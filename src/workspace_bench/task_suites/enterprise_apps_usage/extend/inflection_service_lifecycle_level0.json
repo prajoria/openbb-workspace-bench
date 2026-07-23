@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "Add a Buildout Inflection Service custom backend with the Growth-Rate Reversals table.",
+  "prompt": "Inflection watch kicks off: add a Buildout Inflection Service custom backend carrying the Growth-Rate Reversals table.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

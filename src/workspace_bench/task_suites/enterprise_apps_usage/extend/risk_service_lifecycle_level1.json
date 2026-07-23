@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Add a minimal Pilot Risk Service backend that serves a Pilot Risk Signal table at /risk-signal.",
+  "prompt": "Get the risk desk started - add a minimal Pilot Risk Service backend that serves a Pilot Risk Signal table at /risk-signal.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

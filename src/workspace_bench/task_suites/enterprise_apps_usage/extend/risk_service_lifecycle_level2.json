@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Apply the risk refresh policy on the open Risk Service Staging dashboard - review the connected backends, then refresh Pilot Risk Service so Pilot Risk App has one non-overlapping Pilot Risk Signal placement on Monitor.",
+  "prompt": "Under the risk refresh policy on the open Risk Service Staging dashboard, review the connected backends, then refresh Pilot Risk Service so Pilot Risk App keeps one non-overlapping Pilot Risk Signal placement on Monitor.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

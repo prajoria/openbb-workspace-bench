@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "On the open Risk Service Staging dashboard, review the connected backends and refresh Pilot Risk Service so its Pilot Risk Signal description is Refreshed risk signal feed.",
+  "prompt": "Risk feed hygiene on the open Risk Service Staging dashboard: review the connected backends and refresh Pilot Risk Service so its Pilot Risk Signal description reads Refreshed risk signal feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Set up Buildout Guidance Service to the guidance service policy - that policy means Evidence Gaps and Changed Assumptions tables - and add it as a custom backend.",
+  "prompt": "The guidance desk runs on the guidance service policy - that policy means Evidence Gaps and Changed Assumptions tables - so add Buildout Guidance Service as a custom backend configured that way.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

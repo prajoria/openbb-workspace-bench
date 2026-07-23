@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "On the open Research Feed Staging dashboard, review the connected backends and refresh Rollout Research Feed so Research Feed Pulse has the description Refreshed research feed.",
+  "prompt": "Feed maintenance on the open Research Feed Staging dashboard: review the connected backends and refresh Rollout Research Feed so Research Feed Pulse carries the description Refreshed research feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Complete the risk desk build with Pilot Risk Service, Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch. Add the service, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it. Follow the Finance Guidance Tracker skill and add a Risk Service Build Note recording the final thing its workflow lists.",
+  "prompt": "Stress coverage completes the risk build: add the Pilot Risk Service backend with Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it. Then follow the Finance Guidance Tracker skill and leave a Risk Service Build Note recording the final thing its workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

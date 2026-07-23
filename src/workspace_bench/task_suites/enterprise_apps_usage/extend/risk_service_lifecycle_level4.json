@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "Set up Pilot Risk Service with Pilot Risk Signal and Pilot Limit Alert. Author and add the service, publish Pilot Risk App with both on Monitor, and instantiate it.",
+  "prompt": "Limits come next: per the widgets.json spec, author and add Pilot Risk Service with Pilot Risk Signal and Pilot Limit Alert, publish Pilot Risk App with both on Monitor, and instantiate it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

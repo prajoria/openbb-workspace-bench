@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Spin up Buildout Inflection Service with the Quarterly Series Monitor table - add it as a custom backend.",
+  "prompt": "Momentum tracking next - add Buildout Inflection Service as a custom backend with the Quarterly Series Monitor table.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

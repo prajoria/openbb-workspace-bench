@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "Add a Buildout Guidance Service custom backend with the Evidence Gaps table.",
+  "prompt": "Guidance tracking needs a home: add a Buildout Guidance Service custom backend carrying the Evidence Gaps table.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

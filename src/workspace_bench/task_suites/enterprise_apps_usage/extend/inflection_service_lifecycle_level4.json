@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "In line with the Daloopa Inflection skill, add a custom backend Buildout Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.",
+  "prompt": "Inflection coverage is governed too - per the Daloopa Inflection skill, add a custom backend Buildout Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, then publish Inflection Service App on Review and instantiate it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

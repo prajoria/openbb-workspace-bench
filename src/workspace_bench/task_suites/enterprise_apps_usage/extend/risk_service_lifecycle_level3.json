@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "From the open Risk Service Staging dashboard the risk desk needs Pilot Risk Service with its Pilot Risk Signal and a Pilot Risk App containing Monitor. Publish and add it.",
+  "prompt": "Staging is done - from the open Risk Service Staging dashboard, publish and add Pilot Risk Service with its Pilot Risk Signal and a Pilot Risk App containing Monitor.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

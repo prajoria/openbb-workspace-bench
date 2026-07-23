@@ -8672,6 +8672,10 @@
         "why": "target display name (findability)"
       },
       {
+        "text": "Evidence Gaps",
+        "why": "target display name (findability)"
+      },
+      {
         "text": "Finance Guidance Tracker skill",
         "why": "knowledge source (governance)"
       },
@@ -8684,14 +8688,7 @@
         "why": "graded value (manage_apps:operation)"
       }
     ],
-    "must_describe_never_print": [
-      {
-        "token": "evidence gaps",
-        "description": "the final thing its workflow lists",
-        "source": "Finance Guidance Tracker skill",
-        "source_key": "finance-guidance-tracker"
-      }
-    ],
+    "must_describe_never_print": [],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -8742,7 +8739,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "26c521e9cd2c3ebf19f53d302fa50b1e0ee6eb40d8e8e0379e3cd29cbafa9dc9"
+    "spec_sha256": "6457fcae59b7c44ed92f53576fc9e2940661e60619b0e1c166b137b4e3b6f5ca"
   },
   "guidance_service_lifecycle_level5": {
     "task_id": "guidance_service_lifecycle_level5",
@@ -9186,6 +9183,10 @@
         "why": "knowledge source (governance)"
       },
       {
+        "text": "Growth-Rate Reversals",
+        "why": "target display name (findability)"
+      },
+      {
         "text": "Quarterly Series Monitor",
         "why": "target display name (findability)"
       },
@@ -9198,14 +9199,7 @@
         "why": "graded value (manage_apps:operation)"
       }
     ],
-    "must_describe_never_print": [
-      {
-        "token": "growth-rate reversals",
-        "description": "what it flags as inflections",
-        "source": "Daloopa Inflection skill",
-        "source_key": "daloopa-inflection"
-      }
-    ],
+    "must_describe_never_print": [],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -9256,7 +9250,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "a3f118fe49b5181396111a612ac8cd10841be2f106af70f415135556e8a75990"
+    "spec_sha256": "58f965028e3eefb310ad9a4b6bfc1cd387e27273ee179d96c0cef63d8001e524"
   },
   "inflection_service_lifecycle_level5": {
     "task_id": "inflection_service_lifecycle_level5",

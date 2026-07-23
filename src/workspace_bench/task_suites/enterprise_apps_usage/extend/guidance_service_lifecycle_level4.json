@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "In line with the Finance Guidance Tracker skill, add a custom backend Buildout Guidance Service with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.",
+  "prompt": "The guidance build is governed - per the Finance Guidance Tracker skill, add a custom backend Buildout Guidance Service with Evidence Gaps and Changed Assumptions tables, then publish Guidance Service App on Review and instantiate it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

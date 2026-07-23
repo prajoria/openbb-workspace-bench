@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Publish from the open Research Feed Staging dashboard: add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.",
+  "prompt": "Ship it from the open Research Feed Staging dashboard: add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

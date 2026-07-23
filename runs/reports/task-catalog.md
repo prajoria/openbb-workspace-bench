@@ -3359,7 +3359,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> Add a Buildout Guidance Service custom backend with the Evidence Gaps table.
+> Guidance tracking needs a home: add a Buildout Guidance Service custom backend carrying the Evidence Gaps table.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3372,7 +3372,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Spin up Buildout Guidance Service with the Changed Assumptions table - add it as a custom backend.
+> One more table for the guidance stack - add Buildout Guidance Service as a custom backend with the Changed Assumptions table.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3385,7 +3385,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Set up Buildout Guidance Service to the guidance service policy - that policy means Evidence Gaps and Changed Assumptions tables - and add it as a custom backend.
+> The guidance desk runs on the guidance service policy - that policy means Evidence Gaps and Changed Assumptions tables - so add Buildout Guidance Service as a custom backend configured that way.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3398,7 +3398,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> From the open Guidance Service Staging dashboard, publish Buildout Guidance Service as an app: add the backend with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.
+> Working from the open Guidance Service Staging dashboard, take Buildout Guidance Service live: add the backend with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.
 
 - Initial workspace: dashboard "Guidance Service Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3413,7 +3413,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> In line with the Finance Guidance Tracker skill, add a custom backend Buildout Guidance Service with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.
+> The guidance build is governed - per the Finance Guidance Tracker skill, add a custom backend Buildout Guidance Service with Evidence Gaps and Changed Assumptions tables, then publish Guidance Service App on Review and instantiate it.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3428,7 +3428,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Build Buildout Guidance Service end to end, following the widgets.json spec: add the backend with Evidence Gaps, Changed Assumptions, Management Claims tables, publish Guidance Service App with Evidence Gaps and Changed Assumptions on Review and Management Claims on Archive, and instantiate it. Follow the Finance Guidance Tracker skill and add a Guidance-service Governing Note recording what management claims are compared with.
+> Guidance goes end to end today: following the widgets.json spec, add the Buildout Guidance Service backend with Evidence Gaps, Changed Assumptions, and Management Claims tables, publish Guidance Service App with Evidence Gaps and Changed Assumptions on Review and Management Claims on Archive, and instantiate it. Then follow the Finance Guidance Tracker skill and leave a Guidance-service Governing Note recording what management claims are compared with.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3445,7 +3445,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> Add a Buildout Inflection Service custom backend with the Growth-Rate Reversals table.
+> Inflection watch kicks off: add a Buildout Inflection Service custom backend carrying the Growth-Rate Reversals table.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3458,7 +3458,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Spin up Buildout Inflection Service with the Quarterly Series Monitor table - add it as a custom backend.
+> Momentum tracking next - add Buildout Inflection Service as a custom backend with the Quarterly Series Monitor table.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3471,7 +3471,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Set up Buildout Inflection Service to the inflection service policy - that policy means Growth-Rate Reversals and Quarterly Series Monitor tables - and add it as a custom backend.
+> Our inflection desk follows the inflection service policy - that policy means Growth-Rate Reversals and Quarterly Series Monitor tables - so add Buildout Inflection Service as a custom backend configured that way.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3484,7 +3484,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> From the open Inflection Service Staging dashboard, publish Buildout Inflection Service as an app: add the backend with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.
+> Working from the open Inflection Service Staging dashboard, take Buildout Inflection Service live: add the backend with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.
 
 - Initial workspace: dashboard "Inflection Service Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3499,7 +3499,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> In line with the Daloopa Inflection skill, add a custom backend Buildout Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.
+> Inflection coverage is governed too - per the Daloopa Inflection skill, add a custom backend Buildout Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, then publish Inflection Service App on Review and instantiate it.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3514,7 +3514,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Build Buildout Inflection Service end to end, following the widgets.json spec: add the backend with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Follow the Daloopa Inflection skill and add a Inflection-service Governing Note recording the first growth cadence it computes.
+> Inflections go end to end now: following the widgets.json spec, add the Buildout Inflection Service backend with Growth-Rate Reversals, Quarterly Series Monitor, and Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Then follow the Daloopa Inflection skill and leave an Inflection-service Governing Note recording the first growth cadence it computes.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3531,7 +3531,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> On the open Research Feed Staging dashboard, review the connected backends and refresh Rollout Research Feed so Research Feed Pulse has the description Refreshed research feed.
+> Feed maintenance on the open Research Feed Staging dashboard: review the connected backends and refresh Rollout Research Feed so Research Feed Pulse carries the description Refreshed research feed.
 
 - Initial workspace: dashboard "Research Feed Staging"; 1 tab(s): feed; 1 seeded widget(s): research_feed_pulse({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3544,7 +3544,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Add a minimal Rollout Research Feed backend serving a Research Feed Pulse table at /research-feed.
+> Bootstrap the research feed - add a minimal Rollout Research Feed backend serving a Research Feed Pulse table at /research-feed.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3557,7 +3557,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> From the open Research Feed Staging dashboard, apply the feed refresh policy - review the connected backends, then refresh Rollout Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.
+> The feed refresh policy governs the open Research Feed Staging dashboard - review the connected backends, then refresh Rollout Research Feed so Research Feed App keeps one non-overlapping Research Feed Pulse placement on Feed.
 
 - Initial workspace: dashboard "Research Feed Staging"; 1 tab(s): feed; 1 seeded widget(s): research_feed_pulse({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3570,7 +3570,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Publish from the open Research Feed Staging dashboard: add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.
+> Ship it from the open Research Feed Staging dashboard: add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.
 
 - Initial workspace: dashboard "Research Feed Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3583,7 +3583,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> Set up and add Rollout Research Feed with Research Feed Pulse and Source Freshness Alert, publish Research Feed App with both on Feed, and instantiate it.
+> Freshness checks join the feed: set up and add Rollout Research Feed per the widgets.json spec with Research Feed Pulse and Source Freshness Alert, publish Research Feed App with both on Feed, and instantiate it.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3598,7 +3598,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Complete the research service with Rollout Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it. Follow the Daloopa Capital Allocation skill and add a Research Feed Build Note recording the payout item added to buybacks in its comparison.
+> Round out the research service: add the Rollout Research Feed backend with Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it. Then follow the Daloopa Capital Allocation skill and leave a Research Feed Build Note recording the payout item added to buybacks in its comparison.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3615,7 +3615,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> On the open Risk Service Staging dashboard, review the connected backends and refresh Pilot Risk Service so its Pilot Risk Signal description is Refreshed risk signal feed.
+> Risk feed hygiene on the open Risk Service Staging dashboard: review the connected backends and refresh Pilot Risk Service so its Pilot Risk Signal description reads Refreshed risk signal feed.
 
 - Initial workspace: dashboard "Risk Service Staging"; 1 tab(s): monitor; 1 seeded widget(s): pilot_risk_signal({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3628,7 +3628,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Add a minimal Pilot Risk Service backend that serves a Pilot Risk Signal table at /risk-signal.
+> Get the risk desk started - add a minimal Pilot Risk Service backend that serves a Pilot Risk Signal table at /risk-signal.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3641,7 +3641,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Apply the risk refresh policy on the open Risk Service Staging dashboard - review the connected backends, then refresh Pilot Risk Service so Pilot Risk App has one non-overlapping Pilot Risk Signal placement on Monitor.
+> Under the risk refresh policy on the open Risk Service Staging dashboard, review the connected backends, then refresh Pilot Risk Service so Pilot Risk App keeps one non-overlapping Pilot Risk Signal placement on Monitor.
 
 - Initial workspace: dashboard "Risk Service Staging"; 1 tab(s): monitor; 1 seeded widget(s): pilot_risk_signal({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3654,7 +3654,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> From the open Risk Service Staging dashboard the risk desk needs Pilot Risk Service with its Pilot Risk Signal and a Pilot Risk App containing Monitor. Publish and add it.
+> Staging is done - from the open Risk Service Staging dashboard, publish and add Pilot Risk Service with its Pilot Risk Signal and a Pilot Risk App containing Monitor.
 
 - Initial workspace: dashboard "Risk Service Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3667,7 +3667,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> Set up Pilot Risk Service with Pilot Risk Signal and Pilot Limit Alert. Author and add the service, publish Pilot Risk App with both on Monitor, and instantiate it.
+> Limits come next: per the widgets.json spec, author and add Pilot Risk Service with Pilot Risk Signal and Pilot Limit Alert, publish Pilot Risk App with both on Monitor, and instantiate it.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3682,7 +3682,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Complete the risk desk build with Pilot Risk Service, Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch. Add the service, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it. Follow the Finance Guidance Tracker skill and add a Risk Service Build Note recording the final thing its workflow lists.
+> Stress coverage completes the risk build: add the Pilot Risk Service backend with Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it. Then follow the Finance Guidance Tracker skill and leave a Risk Service Build Note recording the final thing its workflow lists.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`

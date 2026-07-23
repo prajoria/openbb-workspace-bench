@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Build Buildout Inflection Service end to end, following the widgets.json spec: add the backend with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Follow the Daloopa Inflection skill and add a Inflection-service Governing Note recording the first growth cadence it computes.",
+  "prompt": "Inflections go end to end now: following the widgets.json spec, add the Buildout Inflection Service backend with Growth-Rate Reversals, Quarterly Series Monitor, and Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Then follow the Daloopa Inflection skill and leave an Inflection-service Governing Note recording the first growth cadence it computes.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

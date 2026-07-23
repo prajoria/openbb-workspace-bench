@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Build Buildout Guidance Service end to end, following the widgets.json spec: add the backend with Evidence Gaps, Changed Assumptions, Management Claims tables, publish Guidance Service App with Evidence Gaps and Changed Assumptions on Review and Management Claims on Archive, and instantiate it. Follow the Finance Guidance Tracker skill and add a Guidance-service Governing Note recording what management claims are compared with.",
+  "prompt": "Guidance goes end to end today: following the widgets.json spec, add the Buildout Guidance Service backend with Evidence Gaps, Changed Assumptions, and Management Claims tables, publish Guidance Service App with Evidence Gaps and Changed Assumptions on Review and Management Claims on Archive, and instantiate it. Then follow the Finance Guidance Tracker skill and leave a Guidance-service Governing Note recording what management claims are compared with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

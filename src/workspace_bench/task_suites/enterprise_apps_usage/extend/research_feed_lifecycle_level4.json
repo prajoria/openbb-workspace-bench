@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "Set up and add Rollout Research Feed with Research Feed Pulse and Source Freshness Alert, publish Research Feed App with both on Feed, and instantiate it.",
+  "prompt": "Freshness checks join the feed: set up and add Rollout Research Feed per the widgets.json spec with Research Feed Pulse and Source Freshness Alert, publish Research Feed App with both on Feed, and instantiate it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

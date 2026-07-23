@@ -335,6 +335,54 @@
     "prompt": "The desk wants its own register: following the build-an-app guide, author and add a Governed Earnings Backend with an Earnings Action Register, publish a Governed Earnings App with an Actions tab, and instantiate it.",
     "spec_sha256": "e138dbef467dd0352c604b37e07a4bc965e3f0be63f47af404a21b061179d12b"
   },
+  "guidance_service_lifecycle_level0": {
+    "prompt": "Guidance tracking needs a home: add a Buildout Guidance Service custom backend carrying the Evidence Gaps table.",
+    "spec_sha256": "101f3250da032ed20fd17c0abbc418e1d99a156f1d1b3beee805cf90cb734e7d"
+  },
+  "guidance_service_lifecycle_level1": {
+    "prompt": "One more table for the guidance stack - add Buildout Guidance Service as a custom backend with the Changed Assumptions table.",
+    "spec_sha256": "e3832c8ac98f78351b93802d3ddbcb92cc2039530d0ca64728a6b053d452a664"
+  },
+  "guidance_service_lifecycle_level2": {
+    "prompt": "The guidance desk runs on the guidance service policy - that policy means Evidence Gaps and Changed Assumptions tables - so add Buildout Guidance Service as a custom backend configured that way.",
+    "spec_sha256": "83aa13cf8c0b67795a9acdd45dd81d93f34ce8f0f952e1a707f29a0d643b5a64"
+  },
+  "guidance_service_lifecycle_level3": {
+    "prompt": "Working from the open Guidance Service Staging dashboard, take Buildout Guidance Service live: add the backend with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.",
+    "spec_sha256": "94db81221406f11974c72e631550f3d71a275ce8fd147edaad4d8f2fbbfdab91"
+  },
+  "guidance_service_lifecycle_level4": {
+    "prompt": "The guidance build is governed - per the Finance Guidance Tracker skill, add a custom backend Buildout Guidance Service with Evidence Gaps and Changed Assumptions tables, then publish Guidance Service App on Review and instantiate it.",
+    "spec_sha256": "6457fcae59b7c44ed92f53576fc9e2940661e60619b0e1c166b137b4e3b6f5ca"
+  },
+  "guidance_service_lifecycle_level5": {
+    "prompt": "Guidance goes end to end today: following the widgets.json spec, add the Buildout Guidance Service backend with Evidence Gaps, Changed Assumptions, and Management Claims tables, publish Guidance Service App with Evidence Gaps and Changed Assumptions on Review and Management Claims on Archive, and instantiate it. Then follow the Finance Guidance Tracker skill and leave a Guidance-service Governing Note recording what management claims are compared with.",
+    "spec_sha256": "52d63c6bdcac2263b71d4540f214878664e2c67aba3557e801857e724b7b01df"
+  },
+  "inflection_service_lifecycle_level0": {
+    "prompt": "Inflection watch kicks off: add a Buildout Inflection Service custom backend carrying the Growth-Rate Reversals table.",
+    "spec_sha256": "3ddec0536956c3be1c76301892ca076df2b3207d0017f9be01725127b2dc54d1"
+  },
+  "inflection_service_lifecycle_level1": {
+    "prompt": "Momentum tracking next - add Buildout Inflection Service as a custom backend with the Quarterly Series Monitor table.",
+    "spec_sha256": "3789f76ea1e54fddb58e29cbb92cea232faa94a9e153769d06a304c5b4e19b0e"
+  },
+  "inflection_service_lifecycle_level2": {
+    "prompt": "Our inflection desk follows the inflection service policy - that policy means Growth-Rate Reversals and Quarterly Series Monitor tables - so add Buildout Inflection Service as a custom backend configured that way.",
+    "spec_sha256": "b4e7e150773922775daf6647623a8f092f051350521693b0daaa568461742156"
+  },
+  "inflection_service_lifecycle_level3": {
+    "prompt": "Working from the open Inflection Service Staging dashboard, take Buildout Inflection Service live: add the backend with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.",
+    "spec_sha256": "e8ad3a26a77bb061fec246497907b3b01b543f5a99de129fdf975f11691b7b4e"
+  },
+  "inflection_service_lifecycle_level4": {
+    "prompt": "Inflection coverage is governed too - per the Daloopa Inflection skill, add a custom backend Buildout Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables, then publish Inflection Service App on Review and instantiate it.",
+    "spec_sha256": "58f965028e3eefb310ad9a4b6bfc1cd387e27273ee179d96c0cef63d8001e524"
+  },
+  "inflection_service_lifecycle_level5": {
+    "prompt": "Inflections go end to end now: following the widgets.json spec, add the Buildout Inflection Service backend with Growth-Rate Reversals, Quarterly Series Monitor, and Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Then follow the Daloopa Inflection skill and leave an Inflection-service Governing Note recording the first growth cadence it computes.",
+    "spec_sha256": "740b34edfcda8828e5bd90363b953303b754479d7fbf25be3a1d502ce69f7f4d"
+  },
   "investment_snapshot_governance_level0": {
     "prompt": "Snapshot groundwork first: read the Finance Tearsheet skill and post an Investment-snapshot Starter Note containing price action.",
     "spec_sha256": "1892be90f4a996a2e267af1836557fe391e52e6dad4efe03f8707895ad0146b5"
@@ -502,6 +550,54 @@
   "protocol_display_repair_level5": {
     "prompt": "Buildout Protocol Repair is gone from the workspace. On the open Protocol-display Backend Repair dashboard, rebuild it: add a custom backend Buildout Protocol Repair with a Protocol Repair Queue table following the widgets.json spec, publish and instantiate its app with the queue on Protocols, then finish with a Protocol-display Rebuild Note recording what the Daloopa Inflection skill flags as inflections.",
     "spec_sha256": "382a2499601b16f6e62daa7ab67bc8e51bdad3f6f933f9430f8647e1bb3ee25e"
+  },
+  "research_feed_lifecycle_level0": {
+    "prompt": "Feed maintenance on the open Research Feed Staging dashboard: review the connected backends and refresh Rollout Research Feed so Research Feed Pulse carries the description Refreshed research feed.",
+    "spec_sha256": "55cfda194c0096c8159c694fd59e922d958f97ce25bcd679bbd980e7161ad62c"
+  },
+  "research_feed_lifecycle_level1": {
+    "prompt": "Bootstrap the research feed - add a minimal Rollout Research Feed backend serving a Research Feed Pulse table at /research-feed.",
+    "spec_sha256": "1f0aeb9b83ed7bcc416e361dc3da301abaf5b2ac5fbee10fd554fcf7c7c05e06"
+  },
+  "research_feed_lifecycle_level2": {
+    "prompt": "The feed refresh policy governs the open Research Feed Staging dashboard - review the connected backends, then refresh Rollout Research Feed so Research Feed App keeps one non-overlapping Research Feed Pulse placement on Feed.",
+    "spec_sha256": "bc9764fa101e98cf99eef895fe7d42da839eb5788946ffc6ae1ca8b6a02f4b85"
+  },
+  "research_feed_lifecycle_level3": {
+    "prompt": "Ship it from the open Research Feed Staging dashboard: add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.",
+    "spec_sha256": "78a0fd1b78b57850856a7c5153be63f920303caeb24b65a5fe579c374b4ae5ef"
+  },
+  "research_feed_lifecycle_level4": {
+    "prompt": "Freshness checks join the feed: set up and add Rollout Research Feed per the widgets.json spec with Research Feed Pulse and Source Freshness Alert, publish Research Feed App with both on Feed, and instantiate it.",
+    "spec_sha256": "c77914d094fcb156b484c6c13f5d80699dce94f59cae6a641ea91297e6f4d98a"
+  },
+  "research_feed_lifecycle_level5": {
+    "prompt": "Round out the research service: add the Rollout Research Feed backend with Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it. Then follow the Daloopa Capital Allocation skill and leave a Research Feed Build Note recording the payout item added to buybacks in its comparison.",
+    "spec_sha256": "ddc00454014a1eb2274fcd440ff3539108060cb130790c23a196a0b8dc09c113"
+  },
+  "risk_service_lifecycle_level0": {
+    "prompt": "Risk feed hygiene on the open Risk Service Staging dashboard: review the connected backends and refresh Pilot Risk Service so its Pilot Risk Signal description reads Refreshed risk signal feed.",
+    "spec_sha256": "d71cf859f841ae2d8b70d4de94a37e020ba9bf3bba1f8f73481a2b66e08daa48"
+  },
+  "risk_service_lifecycle_level1": {
+    "prompt": "Get the risk desk started - add a minimal Pilot Risk Service backend that serves a Pilot Risk Signal table at /risk-signal.",
+    "spec_sha256": "b01bd0e5ed9205d7b91406dce6a41400fed134f8786d8445c84dd81d0ebe5682"
+  },
+  "risk_service_lifecycle_level2": {
+    "prompt": "Under the risk refresh policy on the open Risk Service Staging dashboard, review the connected backends, then refresh Pilot Risk Service so Pilot Risk App keeps one non-overlapping Pilot Risk Signal placement on Monitor.",
+    "spec_sha256": "06cc6f9b6a80409e21f33f8441c938bdc404b925456586d6ba827b2e2aba2c12"
+  },
+  "risk_service_lifecycle_level3": {
+    "prompt": "Staging is done - from the open Risk Service Staging dashboard, publish and add Pilot Risk Service with its Pilot Risk Signal and a Pilot Risk App containing Monitor.",
+    "spec_sha256": "2466a9614ee6a1dcaaed7cb935d3357fa8fe885bd27ad3e453d0defa7dfdd2a4"
+  },
+  "risk_service_lifecycle_level4": {
+    "prompt": "Limits come next: per the widgets.json spec, author and add Pilot Risk Service with Pilot Risk Signal and Pilot Limit Alert, publish Pilot Risk App with both on Monitor, and instantiate it.",
+    "spec_sha256": "1edfe4d662aef7197bc141bc5c37fad3902a6bb1d2e5e3d3795853b1e84d6dc5"
+  },
+  "risk_service_lifecycle_level5": {
+    "prompt": "Stress coverage completes the risk build: add the Pilot Risk Service backend with Pilot Risk Signal, Pilot Limit Alert, and Pilot Stress Watch, publish Pilot Risk App with Pilot Risk Signal and Pilot Limit Alert on Monitor and Pilot Stress Watch on Stress, and instantiate it. Then follow the Finance Guidance Tracker skill and leave a Risk Service Build Note recording the final thing its workflow lists.",
+    "spec_sha256": "0669233272839490ed1e0ee7a5e5915d86361f98e8a98eb1393c6d6822edf8e5"
   },
   "technology_decision_inputs_level0": {
     "prompt": "On the open Technology Decision Inputs dashboard, switch Car Manufacturer Performance: company to TSLA, year to 2023. Leave everything else in place.",

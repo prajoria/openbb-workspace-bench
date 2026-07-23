@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Spin up Buildout Guidance Service with the Changed Assumptions table - add it as a custom backend.",
+  "prompt": "One more table for the guidance stack - add Buildout Guidance Service as a custom backend with the Changed Assumptions table.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

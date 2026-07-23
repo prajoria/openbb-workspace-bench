@@ -10072,7 +10072,9 @@ def _assert_wave2_requirements(records: list[TaskRecord]) -> None:
     ]
     for slug, marker, token in ordinal_claims:
         source_lines = str(WORKSPACE_SKILLS[slug]["content"]).splitlines()
-        line = next((l for l in source_lines if l.strip().startswith(marker)), "")
+        line = next(
+            (text for text in source_lines if text.strip().startswith(marker)), ""
+        )
         if token.casefold() not in line.casefold():
             raise AssertionError(
                 f"{slug}: prompt ordinal claim broken - {token!r} is no longer "
@@ -10808,11 +10810,21 @@ def _compute_prompt_spec(record: TaskRecord) -> JsonDict:
     evaluation = payload["eval"]
     level = str(payload["difficulty"])
 
+    # F5 forces authored widget display names into the prompt (their ids
+    # derive from those names via snake_case), so a governed token that IS
+    # such a name cannot be describe-never-print - printing wins.
+    authored_names = {
+        target.display_name.casefold()
+        for definition in evaluation.get("required_widget_defs") or []
+        for target in record.targets
+        if (target.origin, target.widget_id)
+        == (definition["backend_name"], definition["widget_id"])
+    }
     described: dict[str, JsonDict] = {}
     if record.governance is not None:
         for token in record.governance.outcome_tokens:
             words = GOVERNED_TOKEN_WORDS.get(token)
-            if words is not None:
+            if words is not None and token.casefold() not in authored_names:
                 described[token] = {
                     "token": token,
                     "description": words,

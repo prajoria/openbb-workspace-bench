@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Add a minimal Rollout Research Feed backend serving a Research Feed Pulse table at /research-feed.",
+  "prompt": "Bootstrap the research feed - add a minimal Rollout Research Feed backend serving a Research Feed Pulse table at /research-feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

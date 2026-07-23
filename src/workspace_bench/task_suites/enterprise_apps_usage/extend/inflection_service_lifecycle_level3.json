@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "From the open Inflection Service Staging dashboard, publish Buildout Inflection Service as an app: add the backend with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.",
+  "prompt": "Working from the open Inflection Service Staging dashboard, take Buildout Inflection Service live: add the backend with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
