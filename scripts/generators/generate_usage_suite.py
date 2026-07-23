@@ -10387,8 +10387,8 @@ def _report_level_contract(records: list[TaskRecord]) -> int:
     by_spine: dict[str, dict[int, TaskRecord]] = defaultdict(dict)
     for record in records:
         task_id = str(record.payload["id"])
-        spine, _, level = task_id.rpartition("_level")
-        by_spine[spine][int(level)] = record
+        spine, _, level_suffix = task_id.rpartition("_level")
+        by_spine[spine][int(level_suffix)] = record
 
     def body(record: TaskRecord) -> str:
         return " ".join(str(record.payload["prompt"]).casefold().split()[5:])
