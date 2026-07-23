@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level4",
   "category": "read",
   "difficulty": "level4",
-  "prompt": "Following the Finance Tearsheet skill, read Widget Examples's Live Grid with symbol AAPL, report the exact symbol and price shown, and add a Live-quote Governance Note that records price action.",
+  "prompt": "Quote check under the Finance Tearsheet skill: read Widget Examples's Live Grid with symbol AAPL, report the exact symbol and price shown, and leave a Live-quote Governance Note recording the first input the skill's workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

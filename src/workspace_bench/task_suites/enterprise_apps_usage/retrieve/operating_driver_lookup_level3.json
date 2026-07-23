@@ -2,7 +2,7 @@
   "id": "operating_driver_lookup_level3",
   "category": "read",
   "difficulty": "level3",
-  "prompt": "Before the meeting, read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
+  "prompt": "Driver review time: on the open Operating Driver Review dashboard, read the configured Bench Daloopa's Operating KPIs view without changing it and report the exact calendar_period and Installed Base Active Devices value shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Home",
+    "default_selected_dashboard": "Operating Driver Review",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -46,10 +46,44 @@
       "get_workspace_prompt",
       "assign_tasks_to_agents",
       "final_answer"
-    ]
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Operating Driver Review",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_kpi_metrics",
+            "tab_id": "review",
+            "data_args": {
+              "ticker": "AAPL",
+              "period": "2026Q1"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 14
+            }
+          }
+        ]
+      }
+    }
   },
   "eval": {
     "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
       {
         "tool": "list_available_widgets",
         "args": {
@@ -77,7 +111,7 @@
       "2026Q1",
       "2420.9"
     ],
-    "reference_answer": "The requested view reports 2026Q1 and 2420.9.",
-    "max_turns": 5
+    "reference_answer": "The configured view reports 2026Q1 and 2420.9.",
+    "max_turns": 6
   }
 }

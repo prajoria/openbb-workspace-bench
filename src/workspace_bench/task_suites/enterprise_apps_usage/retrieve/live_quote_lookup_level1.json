@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Quick ask - read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
+  "prompt": "Apple's live quote, please: find Widget Examples's Live Grid for it and report the exact symbol and price shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -63,6 +63,15 @@
         "optional": true
       },
       {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
+          "param_name": "symbol"
+        },
+        "optional": true
+      },
+      {
         "tool": "get_widget_data",
         "args": {
           "origin": "Widget Examples",
@@ -82,6 +91,6 @@
       "150.0"
     ],
     "reference_answer": "The requested view reports AAPL and 150.0.",
-    "max_turns": 6
+    "max_turns": 7
   }
 }

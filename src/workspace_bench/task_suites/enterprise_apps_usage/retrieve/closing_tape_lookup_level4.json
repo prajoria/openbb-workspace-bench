@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level4",
   "category": "read",
   "difficulty": "level4",
-  "prompt": "Use Daloopa Tearsheet governance to review the daily OHLCV rows in Bench Daloopa's Stock Prices for Apple, then report the latest date and exact close.",
+  "prompt": "Working under Daloopa Tearsheet governance, review the daily OHLCV rows in Bench Daloopa's Stock Prices for Apple, then report the latest date and exact close.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

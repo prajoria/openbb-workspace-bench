@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "For the desk, read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
+  "prompt": "Under the mega-cap tape policy - that means the Apple line - read Widget Examples's Live Grid and report the exact symbol and price shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,6 +58,15 @@
         "optional": true
       },
       {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "live_grid_example",
+          "param_name": "symbol"
+        },
+        "optional": true
+      },
+      {
         "tool": "get_widget_data",
         "args": {
           "origin": "Widget Examples",
@@ -77,6 +86,6 @@
       "150.0"
     ],
     "reference_answer": "The requested view reports AAPL and 150.0.",
-    "max_turns": 5
+    "max_turns": 6
   }
 }

@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level4",
   "category": "read",
   "difficulty": "level4",
-  "prompt": "Review Apple's earnings under Finance Earnings Prep governance. In Bench Stark Enterprise's Earnings & Estimates Monitor, use Upcoming Earnings for Technology, AAPL, and QTD, then report the exact score and status.",
+  "prompt": "Earnings week - review Apple under Finance Earnings Prep governance. In Bench Stark Enterprise's Earnings & Estimates Monitor, use Upcoming Earnings for Technology, AAPL, and QTD, then report the exact score and status.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

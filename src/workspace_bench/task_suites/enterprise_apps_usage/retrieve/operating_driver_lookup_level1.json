@@ -2,7 +2,7 @@
   "id": "operating_driver_lookup_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Quick ask - read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
+  "prompt": "How are Apple's device numbers trending? Find Bench Daloopa's Operating KPIs for it with period 2026Q1, and report the exact calendar_period and Installed Base Active Devices value shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -63,6 +63,15 @@
         "optional": true
       },
       {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_kpi_metrics",
+          "param_name": "ticker"
+        },
+        "optional": true
+      },
+      {
         "tool": "get_widget_data",
         "args": {
           "origin": "Bench Daloopa",
@@ -83,6 +92,6 @@
       "2420.9"
     ],
     "reference_answer": "The requested view reports 2026Q1 and 2420.9.",
-    "max_turns": 6
+    "max_turns": 7
   }
 }

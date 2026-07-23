@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level3",
   "category": "read",
   "difficulty": "level3",
-  "prompt": "On the open Closing Tape Review dashboard, read the daily OHLCV rows in Bench Daloopa's configured Stock Prices view without changing it and report the latest date, exact close, and volume.",
+  "prompt": "The tape review is already up: on the open Closing Tape Review dashboard, read Bench Daloopa's configured Stock Prices view without changing it and report the latest date, exact close, and volume.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

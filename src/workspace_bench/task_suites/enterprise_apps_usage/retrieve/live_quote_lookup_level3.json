@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level3",
   "category": "read",
   "difficulty": "level3",
-  "prompt": "Before the meeting, read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
+  "prompt": "The desk screen is set up on the open Live Quote Desk dashboard - read the configured Widget Examples's Live Grid view without changing it and report the exact symbol and price shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Home",
+    "default_selected_dashboard": "Live Quote Desk",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -46,10 +46,43 @@
       "get_workspace_prompt",
       "assign_tasks_to_agents",
       "final_answer"
-    ]
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Live Quote Desk",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "live_grid_example",
+            "tab_id": "review",
+            "data_args": {
+              "symbol": "AAPL"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 14
+            }
+          }
+        ]
+      }
+    }
   },
   "eval": {
     "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
       {
         "tool": "list_available_widgets",
         "args": {
@@ -76,7 +109,7 @@
       "AAPL",
       "150.0"
     ],
-    "reference_answer": "The requested view reports AAPL and 150.0.",
-    "max_turns": 5
+    "reference_answer": "The configured view reports AAPL and 150.0.",
+    "max_turns": 6
   }
 }

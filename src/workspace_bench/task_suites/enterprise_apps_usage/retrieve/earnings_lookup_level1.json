@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Find Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, set the view to Technology, AAPL, and QTD, and give me the exact score and status.",
+  "prompt": "Where does Apple stand this quarter? Find Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, set the view to Technology, Apple's ticker, and QTD, and give me the exact score and status.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

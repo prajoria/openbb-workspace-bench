@@ -1551,10 +1551,6 @@
         "why": "target display name (findability)"
       },
       {
-        "text": "daloopa_stock_prices",
-        "why": "graded value (get_widget_data:widget_id)"
-      },
-      {
         "text": "ticker",
         "why": "level0 parameter key"
       }
@@ -1606,7 +1602,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"NVDA\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "cb224d75555b6d19d4b55da556e7cdff1507e736eec20b18b0124efe92a2ba07"
+    "spec_sha256": "b60c5b535a612e2d159d6035e0d5859f186ccba7e4c5d27103bdec958d6c2755"
   },
   "closing_tape_lookup_level1": {
     "task_id": "closing_tape_lookup_level1",
@@ -1623,10 +1619,6 @@
       {
         "text": "Stock Prices",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "daloopa_stock_prices",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -1677,7 +1669,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"NFLX\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "4ee6a4d7944ad08ca23dc131f90d94cb085676554ef047dbac69ff565b9d445f"
+    "spec_sha256": "effa21123026a0105c1df42b0cb46555ddd1037a00dc1ec8feb96c43b53eacd3"
   },
   "closing_tape_lookup_level2": {
     "task_id": "closing_tape_lookup_level2",
@@ -1698,10 +1690,6 @@
       {
         "text": "Stock Prices",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "daloopa_stock_prices",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -1751,7 +1739,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"TSLA\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "a58cb122fd4201c1079ae6f5db390e4d84ccd548c5e499b64450ab1f66c19601"
+    "spec_sha256": "e1daab44ad2f667b6846092c53d5912bca1fcdad3af77afa1b6e87a996f86580"
   },
   "closing_tape_lookup_level3": {
     "task_id": "closing_tape_lookup_level3",
@@ -1768,10 +1756,6 @@
       {
         "text": "Stock Prices",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "daloopa_stock_prices",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "open Closing Tape Review dashboard",
@@ -1824,7 +1808,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"MSFT\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "38f10c51ce2fbc97d1e45da64ff2290a5b975c8c5eea1d9f62d66efd14169951"
+    "spec_sha256": "c7883820b6b114c5e5662b84055070d56e2ea8e7349f443aca8121e8a321e884"
   },
   "closing_tape_lookup_level4": {
     "task_id": "closing_tape_lookup_level4",
@@ -1845,10 +1829,6 @@
       {
         "text": "Stock Prices",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "daloopa_stock_prices",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -1899,7 +1879,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"AAPL\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "d7370152b4e3ff0cec63cdf602a88b7db8bbce53b605349fa94a383a027a87ff"
+    "spec_sha256": "da524937e7bab63cd8b910de3f0626ff04b822a026b66a06d2dec9cbbfb67626"
   },
   "closing_tape_lookup_level5": {
     "task_id": "closing_tape_lookup_level5",
@@ -1932,10 +1912,6 @@
       {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
-      },
-      {
-        "text": "closing_tape_lookup",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "instantiate",
@@ -2009,7 +1985,7 @@
       "add_generative_widget {\"name\": \"Closing Tape Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "c5517fcd271a57ffcf16ea7fcb9c7fd05dc632b18116550d5f8c1904346a3545"
+    "spec_sha256": "2602d4cb192268530c89d974b147033e90ec7c4cbb84f8a74d554e724e933f28"
   },
   "committee_navigation_level0": {
     "task_id": "committee_navigation_level0",
@@ -2502,10 +2478,6 @@
       {
         "text": "Open Alert Metrics",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "compliance_surveillance_hub_alerts_open_alert_metrics",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -2555,7 +2527,7 @@
       "create_widget {\"widget_id\": \"compliance_surveillance_hub_alerts_open_alert_metrics\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "7b58b814df38b653c19fc825421baee2d3bed78011d6f431a610c5c5d389c4ae"
+    "spec_sha256": "d82612810a93e80822fa8d72a8138da8f645722c31d2bb2adf358d459cc03c36"
   },
   "compliance_alert_review_level1": {
     "task_id": "compliance_alert_review_level1",
@@ -2572,10 +2544,6 @@
       {
         "text": "Policy Breaches",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "compliance_surveillance_hub_personal_trading_policy_breaches",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -2626,7 +2594,7 @@
       "create_widget {\"widget_id\": \"compliance_surveillance_hub_personal_trading_policy_breaches\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "a70a3c2e66062d6e5b14cc8a9c8b2faa4b0cd284b249fcb1413f89e4f0bc7c96"
+    "spec_sha256": "1a77d0ac9e9c2fc0a56f14fb8f01eb2b07997512379755eb3ec645ea2c489221"
   },
   "compliance_alert_review_level2": {
     "task_id": "compliance_alert_review_level2",
@@ -2647,14 +2615,6 @@
       {
         "text": "Policy Breaches",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "compliance_surveillance_hub_alerts_open_alert_metrics",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "compliance_surveillance_hub_personal_trading_policy_breaches",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -2704,7 +2664,7 @@
       "create_widget {\"widget_id\": \"compliance_surveillance_hub_personal_trading_policy_breaches\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "33ef708e39208af3916e656b0e4ee93e9c46d933f9961b4b3cb749d462143fb6"
+    "spec_sha256": "c13f3f0910abab4d39617943aa411255babb32199acecf722727958c21058c1c"
   },
   "compliance_alert_review_level3": {
     "task_id": "compliance_alert_review_level3",
@@ -2729,14 +2689,6 @@
       {
         "text": "Open Alert Metrics",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "compliance_surveillance_hub_alerts_open_alert_metrics",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "markdown_widget_with_number_input",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -2787,7 +2739,7 @@
       "create_widget {\"widget_id\": \"markdown_widget_with_number_input\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "057033609d6a6d4bc2a175c1f8dbafbf07755619081a523667f226d8f0bef848"
+    "spec_sha256": "765250b72b19799f2565af427f47bc5a0b9c280a736b2e3de8d7e87b407f7aa8"
   },
   "compliance_alert_review_level4": {
     "task_id": "compliance_alert_review_level4",
@@ -2820,14 +2772,6 @@
       {
         "text": "Open Alert Metrics",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "compliance_surveillance_hub_alerts_open_alert_metrics",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "markdown_widget_with_number_input",
-        "why": "graded value (create_widget:widget_id)"
       },
       {
         "text": "note",
@@ -2892,7 +2836,7 @@
       "add_generative_widget {\"name\": \"Compliance-alert Governance\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "dc94fff0c8dacb3023d17436965e4cc2fd83150daa9504007fd1c078ff0569fa"
+    "spec_sha256": "fe018f899d5adc452334e3ef2d52bd5c1010fb4e560e3c46b493e9cdae0bb43d"
   },
   "compliance_alert_review_level5": {
     "task_id": "compliance_alert_review_level5",
@@ -2943,16 +2887,8 @@
         "why": "graded value (manage_backends:operation)"
       },
       {
-        "text": "compliance_surveillance_hub_alerts_open_alert_metrics",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "instantiate",
         "why": "graded value (manage_apps:operation)"
-      },
-      {
-        "text": "markdown_widget_with_number_input",
-        "why": "graded value (create_widget:widget_id)"
       },
       {
         "text": "note",
@@ -3025,7 +2961,7 @@
       "add_generative_widget {\"name\": \"Compliance-alert Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "c33d9d0e72a9c73c8b1a06ae2cc9d7b3dd5d87064abd2e215ff873342ecd6753"
+    "spec_sha256": "94f3823a0cbf26e81e6daf738cdd6b351d20b64e9f394bf77faa8e64faec7583"
   },
   "comps_governance_level0": {
     "task_id": "comps_governance_level0",
@@ -3186,10 +3122,6 @@
       {
         "text": "finance-comps",
         "why": "graded value (get_skill_content:slug)"
-      },
-      {
-        "text": "plotly_chart_with_theme_and_toolbar_using_config_file",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -3239,7 +3171,7 @@
       "create_widget {\"widget_id\": \"plotly_chart_with_theme_and_toolbar_using_config_file\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "7b560ade2eed4c8a5d550422efdba02922d966fe65118cbeb1c4d2147ec24be7"
+    "spec_sha256": "9c26756f1cc3710d77a7ccb8b2263eaa0c872254304deab29713be15392970c3"
   },
   "comps_governance_level3": {
     "task_id": "comps_governance_level3",
@@ -3266,16 +3198,8 @@
         "why": "graded value (create_widget:origin)"
       },
       {
-        "text": "chains_plotly",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "finance-comps",
         "why": "graded value (get_skill_content:slug)"
-      },
-      {
-        "text": "plotly_chart_with_theme_and_toolbar_using_config_file",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -3327,7 +3251,7 @@
       "create_widget {\"widget_id\": \"chains_plotly\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "f84005385871c382937da0ae08a1abda01d5b4e26b71f5cc421cb4073637fe47"
+    "spec_sha256": "aa7e1c1a05a75827c21577c3be23f44fbfb198dfe9ea4de458ff00fee7d89e56"
   },
   "comps_governance_level4": {
     "task_id": "comps_governance_level4",
@@ -3362,16 +3286,8 @@
         "why": "graded value (create_widget:origin)"
       },
       {
-        "text": "chains_plotly",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "note",
         "why": "graded value (add_generative_widget:widget_type)"
-      },
-      {
-        "text": "plotly_chart_with_theme_and_toolbar_using_config_file",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [
@@ -3432,7 +3348,7 @@
       "add_generative_widget {\"name\": \"Comps-governance Governed Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "21c12bcf66e14aa52b17fa78279cf8fcd8b2d20c3245626723c65b383230a999"
+    "spec_sha256": "c2425f8a0a82b0fcd9f49a164af740a87446e6d81b38ebedbe6720ec02285a5e"
   },
   "comps_governance_level5": {
     "task_id": "comps_governance_level5",
@@ -3549,10 +3465,6 @@
         "why": "graded value (add_generative_widget:name)"
       },
       {
-        "text": "daloopa_consensus_estimates",
-        "why": "graded value (get_widget_data:widget_id)"
-      },
-      {
         "text": "note",
         "why": "graded value (add_generative_widget:widget_type)"
       },
@@ -3621,7 +3533,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Direct Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "9341227e771a3ac6e0c9a7889cc97d2ccc9b9ddaaea10bb8b4397e4fe8f4ac2f"
+    "spec_sha256": "0228899a2b4da13f1cc28c5931ab6390dc2deb9d17a4e4e868ecbb84ad872633"
   },
   "consensus_exception_handoff_level1": {
     "task_id": "consensus_exception_handoff_level1",
@@ -3642,10 +3554,6 @@
       {
         "text": "Consensus-exception Discovered Note",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_consensus_estimates",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -3712,7 +3620,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Discovered Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "b9bf0152061871cdd9f877df2c499e662c7f697da299d101dec4ac39348d5e69"
+    "spec_sha256": "e8a3500b255e6187b7c4e99f51ce20f15984855eef95758a0c232b62dbc5fd5a"
   },
   "consensus_exception_handoff_level2": {
     "task_id": "consensus_exception_handoff_level2",
@@ -3733,10 +3641,6 @@
       {
         "text": "Consensus-exception Analyst Note",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_consensus_estimates",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -3802,7 +3706,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Analyst Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "819dd31d9f12e0bcfbadea9a548c28ed2818b8d07961e5efdd07089b6335035c"
+    "spec_sha256": "369407cdb5a326e533005a26c194ce4bbcfbb7fbcb716f9c5591206d111a83ae"
   },
   "consensus_exception_handoff_level3": {
     "task_id": "consensus_exception_handoff_level3",
@@ -3823,10 +3727,6 @@
       {
         "text": "Consensus-exception Desk Note",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_consensus_estimates",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -3892,7 +3792,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Desk Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "8c6b4d26b7c25908c41e2ad5991666b90723a1c3d4ae9e1702185a6ee0555ee3"
+    "spec_sha256": "75aeb7d686c53ac2c89fcdd7d8c5e3be0d0ed9ecbf422f5ed4c5616e5972e3e9"
   },
   "consensus_exception_handoff_level4": {
     "task_id": "consensus_exception_handoff_level4",
@@ -3917,10 +3817,6 @@
       {
         "text": "Daloopa Earnings Review skill",
         "why": "knowledge source (governance)"
-      },
-      {
-        "text": "daloopa_consensus_estimates",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -3989,7 +3885,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 9,
-    "spec_sha256": "273b45fd7353eb544c754bcd807c5f914e1048dc846f76081dd32e60e31058af"
+    "spec_sha256": "3afeb64220c4b35b641990eeda7970f60ae4e76c2105915a1a8dc6616bfe5fa2"
   },
   "consensus_exception_handoff_level5": {
     "task_id": "consensus_exception_handoff_level5",
@@ -5901,10 +5797,6 @@
       {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
-      },
-      {
-        "text": "get_video_with_transcript",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -5955,7 +5847,7 @@
       "create_widget {\"widget_id\": \"get_video_with_transcript\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "d366ebfa9c53a1b90668db1466117ce8dd1ae4131940e6c4f41141629f952df5"
+    "spec_sha256": "3fc6d96fadc32741be50f89e2a0cd21e33e5e256d23209f61ccfcdfa530ab7b0"
   },
   "due_diligence_media_room_level3": {
     "task_id": "due_diligence_media_room_level3",
@@ -5992,14 +5884,6 @@
       {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
-      },
-      {
-        "text": "get_video_with_transcript",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "pdf_widget_url",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -6051,7 +5935,7 @@
       "create_widget {\"widget_id\": \"pdf_widget_url\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "7f9d6d23057ecc1270ba0538b185c29921c0ddbd3be46e0db10c6a3c0b6bbc07"
+    "spec_sha256": "ecd735c4bb7a43e5d2436f5f1e3ed7ecef81abc69dd6db9495d03d0d46fb966d"
   },
   "due_diligence_media_room_level4": {
     "task_id": "due_diligence_media_room_level4",
@@ -6092,14 +5976,6 @@
       {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
-      },
-      {
-        "text": "get_video_with_transcript",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "url_pdf",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [
@@ -6161,7 +6037,7 @@
       "create_widget {\"widget_id\": \"url_pdf\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "71f22e1b47ac3ef100fc7e8705282968902f302be54c4c5dfbff62bc38650e10"
+    "spec_sha256": "82096635c46d0a9b2f93f27b29742745d708ab7fcdd178dc3c7508e4c776b047"
   },
   "due_diligence_media_room_level5": {
     "task_id": "due_diligence_media_room_level5",
@@ -6218,14 +6094,6 @@
       {
         "text": "note",
         "why": "graded value (add_generative_widget:widget_type)"
-      },
-      {
-        "text": "pdf_widget_url",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "url_pdf",
-        "why": "graded value (create_widget:widget_id)"
       },
       {
         "text": "widgets.json spec",
@@ -6294,7 +6162,7 @@
       "add_generative_widget {\"name\": \"Media-room Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "68e4c88f98ab0c7d4c73cc9344c7ed0302dec2ad1bccee33a03c68c3a7fec203"
+    "spec_sha256": "56f8a7ab75e2613462a3f7260e7519222a1f067d4b2667f6333f5f6862c93700"
   },
   "earnings_handoff_level0": {
     "task_id": "earnings_handoff_level0",
@@ -6315,10 +6183,6 @@
       {
         "text": "Upcoming Earnings",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -6396,7 +6260,7 @@
       "add_generative_widget {\"name\": \"LLY Earnings Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "f677293f69b28c74141b4f7aaa316697495bb0437b3f56f14dc42d512b0c4545"
+    "spec_sha256": "2cb4210b87527a408a48ddda6edd054d5e0247a92fb30287c8f62fd2119b047b"
   },
   "earnings_handoff_level1": {
     "task_id": "earnings_handoff_level1",
@@ -6417,10 +6281,6 @@
       {
         "text": "Upcoming Earnings",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -6488,7 +6348,7 @@
       "add_generative_widget {\"name\": \"Apple Earnings Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "3181e71b87631e1bd59269cd28e814f722c9f87f7ab1aafdbb3f2dc928932b13"
+    "spec_sha256": "54978af1dd3d6617e0ee0fc369fe07ad702a84fac228321d82f9edc06e5c25ce"
   },
   "earnings_handoff_level2": {
     "task_id": "earnings_handoff_level2",
@@ -6513,10 +6373,6 @@
       {
         "text": "current-month handoff policy",
         "why": "policy phrase (declared grounding)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -6581,7 +6437,7 @@
       "add_generative_widget {\"name\": \"Microsoft Earnings Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "0972372de78bbfd76dc29f5b60b774c7e6bf4c1126a1cf360f077b10354fd995"
+    "spec_sha256": "2f3bf8831654316e5c61094366e7e36336bd504ce76d51caa6152acf1bbca12f"
   },
   "earnings_handoff_level3": {
     "task_id": "earnings_handoff_level3",
@@ -6606,10 +6462,6 @@
       {
         "text": "Upcoming Earnings",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -6675,7 +6527,7 @@
       "add_generative_widget {\"name\": \"Governed Apple Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "806e8276987c59ae4db35ce4beae23607cfb7c9370b50ee82398c1fe08426019"
+    "spec_sha256": "e52e925a7755475c2a3abbb0288094236304cf78e1c2b869d75dad5280233be3"
   },
   "earnings_handoff_level4": {
     "task_id": "earnings_handoff_level4",
@@ -6704,10 +6556,6 @@
       {
         "text": "coverage follow-up route",
         "why": "policy phrase (declared grounding)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -6775,7 +6623,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 8,
-    "spec_sha256": "a1121a57758849caba042af97550228122ae39227dfc47f66c8f469fa384f4aa"
+    "spec_sha256": "eb6dfdadfc593b3ec3a7d2bcf7b21ff36228d432e47acb6c81ce7431cdf1d80e"
   },
   "earnings_handoff_level5": {
     "task_id": "earnings_handoff_level5",
@@ -6900,10 +6748,6 @@
         "why": "target display name (findability)"
       },
       {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
-      },
-      {
         "text": "period",
         "why": "level0 parameter key"
       },
@@ -6962,7 +6806,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Healthcare\", \"ticker\": \"LLY\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "89247754e3e81605f340418ed4edaa1ec3a5ff0ca54ce29cb12848f5255f2949"
+    "spec_sha256": "95a7dd3a929b99a5a437cdee5afa8a9581e6b7c01dd01389b27c15413a25d297"
   },
   "earnings_lookup_level1": {
     "task_id": "earnings_lookup_level1",
@@ -6979,10 +6823,6 @@
       {
         "text": "Upcoming Earnings",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -7033,7 +6873,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"AAPL\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "023faee7d03d5ca075ede767bcdef883eb91a55557318bc2ada13d9367ac9415"
+    "spec_sha256": "e7e1741b3fcc1966e0cbc77975e220db074752557a836adbc6c38c6e3efe4986"
   },
   "earnings_lookup_level2": {
     "task_id": "earnings_lookup_level2",
@@ -7054,10 +6894,6 @@
       {
         "text": "current-month policy",
         "why": "policy phrase (declared grounding)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -7106,7 +6942,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"MSFT\", \"period\": \"MTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "6b66efa2be4fbbeda36231dbd2a08733a904310d4f74944105536f06fdd8729b"
+    "spec_sha256": "210bff143383609dfc02c779bd17d0c72e227c0ac5ef627e836a4d13463622d3"
   },
   "earnings_lookup_level3": {
     "task_id": "earnings_lookup_level3",
@@ -7123,10 +6959,6 @@
       {
         "text": "Upcoming Earnings",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "open Earnings & Estimates Monitor dashboard",
@@ -7179,7 +7011,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Healthcare\", \"ticker\": \"LLY\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "25e8a0bc185ade8370f2e914773bcdd27717dc371a1257a3b05415127174c71c"
+    "spec_sha256": "38720b57637f1ba1253a6e9792689498afa13a01f2d26120c9cb3157e566c288"
   },
   "earnings_lookup_level4": {
     "task_id": "earnings_lookup_level4",
@@ -7200,10 +7032,6 @@
       {
         "text": "Upcoming Earnings",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "earnings_estimates_monitor_calendar_upcoming_earnings",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -7253,7 +7081,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"AAPL\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "a23e7f5f4e9c4be22c9a04b432be7d44224554a4b35e67b0fced9f2ed1b44161"
+    "spec_sha256": "85b01446215d879953828b029ae9e17df284c5245f933b47244a6530296dae26"
   },
   "earnings_lookup_level5": {
     "task_id": "earnings_lookup_level5",
@@ -7286,10 +7114,6 @@
       {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
-      },
-      {
-        "text": "earnings_status_lookup",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "instantiate",
@@ -7363,7 +7187,7 @@
       "add_generative_widget {\"name\": \"Earnings Lookup Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "a98be0385c308099f79eadad1816928081acfb4e2d514bd05c5549070db65545"
+    "spec_sha256": "943ae5ca1654e68b6a15a8324b62f6315e6b3e099128278297842d57490bcad4"
   },
   "execution_quality_review_level0": {
     "task_id": "execution_quality_review_level0",
@@ -7380,10 +7204,6 @@
       {
         "text": "Live Orders",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "execution_desk_blotter_live_orders",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -7433,7 +7253,7 @@
       "create_widget {\"widget_id\": \"execution_desk_blotter_live_orders\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "ca672499d7c400e364b7c39b9cbea28370c7469b3aeb7a9ea7b44164edf496f7"
+    "spec_sha256": "42c780710b68257c6e036f0a2b937641e9d55dcdb17f634c08f5fb6f29e71339"
   },
   "execution_quality_review_level1": {
     "task_id": "execution_quality_review_level1",
@@ -7450,10 +7270,6 @@
       {
         "text": "Broker Scorecard",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "execution_desk_fills_broker_scorecard",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -7504,7 +7320,7 @@
       "create_widget {\"widget_id\": \"execution_desk_fills_broker_scorecard\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "b1adad6dba2fbfc1153e6b188102a69e3373d0ac9ba150d570fdf8ff6cdc40a6"
+    "spec_sha256": "188aa66781faeec7a7193007f0b00c429a8c99f68ff4e49e3458a281335556fe"
   },
   "execution_quality_review_level2": {
     "task_id": "execution_quality_review_level2",
@@ -7525,14 +7341,6 @@
       {
         "text": "Live Orders",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "execution_desk_blotter_live_orders",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "execution_desk_fills_broker_scorecard",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -7582,7 +7390,7 @@
       "create_widget {\"widget_id\": \"execution_desk_fills_broker_scorecard\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "651220ae118652a613b2ceb6853356cfc695756c5a147e112703dbf5babf5ce1"
+    "spec_sha256": "6199d279660b2dd793ac676a87e835b2a8527b2c84fd82d4acb71336c6850127"
   },
   "execution_quality_review_level3": {
     "task_id": "execution_quality_review_level3",
@@ -7607,14 +7415,6 @@
       {
         "text": "Multi PDF Viewer - URL",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "execution_desk_blotter_live_orders",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "multi_pdf_url",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -7665,7 +7465,7 @@
       "create_widget {\"widget_id\": \"multi_pdf_url\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "efe889c695937378e37591cbc729a6094d37d72b4bc1db0d2c6a2c30e31bb2fa"
+    "spec_sha256": "a68de492d226a5791c29ac8e16a4fde995f440988eae2beb68580ca009330bd5"
   },
   "execution_quality_review_level4": {
     "task_id": "execution_quality_review_level4",
@@ -7698,14 +7498,6 @@
       {
         "text": "Multi PDF Viewer - URL",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "execution_desk_blotter_live_orders",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "multi_pdf_url",
-        "why": "graded value (create_widget:widget_id)"
       },
       {
         "text": "note",
@@ -7770,7 +7562,7 @@
       "add_generative_widget {\"name\": \"Execution-quality Governance\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "59688ad64abd08d742de4c4e2fd31844d38c7c2c5d16f3c575395c0bc14d24bf"
+    "spec_sha256": "f40172073495ad96396a8c2a85d9db574403f678350494c79cc116c57969416e"
   },
   "execution_quality_review_level5": {
     "task_id": "execution_quality_review_level5",
@@ -7821,16 +7613,8 @@
         "why": "graded value (manage_backends:operation)"
       },
       {
-        "text": "execution_desk_blotter_live_orders",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "instantiate",
         "why": "graded value (manage_apps:operation)"
-      },
-      {
-        "text": "multi_pdf_url",
-        "why": "graded value (create_widget:widget_id)"
       },
       {
         "text": "note",
@@ -7903,7 +7687,7 @@
       "add_generative_widget {\"name\": \"Execution-quality Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "92ec44fad9066ac5886986419851f9a82f2ef7b899fac94dfef12c9acfe0d8db"
+    "spec_sha256": "50e6f8cc9e3cc8c8fd896a2ea727293ff14a078c27c651470f3c5e13589af811"
   },
   "governed_earnings_brief_level0": {
     "task_id": "governed_earnings_brief_level0",
@@ -9532,10 +9316,6 @@
       {
         "text": "finance-tearsheet",
         "why": "graded value (get_skill_content:slug)"
-      },
-      {
-        "text": "udf",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -9585,7 +9365,7 @@
       "create_widget {\"widget_id\": \"udf\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "5f6ba6df0b663eb19b88ee1c8c8def975f04b656fe88d762748081743a7c81a7"
+    "spec_sha256": "2631b418911279c2219c76c5d5f5cb755e007f33bf37de05b8161d81f194ea62"
   },
   "investment_snapshot_governance_level3": {
     "task_id": "investment_snapshot_governance_level3",
@@ -9610,14 +9390,6 @@
       {
         "text": "finance-tearsheet",
         "why": "graded value (get_skill_content:slug)"
-      },
-      {
-        "text": "html_widget",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "udf",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -9668,7 +9440,7 @@
       "create_widget {\"widget_id\": \"html_widget\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "c84103cff4d2506c4a490253c742de7fd6b4a46c755a0f8b7d61b3fa439232d6"
+    "spec_sha256": "d74e804d34f4cc6434149a94ab14a088d77df351b03cf997b86754fa7623cdf4"
   },
   "investment_snapshot_governance_level4": {
     "task_id": "investment_snapshot_governance_level4",
@@ -9699,16 +9471,8 @@
         "why": "target display name (findability)"
       },
       {
-        "text": "html_widget",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "note",
         "why": "graded value (add_generative_widget:widget_type)"
-      },
-      {
-        "text": "udf",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [
@@ -9768,7 +9532,7 @@
       "add_generative_widget {\"name\": \"Investment-snapshot Governed Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "1c5776010713b1c26055a621059abb88780ee324bdc6c43232982de94dc152e3"
+    "spec_sha256": "f39c00bc06dfd848b1a4d9e308b429bb87d814f6ef87b86af9d8fffc7ed08944"
   },
   "investment_snapshot_governance_level5": {
     "task_id": "investment_snapshot_governance_level5",
@@ -9881,10 +9645,6 @@
         "why": "graded value (get_widget_data:origin)"
       },
       {
-        "text": "live_grid_example",
-        "why": "graded value (get_widget_data:widget_id)"
-      },
-      {
         "text": "symbol",
         "why": "level0 parameter key"
       }
@@ -9936,7 +9696,7 @@
       "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "faa301c0c244259f305c89d8c9f726e850c5ac713e1d9ca0f464722294144d2f"
+    "spec_sha256": "45ac7535ae64ccd81c291d827a0e8147cb7e498fc6e7e5c4ecc38002a1856ca9"
   },
   "live_quote_lookup_level1": {
     "task_id": "live_quote_lookup_level1",
@@ -9953,10 +9713,147 @@
       {
         "text": "Widget Examples",
         "why": "graded value (get_widget_data:origin)"
+      }
+    ],
+    "must_describe_never_print": [],
+    "grounded_from_read": [],
+    "forbidden_fragments": [
+      " marker",
+      "(daloopa-",
+      "(finance-",
+      "level-",
+      "manifest specification",
+      "snake_case",
+      "wave one",
+      "wave three",
+      "wave two",
+      "add_generative_widget",
+      "assign_tasks_to_agents",
+      "backend_id",
+      "create_widget",
+      "dashboard_id",
+      "delete_widget",
+      "final_answer",
+      "get_params_options",
+      "get_skill_content",
+      "get_widget_data",
+      "get_widget_schema",
+      "get_workspace_prompt",
+      "get_workspace_snapshot",
+      "json payload",
+      "list_available_widgets",
+      "manage_apps",
+      "manage_backends",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "read_widget",
+      "read_workspace_resource",
+      "tab_id",
+      "update_widget",
+      "update_widget_layout",
+      "widget_id"
+    ],
+    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
+    "word_cap": 110,
+    "flow": [
+      "get_workspace_snapshot  (optional)",
+      "list_available_widgets  (optional)",
+      "get_params_options {\"widget_id\": \"live_grid_example\"}  (optional)",
+      "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
+    ],
+    "max_turns": 7,
+    "spec_sha256": "841a0b0ebe9f1d29cfda196d664aaa5c2764de3e377186935a2de420b9b9103b"
+  },
+  "live_quote_lookup_level2": {
+    "task_id": "live_quote_lookup_level2",
+    "family": "retrieve",
+    "spine": "live_quote_lookup",
+    "level": "level2",
+    "level_directive": "translate policy: state the policy phrase and let it carry the values it maps to; do not also state those values directly",
+    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
+    "must_contain": [
+      {
+        "text": "Live Grid",
+        "why": "target display name (findability)"
       },
       {
-        "text": "live_grid_example",
-        "why": "graded value (get_widget_data:widget_id)"
+        "text": "Widget Examples",
+        "why": "graded value (get_widget_data:origin)"
+      },
+      {
+        "text": "the mega-cap tape policy",
+        "why": "policy phrase (declared grounding)"
+      }
+    ],
+    "must_describe_never_print": [],
+    "grounded_from_read": [],
+    "forbidden_fragments": [
+      " marker",
+      "(daloopa-",
+      "(finance-",
+      "level-",
+      "manifest specification",
+      "snake_case",
+      "wave one",
+      "wave three",
+      "wave two",
+      "add_generative_widget",
+      "assign_tasks_to_agents",
+      "backend_id",
+      "create_widget",
+      "dashboard_id",
+      "delete_widget",
+      "final_answer",
+      "get_params_options",
+      "get_skill_content",
+      "get_widget_data",
+      "get_widget_schema",
+      "get_workspace_prompt",
+      "get_workspace_snapshot",
+      "json payload",
+      "list_available_widgets",
+      "manage_apps",
+      "manage_backends",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "read_widget",
+      "read_workspace_resource",
+      "tab_id",
+      "update_widget",
+      "update_widget_layout",
+      "widget_id"
+    ],
+    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
+    "word_cap": 110,
+    "flow": [
+      "list_available_widgets  (optional)",
+      "get_params_options {\"widget_id\": \"live_grid_example\"}  (optional)",
+      "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
+    ],
+    "max_turns": 6,
+    "spec_sha256": "4ce66c03dadc2bca462749df3dcf5cc30eeee68292214eb44cd8d435a937dfe5"
+  },
+  "live_quote_lookup_level3": {
+    "task_id": "live_quote_lookup_level3",
+    "family": "retrieve",
+    "spine": "live_quote_lookup",
+    "level": "level3",
+    "level_directive": "ambient: the work happens on the open dashboard named in the prompt; everything already there must survive",
+    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
+    "must_contain": [
+      {
+        "text": "Live Grid",
+        "why": "target display name (findability)"
+      },
+      {
+        "text": "Widget Examples",
+        "why": "graded value (get_widget_data:origin)"
+      },
+      {
+        "text": "open Live Quote Desk dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -10006,145 +9903,7 @@
       "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "a015addee62f3d97ed03329f11ca53685164ebb61164d8fab1e0e3ef00534ff7"
-  },
-  "live_quote_lookup_level2": {
-    "task_id": "live_quote_lookup_level2",
-    "family": "retrieve",
-    "spine": "live_quote_lookup",
-    "level": "level2",
-    "level_directive": "translate policy: state the policy phrase and let it carry the values it maps to; do not also state those values directly",
-    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
-    "must_contain": [
-      {
-        "text": "Live Grid",
-        "why": "target display name (findability)"
-      },
-      {
-        "text": "Widget Examples",
-        "why": "graded value (get_widget_data:origin)"
-      },
-      {
-        "text": "live_grid_example",
-        "why": "graded value (get_widget_data:widget_id)"
-      }
-    ],
-    "must_describe_never_print": [],
-    "grounded_from_read": [],
-    "forbidden_fragments": [
-      " marker",
-      "(daloopa-",
-      "(finance-",
-      "level-",
-      "manifest specification",
-      "snake_case",
-      "wave one",
-      "wave three",
-      "wave two",
-      "add_generative_widget",
-      "assign_tasks_to_agents",
-      "backend_id",
-      "create_widget",
-      "dashboard_id",
-      "delete_widget",
-      "final_answer",
-      "get_params_options",
-      "get_skill_content",
-      "get_widget_data",
-      "get_widget_schema",
-      "get_workspace_prompt",
-      "get_workspace_snapshot",
-      "json payload",
-      "list_available_widgets",
-      "manage_apps",
-      "manage_backends",
-      "manage_dashboard",
-      "manage_navigation_bar",
-      "navigate_workspace",
-      "read_widget",
-      "read_workspace_resource",
-      "tab_id",
-      "update_widget",
-      "update_widget_layout",
-      "widget_id"
-    ],
-    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
-    "word_cap": 110,
-    "flow": [
-      "list_available_widgets  (optional)",
-      "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
-    ],
-    "max_turns": 5,
-    "spec_sha256": "68d4bf25946fec6e697df18656e8136b150f1a32e295e97b665b8abc263ceb5b"
-  },
-  "live_quote_lookup_level3": {
-    "task_id": "live_quote_lookup_level3",
-    "family": "retrieve",
-    "spine": "live_quote_lookup",
-    "level": "level3",
-    "level_directive": "ambient: the work happens on the open dashboard named in the prompt; everything already there must survive",
-    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
-    "must_contain": [
-      {
-        "text": "Live Grid",
-        "why": "target display name (findability)"
-      },
-      {
-        "text": "Widget Examples",
-        "why": "graded value (get_widget_data:origin)"
-      },
-      {
-        "text": "live_grid_example",
-        "why": "graded value (get_widget_data:widget_id)"
-      }
-    ],
-    "must_describe_never_print": [],
-    "grounded_from_read": [],
-    "forbidden_fragments": [
-      " marker",
-      "(daloopa-",
-      "(finance-",
-      "level-",
-      "manifest specification",
-      "snake_case",
-      "wave one",
-      "wave three",
-      "wave two",
-      "add_generative_widget",
-      "assign_tasks_to_agents",
-      "backend_id",
-      "create_widget",
-      "dashboard_id",
-      "delete_widget",
-      "final_answer",
-      "get_params_options",
-      "get_skill_content",
-      "get_widget_data",
-      "get_widget_schema",
-      "get_workspace_prompt",
-      "get_workspace_snapshot",
-      "json payload",
-      "list_available_widgets",
-      "manage_apps",
-      "manage_backends",
-      "manage_dashboard",
-      "manage_navigation_bar",
-      "navigate_workspace",
-      "read_widget",
-      "read_workspace_resource",
-      "tab_id",
-      "update_widget",
-      "update_widget_layout",
-      "widget_id"
-    ],
-    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
-    "word_cap": 110,
-    "flow": [
-      "list_available_widgets  (optional)",
-      "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
-    ],
-    "max_turns": 5,
-    "spec_sha256": "2cf463a10e678a8d13836f733dde76f7f2206a3e15061d76cfa8f4edf58658b0"
+    "spec_sha256": "9d3fe772741b33bd13248aa2b2ec7dec0e3df4aa76b65f53a800bbc86004a3d1"
   },
   "live_quote_lookup_level4": {
     "task_id": "live_quote_lookup_level4",
@@ -10169,10 +9928,6 @@
       {
         "text": "Widget Examples",
         "why": "graded value (get_widget_data:origin)"
-      },
-      {
-        "text": "live_grid_example",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -10235,7 +9990,7 @@
       "add_generative_widget {\"name\": \"Live-quote Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "683f3e438846ab1afbecffc6b71eec73186a908462831c3a78db1061ca5c691e"
+    "spec_sha256": "fd4fce673a15a7d20e48f62bcecb97d40cce361dd30e4f8773d83fe9716c0a69"
   },
   "live_quote_lookup_level5": {
     "task_id": "live_quote_lookup_level5",
@@ -12052,10 +11807,6 @@
       {
         "text": "open News Desk Handoff dashboard",
         "why": "selected-dashboard phrase (asserted)"
-      },
-      {
-        "text": "sample_newsfeed",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -12114,7 +11865,7 @@
       "add_generative_widget {\"name\": \"Markets News Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "c378128f6abac073d3d7b9720d1bf59616b5139b1afc63ee6c838086ac54d29d"
+    "spec_sha256": "8be744d5b6bff6818f1cdb3b5d912a00d04e84f9495f4efe5481beafb998d10c"
   },
   "news_desk_handoff_level1": {
     "task_id": "news_desk_handoff_level1",
@@ -12143,10 +11894,6 @@
       {
         "text": "open News Desk Handoff dashboard",
         "why": "selected-dashboard phrase (asserted)"
-      },
-      {
-        "text": "sample_newsfeed",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -12206,7 +11953,7 @@
       "add_generative_widget {\"name\": \"Technology News Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "228da3fca29b2d8a6df510795ab952670cbb90c66298695a261930c2baebeda7"
+    "spec_sha256": "8224e02b90881a7498cfc825b9afef36ff2ef21835977768e627233b5f90500e"
   },
   "news_desk_handoff_level2": {
     "task_id": "news_desk_handoff_level2",
@@ -12235,10 +11982,6 @@
       {
         "text": "open News Desk Handoff dashboard",
         "why": "selected-dashboard phrase (asserted)"
-      },
-      {
-        "text": "sample_newsfeed",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "science route",
@@ -12300,7 +12043,7 @@
       "add_generative_widget {\"name\": \"Science News Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "74e7f49781ea785ff17547e32677ee336ce65b8d91d5640bc4d2be57245b577e"
+    "spec_sha256": "c5295c5fa18c450e276323e0cf3570d18052af1ecf2daf91db23859365947d38"
   },
   "news_desk_handoff_level3": {
     "task_id": "news_desk_handoff_level3",
@@ -12333,10 +12076,6 @@
       {
         "text": "open News Desk Handoff dashboard",
         "why": "selected-dashboard phrase (asserted)"
-      },
-      {
-        "text": "sample_newsfeed",
-        "why": "graded value (get_widget_data:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -12395,7 +12134,7 @@
       "add_generative_widget {\"name\": \"Governed Expansion Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "ae6ac8e7760a30493b2f62834d5f91733ae0969fcf68a87fc93ea8dde4488361"
+    "spec_sha256": "df77220c4a30df5738005140812612b5303d7eea8a1690cb3549375389878c2d"
   },
   "news_desk_handoff_level4": {
     "task_id": "news_desk_handoff_level4",
@@ -12428,10 +12167,6 @@
       {
         "text": "open News Desk Handoff dashboard",
         "why": "selected-dashboard phrase (asserted)"
-      },
-      {
-        "text": "sample_newsfeed",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "science follow-up route",
@@ -12496,7 +12231,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 9,
-    "spec_sha256": "d286f1d79f9b43c215c27949b51b64bd7868ede1deab30f75f84ffa8b0597515"
+    "spec_sha256": "fefa6021d7b916766d3822aa6987d75534be94d958396ded76f9df2b69bc983c"
   },
   "news_desk_handoff_level5": {
     "task_id": "news_desk_handoff_level5",
@@ -12621,10 +12356,6 @@
         "why": "target display name (findability)"
       },
       {
-        "text": "daloopa_kpi_metrics",
-        "why": "graded value (get_widget_data:widget_id)"
-      },
-      {
         "text": "period",
         "why": "level0 parameter key"
       },
@@ -12680,7 +12411,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "87d9ace917044c577971e49107d673fe4bd748fd6d58575717d4e96fef1bf5aa"
+    "spec_sha256": "90347df20705f14363d4a78910a4d0d1cebcab9fc1e9f9a67b4460c4bbd08844"
   },
   "operating_driver_lookup_level1": {
     "task_id": "operating_driver_lookup_level1",
@@ -12697,10 +12428,147 @@
       {
         "text": "Operating KPIs",
         "why": "target display name (findability)"
+      }
+    ],
+    "must_describe_never_print": [],
+    "grounded_from_read": [],
+    "forbidden_fragments": [
+      " marker",
+      "(daloopa-",
+      "(finance-",
+      "level-",
+      "manifest specification",
+      "snake_case",
+      "wave one",
+      "wave three",
+      "wave two",
+      "add_generative_widget",
+      "assign_tasks_to_agents",
+      "backend_id",
+      "create_widget",
+      "dashboard_id",
+      "delete_widget",
+      "final_answer",
+      "get_params_options",
+      "get_skill_content",
+      "get_widget_data",
+      "get_widget_schema",
+      "get_workspace_prompt",
+      "get_workspace_snapshot",
+      "json payload",
+      "list_available_widgets",
+      "manage_apps",
+      "manage_backends",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "read_widget",
+      "read_workspace_resource",
+      "tab_id",
+      "update_widget",
+      "update_widget_layout",
+      "widget_id"
+    ],
+    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
+    "word_cap": 110,
+    "flow": [
+      "get_workspace_snapshot  (optional)",
+      "list_available_widgets  (optional)",
+      "get_params_options {\"widget_id\": \"daloopa_kpi_metrics\"}  (optional)",
+      "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
+    ],
+    "max_turns": 7,
+    "spec_sha256": "adc276cedfbcee99cd8c961c90db0beaf1b11a2f76b547e266da1bd4daa6ac18"
+  },
+  "operating_driver_lookup_level2": {
+    "task_id": "operating_driver_lookup_level2",
+    "family": "retrieve",
+    "spine": "operating_driver_lookup",
+    "level": "level2",
+    "level_directive": "translate policy: state the policy phrase and let it carry the values it maps to; do not also state those values directly",
+    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
+    "must_contain": [
+      {
+        "text": "Bench Daloopa",
+        "why": "graded value (get_widget_data:origin)"
       },
       {
-        "text": "daloopa_kpi_metrics",
-        "why": "graded value (get_widget_data:widget_id)"
+        "text": "Operating KPIs",
+        "why": "target display name (findability)"
+      },
+      {
+        "text": "the latest-covered-quarter policy",
+        "why": "policy phrase (declared grounding)"
+      }
+    ],
+    "must_describe_never_print": [],
+    "grounded_from_read": [],
+    "forbidden_fragments": [
+      " marker",
+      "(daloopa-",
+      "(finance-",
+      "level-",
+      "manifest specification",
+      "snake_case",
+      "wave one",
+      "wave three",
+      "wave two",
+      "add_generative_widget",
+      "assign_tasks_to_agents",
+      "backend_id",
+      "create_widget",
+      "dashboard_id",
+      "delete_widget",
+      "final_answer",
+      "get_params_options",
+      "get_skill_content",
+      "get_widget_data",
+      "get_widget_schema",
+      "get_workspace_prompt",
+      "get_workspace_snapshot",
+      "json payload",
+      "list_available_widgets",
+      "manage_apps",
+      "manage_backends",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "read_widget",
+      "read_workspace_resource",
+      "tab_id",
+      "update_widget",
+      "update_widget_layout",
+      "widget_id"
+    ],
+    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
+    "word_cap": 110,
+    "flow": [
+      "list_available_widgets  (optional)",
+      "get_params_options {\"widget_id\": \"daloopa_kpi_metrics\"}  (optional)",
+      "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
+    ],
+    "max_turns": 6,
+    "spec_sha256": "be3e1111c027748735c031fd079db422b21485d8519e3e3ceac9f8eb4333e481"
+  },
+  "operating_driver_lookup_level3": {
+    "task_id": "operating_driver_lookup_level3",
+    "family": "retrieve",
+    "spine": "operating_driver_lookup",
+    "level": "level3",
+    "level_directive": "ambient: the work happens on the open dashboard named in the prompt; everything already there must survive",
+    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
+    "must_contain": [
+      {
+        "text": "Bench Daloopa",
+        "why": "graded value (get_widget_data:origin)"
+      },
+      {
+        "text": "Operating KPIs",
+        "why": "target display name (findability)"
+      },
+      {
+        "text": "open Operating Driver Review dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -12750,145 +12618,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "4855255dd645d9b031a74e54fda8e0838155adc343a317a75b434236c1a92051"
-  },
-  "operating_driver_lookup_level2": {
-    "task_id": "operating_driver_lookup_level2",
-    "family": "retrieve",
-    "spine": "operating_driver_lookup",
-    "level": "level2",
-    "level_directive": "translate policy: state the policy phrase and let it carry the values it maps to; do not also state those values directly",
-    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
-    "must_contain": [
-      {
-        "text": "Bench Daloopa",
-        "why": "graded value (get_widget_data:origin)"
-      },
-      {
-        "text": "Operating KPIs",
-        "why": "target display name (findability)"
-      },
-      {
-        "text": "daloopa_kpi_metrics",
-        "why": "graded value (get_widget_data:widget_id)"
-      }
-    ],
-    "must_describe_never_print": [],
-    "grounded_from_read": [],
-    "forbidden_fragments": [
-      " marker",
-      "(daloopa-",
-      "(finance-",
-      "level-",
-      "manifest specification",
-      "snake_case",
-      "wave one",
-      "wave three",
-      "wave two",
-      "add_generative_widget",
-      "assign_tasks_to_agents",
-      "backend_id",
-      "create_widget",
-      "dashboard_id",
-      "delete_widget",
-      "final_answer",
-      "get_params_options",
-      "get_skill_content",
-      "get_widget_data",
-      "get_widget_schema",
-      "get_workspace_prompt",
-      "get_workspace_snapshot",
-      "json payload",
-      "list_available_widgets",
-      "manage_apps",
-      "manage_backends",
-      "manage_dashboard",
-      "manage_navigation_bar",
-      "navigate_workspace",
-      "read_widget",
-      "read_workspace_resource",
-      "tab_id",
-      "update_widget",
-      "update_widget_layout",
-      "widget_id"
-    ],
-    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
-    "word_cap": 110,
-    "flow": [
-      "list_available_widgets  (optional)",
-      "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
-    ],
-    "max_turns": 5,
-    "spec_sha256": "7208da204a1dd0f460a5f678c18b294f3210787c9b8ef05fe13df4a5874c8753"
-  },
-  "operating_driver_lookup_level3": {
-    "task_id": "operating_driver_lookup_level3",
-    "family": "retrieve",
-    "spine": "operating_driver_lookup",
-    "level": "level3",
-    "level_directive": "ambient: the work happens on the open dashboard named in the prompt; everything already there must survive",
-    "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
-    "must_contain": [
-      {
-        "text": "Bench Daloopa",
-        "why": "graded value (get_widget_data:origin)"
-      },
-      {
-        "text": "Operating KPIs",
-        "why": "target display name (findability)"
-      },
-      {
-        "text": "daloopa_kpi_metrics",
-        "why": "graded value (get_widget_data:widget_id)"
-      }
-    ],
-    "must_describe_never_print": [],
-    "grounded_from_read": [],
-    "forbidden_fragments": [
-      " marker",
-      "(daloopa-",
-      "(finance-",
-      "level-",
-      "manifest specification",
-      "snake_case",
-      "wave one",
-      "wave three",
-      "wave two",
-      "add_generative_widget",
-      "assign_tasks_to_agents",
-      "backend_id",
-      "create_widget",
-      "dashboard_id",
-      "delete_widget",
-      "final_answer",
-      "get_params_options",
-      "get_skill_content",
-      "get_widget_data",
-      "get_widget_schema",
-      "get_workspace_prompt",
-      "get_workspace_snapshot",
-      "json payload",
-      "list_available_widgets",
-      "manage_apps",
-      "manage_backends",
-      "manage_dashboard",
-      "manage_navigation_bar",
-      "navigate_workspace",
-      "read_widget",
-      "read_workspace_resource",
-      "tab_id",
-      "update_widget",
-      "update_widget_layout",
-      "widget_id"
-    ],
-    "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
-    "word_cap": 110,
-    "flow": [
-      "list_available_widgets  (optional)",
-      "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
-    ],
-    "max_turns": 5,
-    "spec_sha256": "80aeba133bde60f4e06a1e3f0a87d98edf77fa98eb11364cf9a875be87f7bda3"
+    "spec_sha256": "bfe5668b1ed7a5ef3ef38d633e0443c79496b396976032558537343631467bf2"
   },
   "operating_driver_lookup_level4": {
     "task_id": "operating_driver_lookup_level4",
@@ -12913,10 +12643,6 @@
       {
         "text": "Operating-driver Governance Note",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_kpi_metrics",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -12979,7 +12705,7 @@
       "add_generative_widget {\"name\": \"Operating-driver Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "fbd35ae8d3537afb04c066a55696791e5b247c816339457315a846f19f99a877"
+    "spec_sha256": "057ec9e7fd147269f2dc8faa5581f0a5a6f45c0def46cf17580852e3b118673f"
   },
   "operating_driver_lookup_level5": {
     "task_id": "operating_driver_lookup_level5",
@@ -14585,10 +14311,6 @@
         "why": "graded value (add_generative_widget:name)"
       },
       {
-        "text": "daloopa_segment_breakdown",
-        "why": "graded value (get_widget_data:widget_id)"
-      },
-      {
         "text": "note",
         "why": "graded value (add_generative_widget:widget_type)"
       },
@@ -14661,7 +14383,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Direct Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "2b183e8078d65911f6a9f4505c9903989b5b8ef7eca9f4b3fba487b8fbf64652"
+    "spec_sha256": "f01b038e956beef15609668b1c32aade9e43fd87eff061ff69dccb13aaff5c57"
   },
   "segment_mix_handoff_level1": {
     "task_id": "segment_mix_handoff_level1",
@@ -14682,10 +14404,6 @@
       {
         "text": "Segment-mix Discovered Note",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_segment_breakdown",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -14752,7 +14470,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Discovered Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "2d5ed30a00eea84022a46f8e0ae95dbc1a0b61bb85255ecadc42a60c31b9b046"
+    "spec_sha256": "203c0e35a528d6d9647112a2b7578344d170a3722fbeccda344440f00fdfcdf4"
   },
   "segment_mix_handoff_level2": {
     "task_id": "segment_mix_handoff_level2",
@@ -14773,10 +14491,6 @@
       {
         "text": "Segment-mix Analyst Note",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_segment_breakdown",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -14842,7 +14556,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Analyst Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "fc995902b2205329205453fe1cace1dc0e41949fa2be08c6fa28849fbe204f74"
+    "spec_sha256": "6bb44c8daf9e4ddf8be469496e5cfae2e1b54584b6e5c2d4c949d17095d3c1b8"
   },
   "segment_mix_handoff_level3": {
     "task_id": "segment_mix_handoff_level3",
@@ -14863,10 +14577,6 @@
       {
         "text": "Segment-mix Desk Note",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_segment_breakdown",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -14932,7 +14642,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Desk Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "3405042d346ba4438b5eea31ecb33a277c1b1198de0b19f18cc8cdbc275251db"
+    "spec_sha256": "121e9966a3d14cdff270a91cbed47e94f549ecb5069a50e9fa3a04be28e4bcd3"
   },
   "segment_mix_handoff_level4": {
     "task_id": "segment_mix_handoff_level4",
@@ -14957,10 +14667,6 @@
       {
         "text": "Segment-mix Governed Handoff",
         "why": "graded value (add_generative_widget:name)"
-      },
-      {
-        "text": "daloopa_segment_breakdown",
-        "why": "graded value (get_widget_data:widget_id)"
       },
       {
         "text": "note",
@@ -15029,7 +14735,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 9,
-    "spec_sha256": "62560cccf26449145b30e806daf72d75af662487dac32a2cb47147482767604a"
+    "spec_sha256": "12c6bfa3003d8ba729990500446e14104040c75ac0261a4d32ac9ed6886b1629"
   },
   "segment_mix_handoff_level5": {
     "task_id": "segment_mix_handoff_level5",
@@ -16369,10 +16075,6 @@
         "why": "graded value (manage_dashboard:name)"
       },
       {
-        "text": "chains_highchart",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
       }
@@ -16425,7 +16127,7 @@
       "create_widget {\"widget_id\": \"chains_highchart\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "dd752e714659fe4573464333b7794affba92f81acc2a5a94b8e3098860475fe4"
+    "spec_sha256": "db531954d918587223b45bcd6fc63da94a01fc906390ecf11d8953340c6936ce"
   },
   "visualization_gallery_level3": {
     "task_id": "visualization_gallery_level3",
@@ -16460,16 +16162,8 @@
         "why": "graded value (manage_dashboard:name)"
       },
       {
-        "text": "chains_highchart",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
-      },
-      {
-        "text": "vega_bar",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [],
@@ -16521,7 +16215,7 @@
       "create_widget {\"widget_id\": \"vega_bar\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "ab128f94c21d2d23180522dc6e77d5117a342cbb0fcab05aaffec15b21f00077"
+    "spec_sha256": "9f7960a5af86ac55ca0a374307d7ba58866e6abb5fc7b7c50bf9a6274694fe0d"
   },
   "visualization_gallery_level4": {
     "task_id": "visualization_gallery_level4",
@@ -16556,16 +16250,8 @@
         "why": "graded value (create_widget:origin)"
       },
       {
-        "text": "chains_highchart",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
-      },
-      {
-        "text": "vega_scatter_demo",
-        "why": "graded value (create_widget:widget_id)"
       }
     ],
     "must_describe_never_print": [
@@ -16633,7 +16319,7 @@
       "create_widget {\"widget_id\": \"vega_scatter_demo\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "f6e8d1bbf62eb739d8c8f5b378f46abeb24cfd42ae2241fb87f191337774cf4f"
+    "spec_sha256": "57f344ef73766c00ee466b3f3c1e7490fd39df9523435be5eeebd5250f474029"
   },
   "visualization_gallery_level5": {
     "task_id": "visualization_gallery_level5",
@@ -16690,14 +16376,6 @@
       {
         "text": "note",
         "why": "graded value (add_generative_widget:widget_type)"
-      },
-      {
-        "text": "vega_bar",
-        "why": "graded value (create_widget:widget_id)"
-      },
-      {
-        "text": "vega_scatter_demo",
-        "why": "graded value (create_widget:widget_id)"
       },
       {
         "text": "widgets.json spec",
@@ -16772,6 +16450,6 @@
       "add_generative_widget {\"name\": \"Visualization-gallery Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "4a7e3b2cb4968e5cd379219f8c8cd278a54c6c61f4398b846aa28e49d85798d4"
+    "spec_sha256": "3306588c6107d6a0980e3793fa730b2efa12855f77f1bf9f262e5b1deadbb874"
   }
 }

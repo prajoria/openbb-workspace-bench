@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "Pull the latest date and exact close from the daily OHLCV rows in Bench Daloopa's Stock Prices for the EV tape policy; that policy means the Tesla coverage name.",
+  "prompt": "For the EV tape policy - that means the Tesla coverage name - pull the latest date and exact close from the daily OHLCV rows in Bench Daloopa's Stock Prices.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

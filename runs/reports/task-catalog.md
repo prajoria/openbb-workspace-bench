@@ -5470,7 +5470,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: read · specification: -
 
-> Read the daily OHLCV rows in Bench Daloopa's Stock Prices with ticker set to NVDA, then report the latest date and exact close.
+> Pull up the daily OHLCV rows in Bench Daloopa's Stock Prices with ticker set to NVDA, and report the latest date and exact close.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5483,7 +5483,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Find the daily OHLCV rows in Bench Daloopa's Stock Prices for Netflix and give me the latest date and exact close.
+> Netflix closed where, exactly? Find the daily OHLCV rows in Bench Daloopa's Stock Prices for it and give me the latest date and exact close.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5496,7 +5496,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> Pull the latest date and exact close from the daily OHLCV rows in Bench Daloopa's Stock Prices for the EV tape policy; that policy means the Tesla coverage name.
+> For the EV tape policy - that means the Tesla coverage name - pull the latest date and exact close from the daily OHLCV rows in Bench Daloopa's Stock Prices.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5509,7 +5509,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: read · specification: -
 
-> On the open Closing Tape Review dashboard, read the daily OHLCV rows in Bench Daloopa's configured Stock Prices view without changing it and report the latest date, exact close, and volume.
+> The tape review is already up: on the open Closing Tape Review dashboard, read Bench Daloopa's configured Stock Prices view without changing it and report the latest date, exact close, and volume.
 
 - Initial workspace: dashboard "Closing Tape Review"; 1 tab(s): review; 1 seeded widget(s): daloopa_stock_prices({"ticker": "MSFT"})
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5522,7 +5522,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: read · specification: -
 
-> Use Daloopa Tearsheet governance to review the daily OHLCV rows in Bench Daloopa's Stock Prices for Apple, then report the latest date and exact close.
+> Working under Daloopa Tearsheet governance, review the daily OHLCV rows in Bench Daloopa's Stock Prices for Apple, then report the latest date and exact close.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5535,7 +5535,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Build and add a Rollout Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets.json spec. Follow the Daloopa Tearsheet skill and add a Closing Tape Build Note recording the anchor it uses for all period math.
+> The tape desk wants its own lookup: build and add a Rollout Closing Tape backend with a Closing Tape Lookup table for NVDA to the widgets.json spec, instantiate its Closing Tape App with the lookup on Tape, read the result, and report the latest date and exact close. Close with a Closing Tape Build Note recording the anchor the Daloopa Tearsheet skill uses for all period math.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5550,7 +5550,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: read · specification: -
 
-> Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor for Healthcare, LLY, and YTD, and report the exact score and status.
+> Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor with sector Healthcare, ticker LLY, period YTD, and report the exact score and status.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5563,7 +5563,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Find Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, set the view to Technology, AAPL, and QTD, and give me the exact score and status.
+> Where does Apple stand this quarter? Find Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, set the view to Technology, Apple's ticker, and QTD, and give me the exact score and status.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5576,7 +5576,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> I need MSFT's exact score and status from Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor. Use Technology for the coverage sector; the current-month policy means MTD.
+> MSFT's score is due upstairs: from Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, get the exact score and status using Technology for the coverage sector; the current-month policy means MTD.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5589,7 +5589,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: read · specification: -
 
-> On the open Earnings & Estimates Monitor dashboard, read Bench Stark Enterprise's configured Upcoming Earnings view without changing it, and report LLY's exact YTD score and change.
+> Without changing the view, read Bench Stark Enterprise's configured Upcoming Earnings on the open Earnings & Estimates Monitor dashboard and report LLY's exact YTD score and change.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Earnings & Estimates Monitor"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5602,7 +5602,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: read · specification: -
 
-> Review Apple's earnings under Finance Earnings Prep governance. In Bench Stark Enterprise's Earnings & Estimates Monitor, use Upcoming Earnings for Technology, AAPL, and QTD, then report the exact score and status.
+> Earnings week - review Apple under Finance Earnings Prep governance. In Bench Stark Enterprise's Earnings & Estimates Monitor, use Upcoming Earnings for Technology, AAPL, and QTD, then report the exact score and status.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5615,7 +5615,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The desk needs a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets.json spec. Follow the Finance Earnings Prep skill and add a Earnings Lookup Build Note recording what it identifies right after the estimate comparison.
+> The desk wants a dedicated status check: build and add a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD per the widgets.json spec, instantiate its Earnings Lookup App with the table on Lookup, read the lookup, and report the exact score and status. Add an Earnings Lookup Build Note recording what the Finance Earnings Prep skill identifies right after the estimate comparison.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5643,7 +5643,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Quick ask - read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.
+> Apple's live quote, please: find Widget Examples's Live Grid for it and report the exact symbol and price shown.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5656,7 +5656,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> For the desk, read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.
+> Under the mega-cap tape policy - that means the Apple line - read Widget Examples's Live Grid and report the exact symbol and price shown.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5669,9 +5669,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: read · specification: -
 
-> Before the meeting, read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.
+> The desk screen is set up on the open Live Quote Desk dashboard - read the configured Widget Examples's Live Grid view without changing it and report the exact symbol and price shown.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Live Quote Desk"; 1 tab(s): review; 1 seeded widget(s): live_grid_example({"symbol": "AAPL"})
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -5682,7 +5682,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: read · specification: -
 
-> Following the Finance Tearsheet skill, read Widget Examples's Live Grid with symbol AAPL, report the exact symbol and price shown, and add a Live-quote Governance Note that records price action.
+> Quote check under the Finance Tearsheet skill: read Widget Examples's Live Grid with symbol AAPL, report the exact symbol and price shown, and leave a Live-quote Governance Note recording the first input the skill's workflow gathers.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5696,7 +5696,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Stand up Buildout Live Quote: add it with a Live Quote Lookup table carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Build it to the workspace's widgets.json spec. Follow the Finance Tearsheet skill and add a Live-quote Build Note recording the first input its workflow gathers.
+> Give the quote desk its own service - stand up Buildout Live Quote: add it with a Live Quote Lookup table carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes per the widgets.json spec; read it with symbol AAPL and report the exact symbol and last_price values shown. Finish with a Live-quote Build Note recording the first input the Finance Tearsheet skill's workflow gathers.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5724,7 +5724,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: read · specification: -
 
-> Quick ask - read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.
+> How are Apple's device numbers trending? Find Bench Daloopa's Operating KPIs for it with period 2026Q1, and report the exact calendar_period and Installed Base Active Devices value shown.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5737,7 +5737,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> For the desk, read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.
+> Under the latest-covered-quarter policy - that means the most recent quarter Daloopa covers - read Bench Daloopa's Operating KPIs with ticker AAPL and report the exact calendar_period and Installed Base Active Devices value shown.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5750,9 +5750,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: read · specification: -
 
-> Before the meeting, read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.
+> Driver review time: on the open Operating Driver Review dashboard, read the configured Bench Daloopa's Operating KPIs view without changing it and report the exact calendar_period and Installed Base Active Devices value shown.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Operating Driver Review"; 1 tab(s): review; 1 seeded widget(s): daloopa_kpi_metrics({"ticker": "AAPL", "period": "2026Q1"})
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -5763,7 +5763,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: read · specification: -
 
-> Following the Daloopa Inflection skill, read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, report the exact calendar_period and Installed Base Active Devices value shown, and add a Operating-driver Governance Note that records growth-rate reversals.
+> Scan Apple's drivers under the Daloopa Inflection skill: read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, report the exact calendar_period and Installed Base Active Devices value shown, and add an Operating-driver Governance Note recording what the skill flags as inflections.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`
@@ -5777,7 +5777,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Stand up Buildout Operating Drivers: add it with a Operating Driver Lookup table carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers, read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. Build it to the workspace's widgets.json spec. Follow the Daloopa Inflection skill and add a Operating-driver Build Note recording what it flags as inflections.
+> The KPI desk needs its own lookup - stand up Buildout Operating Drivers: add it with an Operating Driver Lookup table carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers per the widgets.json spec; read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. End with an Operating-driver Build Note recording what the Daloopa Inflection skill flags as inflections.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (21): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`, `final_answer`

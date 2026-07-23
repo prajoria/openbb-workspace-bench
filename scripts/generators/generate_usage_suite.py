@@ -6338,6 +6338,9 @@ def _build_wave3_retrieve_spine(
     tokens: tuple[str, str],
     read_value_words: str,
     served_columns: tuple[str, str],
+    colloquial: tuple[str, str],
+    policy: tuple[str, str, str],
+    staged_dashboard: str,
     governance: GovernanceSpec,
     backend_name: str,
     widget_name: str,
@@ -6347,37 +6350,140 @@ def _build_wave3_retrieve_spine(
 ) -> list[TaskRecord]:
     tasks: list[TaskRecord] = []
     subject = f"{target.origin}'s {target.display_name}"
-    openings = (
-        f"Read {subject}",
-        f"Quick ask - read {subject}",
-        f"For the desk, read {subject}",
-        f"Before the meeting, read {subject}",
+    colloquial_key, colloquial_words = colloquial
+    policy_words, policy_meaning, policy_key = policy
+
+    def _args_words_except(hidden: str | None) -> str:
+        return ", ".join(
+            f"{key} {value}" for key, value in data_args.items() if key != hidden
+        )
+
+    def _params_probe(param_name: str) -> JsonDict:
+        return _call(
+            "get_params_options",
+            {
+                "origin": target.origin,
+                "widget_id": target.widget_id,
+                "param_name": param_name,
+            },
+            optional=True,
+        )
+
+    # level0 - execute: everything stated, parameter keys included.
+    tasks.append(
+        _record(
+            "retrieve",
+            spine,
+            0,
+            "read",
+            (
+                f"Read {subject} with "
+                + _args_words_except(None)
+                + f", then report {read_value_words}."
+            ),
+            [
+                _snapshot(),
+                *_wave3_discover_targets((target,)),
+                _wave3_read_call(target, data_args),
+            ],
+            targets=(target,),
+            required_values=list(tokens),
+            reference_answer=f"The requested view reports {tokens[0]} and {tokens[1]}.",
+            answer_source=(source_slug, target.widget_id),
+        )
     )
-    for level in range(4):
-        prompt = (
-            f"{openings[level]} with "
-            + ", ".join(f"{key} {value}" for key, value in data_args.items())
-            + f", then report {read_value_words}."
+
+    # level1 - discover: one input stated only colloquially.
+    l1_rest = _args_words_except(colloquial_key)
+    tasks.append(
+        _record(
+            "retrieve",
+            spine,
+            1,
+            "read",
+            (
+                f"Find {subject} for {colloquial_words}"
+                + (f" with {l1_rest}" if l1_rest else "")
+                + f", and report {read_value_words}."
+            ),
+            [
+                _snapshot(),
+                *_wave3_discover_targets((target,)),
+                _params_probe(colloquial_key),
+                _wave3_read_call(target, data_args),
+            ],
+            targets=(target,),
+            required_values=list(tokens),
+            reference_answer=f"The requested view reports {tokens[0]} and {tokens[1]}.",
+            answer_source=(source_slug, target.widget_id),
         )
-        tools: list[JsonDict] = []
-        if level in {0, 1}:
-            tools.append(_snapshot())
-        tools.extend(_wave3_discover_targets((target,)))
-        tools.append(_wave3_read_call(target, data_args))
-        tasks.append(
-            _record(
-                "retrieve",
-                spine,
-                level,
-                "read",
-                prompt,
-                tools,
-                targets=(target,),
-                required_values=list(tokens),
-                reference_answer=f"The requested view reports {tokens[0]} and {tokens[1]}.",
-                answer_source=(source_slug, target.widget_id),
-            )
+    )
+
+    # level2 - translate policy: the policy phrase carries the hidden value.
+    l2_rest = _args_words_except(policy_key)
+    tasks.append(
+        _record(
+            "retrieve",
+            spine,
+            2,
+            "read",
+            (
+                f"Under {policy_words} - that policy means {policy_meaning} - read "
+                f"{subject}"
+                + (f" with {l2_rest}" if l2_rest else "")
+                + f" and report {read_value_words}."
+            ),
+            [
+                *_wave3_discover_targets((target,)),
+                _params_probe(policy_key),
+                _wave3_read_call(target, data_args),
+            ],
+            targets=(target,),
+            policies=(PolicyMapping(policy_words, (data_args[policy_key],)),),
+            required_values=list(tokens),
+            reference_answer=f"The requested view reports {tokens[0]} and {tokens[1]}.",
+            answer_source=(source_slug, target.widget_id),
         )
+    )
+
+    # level3 - ambient: read the configured view on a staged open dashboard.
+    staged_state = _staged_dashboard(
+        staged_dashboard,
+        [
+            {
+                "origin": target.origin,
+                "widget_id": target.widget_id,
+                "tab_id": "review",
+                "data_args": dict(data_args),
+                "layout": {"x": 0, "y": 0, "w": 40, "h": 14},
+            }
+        ],
+    )
+    staged_target = dataclasses.replace(target, staged=True)
+    tasks.append(
+        _record(
+            "retrieve",
+            spine,
+            3,
+            "read",
+            (
+                f"On the open {staged_dashboard} dashboard, read the configured "
+                f"{subject} view without changing it and report "
+                f"{read_value_words}."
+            ),
+            [
+                _snapshot(),
+                *_wave3_discover_targets((staged_target,)),
+                _wave3_read_call(staged_target, data_args),
+            ],
+            targets=(staged_target,),
+            required_values=list(tokens),
+            reference_answer=f"The configured view reports {tokens[0]} and {tokens[1]}.",
+            answer_source=(source_slug, target.widget_id),
+            selected_dashboard=staged_dashboard,
+            initial_state=staged_state,
+        )
+    )
 
     note_name = f"{title} Governance Note"
     governance_token = governance.outcome_tokens[0]
@@ -6547,6 +6653,13 @@ def _build_wave3_retrieve_tasks() -> list[TaskRecord]:
                 "the exact calendar_period and Installed Base Active Devices value shown"
             ),
             served_columns=("fiscal_period", "driver_value"),
+            colloquial=("ticker", "Apple"),
+            policy=(
+                "the latest-covered-quarter policy",
+                "the most recent quarter Daloopa covers",
+                "period",
+            ),
+            staged_dashboard="Operating Driver Review",
             governance=GovernanceSpec(
                 "get_skill_content",
                 "daloopa-inflection",
@@ -6568,6 +6681,9 @@ def _build_wave3_retrieve_tasks() -> list[TaskRecord]:
             tokens=("AAPL", "150.0"),
             read_value_words="the exact symbol and price shown",
             served_columns=("symbol", "last_price"),
+            colloquial=("symbol", "Apple"),
+            policy=("the mega-cap tape policy", "the Apple line", "symbol"),
+            staged_dashboard="Live Quote Desk",
             governance=GovernanceSpec(
                 "get_skill_content",
                 "finance-tearsheet",
@@ -10349,6 +10465,12 @@ def _compute_prompt_spec(record: TaskRecord) -> JsonDict:
                 if name == "slug" and leaf == governance_key:
                     # Slugs never appear in prompts; naming the skill in
                     # words (the governance label above) grounds the slug.
+                    continue
+                if name == "widget_id" and any(
+                    t.widget_id == leaf for t in record.targets
+                ):
+                    # Widget ids are handles: the target display name
+                    # (required above) grounds them per F2.
                     continue
                 _require(leaf, f"graded value ({call['tool']}:{name})")
         if level == "level0" and isinstance(args.get("data_args"), dict):

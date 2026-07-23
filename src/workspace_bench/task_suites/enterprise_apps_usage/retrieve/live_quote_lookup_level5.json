@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Stand up Buildout Live Quote: add it with a Live Quote Lookup table carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Build it to the workspace's widgets.json spec. Follow the Finance Tearsheet skill and add a Live-quote Build Note recording the first input its workflow gathers.",
+  "prompt": "Give the quote desk its own service - stand up Buildout Live Quote: add it with a Live Quote Lookup table carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes per the widgets.json spec; read it with symbol AAPL and report the exact symbol and last_price values shown. Finish with a Live-quote Build Note recording the first input the Finance Tearsheet skill's workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

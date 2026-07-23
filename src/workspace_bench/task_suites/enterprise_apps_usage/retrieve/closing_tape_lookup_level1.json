@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Find the daily OHLCV rows in Bench Daloopa's Stock Prices for Netflix and give me the latest date and exact close.",
+  "prompt": "Netflix closed where, exactly? Find the daily OHLCV rows in Bench Daloopa's Stock Prices for it and give me the latest date and exact close.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

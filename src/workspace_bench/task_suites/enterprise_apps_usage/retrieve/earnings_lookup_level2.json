@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "I need MSFT's exact score and status from Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor. Use Technology for the coverage sector; the current-month policy means MTD.",
+  "prompt": "MSFT's score is due upstairs: from Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, get the exact score and status using Technology for the coverage sector; the current-month policy means MTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

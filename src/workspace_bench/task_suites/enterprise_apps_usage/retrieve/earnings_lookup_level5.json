@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The desk needs a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets.json spec. Follow the Finance Earnings Prep skill and add a Earnings Lookup Build Note recording what it identifies right after the estimate comparison.",
+  "prompt": "The desk wants a dedicated status check: build and add a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD per the widgets.json spec, instantiate its Earnings Lookup App with the table on Lookup, read the lookup, and report the exact score and status. Add an Earnings Lookup Build Note recording what the Finance Earnings Prep skill identifies right after the estimate comparison.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

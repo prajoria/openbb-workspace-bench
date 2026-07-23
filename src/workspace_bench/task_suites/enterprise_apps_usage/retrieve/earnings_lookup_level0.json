@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level0",
   "category": "read",
   "difficulty": "level0",
-  "prompt": "Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor for Healthcare, LLY, and YTD, and report the exact score and status.",
+  "prompt": "Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor with sector Healthcare, ticker LLY, period YTD, and report the exact score and status.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

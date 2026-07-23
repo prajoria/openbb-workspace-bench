@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Build and add a Rollout Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets.json spec. Follow the Daloopa Tearsheet skill and add a Closing Tape Build Note recording the anchor it uses for all period math.",
+  "prompt": "The tape desk wants its own lookup: build and add a Rollout Closing Tape backend with a Closing Tape Lookup table for NVDA to the widgets.json spec, instantiate its Closing Tape App with the lookup on Tape, read the result, and report the latest date and exact close. Close with a Closing Tape Build Note recording the anchor the Daloopa Tearsheet skill uses for all period math.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

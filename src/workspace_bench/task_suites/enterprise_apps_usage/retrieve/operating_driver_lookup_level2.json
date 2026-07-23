@@ -2,7 +2,7 @@
   "id": "operating_driver_lookup_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "For the desk, read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
+  "prompt": "Under the latest-covered-quarter policy - that means the most recent quarter Daloopa covers - read Bench Daloopa's Operating KPIs with ticker AAPL and report the exact calendar_period and Installed Base Active Devices value shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,6 +58,15 @@
         "optional": true
       },
       {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_kpi_metrics",
+          "param_name": "period"
+        },
+        "optional": true
+      },
+      {
         "tool": "get_widget_data",
         "args": {
           "origin": "Bench Daloopa",
@@ -78,6 +87,6 @@
       "2420.9"
     ],
     "reference_answer": "The requested view reports 2026Q1 and 2420.9.",
-    "max_turns": 5
+    "max_turns": 6
   }
 }

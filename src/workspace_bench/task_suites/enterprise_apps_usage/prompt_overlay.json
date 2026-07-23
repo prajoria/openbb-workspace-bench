@@ -1,4 +1,76 @@
 {
+  "closing_tape_lookup_level0": {
+    "prompt": "Pull up the daily OHLCV rows in Bench Daloopa's Stock Prices with ticker set to NVDA, and report the latest date and exact close.",
+    "spec_sha256": "b60c5b535a612e2d159d6035e0d5859f186ccba7e4c5d27103bdec958d6c2755"
+  },
+  "closing_tape_lookup_level1": {
+    "prompt": "Netflix closed where, exactly? Find the daily OHLCV rows in Bench Daloopa's Stock Prices for it and give me the latest date and exact close.",
+    "spec_sha256": "effa21123026a0105c1df42b0cb46555ddd1037a00dc1ec8feb96c43b53eacd3"
+  },
+  "closing_tape_lookup_level2": {
+    "prompt": "For the EV tape policy - that means the Tesla coverage name - pull the latest date and exact close from the daily OHLCV rows in Bench Daloopa's Stock Prices.",
+    "spec_sha256": "e1daab44ad2f667b6846092c53d5912bca1fcdad3af77afa1b6e87a996f86580"
+  },
+  "closing_tape_lookup_level3": {
+    "prompt": "The tape review is already up: on the open Closing Tape Review dashboard, read Bench Daloopa's configured Stock Prices view without changing it and report the latest date, exact close, and volume.",
+    "spec_sha256": "c7883820b6b114c5e5662b84055070d56e2ea8e7349f443aca8121e8a321e884"
+  },
+  "closing_tape_lookup_level4": {
+    "prompt": "Working under Daloopa Tearsheet governance, review the daily OHLCV rows in Bench Daloopa's Stock Prices for Apple, then report the latest date and exact close.",
+    "spec_sha256": "da524937e7bab63cd8b910de3f0626ff04b822a026b66a06d2dec9cbbfb67626"
+  },
+  "closing_tape_lookup_level5": {
+    "prompt": "The tape desk wants its own lookup: build and add a Rollout Closing Tape backend with a Closing Tape Lookup table for NVDA to the widgets.json spec, instantiate its Closing Tape App with the lookup on Tape, read the result, and report the latest date and exact close. Close with a Closing Tape Build Note recording the anchor the Daloopa Tearsheet skill uses for all period math.",
+    "spec_sha256": "2602d4cb192268530c89d974b147033e90ec7c4cbb84f8a74d554e724e933f28"
+  },
+  "earnings_lookup_level0": {
+    "prompt": "Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor with sector Healthcare, ticker LLY, period YTD, and report the exact score and status.",
+    "spec_sha256": "95a7dd3a929b99a5a437cdee5afa8a9581e6b7c01dd01389b27c15413a25d297"
+  },
+  "earnings_lookup_level1": {
+    "prompt": "Where does Apple stand this quarter? Find Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, set the view to Technology, Apple's ticker, and QTD, and give me the exact score and status.",
+    "spec_sha256": "e7e1741b3fcc1966e0cbc77975e220db074752557a836adbc6c38c6e3efe4986"
+  },
+  "earnings_lookup_level2": {
+    "prompt": "MSFT's score is due upstairs: from Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, get the exact score and status using Technology for the coverage sector; the current-month policy means MTD.",
+    "spec_sha256": "210bff143383609dfc02c779bd17d0c72e227c0ac5ef627e836a4d13463622d3"
+  },
+  "earnings_lookup_level3": {
+    "prompt": "Without changing the view, read Bench Stark Enterprise's configured Upcoming Earnings on the open Earnings & Estimates Monitor dashboard and report LLY's exact YTD score and change.",
+    "spec_sha256": "38720b57637f1ba1253a6e9792689498afa13a01f2d26120c9cb3157e566c288"
+  },
+  "earnings_lookup_level4": {
+    "prompt": "Earnings week - review Apple under Finance Earnings Prep governance. In Bench Stark Enterprise's Earnings & Estimates Monitor, use Upcoming Earnings for Technology, AAPL, and QTD, then report the exact score and status.",
+    "spec_sha256": "85b01446215d879953828b029ae9e17df284c5245f933b47244a6530296dae26"
+  },
+  "earnings_lookup_level5": {
+    "prompt": "The desk wants a dedicated status check: build and add a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD per the widgets.json spec, instantiate its Earnings Lookup App with the table on Lookup, read the lookup, and report the exact score and status. Add an Earnings Lookup Build Note recording what the Finance Earnings Prep skill identifies right after the estimate comparison.",
+    "spec_sha256": "943ae5ca1654e68b6a15a8324b62f6315e6b3e099128278297842d57490bcad4"
+  },
+  "live_quote_lookup_level0": {
+    "prompt": "Read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
+    "spec_sha256": "45ac7535ae64ccd81c291d827a0e8147cb7e498fc6e7e5c4ecc38002a1856ca9"
+  },
+  "live_quote_lookup_level1": {
+    "prompt": "Apple's live quote, please: find Widget Examples's Live Grid for it and report the exact symbol and price shown.",
+    "spec_sha256": "841a0b0ebe9f1d29cfda196d664aaa5c2764de3e377186935a2de420b9b9103b"
+  },
+  "live_quote_lookup_level2": {
+    "prompt": "Under the mega-cap tape policy - that means the Apple line - read Widget Examples's Live Grid and report the exact symbol and price shown.",
+    "spec_sha256": "4ce66c03dadc2bca462749df3dcf5cc30eeee68292214eb44cd8d435a937dfe5"
+  },
+  "live_quote_lookup_level3": {
+    "prompt": "The desk screen is set up on the open Live Quote Desk dashboard - read the configured Widget Examples's Live Grid view without changing it and report the exact symbol and price shown.",
+    "spec_sha256": "9d3fe772741b33bd13248aa2b2ec7dec0e3df4aa76b65f53a800bbc86004a3d1"
+  },
+  "live_quote_lookup_level4": {
+    "prompt": "Quote check under the Finance Tearsheet skill: read Widget Examples's Live Grid with symbol AAPL, report the exact symbol and price shown, and leave a Live-quote Governance Note recording the first input the skill's workflow gathers.",
+    "spec_sha256": "fd4fce673a15a7d20e48f62bcecb97d40cce361dd30e4f8773d83fe9716c0a69"
+  },
+  "live_quote_lookup_level5": {
+    "prompt": "Give the quote desk its own service - stand up Buildout Live Quote: add it with a Live Quote Lookup table carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes per the widgets.json spec; read it with symbol AAPL and report the exact symbol and last_price values shown. Finish with a Live-quote Build Note recording the first input the Finance Tearsheet skill's workflow gathers.",
+    "spec_sha256": "6b840dfab3e3651ecfca2009bba6dfc729c08bbc1c82d9004de5e12344e7374b"
+  },
   "manufacturer_details_repair_level0": {
     "prompt": "Car Manufacturer Details on the open Manufacturer Detail Repair dashboard is stuck on the wrong year: set company to F and year to 2024.",
     "spec_sha256": "85ae3c6499bbf9a1d1c4e77467753f1f60b1e78b256b9a88cf3215e613bd38e2"
@@ -46,6 +118,30 @@
   "nav_exception_station_level5": {
     "prompt": "We lost Pilot NAV Repair and its staging queue. On the open Custom NAV Repair Staging dashboard, stand it back up: add a custom backend Pilot NAV Repair carrying a NAV Exception Queue table per the widgets.json spec, publish and instantiate its app with the queue on Exceptions, then leave a NAV-exception Rebuild Note recording the last of the three verdict kinds the Daloopa Guidance Tracker skill tallies.",
     "spec_sha256": "eb2755526564f785ffbc0aee02d6c3032f71e5093e1c4505fb45e499afcbae14"
+  },
+  "operating_driver_lookup_level0": {
+    "prompt": "Read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
+    "spec_sha256": "90347df20705f14363d4a78910a4d0d1cebcab9fc1e9f9a67b4460c4bbd08844"
+  },
+  "operating_driver_lookup_level1": {
+    "prompt": "How are Apple's device numbers trending? Find Bench Daloopa's Operating KPIs for it with period 2026Q1, and report the exact calendar_period and Installed Base Active Devices value shown.",
+    "spec_sha256": "adc276cedfbcee99cd8c961c90db0beaf1b11a2f76b547e266da1bd4daa6ac18"
+  },
+  "operating_driver_lookup_level2": {
+    "prompt": "Under the latest-covered-quarter policy - that means the most recent quarter Daloopa covers - read Bench Daloopa's Operating KPIs with ticker AAPL and report the exact calendar_period and Installed Base Active Devices value shown.",
+    "spec_sha256": "be3e1111c027748735c031fd079db422b21485d8519e3e3ceac9f8eb4333e481"
+  },
+  "operating_driver_lookup_level3": {
+    "prompt": "Driver review time: on the open Operating Driver Review dashboard, read the configured Bench Daloopa's Operating KPIs view without changing it and report the exact calendar_period and Installed Base Active Devices value shown.",
+    "spec_sha256": "bfe5668b1ed7a5ef3ef38d633e0443c79496b396976032558537343631467bf2"
+  },
+  "operating_driver_lookup_level4": {
+    "prompt": "Scan Apple's drivers under the Daloopa Inflection skill: read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, report the exact calendar_period and Installed Base Active Devices value shown, and add an Operating-driver Governance Note recording what the skill flags as inflections.",
+    "spec_sha256": "057ec9e7fd147269f2dc8faa5581f0a5a6f45c0def46cf17580852e3b118673f"
+  },
+  "operating_driver_lookup_level5": {
+    "prompt": "The KPI desk needs its own lookup - stand up Buildout Operating Drivers: add it with an Operating Driver Lookup table carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers per the widgets.json spec; read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. End with an Operating-driver Build Note recording what the Daloopa Inflection skill flags as inflections.",
+    "spec_sha256": "0bf2d50e0e04eb6c79160a1e92eee060053fe25d005fb0f53ac47b4a2b32c346"
   },
   "protocol_display_repair_level0": {
     "prompt": "Point Defi Llama Protocol Details at the right protocol on the open Protocol Display Repair dashboard: set protocol_id to uniswap.",

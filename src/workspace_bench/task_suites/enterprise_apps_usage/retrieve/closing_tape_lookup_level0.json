@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level0",
   "category": "read",
   "difficulty": "level0",
-  "prompt": "Read the daily OHLCV rows in Bench Daloopa's Stock Prices with ticker set to NVDA, then report the latest date and exact close.",
+  "prompt": "Pull up the daily OHLCV rows in Bench Daloopa's Stock Prices with ticker set to NVDA, and report the latest date and exact close.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

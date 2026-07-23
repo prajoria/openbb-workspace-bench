@@ -2,7 +2,7 @@
   "id": "operating_driver_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Stand up Buildout Operating Drivers: add it with a Operating Driver Lookup table carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers, read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. Build it to the workspace's widgets.json spec. Follow the Daloopa Inflection skill and add a Operating-driver Build Note recording what it flags as inflections.",
+  "prompt": "The KPI desk needs its own lookup - stand up Buildout Operating Drivers: add it with an Operating Driver Lookup table carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers per the widgets.json spec; read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. End with an Operating-driver Build Note recording what the Daloopa Inflection skill flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

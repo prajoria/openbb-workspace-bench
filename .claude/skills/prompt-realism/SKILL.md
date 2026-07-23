@@ -33,7 +33,12 @@ Write like an analyst or PM asking a colleague, not like a test case:
 
 ## Gold examples
 
-(Empty until the first family is approved. Then paste 3–4 approved before→after pairs here — they outrank every rule above when in tension, because they carry the user's actual taste.)
+Approved (repair family, 2026-07-23) — these outrank every rule above when in tension:
+
+1. L0 with a reason: "Our SLA Metrics view on the open Vendor Freshness Repair dashboard is misconfigured: set vendor to Bloomberg, status to Open, and period to QTD."
+2. L2, situation first: "Two copies of NAV Exceptions are cluttering the open NAV Repair Staging dashboard. Remove the one flagged as the duplicate; Trade Ideas stays."
+3. L3, describe the problem not the operation: "Demo Financial Data (SSRM) is buried under the protocol tile on the open Protocol Display Repair dashboard. Move it to x 0, y 12, width 40, height 12 on Review, and preserve Defi Llama Protocol Details."
+4. L4 governed composite, describe-never-print: "End-of-day cleanup on the open NAV Repair Staging dashboard, run under the Finance Guidance Tracker skill: restore the primary NAV Exceptions to Flagship Long/Short, Open, and YTD; remove the copy flagged as the duplicate; move the primary to x 0, y 14, width 40, height 14 on Exceptions; keep Trade Ideas; and close with a NAV Exception Governance Note recording the final thing the skill's workflow lists."
 
 ## Done means
 
