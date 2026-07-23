@@ -24,17 +24,18 @@ def main() -> int:
         str(record.payload["id"]): gen._compute_prompt_spec(record)
         for record in records
     }
-    stats = gen._apply_prompt_overlay(records, specs)
+    try:
+        stats = gen._apply_prompt_overlay(records, specs)
+    except AssertionError as err:
+        print(f"FAIL: {err}")
+        return 1
     total = len(records)
     print(
         f"overlay: {stats['applied']} applied, {stats['stale']} stale, "
         f"{stats['unknown']} unknown, {total - stats['applied']} still template"
     )
-    if stats["stale"] or stats["unknown"]:
-        print(
-            "note: stale entries need re-authoring against the current spec; "
-            "unknown entries name tasks that no longer exist"
-        )
+    if stats["unknown"]:
+        print("note: unknown entries name tasks that no longer exist")
     try:
         gen.validate_payloads(records)
     except AssertionError as err:

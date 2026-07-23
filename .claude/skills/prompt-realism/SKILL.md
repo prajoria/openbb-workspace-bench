@@ -12,6 +12,8 @@ You author the **prompt field only**, from each task's spec. Setup, traces, and 
 1. Specs: `src/workspace_bench/task_suites/enterprise_apps_usage/prompt_specs.json` — per task: `must_contain` literals (each with its reason), `must_describe_never_print` tokens with their registered descriptions, `grounded_from_read` facts, the level directive, forbidden fragments, the word cap, and the reference flow. **The spec is law.** If a good prompt and a spec entry conflict, the spec wins and the conflict gets flagged to the user — never argue for weakening a check.
 2. Output: `src/workspace_bench/task_suites/enterprise_apps_usage/prompt_overlay.json` — `{task_id: {"prompt": ..., "spec_sha256": <copied from the task's spec>}}`. Committed; the sha is the provenance: when a spec changes, its overlay entry goes stale and is re-authored.
 
+The overlay is mandatory and complete: the generator refuses to build if any task's entry is missing or stale. Builder prompt strings inside `generate_usage_suite.py` are authoring references only — they never ship. Adding a task therefore always means authoring its prompt here before the suite builds again.
+
 ## Voice contract
 
 Write like an analyst or PM asking a colleague, not like a test case:

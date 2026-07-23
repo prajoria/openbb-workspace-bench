@@ -10975,10 +10975,13 @@ def _apply_prompt_overlay(
 
     stats = {"applied": 0, "stale": 0, "unknown": 0}
     overlay_path = OUTPUT_DIR / PROMPT_OVERLAY_NAME
-    if not overlay_path.exists():
-        return stats
-    overlay = json.loads(overlay_path.read_text(encoding="utf-8"))
+    overlay = (
+        json.loads(overlay_path.read_text(encoding="utf-8"))
+        if overlay_path.exists()
+        else {}
+    )
     by_id = {str(record.payload["id"]): record for record in records}
+    uncovered: list[str] = []
     for task_id, entry in overlay.items():
         record = by_id.get(task_id)
         if record is None:
@@ -10986,11 +10989,24 @@ def _apply_prompt_overlay(
             continue
         if entry.get("spec_sha256") != _spec_sha(specs[task_id]):
             stats["stale"] += 1
+            uncovered.append(f"{task_id} (stale)")
             continue
         record.payload["prompt"] = re.sub(
             r"\s{2,}", " ", str(entry["prompt"])
         ).strip()
         stats["applied"] += 1
+    missing = sorted(set(by_id) - set(overlay))
+    uncovered.extend(f"{task_id} (missing)" for task_id in missing)
+    if uncovered:
+        listing = ", ".join(sorted(uncovered)[:8])
+        more = len(uncovered) - min(len(uncovered), 8)
+        raise AssertionError(
+            "prompt overlay must cover every task - builder prompts are "
+            f"authoring references, not publishable: {len(uncovered)} uncovered "
+            f"({listing}{f', +{more} more' if more else ''}). Author the "
+            "prompts from prompt_specs.json into prompt_overlay.json "
+            "(see .claude/skills/prompt-realism)."
+        )
     return stats
 
 
