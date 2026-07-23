@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level4",
   "category": "repair",
   "difficulty": "level4",
-  "prompt": "Repair the open Protocol Display Repair dashboard under the Daloopa Inflection skill: restore Defi Llama Protocol Details with protocol_id uniswap, preserve Demo Financial Data (SSRM), and add a Protocol-display Governance Note naming growth-rate reversals.",
+  "prompt": "Crypto desk cleanup under the Daloopa Inflection skill: on the open Protocol Display Repair dashboard, restore Defi Llama Protocol Details to uniswap, keep Demo Financial Data (SSRM) as is, and post a Protocol-display Governance Note recording what the skill flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

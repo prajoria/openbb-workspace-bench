@@ -431,6 +431,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Research",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -489,7 +493,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "ad28bc8cf3bb4cd4ef3e737b81c4a280dce70d333463fee3b55da2e1ae8d7f17"
+    "spec_sha256": "8ecc1f22f72025ba7924e898e85a447a42827e0c8ad84b1401959fbc1d834b20"
   },
   "client_intake_controls_level0": {
     "task_id": "client_intake_controls_level0",
@@ -957,6 +961,10 @@
         "why": "graded value (add_generative_widget:name)"
       },
       {
+        "text": "Controls",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Intake Control Panel",
         "why": "target display name (findability)"
       },
@@ -1048,7 +1056,7 @@
       "add_generative_widget {\"name\": \"Client-intake Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "894c0fc93f81c6442be9a141a508dafad4afcc0f3903339a1f391f773d6e4e33"
+    "spec_sha256": "aafe03b3276b26b030388737917311417da84036c1c7868c70cb0fa0543c96d8"
   },
   "client_onboarding_flow_level0": {
     "task_id": "client_onboarding_flow_level0",
@@ -1425,6 +1433,10 @@
         "why": "target display name (findability)"
       },
       {
+        "text": "Approvals",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Client Intake Queue",
         "why": "target display name (findability)"
       },
@@ -1439,6 +1451,10 @@
       {
         "text": "Finance Guidance Tracker skill",
         "why": "policy phrase (declared grounding)"
+      },
+      {
+        "text": "Intake",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "add",
@@ -1516,7 +1532,7 @@
       "add_generative_widget {\"name\": \"Client Onboarding Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "d0f2d901c163b65ac849a3379d950ba80d031741e16bc5c313c2ee7cc2d8e53a"
+    "spec_sha256": "b24ab8adce30b529356db0a09c9f4aa2d4e8e4154a036b4306740289884f77a3"
   },
   "closing_tape_lookup_level0": {
     "task_id": "closing_tape_lookup_level0",
@@ -1910,6 +1926,10 @@
         "why": "graded value (manage_backends:name)"
       },
       {
+        "text": "Tape",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -1989,7 +2009,7 @@
       "add_generative_widget {\"name\": \"Closing Tape Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "e87fef2e6ad4caf114d3580a48885a91b90effdaadd7ca2719f0a6462d3158a8"
+    "spec_sha256": "c5517fcd271a57ffcf16ea7fcb9c7fd05dc632b18116550d5f8c1904346a3545"
   },
   "committee_navigation_level0": {
     "task_id": "committee_navigation_level0",
@@ -2362,6 +2382,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Agenda",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Agenda Queue",
         "why": "target display name (findability)"
       },
@@ -2372,6 +2396,10 @@
       {
         "text": "Committee Navigation Build Note",
         "why": "graded value (add_generative_widget:name)"
+      },
+      {
+        "text": "Evidence",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "Evidence Register",
@@ -2457,7 +2485,7 @@
       "add_generative_widget {\"name\": \"Committee Navigation Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "323467d4cc727aa1fe9dfaa8c25ff8a2812ce38932a239b941ac6eb605c45466"
+    "spec_sha256": "a6e4a31083f8e4887e7626b09d4af6af327a4dd3616d3cdb56935923fa508a54"
   },
   "compliance_alert_review_level0": {
     "task_id": "compliance_alert_review_level0",
@@ -2907,6 +2935,10 @@
         "why": "target display name (findability)"
       },
       {
+        "text": "Review",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -2993,7 +3025,7 @@
       "add_generative_widget {\"name\": \"Compliance-alert Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "a6e185210c82bfa0497bcd74e2d85c895dbab8eca3c5b0345432d297e54eeee6"
+    "spec_sha256": "c33d9d0e72a9c73c8b1a06ae2cc9d7b3dd5d87064abd2e215ff873342ecd6753"
   },
   "comps_governance_level0": {
     "task_id": "comps_governance_level0",
@@ -3415,6 +3447,10 @@
         "why": "graded value (manage_backends:name)"
       },
       {
+        "text": "Comparables",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Comps Governance Register",
         "why": "target display name (findability)"
       },
@@ -3490,7 +3526,7 @@
       "add_generative_widget {\"name\": \"Comps-governance Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "0a51dd54f6d22b872e269ecb133d671404454f175e0e376658de7fc9a02200cf"
+    "spec_sha256": "e0d807959b7bdd70327b0f212be4bcc275037bb0a0df511041302c824db9a1ae"
   },
   "consensus_exception_handoff_level0": {
     "task_id": "consensus_exception_handoff_level0",
@@ -3984,6 +4020,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Handoff",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -4069,7 +4109,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 13,
-    "spec_sha256": "26f279b3b620c4305d9fd8980cb03571dcebbd06eb3be7d6eca49e55a5cd35b7"
+    "spec_sha256": "4cf1dff019379be8fce4e8462106267e1d38c6ec1e43f17b72344107aed32e5f"
   },
   "crypto_display_controls_level0": {
     "task_id": "crypto_display_controls_level0",
@@ -4493,6 +4533,10 @@
         "why": "graded value (manage_backends:name)"
       },
       {
+        "text": "Controls",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Crypto-display Tuning Note",
         "why": "graded value (add_generative_widget:name)"
       },
@@ -4584,7 +4628,7 @@
       "add_generative_widget {\"name\": \"Crypto-display Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "14f25d9d49571e877a15ec63e9ecd1622dadc023f023c38d8d8139778c6a9c03"
+    "spec_sha256": "99bf437d866d6a1ba7f22e285dafc9f16d4ca85b2846e7761228da8d5103a843"
   },
   "crypto_document_controls_level0": {
     "task_id": "crypto_document_controls_level0",
@@ -4993,6 +5037,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Controls",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Document Control Panel",
         "why": "target display name (findability)"
       },
@@ -5092,7 +5140,7 @@
       "add_generative_widget {\"name\": \"Document-controls Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "826dece2c62e68348a1ac2a4d4a2513a4a9a5e43b968f430b487b7ab2a4e2d2a"
+    "spec_sha256": "c6f9207695a8f665401778768db2dc40739ae80841906e5b34997fd0a6b74970"
   },
   "decision_briefing_level0": {
     "task_id": "decision_briefing_level0",
@@ -5573,6 +5621,10 @@
         "why": "graded value (create_widget:origin)"
       },
       {
+        "text": "Briefing",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Car Manufacturer Performance",
         "why": "target display name (findability)"
       },
@@ -5677,7 +5729,7 @@
       "add_generative_widget {\"name\": \"Decision Briefing Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 16,
-    "spec_sha256": "0762f58c98d1b412b773abe1aa8cb8f45262d5b56b6927e5be8acff5b2882937"
+    "spec_sha256": "84eac5a76898d1b42cbb8b0002da96bf72662b2a9d764b405cca4d763778fb6b"
   },
   "due_diligence_media_room_level0": {
     "task_id": "due_diligence_media_room_level0",
@@ -6132,6 +6184,10 @@
         "why": "graded value (create_widget:origin)"
       },
       {
+        "text": "Media",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Media Review Register",
         "why": "target display name (findability)"
       },
@@ -6238,7 +6294,7 @@
       "add_generative_widget {\"name\": \"Media-room Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "bb5f17269550051998b0c6cd61ef09d1ba67bb5cd094d889f7e129b356ea54e2"
+    "spec_sha256": "68e4c88f98ab0c7d4c73cc9344c7ed0302dec2ad1bccee33a03c68c3a7fec203"
   },
   "earnings_handoff_level0": {
     "task_id": "earnings_handoff_level0",
@@ -6746,6 +6802,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Handoff",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -6821,7 +6881,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 11,
-    "spec_sha256": "d3c12ec527196f0cfa5f31493b5b6128f158e3708af087297ed1d8e9f3ec12db"
+    "spec_sha256": "68fba1b04237e0c624e1289d11aae85985eff573b9b19b43e95798a1ced1637c"
   },
   "earnings_lookup_level0": {
     "task_id": "earnings_lookup_level0",
@@ -7216,6 +7276,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Lookup",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Pilot Earnings Lookup",
         "why": "graded value (manage_backends:name)"
       },
@@ -7299,7 +7363,7 @@
       "add_generative_widget {\"name\": \"Earnings Lookup Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "32d3dcedcb9e574b4c89063d95ec79a99e34c70fc864011cecbc3c97154f378a"
+    "spec_sha256": "a98be0385c308099f79eadad1816928081acfb4e2d514bd05c5549070db65545"
   },
   "execution_quality_review_level0": {
     "task_id": "execution_quality_review_level0",
@@ -7749,6 +7813,10 @@
         "why": "target display name (findability)"
       },
       {
+        "text": "Quality",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -7835,7 +7903,7 @@
       "add_generative_widget {\"name\": \"Execution-quality Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "9e124bf7416ed8ba0dfb75279642358b2b15dc9e80295b26021784d0b9009a9d"
+    "spec_sha256": "92ec44fad9066ac5886986419851f9a82f2ef7b899fac94dfef12c9acfe0d8db"
   },
   "governed_earnings_brief_level0": {
     "task_id": "governed_earnings_brief_level0",
@@ -8229,6 +8297,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Actions",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Earnings Action Register",
         "why": "target display name (findability)"
       },
@@ -8299,7 +8371,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "df72ba960363b05e2517be824c56d3df0e70ca221dec89ce61bdfedc37bfae18"
+    "spec_sha256": "46e551cefd52a9e476a3be2aca20bb931a1eae85b257ae6678cf6e15f6cb9837"
   },
   "guidance_service_lifecycle_level0": {
     "task_id": "guidance_service_lifecycle_level0",
@@ -8535,6 +8607,10 @@
         "why": "target display name (findability)"
       },
       {
+        "text": "Review",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -8590,7 +8666,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "d76638ea0801edd4fadd08562897f8e4fefa6586534545153d87977d50eade4d"
+    "spec_sha256": "08c2c56d2b1927eae5b0c31e4f658e81be0f8e898536af640fe3174a358d7728"
   },
   "guidance_service_lifecycle_level4": {
     "task_id": "guidance_service_lifecycle_level4",
@@ -8689,6 +8765,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Archive",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Buildout Guidance Service",
         "why": "graded value (manage_backends:name)"
       },
@@ -8711,6 +8791,10 @@
       {
         "text": "Management Claims",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "Review",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "add",
@@ -8787,7 +8871,7 @@
       "add_generative_widget {\"name\": \"Guidance-service Governing Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "84233fedfc4162036bd3367ecfae7c03d7b959741263bf5c95fdea9c1044f5b6"
+    "spec_sha256": "c93be1fb00ccc3e6229b673e4c8f5532cd98d158bef592f64881d75a87662e25"
   },
   "inflection_service_lifecycle_level0": {
     "task_id": "inflection_service_lifecycle_level0",
@@ -9023,6 +9107,10 @@
         "why": "target display name (findability)"
       },
       {
+        "text": "Review",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -9078,7 +9166,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "b8b661c59319784be19603208860dd1eb1ebb5f82fe92d8a728d266016384785"
+    "spec_sha256": "344fcbf4f011cf0f1af70829e7b6e68d7e93adb07c9ef74ced2832fb0d7a83c4"
   },
   "inflection_service_lifecycle_level4": {
     "task_id": "inflection_service_lifecycle_level4",
@@ -9177,6 +9265,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Archive",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Buildout Inflection Service",
         "why": "graded value (manage_backends:name)"
       },
@@ -9199,6 +9291,10 @@
       {
         "text": "Quarterly Series Monitor",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "Review",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "add",
@@ -9275,7 +9371,7 @@
       "add_generative_widget {\"name\": \"Inflection-service Governing Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "c5cf945ce90308da09e2994fb6023b35c3c5e48374a12dd935ab43ef39c1607a"
+    "spec_sha256": "c725482ebbe3d4b568bfa9865393a5e36f5e9043fc2a53ba6f764d61bb03deec"
   },
   "investment_snapshot_governance_level0": {
     "task_id": "investment_snapshot_governance_level0",
@@ -9695,6 +9791,10 @@
         "why": "graded value (add_generative_widget:name)"
       },
       {
+        "text": "Snapshot",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -9762,7 +9862,7 @@
       "add_generative_widget {\"name\": \"Investment-snapshot Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "869e321e26c0caf63bfb1fa1bba224be14aa391c699cac885f8605b19d492eb6"
+    "spec_sha256": "dd78bac11ab299a73aa3300d3a5f39b9111be93a079bce6c57bb71abdc81ab88"
   },
   "live_quote_lookup_level0": {
     "task_id": "live_quote_lookup_level0",
@@ -10162,6 +10262,10 @@
         "why": "graded value (add_generative_widget:name)"
       },
       {
+        "text": "Quotes",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -10237,7 +10341,7 @@
       "add_generative_widget {\"name\": \"Live-quote Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "b53c20946afb35b40f4080706323f324d6be5958c7c4c4e65e6551097c819d5b"
+    "spec_sha256": "6b840dfab3e3651ecfca2009bba6dfc729c08bbc1c82d9004de5e12344e7374b"
   },
   "manufacturer_details_repair_level0": {
     "task_id": "manufacturer_details_repair_level0",
@@ -10595,6 +10699,14 @@
         "why": "graded value (update_widget:data_args)"
       },
       {
+        "text": "Finance Tearsheet skill",
+        "why": "knowledge source (governance)"
+      },
+      {
+        "text": "Manufacturer Detail Governance Note",
+        "why": "graded value (add_generative_widget:name)"
+      },
+      {
         "text": "Markdown Widget",
         "why": "target display name (findability)"
       },
@@ -10607,11 +10719,22 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
+      },
+      {
         "text": "open Manufacturer Detail Repair dashboard",
         "why": "selected-dashboard phrase (asserted)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "price action",
+        "description": "the first input its workflow gathers",
+        "source": "Finance Tearsheet skill",
+        "source_key": "finance-tearsheet"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -10654,12 +10777,14 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
+      "get_skill_content {\"slug\": \"finance-tearsheet\"}",
       "update_widget {\"data_args\": {\"company\": \"F\", \"year\": 2024}}",
-      "delete_widget",
-      "update_widget_layout"
+      "delete_widget  (optional)",
+      "update_widget_layout",
+      "add_generative_widget {\"name\": \"Manufacturer Detail Governance Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "6b055abcbe2602a7b907b86124085f1ab5c344c099100ccda39815fc62aeacc9"
+    "max_turns": 9,
+    "spec_sha256": "db2eb1227cf61c0f632a0af77473124f8b97eea326b31f5a5fb436331ce977d5"
   },
   "manufacturer_details_repair_level5": {
     "task_id": "manufacturer_details_repair_level5",
@@ -10676,6 +10801,10 @@
       {
         "text": "Detail-queue Rebuild Note",
         "why": "graded value (add_generative_widget:name)"
+      },
+      {
+        "text": "Details",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "Manufacturer Detail Queue",
@@ -10764,7 +10893,7 @@
       "add_generative_widget {\"name\": \"Detail-queue Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "8e32827a22aefde094a82c581694d9c98129f3c4b3d8c26bbd1005bc554fc194"
+    "spec_sha256": "60b6b8c4cb63da65c1aecb710803300a2a616b659e6ad5e0cf1b52ed85251b5e"
   },
   "market_telemetry_level0": {
     "task_id": "market_telemetry_level0",
@@ -11226,6 +11355,10 @@
         "why": "graded value (add_generative_widget:name)"
       },
       {
+        "text": "Monitor",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Stock Price Trends - Line Sparklines with First/Last Points",
         "why": "target display name (findability)"
       },
@@ -11322,7 +11455,7 @@
       "add_generative_widget {\"name\": \"Market Telemetry Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 16,
-    "spec_sha256": "f5d7af22aa25a4225ec379c3ae6ed0ae26c880488e1f968216f48638a3ab76d8"
+    "spec_sha256": "32105e8a86e65b992f3311e8a865127b36423798302233808a669c4e402ff3aa"
   },
   "nav_exception_station_level0": {
     "task_id": "nav_exception_station_level0",
@@ -11672,8 +11805,16 @@
         "why": "graded value (update_widget_layout:w)"
       },
       {
+        "text": "Finance Guidance Tracker skill",
+        "why": "knowledge source (governance)"
+      },
+      {
         "text": "Flagship Long/Short",
         "why": "graded value (update_widget:data_args)"
+      },
+      {
+        "text": "NAV Exception Governance Note",
+        "why": "graded value (add_generative_widget:name)"
       },
       {
         "text": "NAV Exceptions",
@@ -11700,11 +11841,22 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
+      },
+      {
         "text": "open NAV Repair Staging dashboard",
         "why": "selected-dashboard phrase (asserted)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "evidence gaps",
+        "description": "the final thing its workflow lists",
+        "source": "Finance Guidance Tracker skill",
+        "source_key": "finance-guidance-tracker"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -11747,12 +11899,14 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
+      "get_skill_content {\"slug\": \"finance-guidance-tracker\"}",
       "update_widget {\"data_args\": {\"fund\": \"Flagship Long/Short\", \"status\": \"Open\", \"period\": \"YTD\"}}",
-      "delete_widget",
-      "update_widget_layout"
+      "delete_widget  (optional)",
+      "update_widget_layout",
+      "add_generative_widget {\"name\": \"NAV Exception Governance Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "ea0eafa3960dfb99477d1338e5f9c82fe38c2bff3302a883bb244d1a99508ec6"
+    "max_turns": 9,
+    "spec_sha256": "6adb5b0bb1d84c2e842a48ee5479395d8ade8befea0f7d2b9db95fd19a80779c"
   },
   "nav_exception_station_level5": {
     "task_id": "nav_exception_station_level5",
@@ -11765,6 +11919,10 @@
       {
         "text": "Daloopa Guidance Tracker skill",
         "why": "policy phrase (declared grounding)"
+      },
+      {
+        "text": "Exceptions",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "NAV Exception Queue",
@@ -11857,7 +12015,7 @@
       "add_generative_widget {\"name\": \"NAV-exception Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "e0120cbf38db5c66d73e6007b3ff9a2306097f5078f37223b058ad30efded424"
+    "spec_sha256": "eb2755526564f785ffbc0aee02d6c3032f71e5093e1c4505fb45e499afcbae14"
   },
   "news_desk_handoff_level0": {
     "task_id": "news_desk_handoff_level0",
@@ -12353,6 +12511,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Handoff",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "News Build Handoff",
         "why": "graded value (add_generative_widget:name)"
       },
@@ -12440,7 +12602,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 11,
-    "spec_sha256": "b42b64a86a7927877e97d0e0dd1bcf80906d9e8286c9c7c1bf778bd1b25a0e56"
+    "spec_sha256": "9dde8dff69e68d8e23550febf7a8cde4244479bdfebf48a8ef1fa1839e2ab2ad"
   },
   "operating_driver_lookup_level0": {
     "task_id": "operating_driver_lookup_level0",
@@ -12836,6 +12998,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Drivers",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Operating Driver Lookup",
         "why": "target display name (findability)"
       },
@@ -12919,7 +13085,7 @@
       "add_generative_widget {\"name\": \"Operating-driver Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "ef4f9111f8e4e7963dc734712b4df5deb3b6baf3a5721a2c33d28fc5d8d24393"
+    "spec_sha256": "0bf2d50e0e04eb6c79160a1e92eee060053fe25d005fb0f53ac47b4a2b32c346"
   },
   "protocol_display_repair_level0": {
     "task_id": "protocol_display_repair_level0",
@@ -13342,6 +13508,10 @@
         "why": "graded value (add_generative_widget:name)"
       },
       {
+        "text": "Protocols",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
       },
@@ -13420,7 +13590,7 @@
       "add_generative_widget {\"name\": \"Protocol-display Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "810853eb2a833ab0459673eede77f9cc188c3e4038435984574ff3a3aecff293"
+    "spec_sha256": "c81b6d6e1aa9c000627fe2f3400d563c3405dfd1fb5db2a45e39e2128076546b"
   },
   "research_feed_lifecycle_level0": {
     "task_id": "research_feed_lifecycle_level0",
@@ -13572,6 +13742,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Feed",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Research Feed Pulse",
         "why": "target display name (findability)"
       },
@@ -13632,7 +13806,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "dae601b386ba39142edd0e5ada84ec5ef45db4f538995d0f9184c4dfe076faa3"
+    "spec_sha256": "7fad8b112e01e63b14ab2e95309a71cab983a864e87bde03c63f31f2bd1f2b96"
   },
   "research_feed_lifecycle_level3": {
     "task_id": "research_feed_lifecycle_level3",
@@ -13642,6 +13816,10 @@
     "level_directive": "ambient: the work happens on the open dashboard named in the prompt; everything already there must survive",
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
+      {
+        "text": "Feed",
+        "why": "authored app tab name (F5)"
+      },
       {
         "text": "Research Feed Pulse",
         "why": "target display name (findability)"
@@ -13701,7 +13879,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Rollout Research Feed\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "0d9e11df917554fde3dd3fc7444632590e05332cd849a799901938ee9d1933bb"
+    "spec_sha256": "1ec7cab09171ad027892fddc10f74dc7ff7b5baa74aabc5313ae8dfdfc526837"
   },
   "research_feed_lifecycle_level4": {
     "task_id": "research_feed_lifecycle_level4",
@@ -13711,6 +13889,10 @@
     "level_directive": "governed: name the knowledge source and describe - never print - each governed token via its registered description",
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
+      {
+        "text": "Feed",
+        "why": "authored app tab name (F5)"
+      },
       {
         "text": "Research Feed Pulse",
         "why": "target display name (findability)"
@@ -13781,7 +13963,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "44a407fa48b8e315925d208e8b0f2e1d433eed53b289afd48a7c6d144b148d3f"
+    "spec_sha256": "33848a57c64fc0a1e6c8cd27792a920c5b1c8cf1744d88cfff71e3a944f1f8ad"
   },
   "research_feed_lifecycle_level5": {
     "task_id": "research_feed_lifecycle_level5",
@@ -13792,12 +13974,20 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Archive",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Archive Coverage Watch",
         "why": "target display name (findability)"
       },
       {
         "text": "Daloopa Capital Allocation skill",
         "why": "policy phrase (declared grounding)"
+      },
+      {
+        "text": "Feed",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "Research Feed Build Note",
@@ -13886,7 +14076,7 @@
       "add_generative_widget {\"name\": \"Research Feed Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "a3c81a50e85b6e17740b0d8c58b003bb4cc3e5659a5281fa3d7237e184c46d7a"
+    "spec_sha256": "fb078ca086f78c2cda7d8848c53c35e80c69089d91527c85471b089b4d996cfe"
   },
   "risk_service_lifecycle_level0": {
     "task_id": "risk_service_lifecycle_level0",
@@ -14038,6 +14228,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Monitor",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Pilot Risk Signal",
         "why": "target display name (findability)"
       },
@@ -14098,7 +14292,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "b4a6598e3a130cec4fe6a753ec8321047ccae3760b45b528da889e1d1f33ed4f"
+    "spec_sha256": "555526c88f0b87d7248cc4776bdc5e7f4f1d1ad76a9c8b7eff1f9c2b415b942c"
   },
   "risk_service_lifecycle_level3": {
     "task_id": "risk_service_lifecycle_level3",
@@ -14108,6 +14302,10 @@
     "level_directive": "ambient: the work happens on the open dashboard named in the prompt; everything already there must survive",
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
+      {
+        "text": "Monitor",
+        "why": "authored app tab name (F5)"
+      },
       {
         "text": "Pilot Risk Service",
         "why": "graded value (manage_backends:name)"
@@ -14167,7 +14365,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Pilot Risk Service\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "c80900d0a405e3dd44f7ae3f61aabee743117e076b7f1ac8ec9555de6e5c5fbd"
+    "spec_sha256": "0b290762b323c9571cf90681fe11fdd73f5e59bbea8b22fc19ca3e9e04126d57"
   },
   "risk_service_lifecycle_level4": {
     "task_id": "risk_service_lifecycle_level4",
@@ -14177,6 +14375,10 @@
     "level_directive": "governed: name the knowledge source and describe - never print - each governed token via its registered description",
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
+      {
+        "text": "Monitor",
+        "why": "authored app tab name (F5)"
+      },
       {
         "text": "Pilot Limit Alert",
         "why": "target display name (findability)"
@@ -14247,7 +14449,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "9a64a9800d87597de03e2491f139946391936dedbe855247f22e2bf38670c8f3"
+    "spec_sha256": "6efa7c3a2cdb8838c60128d8c7ffdcfb3148d852644a814f474cb9e8e41c35c8"
   },
   "risk_service_lifecycle_level5": {
     "task_id": "risk_service_lifecycle_level5",
@@ -14260,6 +14462,10 @@
       {
         "text": "Finance Guidance Tracker skill",
         "why": "policy phrase (declared grounding)"
+      },
+      {
+        "text": "Monitor",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "Pilot Limit Alert",
@@ -14280,6 +14486,10 @@
       {
         "text": "Risk Service Build Note",
         "why": "graded value (add_generative_widget:name)"
+      },
+      {
+        "text": "Stress",
+        "why": "authored app tab name (F5)"
       },
       {
         "text": "add",
@@ -14352,7 +14562,7 @@
       "add_generative_widget {\"name\": \"Risk Service Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "8c6c2a581fcfab88c253545dbe9f1a607786af6831d44e9641f0c0bfb9819565"
+    "spec_sha256": "66095efab4c93e75ba1624fd110d0eb5594bbad1b9aa064bf6b21419352769da"
   },
   "segment_mix_handoff_level0": {
     "task_id": "segment_mix_handoff_level0",
@@ -14838,6 +15048,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Handoff",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Segment Breakdown",
         "why": "target display name (findability)"
       },
@@ -14935,7 +15149,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 13,
-    "spec_sha256": "dc1002bea0d38ac6defc00dc0d6404327fb0d60404e8c14ec7f5e761af1a5b71"
+    "spec_sha256": "ddd948fbfc9330bf8319b572b31b5519b1621d7634cb632487203820d1b77906"
   },
   "technology_decision_inputs_level0": {
     "task_id": "technology_decision_inputs_level0",
@@ -15345,6 +15559,10 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Controls",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Decision Input Panel",
         "why": "target display name (findability)"
       },
@@ -15444,7 +15662,7 @@
       "add_generative_widget {\"name\": \"Decision-inputs Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "4bda0d659075a06b825eb28ba2dce6dd4264a0337978183a4d9def051e2c61a2"
+    "spec_sha256": "03c235fea75b9dd4038c2c28b267b5ad10f28a6f49c8186bd80608fe27cbdc60"
   },
   "vendor_freshness_repair_level0": {
     "task_id": "vendor_freshness_repair_level0",
@@ -15891,6 +16109,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Incidents",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Vendor Repair Queue",
         "why": "target display name (findability)"
       },
@@ -15977,7 +16199,7 @@
       "add_generative_widget {\"name\": \"Vendor-freshness Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "a1a98c3ff4bd8e75fe291e72dd78b69c78cf2dee0351df643a34436a641f215c"
+    "spec_sha256": "aa9bdc1324e21bc41b37d932f06ce0538e9f59297f34219d1188debf2add4992"
   },
   "visualization_gallery_level0": {
     "task_id": "visualization_gallery_level0",
@@ -16430,6 +16652,10 @@
         "why": "policy phrase (declared grounding)"
       },
       {
+        "text": "Gallery",
+        "why": "authored app tab name (F5)"
+      },
+      {
         "text": "Getting Started",
         "why": "graded value (create_widget:origin)"
       },
@@ -16546,6 +16772,6 @@
       "add_generative_widget {\"name\": \"Visualization-gallery Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "29fb285f237c09b2388fb317bfccabc6c84e3e69935b8b3f12f2c2a85c74a532"
+    "spec_sha256": "4a7e3b2cb4968e5cd379219f8c8cd278a54c6c61f4398b846aa28e49d85798d4"
   }
 }

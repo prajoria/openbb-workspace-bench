@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level0",
   "category": "repair",
   "difficulty": "level0",
-  "prompt": "Fix Defi Llama Protocol Details on the open Protocol Display Repair dashboard: set protocol_id to uniswap.",
+  "prompt": "Point Defi Llama Protocol Details at the right protocol on the open Protocol Display Repair dashboard: set protocol_id to uniswap.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

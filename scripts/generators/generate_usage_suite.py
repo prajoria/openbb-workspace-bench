@@ -2338,12 +2338,20 @@ def _build_repair_tasks() -> list[TaskRecord]:
             4,
             "repair",
             (
-                "Clean up the open NAV Repair Staging dashboard. Restore the primary NAV "
+                "Clean up the open NAV Repair Staging dashboard under the Finance "
+                "Guidance Tracker skill. Restore the primary NAV "
                 "Exceptions view to Flagship Long/Short, Open, and YTD; remove the extra "
                 "copy flagged as the duplicate. Move the primary to "
-                "x 0, y 14, width 40, height 14 on Exceptions, and preserve Trade Ideas."
+                "x 0, y 14, width 40, height 14 on Exceptions, preserve Trade Ideas, "
+                "and add a NAV Exception Governance Note recording the final thing "
+                "the skill's workflow lists."
             ),
             [
+                _call(
+                    "get_skill_content",
+                    {"slug": "finance-guidance-tracker"},
+                    graded_args=("slug",),
+                ),
                 _call(
                     "update_widget",
                     {
@@ -2355,7 +2363,7 @@ def _build_repair_tasks() -> list[TaskRecord]:
                 _call(
                     "delete_widget",
                     {"widget_uuid": "nav_duplicate"},
-                    graded_args=("widget_uuid",),
+                    optional=True,
                 ),
                 _call(
                     "update_widget_layout",
@@ -2368,6 +2376,15 @@ def _build_repair_tasks() -> list[TaskRecord]:
                         "tab_id": "exceptions",
                     },
                     graded_args=("x", "y", "w", "h", "tab_id"),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "NAV Exception Governance Note",
+                        "data": "evidence gaps",
+                    },
+                    graded_args=("widget_type", "name"),
                 ),
             ],
             targets=(_nav_target(staged=True), _trade_target(staged=True)),
@@ -2385,6 +2402,19 @@ def _build_repair_tasks() -> list[TaskRecord]:
                 ),
                 _required_widget(STARK, TRADE_IDEAS_WIDGET),
             ],
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "NAV Exception Governance Note",
+                    "data_contains": ["evidence gaps"],
+                }
+            ],
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-guidance-tracker",
+                "Finance Guidance Tracker skill",
+                ("evidence gaps",),
+            ),
             selected_dashboard="NAV Repair Staging",
             initial_state=multi_stage,
         )
@@ -4902,12 +4932,19 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
             4,
             "repair",
             (
-                "Clean up the open Manufacturer Detail Repair dashboard. Restore the primary "
+                "Clean up the open Manufacturer Detail Repair dashboard under the "
+                "Finance Tearsheet skill. Restore the primary "
                 "Car Manufacturer Details to F and 2024, and remove the extra copy "
                 "flagged as the duplicate. Move the primary to x 0, y 10, width 40, height "
-                "14 on Details, and preserve Markdown Widget."
+                "14 on Details, preserve Markdown Widget, and add a Manufacturer Detail "
+                "Governance Note recording the first input the skill's workflow gathers."
             ),
             [
+                _call(
+                    "get_skill_content",
+                    {"slug": "finance-tearsheet"},
+                    graded_args=("slug",),
+                ),
                 _call(
                     "update_widget",
                     {"widget_uuid": "detail_primary", "data_args": correct_args},
@@ -4916,7 +4953,7 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "delete_widget",
                     {"widget_uuid": "detail_duplicate"},
-                    graded_args=("widget_uuid",),
+                    optional=True,
                 ),
                 _call(
                     "update_widget_layout",
@@ -4929,6 +4966,15 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
                         "tab_id": "details",
                     },
                     graded_args=("x", "y", "w", "h", "tab_id"),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "Manufacturer Detail Governance Note",
+                        "data": "price action",
+                    },
+                    graded_args=("widget_type", "name"),
                 ),
             ],
             targets=(detail_target, notes_target),
@@ -4944,6 +4990,19 @@ def _build_repair_wave2_tasks() -> list[TaskRecord]:
                 ),
                 _required_widget(GETTING_STARTED, MARKDOWN_WIDGET),
             ],
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "Manufacturer Detail Governance Note",
+                    "data_contains": ["price action"],
+                }
+            ],
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-tearsheet",
+                "Finance Tearsheet skill",
+                ("price action",),
+            ),
             selected_dashboard="Manufacturer Detail Repair",
             initial_state=multi_stage,
         )
@@ -10269,6 +10328,12 @@ def _compute_prompt_spec(record: TaskRecord) -> JsonDict:
     selected = str(payload["setup"]["default_selected_dashboard"])
     if selected != "Home":
         _require(f"open {selected} dashboard", "selected-dashboard phrase (asserted)")
+    for app in evaluation.get("required_app_defs", []):
+        for tab_id in app.get("tabs_include", []):
+            _require(
+                str(tab_id).replace("_", " ").title(),
+                "authored app tab name (F5)",
+            )
     policy_values = {
         leaf.casefold()
         for policy in record.policies

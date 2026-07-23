@@ -5108,7 +5108,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: repair · specification: -
 
-> Car Manufacturer Details on the open Manufacturer Detail Repair dashboard has company set to F and year set to 2022. Set company to F and year back to 2024.
+> Car Manufacturer Details on the open Manufacturer Detail Repair dashboard is stuck on the wrong year: set company to F and year to 2024.
 
 - Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 2 seeded widget(s): company_details({"company": "F", "year": 2022}), markdown_widget({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5122,7 +5122,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: repair · specification: -
 
-> On the open Manufacturer Detail Repair dashboard, restore Car Manufacturer Details to company F and year 2024. Preserve Markdown Widget and every other workspace item.
+> The Ford view is stale - put Car Manufacturer Details back on F and 2024 on the open Manufacturer Detail Repair dashboard, without touching Markdown Widget.
 
 - Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 2 seeded widget(s): company_details({"company": "F", "year": 2022}), markdown_widget({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5137,7 +5137,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: repair · specification: -
 
-> The open Manufacturer Detail Repair dashboard has two copies of Car Manufacturer Details. Remove the one flagged as the duplicate so exactly one remains, and preserve Markdown Widget.
+> Housekeeping on the open Manufacturer Detail Repair dashboard: Car Manufacturer Details exists twice. Remove the copy flagged as the duplicate and spare Markdown Widget.
 
 - Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 3 seeded widget(s): company_details({"company": "F", "year": 2024}), company_details({"company": "F", "year": 2024}), markdown_widget({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5152,7 +5152,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: repair · specification: -
 
-> Car Manufacturer Details overlaps Markdown Widget on the open Manufacturer Detail Repair dashboard. Move Car Manufacturer Details to x 0, y 10, width 40, height 14 on Details while preserving its parameters.
+> Car Manufacturer Details and Markdown Widget are stacked on the open Manufacturer Detail Repair dashboard. Slide Car Manufacturer Details to x 0, y 10, width 40, height 14 on Details, keeping its parameters.
 
 - Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 2 seeded widget(s): company_details({"company": "F", "year": 2024}), markdown_widget({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5167,7 +5167,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: repair · specification: -
 
-> Clean up the open Manufacturer Detail Repair dashboard. Restore the primary Car Manufacturer Details to F and 2024, and remove the extra copy flagged as the duplicate. Move the primary to x 0, y 10, width 40, height 14 on Details, and preserve Markdown Widget.
+> Full sweep of the open Manufacturer Detail Repair dashboard, guided by the Finance Tearsheet skill: restore the primary Car Manufacturer Details to F and 2024, drop the copy flagged as the duplicate, move the primary to x 0, y 10, width 40, height 14 on Details, keep Markdown Widget, and wrap up with a Manufacturer Detail Governance Note recording the first input the skill's workflow gathers.
 
 - Initial workspace: dashboard "Manufacturer Detail Repair"; 1 tab(s): details; 3 seeded widget(s): company_details({"company": "F", "year": 2022}), company_details({"company": "F", "year": 2022}), markdown_widget({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5177,12 +5177,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Getting Started/company_details` with data_args ⊇ {"company": "F", "year": 2024} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
 - **Widget** ≥1× `Getting Started/markdown_widget` → `missing_widget`
+- **Generated note** ≥1× named ~"Manufacturer Detail Governance Note" whose content mentions "price action" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `manufacturer_details_repair_level5`
 
 **level5** · category: repair · specification: -
 
-> Rollout Detail Repair was lost from the workspace; on the open Custom Detail Repair dashboard, rebuild it from scratch: add a custom backend Rollout Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets.json spec. Follow the Daloopa Industry skill and add a Detail-queue Rebuild Note recording who it lists from the company directory.
+> Rollout Detail Repair vanished along with its queue. On the open Custom Detail Repair dashboard, rebuild the service: add a custom backend Rollout Detail Repair with a Manufacturer Detail Queue table to the widgets.json spec, publish and instantiate its app with the queue on Details, and leave a Detail-queue Rebuild Note recording who the Daloopa Industry skill lists from the company directory.
 
 - Initial workspace: dashboard "Custom Detail Repair"; 1 tab(s): details
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5197,7 +5198,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: repair · specification: -
 
-> NAV Exceptions on the open NAV Repair Staging dashboard has fund set to Flagship Long/Short, status set to Open, and period set to QTD. Set fund to Flagship Long/Short, status to Open, and period back to YTD.
+> NAV Exceptions on the open NAV Repair Staging dashboard is showing the wrong slice: set fund to Flagship Long/Short, status to Open, and period to YTD.
 
 - Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 2 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "QTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5211,7 +5212,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: repair · specification: -
 
-> On the open NAV Repair Staging dashboard, fix the NAV Exceptions parameters by restoring Flagship Long/Short, Open, and YTD. Preserve Trade Ideas and every other workspace item.
+> The breaks queue looks wrong - restore NAV Exceptions on the open NAV Repair Staging dashboard to Flagship Long/Short, Open, and YTD, and keep Trade Ideas exactly where it is.
 
 - Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 2 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Closed", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5226,7 +5227,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: repair · specification: -
 
-> The open NAV Repair Staging dashboard has two copies of NAV Exceptions. Remove the one flagged as the duplicate so exactly one remains, and preserve Trade Ideas and all other content.
+> Two copies of NAV Exceptions are cluttering the open NAV Repair Staging dashboard. Remove the one flagged as the duplicate; Trade Ideas stays.
 
 - Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 3 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"}), fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5241,7 +5242,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: repair · specification: -
 
-> Fix the overlap on the open NAV Repair Staging dashboard without disturbing Trade Ideas. Move NAV Exceptions to x 0, y 14, width 40, and height 14 on Exceptions, preserving all parameters and remaining workspace content.
+> Ops flagged an overlap on the open NAV Repair Staging dashboard: move NAV Exceptions down to x 0, y 14, width 40, height 14 on Exceptions so Trade Ideas is readable again, and change nothing else.
 
 - Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 2 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5256,7 +5257,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: repair · specification: -
 
-> Clean up the open NAV Repair Staging dashboard. Restore the primary NAV Exceptions view to Flagship Long/Short, Open, and YTD; remove the extra copy flagged as the duplicate. Move the primary to x 0, y 14, width 40, height 14 on Exceptions, and preserve Trade Ideas.
+> End-of-day cleanup on the open NAV Repair Staging dashboard, run under the Finance Guidance Tracker skill: restore the primary NAV Exceptions to Flagship Long/Short, Open, and YTD; remove the copy flagged as the duplicate; move the primary to x 0, y 14, width 40, height 14 on Exceptions; keep Trade Ideas; and close with a NAV Exception Governance Note recording the final thing the skill's workflow lists.
 
 - Initial workspace: dashboard "NAV Repair Staging"; 1 tab(s): exceptions; 3 seeded widget(s): fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Closed", "period": "YTD"}), fund_operations_control_tower_pricing_nav_exceptions({"fund": "Flagship Long/Short", "status": "Closed", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5266,12 +5267,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Bench Stark Enterprise/fund_operations_control_tower_pricing_nav_exceptions` with data_args ⊇ {"fund": "Flagship Long/Short", "status": "Open", "period": "YTD"} → `missing_widget`; and ≤1 such widget(s) → `too_many_widgets`
 - **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` → `missing_widget`
+- **Generated note** ≥1× named ~"NAV Exception Governance Note" whose content mentions "evidence gaps" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `nav_exception_station_level5`
 
 **level5** · category: repair · specification: -
 
-> Pilot NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging dashboard, rebuild it from scratch: add a custom backend Pilot NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets.json spec. Follow the Daloopa Guidance Tracker skill and add a NAV-exception Rebuild Note recording the last of the three verdict kinds it tallies.
+> We lost Pilot NAV Repair and its staging queue. On the open Custom NAV Repair Staging dashboard, stand it back up: add a custom backend Pilot NAV Repair carrying a NAV Exception Queue table per the widgets.json spec, publish and instantiate its app with the queue on Exceptions, then leave a NAV-exception Rebuild Note recording the last of the three verdict kinds the Daloopa Guidance Tracker skill tallies.
 
 - Initial workspace: dashboard "Custom NAV Repair Staging"; 1 tab(s): exceptions
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5286,7 +5288,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: repair · specification: -
 
-> Fix Defi Llama Protocol Details on the open Protocol Display Repair dashboard: set protocol_id to uniswap.
+> Point Defi Llama Protocol Details at the right protocol on the open Protocol Display Repair dashboard: set protocol_id to uniswap.
 
 - Initial workspace: dashboard "Protocol Display Repair"; 1 tab(s): review; 2 seeded widget(s): defi_llama_protocol_details({"protocol_id": "aave"}), demo_data_ssrm({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5300,7 +5302,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: repair · specification: -
 
-> Restore Defi Llama Protocol Details on the open Protocol Display Repair dashboard with protocol_id uniswap, and preserve Demo Financial Data (SSRM).
+> The protocol tile drifted again - restore Defi Llama Protocol Details to uniswap on the open Protocol Display Repair dashboard, and leave Demo Financial Data (SSRM) alone.
 
 - Initial workspace: dashboard "Protocol Display Repair"; 1 tab(s): review; 2 seeded widget(s): defi_llama_protocol_details({"protocol_id": "aave"}), demo_data_ssrm({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5315,7 +5317,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: repair · specification: -
 
-> The open Protocol Display Repair dashboard has two copies of Defi Llama Protocol Details. Remove the one flagged as the duplicate, and preserve Demo Financial Data (SSRM).
+> Duplicate alert on the open Protocol Display Repair dashboard: two Defi Llama Protocol Details tiles. Delete the one flagged as the duplicate and keep Demo Financial Data (SSRM).
 
 - Initial workspace: dashboard "Protocol Display Repair"; 1 tab(s): review; 3 seeded widget(s): defi_llama_protocol_details({"protocol_id": "uniswap"}), demo_data_ssrm({}), defi_llama_protocol_details({"protocol_id": "uniswap"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5330,7 +5332,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: repair · specification: -
 
-> Demo Financial Data (SSRM) is overlapping on the open Protocol Display Repair dashboard: move it to x 0, y 12, width 40, height 12 on Review, and preserve Defi Llama Protocol Details.
+> Demo Financial Data (SSRM) is buried under the protocol tile on the open Protocol Display Repair dashboard. Move it to x 0, y 12, width 40, height 12 on Review, and preserve Defi Llama Protocol Details.
 
 - Initial workspace: dashboard "Protocol Display Repair"; 1 tab(s): review; 2 seeded widget(s): defi_llama_protocol_details({"protocol_id": "uniswap"}), demo_data_ssrm({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5345,7 +5347,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: repair · specification: -
 
-> Repair the open Protocol Display Repair dashboard under the Daloopa Inflection skill: restore Defi Llama Protocol Details with protocol_id uniswap, preserve Demo Financial Data (SSRM), and add a Protocol-display Governance Note naming growth-rate reversals.
+> Crypto desk cleanup under the Daloopa Inflection skill: on the open Protocol Display Repair dashboard, restore Defi Llama Protocol Details to uniswap, keep Demo Financial Data (SSRM) as is, and post a Protocol-display Governance Note recording what the skill flags as inflections.
 
 - Initial workspace: dashboard "Protocol Display Repair"; 1 tab(s): review; 2 seeded widget(s): defi_llama_protocol_details({"protocol_id": "aave"}), demo_data_ssrm({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5361,7 +5363,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> Buildout Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair dashboard, rebuild it from scratch: add a custom backend Buildout Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets.json spec. Follow the Daloopa Inflection skill and add a Protocol-display Rebuild Note recording what it flags as inflections.
+> Buildout Protocol Repair is gone from the workspace. On the open Protocol-display Backend Repair dashboard, rebuild it: add a custom backend Buildout Protocol Repair with a Protocol Repair Queue table following the widgets.json spec, publish and instantiate its app with the queue on Protocols, then finish with a Protocol-display Rebuild Note recording what the Daloopa Inflection skill flags as inflections.
 
 - Initial workspace: dashboard "Protocol-display Backend Repair"; 1 tab(s): protocols
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5376,7 +5378,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: repair · specification: -
 
-> Fix SLA Metrics on the open Vendor Freshness Repair dashboard: set vendor to Bloomberg, status to Open, period to QTD.
+> Our SLA Metrics view on the open Vendor Freshness Repair dashboard is misconfigured: set vendor to Bloomberg, status to Open, and period to QTD.
 
 - Initial workspace: dashboard "Vendor Freshness Repair"; 1 tab(s): review; 2 seeded widget(s): vendor_dataset_monitor_vendors_sla_metrics({"vendor": "FactSet", "status": "Closed", "period": "1Y"}), vendor_dataset_monitor_vendors_vendor_contract_terms({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5390,7 +5392,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: repair · specification: -
 
-> Restore SLA Metrics on the open Vendor Freshness Repair dashboard with vendor Bloomberg, status Open, period QTD, and preserve Vendor Contract Terms.
+> Someone knocked SLA Metrics off its usual view on the open Vendor Freshness Repair dashboard. Restore it to Bloomberg, Open, and QTD, and leave Vendor Contract Terms exactly as it is.
 
 - Initial workspace: dashboard "Vendor Freshness Repair"; 1 tab(s): review; 2 seeded widget(s): vendor_dataset_monitor_vendors_sla_metrics({"vendor": "FactSet", "status": "Closed", "period": "1Y"}), vendor_dataset_monitor_vendors_vendor_contract_terms({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5405,7 +5407,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: repair · specification: -
 
-> The open Vendor Freshness Repair dashboard has two copies of SLA Metrics. Remove the one flagged as the duplicate, and preserve Vendor Contract Terms.
+> There are two SLA Metrics tiles on the open Vendor Freshness Repair dashboard. Drop the one flagged as the duplicate and keep Vendor Contract Terms untouched.
 
 - Initial workspace: dashboard "Vendor Freshness Repair"; 1 tab(s): review; 3 seeded widget(s): vendor_dataset_monitor_vendors_sla_metrics({"vendor": "Bloomberg", "status": "Open", "period": "QTD"}), vendor_dataset_monitor_vendors_vendor_contract_terms({"vendor": "FactSet", "status": "Open", "period": "YTD"}), vendor_dataset_monitor_vendors_sla_metrics({"vendor": "Bloomberg", "status": "Open", "period": "QTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5420,7 +5422,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: repair · specification: -
 
-> Vendor Contract Terms is overlapping on the open Vendor Freshness Repair dashboard: move it to x 0, y 12, width 40, height 12 on Review, and preserve SLA Metrics.
+> SLA Metrics is sitting on top of Vendor Contract Terms on the open Vendor Freshness Repair dashboard. Give Vendor Contract Terms its own row - x 0, y 12, width 40, height 12 on Review - and don't touch anything else.
 
 - Initial workspace: dashboard "Vendor Freshness Repair"; 1 tab(s): review; 2 seeded widget(s): vendor_dataset_monitor_vendors_sla_metrics({"vendor": "Bloomberg", "status": "Open", "period": "QTD"}), vendor_dataset_monitor_vendors_vendor_contract_terms({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5435,7 +5437,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: repair · specification: -
 
-> Repair the open Vendor Freshness Repair dashboard under the Finance Guidance Tracker skill: restore SLA Metrics with vendor Bloomberg, status Open, period QTD, preserve Vendor Contract Terms, and add a Vendor-freshness Governance Note naming evidence gaps.
+> Vendor data hygiene, under the Finance Guidance Tracker skill: on the open Vendor Freshness Repair dashboard, restore SLA Metrics to vendor Bloomberg, status Open, period QTD, keep Vendor Contract Terms as is, and close with a Vendor-freshness Governance Note recording the final thing the skill's workflow lists.
 
 - Initial workspace: dashboard "Vendor Freshness Repair"; 1 tab(s): review; 2 seeded widget(s): vendor_dataset_monitor_vendors_sla_metrics({"vendor": "FactSet", "status": "Closed", "period": "1Y"}), vendor_dataset_monitor_vendors_vendor_contract_terms({"vendor": "FactSet", "status": "Open", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5451,7 +5453,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: repair · specification: -
 
-> Buildout Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair dashboard, rebuild it from scratch: add a custom backend Buildout Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets.json spec. Follow the Finance Guidance Tracker skill and add a Vendor-freshness Rebuild Note recording the final thing its workflow lists.
+> Vendor Repair went down and took its queue with it. On the open Vendor-freshness Backend Repair dashboard, rebuild the service: add a custom backend Buildout Vendor Repair with a Vendor Repair Queue table to the widgets.json spec, publish and instantiate its app with the queue on Incidents, and leave a Vendor-freshness Rebuild Note recording the final thing the Finance Guidance Tracker skill's workflow lists.
 
 - Initial workspace: dashboard "Vendor-freshness Backend Repair"; 1 tab(s): incidents
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`

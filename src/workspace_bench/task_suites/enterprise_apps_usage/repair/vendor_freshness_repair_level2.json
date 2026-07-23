@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level2",
   "category": "repair",
   "difficulty": "level2",
-  "prompt": "The open Vendor Freshness Repair dashboard has two copies of SLA Metrics. Remove the one flagged as the duplicate, and preserve Vendor Contract Terms.",
+  "prompt": "There are two SLA Metrics tiles on the open Vendor Freshness Repair dashboard. Drop the one flagged as the duplicate and keep Vendor Contract Terms untouched.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

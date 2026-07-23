@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level1",
   "category": "repair",
   "difficulty": "level1",
-  "prompt": "Restore SLA Metrics on the open Vendor Freshness Repair dashboard with vendor Bloomberg, status Open, period QTD, and preserve Vendor Contract Terms.",
+  "prompt": "Someone knocked SLA Metrics off its usual view on the open Vendor Freshness Repair dashboard. Restore it to Bloomberg, Open, and QTD, and leave Vendor Contract Terms exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

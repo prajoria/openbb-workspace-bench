@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level4",
   "category": "repair",
   "difficulty": "level4",
-  "prompt": "Clean up the open Manufacturer Detail Repair dashboard. Restore the primary Car Manufacturer Details to F and 2024, and remove the extra copy flagged as the duplicate. Move the primary to x 0, y 10, width 40, height 14 on Details, and preserve Markdown Widget.",
+  "prompt": "Full sweep of the open Manufacturer Detail Repair dashboard, guided by the Finance Tearsheet skill: restore the primary Car Manufacturer Details to F and 2024, drop the copy flagged as the duplicate, move the primary to x 0, y 10, width 40, height 14 on Details, keep Markdown Widget, and wrap up with a Manufacturer Detail Governance Note recording the first input the skill's workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -113,6 +113,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "update_widget",
         "args": {
           "widget_uuid": "detail_primary",
@@ -130,9 +139,7 @@
         "args": {
           "widget_uuid": "detail_duplicate"
         },
-        "graded_args": [
-          "widget_uuid"
-        ]
+        "optional": true
       },
       {
         "tool": "update_widget_layout",
@@ -150,6 +157,18 @@
           "w",
           "h",
           "tab_id"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Manufacturer Detail Governance Note",
+          "data": "price action"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
         ]
       }
     ],
@@ -169,6 +188,15 @@
         "widget_id": "markdown_widget"
       }
     ],
-    "max_turns": 7
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Manufacturer Detail Governance Note",
+        "data_contains": [
+          "price action"
+        ]
+      }
+    ],
+    "max_turns": 9
   }
 }

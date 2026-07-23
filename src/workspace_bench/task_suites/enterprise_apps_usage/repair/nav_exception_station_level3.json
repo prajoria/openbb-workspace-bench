@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level3",
   "category": "repair",
   "difficulty": "level3",
-  "prompt": "Fix the overlap on the open NAV Repair Staging dashboard without disturbing Trade Ideas. Move NAV Exceptions to x 0, y 14, width 40, and height 14 on Exceptions, preserving all parameters and remaining workspace content.",
+  "prompt": "Ops flagged an overlap on the open NAV Repair Staging dashboard: move NAV Exceptions down to x 0, y 14, width 40, height 14 on Exceptions so Trade Ideas is readable again, and change nothing else.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

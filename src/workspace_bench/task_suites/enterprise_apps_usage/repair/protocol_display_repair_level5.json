@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Buildout Protocol Repair was lost from the workspace; on the open Protocol-display Backend Repair dashboard, rebuild it from scratch: add a custom backend Buildout Protocol Repair with a Protocol Repair Queue table, publish Protocol Repair App, and instantiate it with one non-overlapping Protocol Repair Queue placement on Protocols, keeping all other workspace content. Follow the widgets.json spec. Follow the Daloopa Inflection skill and add a Protocol-display Rebuild Note recording what it flags as inflections.",
+  "prompt": "Buildout Protocol Repair is gone from the workspace. On the open Protocol-display Backend Repair dashboard, rebuild it: add a custom backend Buildout Protocol Repair with a Protocol Repair Queue table following the widgets.json spec, publish and instantiate its app with the queue on Protocols, then finish with a Protocol-display Rebuild Note recording what the Daloopa Inflection skill flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

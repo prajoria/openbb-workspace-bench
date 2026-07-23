@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Pilot NAV Repair was lost from the workspace; on the open Custom NAV Repair Staging dashboard, rebuild it from scratch: add a custom backend Pilot NAV Repair with a NAV Exception Queue table, publish NAV Repair App, and instantiate it with one non-overlapping NAV Exception Queue placement on Exceptions, keeping all other workspace content. Follow the widgets.json spec. Follow the Daloopa Guidance Tracker skill and add a NAV-exception Rebuild Note recording the last of the three verdict kinds it tallies.",
+  "prompt": "We lost Pilot NAV Repair and its staging queue. On the open Custom NAV Repair Staging dashboard, stand it back up: add a custom backend Pilot NAV Repair carrying a NAV Exception Queue table per the widgets.json spec, publish and instantiate its app with the queue on Exceptions, then leave a NAV-exception Rebuild Note recording the last of the three verdict kinds the Daloopa Guidance Tracker skill tallies.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

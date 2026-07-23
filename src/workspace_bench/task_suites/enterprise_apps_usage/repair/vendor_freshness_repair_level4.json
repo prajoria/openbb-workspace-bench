@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level4",
   "category": "repair",
   "difficulty": "level4",
-  "prompt": "Repair the open Vendor Freshness Repair dashboard under the Finance Guidance Tracker skill: restore SLA Metrics with vendor Bloomberg, status Open, period QTD, preserve Vendor Contract Terms, and add a Vendor-freshness Governance Note naming evidence gaps.",
+  "prompt": "Vendor data hygiene, under the Finance Guidance Tracker skill: on the open Vendor Freshness Repair dashboard, restore SLA Metrics to vendor Bloomberg, status Open, period QTD, keep Vendor Contract Terms as is, and close with a Vendor-freshness Governance Note recording the final thing the skill's workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

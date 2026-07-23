@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level1",
   "category": "repair",
   "difficulty": "level1",
-  "prompt": "Restore Defi Llama Protocol Details on the open Protocol Display Repair dashboard with protocol_id uniswap, and preserve Demo Financial Data (SSRM).",
+  "prompt": "The protocol tile drifted again - restore Defi Llama Protocol Details to uniswap on the open Protocol Display Repair dashboard, and leave Demo Financial Data (SSRM) alone.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level4",
   "category": "repair",
   "difficulty": "level4",
-  "prompt": "Clean up the open NAV Repair Staging dashboard. Restore the primary NAV Exceptions view to Flagship Long/Short, Open, and YTD; remove the extra copy flagged as the duplicate. Move the primary to x 0, y 14, width 40, height 14 on Exceptions, and preserve Trade Ideas.",
+  "prompt": "End-of-day cleanup on the open NAV Repair Staging dashboard, run under the Finance Guidance Tracker skill: restore the primary NAV Exceptions to Flagship Long/Short, Open, and YTD; remove the copy flagged as the duplicate; move the primary to x 0, y 14, width 40, height 14 on Exceptions; keep Trade Ideas; and close with a NAV Exception Governance Note recording the final thing the skill's workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -119,6 +119,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "update_widget",
         "args": {
           "widget_uuid": "nav_primary",
@@ -137,9 +146,7 @@
         "args": {
           "widget_uuid": "nav_duplicate"
         },
-        "graded_args": [
-          "widget_uuid"
-        ]
+        "optional": true
       },
       {
         "tool": "update_widget_layout",
@@ -157,6 +164,18 @@
           "w",
           "h",
           "tab_id"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "NAV Exception Governance Note",
+          "data": "evidence gaps"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
         ]
       }
     ],
@@ -177,6 +196,15 @@
         "widget_id": "portfolio_command_center_actions_trade_ideas"
       }
     ],
-    "max_turns": 7
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "NAV Exception Governance Note",
+        "data_contains": [
+          "evidence gaps"
+        ]
+      }
+    ],
+    "max_turns": 9
   }
 }

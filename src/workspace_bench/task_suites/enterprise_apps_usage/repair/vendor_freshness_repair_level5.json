@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Buildout Vendor Repair was lost from the workspace; on the open Vendor-freshness Backend Repair dashboard, rebuild it from scratch: add a custom backend Buildout Vendor Repair with a Vendor Repair Queue table, publish Vendor Repair App, and instantiate it with one non-overlapping Vendor Repair Queue placement on Incidents, keeping all other workspace content. Follow the widgets.json spec. Follow the Finance Guidance Tracker skill and add a Vendor-freshness Rebuild Note recording the final thing its workflow lists.",
+  "prompt": "Vendor Repair went down and took its queue with it. On the open Vendor-freshness Backend Repair dashboard, rebuild the service: add a custom backend Buildout Vendor Repair with a Vendor Repair Queue table to the widgets.json spec, publish and instantiate its app with the queue on Incidents, and leave a Vendor-freshness Rebuild Note recording the final thing the Finance Guidance Tracker skill's workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

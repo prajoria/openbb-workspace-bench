@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level0",
   "category": "repair",
   "difficulty": "level0",
-  "prompt": "Fix SLA Metrics on the open Vendor Freshness Repair dashboard: set vendor to Bloomberg, status to Open, period to QTD.",
+  "prompt": "Our SLA Metrics view on the open Vendor Freshness Repair dashboard is misconfigured: set vendor to Bloomberg, status to Open, and period to QTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

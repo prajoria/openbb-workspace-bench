@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Rollout Detail Repair was lost from the workspace; on the open Custom Detail Repair dashboard, rebuild it from scratch: add a custom backend Rollout Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets.json spec. Follow the Daloopa Industry skill and add a Detail-queue Rebuild Note recording who it lists from the company directory.",
+  "prompt": "Rollout Detail Repair vanished along with its queue. On the open Custom Detail Repair dashboard, rebuild the service: add a custom backend Rollout Detail Repair with a Manufacturer Detail Queue table to the widgets.json spec, publish and instantiate its app with the queue on Details, and leave a Detail-queue Rebuild Note recording who the Daloopa Industry skill lists from the company directory.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
