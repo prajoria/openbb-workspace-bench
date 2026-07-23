@@ -1,5 +1,5 @@
 {
-  "content": "Guidance tracker workflow: extract management claims, compare them with prior guidance, flag changed assumptions, and list evidence gaps.",
+  "content": "Guidance tracker workflow: management's story changes in small steps; track the steps.\n1. Extract management claims from the most recent communications - guidance, calls, filings.\n2. Compare each claim with prior guidance for the same metric and period.\n3. Flag changed assumptions coming out of that comparison - what now has to be true that did not before.\n4. Separate walked-back claims from restated ones; quietly dropping a target is a change too.\n5. Record the follow-up evidence each claim needs, and when it should arrive.\n6. List evidence gaps - the claims currently supported by nothing you can point to.",
   "description": "Track company guidance changes, management claims, and follow-up evidence.",
   "name": "Finance Guidance Tracker",
   "slug": "finance-guidance-tracker"

@@ -1,5 +1,5 @@
 {
-  "content": "Daloopa guidance tracker workflow: pull daloopa_management_guidance for one ticker, tally Beat, In Line, and Missed verdicts across reported quarters, treat the Pending row as the open guide for the next quarter, and cite each quoted range via its source_url.",
+  "content": "Daloopa guidance tracker workflow: score how reliable management's guidance has been, quarter after quarter.\n1. Pull daloopa_management_guidance for one ticker across all reported quarters.\n2. Tally the Beat, In Line, and Missed verdicts; that mix is the reliability record.\n3. Treat the Pending row as the open guide for the next quarter - a claim to track, not a result.\n4. Quote guidance ranges exactly as given; do not midpoint them unless the comparison requires it, and say so when you do.\n5. Weight recent quarters over old ones when characterizing the trend.\n6. Cite each quoted range via its source_url.",
   "description": "Score management guidance accuracy across the covered quarters.",
   "name": "Daloopa Guidance Tracker",
   "slug": "daloopa-guidance-tracker"

@@ -1,5 +1,5 @@
 {
-  "content": "Tearsheet workflow: gather price action, fundamentals, valuation, catalysts, risks, ownership, and a short investment conclusion.",
+  "content": "Tearsheet workflow: everything a reader needs on the name, on one page, in the order they will ask for it.\n1. Gather price action first - level, trend, and how the name has traded around recent events.\n2. Add fundamentals: growth, margins, and balance-sheet posture.\n3. Add valuation, absolute and against its own history.\n4. Add catalysts - dated events that could re-rate the name.\n5. Add risks, and be specific: what breaks the thesis, not generic caution.\n6. Add ownership context: who holds it and what changed recently.\n7. Close with a short investment conclusion a reader could act on.",
   "description": "Create a concise company or asset tear sheet with valuation, catalysts, risks, and ownership context.",
   "name": "Finance Tearsheet",
   "slug": "finance-tearsheet"

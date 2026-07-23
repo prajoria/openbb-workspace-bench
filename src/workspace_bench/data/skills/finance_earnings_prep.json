@@ -1,5 +1,5 @@
 {
-  "content": "Earnings prep workflow: compare internal estimates to street numbers, identify surprise drivers, review guidance, inspect transcript tone, and produce action items for the portfolio manager.",
+  "content": "Earnings prep workflow: walk into the print knowing what would surprise you, and what you would do about it.\n1. Compare internal estimates to street numbers, line by line, before anything else.\n2. Identify surprise drivers straight from that comparison - the widest gaps are where the print will move.\n3. Review guidance: what management promised, and which promises are at risk this quarter.\n4. List the thesis risks this print could confirm or kill.\n5. Inspect transcript tone from the prior call - hedged language often precedes the numbers.\n6. Produce action items for the portfolio manager: what to do on a beat, a miss, and an in-line print.",
   "description": "Build an earnings preview from estimates, guidance, transcript, price reaction, and thesis risks.",
   "name": "Finance Earnings Prep",
   "slug": "finance-earnings-prep"

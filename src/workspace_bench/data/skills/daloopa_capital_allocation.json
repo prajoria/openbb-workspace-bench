@@ -1,5 +1,5 @@
 {
-  "content": "Daloopa capital allocation workflow: from daloopa_company_fundamentals, compare Share Buybacks plus Dividends Paid against Free Cash Flow per quarter, use Diluted Weighted Average Shares drift as buyback evidence, and cite every figure via source_url.",
+  "content": "Daloopa capital allocation workflow: assess how much of the company's cash generation is returned to shareholders, and whether that return is sustainable.\n1. Pull daloopa_company_fundamentals for the ticker across all covered quarters.\n2. For each quarter, add Share Buybacks and Dividends Paid together into a total shareholder return.\n3. Compare that total against Free Cash Flow for the same quarter, and flag any quarter where returns exceed it.\n4. Use Diluted Weighted Average Shares drift as buyback evidence - a falling share count corroborates the buyback line.\n5. Note dividend streaks and cuts separately from buybacks; they carry different signals.\n6. Do not annualize single quarters or mix fiscal and calendar periods in one comparison.\n7. Cite every figure via source_url.",
   "description": "Assess buybacks, dividends, and free cash flow coverage.",
   "name": "Daloopa Capital Allocation",
   "slug": "daloopa-capital-allocation"

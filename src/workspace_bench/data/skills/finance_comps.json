@@ -1,5 +1,5 @@
 {
-  "content": "Comps workflow: define the peer set, normalize metrics, compare valuation multiples, and explain why outliers deserve premium or discount.",
+  "content": "Comps workflow: a comparison is only as honest as its peer set and its normalization.\n1. Define the peer set first, and write down why each name belongs; one stray peer makes the whole table quietly wrong.\n2. Normalize metrics before comparing - same periods, same currency, same definitions of earnings and revenue.\n3. Compare valuation multiples across the set only after that normalization.\n4. Line up operating metrics beside the multiples, so cheap and expensive have context.\n5. Explain why outliers deserve premium or discount rather than deleting them; the outlier is often the finding.\n6. State the as-of date for every market-derived number.",
   "description": "Compare companies or assets using peer valuation and operating metrics.",
   "name": "Finance Comps",
   "slug": "finance-comps"

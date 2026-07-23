@@ -1,5 +1,5 @@
 {
-  "content": "Daloopa inflection workflow: pull daloopa_company_fundamentals and daloopa_kpi_metrics across all covered quarters for one ticker, compute quarter-over-quarter and year-over-year growth per series, flag growth-rate reversals as inflections, and cite the underlying inputs via source_url for every flagged move.",
+  "content": "Daloopa inflection workflow: find where a company's trajectory actually changed, not where the narrative says it did.\n1. Pull daloopa_company_fundamentals and daloopa_kpi_metrics across all covered quarters for one ticker.\n2. Compute quarter-over-quarter growth per series first, then year-over-year growth for the same series.\n3. Flag growth-rate reversals as inflections - a series that was accelerating and starts decelerating, or the reverse.\n4. Distinguish one-quarter noise from a turn: an inflection needs the new direction to hold for more than a single print.\n5. Tie each flagged inflection to the KPI that moved first; drivers usually lead, revenue usually confirms.\n6. Cite the underlying inputs via source_url for every flagged move.",
   "description": "Detect metric accelerations and decelerations across quarters.",
   "name": "Daloopa Inflection",
   "slug": "daloopa-inflection"
