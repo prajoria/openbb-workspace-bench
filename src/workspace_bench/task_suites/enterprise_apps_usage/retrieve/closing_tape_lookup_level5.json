@@ -224,7 +224,7 @@
     "runtime_checks": {
       "datasets": [
         {
-          "name": "wave2-closing-tape",
+          "name": "rollout-closing-tape",
           "widget_id": "closing_tape_lookup",
           "fields": [
             "ticker",

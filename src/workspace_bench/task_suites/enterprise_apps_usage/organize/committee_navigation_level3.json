@@ -61,7 +61,7 @@
           }
         ],
         "widgets": [],
-        "dashboard_id": "wave1_committee_staging"
+        "dashboard_id": "pilot_committee_staging"
       }
     }
   },
@@ -76,7 +76,7 @@
         "tool": "manage_dashboard",
         "args": {
           "operation": "update",
-          "dashboard_id": "wave1_committee_staging",
+          "dashboard_id": "pilot_committee_staging",
           "name": "Pilot Committee Review"
         },
         "graded_args": [
@@ -90,7 +90,7 @@
           "rename_map": {
             "agenda": "Decision Agenda"
           },
-          "dashboard_id": "wave1_committee_staging"
+          "dashboard_id": "pilot_committee_staging"
         },
         "graded_args": [
           "rename_map"

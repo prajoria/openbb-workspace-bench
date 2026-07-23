@@ -60,7 +60,7 @@
           {
             "origin": "Widget Examples",
             "widget_id": "html_binance_ohlc",
-            "widget_uuid": "wave3_crypto_display_controls_0",
+            "widget_uuid": "seeded_crypto_display_controls_0",
             "tab_id": "review",
             "data_args": {
               "symbol": "BTCUSDT",
@@ -77,7 +77,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "omni_sql_widget",
-            "widget_uuid": "wave3_crypto_display_controls_1",
+            "widget_uuid": "seeded_crypto_display_controls_1",
             "tab_id": "review",
             "data_args": {
               "prompt": "SELECT * FROM DATA LIMIT 5"
@@ -92,7 +92,7 @@
           {
             "origin": "Widget Examples",
             "widget_id": "moving_parameters_example",
-            "widget_uuid": "wave3_crypto_display_controls_2",
+            "widget_uuid": "seeded_crypto_display_controls_2",
             "tab_id": "review",
             "data_args": {
               "datePicker1": "$currentDate-1d",
@@ -116,7 +116,7 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "wave3_crypto_display_controls_1",
+          "widget_uuid": "seeded_crypto_display_controls_1",
           "data_args": {
             "prompt": "SELECT * FROM DATA LIMIT 3"
           }

@@ -75,6 +75,13 @@
         "optional": true
       },
       {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
         "tool": "get_widget_data",
         "args": {
           "origin": "Getting Started",
@@ -126,6 +133,6 @@
         ]
       }
     ],
-    "max_turns": 8
+    "max_turns": 9
   }
 }

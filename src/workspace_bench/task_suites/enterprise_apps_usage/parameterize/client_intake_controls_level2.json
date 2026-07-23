@@ -60,7 +60,7 @@
           {
             "origin": "Widget Examples",
             "widget_id": "form_submit_widget",
-            "widget_uuid": "wave3_client_intake_controls_0",
+            "widget_uuid": "seeded_client_intake_controls_0",
             "tab_id": "review",
             "data_args": {
               "client_first_name": "Alex",
@@ -78,7 +78,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "all_forms",
-            "widget_uuid": "wave3_client_intake_controls_1",
+            "widget_uuid": "seeded_client_intake_controls_1",
             "tab_id": "review",
             "data_args": {
               "client_first_name": "Taylor",
@@ -96,7 +96,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "markdown_widget_with_text_input",
-            "widget_uuid": "wave3_client_intake_controls_2",
+            "widget_uuid": "seeded_client_intake_controls_2",
             "tab_id": "review",
             "data_args": {
               "name": "Pending"
@@ -117,7 +117,7 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "wave3_client_intake_controls_1",
+          "widget_uuid": "seeded_client_intake_controls_1",
           "data_args": {
             "client_first_name": "Noah",
             "client_last_name": "Patel",

@@ -239,7 +239,7 @@
     "runtime_checks": {
       "datasets": [
         {
-          "name": "wave1-earnings-status",
+          "name": "pilot-earnings-status",
           "widget_id": "earnings_status_lookup",
           "fields": [
             "ticker",

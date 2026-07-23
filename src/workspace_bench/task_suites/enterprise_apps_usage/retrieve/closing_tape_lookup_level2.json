@@ -51,6 +51,13 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
         "tool": "get_params_options",
         "args": {
           "origin": "Bench Daloopa",
@@ -79,6 +86,6 @@
       "325.5"
     ],
     "reference_answer": "Tesla's latest row is dated 2026-07-10 with an exact close of 325.5.",
-    "max_turns": 5
+    "max_turns": 6
   }
 }

@@ -61,7 +61,7 @@
           }
         ],
         "widgets": [],
-        "dashboard_id": "wave2_client_staging"
+        "dashboard_id": "rollout_client_staging"
       }
     }
   },
@@ -76,7 +76,7 @@
         "tool": "manage_dashboard",
         "args": {
           "operation": "update",
-          "dashboard_id": "wave2_client_staging",
+          "dashboard_id": "rollout_client_staging",
           "name": "Rollout Client Onboarding"
         },
         "graded_args": [
@@ -90,7 +90,7 @@
           "rename_map": {
             "intake": "Client Intake"
           },
-          "dashboard_id": "wave2_client_staging"
+          "dashboard_id": "rollout_client_staging"
         },
         "graded_args": [
           "rename_map"
