@@ -2,7 +2,7 @@
   "id": "client_intake_controls_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Retune Entry Form on the open Client Intake Controls dashboard to client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True, preserving the other views.",
+  "prompt": "Apply the second-wave intake policy to Entry Form on the open Client Intake Controls dashboard - that policy means Noah Patel at a Balanced risk profile, with the record added - and preserve the other views.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

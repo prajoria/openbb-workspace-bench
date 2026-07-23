@@ -2,7 +2,7 @@
   "id": "crypto_document_controls_level3",
   "category": "single-widget",
   "difficulty": "level3",
-  "prompt": "Retune Whitepapers on the open Crypto Document Controls dashboard to ethereum.pdf from l1. Keep CoinDesk News and every other view unchanged.",
+  "prompt": "Reset the library: retune Whitepapers on the open Crypto Document Controls dashboard to ethereum.pdf from l1, and keep CoinDesk News and every other view unchanged.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -4054,7 +4054,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: dashboard · specification: -
 
-> Create and activate Rollout Client Onboarding with Intake and Review tabs for the operations team.
+> Client ops again - create and open Rollout Client Onboarding, then add Intake and Review tabs.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4067,7 +4067,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> Operations needs you to create and activate Rollout Client Onboarding with Intake, Review, and Approval tabs, then open Review.
+> Operations wants Rollout Client Onboarding stood up to the intake flow policy - that means Intake, Review, and Approval tabs - create and activate it, then open Review.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4097,7 +4097,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Client operations needs a governed setup: following Workspace session guidance, create and activate Rollout Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order.
+> Client operations needs a governed setup: following Workspace session guidance, create and activate Rollout Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order, and pin an Onboarding Session Note naming the two anchors in the guidance's stable session-grounding phrase.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4105,12 +4105,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
+- **Generated note** ≥1× named ~"Onboarding Session Note" whose content mentions "current-dashboard", "current-tab" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `client_onboarding_flow_level5`
 
 **level5** · category: platform · specification: -
 
-> Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps.json spec. Follow the Finance Guidance Tracker skill and add a Client Onboarding Build Note recording what it flags after comparing claims with guidance.
+> Stand up onboarding as an app: author and add Client Onboarding Backend with Client Intake Queue and Approval Log table views per the apps.json spec, publish a Client Onboarding App with Intake and Approvals tabs, and instantiate it. Then add a Client Onboarding Build Note recording what the Finance Guidance Tracker skill flags after comparing claims with guidance.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4139,7 +4140,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: dashboard · specification: -
 
-> Create Pilot Committee Review as the active committee dashboard, with Agenda and Evidence tabs.
+> Committee prep - create Pilot Committee Review as the active dashboard, with Agenda and Evidence tabs.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4152,7 +4153,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> The committee needs an active Pilot Committee Review dashboard with Agenda and Evidence tabs. Create it, then open Evidence.
+> The committee needs an active Pilot Committee Review dashboard set to the committee session policy - that means Agenda and Evidence tabs. Create it, then open Evidence.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4181,7 +4182,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Following Workspace session guidance, create and activate Pilot Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order.
+> Following Workspace session guidance, create and activate Pilot Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order, and pin a Committee Session Note naming the two anchors in the guidance's stable session-grounding phrase.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4189,12 +4190,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
+- **Generated note** ≥1× named ~"Committee Session Note" whose content mentions "current-dashboard", "current-tab" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `committee_navigation_level5`
 
 **level5** · category: platform · specification: -
 
-> The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register table views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps.json spec. Follow the Finance Earnings Prep skill and add a Committee Navigation Build Note recording what it inspects just before producing action items.
+> Give the committee an app of its own: author and add Committee Navigation Backend with Agenda Queue and Evidence Register table views per the apps.json spec, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Close with a Committee Navigation Build Note recording what the Finance Earnings Prep skill inspects just before producing action items.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4240,7 +4242,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> Build Due Diligence Media Room from scratch: create and open it, add Overview and Review tabs, then add Getting Started's Video Library with Transcript.
+> Set Due Diligence Media Room up to the media room layout policy - that means Overview and Review tabs - create and open it, then add Getting Started's Video Library with Transcript.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4257,9 +4259,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> Lay out Due Diligence Media Room end to end: create and open it, add Overview and Review tabs, then add Getting Started's Video Library with Transcript, Getting Started's PDF Widget with URL.
+> Finish the open Due Diligence Media Room dashboard someone else started: its Overview and Review tabs are in place - add Getting Started's Video Library with Transcript, Getting Started's PDF Widget with URL, and leave the existing setup as it is.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Due Diligence Media Room"; 2 tab(s): overview, review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -4275,7 +4277,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Apply the Finance Tearsheet skill: create and open Due Diligence Media Room, add Catalysts and Risks tabs, and add Getting Started's Video Library with Transcript, Widget Examples's URL PDF files.
+> Apply the Finance Tearsheet skill: create and open Due Diligence Media Room with a Risks tab and, before it, a tab named for what the skill gathers between valuation and risks; then add Getting Started's Video Library with Transcript and Widget Examples's URL PDF files.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4293,7 +4295,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Assemble Buildout Media Room: add it with a Media Review Register table, publish and instantiate Media Room App on Media, following the workspace's widgets.json spec, then add Getting Started's PDF Widget with URL, Widget Examples's URL PDF files. Follow the Finance Tearsheet skill and add a Media-room Build Note recording the input it gathers between valuation and risks.
+> Buildout Media Room goes live today: add it with a Media Review Register table per the widgets.json spec, publish and instantiate Media Room App on Media, then add Getting Started's PDF Widget with URL and Widget Examples's URL PDF files. Wrap with a Media-room Build Note recording what the Finance Tearsheet skill gathers between valuation and risks.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4340,7 +4342,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> Build Visualization Gallery from scratch: create and open it, add Overview and Review tabs, then add Getting Started's Chains TVL Highcharts.
+> Set Visualization Gallery up to the gallery layout policy - that means Overview and Review tabs - create and open it, then add Getting Started's Chains TVL Highcharts.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4357,9 +4359,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> Lay out Visualization Gallery end to end: create and open it, add Overview and Review tabs, then add Getting Started's Chains TVL Highcharts, Getting Started's Vega-Lite Bar Demo.
+> Finish the open Visualization Gallery dashboard someone else started: its Overview and Review tabs are in place - add Getting Started's Chains TVL Highcharts, Getting Started's Vega-Lite Bar Demo, and leave the existing setup as it is.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Visualization Gallery"; 2 tab(s): overview, review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -4375,7 +4377,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Apply the Finance Comps skill: create and open Visualization Gallery, add Valuation Multiples and Outliers tabs, and add Getting Started's Chains TVL Highcharts, Widget Examples's Vega-Lite Scatter Demo.
+> Apply the Finance Comps skill: create and open Visualization Gallery with two tabs named for what the skill compares after normalizing metrics and for what it says deserve premium or discount; then add Getting Started's Chains TVL Highcharts and Widget Examples's Vega-Lite Scatter Demo.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4393,7 +4395,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Assemble Buildout Visualization Gallery: add it with a Visualization Review Register table, publish and instantiate Visualization Gallery App on Gallery, following the workspace's widgets.json spec, then add Getting Started's Vega-Lite Bar Demo, Widget Examples's Vega-Lite Scatter Demo. Follow the Finance Comps skill and add a Visualization-gallery Build Note recording what it compares after normalizing metrics.
+> Buildout Visualization Gallery ships now: add it with a Visualization Review Register table per the widgets.json spec, publish and instantiate Visualization Gallery App on Gallery, then add Getting Started's Vega-Lite Bar Demo and Widget Examples's Vega-Lite Scatter Demo. Sign off with a Visualization-gallery Build Note recording what the Finance Comps skill compares after normalizing metrics and what it says deserve premium or discount.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4426,7 +4428,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: single-widget · specification: -
 
-> Update Financial Entry Form on the open Client Intake Controls dashboard: set it with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True, and preserve the other views.
+> New client to book - fill Financial Entry Form on the open Client Intake Controls dashboard for Maya Chen at Moderate risk with add-record True, leaving the other views alone.
 
 - Initial workspace: dashboard "Client Intake Controls"; 1 tab(s): review; 3 seeded widget(s): form_submit_widget({"client_first_name": "Alex", "client_last_name": "Rivera", "risk_profile": "Conservative", "add_record": false}), all_forms({"client_first_name": "Taylor", "client_last_name": "Morgan", "risk_profile": "Balanced", "add_record": false}), markdown_widget_with_text_input({"name": "Pending"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4440,7 +4442,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: single-widget · specification: -
 
-> Retune Entry Form on the open Client Intake Controls dashboard to client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True, preserving the other views.
+> Apply the second-wave intake policy to Entry Form on the open Client Intake Controls dashboard - that policy means Noah Patel at a Balanced risk profile, with the record added - and preserve the other views.
 
 - Initial workspace: dashboard "Client Intake Controls"; 1 tab(s): review; 3 seeded widget(s): form_submit_widget({"client_first_name": "Alex", "client_last_name": "Rivera", "risk_profile": "Conservative", "add_record": false}), all_forms({"client_first_name": "Taylor", "client_last_name": "Morgan", "risk_profile": "Balanced", "add_record": false}), markdown_widget_with_text_input({"name": "Pending"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4454,7 +4456,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: single-widget · specification: -
 
-> Updates for the open Client Intake Controls dashboard: set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True; set Markdown Widget with Text Input with name Intake Ready; preserve the first view.
+> Two intake chores on the open Client Intake Controls dashboard: set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True, and set Markdown Widget with Text Input with name Intake Ready; the first view stays as is.
 
 - Initial workspace: dashboard "Client Intake Controls"; 1 tab(s): review; 3 seeded widget(s): form_submit_widget({"client_first_name": "Alex", "client_last_name": "Rivera", "risk_profile": "Conservative", "add_record": false}), all_forms({"client_first_name": "Taylor", "client_last_name": "Morgan", "risk_profile": "Balanced", "add_record": false}), markdown_widget_with_text_input({"name": "Pending"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4469,7 +4471,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: single-widget · specification: -
 
-> Guided by the Widget Parameters resource (openbb://workspace/specs/widget-parameters), set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True on the open Client Intake Controls dashboard, and preserve the other views. The governing concepts are form, button.
+> Intake hygiene, guided by the Widget Parameters resource: set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True on the open Client Intake Controls dashboard, preserve the other views, and leave a Client-intake Governance Note recording the param kind the resource names between endpoint and button.
 
 - Initial workspace: dashboard "Client Intake Controls"; 1 tab(s): review; 3 seeded widget(s): form_submit_widget({"client_first_name": "Alex", "client_last_name": "Rivera", "risk_profile": "Conservative", "add_record": false}), all_forms({"client_first_name": "Taylor", "client_last_name": "Morgan", "risk_profile": "Balanced", "add_record": false}), markdown_widget_with_text_input({"name": "Pending"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4478,12 +4480,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
 - **Widget** ≥1× `Widget Examples/form_submit_widget` with data_args ⊇ {"client_first_name": "Maya", "client_last_name": "Chen", "risk_profile": "Moderate", "add_record": true} → `missing_widget`
+- **Generated note** ≥1× named ~"Client-intake Governance Note" whose content mentions "form" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `client_intake_controls_level5`
 
 **level5** · category: platform · specification: -
 
-> Tune Buildout Intake Tuning end to end: add it as a custom backend with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets.json spec. Follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) and add a Client-intake Tuning Note recording the param kind it names between endpoint and button.
+> The desk wants intake tuning self-serve - add Buildout Intake Tuning as a custom backend with an Intake Control Panel table carrying risk_profile and client_last_name params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to Moderate and Chen, and finish with a Client-intake Tuning Note recording the param kind the Widget Parameters resource names between endpoint and button.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4512,7 +4515,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: single-widget · specification: -
 
-> Update Binance OHLC on the open Crypto Display Controls dashboard: set it with symbol ethusdt, interval 1m, exchange binancef, and preserve the other views.
+> Switch the candles view - set Binance OHLC on the open Crypto Display Controls dashboard to ethusdt at 1m on binancef, and don't touch the rest.
 
 - Initial workspace: dashboard "Crypto Display Controls"; 1 tab(s): review; 3 seeded widget(s): html_binance_ohlc({"symbol": "BTCUSDT", "interval": "30m", "exchange": "BinanceUS"}), omni_sql_widget({"prompt": "SELECT * FROM DATA LIMIT 5"}), moving_parameters_example({"datePicker1": "$currentDate-1d", "textBox1": "Hello!", "TrueFalse": true, "daysPicker1": "1"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4526,7 +4529,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: single-widget · specification: -
 
-> Retune SQL Query Widget on the open Crypto Display Controls dashboard to prompt SELECT * FROM DATA LIMIT 3, preserving the other views.
+> Apply the quick-look sampling policy to SQL Query Widget on the open Crypto Display Controls dashboard - that policy means prompt SELECT * FROM DATA LIMIT 3 - and preserve the other views.
 
 - Initial workspace: dashboard "Crypto Display Controls"; 1 tab(s): review; 3 seeded widget(s): html_binance_ohlc({"symbol": "BTCUSDT", "interval": "30m", "exchange": "BinanceUS"}), omni_sql_widget({"prompt": "SELECT * FROM DATA LIMIT 5"}), moving_parameters_example({"datePicker1": "$currentDate-1d", "textBox1": "Hello!", "TrueFalse": true, "daysPicker1": "1"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4540,7 +4543,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: single-widget · specification: -
 
-> Updates for the open Crypto Display Controls dashboard: set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, daysPicker1 1; preserve the first view.
+> Two screen tweaks on the open Crypto Display Controls dashboard: set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3, and set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, days 1; the first view keeps its setup.
 
 - Initial workspace: dashboard "Crypto Display Controls"; 1 tab(s): review; 3 seeded widget(s): html_binance_ohlc({"symbol": "BTCUSDT", "interval": "30m", "exchange": "BinanceUS"}), omni_sql_widget({"prompt": "SELECT * FROM DATA LIMIT 5"}), moving_parameters_example({"datePicker1": "$currentDate-1d", "textBox1": "Hello!", "TrueFalse": true, "daysPicker1": "1"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4555,7 +4558,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: single-widget · specification: -
 
-> Guided by the Daloopa Inflection skill, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 -- growth-rate reversals on the open Crypto Display Controls dashboard, and preserve the other views. The governing concepts are growth-rate reversals.
+> Guided by the Daloopa Inflection skill, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 on the open Crypto Display Controls dashboard, preserve the other views, and leave a Crypto-display Governance Note recording what the skill flags as inflections.
 
 - Initial workspace: dashboard "Crypto Display Controls"; 1 tab(s): review; 3 seeded widget(s): html_binance_ohlc({"symbol": "BTCUSDT", "interval": "30m", "exchange": "BinanceUS"}), omni_sql_widget({"prompt": "SELECT * FROM DATA LIMIT 5"}), moving_parameters_example({"datePicker1": "$currentDate-1d", "textBox1": "Hello!", "TrueFalse": true, "daysPicker1": "1"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4563,13 +4566,14 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **Passes only if all of these checks hold** (each failure emits the issue code shown):
 
-- **Widget** ≥1× `Getting Started/omni_sql_widget` with data_args ⊇ {"prompt": "SELECT * FROM DATA LIMIT 3 -- growth-rate reversals"} → `missing_widget`
+- **Widget** ≥1× `Getting Started/omni_sql_widget` with data_args ⊇ {"prompt": "SELECT * FROM DATA LIMIT 3"} → `missing_widget`
+- **Generated note** ≥1× named ~"Crypto-display Governance Note" whose content mentions "growth-rate reversals" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `crypto_display_controls_level5`
 
 **level5** · category: platform · specification: -
 
-> Tune Buildout Display Tuning end to end: add it as a custom backend with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets.json spec. Follow the Daloopa Inflection skill and add a Crypto-display Tuning Note recording what it flags as inflections.
+> Give the crypto screens their own tuner - add Buildout Display Tuning as a custom backend with a Display Control Panel table carrying symbol and interval params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to ethusdt at 1m, and close with a Crypto-display Tuning Note recording what the Daloopa Inflection skill flags as inflections.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4584,7 +4588,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: single-widget · specification: -
 
-> On the open Crypto Document Controls dashboard, set Whitepapers with filenames set to ethereum.pdf and category set to l1, preserving every other view.
+> On the open Crypto Document Controls dashboard, set Whitepapers: filenames to ethereum.pdf, category to l1. Preserve every other view.
 
 - Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4598,7 +4602,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: single-widget · specification: -
 
-> Use the whitepaper PDF on the open Crypto Document Controls dashboard to show Solana's solana.pdf from the l1 collection, leaving the rest alone.
+> Use the whitepaper PDF viewer on the open Crypto Document Controls dashboard to show Solana's solana.pdf from the l1 collection, leaving the rest alone.
 
 - Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4612,7 +4616,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: single-widget · specification: -
 
-> Apply the DeFi research set to Whitepapers on the open Crypto Document Controls dashboard and preserve the surrounding document views.
+> Apply the DeFi research set to Whitepapers on the open Crypto Document Controls dashboard - that set means solana.pdf under the defi category - and preserve the surrounding document views.
 
 - Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4626,7 +4630,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: single-widget · specification: -
 
-> Retune Whitepapers on the open Crypto Document Controls dashboard to ethereum.pdf from l1. Keep CoinDesk News and every other view unchanged.
+> Reset the library: retune Whitepapers on the open Crypto Document Controls dashboard to ethereum.pdf from l1, and keep CoinDesk News and every other view unchanged.
 
 - Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4641,7 +4645,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: single-widget · specification: -
 
-> Using Workspace session guidance, prepare the open Crypto Document Controls dashboard with Whitepapers on ethereum.pdf from l1 and CoinDesk News limited to 6 in ES. Preserve the PDF viewer.
+> Using Workspace session guidance, prepare the open Crypto Document Controls dashboard: Whitepapers on ethereum.pdf from l1, CoinDesk News limited to 6 in ES, preserve Multi PDF Viewer - Base64, and pin a Document Session Note naming the two anchors in the guidance's stable session-grounding phrase.
 
 - Initial workspace: dashboard "Crypto Document Controls"; 1 tab(s): review; 3 seeded widget(s): whitepapers({"filenames": "bitcoin.pdf", "category": "all"}), coindesk_news({"limit": 10, "lang": "EN"}), multi_pdf_base64({"pdf_name": "Bitcoin Whitepaper"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4651,12 +4655,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Widget Examples/whitepapers` with data_args ⊇ {"filenames": "ethereum.pdf", "category": "l1"} → `missing_widget`
 - **Widget** ≥1× `Widget Examples/coindesk_news` with data_args ⊇ {"limit": 6, "lang": "ES"} → `missing_widget`
+- **Generated note** ≥1× named ~"Document Session Note" whose content mentions "current-dashboard", "current-tab" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `crypto_document_controls_level5`
 
 **level5** · category: platform · specification: -
 
-> Tune Rollout Document Tuning end to end: add it as a custom backend with a Document Control Panel table carrying filenames and category params, publish and instantiate Document Tuning App on Controls, then set the live Document Control Panel to filenames solana.pdf, category l1. Follow the widgets.json spec. Follow the Finance Tearsheet skill and add a Document-controls Tuning Note recording the first input its workflow gathers.
+> Document tooling next - add Rollout Document Tuning as a custom backend with a Document Control Panel table carrying filenames and category params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to solana.pdf from l1, and wrap with a Document-controls Tuning Note recording the first input the Finance Tearsheet skill's workflow gathers.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4671,7 +4676,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: single-widget · specification: -
 
-> On the open Technology Decision Inputs dashboard, switch Car Manufacturer Performance with company set to TSLA and year set to 2023, and leave every other view unchanged.
+> On the open Technology Decision Inputs dashboard, switch Car Manufacturer Performance: company to TSLA, year to 2023. Leave everything else in place.
 
 - Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4685,7 +4690,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: single-widget · specification: -
 
-> Look over the open Technology Decision Inputs dashboard, then change Car Manufacturer Performance to TSLA and 2022 while preserving everything else.
+> Roll the Tesla view back - change Car Manufacturer Performance on the open Technology Decision Inputs dashboard to TSLA and 2022 while preserving everything else.
 
 - Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4713,7 +4718,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: single-widget · specification: -
 
-> Retune Upcoming Earnings on the open Technology Decision Inputs dashboard to Technology, AAPL, and QTD. Keep Car Manufacturer Performance and every other view as they are.
+> Earnings prep beats car data today: retune Upcoming Earnings on the open Technology Decision Inputs dashboard to Technology, AAPL, and QTD, and keep Car Manufacturer Performance and every other view as they are.
 
 - Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4728,7 +4733,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: single-widget · specification: -
 
-> Prepare the open Technology Decision Inputs dashboard for the quarterly review under Finance Earnings Prep governance. Set Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve Car Manufacturer Performance.
+> Prepare the open Technology Decision Inputs dashboard for the quarterly review under Finance Earnings Prep governance: set Upcoming Earnings to Technology, AAPL, and QTD, set Trade Ideas to Flagship Long/Short and QTD, preserve Car Manufacturer Performance, and leave a Decision Inputs Governance Note recording what the skill identifies right after the estimate comparison.
 
 - Initial workspace: dashboard "Technology Decision Inputs"; 1 tab(s): review; 3 seeded widget(s): company_performance({"company": "TM", "year": 2024}), earnings_estimates_monitor_calendar_upcoming_earnings({"sector": "Healthcare", "ticker": "LLY", "period": "YTD"}), portfolio_command_center_actions_trade_ideas({"fund": "Flagship Long/Short", "period": "YTD"})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4738,12 +4743,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Bench Stark Enterprise/earnings_estimates_monitor_calendar_upcoming_earnings` with data_args ⊇ {"sector": "Technology", "ticker": "AAPL", "period": "QTD"} → `missing_widget`
 - **Widget** ≥1× `Bench Stark Enterprise/portfolio_command_center_actions_trade_ideas` with data_args ⊇ {"fund": "Flagship Long/Short", "period": "QTD"} → `missing_widget`
+- **Generated note** ≥1× named ~"Decision Inputs Governance Note" whose content mentions "surprise drivers" (case-insensitive; widget-name aliases and numeric equivalence like 0.5 ≈ 50% accepted) → `missing_generated_widget`
 
 #### `technology_decision_inputs_level5`
 
 **level5** · category: platform · specification: -
 
-> Tune Pilot Decision Tuning end to end: add it as a custom backend with a Decision Input Panel table carrying company and period params, publish and instantiate Decision Tuning App on Controls, then set the live Decision Input Panel to company TSLA, period QTD. Follow the widgets.json spec. Follow the Finance Earnings Prep skill and add a Decision-inputs Tuning Note recording what it compares to street numbers first.
+> One more tuner for the desk - add Pilot Decision Tuning as a custom backend with a Decision Input Panel table carrying company and period params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to TSLA and QTD, and sign off with a Decision-inputs Tuning Note recording what the Finance Earnings Prep skill compares to street numbers first.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4962,7 +4968,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Review the backend contract resource (openbb://workspace/contract/backend) for the open Governed Earnings Brief dashboard, then add a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.
+> Review the backend contract resource for the open Governed Earnings Brief dashboard, then add a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.
 
 - Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`

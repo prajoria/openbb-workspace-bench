@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level3",
   "category": "single-widget",
   "difficulty": "level3",
-  "prompt": "Retune Upcoming Earnings on the open Technology Decision Inputs dashboard to Technology, AAPL, and QTD. Keep Car Manufacturer Performance and every other view as they are.",
+  "prompt": "Earnings prep beats car data today: retune Upcoming Earnings on the open Technology Decision Inputs dashboard to Technology, AAPL, and QTD, and keep Car Manufacturer Performance and every other view as they are.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

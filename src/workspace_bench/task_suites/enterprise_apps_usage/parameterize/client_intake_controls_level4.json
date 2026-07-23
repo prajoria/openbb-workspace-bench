@@ -2,7 +2,7 @@
   "id": "client_intake_controls_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Guided by the Widget Parameters resource (openbb://workspace/specs/widget-parameters), set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True on the open Client Intake Controls dashboard, and preserve the other views. The governing concepts are form, button.",
+  "prompt": "Intake hygiene, guided by the Widget Parameters resource: set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True on the open Client Intake Controls dashboard, preserve the other views, and leave a Client-intake Governance Note recording the param kind the resource names between endpoint and button.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -142,6 +142,18 @@
         "graded_args": [
           "data_args"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Client-intake Governance Note",
+          "data": "form"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -156,6 +168,15 @@
         }
       }
     ],
-    "max_turns": 6
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Client-intake Governance Note",
+        "data_contains": [
+          "form"
+        ]
+      }
+    ],
+    "max_turns": 7
   }
 }

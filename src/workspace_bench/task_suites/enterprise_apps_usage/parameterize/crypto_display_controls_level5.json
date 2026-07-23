@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Tune Buildout Display Tuning end to end: add it as a custom backend with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets.json spec. Follow the Daloopa Inflection skill and add a Crypto-display Tuning Note recording what it flags as inflections.",
+  "prompt": "Give the crypto screens their own tuner - add Buildout Display Tuning as a custom backend with a Display Control Panel table carrying symbol and interval params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to ethusdt at 1m, and close with a Crypto-display Tuning Note recording what the Daloopa Inflection skill flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

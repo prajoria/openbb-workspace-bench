@@ -1,194 +1,386 @@
 {
+  "client_intake_controls_level0": {
+    "prompt": "On the open Client Intake Controls dashboard, set Financial Entry Form: client_first_name to Maya, client_last_name to Chen, risk_profile to Moderate, add_record to True. Preserve the other views.",
+    "spec_sha256": "bb145b3d6ca8fe82efa74ec30c556cb475558debe31b51b66481ce27919a7235"
+  },
+  "client_intake_controls_level1": {
+    "prompt": "New client to book - fill Financial Entry Form on the open Client Intake Controls dashboard for Maya Chen at Moderate risk with add-record True, leaving the other views alone.",
+    "spec_sha256": "ebe49190ef01233658fa6f376e1b87038cedb2bdf478cda360f4587a74b074f7"
+  },
+  "client_intake_controls_level2": {
+    "prompt": "Apply the second-wave intake policy to Entry Form on the open Client Intake Controls dashboard - that policy means Noah Patel at a Balanced risk profile, with the record added - and preserve the other views.",
+    "spec_sha256": "92d9320fc76c18cc8c81e52f4b9ae4a35917c76538963aacfa169a1503b8b075"
+  },
+  "client_intake_controls_level3": {
+    "prompt": "Two intake chores on the open Client Intake Controls dashboard: set Entry Form with client_first_name Noah, client_last_name Patel, risk_profile Balanced, add_record True, and set Markdown Widget with Text Input with name Intake Ready; the first view stays as is.",
+    "spec_sha256": "6b967664d0623d190a84e8f37866a73db54aa09e1a546d7418781a31290da02a"
+  },
+  "client_intake_controls_level4": {
+    "prompt": "Intake hygiene, guided by the Widget Parameters resource: set Financial Entry Form with client_first_name Maya, client_last_name Chen, risk_profile Moderate, add_record True on the open Client Intake Controls dashboard, preserve the other views, and leave a Client-intake Governance Note recording the param kind the resource names between endpoint and button.",
+    "spec_sha256": "47e5c6f6de30eb1c7079b448e7768e86fea1a03f444d4ee0740f6f8eb9e7df72"
+  },
+  "client_intake_controls_level5": {
+    "prompt": "The desk wants intake tuning self-serve - add Buildout Intake Tuning as a custom backend with an Intake Control Panel table carrying risk_profile and client_last_name params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to Moderate and Chen, and finish with a Client-intake Tuning Note recording the param kind the Widget Parameters resource names between endpoint and button.",
+    "spec_sha256": "215102572a4512d48308bf749d6267e5ba6b7bc148d06fefbeedb005495fa56c"
+  },
+  "client_onboarding_flow_level0": {
+    "prompt": "For client operations, create a dashboard named Rollout Client Onboarding and make it the active dashboard.",
+    "spec_sha256": "87c3b2d71cf449b1325c9d6cf3740fee73f13bb776cc5f9062462ff3606c0482"
+  },
+  "client_onboarding_flow_level1": {
+    "prompt": "Client ops again - create and open Rollout Client Onboarding, then add Intake and Review tabs.",
+    "spec_sha256": "ad436f0bfc30c52b71593cc807177e272ca97a9a4d2bc2c183ba3136fe980538"
+  },
+  "client_onboarding_flow_level2": {
+    "prompt": "Operations wants Rollout Client Onboarding stood up to the intake flow policy - that means Intake, Review, and Approval tabs - create and activate it, then open Review.",
+    "spec_sha256": "582405298d48a1aa9c344e3cb0cdbfa569f999b489e13a4cd8fbf3d2c3683ca0"
+  },
+  "client_onboarding_flow_level3": {
+    "prompt": "On the open Client Onboarding Staging dashboard, rename the dashboard to Rollout Client Onboarding and change Intake to Client Intake. Preserve Review and every other workspace item.",
+    "spec_sha256": "9307843ec14d53d61da504ee06ab148bb1e8316ad77ae69a03e971abf856006f"
+  },
+  "client_onboarding_flow_level4": {
+    "prompt": "Client operations needs a governed setup: following Workspace session guidance, create and activate Rollout Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order, and pin an Onboarding Session Note naming the two anchors in the guidance's stable session-grounding phrase.",
+    "spec_sha256": "f8499c19807d163d7b7f4f50ee5f60532cd55824962b098a1e70e57b07b216d9"
+  },
+  "client_onboarding_flow_level5": {
+    "prompt": "Stand up onboarding as an app: author and add Client Onboarding Backend with Client Intake Queue and Approval Log table views per the apps.json spec, publish a Client Onboarding App with Intake and Approvals tabs, and instantiate it. Then add a Client Onboarding Build Note recording what the Finance Guidance Tracker skill flags after comparing claims with guidance.",
+    "spec_sha256": "216767274dba3c05303f2ac4bfbc61c9e72c4ccc3db986235b73bc57ef9859a6"
+  },
   "closing_tape_lookup_level0": {
     "prompt": "Pull up the daily OHLCV rows in Bench Daloopa's Stock Prices with ticker set to NVDA, and report the latest date and exact close.",
-    "spec_sha256": "b60c5b535a612e2d159d6035e0d5859f186ccba7e4c5d27103bdec958d6c2755"
+    "spec_sha256": "6c6edafe4c201cb72be50984821ef5c9ee5fa23a34e018f712f5935bd3e0f2eb"
   },
   "closing_tape_lookup_level1": {
     "prompt": "Netflix closed where, exactly? Find the daily OHLCV rows in Bench Daloopa's Stock Prices for it and give me the latest date and exact close.",
-    "spec_sha256": "effa21123026a0105c1df42b0cb46555ddd1037a00dc1ec8feb96c43b53eacd3"
+    "spec_sha256": "dd749272882ac917b4638f166ce8b1ad038ee7605469d992eeb8a67a1a67199e"
   },
   "closing_tape_lookup_level2": {
     "prompt": "For the EV tape policy - that means the Tesla coverage name - pull the latest date and exact close from the daily OHLCV rows in Bench Daloopa's Stock Prices.",
-    "spec_sha256": "e1daab44ad2f667b6846092c53d5912bca1fcdad3af77afa1b6e87a996f86580"
+    "spec_sha256": "70fdbb740ae7fb079a5ba989fcdbeddb619aaf3c7455d4648b378fa24253666d"
   },
   "closing_tape_lookup_level3": {
     "prompt": "The tape review is already up: on the open Closing Tape Review dashboard, read Bench Daloopa's configured Stock Prices view without changing it and report the latest date, exact close, and volume.",
-    "spec_sha256": "c7883820b6b114c5e5662b84055070d56e2ea8e7349f443aca8121e8a321e884"
+    "spec_sha256": "ef51bf9114c02ee6884f70837f0fd9d91969aa0d92f4506a264d4a4953df12bc"
   },
   "closing_tape_lookup_level4": {
     "prompt": "Working under Daloopa Tearsheet governance, review the daily OHLCV rows in Bench Daloopa's Stock Prices for Apple, then report the latest date and exact close.",
-    "spec_sha256": "da524937e7bab63cd8b910de3f0626ff04b822a026b66a06d2dec9cbbfb67626"
+    "spec_sha256": "40cbc020451b69dcc0e938e63ce457f6a73ed6c24386b3dbac55180628f94003"
   },
   "closing_tape_lookup_level5": {
     "prompt": "The tape desk wants its own lookup: build and add a Rollout Closing Tape backend with a Closing Tape Lookup table for NVDA to the widgets.json spec, instantiate its Closing Tape App with the lookup on Tape, read the result, and report the latest date and exact close. Close with a Closing Tape Build Note recording the anchor the Daloopa Tearsheet skill uses for all period math.",
-    "spec_sha256": "2602d4cb192268530c89d974b147033e90ec7c4cbb84f8a74d554e724e933f28"
+    "spec_sha256": "6330d99e4e7d427c282e0482f1706525b35957953dec60fdfcaf4c4ae0adc78a"
+  },
+  "committee_navigation_level0": {
+    "prompt": "Create a dashboard named Pilot Committee Review for the committee and make it the active dashboard.",
+    "spec_sha256": "055523aee1adf2acd4c07c9990e05f3f7b9b64f2f7bcd264364c632cc1e8fa57"
+  },
+  "committee_navigation_level1": {
+    "prompt": "Committee prep - create Pilot Committee Review as the active dashboard, with Agenda and Evidence tabs.",
+    "spec_sha256": "f020ae29c46c23d04db5078755031247fbcea5c587fc388c29ed7b9741d7ec2e"
+  },
+  "committee_navigation_level2": {
+    "prompt": "The committee needs an active Pilot Committee Review dashboard set to the committee session policy - that means Agenda and Evidence tabs. Create it, then open Evidence.",
+    "spec_sha256": "da9250cfda3f4ef6c31097b072ab9a8af051c3a77166a26210d7b17ce425ca7c"
+  },
+  "committee_navigation_level3": {
+    "prompt": "On the open Committee Review Staging dashboard, rename the dashboard to Pilot Committee Review and change its Agenda tab to Decision Agenda. Keep Evidence and all other workspace content intact.",
+    "spec_sha256": "a4d6cf01f31dd142cb5cd4cba2c20bc27b31c88a2a0bbf094894ecc7f33b3382"
+  },
+  "committee_navigation_level4": {
+    "prompt": "Following Workspace session guidance, create and activate Pilot Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order, and pin a Committee Session Note naming the two anchors in the guidance's stable session-grounding phrase.",
+    "spec_sha256": "2178aa905531df3e0403cc2cb63c23e37f51df760e5dfef2891d8e03e3a51013"
+  },
+  "committee_navigation_level5": {
+    "prompt": "Give the committee an app of its own: author and add Committee Navigation Backend with Agenda Queue and Evidence Register table views per the apps.json spec, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Close with a Committee Navigation Build Note recording what the Finance Earnings Prep skill inspects just before producing action items.",
+    "spec_sha256": "7904af6ac711e1d23512773828f6c07b9f6da2d431c1f6b34623ddf2bffb1735"
+  },
+  "crypto_display_controls_level0": {
+    "prompt": "On the open Crypto Display Controls dashboard, set Binance OHLC: symbol to ethusdt, interval to 1m, exchange to binancef. Preserve the other views.",
+    "spec_sha256": "3887f19ed866345abc0586df31961f38c51b67da74514667f72a3d2c8337f864"
+  },
+  "crypto_display_controls_level1": {
+    "prompt": "Switch the candles view - set Binance OHLC on the open Crypto Display Controls dashboard to ethusdt at 1m on binancef, and don't touch the rest.",
+    "spec_sha256": "911582fe8209c3d4c2e5d2777f65f69394efe69e28084f8620b84efe90b8f774"
+  },
+  "crypto_display_controls_level2": {
+    "prompt": "Apply the quick-look sampling policy to SQL Query Widget on the open Crypto Display Controls dashboard - that policy means prompt SELECT * FROM DATA LIMIT 3 - and preserve the other views.",
+    "spec_sha256": "c9d6a48de072e0adc31754c346e6783739636001efad9845449b8922793338e1"
+  },
+  "crypto_display_controls_level3": {
+    "prompt": "Two screen tweaks on the open Crypto Display Controls dashboard: set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3, and set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, days 1; the first view keeps its setup.",
+    "spec_sha256": "64ba15569495d87362ba6aa0795372ed1becb89e9bd434c2aef5d25dd6e340ca"
+  },
+  "crypto_display_controls_level4": {
+    "prompt": "Guided by the Daloopa Inflection skill, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 on the open Crypto Display Controls dashboard, preserve the other views, and leave a Crypto-display Governance Note recording what the skill flags as inflections.",
+    "spec_sha256": "21e69983a5d8c4a91eb378e928857098c75bfdb75a04461342ec15a029cf0568"
+  },
+  "crypto_display_controls_level5": {
+    "prompt": "Give the crypto screens their own tuner - add Buildout Display Tuning as a custom backend with a Display Control Panel table carrying symbol and interval params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to ethusdt at 1m, and close with a Crypto-display Tuning Note recording what the Daloopa Inflection skill flags as inflections.",
+    "spec_sha256": "cf72b8b508019cb56212f81bbac20565769cd178f424570b10d3b8c31ca9105b"
+  },
+  "crypto_document_controls_level0": {
+    "prompt": "On the open Crypto Document Controls dashboard, set Whitepapers: filenames to ethereum.pdf, category to l1. Preserve every other view.",
+    "spec_sha256": "e29706db6c43a29db1181348c45c64a1bad4f2f70bfb0a02328b45c4598e4136"
+  },
+  "crypto_document_controls_level1": {
+    "prompt": "Use the whitepaper PDF viewer on the open Crypto Document Controls dashboard to show Solana's solana.pdf from the l1 collection, leaving the rest alone.",
+    "spec_sha256": "630bdc6daa260fbf291e5e843aa374f76d16fe80a3043e6aaffb4967a1de93b5"
+  },
+  "crypto_document_controls_level2": {
+    "prompt": "Apply the DeFi research set to Whitepapers on the open Crypto Document Controls dashboard - that set means solana.pdf under the defi category - and preserve the surrounding document views.",
+    "spec_sha256": "24ed54514a10f0db62e8ef86db76d35f57dbb90590171748a9d2e8de0a608ef5"
+  },
+  "crypto_document_controls_level3": {
+    "prompt": "Reset the library: retune Whitepapers on the open Crypto Document Controls dashboard to ethereum.pdf from l1, and keep CoinDesk News and every other view unchanged.",
+    "spec_sha256": "058f3687099f762037e02af6d756ed008724abeb2dd804434e5817620aea85d8"
+  },
+  "crypto_document_controls_level4": {
+    "prompt": "Using Workspace session guidance, prepare the open Crypto Document Controls dashboard: Whitepapers on ethereum.pdf from l1, CoinDesk News limited to 6 in ES, preserve Multi PDF Viewer - Base64, and pin a Document Session Note naming the two anchors in the guidance's stable session-grounding phrase.",
+    "spec_sha256": "b6130c4d31d7bf52bb7c141e6ea8d7a543b6b1895101bef34c9911ef2fe28a80"
+  },
+  "crypto_document_controls_level5": {
+    "prompt": "Document tooling next - add Rollout Document Tuning as a custom backend with a Document Control Panel table carrying filenames and category params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to solana.pdf from l1, and wrap with a Document-controls Tuning Note recording the first input the Finance Tearsheet skill's workflow gathers.",
+    "spec_sha256": "1f485e39717be364a701b0aa7294bbc7cd18bd0ea51d3b517522a43634326e67"
+  },
+  "due_diligence_media_room_level0": {
+    "prompt": "Create a dashboard named Due Diligence Media Room and open it.",
+    "spec_sha256": "940933856ced0914108205b03c8855f17ec3bb1c9003b517447066369102b99b"
+  },
+  "due_diligence_media_room_level1": {
+    "prompt": "Set up Due Diligence Media Room: create and open it, then add Overview and Review tabs.",
+    "spec_sha256": "40f78516bc455096eb3337a2b2b2899a6c43b09488bbdb8e396ca0920d131d2a"
+  },
+  "due_diligence_media_room_level2": {
+    "prompt": "Set Due Diligence Media Room up to the media room layout policy - that means Overview and Review tabs - create and open it, then add Getting Started's Video Library with Transcript.",
+    "spec_sha256": "fde2e69ab0c04b514b30e4fe2a5ea095501b737565f38b7516195c6782614062"
+  },
+  "due_diligence_media_room_level3": {
+    "prompt": "Finish the open Due Diligence Media Room dashboard someone else started: its Overview and Review tabs are in place - add Getting Started's Video Library with Transcript, Getting Started's PDF Widget with URL, and leave the existing setup as it is.",
+    "spec_sha256": "d51016a8104dd7680f2278afac545088375ba0a1c15cc77e41c820acbb20d8a3"
+  },
+  "due_diligence_media_room_level4": {
+    "prompt": "Apply the Finance Tearsheet skill: create and open Due Diligence Media Room with a Risks tab and, before it, a tab named for what the skill gathers between valuation and risks; then add Getting Started's Video Library with Transcript and Widget Examples's URL PDF files.",
+    "spec_sha256": "daf9d850dc4fd260d667fc21bbfeb04f6d4d4c2b222957801958b4ada49b81c6"
+  },
+  "due_diligence_media_room_level5": {
+    "prompt": "Buildout Media Room goes live today: add it with a Media Review Register table per the widgets.json spec, publish and instantiate Media Room App on Media, then add Getting Started's PDF Widget with URL and Widget Examples's URL PDF files. Wrap with a Media-room Build Note recording what the Finance Tearsheet skill gathers between valuation and risks.",
+    "spec_sha256": "daf3927559116fdb78583ccc0a50bea0896fbb58bc99ad13793db31c31314278"
   },
   "earnings_lookup_level0": {
     "prompt": "Read Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor with sector Healthcare, ticker LLY, period YTD, and report the exact score and status.",
-    "spec_sha256": "95a7dd3a929b99a5a437cdee5afa8a9581e6b7c01dd01389b27c15413a25d297"
+    "spec_sha256": "bfe787afc441390a232b69817bdd8bf014e76495cdf857161ade29fd0333b191"
   },
   "earnings_lookup_level1": {
     "prompt": "Where does Apple stand this quarter? Find Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, set the view to Technology, Apple's ticker, and QTD, and give me the exact score and status.",
-    "spec_sha256": "e7e1741b3fcc1966e0cbc77975e220db074752557a836adbc6c38c6e3efe4986"
+    "spec_sha256": "5714e5590d94dc2d07bd80fa35a65f4dd178f3027cf564f2784196393c63ae9d"
   },
   "earnings_lookup_level2": {
     "prompt": "MSFT's score is due upstairs: from Upcoming Earnings in Bench Stark Enterprise's Earnings & Estimates Monitor, get the exact score and status using Technology for the coverage sector; the current-month policy means MTD.",
-    "spec_sha256": "210bff143383609dfc02c779bd17d0c72e227c0ac5ef627e836a4d13463622d3"
+    "spec_sha256": "675a5a4fe3994e7e88689e93927fcb11d8a4e950aa938f3749516d461ecf4cdf"
   },
   "earnings_lookup_level3": {
     "prompt": "Without changing the view, read Bench Stark Enterprise's configured Upcoming Earnings on the open Earnings & Estimates Monitor dashboard and report LLY's exact YTD score and change.",
-    "spec_sha256": "38720b57637f1ba1253a6e9792689498afa13a01f2d26120c9cb3157e566c288"
+    "spec_sha256": "d6ea0190529f9b6282eb50e254319fcaf33780d50df3e14d523f02b602727ab3"
   },
   "earnings_lookup_level4": {
     "prompt": "Earnings week - review Apple under Finance Earnings Prep governance. In Bench Stark Enterprise's Earnings & Estimates Monitor, use Upcoming Earnings for Technology, AAPL, and QTD, then report the exact score and status.",
-    "spec_sha256": "85b01446215d879953828b029ae9e17df284c5245f933b47244a6530296dae26"
+    "spec_sha256": "fc1b8b9e210fe6b8b94e35b0842042fd9a5cab896e8521b6a4e8a4581a29c69e"
   },
   "earnings_lookup_level5": {
     "prompt": "The desk wants a dedicated status check: build and add a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD per the widgets.json spec, instantiate its Earnings Lookup App with the table on Lookup, read the lookup, and report the exact score and status. Add an Earnings Lookup Build Note recording what the Finance Earnings Prep skill identifies right after the estimate comparison.",
-    "spec_sha256": "943ae5ca1654e68b6a15a8324b62f6315e6b3e099128278297842d57490bcad4"
+    "spec_sha256": "58cdedd9489cda285f79d188b8a6b5b03e2cb1a04e5225dedb25bbc3e0a1eb97"
   },
   "live_quote_lookup_level0": {
     "prompt": "Read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
-    "spec_sha256": "45ac7535ae64ccd81c291d827a0e8147cb7e498fc6e7e5c4ecc38002a1856ca9"
+    "spec_sha256": "be28e224fe26db94bb7848205bb8f399457f85e28a2a4ac20f8d870c7375a365"
   },
   "live_quote_lookup_level1": {
     "prompt": "Apple's live quote, please: find Widget Examples's Live Grid for it and report the exact symbol and price shown.",
-    "spec_sha256": "841a0b0ebe9f1d29cfda196d664aaa5c2764de3e377186935a2de420b9b9103b"
+    "spec_sha256": "378a29066784d3e7889ae6e13d113eec25bb130c8fea4b67bdca446d89f4dcb2"
   },
   "live_quote_lookup_level2": {
     "prompt": "Under the mega-cap tape policy - that means the Apple line - read Widget Examples's Live Grid and report the exact symbol and price shown.",
-    "spec_sha256": "4ce66c03dadc2bca462749df3dcf5cc30eeee68292214eb44cd8d435a937dfe5"
+    "spec_sha256": "7e8f47ce5834150be6bf1b689f1116e01113bcbcc3ace5961c21b0c6322fa7d8"
   },
   "live_quote_lookup_level3": {
     "prompt": "The desk screen is set up on the open Live Quote Desk dashboard - read the configured Widget Examples's Live Grid view without changing it and report the exact symbol and price shown.",
-    "spec_sha256": "9d3fe772741b33bd13248aa2b2ec7dec0e3df4aa76b65f53a800bbc86004a3d1"
+    "spec_sha256": "0dc59dda2004da91da136031582fd895c47d9d07a77bc27ad5ca879222199b78"
   },
   "live_quote_lookup_level4": {
     "prompt": "Quote check under the Finance Tearsheet skill: read Widget Examples's Live Grid with symbol AAPL, report the exact symbol and price shown, and leave a Live-quote Governance Note recording the first input the skill's workflow gathers.",
-    "spec_sha256": "fd4fce673a15a7d20e48f62bcecb97d40cce361dd30e4f8773d83fe9716c0a69"
+    "spec_sha256": "e705fce77317eabaf16e8a9fb2d60f96eba2858c0181aa5a04aa4b235b05ee9a"
   },
   "live_quote_lookup_level5": {
     "prompt": "Give the quote desk its own service - stand up Buildout Live Quote: add it with a Live Quote Lookup table carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes per the widgets.json spec; read it with symbol AAPL and report the exact symbol and last_price values shown. Finish with a Live-quote Build Note recording the first input the Finance Tearsheet skill's workflow gathers.",
-    "spec_sha256": "6b840dfab3e3651ecfca2009bba6dfc729c08bbc1c82d9004de5e12344e7374b"
+    "spec_sha256": "e344f2df647c869ce8332a74d79b8ee7e9b5931f295fe008fff345834fd630a8"
   },
   "manufacturer_details_repair_level0": {
     "prompt": "Car Manufacturer Details on the open Manufacturer Detail Repair dashboard is stuck on the wrong year: set company to F and year to 2024.",
-    "spec_sha256": "85ae3c6499bbf9a1d1c4e77467753f1f60b1e78b256b9a88cf3215e613bd38e2"
+    "spec_sha256": "7c2f67eef4d06d0fc4573ed81fe1771f2f134ab01dff1dc4a3869a7d14b79a69"
   },
   "manufacturer_details_repair_level1": {
     "prompt": "The Ford view is stale - put Car Manufacturer Details back on F and 2024 on the open Manufacturer Detail Repair dashboard, without touching Markdown Widget.",
-    "spec_sha256": "76adbd36259dc80fb7a64ef8f8ebc73680c5dba0876e0cfbba564dca604bd384"
+    "spec_sha256": "a32c13b18e329125cb25a31d7631363ed28e526b8fd5eeeeee21e8b0f5f5753f"
   },
   "manufacturer_details_repair_level2": {
     "prompt": "Housekeeping on the open Manufacturer Detail Repair dashboard: Car Manufacturer Details exists twice. Remove the copy flagged as the duplicate and spare Markdown Widget.",
-    "spec_sha256": "e44832dfec22f72c645e7e4f14d858aaaff4c9e6d2ddc55d019aaa8b07fd8cf2"
+    "spec_sha256": "f7d250c1ba6755dfa590bbe45908310635b86416d49412bf7ec8a6754597a524"
   },
   "manufacturer_details_repair_level3": {
     "prompt": "Car Manufacturer Details and Markdown Widget are stacked on the open Manufacturer Detail Repair dashboard. Slide Car Manufacturer Details to x 0, y 10, width 40, height 14 on Details, keeping its parameters.",
-    "spec_sha256": "f0704a162097ac6519d8fba982b3fa632a8885f189492e6fe77637dd4dd67558"
+    "spec_sha256": "2270bdae136ed110c3968e62fe7fe75fce0420ac94e261c05a0a070751b2d3f6"
   },
   "manufacturer_details_repair_level4": {
     "prompt": "Full sweep of the open Manufacturer Detail Repair dashboard, guided by the Finance Tearsheet skill: restore the primary Car Manufacturer Details to F and 2024, drop the copy flagged as the duplicate, move the primary to x 0, y 10, width 40, height 14 on Details, keep Markdown Widget, and wrap up with a Manufacturer Detail Governance Note recording the first input the skill's workflow gathers.",
-    "spec_sha256": "db2eb1227cf61c0f632a0af77473124f8b97eea326b31f5a5fb436331ce977d5"
+    "spec_sha256": "bbac30b0350225b6924cd475d2fe2e555f1a33d9fbd14f59c6e6060f4be4bb60"
   },
   "manufacturer_details_repair_level5": {
     "prompt": "Rollout Detail Repair vanished along with its queue. On the open Custom Detail Repair dashboard, rebuild the service: add a custom backend Rollout Detail Repair with a Manufacturer Detail Queue table to the widgets.json spec, publish and instantiate its app with the queue on Details, and leave a Detail-queue Rebuild Note recording who the Daloopa Industry skill lists from the company directory.",
-    "spec_sha256": "60b6b8c4cb63da65c1aecb710803300a2a616b659e6ad5e0cf1b52ed85251b5e"
+    "spec_sha256": "7ada9564c190c82727287674cb9c9bbf56dc173dbd531ee9dbb0d455bcc23e21"
   },
   "nav_exception_station_level0": {
     "prompt": "NAV Exceptions on the open NAV Repair Staging dashboard is showing the wrong slice: set fund to Flagship Long/Short, status to Open, and period to YTD.",
-    "spec_sha256": "c8f9a128606177a37b4b92574279edc943ae1a941e65bebff79ca59a8c41550d"
+    "spec_sha256": "ddddb3e04bf1a0915fb1a4dd1ba9853f21c546260d2732b5bb5124e8a931df4e"
   },
   "nav_exception_station_level1": {
     "prompt": "The breaks queue looks wrong - restore NAV Exceptions on the open NAV Repair Staging dashboard to Flagship Long/Short, Open, and YTD, and keep Trade Ideas exactly where it is.",
-    "spec_sha256": "12135119e7603a506eb67ccf62f50ef350edb0d7588b9d4cc7a8ac67873570b7"
+    "spec_sha256": "e45de6e81b72febfc330ee0458df2f1163b367d22709d810386b0ad8599fa656"
   },
   "nav_exception_station_level2": {
     "prompt": "Two copies of NAV Exceptions are cluttering the open NAV Repair Staging dashboard. Remove the one flagged as the duplicate; Trade Ideas stays.",
-    "spec_sha256": "21aa9b22f64ad6a74bfd3a49313704bcd44a00ab1576b15620ec85dd8f4872c7"
+    "spec_sha256": "30ca7d14f4b573850a5b0d8044a1728c738937fbc7abf150653242ff97856284"
   },
   "nav_exception_station_level3": {
     "prompt": "Ops flagged an overlap on the open NAV Repair Staging dashboard: move NAV Exceptions down to x 0, y 14, width 40, height 14 on Exceptions so Trade Ideas is readable again, and change nothing else.",
-    "spec_sha256": "5f071ef8709522db242168af02919301079fc1b6180ca80474acb4eb89b3b2ae"
+    "spec_sha256": "fa7cd04cb0da17487085e31226711d47cbc9718902f0e28be448000972c2c061"
   },
   "nav_exception_station_level4": {
     "prompt": "End-of-day cleanup on the open NAV Repair Staging dashboard, run under the Finance Guidance Tracker skill: restore the primary NAV Exceptions to Flagship Long/Short, Open, and YTD; remove the copy flagged as the duplicate; move the primary to x 0, y 14, width 40, height 14 on Exceptions; keep Trade Ideas; and close with a NAV Exception Governance Note recording the final thing the skill's workflow lists.",
-    "spec_sha256": "6adb5b0bb1d84c2e842a48ee5479395d8ade8befea0f7d2b9db95fd19a80779c"
+    "spec_sha256": "23e985afeb1d764bc0c8e0b2df52b25d93cd639dae6081634cd48881e4ca0483"
   },
   "nav_exception_station_level5": {
     "prompt": "We lost Pilot NAV Repair and its staging queue. On the open Custom NAV Repair Staging dashboard, stand it back up: add a custom backend Pilot NAV Repair carrying a NAV Exception Queue table per the widgets.json spec, publish and instantiate its app with the queue on Exceptions, then leave a NAV-exception Rebuild Note recording the last of the three verdict kinds the Daloopa Guidance Tracker skill tallies.",
-    "spec_sha256": "eb2755526564f785ffbc0aee02d6c3032f71e5093e1c4505fb45e499afcbae14"
+    "spec_sha256": "5948326dcb316a5d5c0f310cacb4eb24951ec77b4093c7402bad89e2b778bb92"
   },
   "operating_driver_lookup_level0": {
     "prompt": "Read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
-    "spec_sha256": "90347df20705f14363d4a78910a4d0d1cebcab9fc1e9f9a67b4460c4bbd08844"
+    "spec_sha256": "861da6445934b1cfcbe479049f20893de63888b38b38b0cb3b71130d33949458"
   },
   "operating_driver_lookup_level1": {
     "prompt": "How are Apple's device numbers trending? Find Bench Daloopa's Operating KPIs for it with period 2026Q1, and report the exact calendar_period and Installed Base Active Devices value shown.",
-    "spec_sha256": "adc276cedfbcee99cd8c961c90db0beaf1b11a2f76b547e266da1bd4daa6ac18"
+    "spec_sha256": "1256d25829816644edb14b940c4abb5579f3a7e138a418962faef37aa589e40e"
   },
   "operating_driver_lookup_level2": {
     "prompt": "Under the latest-covered-quarter policy - that means the most recent quarter Daloopa covers - read Bench Daloopa's Operating KPIs with ticker AAPL and report the exact calendar_period and Installed Base Active Devices value shown.",
-    "spec_sha256": "be3e1111c027748735c031fd079db422b21485d8519e3e3ceac9f8eb4333e481"
+    "spec_sha256": "76a3b1ab7da3b53b10dafe8316aec7ad9267ff8da1ece75e7dab7fec893bb03d"
   },
   "operating_driver_lookup_level3": {
     "prompt": "Driver review time: on the open Operating Driver Review dashboard, read the configured Bench Daloopa's Operating KPIs view without changing it and report the exact calendar_period and Installed Base Active Devices value shown.",
-    "spec_sha256": "bfe5668b1ed7a5ef3ef38d633e0443c79496b396976032558537343631467bf2"
+    "spec_sha256": "8bf295a8d27fb3d24d5460bbfd5587f832b1f22b53672ba76b4cfc7927d0481a"
   },
   "operating_driver_lookup_level4": {
     "prompt": "Scan Apple's drivers under the Daloopa Inflection skill: read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, report the exact calendar_period and Installed Base Active Devices value shown, and add an Operating-driver Governance Note recording what the skill flags as inflections.",
-    "spec_sha256": "057ec9e7fd147269f2dc8faa5581f0a5a6f45c0def46cf17580852e3b118673f"
+    "spec_sha256": "4de3fe8e32d89e8e8c7b4f17ddec9eb5dd0190af956581dfa682d3e0924c5ca0"
   },
   "operating_driver_lookup_level5": {
     "prompt": "The KPI desk needs its own lookup - stand up Buildout Operating Drivers: add it with an Operating Driver Lookup table carrying fiscal_period and driver_value columns; publish and instantiate Operating Driver App on Drivers per the widgets.json spec; read it with ticker AAPL, period 2026Q1, and report the exact fiscal_period and driver_value values shown. End with an Operating-driver Build Note recording what the Daloopa Inflection skill flags as inflections.",
-    "spec_sha256": "0bf2d50e0e04eb6c79160a1e92eee060053fe25d005fb0f53ac47b4a2b32c346"
+    "spec_sha256": "f947d591e76fd72c4eb9f4e86582252da8ea175f86c92fe33a4ed4fa5349b2d3"
   },
   "protocol_display_repair_level0": {
     "prompt": "Point Defi Llama Protocol Details at the right protocol on the open Protocol Display Repair dashboard: set protocol_id to uniswap.",
-    "spec_sha256": "57d8e36b1beb9822df17fa364e9107986c63ac3b4e39a88ab4e04b348e863042"
+    "spec_sha256": "c708f35072729beac183f0700e4a9147948c7dec86cc8f2d8bf3b26086587535"
   },
   "protocol_display_repair_level1": {
     "prompt": "The protocol tile drifted again - restore Defi Llama Protocol Details to uniswap on the open Protocol Display Repair dashboard, and leave Demo Financial Data (SSRM) alone.",
-    "spec_sha256": "054b03e2e8cc89fb986c8516d6566d7beaf7e43627be25aa3f88b03572d78556"
+    "spec_sha256": "f7d9dc183fb376b2d7d751bdf905d5d029e18d35bb5429d3815da9adfe96025f"
   },
   "protocol_display_repair_level2": {
     "prompt": "Duplicate alert on the open Protocol Display Repair dashboard: two Defi Llama Protocol Details tiles. Delete the one flagged as the duplicate and keep Demo Financial Data (SSRM).",
-    "spec_sha256": "16a75d347d9694364257af43ea67619139212c9a4d109af877989c88e2ba0272"
+    "spec_sha256": "1259ef9fbb4dc7cda62e6a9a7c747a545cf234e73a0ac30ea3bd00e804b87a80"
   },
   "protocol_display_repair_level3": {
     "prompt": "Demo Financial Data (SSRM) is buried under the protocol tile on the open Protocol Display Repair dashboard. Move it to x 0, y 12, width 40, height 12 on Review, and preserve Defi Llama Protocol Details.",
-    "spec_sha256": "129cd8cd11e2f78b9cdbdf6bee190f01869ce7f418170d829a8e008d692aba23"
+    "spec_sha256": "b0eea9185386bbca64e01ad0a52014548129a78962ab9e76ed33ddd3534b40e3"
   },
   "protocol_display_repair_level4": {
     "prompt": "Crypto desk cleanup under the Daloopa Inflection skill: on the open Protocol Display Repair dashboard, restore Defi Llama Protocol Details to uniswap, keep Demo Financial Data (SSRM) as is, and post a Protocol-display Governance Note recording what the skill flags as inflections.",
-    "spec_sha256": "54f453c73108805023aebb63e4397edcc7b9053a66ed98e9e06e4fa6d78d1ce2"
+    "spec_sha256": "838e07382f55a4be7f29147060ce13464c63ec529c8fda44551b682d9be91a7b"
   },
   "protocol_display_repair_level5": {
     "prompt": "Buildout Protocol Repair is gone from the workspace. On the open Protocol-display Backend Repair dashboard, rebuild it: add a custom backend Buildout Protocol Repair with a Protocol Repair Queue table following the widgets.json spec, publish and instantiate its app with the queue on Protocols, then finish with a Protocol-display Rebuild Note recording what the Daloopa Inflection skill flags as inflections.",
-    "spec_sha256": "c81b6d6e1aa9c000627fe2f3400d563c3405dfd1fb5db2a45e39e2128076546b"
+    "spec_sha256": "382a2499601b16f6e62daa7ab67bc8e51bdad3f6f933f9430f8647e1bb3ee25e"
+  },
+  "technology_decision_inputs_level0": {
+    "prompt": "On the open Technology Decision Inputs dashboard, switch Car Manufacturer Performance: company to TSLA, year to 2023. Leave everything else in place.",
+    "spec_sha256": "79c8b9d55847c1d1aba1bae4a63eb44479f82b4076f2b37b89a02c6989f67111"
+  },
+  "technology_decision_inputs_level1": {
+    "prompt": "Roll the Tesla view back - change Car Manufacturer Performance on the open Technology Decision Inputs dashboard to TSLA and 2022 while preserving everything else.",
+    "spec_sha256": "111d7ed8ad34cab2b2433bb8cb30193d991acadc9096ba4be6e20990a686f90c"
+  },
+  "technology_decision_inputs_level2": {
+    "prompt": "Apply the current Tesla model-year policy on the open Technology Decision Inputs dashboard. Set Car Manufacturer Performance to company TSLA and year 2024, the current model year, and preserve the rest of the dashboard.",
+    "spec_sha256": "1dacc86fca26d30260c1a47c5005432c29d9202ebff0963f6095364a47f1069e"
+  },
+  "technology_decision_inputs_level3": {
+    "prompt": "Earnings prep beats car data today: retune Upcoming Earnings on the open Technology Decision Inputs dashboard to Technology, AAPL, and QTD, and keep Car Manufacturer Performance and every other view as they are.",
+    "spec_sha256": "a426d70bbe187c47ea9369226fb1dc0d31e7b05722c7b57c11aa35f60a86690c"
+  },
+  "technology_decision_inputs_level4": {
+    "prompt": "Prepare the open Technology Decision Inputs dashboard for the quarterly review under Finance Earnings Prep governance: set Upcoming Earnings to Technology, AAPL, and QTD, set Trade Ideas to Flagship Long/Short and QTD, preserve Car Manufacturer Performance, and leave a Decision Inputs Governance Note recording what the skill identifies right after the estimate comparison.",
+    "spec_sha256": "a60e85610ff70b97f9c78761ba7842630b6132eb5c7310afad24d914285de622"
+  },
+  "technology_decision_inputs_level5": {
+    "prompt": "One more tuner for the desk - add Pilot Decision Tuning as a custom backend with a Decision Input Panel table carrying company and period params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to TSLA and QTD, and sign off with a Decision-inputs Tuning Note recording what the Finance Earnings Prep skill compares to street numbers first.",
+    "spec_sha256": "24c617e52d4522a992bfae2d67fc047f7fe84ea152174da743d496123dc82630"
   },
   "vendor_freshness_repair_level0": {
     "prompt": "Our SLA Metrics view on the open Vendor Freshness Repair dashboard is misconfigured: set vendor to Bloomberg, status to Open, and period to QTD.",
-    "spec_sha256": "9e019ae4e62256da1c57036396eaf198f4796bdc70217e608f601a074181765d"
+    "spec_sha256": "99728a8a597b41d60304dd3f9e2609d0c38289121da35ba12091f2b3e4813009"
   },
   "vendor_freshness_repair_level1": {
     "prompt": "Someone knocked SLA Metrics off its usual view on the open Vendor Freshness Repair dashboard. Restore it to Bloomberg, Open, and QTD, and leave Vendor Contract Terms exactly as it is.",
-    "spec_sha256": "9efd46525666e69ed5e92adbd356c77b0c092b086247d72c3951cf79bc03f7f4"
+    "spec_sha256": "a1276503edf429ca56f1d91dc7766e8776bd76802b693989b804bb30ce492562"
   },
   "vendor_freshness_repair_level2": {
     "prompt": "There are two SLA Metrics tiles on the open Vendor Freshness Repair dashboard. Drop the one flagged as the duplicate and keep Vendor Contract Terms untouched.",
-    "spec_sha256": "3ac93696e78f2b6e8d7e5aec0353a2180e6acf3ddf7b41350aa512ff75d75e83"
+    "spec_sha256": "17cc2a8deeec980abe38f50c3fca5ec2cbfbf3a28b35063aa2330ae8e8643469"
   },
   "vendor_freshness_repair_level3": {
     "prompt": "SLA Metrics is sitting on top of Vendor Contract Terms on the open Vendor Freshness Repair dashboard. Give Vendor Contract Terms its own row - x 0, y 12, width 40, height 12 on Review - and don't touch anything else.",
-    "spec_sha256": "da9289f027870dea418bd38f60934f61b70706927d675098742d9d4abdf3578a"
+    "spec_sha256": "4979ade35cf70d2c159a742e59fb7ca37aca731fe9cbc6f8de3bef01cc5ae240"
   },
   "vendor_freshness_repair_level4": {
     "prompt": "Vendor data hygiene, under the Finance Guidance Tracker skill: on the open Vendor Freshness Repair dashboard, restore SLA Metrics to vendor Bloomberg, status Open, period QTD, keep Vendor Contract Terms as is, and close with a Vendor-freshness Governance Note recording the final thing the skill's workflow lists.",
-    "spec_sha256": "e8b633dcce5d085dac665bb2b565a85b240466869a785bbf05d31f4e644ba277"
+    "spec_sha256": "613c105f61105bf09b9564d85556291f988bfaee6a84b077a960db517f95946c"
   },
   "vendor_freshness_repair_level5": {
     "prompt": "Vendor Repair went down and took its queue with it. On the open Vendor-freshness Backend Repair dashboard, rebuild the service: add a custom backend Buildout Vendor Repair with a Vendor Repair Queue table to the widgets.json spec, publish and instantiate its app with the queue on Incidents, and leave a Vendor-freshness Rebuild Note recording the final thing the Finance Guidance Tracker skill's workflow lists.",
-    "spec_sha256": "aa9bdc1324e21bc41b37d932f06ce0538e9f59297f34219d1188debf2add4992"
+    "spec_sha256": "5d0125140e75c706ee3f84a7df83d46b7dc9cf9ed4d3b0cebc46fd2dc73feaba"
+  },
+  "visualization_gallery_level0": {
+    "prompt": "Create a dashboard named Visualization Gallery and open it.",
+    "spec_sha256": "932f67799862165a9da2e3ee59e4583013425ab2d4e12650576044fea1daff64"
+  },
+  "visualization_gallery_level1": {
+    "prompt": "Set up Visualization Gallery: create and open it, then add Overview and Review tabs.",
+    "spec_sha256": "d5d66eb3b3ca9326e4cf9a2cf5e1e17723829fe9ecc17139292c2321f32c425d"
+  },
+  "visualization_gallery_level2": {
+    "prompt": "Set Visualization Gallery up to the gallery layout policy - that means Overview and Review tabs - create and open it, then add Getting Started's Chains TVL Highcharts.",
+    "spec_sha256": "3c73f3f007907d07f9daaf3b47ad6af8d942d7b5cf0bef49fc38878248173c59"
+  },
+  "visualization_gallery_level3": {
+    "prompt": "Finish the open Visualization Gallery dashboard someone else started: its Overview and Review tabs are in place - add Getting Started's Chains TVL Highcharts, Getting Started's Vega-Lite Bar Demo, and leave the existing setup as it is.",
+    "spec_sha256": "0868d4702b244db64e77518b79718ea78b5dcb6bca1901380a646deea1c6519b"
+  },
+  "visualization_gallery_level4": {
+    "prompt": "Apply the Finance Comps skill: create and open Visualization Gallery with two tabs named for what the skill compares after normalizing metrics and for what it says deserve premium or discount; then add Getting Started's Chains TVL Highcharts and Widget Examples's Vega-Lite Scatter Demo.",
+    "spec_sha256": "d43346287d9becfb897e65ecd46f44e30e62865f521b6a83312934c859962021"
+  },
+  "visualization_gallery_level5": {
+    "prompt": "Buildout Visualization Gallery ships now: add it with a Visualization Review Register table per the widgets.json spec, publish and instantiate Visualization Gallery App on Gallery, then add Getting Started's Vega-Lite Bar Demo and Widget Examples's Vega-Lite Scatter Demo. Sign off with a Visualization-gallery Build Note recording what the Finance Comps skill compares after normalizing metrics and what it says deserve premium or discount.",
+    "spec_sha256": "5becbf83f1c43fddee3b14b15ac45b16a9c9e03a40c4113f9eb4d1c0ea650a41"
   }
 }

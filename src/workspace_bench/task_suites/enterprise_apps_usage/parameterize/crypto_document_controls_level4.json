@@ -2,7 +2,7 @@
   "id": "crypto_document_controls_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Using Workspace session guidance, prepare the open Crypto Document Controls dashboard with Whitepapers on ethereum.pdf from l1 and CoinDesk News limited to 6 in ES. Preserve the PDF viewer.",
+  "prompt": "Using Workspace session guidance, prepare the open Crypto Document Controls dashboard: Whitepapers on ethereum.pdf from l1, CoinDesk News limited to 6 in ES, preserve Multi PDF Viewer - Base64, and pin a Document Session Note naming the two anchors in the guidance's stable session-grounding phrase.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -117,7 +117,9 @@
         "args": {
           "name": "workspace_session_context"
         },
-        "optional": true
+        "graded_args": [
+          "name"
+        ]
       },
       {
         "tool": "update_widget",
@@ -144,6 +146,18 @@
         "graded_args": [
           "data_args"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Document Session Note",
+          "data": "current-dashboard current-tab"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -164,6 +178,16 @@
         }
       }
     ],
-    "max_turns": 7
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Document Session Note",
+        "data_contains": [
+          "current-dashboard",
+          "current-tab"
+        ]
+      }
+    ],
+    "max_turns": 8
   }
 }

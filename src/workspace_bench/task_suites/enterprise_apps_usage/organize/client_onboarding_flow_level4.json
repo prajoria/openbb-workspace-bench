@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Client operations needs a governed setup: following Workspace session guidance, create and activate Rollout Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order.",
+  "prompt": "Client operations needs a governed setup: following Workspace session guidance, create and activate Rollout Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order, and pin an Onboarding Session Note naming the two anchors in the guidance's stable session-grounding phrase.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,9 @@
         "args": {
           "name": "workspace_session_context"
         },
-        "optional": true
+        "graded_args": [
+          "name"
+        ]
       },
       {
         "tool": "manage_dashboard",
@@ -90,11 +92,32 @@
           ]
         },
         "graded_args": [
-          "operation",
           "tabs"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Onboarding Session Note",
+          "data": "current-dashboard current-tab"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
         ]
       }
     ],
-    "max_turns": 7
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Onboarding Session Note",
+        "data_contains": [
+          "current-dashboard",
+          "current-tab"
+        ]
+      }
+    ],
+    "max_turns": 8
   }
 }

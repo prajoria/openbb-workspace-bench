@@ -2,7 +2,7 @@
   "id": "crypto_document_controls_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Apply the DeFi research set to Whitepapers on the open Crypto Document Controls dashboard and preserve the surrounding document views.",
+  "prompt": "Apply the DeFi research set to Whitepapers on the open Crypto Document Controls dashboard - that set means solana.pdf under the defi category - and preserve the surrounding document views.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

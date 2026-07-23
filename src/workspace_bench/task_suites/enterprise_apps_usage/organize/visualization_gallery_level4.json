@@ -2,7 +2,7 @@
   "id": "visualization_gallery_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Apply the Finance Comps skill: create and open Visualization Gallery, add Valuation Multiples and Outliers tabs, and add Getting Started's Chains TVL Highcharts, Widget Examples's Vega-Lite Scatter Demo.",
+  "prompt": "Apply the Finance Comps skill: create and open Visualization Gallery with two tabs named for what the skill compares after normalizing metrics and for what it says deserve premium or discount; then add Getting Started's Chains TVL Highcharts and Widget Examples's Vega-Lite Scatter Demo.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

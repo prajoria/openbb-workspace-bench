@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level1",
   "category": "dashboard",
   "difficulty": "level1",
-  "prompt": "Create and activate Rollout Client Onboarding with Intake and Review tabs for the operations team.",
+  "prompt": "Client ops again - create and open Rollout Client Onboarding, then add Intake and Review tabs.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

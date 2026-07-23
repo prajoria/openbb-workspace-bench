@@ -233,6 +233,7 @@ REALISM_FENCE = (
     "wave two",
     "wave three",
     "manifest specification",
+    "openbb://",          # raw resource URIs are tool-layer, not analyst speech
 )
 
 PROMPT_FORBIDDEN = {
@@ -1728,13 +1729,14 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
                 "Prepare the open Technology Decision Inputs dashboard for the quarterly review "
                 "under Finance Earnings Prep governance. Set Upcoming Earnings to "
                 "Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. "
-                "Preserve Car Manufacturer Performance."
+                "Preserve Car Manufacturer Performance, and leave a Decision Inputs "
+                "Governance Note recording what the skill identifies right after the "
+                "estimate comparison."
             ),
             [
                 _call(
                     "get_skill_content",
                     {"slug": "finance-earnings-prep"},
-                    optional=True,
                     graded_args=("slug",),
                 ),
                 _call(
@@ -1746,6 +1748,15 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
                     "update_widget",
                     {"widget_id": TRADE_IDEAS_WIDGET, "data_args": trade_args},
                     graded_args=("data_args",),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "Decision Inputs Governance Note",
+                        "data": "surprise drivers",
+                    },
+                    graded_args=("widget_type", "name"),
                 ),
             ],
             targets=(
@@ -1759,6 +1770,19 @@ def _build_parameterize_tasks() -> list[TaskRecord]:
                     ("finance-earnings-prep",),
                 ),
             ),
+            governance=GovernanceSpec(
+                "get_skill_content",
+                "finance-earnings-prep",
+                "Finance Earnings Prep governance",
+                ("surprise drivers",),
+            ),
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "Decision Inputs Governance Note",
+                    "data_contains": ["surprise drivers"],
+                }
+            ],
             pinned_widget_args={
                 (STARK, EARNINGS_WIDGET): frozenset({"sector", "ticker", "period"}),
                 (STARK, TRADE_IDEAS_WIDGET): frozenset({"fund", "period"}),
@@ -1859,8 +1883,9 @@ def _build_organize_tasks() -> list[TaskRecord]:
             2,
             "dashboard",
             (
-                "The committee needs an active Pilot Committee Review dashboard with Agenda "
-                "and Evidence tabs. Create it, then open Evidence."
+                "The committee needs an active Pilot Committee Review dashboard set to "
+                "the committee session policy - that means Agenda and Evidence tabs. "
+                "Create it, then open Evidence."
             ),
             [
                 _call(
@@ -1886,6 +1911,11 @@ def _build_organize_tasks() -> list[TaskRecord]:
                     graded_args=("tab_id",),
                 ),
             ],
+            policies=(
+                PolicyMapping(
+                    "the committee session policy", ("Agenda", "Evidence")
+                ),
+            ),
             required_tabs=["agenda", "evidence"],
             required_dashboard_name="Pilot Committee Review",
         )
@@ -1945,13 +1975,13 @@ def _build_organize_tasks() -> list[TaskRecord]:
             (
                 "Following Workspace session guidance, create and activate Pilot "
                 "Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in "
-                "that order."
+                "that order, and pin a Committee Session Note naming the two anchors "
+                "in the guidance's stable session-grounding phrase."
             ),
             [
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
-                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -1973,7 +2003,16 @@ def _build_organize_tasks() -> list[TaskRecord]:
                             {"name": "Sign-Off"},
                         ],
                     },
-                    graded_args=("operation", "tabs"),
+                    graded_args=("tabs",),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "Committee Session Note",
+                        "data": "current-dashboard current-tab",
+                    },
+                    graded_args=("widget_type", "name"),
                 ),
             ],
             policies=(
@@ -1982,6 +2021,19 @@ def _build_organize_tasks() -> list[TaskRecord]:
                     ("workspace_session_context",),
                 ),
             ),
+            governance=GovernanceSpec(
+                "get_workspace_prompt",
+                "workspace_session_context",
+                "Workspace session guidance",
+                ("current-dashboard", "current-tab"),
+            ),
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "Committee Session Note",
+                    "data_contains": ["current-dashboard", "current-tab"],
+                }
+            ],
         )
     )
 
@@ -2557,7 +2609,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
             "platform",
             (
                 "Review the backend contract resource "
-                "(openbb://workspace/contract/backend) for the open Governed Earnings "
+                "for the open Governed Earnings "
                 "Brief dashboard, then add a Backend Contract Actions note recording the two "
                 "contract items listed between the manifest files and authentication."
             ),
@@ -4368,13 +4420,14 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
             (
                 "Using Workspace session guidance, prepare the open Crypto Document "
                 "Controls dashboard with Whitepapers on ethereum.pdf from l1 and CoinDesk News "
-                "limited to 6 in ES. Preserve the PDF viewer."
+                "limited to 6 in ES. Preserve the PDF viewer, and pin a Document Session "
+                "Note naming the two anchors in the guidance's stable session-grounding "
+                "phrase."
             ),
             [
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
-                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -4387,9 +4440,31 @@ def _build_parameterize_wave2_tasks() -> list[TaskRecord]:
                     {"widget_id": COINDESK_WIDGET, "data_args": news_args},
                     graded_args=("data_args",),
                 ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "Document Session Note",
+                        "data": "current-dashboard current-tab",
+                    },
+                    graded_args=("widget_type", "name"),
+                ),
             ],
             targets=(white_target, news_target, pdf_target),
             policies=(PolicyMapping("Workspace session guidance", ("workspace_session_context",)),),
+            governance=GovernanceSpec(
+                "get_workspace_prompt",
+                "workspace_session_context",
+                "Workspace session guidance",
+                ("current-dashboard", "current-tab"),
+            ),
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "Document Session Note",
+                    "data_contains": ["current-dashboard", "current-tab"],
+                }
+            ],
             pinned_widget_args={
                 (WIDGET_EXAMPLES, WHITEPAPERS_WIDGET): frozenset(ethereum_args),
                 (WIDGET_EXAMPLES, COINDESK_WIDGET): frozenset(news_args),
@@ -4481,8 +4556,9 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
             2,
             "dashboard",
             (
-                "Operations needs you to create and activate Rollout Client Onboarding "
-                "with Intake, Review, and Approval tabs, then open Review."
+                "Operations wants Rollout Client Onboarding stood up to the intake "
+                "flow policy - that means Intake, Review, and Approval tabs - create "
+                "and activate it, then open Review."
             ),
             [
                 _call(
@@ -4508,6 +4584,11 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                     graded_args=("tab_id",),
                 ),
             ],
+            policies=(
+                PolicyMapping(
+                    "the intake flow policy", ("Intake", "Review", "Approval")
+                ),
+            ),
             required_tabs=["intake", "review", "approval"],
             required_dashboard_name=dashboard_name,
         )
@@ -4566,13 +4647,14 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
             (
                 "Client operations needs a governed setup: following Workspace session "
                 "guidance, create and activate Rollout Client Onboarding with Client "
-                "Intake, Due Diligence, and Approval tabs in that order."
+                "Intake, Due Diligence, and Approval tabs in that order, and pin an "
+                "Onboarding Session Note naming the two anchors in the guidance's "
+                "stable session-grounding phrase."
             ),
             [
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
-                    optional=True,
                     graded_args=("name",),
                 ),
                 _call(
@@ -4590,10 +4672,32 @@ def _build_organize_wave2_tasks() -> list[TaskRecord]:
                             {"name": "Approval"},
                         ],
                     },
-                    graded_args=("operation", "tabs"),
+                    graded_args=("tabs",),
+                ),
+                _call(
+                    "add_generative_widget",
+                    {
+                        "widget_type": "note",
+                        "name": "Onboarding Session Note",
+                        "data": "current-dashboard current-tab",
+                    },
+                    graded_args=("widget_type", "name"),
                 ),
             ],
             policies=(PolicyMapping("Workspace session guidance", ("workspace_session_context",)),),
+            governance=GovernanceSpec(
+                "get_workspace_prompt",
+                "workspace_session_context",
+                "Workspace session guidance",
+                ("current-dashboard", "current-tab"),
+            ),
+            required_generated_widgets=[
+                {
+                    "widget_type": "note",
+                    "name_contains": "Onboarding Session Note",
+                    "data_contains": ["current-dashboard", "current-tab"],
+                }
+            ],
         )
     )
 
@@ -6123,6 +6227,8 @@ GOVERNED_TOKEN_WORDS: dict[str, str] = {
     "catalysts": "the input it gathers between valuation and risks",
     "price action": "the first input its workflow gathers",
     "form": "the param kind it names between endpoint and button",
+    "current-dashboard": "the first anchor in its stable session-grounding phrase",
+    "current-tab": "the second anchor in its stable session-grounding phrase",
 }
 
 # Machine-checkable truth conditions for GOVERNED_TOKEN_WORDS: each entry
@@ -6151,6 +6257,8 @@ TOKEN_DESCRIPTION_TRUTHS: dict[str, tuple[tuple[str, ...], ...]] = {
     "catalysts": (("order", "valuation", "catalysts"), ("order", "catalysts", "risks")),
     "price action": (("order", "price action", "fundamentals"),),
     "form": (("order", "endpoint", "form"), ("order", "form", "button")),
+    "current-dashboard": (("order", "current-dashboard", "current-tab"),),
+    "current-tab": (("order", "current-dashboard", "current-tab"),),
 }
 
 
@@ -6989,6 +7097,7 @@ def _build_wave3_parameterize_spine(
     targets: tuple[TargetSpec, TargetSpec, TargetSpec],
     initial_args: tuple[JsonDict, JsonDict, JsonDict],
     final_args: tuple[JsonDict, JsonDict, JsonDict],
+    l2_policy: tuple[str, str],
     governance: GovernanceSpec,
     governed_index: int,
     governed_args: JsonDict,
@@ -7034,13 +7143,23 @@ def _build_wave3_parameterize_spine(
                     )
                     if level == 1
                     else (
-                        f"Retune {target.display_name} on the open {dashboard_name} "
-                        f"dashboard to {_wave3_args_words(data_args)}, preserving the "
-                        "other views."
+                        f"Apply {l2_policy[0]} to {target.display_name} on the open "
+                        f"{dashboard_name} dashboard - that policy means {l2_policy[1]} "
+                        "- and preserve the other views."
                     )
                 ),
                 tools,
                 targets=(target,),
+                policies=(
+                    (
+                        PolicyMapping(
+                            l2_policy[0],
+                            tuple(data_args.values()),
+                        ),
+                    )
+                    if level == 2
+                    else ()
+                ),
                 pinned_widget_args={(target.origin, target.widget_id): frozenset(data_args)},
                 required_widgets=[_required_widget(target.origin, target.widget_id, data_args)],
                 selected_dashboard=dashboard_name,
@@ -7090,12 +7209,16 @@ def _build_wave3_parameterize_spine(
             (
                 f"Guided by the {governance.label}, set {governed_target.display_name} with "
                 f"{_wave3_args_words(governed_args)} on the open {dashboard_name} dashboard, "
-                "and preserve the other views. "
-                f"The governing concepts are {', '.join(governance.outcome_tokens)}."
+                "preserve the other views, and leave a "
+                f"{_note_phrase(f'{title} Governance Note')} recording "
+                f"{GOVERNED_TOKEN_WORDS[governance.outcome_tokens[0]]}."
             ),
             [
                 _wave3_governance_call(governance),
                 _wave3_update_call(uuids[governed_index], governed_args),
+                _wave3_generated_call(
+                    f"{title} Governance Note", governance.outcome_tokens[0]
+                ),
             ],
             targets=(governed_target,),
             pinned_widget_args={
@@ -7106,6 +7229,11 @@ def _build_wave3_parameterize_spine(
                     governed_target.origin,
                     governed_target.widget_id,
                     governed_args,
+                )
+            ],
+            required_generated_widgets=[
+                _wave3_required_generated(
+                    f"{title} Governance Note", governance.outcome_tokens[0]
                 )
             ],
             governance=governance,
@@ -7211,7 +7339,7 @@ def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
             "daysPicker1": "1",
         },
     )
-    governed_sql = {"prompt": "SELECT * FROM DATA LIMIT 3 -- growth-rate reversals"}
+    governed_sql = {"prompt": "SELECT * FROM DATA LIMIT 3"}
     return [
         *_build_wave3_parameterize_spine(
             spine="client_intake_controls",
@@ -7223,8 +7351,12 @@ def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
             governance=GovernanceSpec(
                 "read_workspace_resource",
                 "openbb://workspace/specs/widget-parameters",
-                "Widget Parameters resource (openbb://workspace/specs/widget-parameters)",
+                "Widget Parameters resource",
                 ("form", "button"),
+            ),
+            l2_policy=(
+                "the second-wave intake policy",
+                "Noah Patel at a Balanced risk profile, with the record added",
             ),
             governed_index=0,
             governed_args=client_final[0],
@@ -7247,6 +7379,10 @@ def _build_wave3_parameterize_tasks() -> list[TaskRecord]:
                 "Daloopa Inflection skill",
                 ("growth-rate reversals",),
             ),
+            l2_policy=(
+                "the quick-look sampling policy",
+                "prompt SELECT * FROM DATA LIMIT 3",
+            ),
             governed_index=1,
             governed_args=governed_sql,
             build_backend="Buildout Display Tuning",
@@ -7264,6 +7400,7 @@ def _build_wave3_organize_spine(
     title: str,
     dashboard_name: str,
     targets: tuple[TargetSpec, TargetSpec, TargetSpec],
+    layout_policy: str,
     governance: GovernanceSpec,
     governed_tabs: tuple[str, str],
     backend_name: str,
@@ -7316,41 +7453,75 @@ def _build_wave3_organize_spine(
             required_tabs=[_snake_case(name) for name in basic_tabs],
         )
     )
-    for level, chosen in ((2, targets[:1]), (3, targets[:2])):
-        names = ", ".join(f"{target.origin}'s {target.display_name}" for target in chosen)
-        tasks.append(
-            _record(
-                "organize",
-                spine,
-                level,
-                "dashboard",
-                (
-                    (f"Build {dashboard_name} from scratch" if level == 2 else f"Lay out {dashboard_name} end to end")
-                    + f": create and open it, add Overview "
-                    f"and Review tabs, then add {names}."
+    l2_chosen = targets[:1]
+    l2_names = ", ".join(f"{target.origin}'s {target.display_name}" for target in l2_chosen)
+    tasks.append(
+        _record(
+            "organize",
+            spine,
+            2,
+            "dashboard",
+            (
+                f"Set {dashboard_name} up to {layout_policy} - that means Overview "
+                f"and Review tabs - create and open it, then add {l2_names}."
+            ),
+            [
+                _call(
+                    "manage_dashboard",
+                    {"operation": "create", "name": dashboard_name, "activate": True},
+                    graded_args=("operation", "name"),
                 ),
-                [
-                    _call(
-                        "manage_dashboard",
-                        {"operation": "create", "name": dashboard_name, "activate": True},
-                        graded_args=("operation", "name"),
-                    ),
-                    _call(
-                        "manage_navigation_bar",
-                        {"operation": "add_tabs", "tabs": [{"name": name} for name in basic_tabs]},
-                        graded_args=("tabs",),
-                    ),
-                    *_wave3_discover_targets(chosen),
-                    *(_wave3_place_call(target) for target in chosen),
-                ],
-                targets=chosen,
-                required_dashboard_name=dashboard_name,
-                required_tabs=[_snake_case(name) for name in basic_tabs],
-                required_widgets=[
-                    _required_widget(target.origin, target.widget_id) for target in chosen
-                ],
-            )
+                _call(
+                    "manage_navigation_bar",
+                    {"operation": "add_tabs", "tabs": [{"name": name} for name in basic_tabs]},
+                    graded_args=("tabs",),
+                ),
+                *_wave3_discover_targets(l2_chosen),
+                *(_wave3_place_call(target) for target in l2_chosen),
+            ],
+            targets=l2_chosen,
+            policies=(PolicyMapping(layout_policy, tuple(basic_tabs)),),
+            required_dashboard_name=dashboard_name,
+            required_tabs=[_snake_case(name) for name in basic_tabs],
+            required_widgets=[
+                _required_widget(target.origin, target.widget_id) for target in l2_chosen
+            ],
         )
+    )
+
+    l3_chosen = targets[:2]
+    l3_names = ", ".join(f"{target.origin}'s {target.display_name}" for target in l3_chosen)
+    l3_stage = _staged_dashboard(
+        dashboard_name,
+        [],
+        tabs=[{"id": _snake_case(name), "name": name} for name in basic_tabs],
+    )
+    tasks.append(
+        _record(
+            "organize",
+            spine,
+            3,
+            "dashboard",
+            (
+                f"Finish the open {dashboard_name} dashboard someone else started: "
+                f"its Overview and Review tabs are in place - add {l3_names}, and "
+                "leave the existing setup as it is."
+            ),
+            [
+                _snapshot(),
+                *_wave3_discover_targets(l3_chosen),
+                *(_wave3_place_call(target) for target in l3_chosen),
+            ],
+            targets=l3_chosen,
+            required_dashboard_name=dashboard_name,
+            required_tabs=[_snake_case(name) for name in basic_tabs],
+            required_widgets=[
+                _required_widget(target.origin, target.widget_id) for target in l3_chosen
+            ],
+            selected_dashboard=dashboard_name,
+            initial_state=l3_stage,
+        )
+    )
 
     governed_targets = (targets[0], targets[2])
     governed_names = ", ".join(
@@ -7499,6 +7670,7 @@ def _build_wave3_organize_tasks() -> list[TaskRecord]:
             title="Media-room",
             dashboard_name="Due Diligence Media Room",
             targets=media_targets,
+            layout_policy="the media room layout policy",
             governance=GovernanceSpec(
                 "get_skill_content",
                 "finance-tearsheet",
@@ -7517,6 +7689,7 @@ def _build_wave3_organize_tasks() -> list[TaskRecord]:
             title="Visualization-gallery",
             dashboard_name="Visualization Gallery",
             targets=chart_targets,
+            layout_policy="the gallery layout policy",
             governance=GovernanceSpec(
                 "get_skill_content",
                 "finance-comps",
@@ -9059,14 +9232,45 @@ def _assert_f1_f3(records: list[TaskRecord], catalogs: dict[str, JsonDict]) -> N
                     if convention_name.casefold() in prompt.casefold():
                         continue
                 if (
+                    isinstance(value, str)
+                    and record.governance is not None
+                    and value.casefold()
+                    in {t.casefold() for t in record.governance.outcome_tokens}
+                    and " ".join(
+                        GOVERNED_TOKEN_WORDS.get(
+                            next(
+                                t
+                                for t in record.governance.outcome_tokens
+                                if t.casefold() == value.casefold()
+                            ),
+                            "\x00",
+                        )
+                        .casefold()
+                        .split()[-4:]
+                    )
+                    in prompt.casefold()
+                ):
+                    # Describe-mode governance: the graded value is a governed
+                    # token whose registered description appears in the prompt,
+                    # so reading the source derives it.
+                    continue
+                if (
+                    path
+                    and path[0] in {"slug", "uri", "name"}
+                    and isinstance(value, str)
+                    and record.governance is not None
+                    and value == record.governance.key
+                ):
+                    # Knowledge-source handles (skill slug, resource uri,
+                    # prompt name) are grounded by naming the source in words:
+                    # the handle itself is listed by the workspace surface.
+                    continue
+                if (
                     path
                     and path[0] == "slug"
                     and isinstance(value, str)
                     and value.replace("-", " ").casefold() in prompt.casefold()
                 ):
-                    # A skill slug is a handle: fair whenever the prompt names
-                    # the skill in words - the slug itself is declared in the
-                    # episode's workspace_skills, readable from the world.
                     continue
                 if not _value_has_provenance(
                     value,
@@ -10462,9 +10666,12 @@ def _compute_prompt_spec(record: TaskRecord) -> JsonDict:
             for leaf in _spec_leaf_values(args.get(name)):
                 if leaf.casefold() in policy_values:
                     continue
-                if name == "slug" and leaf == governance_key:
-                    # Slugs never appear in prompts; naming the skill in
-                    # words (the governance label above) grounds the slug.
+                if name in {"slug", "uri"} and leaf == governance_key:
+                    # Knowledge-source handles never appear in prompts;
+                    # naming the source in words (the governance label
+                    # above) grounds them.
+                    continue
+                if name == "name" and leaf == governance_key:
                     continue
                 if name == "widget_id" and any(
                     t.widget_id == leaf for t in record.targets
@@ -10534,7 +10741,15 @@ def _compute_prompt_spec(record: TaskRecord) -> JsonDict:
 def _spec_sha(spec: JsonDict) -> str:
     import hashlib
 
-    canonical = json.dumps(spec, sort_keys=True, ensure_ascii=False)
+    # Global authoring config (fences, audience, caps) is identical across
+    # tasks; excluding it keeps suite-wide config changes from invalidating
+    # every authored prompt.
+    task_specific = {
+        key: value
+        for key, value in spec.items()
+        if key not in {"forbidden_fragments", "audience", "uniqueness", "word_cap"}
+    }
+    canonical = json.dumps(task_specific, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 

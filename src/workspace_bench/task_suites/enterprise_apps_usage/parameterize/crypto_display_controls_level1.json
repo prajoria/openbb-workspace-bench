@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level1",
   "category": "single-widget",
   "difficulty": "level1",
-  "prompt": "Update Binance OHLC on the open Crypto Display Controls dashboard: set it with symbol ethusdt, interval 1m, exchange binancef, and preserve the other views.",
+  "prompt": "Switch the candles view - set Binance OHLC on the open Crypto Display Controls dashboard to ethusdt at 1m on binancef, and don't touch the rest.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "crypto_document_controls_level1",
   "category": "single-widget",
   "difficulty": "level1",
-  "prompt": "Use the whitepaper PDF on the open Crypto Document Controls dashboard to show Solana's solana.pdf from the l1 collection, leaving the rest alone.",
+  "prompt": "Use the whitepaper PDF viewer on the open Crypto Document Controls dashboard to show Solana's solana.pdf from the l1 collection, leaving the rest alone.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

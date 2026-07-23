@@ -2,7 +2,7 @@
   "id": "committee_navigation_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Following Workspace session guidance, create and activate Pilot Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order.",
+  "prompt": "Following Workspace session guidance, create and activate Pilot Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order, and pin a Committee Session Note naming the two anchors in the guidance's stable session-grounding phrase.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,9 @@
         "args": {
           "name": "workspace_session_context"
         },
-        "optional": true
+        "graded_args": [
+          "name"
+        ]
       },
       {
         "tool": "manage_dashboard",
@@ -90,11 +92,32 @@
           ]
         },
         "graded_args": [
-          "operation",
           "tabs"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Committee Session Note",
+          "data": "current-dashboard current-tab"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
         ]
       }
     ],
-    "max_turns": 7
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Committee Session Note",
+        "data_contains": [
+          "current-dashboard",
+          "current-tab"
+        ]
+      }
+    ],
+    "max_turns": 8
   }
 }

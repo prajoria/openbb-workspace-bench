@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Prepare the open Technology Decision Inputs dashboard for the quarterly review under Finance Earnings Prep governance. Set Upcoming Earnings to Technology, AAPL, and QTD, and Trade Ideas to Flagship Long/Short and QTD. Preserve Car Manufacturer Performance.",
+  "prompt": "Prepare the open Technology Decision Inputs dashboard for the quarterly review under Finance Earnings Prep governance: set Upcoming Earnings to Technology, AAPL, and QTD, set Trade Ideas to Flagship Long/Short and QTD, preserve Car Manufacturer Performance, and leave a Decision Inputs Governance Note recording what the skill identifies right after the estimate comparison.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -119,7 +119,9 @@
         "args": {
           "slug": "finance-earnings-prep"
         },
-        "optional": true
+        "graded_args": [
+          "slug"
+        ]
       },
       {
         "tool": "update_widget",
@@ -147,6 +149,18 @@
         "graded_args": [
           "data_args"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Decision Inputs Governance Note",
+          "data": "surprise drivers"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
       }
     ],
     "required_widgets": [
@@ -168,6 +182,15 @@
         }
       }
     ],
-    "max_turns": 7
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Decision Inputs Governance Note",
+        "data_contains": [
+          "surprise drivers"
+        ]
+      }
+    ],
+    "max_turns": 8
   }
 }

@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Retune SQL Query Widget on the open Crypto Display Controls dashboard to prompt SELECT * FROM DATA LIMIT 3, preserving the other views.",
+  "prompt": "Apply the quick-look sampling policy to SQL Query Widget on the open Crypto Display Controls dashboard - that policy means prompt SELECT * FROM DATA LIMIT 3 - and preserve the other views.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

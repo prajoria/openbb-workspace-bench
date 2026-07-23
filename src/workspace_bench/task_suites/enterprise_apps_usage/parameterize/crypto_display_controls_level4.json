@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level4",
   "category": "single-widget",
   "difficulty": "level4",
-  "prompt": "Guided by the Daloopa Inflection skill, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 -- growth-rate reversals on the open Crypto Display Controls dashboard, and preserve the other views. The governing concepts are growth-rate reversals.",
+  "prompt": "Guided by the Daloopa Inflection skill, set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3 on the open Crypto Display Controls dashboard, preserve the other views, and leave a Crypto-display Governance Note recording what the skill flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -132,11 +132,23 @@
         "args": {
           "widget_uuid": "seeded_crypto_display_controls_1",
           "data_args": {
-            "prompt": "SELECT * FROM DATA LIMIT 3 -- growth-rate reversals"
+            "prompt": "SELECT * FROM DATA LIMIT 3"
           }
         },
         "graded_args": [
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Crypto-display Governance Note",
+          "data": "growth-rate reversals"
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
         ]
       }
     ],
@@ -145,10 +157,19 @@
         "origin": "Getting Started",
         "widget_id": "omni_sql_widget",
         "data_args": {
-          "prompt": "SELECT * FROM DATA LIMIT 3 -- growth-rate reversals"
+          "prompt": "SELECT * FROM DATA LIMIT 3"
         }
       }
     ],
-    "max_turns": 6
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Crypto-display Governance Note",
+        "data_contains": [
+          "growth-rate reversals"
+        ]
+      }
+    ],
+    "max_turns": 7
   }
 }

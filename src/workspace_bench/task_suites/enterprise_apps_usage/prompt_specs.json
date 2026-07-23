@@ -32,6 +32,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -71,7 +72,7 @@
       "add_generative_widget {\"name\": \"Daloopa Tearsheet Workflow\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "410afe6a46a9424a64bf0ba6a868521a763fc1ea378a2d46b0793c5bc64f5e0e"
+    "spec_sha256": "4181f86d9a7960959feffce7ba24d2150d24c0690c9a29c9209b1c3a0111d3e2"
   },
   "cited_research_operations_level1": {
     "task_id": "cited_research_operations_level1",
@@ -106,6 +107,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -146,7 +148,7 @@
       "create_widget {\"widget_id\": \"daloopa_company_directory\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "700c423b9c2ad3c6fefb91dc38da126bbb2a5d0c4f86795ea46dd3cdd7c95c3c"
+    "spec_sha256": "338ffda77b573b8a459e4d85564037daff3313d18804d2d3909f4406c41c8564"
   },
   "cited_research_operations_level2": {
     "task_id": "cited_research_operations_level2",
@@ -185,6 +187,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -224,7 +227,7 @@
       "create_widget {\"widget_id\": \"daloopa_management_guidance\", \"data_args\": {\"ticker\": \"NVDA\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "7eea1cb6dccb33c252e3756b0e578403d5d8a6817adfdab1e87c6de21a9632c2"
+    "spec_sha256": "dc96db48a3dc318d3ced19e6e5ed2f9f0b539629d45e734c0493ef09cf66019b"
   },
   "cited_research_operations_level3": {
     "task_id": "cited_research_operations_level3",
@@ -271,6 +274,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -311,7 +315,7 @@
       "create_widget {\"widget_id\": \"daloopa_company_fundamentals\", \"data_args\": {\"ticker\": \"NVDA\", \"period\": \"2025Q4\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "858908a3f80dae5e321c4c3dc7a9b7a8146fbe5fbbe2d6486046fc1c5922cb46"
+    "spec_sha256": "4d02e510d17942d3a1fd506d94e3679d4a6947e3fd92bbd629aa856721a6e2f0"
   },
   "cited_research_operations_level4": {
     "task_id": "cited_research_operations_level4",
@@ -366,6 +370,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -408,7 +413,7 @@
       "add_generative_widget {\"name\": \"Citation Protocol\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "d6b1df6f5cca25699135e9363cd6796a3a99f8a9c1ec61eb37d76c6ab437d8f7"
+    "spec_sha256": "b285e9eac94aafc8fb8ea5ec1f3444fd4c1ea876ac2b509c56e82226519fd527"
   },
   "cited_research_operations_level5": {
     "task_id": "cited_research_operations_level5",
@@ -451,6 +456,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -493,7 +499,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "8ecc1f22f72025ba7924e898e85a447a42827e0c8ad84b1401959fbc1d834b20"
+    "spec_sha256": "0a503ca076d4aea6fb738dd2d1c27156bea891cfda4286d5654c7b2e42eee2d8"
   },
   "client_intake_controls_level0": {
     "task_id": "client_intake_controls_level0",
@@ -552,6 +558,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -590,7 +597,7 @@
       "update_widget {\"data_args\": {\"client_first_name\": \"Maya\", \"client_last_name\": \"Chen\", \"risk_profile\": \"Moderate\", \"add_record\": true}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "5a1e8b8775a4a51a1366627171403ef4c81d9b29c05f169cbdce63488563d43d"
+    "spec_sha256": "bb145b3d6ca8fe82efa74ec30c556cb475558debe31b51b66481ce27919a7235"
   },
   "client_intake_controls_level1": {
     "task_id": "client_intake_controls_level1",
@@ -633,6 +640,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -672,7 +680,7 @@
       "update_widget {\"data_args\": {\"client_first_name\": \"Maya\", \"client_last_name\": \"Chen\", \"risk_profile\": \"Moderate\", \"add_record\": true}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "9e1af3290bac870b38c60faa04b70093daa93f6fd5de447e605128b7eb0c888e"
+    "spec_sha256": "ebe49190ef01233658fa6f376e1b87038cedb2bdf478cda360f4587a74b074f7"
   },
   "client_intake_controls_level2": {
     "task_id": "client_intake_controls_level2",
@@ -683,28 +691,16 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
-        "text": "Balanced",
-        "why": "graded value (update_widget:data_args)"
-      },
-      {
         "text": "Entry Form",
         "why": "target display name (findability)"
       },
       {
-        "text": "Noah",
-        "why": "graded value (update_widget:data_args)"
-      },
-      {
-        "text": "Patel",
-        "why": "graded value (update_widget:data_args)"
-      },
-      {
-        "text": "True",
-        "why": "graded value (update_widget:data_args)"
-      },
-      {
         "text": "open Client Intake Controls dashboard",
         "why": "selected-dashboard phrase (asserted)"
+      },
+      {
+        "text": "the second-wave intake policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -715,6 +711,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -752,7 +749,7 @@
       "update_widget {\"data_args\": {\"client_first_name\": \"Noah\", \"client_last_name\": \"Patel\", \"risk_profile\": \"Balanced\", \"add_record\": true}}"
     ],
     "max_turns": 4,
-    "spec_sha256": "a093db294c992163cc457576e20f2e38a2d3126ea20492d8e6ca4232110bbe84"
+    "spec_sha256": "92d9320fc76c18cc8c81e52f4b9ae4a35917c76538963aacfa169a1503b8b075"
   },
   "client_intake_controls_level3": {
     "task_id": "client_intake_controls_level3",
@@ -803,6 +800,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -841,7 +839,7 @@
       "update_widget {\"data_args\": {\"name\": \"Intake Ready\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "cdd84bce64c39ddb31660e71aae24942f097a85e5e7ca1e1dac5c058565940aa"
+    "spec_sha256": "6b967664d0623d190a84e8f37866a73db54aa09e1a546d7418781a31290da02a"
   },
   "client_intake_controls_level4": {
     "task_id": "client_intake_controls_level4",
@@ -854,6 +852,10 @@
       {
         "text": "Chen",
         "why": "graded value (update_widget:data_args)"
+      },
+      {
+        "text": "Client-intake Governance Note",
+        "why": "graded value (add_generative_widget:name)"
       },
       {
         "text": "Financial Entry Form",
@@ -872,23 +874,23 @@
         "why": "graded value (update_widget:data_args)"
       },
       {
-        "text": "Widget Parameters resource (openbb://workspace/specs/widget-parameters)",
+        "text": "Widget Parameters resource",
         "why": "knowledge source (governance)"
+      },
+      {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
       },
       {
         "text": "open Client Intake Controls dashboard",
         "why": "selected-dashboard phrase (asserted)"
-      },
-      {
-        "text": "openbb://workspace/specs/widget-parameters",
-        "why": "graded value (read_workspace_resource:uri)"
       }
     ],
     "must_describe_never_print": [
       {
         "token": "form",
         "description": "the param kind it names between endpoint and button",
-        "source": "Widget Parameters resource (openbb://workspace/specs/widget-parameters)",
+        "source": "Widget Parameters resource",
         "source_key": "openbb://workspace/specs/widget-parameters"
       }
     ],
@@ -899,6 +901,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -935,10 +938,11 @@
     "flow": [
       "get_workspace_snapshot  (optional)",
       "read_workspace_resource {\"uri\": \"openbb://workspace/specs/widget-parameters\"}",
-      "update_widget {\"data_args\": {\"client_first_name\": \"Maya\", \"client_last_name\": \"Chen\", \"risk_profile\": \"Moderate\", \"add_record\": true}}"
+      "update_widget {\"data_args\": {\"client_first_name\": \"Maya\", \"client_last_name\": \"Chen\", \"risk_profile\": \"Moderate\", \"add_record\": true}}",
+      "add_generative_widget {\"name\": \"Client-intake Governance Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 6,
-    "spec_sha256": "900a88d62b6ebc5049d7bfb55b897d11afd7af6278ea105d17c6e77b18fd9c12"
+    "max_turns": 7,
+    "spec_sha256": "47e5c6f6de30eb1c7079b448e7768e86fea1a03f444d4ee0740f6f8eb9e7df72"
   },
   "client_intake_controls_level5": {
     "task_id": "client_intake_controls_level5",
@@ -973,7 +977,7 @@
         "why": "graded value (update_widget:data_args)"
       },
       {
-        "text": "Widget Parameters resource (openbb://workspace/specs/widget-parameters)",
+        "text": "Widget Parameters resource",
         "why": "policy phrase (declared grounding)"
       },
       {
@@ -989,10 +993,6 @@
         "why": "graded value (add_generative_widget:widget_type)"
       },
       {
-        "text": "openbb://workspace/specs/widget-parameters",
-        "why": "graded value (read_workspace_resource:uri)"
-      },
-      {
         "text": "widgets.json spec",
         "why": "policy phrase (declared grounding)"
       }
@@ -1001,7 +1001,7 @@
       {
         "token": "form",
         "description": "the param kind it names between endpoint and button",
-        "source": "Widget Parameters resource (openbb://workspace/specs/widget-parameters)",
+        "source": "Widget Parameters resource",
         "source_key": "openbb://workspace/specs/widget-parameters"
       }
     ],
@@ -1012,6 +1012,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1056,7 +1057,7 @@
       "add_generative_widget {\"name\": \"Client-intake Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "aafe03b3276b26b030388737917311417da84036c1c7868c70cb0fa0543c96d8"
+    "spec_sha256": "215102572a4512d48308bf749d6267e5ba6b7bc148d06fefbeedb005495fa56c"
   },
   "client_onboarding_flow_level0": {
     "task_id": "client_onboarding_flow_level0",
@@ -1083,6 +1084,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1121,7 +1123,7 @@
       "manage_dashboard {\"operation\": \"create\", \"name\": \"Rollout Client Onboarding\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "4244ff8fd45b2ff244538e0122f3b73f647a411f70da0cebe1015cf945c0302f"
+    "spec_sha256": "87c3b2d71cf449b1325c9d6cf3740fee73f13bb776cc5f9062462ff3606c0482"
   },
   "client_onboarding_flow_level1": {
     "task_id": "client_onboarding_flow_level1",
@@ -1156,6 +1158,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1195,7 +1198,7 @@
       "manage_navigation_bar {\"operation\": \"add_tabs\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "570beee3677148f9a0bb43cf4954c20ce57dcafb0f44efb67b772dad461c4890"
+    "spec_sha256": "ad436f0bfc30c52b71593cc807177e272ca97a9a4d2bc2c183ba3136fe980538"
   },
   "client_onboarding_flow_level2": {
     "task_id": "client_onboarding_flow_level2",
@@ -1214,8 +1217,8 @@
         "why": "graded value (manage_dashboard:operation)"
       },
       {
-        "text": "review",
-        "why": "graded value (navigate_workspace:tab_id)"
+        "text": "the intake flow policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -1226,6 +1229,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1265,7 +1269,7 @@
       "navigate_workspace {\"operation\": \"tab\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "0e88f045a590c13fee9337d1a7295f82ed679717ec762c41ebd433e3251c3abc"
+    "spec_sha256": "582405298d48a1aa9c344e3cb0cdbfa569f999b489e13a4cd8fbf3d2c3683ca0"
   },
   "client_onboarding_flow_level3": {
     "task_id": "client_onboarding_flow_level3",
@@ -1296,6 +1300,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1335,7 +1340,7 @@
       "manage_navigation_bar {\"operation\": \"rename_tabs\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "48508462ae335eb9fa18d08adc6501572f0aa947c03389a73770a53723a77801"
+    "spec_sha256": "9307843ec14d53d61da504ee06ab148bb1e8316ad77ae69a03e971abf856006f"
   },
   "client_onboarding_flow_level4": {
     "task_id": "client_onboarding_flow_level4",
@@ -1358,6 +1363,10 @@
         "why": "graded value (manage_navigation_bar:tabs)"
       },
       {
+        "text": "Onboarding Session Note",
+        "why": "graded value (add_generative_widget:name)"
+      },
+      {
         "text": "Rollout Client Onboarding",
         "why": "graded value (manage_dashboard:name)"
       },
@@ -1368,9 +1377,26 @@
       {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
+      },
+      {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "current-dashboard",
+        "description": "the first anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      },
+      {
+        "token": "current-tab",
+        "description": "the second anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -1378,6 +1404,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1413,12 +1440,13 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
-      "get_workspace_prompt {\"name\": \"workspace_session_context\"}  (optional)",
+      "get_workspace_prompt {\"name\": \"workspace_session_context\"}",
       "manage_dashboard {\"operation\": \"create\", \"name\": \"Rollout Client Onboarding\"}",
-      "manage_navigation_bar {\"operation\": \"create\"}"
+      "manage_navigation_bar {\"operation\": \"create\"}",
+      "add_generative_widget {\"name\": \"Onboarding Session Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "cc782106a1b784d9e61137e0c2f00996ddee0776441632baa3d117a2f3a61bbf"
+    "max_turns": 8,
+    "spec_sha256": "f8499c19807d163d7b7f4f50ee5f60532cd55824962b098a1e70e57b07b216d9"
   },
   "client_onboarding_flow_level5": {
     "task_id": "client_onboarding_flow_level5",
@@ -1488,6 +1516,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1532,7 +1561,7 @@
       "add_generative_widget {\"name\": \"Client Onboarding Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "b24ab8adce30b529356db0a09c9f4aa2d4e8e4154a036b4306740289884f77a3"
+    "spec_sha256": "216767274dba3c05303f2ac4bfbc61c9e72c4ccc3db986235b73bc57ef9859a6"
   },
   "closing_tape_lookup_level0": {
     "task_id": "closing_tape_lookup_level0",
@@ -1563,6 +1592,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1602,7 +1632,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"NVDA\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "b60c5b535a612e2d159d6035e0d5859f186ccba7e4c5d27103bdec958d6c2755"
+    "spec_sha256": "6c6edafe4c201cb72be50984821ef5c9ee5fa23a34e018f712f5935bd3e0f2eb"
   },
   "closing_tape_lookup_level1": {
     "task_id": "closing_tape_lookup_level1",
@@ -1629,6 +1659,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1669,7 +1700,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"NFLX\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "effa21123026a0105c1df42b0cb46555ddd1037a00dc1ec8feb96c43b53eacd3"
+    "spec_sha256": "dd749272882ac917b4638f166ce8b1ad038ee7605469d992eeb8a67a1a67199e"
   },
   "closing_tape_lookup_level2": {
     "task_id": "closing_tape_lookup_level2",
@@ -1700,6 +1731,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1739,7 +1771,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"TSLA\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "e1daab44ad2f667b6846092c53d5912bca1fcdad3af77afa1b6e87a996f86580"
+    "spec_sha256": "70fdbb740ae7fb079a5ba989fcdbeddb619aaf3c7455d4648b378fa24253666d"
   },
   "closing_tape_lookup_level3": {
     "task_id": "closing_tape_lookup_level3",
@@ -1770,6 +1802,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1808,7 +1841,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"MSFT\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "c7883820b6b114c5e5662b84055070d56e2ea8e7349f443aca8121e8a321e884"
+    "spec_sha256": "ef51bf9114c02ee6884f70837f0fd9d91969aa0d92f4506a264d4a4953df12bc"
   },
   "closing_tape_lookup_level4": {
     "task_id": "closing_tape_lookup_level4",
@@ -1839,6 +1872,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1879,7 +1913,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_stock_prices\", \"data_args\": {\"ticker\": \"AAPL\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "da524937e7bab63cd8b910de3f0626ff04b822a026b66a06d2dec9cbbfb67626"
+    "spec_sha256": "40cbc020451b69dcc0e938e63ce457f6a73ed6c24386b3dbac55180628f94003"
   },
   "closing_tape_lookup_level5": {
     "task_id": "closing_tape_lookup_level5",
@@ -1941,6 +1975,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -1985,7 +2020,7 @@
       "add_generative_widget {\"name\": \"Closing Tape Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "2602d4cb192268530c89d974b147033e90ec7c4cbb84f8a74d554e724e933f28"
+    "spec_sha256": "6330d99e4e7d427c282e0482f1706525b35957953dec60fdfcaf4c4ae0adc78a"
   },
   "committee_navigation_level0": {
     "task_id": "committee_navigation_level0",
@@ -2012,6 +2047,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2050,7 +2086,7 @@
       "manage_dashboard {\"operation\": \"create\", \"name\": \"Pilot Committee Review\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "2385d23e6f83b577afad8a0b286dbcc317c0bb047214cc560fd6d4ea1cbdf7e1"
+    "spec_sha256": "055523aee1adf2acd4c07c9990e05f3f7b9b64f2f7bcd264364c632cc1e8fa57"
   },
   "committee_navigation_level1": {
     "task_id": "committee_navigation_level1",
@@ -2085,6 +2121,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2124,7 +2161,7 @@
       "manage_navigation_bar {\"operation\": \"add_tabs\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "e6bb28224d9a3c46c047aee03fa2c9d0f694cac73f75a8e6bbdbb0f1730e20be"
+    "spec_sha256": "f020ae29c46c23d04db5078755031247fbcea5c587fc388c29ed7b9741d7ec2e"
   },
   "committee_navigation_level2": {
     "task_id": "committee_navigation_level2",
@@ -2143,8 +2180,8 @@
         "why": "graded value (manage_dashboard:operation)"
       },
       {
-        "text": "evidence",
-        "why": "graded value (navigate_workspace:tab_id)"
+        "text": "the committee session policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -2155,6 +2192,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2194,7 +2232,7 @@
       "navigate_workspace {\"operation\": \"tab\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "220400a70202940dcf68265bfe6a53cb3acca798fb4a396856f5d962a995f759"
+    "spec_sha256": "da9250cfda3f4ef6c31097b072ab9a8af051c3a77166a26210d7b17ce425ca7c"
   },
   "committee_navigation_level3": {
     "task_id": "committee_navigation_level3",
@@ -2225,6 +2263,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2264,7 +2303,7 @@
       "manage_navigation_bar {\"operation\": \"rename_tabs\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "5c27047877a93cb14703a6a7a330453977c319d3d42c2eef1f03e31923f013f6"
+    "spec_sha256": "a4d6cf01f31dd142cb5cd4cba2c20bc27b31c88a2a0bbf094894ecc7f33b3382"
   },
   "committee_navigation_level4": {
     "task_id": "committee_navigation_level4",
@@ -2274,6 +2313,10 @@
     "level_directive": "governed: name the knowledge source and describe - never print - each governed token via its registered description",
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
+      {
+        "text": "Committee Session Note",
+        "why": "graded value (add_generative_widget:name)"
+      },
       {
         "text": "Decision Agenda",
         "why": "graded value (manage_navigation_bar:tabs)"
@@ -2297,9 +2340,26 @@
       {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
+      },
+      {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "current-dashboard",
+        "description": "the first anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      },
+      {
+        "token": "current-tab",
+        "description": "the second anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -2307,6 +2367,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2342,12 +2403,13 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
-      "get_workspace_prompt {\"name\": \"workspace_session_context\"}  (optional)",
+      "get_workspace_prompt {\"name\": \"workspace_session_context\"}",
       "manage_dashboard {\"operation\": \"create\", \"name\": \"Pilot Committee Review\"}",
-      "manage_navigation_bar {\"operation\": \"create\"}"
+      "manage_navigation_bar {\"operation\": \"create\"}",
+      "add_generative_widget {\"name\": \"Committee Session Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "cba30d5a2947218670285b420ca688ef0fad8b70b85c59c8fc8ce2c9c0c554d0"
+    "max_turns": 8,
+    "spec_sha256": "2178aa905531df3e0403cc2cb63c23e37f51df760e5dfef2891d8e03e3a51013"
   },
   "committee_navigation_level5": {
     "task_id": "committee_navigation_level5",
@@ -2417,6 +2479,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2461,7 +2524,7 @@
       "add_generative_widget {\"name\": \"Committee Navigation Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "a6e4a31083f8e4887e7626b09d4af6af327a4dd3616d3cdb56935923fa508a54"
+    "spec_sha256": "7904af6ac711e1d23512773828f6c07b9f6da2d431c1f6b34623ddf2bffb1735"
   },
   "compliance_alert_review_level0": {
     "task_id": "compliance_alert_review_level0",
@@ -2488,6 +2551,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2527,7 +2591,7 @@
       "create_widget {\"widget_id\": \"compliance_surveillance_hub_alerts_open_alert_metrics\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "d82612810a93e80822fa8d72a8138da8f645722c31d2bb2adf358d459cc03c36"
+    "spec_sha256": "48cb4c3c3d69608fb5bf0554aee02d12f1aed31ef2ffd6e38784d305418b1f61"
   },
   "compliance_alert_review_level1": {
     "task_id": "compliance_alert_review_level1",
@@ -2554,6 +2618,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2594,7 +2659,7 @@
       "create_widget {\"widget_id\": \"compliance_surveillance_hub_personal_trading_policy_breaches\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "1a77d0ac9e9c2fc0a56f14fb8f01eb2b07997512379755eb3ec645ea2c489221"
+    "spec_sha256": "705cc90d73f24803d3dfd2b250a8db54497d8504c1c8001cf8f91b6a927b139c"
   },
   "compliance_alert_review_level2": {
     "task_id": "compliance_alert_review_level2",
@@ -2625,6 +2690,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2664,7 +2730,7 @@
       "create_widget {\"widget_id\": \"compliance_surveillance_hub_personal_trading_policy_breaches\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "c13f3f0910abab4d39617943aa411255babb32199acecf722727958c21058c1c"
+    "spec_sha256": "ff58b2f2bc49b671c4b0f56bd1e739664a470bc6a8b05162904c8c6d4362d291"
   },
   "compliance_alert_review_level3": {
     "task_id": "compliance_alert_review_level3",
@@ -2699,6 +2765,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2739,7 +2806,7 @@
       "create_widget {\"widget_id\": \"markdown_widget_with_number_input\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "765250b72b19799f2565af427f47bc5a0b9c280a736b2e3de8d7e87b407f7aa8"
+    "spec_sha256": "1236b2c5c261e904ce6cee48a7cb39b689dcf9758e50d915b2965a223c6199be"
   },
   "compliance_alert_review_level4": {
     "task_id": "compliance_alert_review_level4",
@@ -2793,6 +2860,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2836,7 +2904,7 @@
       "add_generative_widget {\"name\": \"Compliance-alert Governance\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "fe018f899d5adc452334e3ef2d52bd5c1010fb4e560e3c46b493e9cdae0bb43d"
+    "spec_sha256": "d28e4b60046dadcc4c3aba88767e436666f71e719fa01c7bce2bd81fc920e42d"
   },
   "compliance_alert_review_level5": {
     "task_id": "compliance_alert_review_level5",
@@ -2914,6 +2982,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -2961,7 +3030,7 @@
       "add_generative_widget {\"name\": \"Compliance-alert Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "94f3823a0cbf26e81e6daf738cdd6b351d20b64e9f394bf77faa8e64faec7583"
+    "spec_sha256": "e6124d7e93a76df6fa68df6ab3480ef2fcccdb1a098f67d51420cb2a10a319fd"
   },
   "comps_governance_level0": {
     "task_id": "comps_governance_level0",
@@ -2992,6 +3061,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3031,7 +3101,7 @@
       "add_generative_widget {\"name\": \"Comps-governance Starter Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "0f602cd7a05eff9bd2481dcfc20f93ed6dff36cfc63e8259d5f3406f3f1af74b"
+    "spec_sha256": "13bffc26059dfbe43b68aac65d0aab287bd51ae54490e3da6b4dbb74a7186fbe"
   },
   "comps_governance_level1": {
     "task_id": "comps_governance_level1",
@@ -3062,6 +3132,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3101,7 +3172,7 @@
       "add_generative_widget {\"name\": \"Comps-governance Discovery Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "ad8a436a66074ae7ea83d74ef0c864ee4c1470a5d849c0d8aa4842219356ad5f"
+    "spec_sha256": "8a4a46828984b0403080a88b05258b8745f01bd6e5c1107d01765200ea9727e6"
   },
   "comps_governance_level2": {
     "task_id": "comps_governance_level2",
@@ -3132,6 +3203,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3171,7 +3243,7 @@
       "create_widget {\"widget_id\": \"plotly_chart_with_theme_and_toolbar_using_config_file\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "9c26756f1cc3710d77a7ccb8b2263eaa0c872254304deab29713be15392970c3"
+    "spec_sha256": "3f9b04a6db1335121fd1cab1fc1903f3b0263afb4c2f7c5b4f2a4e25f1eb7b25"
   },
   "comps_governance_level3": {
     "task_id": "comps_governance_level3",
@@ -3210,6 +3282,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3251,7 +3324,7 @@
       "create_widget {\"widget_id\": \"chains_plotly\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "aa7e1c1a05a75827c21577c3be23f44fbfb198dfe9ea4de458ff00fee7d89e56"
+    "spec_sha256": "68fed723ca6fd19135713222d3dafdd7c8c2cc80f5e11382567c69b45988dc9f"
   },
   "comps_governance_level4": {
     "task_id": "comps_governance_level4",
@@ -3305,6 +3378,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3348,7 +3422,7 @@
       "add_generative_widget {\"name\": \"Comps-governance Governed Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "c2425f8a0a82b0fcd9f49a164af740a87446e6d81b38ebedbe6720ec02285a5e"
+    "spec_sha256": "e1e0a2bc351c997fe2b5eb83f010e48da7c3b7d6ee08c9751f2b7fcd6d11d514"
   },
   "comps_governance_level5": {
     "task_id": "comps_governance_level5",
@@ -3399,6 +3473,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3442,7 +3517,7 @@
       "add_generative_widget {\"name\": \"Comps-governance Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "e0d807959b7bdd70327b0f212be4bcc275037bb0a0df511041302c824db9a1ae"
+    "spec_sha256": "311dc2d225d447b9b3281e85223939776e51e304776b4cde3af4807d5103ccf5"
   },
   "consensus_exception_handoff_level0": {
     "task_id": "consensus_exception_handoff_level0",
@@ -3493,6 +3568,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3533,7 +3609,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Direct Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "0228899a2b4da13f1cc28c5931ab6390dc2deb9d17a4e4e868ecbb84ad872633"
+    "spec_sha256": "7ea16366cef0b9f06020a39b715057bf329c1b822ca57d9758faf9ecede94818"
   },
   "consensus_exception_handoff_level1": {
     "task_id": "consensus_exception_handoff_level1",
@@ -3580,6 +3656,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3620,7 +3697,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Discovered Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "e8a3500b255e6187b7c4e99f51ce20f15984855eef95758a0c232b62dbc5fd5a"
+    "spec_sha256": "3b84089161986d509af9d5f172fe56b7572085a111c1816674099666925812a1"
   },
   "consensus_exception_handoff_level2": {
     "task_id": "consensus_exception_handoff_level2",
@@ -3667,6 +3744,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3706,7 +3784,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Analyst Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "369407cdb5a326e533005a26c194ce4bbcfbb7fbcb716f9c5591206d111a83ae"
+    "spec_sha256": "d2fb589a73fad249e64e9511c78a3f01418b349b16b1fe8b9d94185f91159199"
   },
   "consensus_exception_handoff_level3": {
     "task_id": "consensus_exception_handoff_level3",
@@ -3753,6 +3831,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3792,7 +3871,7 @@
       "add_generative_widget {\"name\": \"Consensus-exception Desk Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "75aeb7d686c53ac2c89fcdd7d8c5e3be0d0ed9ecbf422f5ed4c5616e5972e3e9"
+    "spec_sha256": "b6ce55d9bb998e278a5dc39ceb13f247d81ad35a1eead7028e49afb701d2b503"
   },
   "consensus_exception_handoff_level4": {
     "task_id": "consensus_exception_handoff_level4",
@@ -3843,6 +3922,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -3885,7 +3965,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 9,
-    "spec_sha256": "3afeb64220c4b35b641990eeda7970f60ae4e76c2105915a1a8dc6616bfe5fa2"
+    "spec_sha256": "5238e2a5fabea78e9fde33685863350293726dccecdb6a8b33c6cea281ef4935"
   },
   "consensus_exception_handoff_level5": {
     "task_id": "consensus_exception_handoff_level5",
@@ -3959,6 +4039,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4005,7 +4086,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 13,
-    "spec_sha256": "4cf1dff019379be8fce4e8462106267e1d38c6ec1e43f17b72344107aed32e5f"
+    "spec_sha256": "92dd9326d6831d845490d83e5941e7496c1fba7dcd2bfeedaf15ea4b2fb02480"
   },
   "crypto_display_controls_level0": {
     "task_id": "crypto_display_controls_level0",
@@ -4056,6 +4137,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4094,7 +4176,7 @@
       "update_widget {\"data_args\": {\"symbol\": \"ethusdt\", \"interval\": \"1m\", \"exchange\": \"binancef\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "5e423ca631cc68204750331ee3af3ddcd6c2657c8a6ccc1e5425070b62a2df91"
+    "spec_sha256": "3887f19ed866345abc0586df31961f38c51b67da74514667f72a3d2c8337f864"
   },
   "crypto_display_controls_level1": {
     "task_id": "crypto_display_controls_level1",
@@ -4133,6 +4215,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4172,7 +4255,7 @@
       "update_widget {\"data_args\": {\"symbol\": \"ethusdt\", \"interval\": \"1m\", \"exchange\": \"binancef\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "413205722d83489dec921e0dbf75c8b1e35e1e93fe550c816fa946ad577dcd09"
+    "spec_sha256": "911582fe8209c3d4c2e5d2777f65f69394efe69e28084f8620b84efe90b8f774"
   },
   "crypto_display_controls_level2": {
     "task_id": "crypto_display_controls_level2",
@@ -4183,16 +4266,16 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
-        "text": "SELECT * FROM DATA LIMIT 3",
-        "why": "graded value (update_widget:data_args)"
-      },
-      {
         "text": "SQL Query Widget",
         "why": "target display name (findability)"
       },
       {
         "text": "open Crypto Display Controls dashboard",
         "why": "selected-dashboard phrase (asserted)"
+      },
+      {
+        "text": "the quick-look sampling policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -4203,6 +4286,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4240,7 +4324,7 @@
       "update_widget {\"data_args\": {\"prompt\": \"SELECT * FROM DATA LIMIT 3\"}}"
     ],
     "max_turns": 4,
-    "spec_sha256": "4893b5e7fa589aceb357904686a7751cb95f5acdceebc7cddc3399be315c4673"
+    "spec_sha256": "c9d6a48de072e0adc31754c346e6783739636001efad9845449b8922793338e1"
   },
   "crypto_display_controls_level3": {
     "task_id": "crypto_display_controls_level3",
@@ -4291,6 +4375,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4329,7 +4414,7 @@
       "update_widget {\"data_args\": {\"datePicker1\": \"$currentDate-1d\", \"textBox1\": \"Ready\", \"TrueFalse\": true, \"daysPicker1\": \"1\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "a7c6e811a7d59329b15812e3af1f7fa469094ff240e49b3ca3215d98dbd1d470"
+    "spec_sha256": "64ba15569495d87362ba6aa0795372ed1becb89e9bd434c2aef5d25dd6e340ca"
   },
   "crypto_display_controls_level4": {
     "task_id": "crypto_display_controls_level4",
@@ -4340,16 +4425,24 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Crypto-display Governance Note",
+        "why": "graded value (add_generative_widget:name)"
+      },
+      {
         "text": "Daloopa Inflection skill",
         "why": "knowledge source (governance)"
       },
       {
-        "text": "SELECT * FROM DATA LIMIT 3 -- growth-rate reversals",
+        "text": "SELECT * FROM DATA LIMIT 3",
         "why": "graded value (update_widget:data_args)"
       },
       {
         "text": "SQL Query Widget",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
       },
       {
         "text": "open Crypto Display Controls dashboard",
@@ -4371,6 +4464,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4407,10 +4501,11 @@
     "flow": [
       "get_workspace_snapshot  (optional)",
       "get_skill_content {\"slug\": \"daloopa-inflection\"}",
-      "update_widget {\"data_args\": {\"prompt\": \"SELECT * FROM DATA LIMIT 3 -- growth-rate reversals\"}}"
+      "update_widget {\"data_args\": {\"prompt\": \"SELECT * FROM DATA LIMIT 3\"}}",
+      "add_generative_widget {\"name\": \"Crypto-display Governance Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 6,
-    "spec_sha256": "ca0df84efe8c8de4f7ed8a48a26d1286d2ce99bdd1ca96bf1eac7d389b9d394f"
+    "max_turns": 7,
+    "spec_sha256": "21e69983a5d8c4a91eb378e928857098c75bfdb75a04461342ec15a029cf0568"
   },
   "crypto_display_controls_level5": {
     "task_id": "crypto_display_controls_level5",
@@ -4480,6 +4575,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4524,7 +4620,7 @@
       "add_generative_widget {\"name\": \"Crypto-display Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "99bf437d866d6a1ba7f22e285dafc9f16d4ca85b2846e7761228da8d5103a843"
+    "spec_sha256": "cf72b8b508019cb56212f81bbac20565769cd178f424570b10d3b8c31ca9105b"
   },
   "crypto_document_controls_level0": {
     "task_id": "crypto_document_controls_level0",
@@ -4567,6 +4663,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4605,7 +4702,7 @@
       "update_widget {\"widget_id\": \"whitepapers\", \"data_args\": {\"filenames\": \"ethereum.pdf\", \"category\": \"l1\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "9d6c9c6b671cc9adc01b73420b81a34163d6c63d1237662c738323f269d917a4"
+    "spec_sha256": "e29706db6c43a29db1181348c45c64a1bad4f2f70bfb0a02328b45c4598e4136"
   },
   "crypto_document_controls_level1": {
     "task_id": "crypto_document_controls_level1",
@@ -4640,6 +4737,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4679,7 +4777,7 @@
       "update_widget {\"widget_id\": \"whitepapers\", \"data_args\": {\"filenames\": \"solana.pdf\", \"category\": \"l1\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "fd2ba54a3bc1674e455435ed81cd93fb5fa38927ed612a87ce75db4c91a45042"
+    "spec_sha256": "630bdc6daa260fbf291e5e843aa374f76d16fe80a3043e6aaffb4967a1de93b5"
   },
   "crypto_document_controls_level2": {
     "task_id": "crypto_document_controls_level2",
@@ -4710,6 +4808,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4750,7 +4849,7 @@
       "update_widget {\"widget_id\": \"whitepapers\", \"data_args\": {\"filenames\": \"solana.pdf\", \"category\": \"defi\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "30674822e3ae85e5a0e831762bda36ad0bc75a03578f58d4c2bc8fb1bf51f3fa"
+    "spec_sha256": "24ed54514a10f0db62e8ef86db76d35f57dbb90590171748a9d2e8de0a608ef5"
   },
   "crypto_document_controls_level3": {
     "task_id": "crypto_document_controls_level3",
@@ -4789,6 +4888,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4827,7 +4927,7 @@
       "update_widget {\"widget_id\": \"whitepapers\", \"data_args\": {\"filenames\": \"ethereum.pdf\", \"category\": \"l1\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "5faddc4f8fb349879913f0f177a6e5c9b1ec258a94c11b583a77470d03f3b8e6"
+    "spec_sha256": "058f3687099f762037e02af6d756ed008724abeb2dd804434e5817620aea85d8"
   },
   "crypto_document_controls_level4": {
     "task_id": "crypto_document_controls_level4",
@@ -4844,6 +4944,10 @@
       {
         "text": "CoinDesk News",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "Document Session Note",
+        "why": "graded value (add_generative_widget:name)"
       },
       {
         "text": "ES",
@@ -4870,11 +4974,28 @@
         "why": "graded value (update_widget:data_args)"
       },
       {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
+      },
+      {
         "text": "open Crypto Document Controls dashboard",
         "why": "selected-dashboard phrase (asserted)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "current-dashboard",
+        "description": "the first anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      },
+      {
+        "token": "current-tab",
+        "description": "the second anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -4882,6 +5003,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -4917,12 +5039,13 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
-      "get_workspace_prompt {\"name\": \"workspace_session_context\"}  (optional)",
+      "get_workspace_prompt {\"name\": \"workspace_session_context\"}",
       "update_widget {\"widget_id\": \"whitepapers\", \"data_args\": {\"filenames\": \"ethereum.pdf\", \"category\": \"l1\"}}",
-      "update_widget {\"widget_id\": \"coindesk_news\", \"data_args\": {\"limit\": 6, \"lang\": \"ES\"}}"
+      "update_widget {\"widget_id\": \"coindesk_news\", \"data_args\": {\"limit\": 6, \"lang\": \"ES\"}}",
+      "add_generative_widget {\"name\": \"Document Session Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "34f8874f25a0acb1196471b1fd46b21db62ec6174eb6bf39ac65856c0d54ad56"
+    "max_turns": 8,
+    "spec_sha256": "b6130c4d31d7bf52bb7c141e6ea8d7a543b6b1895101bef34c9911ef2fe28a80"
   },
   "crypto_document_controls_level5": {
     "task_id": "crypto_document_controls_level5",
@@ -4992,6 +5115,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5036,7 +5160,7 @@
       "add_generative_widget {\"name\": \"Document-controls Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "c6f9207695a8f665401778768db2dc40739ae80841906e5b34997fd0a6b74970"
+    "spec_sha256": "1f485e39717be364a701b0aa7294bbc7cd18bd0ea51d3b517522a43634326e67"
   },
   "decision_briefing_level0": {
     "task_id": "decision_briefing_level0",
@@ -5083,6 +5207,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5122,7 +5247,7 @@
       "create_widget {\"widget_id\": \"portfolio_command_center_actions_trade_ideas\", \"data_args\": {\"fund\": \"Flagship Long/Short\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "5363a060ac2f597b0de01843d00c418f326898d79ef4b09c4320893703c1fa88"
+    "spec_sha256": "6538ab483fa418511edc46a11e6e0a538f390049a30dc3ec7168397091a67540"
   },
   "decision_briefing_level1": {
     "task_id": "decision_briefing_level1",
@@ -5161,6 +5286,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5201,7 +5327,7 @@
       "create_widget {\"widget_id\": \"portfolio_command_center_actions_trade_ideas\", \"data_args\": {\"fund\": \"Flagship Long/Short\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "615e55eeab1e57c2500358081cc87a35386964773010e07c45507c7b8bff38a0"
+    "spec_sha256": "acdc3b203bf7984224dce094acdf3b20d0a8cf74dab74b00d9d7ebcba46d30c3"
   },
   "decision_briefing_level2": {
     "task_id": "decision_briefing_level2",
@@ -5240,6 +5366,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5278,7 +5405,7 @@
       "create_widget {\"widget_id\": \"portfolio_command_center_actions_trade_ideas\", \"data_args\": {\"fund\": \"Flagship Long/Short\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "dd7b7d616ea14160d60341246db5f21469d4bb4d9ffa15ea3166bedbb04dda07"
+    "spec_sha256": "7d6e914ab2fd48b121a526b7dc55f2e44e27f45b44e9e56a9fb9cbc9c847a982"
   },
   "decision_briefing_level3": {
     "task_id": "decision_briefing_level3",
@@ -5345,6 +5472,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5387,7 +5515,7 @@
       "update_widget_layout {\"widget_id\": \"company_performance\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "af54b270f0d86520ec2088c6ddf1e14eb22764b0e048d71da003d968bb79c9ac"
+    "spec_sha256": "9aff77e0084a270d0df8f3d3c521f36d22c00528b5abb814e3f555730558804f"
   },
   "decision_briefing_level4": {
     "task_id": "decision_briefing_level4",
@@ -5458,6 +5586,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5502,7 +5631,7 @@
       "update_widget_layout {\"widget_id\": \"company_performance\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "dc66ff63be6ae3dc0eedee62383ddf5ce1e0f923534a5956799095c63228458d"
+    "spec_sha256": "1721e83e4419f54b7a242e2eeb418c753c29790c2d613e212fd66f8ccc9ea349"
   },
   "decision_briefing_level5": {
     "task_id": "decision_briefing_level5",
@@ -5576,6 +5705,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5625,7 +5755,7 @@
       "add_generative_widget {\"name\": \"Decision Briefing Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 16,
-    "spec_sha256": "84eac5a76898d1b42cbb8b0002da96bf72662b2a9d764b405cca4d763778fb6b"
+    "spec_sha256": "f7c575891d07c9c7ad6f0559f6a9fb9564832629fc1ed46de28543fbdf0c0be4"
   },
   "due_diligence_media_room_level0": {
     "task_id": "due_diligence_media_room_level0",
@@ -5652,6 +5782,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5690,7 +5821,7 @@
       "manage_dashboard {\"operation\": \"create\", \"name\": \"Due Diligence Media Room\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "285e7fba4a893227ca8a070cd070577b9c9ed190cb48e56135174b46203ec334"
+    "spec_sha256": "940933856ced0914108205b03c8855f17ec3bb1c9003b517447066369102b99b"
   },
   "due_diligence_media_room_level1": {
     "task_id": "due_diligence_media_room_level1",
@@ -5725,6 +5856,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5764,7 +5896,7 @@
       "manage_navigation_bar {\"operation\": \"add_tabs\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "c4c7b9d74ddf9352336cb58e88ba4536d933b7c231ff58e69be58c7b355e1f11"
+    "spec_sha256": "40f78516bc455096eb3337a2b2b2899a6c43b09488bbdb8e396ca0920d131d2a"
   },
   "due_diligence_media_room_level2": {
     "task_id": "due_diligence_media_room_level2",
@@ -5783,20 +5915,16 @@
         "why": "graded value (create_widget:origin)"
       },
       {
-        "text": "Overview",
-        "why": "graded value (manage_navigation_bar:tabs)"
-      },
-      {
-        "text": "Review",
-        "why": "graded value (manage_navigation_bar:tabs)"
-      },
-      {
         "text": "Video Library with Transcript",
         "why": "target display name (findability)"
       },
       {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
+      },
+      {
+        "text": "the media room layout policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -5807,6 +5935,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5847,7 +5976,7 @@
       "create_widget {\"widget_id\": \"get_video_with_transcript\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "3fc6d96fadc32741be50f89e2a0cd21e33e5e256d23209f61ccfcdfa530ab7b0"
+    "spec_sha256": "fde2e69ab0c04b514b30e4fe2a5ea095501b737565f38b7516195c6782614062"
   },
   "due_diligence_media_room_level3": {
     "task_id": "due_diligence_media_room_level3",
@@ -5858,32 +5987,20 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
-        "text": "Due Diligence Media Room",
-        "why": "graded value (manage_dashboard:name)"
-      },
-      {
         "text": "Getting Started",
         "why": "graded value (create_widget:origin)"
-      },
-      {
-        "text": "Overview",
-        "why": "graded value (manage_navigation_bar:tabs)"
       },
       {
         "text": "PDF Widget with URL",
         "why": "target display name (findability)"
       },
       {
-        "text": "Review",
-        "why": "graded value (manage_navigation_bar:tabs)"
-      },
-      {
         "text": "Video Library with Transcript",
         "why": "target display name (findability)"
       },
       {
-        "text": "create",
-        "why": "graded value (manage_dashboard:operation)"
+        "text": "open Due Diligence Media Room dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -5894,6 +6011,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -5928,14 +6046,13 @@
     "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
     "word_cap": 110,
     "flow": [
-      "manage_dashboard {\"operation\": \"create\", \"name\": \"Due Diligence Media Room\"}",
-      "manage_navigation_bar {\"operation\": \"add_tabs\"}",
+      "get_workspace_snapshot  (optional)",
       "list_available_widgets  (optional)",
       "create_widget {\"widget_id\": \"get_video_with_transcript\"}",
       "create_widget {\"widget_id\": \"pdf_widget_url\"}"
     ],
-    "max_turns": 8,
-    "spec_sha256": "ecd735c4bb7a43e5d2436f5f1e3ed7ecef81abc69dd6db9495d03d0d46fb966d"
+    "max_turns": 7,
+    "spec_sha256": "d51016a8104dd7680f2278afac545088375ba0a1c15cc77e41c820acbb20d8a3"
   },
   "due_diligence_media_room_level4": {
     "task_id": "due_diligence_media_room_level4",
@@ -5993,6 +6110,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6037,7 +6155,7 @@
       "create_widget {\"widget_id\": \"url_pdf\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "82096635c46d0a9b2f93f27b29742745d708ab7fcdd178dc3c7508e4c776b047"
+    "spec_sha256": "daf9d850dc4fd260d667fc21bbfeb04f6d4d4c2b222957801958b4ada49b81c6"
   },
   "due_diligence_media_room_level5": {
     "task_id": "due_diligence_media_room_level5",
@@ -6115,6 +6233,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6162,7 +6281,7 @@
       "add_generative_widget {\"name\": \"Media-room Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "56f8a7ab75e2613462a3f7260e7519222a1f067d4b2667f6333f5f6862c93700"
+    "spec_sha256": "daf3927559116fdb78583ccc0a50bea0896fbb58bc99ad13793db31c31314278"
   },
   "earnings_handoff_level0": {
     "task_id": "earnings_handoff_level0",
@@ -6221,6 +6340,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6260,7 +6380,7 @@
       "add_generative_widget {\"name\": \"LLY Earnings Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "2cb4210b87527a408a48ddda6edd054d5e0247a92fb30287c8f62fd2119b047b"
+    "spec_sha256": "633749113b2904298ad0da79aac718061b679ce7850fbec1e237c8bd828b6550"
   },
   "earnings_handoff_level1": {
     "task_id": "earnings_handoff_level1",
@@ -6307,6 +6427,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6348,7 +6469,7 @@
       "add_generative_widget {\"name\": \"Apple Earnings Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "54978af1dd3d6617e0ee0fc369fe07ad702a84fac228321d82f9edc06e5c25ce"
+    "spec_sha256": "81c4785fe8235d0fe454023113a87477816205341f11ee1eaa0ae8f1af02576b"
   },
   "earnings_handoff_level2": {
     "task_id": "earnings_handoff_level2",
@@ -6399,6 +6520,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6437,7 +6559,7 @@
       "add_generative_widget {\"name\": \"Microsoft Earnings Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "2f3bf8831654316e5c61094366e7e36336bd504ce76d51caa6152acf1bbca12f"
+    "spec_sha256": "99b5fa4d2e60faf98b2b0e87549ddc84992fdf54d2380492622e1929868e05f2"
   },
   "earnings_handoff_level3": {
     "task_id": "earnings_handoff_level3",
@@ -6488,6 +6610,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6527,7 +6650,7 @@
       "add_generative_widget {\"name\": \"Governed Apple Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "e52e925a7755475c2a3abbb0288094236304cf78e1c2b869d75dad5280233be3"
+    "spec_sha256": "caea3c8e2b0beab065b236f02f1d0b940bd4ed89efa92bdd9e4dbf2847375326"
   },
   "earnings_handoff_level4": {
     "task_id": "earnings_handoff_level4",
@@ -6582,6 +6705,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6623,7 +6747,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 8,
-    "spec_sha256": "eb6dfdadfc593b3ec3a7d2bcf7b21ff36228d432e47acb6c81ce7431cdf1d80e"
+    "spec_sha256": "21e127d5830cff055b6a9c306d56ee48971b7dd5688cce27b453428ee01126ae"
   },
   "earnings_handoff_level5": {
     "task_id": "earnings_handoff_level5",
@@ -6685,6 +6809,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6729,7 +6854,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 11,
-    "spec_sha256": "68fba1b04237e0c624e1289d11aae85985eff573b9b19b43e95798a1ced1637c"
+    "spec_sha256": "b4e3aa8748c58a8d98f30a105ff4306981f9120d623d7c6c20e99509f83cb631"
   },
   "earnings_lookup_level0": {
     "task_id": "earnings_lookup_level0",
@@ -6768,6 +6893,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6806,7 +6932,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Healthcare\", \"ticker\": \"LLY\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "95a7dd3a929b99a5a437cdee5afa8a9581e6b7c01dd01389b27c15413a25d297"
+    "spec_sha256": "bfe787afc441390a232b69817bdd8bf014e76495cdf857161ade29fd0333b191"
   },
   "earnings_lookup_level1": {
     "task_id": "earnings_lookup_level1",
@@ -6833,6 +6959,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6873,7 +7000,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"AAPL\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "e7e1741b3fcc1966e0cbc77975e220db074752557a836adbc6c38c6e3efe4986"
+    "spec_sha256": "5714e5590d94dc2d07bd80fa35a65f4dd178f3027cf564f2784196393c63ae9d"
   },
   "earnings_lookup_level2": {
     "task_id": "earnings_lookup_level2",
@@ -6904,6 +7031,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -6942,7 +7070,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"MSFT\", \"period\": \"MTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "210bff143383609dfc02c779bd17d0c72e227c0ac5ef627e836a4d13463622d3"
+    "spec_sha256": "675a5a4fe3994e7e88689e93927fcb11d8a4e950aa938f3749516d461ecf4cdf"
   },
   "earnings_lookup_level3": {
     "task_id": "earnings_lookup_level3",
@@ -6973,6 +7101,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7011,7 +7140,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Healthcare\", \"ticker\": \"LLY\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "38720b57637f1ba1253a6e9792689498afa13a01f2d26120c9cb3157e566c288"
+    "spec_sha256": "d6ea0190529f9b6282eb50e254319fcaf33780d50df3e14d523f02b602727ab3"
   },
   "earnings_lookup_level4": {
     "task_id": "earnings_lookup_level4",
@@ -7042,6 +7171,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7081,7 +7211,7 @@
       "get_widget_data {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"AAPL\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "85b01446215d879953828b029ae9e17df284c5245f933b47244a6530296dae26"
+    "spec_sha256": "fc1b8b9e210fe6b8b94e35b0842042fd9a5cab896e8521b6a4e8a4581a29c69e"
   },
   "earnings_lookup_level5": {
     "task_id": "earnings_lookup_level5",
@@ -7143,6 +7273,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7187,7 +7318,7 @@
       "add_generative_widget {\"name\": \"Earnings Lookup Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "943ae5ca1654e68b6a15a8324b62f6315e6b3e099128278297842d57490bcad4"
+    "spec_sha256": "58cdedd9489cda285f79d188b8a6b5b03e2cb1a04e5225dedb25bbc3e0a1eb97"
   },
   "execution_quality_review_level0": {
     "task_id": "execution_quality_review_level0",
@@ -7214,6 +7345,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7253,7 +7385,7 @@
       "create_widget {\"widget_id\": \"execution_desk_blotter_live_orders\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "42c780710b68257c6e036f0a2b937641e9d55dcdb17f634c08f5fb6f29e71339"
+    "spec_sha256": "62e33d942d125e491b35920e9abf62104e2112d516332befc40cd479e8cef4d0"
   },
   "execution_quality_review_level1": {
     "task_id": "execution_quality_review_level1",
@@ -7280,6 +7412,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7320,7 +7453,7 @@
       "create_widget {\"widget_id\": \"execution_desk_fills_broker_scorecard\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "188aa66781faeec7a7193007f0b00c429a8c99f68ff4e49e3458a281335556fe"
+    "spec_sha256": "01dd3499b80a28d9328780dba21ef73d9e92ec54e9e0d3adc64b3766d27ae670"
   },
   "execution_quality_review_level2": {
     "task_id": "execution_quality_review_level2",
@@ -7351,6 +7484,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7390,7 +7524,7 @@
       "create_widget {\"widget_id\": \"execution_desk_fills_broker_scorecard\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "6199d279660b2dd793ac676a87e835b2a8527b2c84fd82d4acb71336c6850127"
+    "spec_sha256": "c34a60cbf0fed6bc7a8b5d345bdc2776d39f73197623ba6931dd3ea3287d3b7a"
   },
   "execution_quality_review_level3": {
     "task_id": "execution_quality_review_level3",
@@ -7425,6 +7559,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7465,7 +7600,7 @@
       "create_widget {\"widget_id\": \"multi_pdf_url\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "a68de492d226a5791c29ac8e16a4fde995f440988eae2beb68580ca009330bd5"
+    "spec_sha256": "e6b6eed1b2987c7d3e76e852cf5179a88add02e08cde6040ce0beea33bef7bf7"
   },
   "execution_quality_review_level4": {
     "task_id": "execution_quality_review_level4",
@@ -7519,6 +7654,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7562,7 +7698,7 @@
       "add_generative_widget {\"name\": \"Execution-quality Governance\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "f40172073495ad96396a8c2a85d9db574403f678350494c79cc116c57969416e"
+    "spec_sha256": "a70677f5f0b351096efd4f9dbc87cbb7f912cad3313904759bfa83696c94e919"
   },
   "execution_quality_review_level5": {
     "task_id": "execution_quality_review_level5",
@@ -7640,6 +7776,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7687,7 +7824,7 @@
       "add_generative_widget {\"name\": \"Execution-quality Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "50e6f8cc9e3cc8c8fd896a2ea727293ff14a078c27c651470f3c5e13589af811"
+    "spec_sha256": "f77b7a4d9632f4fc47bfa47f3f546571c69368d99a343e6c8f56a62ef5890cab"
   },
   "governed_earnings_brief_level0": {
     "task_id": "governed_earnings_brief_level0",
@@ -7722,6 +7859,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7761,7 +7899,7 @@
       "add_generative_widget {\"name\": \"Earnings Prep Workflow\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "2b1e3a1f548787d2d6bab8715a602deaeaf71afd4cc32844f933369b65a66a68"
+    "spec_sha256": "c9c6a358c49d03992c403cd8f4a0286f1e668e50645ef1dce72ea2467bee65e1"
   },
   "governed_earnings_brief_level1": {
     "task_id": "governed_earnings_brief_level1",
@@ -7796,6 +7934,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7835,7 +7974,7 @@
       "add_generative_widget {\"name\": \"Earnings Governance Actions\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "a5d87e03b7e77f4708ece7c045d3f9873bf53192e428755be651a2e55cd36097"
+    "spec_sha256": "5a96bb0686df8d85d56bafbd494986c5db001ee74516ec5b9cbed52460a7185b"
   },
   "governed_earnings_brief_level2": {
     "task_id": "governed_earnings_brief_level2",
@@ -7870,6 +8009,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7908,7 +8048,7 @@
       "add_generative_widget {\"name\": \"Backend Contract Actions\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "4b34c5b37430eb20903a56a0fd5d036636372f7f6ad61431c11c1e42bb5f6d48"
+    "spec_sha256": "11975485c64d16de31ddb470083340dd12792971cba484fc7c5f2b4d72d306c9"
   },
   "governed_earnings_brief_level3": {
     "task_id": "governed_earnings_brief_level3",
@@ -7947,6 +8087,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -7986,7 +8127,7 @@
       "add_generative_widget {\"name\": \"Session Grounding\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "1f176a52384df6cd7c59f4662e2126d864325ff0613fb92c0c3882134db153c3"
+    "spec_sha256": "4593454df2be7bd1ea7013d46916218d5020d1df7a8c4c11106f2e98d1d44065"
   },
   "governed_earnings_brief_level4": {
     "task_id": "governed_earnings_brief_level4",
@@ -8029,6 +8170,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8070,7 +8212,7 @@
       "add_generative_widget {\"name\": \"Earnings Session Actions\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "b86be7dd441e78985cc3be7db01eceb1608c4448e8d656c15a35a21b21114fe1"
+    "spec_sha256": "aa9f5f54c6771b64ccbb48a2b2be5ae15012fed27b0e6d4d2766f1891bb9bdf2"
   },
   "governed_earnings_brief_level5": {
     "task_id": "governed_earnings_brief_level5",
@@ -8113,6 +8255,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8155,7 +8298,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "46e551cefd52a9e476a3be2aca20bb931a1eae85b257ae6678cf6e15f6cb9837"
+    "spec_sha256": "e138dbef467dd0352c604b37e07a4bc965e3f0be63f47af404a21b061179d12b"
   },
   "guidance_service_lifecycle_level0": {
     "task_id": "guidance_service_lifecycle_level0",
@@ -8186,6 +8329,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8225,7 +8369,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Guidance Service\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "612a89d0d34e3f699cca26b41ef3ff03894c60813b442238e42897f1a678e2a5"
+    "spec_sha256": "101f3250da032ed20fd17c0abbc418e1d99a156f1d1b3beee805cf90cb734e7d"
   },
   "guidance_service_lifecycle_level1": {
     "task_id": "guidance_service_lifecycle_level1",
@@ -8256,6 +8400,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8295,7 +8440,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Guidance Service\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "9ecc1d86e0c07753b058dd6a668d51f55ea18a6935649de63fa23b6b9d372307"
+    "spec_sha256": "e3832c8ac98f78351b93802d3ddbcb92cc2039530d0ca64728a6b053d452a664"
   },
   "guidance_service_lifecycle_level2": {
     "task_id": "guidance_service_lifecycle_level2",
@@ -8330,6 +8475,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8368,7 +8514,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Guidance Service\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "054c4b9260bb9ac5ccd93188bae364a7dad4f4bf6be86a0b823ea863eeb3ebab"
+    "spec_sha256": "8405ea7f8b19f25d28334ff5132cefed35a124370f90166390437284628d4f06"
   },
   "guidance_service_lifecycle_level3": {
     "task_id": "guidance_service_lifecycle_level3",
@@ -8411,6 +8557,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8450,7 +8597,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "08c2c56d2b1927eae5b0c31e4f658e81be0f8e898536af640fe3174a358d7728"
+    "spec_sha256": "6e99c7b21da5d478a2208b9843868fca7e4ed162d958358d821cb7424ac1ba5c"
   },
   "guidance_service_lifecycle_level4": {
     "task_id": "guidance_service_lifecycle_level4",
@@ -8496,6 +8643,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8538,7 +8686,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "24f1c5effe39f1922284fcf6bf5b93fec0552b98154c0ed128ac6d4f8c68b3e6"
+    "spec_sha256": "26c521e9cd2c3ebf19f53d302fa50b1e0ee6eb40d8e8e0379e3cd29cbafa9dc9"
   },
   "guidance_service_lifecycle_level5": {
     "task_id": "guidance_service_lifecycle_level5",
@@ -8612,6 +8760,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8655,7 +8804,7 @@
       "add_generative_widget {\"name\": \"Guidance-service Governing Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "c93be1fb00ccc3e6229b673e4c8f5532cd98d158bef592f64881d75a87662e25"
+    "spec_sha256": "52d63c6bdcac2263b71d4540f214878664e2c67aba3557e801857e724b7b01df"
   },
   "inflection_service_lifecycle_level0": {
     "task_id": "inflection_service_lifecycle_level0",
@@ -8686,6 +8835,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8725,7 +8875,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Inflection Service\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "a8da78dc9740d47a787b3ce3b40fce3be31dc001621df7bab819897498df14a0"
+    "spec_sha256": "3ddec0536956c3be1c76301892ca076df2b3207d0017f9be01725127b2dc54d1"
   },
   "inflection_service_lifecycle_level1": {
     "task_id": "inflection_service_lifecycle_level1",
@@ -8756,6 +8906,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8795,7 +8946,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Inflection Service\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "0220d6e202416dae8c4155a45d77bf2cb72db56c02a9b24dc4283f73d193335e"
+    "spec_sha256": "3789f76ea1e54fddb58e29cbb92cea232faa94a9e153769d06a304c5b4e19b0e"
   },
   "inflection_service_lifecycle_level2": {
     "task_id": "inflection_service_lifecycle_level2",
@@ -8830,6 +8981,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8868,7 +9020,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Inflection Service\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "7f9b1f9b00bd7c170ab887e4014c86e2b11a8ce8ff45aa8224e90a9208862646"
+    "spec_sha256": "eb07c9a11f2b9171b2c10150bf28b592bbd863d4710790f84ebcec885dfbe61a"
   },
   "inflection_service_lifecycle_level3": {
     "task_id": "inflection_service_lifecycle_level3",
@@ -8911,6 +9063,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -8950,7 +9103,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "344fcbf4f011cf0f1af70829e7b6e68d7e93adb07c9ef74ced2832fb0d7a83c4"
+    "spec_sha256": "a050f1022392340eb5a4233155c51b6a9114f205e102179c1688a75efa46e2a8"
   },
   "inflection_service_lifecycle_level4": {
     "task_id": "inflection_service_lifecycle_level4",
@@ -8996,6 +9149,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9038,7 +9192,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "94dbc286f6664982adacb8e8b56fb090ee46e508bfd572de24baa2c337d17c71"
+    "spec_sha256": "a3f118fe49b5181396111a612ac8cd10841be2f106af70f415135556e8a75990"
   },
   "inflection_service_lifecycle_level5": {
     "task_id": "inflection_service_lifecycle_level5",
@@ -9112,6 +9266,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9155,7 +9310,7 @@
       "add_generative_widget {\"name\": \"Inflection-service Governing Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "c725482ebbe3d4b568bfa9865393a5e36f5e9043fc2a53ba6f764d61bb03deec"
+    "spec_sha256": "740b34edfcda8828e5bd90363b953303b754479d7fbf25be3a1d502ce69f7f4d"
   },
   "investment_snapshot_governance_level0": {
     "task_id": "investment_snapshot_governance_level0",
@@ -9186,6 +9341,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9225,7 +9381,7 @@
       "add_generative_widget {\"name\": \"Investment-snapshot Starter Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "efe55e7704bec1591e5f7cf29608bebd76a1bc2af89c8ffe95cca1739ceb3f39"
+    "spec_sha256": "1892be90f4a996a2e267af1836557fe391e52e6dad4efe03f8707895ad0146b5"
   },
   "investment_snapshot_governance_level1": {
     "task_id": "investment_snapshot_governance_level1",
@@ -9256,6 +9412,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9295,7 +9452,7 @@
       "add_generative_widget {\"name\": \"Investment-snapshot Discovery Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "254aa270c2ba3cc67673e3025e8c7e80bb75f6070c8e746456cc5307dfeb9b8c"
+    "spec_sha256": "2b72556c58de6239715f6a36951d4656deae95dc11d7cd02464f3b1b02a1b1ec"
   },
   "investment_snapshot_governance_level2": {
     "task_id": "investment_snapshot_governance_level2",
@@ -9326,6 +9483,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9365,7 +9523,7 @@
       "create_widget {\"widget_id\": \"udf\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "2631b418911279c2219c76c5d5f5cb755e007f33bf37de05b8161d81f194ea62"
+    "spec_sha256": "fd77b1e0d8072cef7cdb5f9563c7a0f8b6a9217aa244f78150d7140d3025f574"
   },
   "investment_snapshot_governance_level3": {
     "task_id": "investment_snapshot_governance_level3",
@@ -9400,6 +9558,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9440,7 +9599,7 @@
       "create_widget {\"widget_id\": \"html_widget\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "d74e804d34f4cc6434149a94ab14a088d77df351b03cf997b86754fa7623cdf4"
+    "spec_sha256": "3e5639741af7fbd95606a06773d28138b80830df892b595d7346e36915359779"
   },
   "investment_snapshot_governance_level4": {
     "task_id": "investment_snapshot_governance_level4",
@@ -9490,6 +9649,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9532,7 +9692,7 @@
       "add_generative_widget {\"name\": \"Investment-snapshot Governed Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "f39c00bc06dfd848b1a4d9e308b429bb87d814f6ef87b86af9d8fffc7ed08944"
+    "spec_sha256": "89cd8d8bc6950b724dc8471adadef53f35fce3044810d50e0f3e6f7ed7b85ef2"
   },
   "investment_snapshot_governance_level5": {
     "task_id": "investment_snapshot_governance_level5",
@@ -9583,6 +9743,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9626,7 +9787,7 @@
       "add_generative_widget {\"name\": \"Investment-snapshot Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "dd78bac11ab299a73aa3300d3a5f39b9111be93a079bce6c57bb71abdc81ab88"
+    "spec_sha256": "d13eefff6f1e470aafe0693faa9533fbef4b23a3e3fa46309188e6975fa65b3c"
   },
   "live_quote_lookup_level0": {
     "task_id": "live_quote_lookup_level0",
@@ -9657,6 +9818,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9696,7 +9858,7 @@
       "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "45ac7535ae64ccd81c291d827a0e8147cb7e498fc6e7e5c4ecc38002a1856ca9"
+    "spec_sha256": "be28e224fe26db94bb7848205bb8f399457f85e28a2a4ac20f8d870c7375a365"
   },
   "live_quote_lookup_level1": {
     "task_id": "live_quote_lookup_level1",
@@ -9723,6 +9885,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9763,7 +9926,7 @@
       "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "841a0b0ebe9f1d29cfda196d664aaa5c2764de3e377186935a2de420b9b9103b"
+    "spec_sha256": "378a29066784d3e7889ae6e13d113eec25bb130c8fea4b67bdca446d89f4dcb2"
   },
   "live_quote_lookup_level2": {
     "task_id": "live_quote_lookup_level2",
@@ -9794,6 +9957,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9833,7 +9997,7 @@
       "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "4ce66c03dadc2bca462749df3dcf5cc30eeee68292214eb44cd8d435a937dfe5"
+    "spec_sha256": "7e8f47ce5834150be6bf1b689f1116e01113bcbcc3ace5961c21b0c6322fa7d8"
   },
   "live_quote_lookup_level3": {
     "task_id": "live_quote_lookup_level3",
@@ -9864,6 +10028,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9903,7 +10068,7 @@
       "get_widget_data {\"widget_id\": \"live_grid_example\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "9d3fe772741b33bd13248aa2b2ec7dec0e3df4aa76b65f53a800bbc86004a3d1"
+    "spec_sha256": "0dc59dda2004da91da136031582fd895c47d9d07a77bc27ad5ca879222199b78"
   },
   "live_quote_lookup_level4": {
     "task_id": "live_quote_lookup_level4",
@@ -9949,6 +10114,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -9990,7 +10156,7 @@
       "add_generative_widget {\"name\": \"Live-quote Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "fd4fce673a15a7d20e48f62bcecb97d40cce361dd30e4f8773d83fe9716c0a69"
+    "spec_sha256": "e705fce77317eabaf16e8a9fb2d60f96eba2858c0181aa5a04aa4b235b05ee9a"
   },
   "live_quote_lookup_level5": {
     "task_id": "live_quote_lookup_level5",
@@ -10052,6 +10218,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10096,7 +10263,7 @@
       "add_generative_widget {\"name\": \"Live-quote Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "6b840dfab3e3651ecfca2009bba6dfc729c08bbc1c82d9004de5e12344e7374b"
+    "spec_sha256": "e344f2df647c869ce8332a74d79b8ee7e9b5931f295fe008fff345834fd630a8"
   },
   "manufacturer_details_repair_level0": {
     "task_id": "manufacturer_details_repair_level0",
@@ -10139,6 +10306,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10177,7 +10345,7 @@
       "update_widget {\"data_args\": {\"company\": \"F\", \"year\": 2024}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "85ae3c6499bbf9a1d1c4e77467753f1f60b1e78b256b9a88cf3215e613bd38e2"
+    "spec_sha256": "7c2f67eef4d06d0fc4573ed81fe1771f2f134ab01dff1dc4a3869a7d14b79a69"
   },
   "manufacturer_details_repair_level1": {
     "task_id": "manufacturer_details_repair_level1",
@@ -10216,6 +10384,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10254,7 +10423,7 @@
       "update_widget {\"data_args\": {\"company\": \"F\", \"year\": 2024}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "76adbd36259dc80fb7a64ef8f8ebc73680c5dba0876e0cfbba564dca604bd384"
+    "spec_sha256": "a32c13b18e329125cb25a31d7631363ed28e526b8fd5eeeeee21e8b0f5f5753f"
   },
   "manufacturer_details_repair_level2": {
     "task_id": "manufacturer_details_repair_level2",
@@ -10289,6 +10458,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10326,7 +10496,7 @@
       "delete_widget"
     ],
     "max_turns": 4,
-    "spec_sha256": "e44832dfec22f72c645e7e4f14d858aaaff4c9e6d2ddc55d019aaa8b07fd8cf2"
+    "spec_sha256": "f7d250c1ba6755dfa590bbe45908310635b86416d49412bf7ec8a6754597a524"
   },
   "manufacturer_details_repair_level3": {
     "task_id": "manufacturer_details_repair_level3",
@@ -10377,6 +10547,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10415,7 +10586,7 @@
       "update_widget_layout"
     ],
     "max_turns": 5,
-    "spec_sha256": "f0704a162097ac6519d8fba982b3fa632a8885f189492e6fe77637dd4dd67558"
+    "spec_sha256": "2270bdae136ed110c3968e62fe7fe75fce0420ac94e261c05a0a070751b2d3f6"
   },
   "manufacturer_details_repair_level4": {
     "task_id": "manufacturer_details_repair_level4",
@@ -10497,6 +10668,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10539,7 +10711,7 @@
       "add_generative_widget {\"name\": \"Manufacturer Detail Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "db2eb1227cf61c0f632a0af77473124f8b97eea326b31f5a5fb436331ce977d5"
+    "spec_sha256": "bbac30b0350225b6924cd475d2fe2e555f1a33d9fbd14f59c6e6060f4be4bb60"
   },
   "manufacturer_details_repair_level5": {
     "task_id": "manufacturer_details_repair_level5",
@@ -10605,6 +10777,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10648,7 +10821,7 @@
       "add_generative_widget {\"name\": \"Detail-queue Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "60b6b8c4cb63da65c1aecb710803300a2a616b659e6ad5e0cf1b52ed85251b5e"
+    "spec_sha256": "7ada9564c190c82727287674cb9c9bbf56dc173dbd531ee9dbb0d455bcc23e21"
   },
   "market_telemetry_level0": {
     "task_id": "market_telemetry_level0",
@@ -10679,6 +10852,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10718,7 +10892,7 @@
       "create_widget {\"widget_id\": \"sparkline_line\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "933b16ef4f59e211845079d05f5f2c00d4edfda682c8d17182ddd11e8e55fbc0"
+    "spec_sha256": "c59f5d0b5cdf331445037fceeadafda4cb079ba3d0e8e8b9a93289613db76a60"
   },
   "market_telemetry_level1": {
     "task_id": "market_telemetry_level1",
@@ -10753,6 +10927,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10793,7 +10968,7 @@
       "create_widget {\"widget_id\": \"live_grid_data\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "9ffc39fb5593d670c49a7a5f852d01d1a45e96e9a66acba41b8743f1e953d656"
+    "spec_sha256": "86b3536d3c10dd48739fdc94d6e26d8d0f93a999f033096ee1854cd675c29734"
   },
   "market_telemetry_level2": {
     "task_id": "market_telemetry_level2",
@@ -10840,6 +11015,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10879,7 +11055,7 @@
       "update_widget_layout {\"widget_id\": \"tabs_with_dropdown\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "5846187d0af26697ff3170b86e71705a968121482c8cc8db5c6c1a0f62b86098"
+    "spec_sha256": "f2d9b50045df64c6682ad019d8c89a6366ff031bbcfe539345a2c2c10bc731e4"
   },
   "market_telemetry_level3": {
     "task_id": "market_telemetry_level3",
@@ -10938,6 +11114,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -10980,7 +11157,7 @@
       "update_widget_layout {\"widget_id\": \"tabs_with_dropdown\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "413d5d4418f27b1802f1d94db787834178bf782c00f293206dc804a09a74eacb"
+    "spec_sha256": "2d864a13cca24d5f3074cd0fd637882b91fa5dc170eb01de5e083863cfcb3aec"
   },
   "market_telemetry_level4": {
     "task_id": "market_telemetry_level4",
@@ -11043,6 +11220,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11087,7 +11265,7 @@
       "update_widget_layout {\"widget_id\": \"tabs_with_dropdown\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "87831de8d1614d442405474d7c731d150e540bd9eb750826d0271c3f0f43d4e7"
+    "spec_sha256": "e02ca410d40d8e540c0f9bd22ba151a466e1e0365ed4da886cd110736a815b25"
   },
   "market_telemetry_level5": {
     "task_id": "market_telemetry_level5",
@@ -11161,6 +11339,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11210,7 +11389,7 @@
       "add_generative_widget {\"name\": \"Market Telemetry Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 16,
-    "spec_sha256": "32105e8a86e65b992f3311e8a865127b36423798302233808a669c4e402ff3aa"
+    "spec_sha256": "c2ba7a8a17ef528ac426bf74363f4791a1471e2d90c3f0f11481a19209516631"
   },
   "nav_exception_station_level0": {
     "task_id": "nav_exception_station_level0",
@@ -11261,6 +11440,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11299,7 +11479,7 @@
       "update_widget {\"data_args\": {\"fund\": \"Flagship Long/Short\", \"status\": \"Open\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "c8f9a128606177a37b4b92574279edc943ae1a941e65bebff79ca59a8c41550d"
+    "spec_sha256": "ddddb3e04bf1a0915fb1a4dd1ba9853f21c546260d2732b5bb5124e8a931df4e"
   },
   "nav_exception_station_level1": {
     "task_id": "nav_exception_station_level1",
@@ -11342,6 +11522,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11380,7 +11561,7 @@
       "update_widget {\"data_args\": {\"fund\": \"Flagship Long/Short\", \"status\": \"Open\", \"period\": \"YTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "12135119e7603a506eb67ccf62f50ef350edb0d7588b9d4cc7a8ac67873570b7"
+    "spec_sha256": "e45de6e81b72febfc330ee0458df2f1163b367d22709d810386b0ad8599fa656"
   },
   "nav_exception_station_level2": {
     "task_id": "nav_exception_station_level2",
@@ -11415,6 +11596,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11452,7 +11634,7 @@
       "delete_widget"
     ],
     "max_turns": 4,
-    "spec_sha256": "21aa9b22f64ad6a74bfd3a49313704bcd44a00ab1576b15620ec85dd8f4872c7"
+    "spec_sha256": "30ca7d14f4b573850a5b0d8044a1728c738937fbc7abf150653242ff97856284"
   },
   "nav_exception_station_level3": {
     "task_id": "nav_exception_station_level3",
@@ -11499,6 +11681,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11537,7 +11720,7 @@
       "update_widget_layout"
     ],
     "max_turns": 5,
-    "spec_sha256": "5f071ef8709522db242168af02919301079fc1b6180ca80474acb4eb89b3b2ae"
+    "spec_sha256": "fa7cd04cb0da17487085e31226711d47cbc9718902f0e28be448000972c2c061"
   },
   "nav_exception_station_level4": {
     "task_id": "nav_exception_station_level4",
@@ -11619,6 +11802,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11661,7 +11845,7 @@
       "add_generative_widget {\"name\": \"NAV Exception Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 9,
-    "spec_sha256": "6adb5b0bb1d84c2e842a48ee5479395d8ade8befea0f7d2b9db95fd19a80779c"
+    "spec_sha256": "23e985afeb1d764bc0c8e0b2df52b25d93cd639dae6081634cd48881e4ca0483"
   },
   "nav_exception_station_level5": {
     "task_id": "nav_exception_station_level5",
@@ -11727,6 +11911,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11770,7 +11955,7 @@
       "add_generative_widget {\"name\": \"NAV-exception Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "eb2755526564f785ffbc0aee02d6c3032f71e5093e1c4505fb45e499afcbae14"
+    "spec_sha256": "5948326dcb316a5d5c0f310cacb4eb24951ec77b4093c7402bad89e2b778bb92"
   },
   "news_desk_handoff_level0": {
     "task_id": "news_desk_handoff_level0",
@@ -11825,6 +12010,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11865,7 +12051,7 @@
       "add_generative_widget {\"name\": \"Markets News Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "8be744d5b6bff6818f1cdb3b5d912a00d04e84f9495f4efe5481beafb998d10c"
+    "spec_sha256": "6c82b07a31c59b2ef56dbd0d90e56229d4150748e344ba8a067f671848d0d906"
   },
   "news_desk_handoff_level1": {
     "task_id": "news_desk_handoff_level1",
@@ -11912,6 +12098,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -11953,7 +12140,7 @@
       "add_generative_widget {\"name\": \"Technology News Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "8224e02b90881a7498cfc825b9afef36ff2ef21835977768e627233b5f90500e"
+    "spec_sha256": "c05a25bcbde08fa4f92fdf3775fffce899d5ec79e49beb73ac2a50b707bf1410"
   },
   "news_desk_handoff_level2": {
     "task_id": "news_desk_handoff_level2",
@@ -12004,6 +12191,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12043,7 +12231,7 @@
       "add_generative_widget {\"name\": \"Science News Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "c5295c5fa18c450e276323e0cf3570d18052af1ecf2daf91db23859365947d38"
+    "spec_sha256": "c5bc89c2a5ae817b4dbd113b9c0553bfea443ab641c46db053778a75e108d7ee"
   },
   "news_desk_handoff_level3": {
     "task_id": "news_desk_handoff_level3",
@@ -12094,6 +12282,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12134,7 +12323,7 @@
       "add_generative_widget {\"name\": \"Governed Expansion Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "df77220c4a30df5738005140812612b5303d7eea8a1690cb3549375389878c2d"
+    "spec_sha256": "5594e986ff88dc8d3305868eb590bae28dc88fd49d53d1b559f80d42dddbd62b"
   },
   "news_desk_handoff_level4": {
     "task_id": "news_desk_handoff_level4",
@@ -12189,6 +12378,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12231,7 +12421,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 9,
-    "spec_sha256": "fefa6021d7b916766d3822aa6987d75534be94d958396ded76f9df2b69bc983c"
+    "spec_sha256": "b56a65ef00e37da8e084024adb262800a7482a17bf9cdfc8d2575872535ce2de"
   },
   "news_desk_handoff_level5": {
     "task_id": "news_desk_handoff_level5",
@@ -12293,6 +12483,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12337,7 +12528,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 11,
-    "spec_sha256": "9dde8dff69e68d8e23550febf7a8cde4244479bdfebf48a8ef1fa1839e2ab2ad"
+    "spec_sha256": "91acca392fea95e818bd45ebed5ccbd4b72da11ce804824c1c9a573ff78becc5"
   },
   "operating_driver_lookup_level0": {
     "task_id": "operating_driver_lookup_level0",
@@ -12372,6 +12563,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12411,7 +12603,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "90347df20705f14363d4a78910a4d0d1cebcab9fc1e9f9a67b4460c4bbd08844"
+    "spec_sha256": "861da6445934b1cfcbe479049f20893de63888b38b38b0cb3b71130d33949458"
   },
   "operating_driver_lookup_level1": {
     "task_id": "operating_driver_lookup_level1",
@@ -12438,6 +12630,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12478,7 +12671,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "adc276cedfbcee99cd8c961c90db0beaf1b11a2f76b547e266da1bd4daa6ac18"
+    "spec_sha256": "1256d25829816644edb14b940c4abb5579f3a7e138a418962faef37aa589e40e"
   },
   "operating_driver_lookup_level2": {
     "task_id": "operating_driver_lookup_level2",
@@ -12509,6 +12702,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12548,7 +12742,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "be3e1111c027748735c031fd079db422b21485d8519e3e3ceac9f8eb4333e481"
+    "spec_sha256": "76a3b1ab7da3b53b10dafe8316aec7ad9267ff8da1ece75e7dab7fec893bb03d"
   },
   "operating_driver_lookup_level3": {
     "task_id": "operating_driver_lookup_level3",
@@ -12579,6 +12773,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12618,7 +12813,7 @@
       "get_widget_data {\"widget_id\": \"daloopa_kpi_metrics\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "bfe5668b1ed7a5ef3ef38d633e0443c79496b396976032558537343631467bf2"
+    "spec_sha256": "8bf295a8d27fb3d24d5460bbfd5587f832b1f22b53672ba76b4cfc7927d0481a"
   },
   "operating_driver_lookup_level4": {
     "task_id": "operating_driver_lookup_level4",
@@ -12664,6 +12859,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12705,7 +12901,7 @@
       "add_generative_widget {\"name\": \"Operating-driver Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "057ec9e7fd147269f2dc8faa5581f0a5a6f45c0def46cf17580852e3b118673f"
+    "spec_sha256": "4de3fe8e32d89e8e8c7b4f17ddec9eb5dd0190af956581dfa682d3e0924c5ca0"
   },
   "operating_driver_lookup_level5": {
     "task_id": "operating_driver_lookup_level5",
@@ -12767,6 +12963,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12811,7 +13008,7 @@
       "add_generative_widget {\"name\": \"Operating-driver Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "0bf2d50e0e04eb6c79160a1e92eee060053fe25d005fb0f53ac47b4a2b32c346"
+    "spec_sha256": "f947d591e76fd72c4eb9f4e86582252da8ea175f86c92fe33a4ed4fa5349b2d3"
   },
   "protocol_display_repair_level0": {
     "task_id": "protocol_display_repair_level0",
@@ -12846,6 +13043,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12884,7 +13082,7 @@
       "update_widget {\"data_args\": {\"protocol_id\": \"uniswap\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "57d8e36b1beb9822df17fa364e9107986c63ac3b4e39a88ab4e04b348e863042"
+    "spec_sha256": "c708f35072729beac183f0700e4a9147948c7dec86cc8f2d8bf3b26086587535"
   },
   "protocol_display_repair_level1": {
     "task_id": "protocol_display_repair_level1",
@@ -12919,6 +13117,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -12957,7 +13156,7 @@
       "update_widget {\"data_args\": {\"protocol_id\": \"uniswap\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "054b03e2e8cc89fb986c8516d6566d7beaf7e43627be25aa3f88b03572d78556"
+    "spec_sha256": "f7d9dc183fb376b2d7d751bdf905d5d029e18d35bb5429d3815da9adfe96025f"
   },
   "protocol_display_repair_level2": {
     "task_id": "protocol_display_repair_level2",
@@ -12992,6 +13191,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13029,7 +13229,7 @@
       "delete_widget"
     ],
     "max_turns": 4,
-    "spec_sha256": "16a75d347d9694364257af43ea67619139212c9a4d109af877989c88e2ba0272"
+    "spec_sha256": "1259ef9fbb4dc7cda62e6a9a7c747a545cf234e73a0ac30ea3bd00e804b87a80"
   },
   "protocol_display_repair_level3": {
     "task_id": "protocol_display_repair_level3",
@@ -13076,6 +13276,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13113,7 +13314,7 @@
       "update_widget_layout"
     ],
     "max_turns": 4,
-    "spec_sha256": "129cd8cd11e2f78b9cdbdf6bee190f01869ce7f418170d829a8e008d692aba23"
+    "spec_sha256": "b0eea9185386bbca64e01ad0a52014548129a78962ab9e76ed33ddd3534b40e3"
   },
   "protocol_display_repair_level4": {
     "task_id": "protocol_display_repair_level4",
@@ -13167,6 +13368,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13207,7 +13409,7 @@
       "add_generative_widget {\"name\": \"Protocol-display Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "54f453c73108805023aebb63e4397edcc7b9053a66ed98e9e06e4fa6d78d1ce2"
+    "spec_sha256": "838e07382f55a4be7f29147060ce13464c63ec529c8fda44551b682d9be91a7b"
   },
   "protocol_display_repair_level5": {
     "task_id": "protocol_display_repair_level5",
@@ -13273,6 +13475,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13316,7 +13519,7 @@
       "add_generative_widget {\"name\": \"Protocol-display Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "c81b6d6e1aa9c000627fe2f3400d563c3405dfd1fb5db2a45e39e2128076546b"
+    "spec_sha256": "382a2499601b16f6e62daa7ab67bc8e51bdad3f6f933f9430f8647e1bb3ee25e"
   },
   "research_feed_lifecycle_level0": {
     "task_id": "research_feed_lifecycle_level0",
@@ -13347,6 +13550,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13387,7 +13591,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "1364ad790025ab69e497acca15263159a113c68c6405e9a7c93fd9b1618e0b92"
+    "spec_sha256": "55cfda194c0096c8159c694fd59e922d958f97ce25bcd679bbd980e7161ad62c"
   },
   "research_feed_lifecycle_level1": {
     "task_id": "research_feed_lifecycle_level1",
@@ -13418,6 +13622,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13457,7 +13662,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Rollout Research Feed\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "9931e47e691b2a96e33de88322ebebebf9a42330ab6734af9cdaa997e43ff034"
+    "spec_sha256": "1f0aeb9b83ed7bcc416e361dc3da301abaf5b2ac5fbee10fd554fcf7c7c05e06"
   },
   "research_feed_lifecycle_level2": {
     "task_id": "research_feed_lifecycle_level2",
@@ -13492,6 +13697,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13532,7 +13738,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "7fad8b112e01e63b14ab2e95309a71cab983a864e87bde03c63f31f2bd1f2b96"
+    "spec_sha256": "614cb3524842ab54397d88ff1d7f812e82b7c77fbcd955d042d76d96e9bb1ad9"
   },
   "research_feed_lifecycle_level3": {
     "task_id": "research_feed_lifecycle_level3",
@@ -13567,6 +13773,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13605,7 +13812,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Rollout Research Feed\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "1ec7cab09171ad027892fddc10f74dc7ff7b5baa74aabc5313ae8dfdfc526837"
+    "spec_sha256": "0bef58b01b437667e53699ee36678f17ee2a900a2d55018df9b552032358d017"
   },
   "research_feed_lifecycle_level4": {
     "task_id": "research_feed_lifecycle_level4",
@@ -13648,6 +13855,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13689,7 +13897,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "33848a57c64fc0a1e6c8cd27792a920c5b1c8cf1744d88cfff71e3a944f1f8ad"
+    "spec_sha256": "6c0fcee92b9c0640a2488c160729fe97a7bfb1b31777dc353a28907fb68789a1"
   },
   "research_feed_lifecycle_level5": {
     "task_id": "research_feed_lifecycle_level5",
@@ -13759,6 +13967,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13802,7 +14011,7 @@
       "add_generative_widget {\"name\": \"Research Feed Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "fb078ca086f78c2cda7d8848c53c35e80c69089d91527c85471b089b4d996cfe"
+    "spec_sha256": "ddc00454014a1eb2274fcd440ff3539108060cb130790c23a196a0b8dc09c113"
   },
   "risk_service_lifecycle_level0": {
     "task_id": "risk_service_lifecycle_level0",
@@ -13833,6 +14042,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13873,7 +14083,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "fad4c5b2bc34911f7ca67a2b48149d3a50a54f23332c4103742a8ba038e6c100"
+    "spec_sha256": "d71cf859f841ae2d8b70d4de94a37e020ba9bf3bba1f8f73481a2b66e08daa48"
   },
   "risk_service_lifecycle_level1": {
     "task_id": "risk_service_lifecycle_level1",
@@ -13904,6 +14114,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -13943,7 +14154,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Pilot Risk Service\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "0da98bc06af1088638905a9ec8afadac32da154bd259cec467ae2b7679e60a3d"
+    "spec_sha256": "b01bd0e5ed9205d7b91406dce6a41400fed134f8786d8445c84dd81d0ebe5682"
   },
   "risk_service_lifecycle_level2": {
     "task_id": "risk_service_lifecycle_level2",
@@ -13978,6 +14189,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14018,7 +14230,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "555526c88f0b87d7248cc4776bdc5e7f4f1d1ad76a9c8b7eff1f9c2b415b942c"
+    "spec_sha256": "9d3576dbaa4e0a7640cc5ee2b706702e29f3b4eee6f6d0902954d761e7059953"
   },
   "risk_service_lifecycle_level3": {
     "task_id": "risk_service_lifecycle_level3",
@@ -14053,6 +14265,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14091,7 +14304,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Pilot Risk Service\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "0b290762b323c9571cf90681fe11fdd73f5e59bbea8b22fc19ca3e9e04126d57"
+    "spec_sha256": "ca88c1dfd0271320d3c5f776903dd0b9a67bd7c8186769aa3ed2cda83ee4a332"
   },
   "risk_service_lifecycle_level4": {
     "task_id": "risk_service_lifecycle_level4",
@@ -14134,6 +14347,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14175,7 +14389,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "6efa7c3a2cdb8838c60128d8c7ffdcfb3148d852644a814f474cb9e8e41c35c8"
+    "spec_sha256": "edcac3f93bdeec651dacbd236a677d4436e6e46293252cf6232f04e639a8add6"
   },
   "risk_service_lifecycle_level5": {
     "task_id": "risk_service_lifecycle_level5",
@@ -14245,6 +14459,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14288,7 +14503,7 @@
       "add_generative_widget {\"name\": \"Risk Service Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "66095efab4c93e75ba1624fd110d0eb5594bbad1b9aa064bf6b21419352769da"
+    "spec_sha256": "0669233272839490ed1e0ee7a5e5915d86361f98e8a98eb1393c6d6822edf8e5"
   },
   "segment_mix_handoff_level0": {
     "task_id": "segment_mix_handoff_level0",
@@ -14343,6 +14558,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14383,7 +14599,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Direct Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "f01b038e956beef15609668b1c32aade9e43fd87eff061ff69dccb13aaff5c57"
+    "spec_sha256": "21e33f1e1d7e6523705bf6688ecf516d04309f8054a93ba56a82cd0b270bc796"
   },
   "segment_mix_handoff_level1": {
     "task_id": "segment_mix_handoff_level1",
@@ -14430,6 +14646,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14470,7 +14687,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Discovered Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "203c0e35a528d6d9647112a2b7578344d170a3722fbeccda344440f00fdfcdf4"
+    "spec_sha256": "4ad065f044c89e05c03cbc8f850cd891d265ce87db8b7470a63e7a18a2c316ff"
   },
   "segment_mix_handoff_level2": {
     "task_id": "segment_mix_handoff_level2",
@@ -14517,6 +14734,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14556,7 +14774,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Analyst Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "6bb44c8daf9e4ddf8be469496e5cfae2e1b54584b6e5c2d4c949d17095d3c1b8"
+    "spec_sha256": "c26d6a0fb701359161cbc35fa69110514c2340be008a55278d767d3a0dcfa611"
   },
   "segment_mix_handoff_level3": {
     "task_id": "segment_mix_handoff_level3",
@@ -14603,6 +14821,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14642,7 +14861,7 @@
       "add_generative_widget {\"name\": \"Segment-mix Desk Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "121e9966a3d14cdff270a91cbed47e94f549ecb5069a50e9fa3a04be28e4bcd3"
+    "spec_sha256": "6ae0ea47ba50d43b0545281f43238eb9fbe1e8c6f39c1f35ea0ff9dd9df19d69"
   },
   "segment_mix_handoff_level4": {
     "task_id": "segment_mix_handoff_level4",
@@ -14693,6 +14912,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14735,7 +14955,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 9,
-    "spec_sha256": "12c6bfa3003d8ba729990500446e14104040c75ac0261a4d32ac9ed6886b1629"
+    "spec_sha256": "0c02fe1cfa81048d8b1b928f4c12398157cf154cefc1e62fc585866349db6574"
   },
   "segment_mix_handoff_level5": {
     "task_id": "segment_mix_handoff_level5",
@@ -14809,6 +15029,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14855,7 +15076,7 @@
       "assign_tasks_to_agents"
     ],
     "max_turns": 13,
-    "spec_sha256": "ddd948fbfc9330bf8319b572b31b5519b1621d7634cb632487203820d1b77906"
+    "spec_sha256": "d3452c216de687f517601df1a3f09083446b4b298f9dce4a5ceb7875aa2aceaa"
   },
   "technology_decision_inputs_level0": {
     "task_id": "technology_decision_inputs_level0",
@@ -14898,6 +15119,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -14936,7 +15158,7 @@
       "update_widget {\"widget_id\": \"company_performance\", \"data_args\": {\"company\": \"TSLA\", \"year\": 2023}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "e4db928e0d1fa2bf7c2c2f993f4b871f0167364f764f2276551ad765b0ada356"
+    "spec_sha256": "79c8b9d55847c1d1aba1bae4a63eb44479f82b4076f2b37b89a02c6989f67111"
   },
   "technology_decision_inputs_level1": {
     "task_id": "technology_decision_inputs_level1",
@@ -14971,6 +15193,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15010,7 +15233,7 @@
       "update_widget {\"widget_id\": \"company_performance\", \"data_args\": {\"company\": \"TSLA\", \"year\": 2022}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "870d79dde944fa74e08a5cb8fdf6e8363ae5815175303abea95c366798924fe9"
+    "spec_sha256": "111d7ed8ad34cab2b2433bb8cb30193d991acadc9096ba4be6e20990a686f90c"
   },
   "technology_decision_inputs_level2": {
     "task_id": "technology_decision_inputs_level2",
@@ -15041,6 +15264,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15078,7 +15302,7 @@
       "update_widget {\"widget_id\": \"company_performance\", \"data_args\": {\"company\": \"TSLA\", \"year\": 2024}}"
     ],
     "max_turns": 4,
-    "spec_sha256": "31cba141fd704cf0774327ad42f0b340b0263d54028b47730b8be73870b6f149"
+    "spec_sha256": "1dacc86fca26d30260c1a47c5005432c29d9202ebff0963f6095364a47f1069e"
   },
   "technology_decision_inputs_level3": {
     "task_id": "technology_decision_inputs_level3",
@@ -15121,6 +15345,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15159,7 +15384,7 @@
       "update_widget {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"AAPL\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "ba2d10248792e0d11f1d3f5392a3be04c6642d8c87d1bd8ff31f8634b4ba8925"
+    "spec_sha256": "a426d70bbe187c47ea9369226fb1dc0d31e7b05722c7b57c11aa35f60a86690c"
   },
   "technology_decision_inputs_level4": {
     "task_id": "technology_decision_inputs_level4",
@@ -15176,6 +15401,10 @@
       {
         "text": "Car Manufacturer Performance",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "Decision Inputs Governance Note",
+        "why": "graded value (add_generative_widget:name)"
       },
       {
         "text": "Finance Earnings Prep governance",
@@ -15202,11 +15431,22 @@
         "why": "target display name (findability)"
       },
       {
+        "text": "note",
+        "why": "graded value (add_generative_widget:widget_type)"
+      },
+      {
         "text": "open Technology Decision Inputs dashboard",
         "why": "selected-dashboard phrase (asserted)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "surprise drivers",
+        "description": "what it identifies right after the estimate comparison",
+        "source": "Finance Earnings Prep governance",
+        "source_key": "finance-earnings-prep"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -15214,6 +15454,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15249,12 +15490,13 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
-      "get_skill_content {\"slug\": \"finance-earnings-prep\"}  (optional)",
+      "get_skill_content {\"slug\": \"finance-earnings-prep\"}",
       "update_widget {\"widget_id\": \"earnings_estimates_monitor_calendar_upcoming_earnings\", \"data_args\": {\"sector\": \"Technology\", \"ticker\": \"AAPL\", \"period\": \"QTD\"}}",
-      "update_widget {\"widget_id\": \"portfolio_command_center_actions_trade_ideas\", \"data_args\": {\"fund\": \"Flagship Long/Short\", \"period\": \"QTD\"}}"
+      "update_widget {\"widget_id\": \"portfolio_command_center_actions_trade_ideas\", \"data_args\": {\"fund\": \"Flagship Long/Short\", \"period\": \"QTD\"}}",
+      "add_generative_widget {\"name\": \"Decision Inputs Governance Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "fc40f085f29d1294f98181643239b09585f814e5097685241762f54a7d66bb5a"
+    "max_turns": 8,
+    "spec_sha256": "a60e85610ff70b97f9c78761ba7842630b6132eb5c7310afad24d914285de622"
   },
   "technology_decision_inputs_level5": {
     "task_id": "technology_decision_inputs_level5",
@@ -15324,6 +15566,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15368,7 +15611,7 @@
       "add_generative_widget {\"name\": \"Decision-inputs Tuning Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "03c235fea75b9dd4038c2c28b267b5ad10f28a6f49c8186bd80608fe27cbdc60"
+    "spec_sha256": "24c617e52d4522a992bfae2d67fc047f7fe84ea152174da743d496123dc82630"
   },
   "vendor_freshness_repair_level0": {
     "task_id": "vendor_freshness_repair_level0",
@@ -15419,6 +15662,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15457,7 +15701,7 @@
       "update_widget {\"data_args\": {\"vendor\": \"Bloomberg\", \"status\": \"Open\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "9e019ae4e62256da1c57036396eaf198f4796bdc70217e608f601a074181765d"
+    "spec_sha256": "99728a8a597b41d60304dd3f9e2609d0c38289121da35ba12091f2b3e4813009"
   },
   "vendor_freshness_repair_level1": {
     "task_id": "vendor_freshness_repair_level1",
@@ -15500,6 +15744,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15538,7 +15783,7 @@
       "update_widget {\"data_args\": {\"vendor\": \"Bloomberg\", \"status\": \"Open\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 5,
-    "spec_sha256": "9efd46525666e69ed5e92adbd356c77b0c092b086247d72c3951cf79bc03f7f4"
+    "spec_sha256": "a1276503edf429ca56f1d91dc7766e8776bd76802b693989b804bb30ce492562"
   },
   "vendor_freshness_repair_level2": {
     "task_id": "vendor_freshness_repair_level2",
@@ -15573,6 +15818,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15610,7 +15856,7 @@
       "delete_widget"
     ],
     "max_turns": 4,
-    "spec_sha256": "3ac93696e78f2b6e8d7e5aec0353a2180e6acf3ddf7b41350aa512ff75d75e83"
+    "spec_sha256": "17cc2a8deeec980abe38f50c3fca5ec2cbfbf3a28b35063aa2330ae8e8643469"
   },
   "vendor_freshness_repair_level3": {
     "task_id": "vendor_freshness_repair_level3",
@@ -15657,6 +15903,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15694,7 +15941,7 @@
       "update_widget_layout"
     ],
     "max_turns": 4,
-    "spec_sha256": "da9289f027870dea418bd38f60934f61b70706927d675098742d9d4abdf3578a"
+    "spec_sha256": "4979ade35cf70d2c159a742e59fb7ca37aca731fe9cbc6f8de3bef01cc5ae240"
   },
   "vendor_freshness_repair_level4": {
     "task_id": "vendor_freshness_repair_level4",
@@ -15756,6 +16003,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15796,7 +16044,7 @@
       "add_generative_widget {\"name\": \"Vendor-freshness Governance Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "e8b633dcce5d085dac665bb2b565a85b240466869a785bbf05d31f4e644ba277"
+    "spec_sha256": "613c105f61105bf09b9564d85556291f988bfaee6a84b077a960db517f95946c"
   },
   "vendor_freshness_repair_level5": {
     "task_id": "vendor_freshness_repair_level5",
@@ -15862,6 +16110,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15905,7 +16154,7 @@
       "add_generative_widget {\"name\": \"Vendor-freshness Rebuild Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 10,
-    "spec_sha256": "aa9bdc1324e21bc41b37d932f06ce0538e9f59297f34219d1188debf2add4992"
+    "spec_sha256": "5d0125140e75c706ee3f84a7df83d46b7dc9cf9ed4d3b0cebc46fd2dc73feaba"
   },
   "visualization_gallery_level0": {
     "task_id": "visualization_gallery_level0",
@@ -15932,6 +16181,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -15970,7 +16220,7 @@
       "manage_dashboard {\"operation\": \"create\", \"name\": \"Visualization Gallery\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "50c9791a979e9cccf64487435f189ee58f836ddcd50d94693c34c98500f5b918"
+    "spec_sha256": "932f67799862165a9da2e3ee59e4583013425ab2d4e12650576044fea1daff64"
   },
   "visualization_gallery_level1": {
     "task_id": "visualization_gallery_level1",
@@ -16005,6 +16255,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -16044,7 +16295,7 @@
       "manage_navigation_bar {\"operation\": \"add_tabs\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "22a28f1f0f4764d9a57730a22fa84586d71c7f545b4caf15e1e328518400c12f"
+    "spec_sha256": "d5d66eb3b3ca9326e4cf9a2cf5e1e17723829fe9ecc17139292c2321f32c425d"
   },
   "visualization_gallery_level2": {
     "task_id": "visualization_gallery_level2",
@@ -16063,20 +16314,16 @@
         "why": "graded value (create_widget:origin)"
       },
       {
-        "text": "Overview",
-        "why": "graded value (manage_navigation_bar:tabs)"
-      },
-      {
-        "text": "Review",
-        "why": "graded value (manage_navigation_bar:tabs)"
-      },
-      {
         "text": "Visualization Gallery",
         "why": "graded value (manage_dashboard:name)"
       },
       {
         "text": "create",
         "why": "graded value (manage_dashboard:operation)"
+      },
+      {
+        "text": "the gallery layout policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -16087,6 +16334,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -16127,7 +16375,7 @@
       "create_widget {\"widget_id\": \"chains_highchart\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "db531954d918587223b45bcd6fc63da94a01fc906390ecf11d8953340c6936ce"
+    "spec_sha256": "3c73f3f007907d07f9daaf3b47ad6af8d942d7b5cf0bef49fc38878248173c59"
   },
   "visualization_gallery_level3": {
     "task_id": "visualization_gallery_level3",
@@ -16146,24 +16394,12 @@
         "why": "graded value (create_widget:origin)"
       },
       {
-        "text": "Overview",
-        "why": "graded value (manage_navigation_bar:tabs)"
-      },
-      {
-        "text": "Review",
-        "why": "graded value (manage_navigation_bar:tabs)"
-      },
-      {
         "text": "Vega-Lite Bar Demo",
         "why": "target display name (findability)"
       },
       {
-        "text": "Visualization Gallery",
-        "why": "graded value (manage_dashboard:name)"
-      },
-      {
-        "text": "create",
-        "why": "graded value (manage_dashboard:operation)"
+        "text": "open Visualization Gallery dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -16174,6 +16410,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -16208,14 +16445,13 @@
     "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
     "word_cap": 110,
     "flow": [
-      "manage_dashboard {\"operation\": \"create\", \"name\": \"Visualization Gallery\"}",
-      "manage_navigation_bar {\"operation\": \"add_tabs\"}",
+      "get_workspace_snapshot  (optional)",
       "list_available_widgets  (optional)",
       "create_widget {\"widget_id\": \"chains_highchart\"}",
       "create_widget {\"widget_id\": \"vega_bar\"}"
     ],
-    "max_turns": 8,
-    "spec_sha256": "9f7960a5af86ac55ca0a374307d7ba58866e6abb5fc7b7c50bf9a6274694fe0d"
+    "max_turns": 7,
+    "spec_sha256": "0868d4702b244db64e77518b79718ea78b5dcb6bca1901380a646deea1c6519b"
   },
   "visualization_gallery_level4": {
     "task_id": "visualization_gallery_level4",
@@ -16275,6 +16511,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -16319,7 +16556,7 @@
       "create_widget {\"widget_id\": \"vega_scatter_demo\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "57f344ef73766c00ee466b3f3c1e7490fd39df9523435be5eeebd5250f474029"
+    "spec_sha256": "d43346287d9becfb897e65ecd46f44e30e62865f521b6a83312934c859962021"
   },
   "visualization_gallery_level5": {
     "task_id": "visualization_gallery_level5",
@@ -16403,6 +16640,7 @@
       "(finance-",
       "level-",
       "manifest specification",
+      "openbb://",
       "snake_case",
       "wave one",
       "wave three",
@@ -16450,6 +16688,6 @@
       "add_generative_widget {\"name\": \"Visualization-gallery Build Note\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 14,
-    "spec_sha256": "3306588c6107d6a0980e3793fa730b2efa12855f77f1bf9f262e5b1deadbb874"
+    "spec_sha256": "5becbf83f1c43fddee3b14b15ac45b16a9c9e03a40c4113f9eb4d1c0ea650a41"
   }
 }

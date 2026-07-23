@@ -2,7 +2,7 @@
   "id": "visualization_gallery_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Build Visualization Gallery from scratch: create and open it, add Overview and Review tabs, then add Getting Started's Chains TVL Highcharts.",
+  "prompt": "Set Visualization Gallery up to the gallery layout policy - that means Overview and Review tabs - create and open it, then add Getting Started's Chains TVL Highcharts.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

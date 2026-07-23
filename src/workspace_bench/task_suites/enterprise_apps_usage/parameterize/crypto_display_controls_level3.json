@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level3",
   "category": "single-widget",
   "difficulty": "level3",
-  "prompt": "Updates for the open Crypto Display Controls dashboard: set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3; set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, daysPicker1 1; preserve the first view.",
+  "prompt": "Two screen tweaks on the open Crypto Display Controls dashboard: set SQL Query Widget with prompt SELECT * FROM DATA LIMIT 3, and set Moving Parameters Example with datePicker1 $currentDate-1d, textBox1 Ready, TrueFalse True, days 1; the first view keeps its setup.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "governed_earnings_brief_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Review the backend contract resource (openbb://workspace/contract/backend) for the open Governed Earnings Brief dashboard, then add a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.",
+  "prompt": "Review the backend contract resource for the open Governed Earnings Brief dashboard, then add a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "technology_decision_inputs_level0",
   "category": "single-widget",
   "difficulty": "level0",
-  "prompt": "On the open Technology Decision Inputs dashboard, switch Car Manufacturer Performance with company set to TSLA and year set to 2023, and leave every other view unchanged.",
+  "prompt": "On the open Technology Decision Inputs dashboard, switch Car Manufacturer Performance: company to TSLA, year to 2023. Leave everything else in place.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

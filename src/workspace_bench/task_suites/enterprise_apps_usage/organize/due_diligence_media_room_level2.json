@@ -2,7 +2,7 @@
   "id": "due_diligence_media_room_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Build Due Diligence Media Room from scratch: create and open it, add Overview and Review tabs, then add Getting Started's Video Library with Transcript.",
+  "prompt": "Set Due Diligence Media Room up to the media room layout policy - that means Overview and Review tabs - create and open it, then add Getting Started's Video Library with Transcript.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

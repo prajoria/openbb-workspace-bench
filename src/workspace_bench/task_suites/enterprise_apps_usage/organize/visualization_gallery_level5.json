@@ -2,7 +2,7 @@
   "id": "visualization_gallery_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Assemble Buildout Visualization Gallery: add it with a Visualization Review Register table, publish and instantiate Visualization Gallery App on Gallery, following the workspace's widgets.json spec, then add Getting Started's Vega-Lite Bar Demo, Widget Examples's Vega-Lite Scatter Demo. Follow the Finance Comps skill and add a Visualization-gallery Build Note recording what it compares after normalizing metrics.",
+  "prompt": "Buildout Visualization Gallery ships now: add it with a Visualization Review Register table per the widgets.json spec, publish and instantiate Visualization Gallery App on Gallery, then add Getting Started's Vega-Lite Bar Demo and Widget Examples's Vega-Lite Scatter Demo. Sign off with a Visualization-gallery Build Note recording what the Finance Comps skill compares after normalizing metrics and what it says deserve premium or discount.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

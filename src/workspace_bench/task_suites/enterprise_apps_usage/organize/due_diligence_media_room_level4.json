@@ -2,7 +2,7 @@
   "id": "due_diligence_media_room_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Apply the Finance Tearsheet skill: create and open Due Diligence Media Room, add Catalysts and Risks tabs, and add Getting Started's Video Library with Transcript, Widget Examples's URL PDF files.",
+  "prompt": "Apply the Finance Tearsheet skill: create and open Due Diligence Media Room with a Risks tab and, before it, a tab named for what the skill gathers between valuation and risks; then add Getting Started's Video Library with Transcript and Widget Examples's URL PDF files.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

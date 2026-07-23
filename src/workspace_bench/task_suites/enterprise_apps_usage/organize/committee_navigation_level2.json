@@ -2,7 +2,7 @@
   "id": "committee_navigation_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "The committee needs an active Pilot Committee Review dashboard with Agenda and Evidence tabs. Create it, then open Evidence.",
+  "prompt": "The committee needs an active Pilot Committee Review dashboard set to the committee session policy - that means Agenda and Evidence tabs. Create it, then open Evidence.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

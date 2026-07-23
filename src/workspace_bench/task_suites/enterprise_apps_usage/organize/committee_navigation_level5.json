@@ -2,7 +2,7 @@
   "id": "committee_navigation_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register table views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps.json spec. Follow the Finance Earnings Prep skill and add a Committee Navigation Build Note recording what it inspects just before producing action items.",
+  "prompt": "Give the committee an app of its own: author and add Committee Navigation Backend with Agenda Queue and Evidence Register table views per the apps.json spec, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Close with a Committee Navigation Build Note recording what the Finance Earnings Prep skill inspects just before producing action items.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

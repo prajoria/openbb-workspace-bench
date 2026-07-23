@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps.json spec. Follow the Finance Guidance Tracker skill and add a Client Onboarding Build Note recording what it flags after comparing claims with guidance.",
+  "prompt": "Stand up onboarding as an app: author and add Client Onboarding Backend with Client Intake Queue and Approval Log table views per the apps.json spec, publish a Client Onboarding App with Intake and Approvals tabs, and instantiate it. Then add a Client Onboarding Build Note recording what the Finance Guidance Tracker skill flags after comparing claims with guidance.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

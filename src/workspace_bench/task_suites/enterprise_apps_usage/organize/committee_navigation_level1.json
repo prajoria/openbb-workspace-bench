@@ -2,7 +2,7 @@
   "id": "committee_navigation_level1",
   "category": "dashboard",
   "difficulty": "level1",
-  "prompt": "Create Pilot Committee Review as the active committee dashboard, with Agenda and Evidence tabs.",
+  "prompt": "Committee prep - create Pilot Committee Review as the active dashboard, with Agenda and Evidence tabs.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

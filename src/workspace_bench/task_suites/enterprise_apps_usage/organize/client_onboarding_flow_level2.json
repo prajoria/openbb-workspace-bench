@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Operations needs you to create and activate Rollout Client Onboarding with Intake, Review, and Approval tabs, then open Review.",
+  "prompt": "Operations wants Rollout Client Onboarding stood up to the intake flow policy - that means Intake, Review, and Approval tabs - create and activate it, then open Review.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
