@@ -2,7 +2,7 @@
   "id": "execution_quality_review_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Under the Finance Comps skill, add Live Orders from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started, and add a Execution-quality Governance note naming outliers.",
+  "prompt": "Desk review under the Finance Comps skill: add Live Orders from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL, then leave an Execution-quality Governance note naming what it says deserve premium or discount.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

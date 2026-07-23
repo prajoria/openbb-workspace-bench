@@ -2,7 +2,7 @@
   "id": "decision_briefing_level1",
   "category": "single-widget",
   "difficulty": "level1",
-  "prompt": "On the open Pilot Decision Brief dashboard, find Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, and add it for Flagship Long/Short and YTD.",
+  "prompt": "Before the portfolio review, get the PM's idea pipeline onto the open Pilot Decision Brief dashboard: it's Trade Ideas under Bench Stark Enterprise's Portfolio Command Center, for Flagship Long/Short and YTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

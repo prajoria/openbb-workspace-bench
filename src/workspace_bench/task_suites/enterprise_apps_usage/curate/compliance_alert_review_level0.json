@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level0",
   "category": "dashboard",
   "difficulty": "level0",
-  "prompt": "Add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub to the current dashboard.",
+  "prompt": "Compliance morning sweep: add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub to the current dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

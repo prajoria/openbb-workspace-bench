@@ -2995,7 +2995,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: dashboard · specification: -
 
-> Add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub to the current dashboard.
+> Compliance morning sweep: add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub to the current dashboard.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3009,7 +3009,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: dashboard · specification: -
 
-> Next, add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub beside it on the current dashboard.
+> Surveillance flagged personal-trading activity again - find the Policy Breaches view in Bench Stark Enterprise's Compliance Surveillance Hub and put it on the current dashboard.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3023,7 +3023,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> Place both Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub on the current dashboard, configured to the open-items review policy - that policy means everything still open, quarter to date.
+> Audit prep, current dashboard: place Open Alert Metrics and Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub, both configured to the open-items review policy - that policy means everything still open, quarter to date.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3038,7 +3038,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> The open Compliance Alert Review dashboard already has Open Alert Metrics on it - add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started alongside, and leave what is there alone.
+> Our compliance lead started the open Compliance Alert Review dashboard and Open Alert Metrics is already up. Add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub and Getting Started's Markdown Widget with Number Input alongside, leaving everything already there untouched.
 
 - Initial workspace: dashboard "Compliance Alert Review"; 1 tab(s): review; 1 seeded widget(s): compliance_surveillance_hub_alerts_open_alert_metrics({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3054,7 +3054,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Under the Finance Guidance Tracker skill, add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started, and add a Compliance-alert Governance note naming evidence gaps.
+> Weekly compliance close under the Finance Guidance Tracker skill: add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub and Getting Started's Markdown Widget with Number Input, then leave a Compliance-alert Governance note naming the final thing its workflow lists.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3070,7 +3070,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Launch Buildout Compliance Review: add it with a Compliance Review Register table and publish and instantiate Compliance Review App on Review, following the workspace's widgets.json spec; also add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started. Follow the Finance Guidance Tracker skill and add a Compliance-alert Build Note recording the final thing its workflow lists.
+> Stand up Buildout Compliance Review for the audit team: add it with a Compliance Review Register table per the workspace's widgets.json spec, publish and instantiate Compliance Review App on Review, and bring in Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub plus Getting Started's Markdown Widget with Number Input. Follow the Finance Guidance Tracker skill and close with a Compliance-alert Build Note recording the final thing its workflow lists.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3087,7 +3087,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: single-widget · specification: -
 
-> The PM wants Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, on the open Pilot Decision Brief dashboard, with fund set to Flagship Long/Short and period set to YTD.
+> The PM call is at three - on the open Pilot Decision Brief dashboard, add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center with fund set to Flagship Long/Short and period set to YTD.
 
 - Initial workspace: dashboard "Pilot Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3101,7 +3101,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: single-widget · specification: -
 
-> On the open Pilot Decision Brief dashboard, find Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, and add it for Flagship Long/Short and YTD.
+> Before the portfolio review, get the PM's idea pipeline onto the open Pilot Decision Brief dashboard: it's Trade Ideas under Bench Stark Enterprise's Portfolio Command Center, for Flagship Long/Short and YTD.
 
 - Initial workspace: dashboard "Pilot Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3115,7 +3115,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: single-widget · specification: -
 
-> Prepare the open Pilot Decision Brief dashboard under the quarterly PM briefing policy. Add Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short; quarterly means QTD.
+> Quarterly PM briefing time: prep the open Pilot Decision Brief dashboard with Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, configured per the quarterly PM briefing policy.
 
 - Initial workspace: dashboard "Pilot Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3129,7 +3129,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> Set up the open Pilot Decision Brief dashboard: place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short and QTD beside Getting Started's Car Manufacturer Performance for TSLA and 2024. Put Trade Ideas at x 0, y 0, width 20, height 14 and the manufacturer view at x 20, y 0, width 20, height 14.
+> Lay out the open Pilot Decision Brief dashboard for the morning meeting: Bench Stark Enterprise's Portfolio Command Center Trade Ideas for Flagship Long/Short and QTD at x 0, y 0, width 20, height 14, with Getting Started's Car Manufacturer Performance for TSLA and 2024 next to it at x 20, y 0, width 20, height 14.
 
 - Initial workspace: dashboard "Pilot Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3144,7 +3144,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Use Workspace session guidance to prepare the open Pilot Decision Brief dashboard: place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short and QTD beside Getting Started's Car Manufacturer Performance for TSLA and 2024. Put Trade Ideas at x 0, y 0, width 20, height 14 and the manufacturer view at x 20, y 0, width 20, height 14.
+> Per Workspace session guidance, finish the open Pilot Decision Brief dashboard: Bench Stark Enterprise's Portfolio Command Center Trade Ideas for Flagship Long/Short and QTD at x 0, y 0, width 20, height 14, and Getting Started's Car Manufacturer Performance for TSLA and 2024 beside it at x 20, y 0, width 20, height 14.
 
 - Initial workspace: dashboard "Pilot Decision Brief"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3159,7 +3159,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The PM needs a Decision Tile Backend with a Decision Summary Tile metric. Author and add it to the workspace's widgets.json spec, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Follow the Daloopa Capital Allocation skill and add a Decision Briefing Build Note recording what buybacks plus payouts are compared against.
+> Our morning briefing needs its own tile: author a Decision Tile Backend with a Decision Summary Tile metric, add it, and instantiate its Decision Briefing App. On the Briefing tab, place Bench Stark Enterprise's Portfolio Command Center Trade Ideas beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Follow the Daloopa Capital Allocation skill and add a Decision Briefing Build Note recording what buybacks plus payouts are compared against.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3176,7 +3176,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: dashboard · specification: -
 
-> Add Live Orders from Bench Stark Enterprise's Execution Desk to the current dashboard.
+> TCA time on the trading desk: add Live Orders from Bench Stark Enterprise's Execution Desk to the current dashboard.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3190,7 +3190,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: dashboard · specification: -
 
-> Next, add Broker Scorecard from Bench Stark Enterprise's Execution Desk beside it on the current dashboard.
+> Best-execution review is next week - dig up the Broker Scorecard view under Bench Stark Enterprise's Execution Desk and add it to the current dashboard.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3204,7 +3204,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> Place both Live Orders from Bench Stark Enterprise's Execution Desk; Broker Scorecard from Bench Stark Enterprise's Execution Desk on the current dashboard, configured to the US desk review policy - that policy means the US Equity desk, quarter to date.
+> For the best-ex file, set the current dashboard up with Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both configured to the US desk review policy - that policy means the US Equity desk, quarter to date.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3219,7 +3219,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> The open Execution Quality Review dashboard already has Live Orders on it - add Broker Scorecard from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started alongside, and leave what is there alone.
+> Trading ops kicked off the open Execution Quality Review dashboard with Live Orders already placed. Add Broker Scorecard from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL next to it, and keep whatever is there intact.
 
 - Initial workspace: dashboard "Execution Quality Review"; 1 tab(s): review; 1 seeded widget(s): execution_desk_blotter_live_orders({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3235,7 +3235,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Under the Finance Comps skill, add Live Orders from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started, and add a Execution-quality Governance note naming outliers.
+> Desk review under the Finance Comps skill: add Live Orders from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL, then leave an Execution-quality Governance note naming what it says deserve premium or discount.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3251,7 +3251,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Launch Buildout Execution Review: add it with a Execution Review Register table and publish and instantiate Execution Review App on Quality, following the workspace's widgets.json spec; also add Live Orders from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started. Follow the Finance Comps skill and add a Execution-quality Build Note recording what it says deserve premium or discount.
+> Give the execution desk its own review stack: add Buildout Execution Review with an Execution Review Register table per the workspace's widgets.json spec, publish and instantiate Execution Review App on Quality, then place Live Orders from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL. Follow the Finance Comps skill and wrap up with an Execution-quality Build Note recording what it says deserve premium or discount.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3268,7 +3268,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: single-widget · specification: -
 
-> Add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Rollout Market Telemetry dashboard.
+> Telemetry rollout continues: add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Rollout Market Telemetry dashboard.
 
 - Initial workspace: dashboard "Rollout Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3282,7 +3282,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: single-widget · specification: -
 
-> On the open Rollout Market Telemetry dashboard, add Getting Started's live-updating grid with real-time WebSocket updates for AAPL.
+> Ticker watch first - on the open Rollout Market Telemetry dashboard, add Getting Started's live-updating grid with real-time WebSocket updates for AAPL.
 
 - Initial workspace: dashboard "Rollout Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3296,7 +3296,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: single-widget · specification: -
 
-> Prepare the open Rollout Market Telemetry dashboard for the quarterly liquidity policy. Add Widget Examples' [MOCK DATA] Tabs + Dropdown Combined; quarterly liquidity means quarterly and liquidity. Place it at x 0, y 0, width 40, height 14.
+> Liquidity round next: prep the open Rollout Market Telemetry dashboard under the quarterly liquidity policy with Widget Examples' [MOCK DATA] Tabs + Dropdown Combined, placed at x 0, y 0, width 40, height 14.
 
 - Initial workspace: dashboard "Rollout Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3310,7 +3310,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> Build out the open Rollout Market Telemetry dashboard with Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity. Put the trends at x 0, y 0, width 20, height 12 and the ratio view at x 20, y 0, width 20, height 12.
+> Fill in the open Rollout Market Telemetry dashboard: Getting Started's Stock Price Trends - Line Sparklines with First/Last Points at x 0, y 0, width 20, height 12, and Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity at x 20, y 0, width 20, height 12.
 
 - Initial workspace: dashboard "Rollout Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3325,7 +3325,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Using Workspace session guidance, finish the open Rollout Market Telemetry dashboard with Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity. Put them at x 0 and x 20, y 0, each width 20 and height 12.
+> Workspace session guidance applies here - wrap the open Rollout Market Telemetry dashboard: Getting Started's Stock Price Trends - Line Sparklines with First/Last Points at x 0, y 0, width 20, height 12, then Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity at x 20, y 0, width 20, height 12.
 
 - Initial workspace: dashboard "Rollout Market Telemetry"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3340,7 +3340,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Author and add a Telemetry Summary Backend with a Telemetry Summary Tile metric, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Follow the Finance Tearsheet skill and add a Market Telemetry Build Note recording the first input its workflow gathers.
+> Monitoring needs a permanent home: author a Telemetry Summary Backend with a Telemetry Summary Tile metric, add it, and instantiate its Market Telemetry App. On the Monitor tab, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Follow the Finance Tearsheet skill and add a Market Telemetry Build Note recording the first input its workflow gathers.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`

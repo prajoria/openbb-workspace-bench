@@ -2,7 +2,7 @@
   "id": "decision_briefing_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Prepare the open Pilot Decision Brief dashboard under the quarterly PM briefing policy. Add Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short; quarterly means QTD.",
+  "prompt": "Quarterly PM briefing time: prep the open Pilot Decision Brief dashboard with Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, configured per the quarterly PM briefing policy.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

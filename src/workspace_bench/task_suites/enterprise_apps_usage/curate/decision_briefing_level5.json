@@ -2,7 +2,7 @@
   "id": "decision_briefing_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The PM needs a Decision Tile Backend with a Decision Summary Tile metric. Author and add it to the workspace's widgets.json spec, then instantiate its Decision Briefing App. On Briefing, place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Follow the Daloopa Capital Allocation skill and add a Decision Briefing Build Note recording what buybacks plus payouts are compared against.",
+  "prompt": "Our morning briefing needs its own tile: author a Decision Tile Backend with a Decision Summary Tile metric, add it, and instantiate its Decision Briefing App. On the Briefing tab, place Bench Stark Enterprise's Portfolio Command Center Trade Ideas beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Follow the Daloopa Capital Allocation skill and add a Decision Briefing Build Note recording what buybacks plus payouts are compared against.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

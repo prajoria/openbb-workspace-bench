@@ -10979,10 +10979,6 @@
         "why": "graded value (create_widget:origin)"
       },
       {
-        "text": "Live Grid",
-        "why": "target display name (findability)"
-      },
-      {
         "text": "open Rollout Market Telemetry dashboard",
         "why": "selected-dashboard phrase (asserted)"
       }
@@ -11036,7 +11032,7 @@
       "create_widget {\"widget_id\": \"live_grid_data\", \"data_args\": {\"symbol\": \"AAPL\"}}"
     ],
     "max_turns": 7,
-    "spec_sha256": "86b3536d3c10dd48739fdc94d6e26d8d0f93a999f033096ee1854cd675c29734"
+    "spec_sha256": "36c32f43d29f73c1b823fca03735563714e3935820f4964899ffd22ea762e83a"
   },
   "market_telemetry_level2": {
     "task_id": "market_telemetry_level2",

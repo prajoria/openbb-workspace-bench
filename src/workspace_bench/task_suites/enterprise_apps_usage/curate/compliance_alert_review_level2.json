@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Place both Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub on the current dashboard, configured to the open-items review policy - that policy means everything still open, quarter to date.",
+  "prompt": "Audit prep, current dashboard: place Open Alert Metrics and Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub, both configured to the open-items review policy - that policy means everything still open, quarter to date.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Under the Finance Guidance Tracker skill, add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started, and add a Compliance-alert Governance note naming evidence gaps.",
+  "prompt": "Weekly compliance close under the Finance Guidance Tracker skill: add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub and Getting Started's Markdown Widget with Number Input, then leave a Compliance-alert Governance note naming the final thing its workflow lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "execution_quality_review_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Place both Live Orders from Bench Stark Enterprise's Execution Desk; Broker Scorecard from Bench Stark Enterprise's Execution Desk on the current dashboard, configured to the US desk review policy - that policy means the US Equity desk, quarter to date.",
+  "prompt": "For the best-ex file, set the current dashboard up with Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both configured to the US desk review policy - that policy means the US Equity desk, quarter to date.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

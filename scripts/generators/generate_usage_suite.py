@@ -10819,6 +10819,10 @@ def _compute_prompt_spec(record: TaskRecord) -> JsonDict:
         must_contain.setdefault(text, why)
 
     for target in record.targets:
+        if target.display_name == "Live Grid" and target.widget_id == LIVE_GRID_WIDGET:
+            # The Live Grid collision test demands disambiguation by
+            # property alone; the prompt must NOT print the display name.
+            continue
         _require(target.display_name, "target display name (findability)")
     for policy in record.policies:
         _require(policy.words, "policy phrase (declared grounding)")

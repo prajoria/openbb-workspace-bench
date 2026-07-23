@@ -2,7 +2,7 @@
   "id": "decision_briefing_level0",
   "category": "single-widget",
   "difficulty": "level0",
-  "prompt": "The PM wants Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, on the open Pilot Decision Brief dashboard, with fund set to Flagship Long/Short and period set to YTD.",
+  "prompt": "The PM call is at three - on the open Pilot Decision Brief dashboard, add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center with fund set to Flagship Long/Short and period set to YTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

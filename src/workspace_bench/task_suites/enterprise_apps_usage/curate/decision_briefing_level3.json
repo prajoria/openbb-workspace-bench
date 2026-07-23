@@ -2,7 +2,7 @@
   "id": "decision_briefing_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "Set up the open Pilot Decision Brief dashboard: place Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, for Flagship Long/Short and QTD beside Getting Started's Car Manufacturer Performance for TSLA and 2024. Put Trade Ideas at x 0, y 0, width 20, height 14 and the manufacturer view at x 20, y 0, width 20, height 14.",
+  "prompt": "Lay out the open Pilot Decision Brief dashboard for the morning meeting: Bench Stark Enterprise's Portfolio Command Center Trade Ideas for Flagship Long/Short and QTD at x 0, y 0, width 20, height 14, with Getting Started's Car Manufacturer Performance for TSLA and 2024 next to it at x 20, y 0, width 20, height 14.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -95,6 +95,30 @@
     "prompt": "Give the committee an app of its own: author and add Committee Navigation Backend with Agenda Queue and Evidence Register table views per the apps.json spec, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Close with a Committee Navigation Build Note recording what the Finance Earnings Prep skill inspects just before producing action items.",
     "spec_sha256": "7904af6ac711e1d23512773828f6c07b9f6da2d431c1f6b34623ddf2bffb1735"
   },
+  "compliance_alert_review_level0": {
+    "prompt": "Compliance morning sweep: add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub to the current dashboard.",
+    "spec_sha256": "48cb4c3c3d69608fb5bf0554aee02d12f1aed31ef2ffd6e38784d305418b1f61"
+  },
+  "compliance_alert_review_level1": {
+    "prompt": "Surveillance flagged personal-trading activity again - find the Policy Breaches view in Bench Stark Enterprise's Compliance Surveillance Hub and put it on the current dashboard.",
+    "spec_sha256": "705cc90d73f24803d3dfd2b250a8db54497d8504c1c8001cf8f91b6a927b139c"
+  },
+  "compliance_alert_review_level2": {
+    "prompt": "Audit prep, current dashboard: place Open Alert Metrics and Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub, both configured to the open-items review policy - that policy means everything still open, quarter to date.",
+    "spec_sha256": "44272030920a6db803352ce0280fcb92f9f5b1023dc32d62da8df97eef2c7d2a"
+  },
+  "compliance_alert_review_level3": {
+    "prompt": "Our compliance lead started the open Compliance Alert Review dashboard and Open Alert Metrics is already up. Add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub and Getting Started's Markdown Widget with Number Input alongside, leaving everything already there untouched.",
+    "spec_sha256": "ae85842422376af1f7021bcc103386bdc8b3a60ad2f7a78ddb86d9ea30b502d9"
+  },
+  "compliance_alert_review_level4": {
+    "prompt": "Weekly compliance close under the Finance Guidance Tracker skill: add Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub and Getting Started's Markdown Widget with Number Input, then leave a Compliance-alert Governance note naming the final thing its workflow lists.",
+    "spec_sha256": "d28e4b60046dadcc4c3aba88767e436666f71e719fa01c7bce2bd81fc920e42d"
+  },
+  "compliance_alert_review_level5": {
+    "prompt": "Stand up Buildout Compliance Review for the audit team: add it with a Compliance Review Register table per the workspace's widgets.json spec, publish and instantiate Compliance Review App on Review, and bring in Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub plus Getting Started's Markdown Widget with Number Input. Follow the Finance Guidance Tracker skill and close with a Compliance-alert Build Note recording the final thing its workflow lists.",
+    "spec_sha256": "e6124d7e93a76df6fa68df6ab3480ef2fcccdb1a098f67d51420cb2a10a319fd"
+  },
   "crypto_display_controls_level0": {
     "prompt": "On the open Crypto Display Controls dashboard, set Binance OHLC: symbol to ethusdt, interval to 1m, exchange to binancef. Preserve the other views.",
     "spec_sha256": "3887f19ed866345abc0586df31961f38c51b67da74514667f72a3d2c8337f864"
@@ -142,6 +166,30 @@
   "crypto_document_controls_level5": {
     "prompt": "Document tooling next - add Rollout Document Tuning as a custom backend with a Document Control Panel table carrying filenames and category params per the widgets.json spec, publish and instantiate its app on Controls, set the live panel to solana.pdf from l1, and wrap with a Document-controls Tuning Note recording the first input the Finance Tearsheet skill's workflow gathers.",
     "spec_sha256": "1f485e39717be364a701b0aa7294bbc7cd18bd0ea51d3b517522a43634326e67"
+  },
+  "decision_briefing_level0": {
+    "prompt": "The PM call is at three - on the open Pilot Decision Brief dashboard, add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center with fund set to Flagship Long/Short and period set to YTD.",
+    "spec_sha256": "6538ab483fa418511edc46a11e6e0a538f390049a30dc3ec7168397091a67540"
+  },
+  "decision_briefing_level1": {
+    "prompt": "Before the portfolio review, get the PM's idea pipeline onto the open Pilot Decision Brief dashboard: it's Trade Ideas under Bench Stark Enterprise's Portfolio Command Center, for Flagship Long/Short and YTD.",
+    "spec_sha256": "acdc3b203bf7984224dce094acdf3b20d0a8cf74dab74b00d9d7ebcba46d30c3"
+  },
+  "decision_briefing_level2": {
+    "prompt": "Quarterly PM briefing time: prep the open Pilot Decision Brief dashboard with Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, configured per the quarterly PM briefing policy.",
+    "spec_sha256": "7d6e914ab2fd48b121a526b7dc55f2e44e27f45b44e9e56a9fb9cbc9c847a982"
+  },
+  "decision_briefing_level3": {
+    "prompt": "Lay out the open Pilot Decision Brief dashboard for the morning meeting: Bench Stark Enterprise's Portfolio Command Center Trade Ideas for Flagship Long/Short and QTD at x 0, y 0, width 20, height 14, with Getting Started's Car Manufacturer Performance for TSLA and 2024 next to it at x 20, y 0, width 20, height 14.",
+    "spec_sha256": "9aff77e0084a270d0df8f3d3c521f36d22c00528b5abb814e3f555730558804f"
+  },
+  "decision_briefing_level4": {
+    "prompt": "Per Workspace session guidance, finish the open Pilot Decision Brief dashboard: Bench Stark Enterprise's Portfolio Command Center Trade Ideas for Flagship Long/Short and QTD at x 0, y 0, width 20, height 14, and Getting Started's Car Manufacturer Performance for TSLA and 2024 beside it at x 20, y 0, width 20, height 14.",
+    "spec_sha256": "5d103dd310e292d2faf459802af8f810ceee1262c88fd0bb1ec09ebc397e2ad6"
+  },
+  "decision_briefing_level5": {
+    "prompt": "Our morning briefing needs its own tile: author a Decision Tile Backend with a Decision Summary Tile metric, add it, and instantiate its Decision Briefing App. On the Briefing tab, place Bench Stark Enterprise's Portfolio Command Center Trade Ideas beside Getting Started's Car Manufacturer Performance at y 10, x 0 and x 20, each width 20 and height 14. Follow the Daloopa Capital Allocation skill and add a Decision Briefing Build Note recording what buybacks plus payouts are compared against.",
+    "spec_sha256": "f7c575891d07c9c7ad6f0559f6a9fb9564832629fc1ed46de28543fbdf0c0be4"
   },
   "due_diligence_media_room_level0": {
     "prompt": "Create a dashboard named Due Diligence Media Room and open it.",
@@ -191,6 +239,30 @@
     "prompt": "The desk wants a dedicated status check: build and add a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD per the widgets.json spec, instantiate its Earnings Lookup App with the table on Lookup, read the lookup, and report the exact score and status. Add an Earnings Lookup Build Note recording what the Finance Earnings Prep skill identifies right after the estimate comparison.",
     "spec_sha256": "58cdedd9489cda285f79d188b8a6b5b03e2cb1a04e5225dedb25bbc3e0a1eb97"
   },
+  "execution_quality_review_level0": {
+    "prompt": "TCA time on the trading desk: add Live Orders from Bench Stark Enterprise's Execution Desk to the current dashboard.",
+    "spec_sha256": "62e33d942d125e491b35920e9abf62104e2112d516332befc40cd479e8cef4d0"
+  },
+  "execution_quality_review_level1": {
+    "prompt": "Best-execution review is next week - dig up the Broker Scorecard view under Bench Stark Enterprise's Execution Desk and add it to the current dashboard.",
+    "spec_sha256": "01dd3499b80a28d9328780dba21ef73d9e92ec54e9e0d3adc64b3766d27ae670"
+  },
+  "execution_quality_review_level2": {
+    "prompt": "For the best-ex file, set the current dashboard up with Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both configured to the US desk review policy - that policy means the US Equity desk, quarter to date.",
+    "spec_sha256": "5d4de5ba901ba9d94fef23fb4f6f885631450f8dec3546bcf9553609c2401fbd"
+  },
+  "execution_quality_review_level3": {
+    "prompt": "Trading ops kicked off the open Execution Quality Review dashboard with Live Orders already placed. Add Broker Scorecard from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL next to it, and keep whatever is there intact.",
+    "spec_sha256": "5620fa42fb99a2e7e1646d289691a39acf5a861f11e7e1005ef9aa92f28387c8"
+  },
+  "execution_quality_review_level4": {
+    "prompt": "Desk review under the Finance Comps skill: add Live Orders from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL, then leave an Execution-quality Governance note naming what it says deserve premium or discount.",
+    "spec_sha256": "a70677f5f0b351096efd4f9dbc87cbb7f912cad3313904759bfa83696c94e919"
+  },
+  "execution_quality_review_level5": {
+    "prompt": "Give the execution desk its own review stack: add Buildout Execution Review with an Execution Review Register table per the workspace's widgets.json spec, publish and instantiate Execution Review App on Quality, then place Live Orders from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL. Follow the Finance Comps skill and wrap up with an Execution-quality Build Note recording what it says deserve premium or discount.",
+    "spec_sha256": "f77b7a4d9632f4fc47bfa47f3f546571c69368d99a343e6c8f56a62ef5890cab"
+  },
   "live_quote_lookup_level0": {
     "prompt": "Read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
     "spec_sha256": "be28e224fe26db94bb7848205bb8f399457f85e28a2a4ac20f8d870c7375a365"
@@ -238,6 +310,30 @@
   "manufacturer_details_repair_level5": {
     "prompt": "Rollout Detail Repair vanished along with its queue. On the open Custom Detail Repair dashboard, rebuild the service: add a custom backend Rollout Detail Repair with a Manufacturer Detail Queue table to the widgets.json spec, publish and instantiate its app with the queue on Details, and leave a Detail-queue Rebuild Note recording who the Daloopa Industry skill lists from the company directory.",
     "spec_sha256": "7ada9564c190c82727287674cb9c9bbf56dc173dbd531ee9dbb0d455bcc23e21"
+  },
+  "market_telemetry_level0": {
+    "prompt": "Telemetry rollout continues: add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Rollout Market Telemetry dashboard.",
+    "spec_sha256": "c59f5d0b5cdf331445037fceeadafda4cb079ba3d0e8e8b9a93289613db76a60"
+  },
+  "market_telemetry_level1": {
+    "prompt": "Ticker watch first - on the open Rollout Market Telemetry dashboard, add Getting Started's live-updating grid with real-time WebSocket updates for AAPL.",
+    "spec_sha256": "36c32f43d29f73c1b823fca03735563714e3935820f4964899ffd22ea762e83a"
+  },
+  "market_telemetry_level2": {
+    "prompt": "Liquidity round next: prep the open Rollout Market Telemetry dashboard under the quarterly liquidity policy with Widget Examples' [MOCK DATA] Tabs + Dropdown Combined, placed at x 0, y 0, width 40, height 14.",
+    "spec_sha256": "f2d9b50045df64c6682ad019d8c89a6366ff031bbcfe539345a2c2c10bc731e4"
+  },
+  "market_telemetry_level3": {
+    "prompt": "Fill in the open Rollout Market Telemetry dashboard: Getting Started's Stock Price Trends - Line Sparklines with First/Last Points at x 0, y 0, width 20, height 12, and Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity at x 20, y 0, width 20, height 12.",
+    "spec_sha256": "2d864a13cca24d5f3074cd0fd637882b91fa5dc170eb01de5e083863cfcb3aec"
+  },
+  "market_telemetry_level4": {
+    "prompt": "Workspace session guidance applies here - wrap the open Rollout Market Telemetry dashboard: Getting Started's Stock Price Trends - Line Sparklines with First/Last Points at x 0, y 0, width 20, height 12, then Widget Examples' [MOCK DATA] Tabs + Dropdown Combined for quarterly liquidity at x 20, y 0, width 20, height 12.",
+    "spec_sha256": "77e945c6a468b1646dbf13753fec00f5d9eee5c07731f9e98d78df36db19f3b3"
+  },
+  "market_telemetry_level5": {
+    "prompt": "Monitoring needs a permanent home: author a Telemetry Summary Backend with a Telemetry Summary Tile metric, add it, and instantiate its Market Telemetry App. On the Monitor tab, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Follow the Finance Tearsheet skill and add a Market Telemetry Build Note recording the first input its workflow gathers.",
+    "spec_sha256": "c2ba7a8a17ef528ac426bf74363f4791a1471e2d90c3f0f11481a19209516631"
   },
   "nav_exception_station_level0": {
     "prompt": "NAV Exceptions on the open NAV Repair Staging dashboard is showing the wrong slice: set fund to Flagship Long/Short, status to Open, and period to YTD.",

@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "The open Compliance Alert Review dashboard already has Open Alert Metrics on it - add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started alongside, and leave what is there alone.",
+  "prompt": "Our compliance lead started the open Compliance Alert Review dashboard and Open Alert Metrics is already up. Add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub and Getting Started's Markdown Widget with Number Input alongside, leaving everything already there untouched.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

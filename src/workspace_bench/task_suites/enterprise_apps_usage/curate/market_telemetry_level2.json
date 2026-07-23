@@ -2,7 +2,7 @@
   "id": "market_telemetry_level2",
   "category": "single-widget",
   "difficulty": "level2",
-  "prompt": "Prepare the open Rollout Market Telemetry dashboard for the quarterly liquidity policy. Add Widget Examples' [MOCK DATA] Tabs + Dropdown Combined; quarterly liquidity means quarterly and liquidity. Place it at x 0, y 0, width 40, height 14.",
+  "prompt": "Liquidity round next: prep the open Rollout Market Telemetry dashboard under the quarterly liquidity policy with Widget Examples' [MOCK DATA] Tabs + Dropdown Combined, placed at x 0, y 0, width 40, height 14.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
