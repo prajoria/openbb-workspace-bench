@@ -2,7 +2,7 @@
   "id": "governed_earnings_brief_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "For the open Governed Earnings Brief dashboard, combine Finance Earnings Prep governance with Workspace session guidance. Add an Actions tab and an Earnings Session Actions note there naming action items and current-dashboard.",
+  "prompt": "Wrap the earnings desk day - on the open Governed Earnings Brief dashboard, combine Finance Earnings Prep governance with Workspace session guidance, add an Actions tab, and leave an Earnings Session Actions note there naming action items and current-dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

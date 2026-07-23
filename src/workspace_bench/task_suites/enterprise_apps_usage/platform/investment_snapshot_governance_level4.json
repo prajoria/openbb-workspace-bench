@@ -2,7 +2,7 @@
   "id": "investment_snapshot_governance_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "Using the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget, and add a Investment-snapshot Governed Note containing price action.",
+  "prompt": "Snapshot sign-off under the Finance Tearsheet skill: add Getting Started's TradingView Chart and Getting Started's HTML Widget, then close with an Investment-snapshot Governed Note recording the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

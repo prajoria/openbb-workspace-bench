@@ -2,7 +2,7 @@
   "id": "investment_snapshot_governance_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Deliver Buildout Investment Snapshot: read the Finance Tearsheet skill, add the backend with a Investment Snapshot Register table per the workspace's widgets.json spec, publish and instantiate Investment Snapshot App on Snapshot, and add a Investment-snapshot Build Note containing price action.",
+  "prompt": "Deliver Buildout Investment Snapshot for the team: read the Finance Tearsheet skill, add the backend with an Investment Snapshot Register table per the workspace's widgets.json spec, publish and instantiate Investment Snapshot App on Snapshot, and cap it with an Investment-snapshot Build Note containing price action.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

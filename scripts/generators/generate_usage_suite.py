@@ -2522,7 +2522,7 @@ def _build_platform_tasks() -> list[TaskRecord]:
             (
                 "Read the Finance Earnings Prep skill for the open "
                 "Governed Earnings Brief dashboard. Add an Earnings Prep Workflow note that "
-                "records the workflow title and its first and fourth actions."
+                "records the workflow title and its first and fifth actions."
             ),
             [
                 _snapshot(),
@@ -10062,6 +10062,22 @@ def _assert_wave2_requirements(records: list[TaskRecord]) -> None:
         for record in daloopa_spine
     ):
         raise AssertionError("wave2 Daloopa spine does not lean on Daloopa plus skills")
+
+    # Ordinal claims made in prose ("its first and fifth actions") are
+    # invisible to the description-truth checks; pin the ones prompts rely on
+    # so a skill edit cannot silently shift them.
+    ordinal_claims = [
+        ("finance-earnings-prep", "1.", "internal estimates"),
+        ("finance-earnings-prep", "5.", "transcript tone"),
+    ]
+    for slug, marker, token in ordinal_claims:
+        source_lines = str(WORKSPACE_SKILLS[slug]["content"]).splitlines()
+        line = next((l for l in source_lines if l.strip().startswith(marker)), "")
+        if token.casefold() not in line.casefold():
+            raise AssertionError(
+                f"{slug}: prompt ordinal claim broken - {token!r} is no longer "
+                f"on the {marker!r} line"
+            )
 
     capability_phrases = {
         "market_telemetry": "live-updating grid",

@@ -4768,7 +4768,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> From the open Cited Research Operations dashboard, read the Daloopa Tearsheet skill. Add a Daloopa Tearsheet Workflow note that records the workflow title and its period-math anchor.
+> Research ops housekeeping on the open Cited Research Operations dashboard: read the Daloopa Tearsheet skill and leave a Daloopa Tearsheet Workflow note recording the workflow title and its period-math anchor.
 
 - Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4782,7 +4782,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> On the open Cited Research Operations dashboard, follow Daloopa Tearsheet governance and add Bench Daloopa's Company Directory.
+> Citations team is onboarding - on the open Cited Research Operations dashboard, follow Daloopa Tearsheet governance and pull in Bench Daloopa's Company Directory.
 
 - Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4796,7 +4796,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Use Daloopa Guidance Tracker governance on the open Cited Research Operations dashboard and add Bench Daloopa's Management Guidance for NVDA.
+> Guidance season is here - per Daloopa Guidance Tracker governance, get Bench Daloopa's Management Guidance for NVDA onto the open Cited Research Operations dashboard.
 
 - Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4810,7 +4810,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> For the open Cited Research Operations dashboard, use Daloopa Industry governance to place two Bench Daloopa Company Fundamentals views, one for MSFT in 2025Q4 and one for NVDA in 2025Q4.
+> Two names for the industry read: under Daloopa Industry governance, set the open Cited Research Operations dashboard up with a pair of Bench Daloopa Company Fundamentals views - MSFT in 2025Q4 and NVDA in 2025Q4.
 
 - Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4825,7 +4825,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> Combine Daloopa Capital Allocation governance with Workspace session guidance on the open Cited Research Operations dashboard. Add Bench Daloopa's Company Fundamentals for AMZN in 2026Q1 and a Citation Protocol note naming source_url and calendar_period.
+> Buyback review wrap-up on the open Cited Research Operations dashboard: combine Daloopa Capital Allocation governance with Workspace session guidance, add Bench Daloopa's Company Fundamentals for AMZN in 2026Q1, and leave a Citation Protocol note naming source_url and calendar_period.
 
 - Initial workspace: dashboard "Cited Research Operations"; 1 tab(s): research
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4840,7 +4840,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Following Daloopa Tearsheet governance, author and add a Cited Research Backend with a Citation Review Queue, then publish and instantiate a Cited Research App with a Research tab.
+> New home for citations: following Daloopa Tearsheet governance, author and add a Cited Research Backend with a Citation Review Queue, then publish and instantiate a Cited Research App with a Research tab.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4854,7 +4854,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> Read the Finance Comps skill and add a Comps-governance Starter Note containing valuation multiples.
+> Kick off comps day: read the Finance Comps skill and post a Comps-governance Starter Note containing valuation multiples.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4868,7 +4868,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Start from the Finance Comps skill: add a Comps-governance Discovery Note containing valuation multiples.
+> Valuation huddle in an hour - start from the Finance Comps skill and drop in a Comps-governance Discovery Note containing valuation multiples.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4882,7 +4882,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Put the Finance Comps skill to work: add Getting Started's Plotly Chart with Theme and Toolbar using Config File for valuation multiples.
+> Comps refresh next: put the Finance Comps skill to work and chart valuation multiples with Getting Started's Plotly Chart with Theme and Toolbar using Config File.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4896,7 +4896,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> On the open Comps-governance Desk dashboard, working from the Finance Comps skill, add Getting Started's Plotly Chart with Theme and Toolbar using Config File, Widget Examples's Chains chart example Plotly with raw data to support valuation multiples.
+> Round out the open Comps-governance Desk dashboard from the Finance Comps skill: Getting Started's Plotly Chart with Theme and Toolbar using Config File plus Widget Examples's Chains chart example Plotly with raw data, all in support of valuation multiples.
 
 - Initial workspace: dashboard "Comps-governance Desk"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4911,7 +4911,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> Using the Finance Comps skill, add Getting Started's Plotly Chart with Theme and Toolbar using Config File, Widget Examples's Chains chart example Plotly with raw data, and add a Comps-governance Governed Note containing valuation multiples.
+> Comps sign-off under the Finance Comps skill: add Getting Started's Plotly Chart with Theme and Toolbar using Config File and Widget Examples's Chains chart example Plotly with raw data, then close with a Comps-governance Governed Note recording what it compares after normalizing metrics.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4927,7 +4927,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Deliver Buildout Comps Governance: read the Finance Comps skill, add the backend with a Comps Governance Register table per the workspace's widgets.json spec, publish and instantiate Comps Governance App on Comparables, and add a Comps-governance Build Note containing valuation multiples.
+> Deliver Buildout Comps Governance end to end: read the Finance Comps skill, add the backend with a Comps Governance Register table per the workspace's widgets.json spec, publish and instantiate Comps Governance App on Comparables, and finish with a Comps-governance Build Note containing valuation multiples.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4942,7 +4942,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> Read the Finance Earnings Prep skill for the open Governed Earnings Brief dashboard. Add an Earnings Prep Workflow note that records the workflow title and its first and fourth actions.
+> Earnings week setup - read the Finance Earnings Prep skill for the open Governed Earnings Brief dashboard and leave an Earnings Prep Workflow note recording the workflow title and its first and fifth actions.
 
 - Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4956,7 +4956,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> On the open Governed Earnings Brief dashboard, consult Finance Earnings Prep governance and add an Earnings Governance Actions note that names internal estimates and transcript tone.
+> Prep for the earnings huddle on the open Governed Earnings Brief dashboard: consult Finance Earnings Prep governance and add an Earnings Governance Actions note naming internal estimates and transcript tone.
 
 - Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4970,7 +4970,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Review the backend contract resource for the open Governed Earnings Brief dashboard, then add a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.
+> Before wiring anything up, review the backend contract resource for the open Governed Earnings Brief dashboard, then post a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.
 
 - Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4984,7 +4984,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: dashboard · specification: -
 
-> Use Workspace session guidance on the open Governed Earnings Brief dashboard. Add an Actions tab and place a Session Grounding note there naming current-dashboard and current-tab.
+> Session hygiene on the open Governed Earnings Brief dashboard: use Workspace session guidance, add an Actions tab, and place a Session Grounding note there naming current-dashboard and current-tab.
 
 - Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4998,7 +4998,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: dashboard · specification: -
 
-> For the open Governed Earnings Brief dashboard, combine Finance Earnings Prep governance with Workspace session guidance. Add an Actions tab and an Earnings Session Actions note there naming action items and current-dashboard.
+> Wrap the earnings desk day - on the open Governed Earnings Brief dashboard, combine Finance Earnings Prep governance with Workspace session guidance, add an Actions tab, and leave an Earnings Session Actions note there naming action items and current-dashboard.
 
 - Initial workspace: dashboard "Governed Earnings Brief"; 1 tab(s): overview
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5012,7 +5012,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> The desk wants a Governed Earnings Backend with an Earnings Action Register. Following the build-an-app guide, author and add it, publish a Governed Earnings App with an Actions tab, and instantiate it.
+> The desk wants its own register: following the build-an-app guide, author and add a Governed Earnings Backend with an Earnings Action Register, publish a Governed Earnings App with an Actions tab, and instantiate it.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5026,7 +5026,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level0** · category: platform · specification: -
 
-> Read the Finance Tearsheet skill and add a Investment-snapshot Starter Note containing price action.
+> Snapshot groundwork first: read the Finance Tearsheet skill and post an Investment-snapshot Starter Note containing price action.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5040,7 +5040,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: platform · specification: -
 
-> Start from the Finance Tearsheet skill: add a Investment-snapshot Discovery Note containing price action.
+> New joiner on the snapshot team - start from the Finance Tearsheet skill and add an Investment-snapshot Discovery Note containing price action.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5054,7 +5054,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Put the Finance Tearsheet skill to work: add Getting Started's TradingView Chart for price action.
+> Charting round: put the Finance Tearsheet skill to work and bring in Getting Started's TradingView Chart for price action.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5068,7 +5068,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> On the open Investment-snapshot Desk dashboard, working from the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget to support price action.
+> Fill the open Investment-snapshot Desk dashboard from the Finance Tearsheet skill: Getting Started's TradingView Chart and Getting Started's HTML Widget, both in support of price action.
 
 - Initial workspace: dashboard "Investment-snapshot Desk"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5083,7 +5083,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level4** · category: platform · specification: -
 
-> Using the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget, and add a Investment-snapshot Governed Note containing price action.
+> Snapshot sign-off under the Finance Tearsheet skill: add Getting Started's TradingView Chart and Getting Started's HTML Widget, then close with an Investment-snapshot Governed Note recording the first input its workflow gathers.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -5099,7 +5099,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level5** · category: platform · specification: -
 
-> Deliver Buildout Investment Snapshot: read the Finance Tearsheet skill, add the backend with a Investment Snapshot Register table per the workspace's widgets.json spec, publish and instantiate Investment Snapshot App on Snapshot, and add a Investment-snapshot Build Note containing price action.
+> Deliver Buildout Investment Snapshot for the team: read the Finance Tearsheet skill, add the backend with an Investment Snapshot Register table per the workspace's widgets.json spec, publish and instantiate Investment Snapshot App on Snapshot, and cap it with an Investment-snapshot Build Note containing price action.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`

@@ -2,7 +2,7 @@
   "id": "cited_research_operations_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Following Daloopa Tearsheet governance, author and add a Cited Research Backend with a Citation Review Queue, then publish and instantiate a Cited Research App with a Research tab.",
+  "prompt": "New home for citations: following Daloopa Tearsheet governance, author and add a Cited Research Backend with a Citation Review Queue, then publish and instantiate a Cited Research App with a Research tab.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

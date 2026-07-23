@@ -2,7 +2,7 @@
   "id": "investment_snapshot_governance_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Put the Finance Tearsheet skill to work: add Getting Started's TradingView Chart for price action.",
+  "prompt": "Charting round: put the Finance Tearsheet skill to work and bring in Getting Started's TradingView Chart for price action.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

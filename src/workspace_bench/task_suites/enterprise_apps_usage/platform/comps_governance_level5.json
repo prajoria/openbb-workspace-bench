@@ -2,7 +2,7 @@
   "id": "comps_governance_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Deliver Buildout Comps Governance: read the Finance Comps skill, add the backend with a Comps Governance Register table per the workspace's widgets.json spec, publish and instantiate Comps Governance App on Comparables, and add a Comps-governance Build Note containing valuation multiples.",
+  "prompt": "Deliver Buildout Comps Governance end to end: read the Finance Comps skill, add the backend with a Comps Governance Register table per the workspace's widgets.json spec, publish and instantiate Comps Governance App on Comparables, and finish with a Comps-governance Build Note containing valuation multiples.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

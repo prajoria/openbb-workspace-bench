@@ -2,7 +2,7 @@
   "id": "investment_snapshot_governance_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Start from the Finance Tearsheet skill: add a Investment-snapshot Discovery Note containing price action.",
+  "prompt": "New joiner on the snapshot team - start from the Finance Tearsheet skill and add an Investment-snapshot Discovery Note containing price action.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

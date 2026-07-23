@@ -2,7 +2,7 @@
   "id": "comps_governance_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Start from the Finance Comps skill: add a Comps-governance Discovery Note containing valuation multiples.",
+  "prompt": "Valuation huddle in an hour - start from the Finance Comps skill and drop in a Comps-governance Discovery Note containing valuation multiples.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

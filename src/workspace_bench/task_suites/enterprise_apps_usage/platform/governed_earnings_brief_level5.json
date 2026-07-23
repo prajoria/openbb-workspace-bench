@@ -2,7 +2,7 @@
   "id": "governed_earnings_brief_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The desk wants a Governed Earnings Backend with an Earnings Action Register. Following the build-an-app guide, author and add it, publish a Governed Earnings App with an Actions tab, and instantiate it.",
+  "prompt": "The desk wants its own register: following the build-an-app guide, author and add a Governed Earnings Backend with an Earnings Action Register, publish a Governed Earnings App with an Actions tab, and instantiate it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

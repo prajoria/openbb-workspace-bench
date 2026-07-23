@@ -1,4 +1,28 @@
 {
+  "cited_research_operations_level0": {
+    "prompt": "Research ops housekeeping on the open Cited Research Operations dashboard: read the Daloopa Tearsheet skill and leave a Daloopa Tearsheet Workflow note recording the workflow title and its period-math anchor.",
+    "spec_sha256": "4181f86d9a7960959feffce7ba24d2150d24c0690c9a29c9209b1c3a0111d3e2"
+  },
+  "cited_research_operations_level1": {
+    "prompt": "Citations team is onboarding - on the open Cited Research Operations dashboard, follow Daloopa Tearsheet governance and pull in Bench Daloopa's Company Directory.",
+    "spec_sha256": "338ffda77b573b8a459e4d85564037daff3313d18804d2d3909f4406c41c8564"
+  },
+  "cited_research_operations_level2": {
+    "prompt": "Guidance season is here - per Daloopa Guidance Tracker governance, get Bench Daloopa's Management Guidance for NVDA onto the open Cited Research Operations dashboard.",
+    "spec_sha256": "dc96db48a3dc318d3ced19e6e5ed2f9f0b539629d45e734c0493ef09cf66019b"
+  },
+  "cited_research_operations_level3": {
+    "prompt": "Two names for the industry read: under Daloopa Industry governance, set the open Cited Research Operations dashboard up with a pair of Bench Daloopa Company Fundamentals views - MSFT in 2025Q4 and NVDA in 2025Q4.",
+    "spec_sha256": "4d02e510d17942d3a1fd506d94e3679d4a6947e3fd92bbd629aa856721a6e2f0"
+  },
+  "cited_research_operations_level4": {
+    "prompt": "Buyback review wrap-up on the open Cited Research Operations dashboard: combine Daloopa Capital Allocation governance with Workspace session guidance, add Bench Daloopa's Company Fundamentals for AMZN in 2026Q1, and leave a Citation Protocol note naming source_url and calendar_period.",
+    "spec_sha256": "b285e9eac94aafc8fb8ea5ec1f3444fd4c1ea876ac2b509c56e82226519fd527"
+  },
+  "cited_research_operations_level5": {
+    "prompt": "New home for citations: following Daloopa Tearsheet governance, author and add a Cited Research Backend with a Citation Review Queue, then publish and instantiate a Cited Research App with a Research tab.",
+    "spec_sha256": "0a503ca076d4aea6fb738dd2d1c27156bea891cfda4286d5654c7b2e42eee2d8"
+  },
   "client_intake_controls_level0": {
     "prompt": "On the open Client Intake Controls dashboard, set Financial Entry Form: client_first_name to Maya, client_last_name to Chen, risk_profile to Moderate, add_record to True. Preserve the other views.",
     "spec_sha256": "bb145b3d6ca8fe82efa74ec30c556cb475558debe31b51b66481ce27919a7235"
@@ -118,6 +142,30 @@
   "compliance_alert_review_level5": {
     "prompt": "Stand up Buildout Compliance Review for the audit team: add it with a Compliance Review Register table per the workspace's widgets.json spec, publish and instantiate Compliance Review App on Review, and bring in Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub plus Getting Started's Markdown Widget with Number Input. Follow the Finance Guidance Tracker skill and close with a Compliance-alert Build Note recording the final thing its workflow lists.",
     "spec_sha256": "e6124d7e93a76df6fa68df6ab3480ef2fcccdb1a098f67d51420cb2a10a319fd"
+  },
+  "comps_governance_level0": {
+    "prompt": "Kick off comps day: read the Finance Comps skill and post a Comps-governance Starter Note containing valuation multiples.",
+    "spec_sha256": "13bffc26059dfbe43b68aac65d0aab287bd51ae54490e3da6b4dbb74a7186fbe"
+  },
+  "comps_governance_level1": {
+    "prompt": "Valuation huddle in an hour - start from the Finance Comps skill and drop in a Comps-governance Discovery Note containing valuation multiples.",
+    "spec_sha256": "8a4a46828984b0403080a88b05258b8745f01bd6e5c1107d01765200ea9727e6"
+  },
+  "comps_governance_level2": {
+    "prompt": "Comps refresh next: put the Finance Comps skill to work and chart valuation multiples with Getting Started's Plotly Chart with Theme and Toolbar using Config File.",
+    "spec_sha256": "bff339bfb077b1e790a21ae958b138a97276c40d68f48462645f8d10285d7715"
+  },
+  "comps_governance_level3": {
+    "prompt": "Round out the open Comps-governance Desk dashboard from the Finance Comps skill: Getting Started's Plotly Chart with Theme and Toolbar using Config File plus Widget Examples's Chains chart example Plotly with raw data, all in support of valuation multiples.",
+    "spec_sha256": "cc515bbce4cea2d31e942f17713e8e0aec9d514622b5015bb5ea872d3afc90e2"
+  },
+  "comps_governance_level4": {
+    "prompt": "Comps sign-off under the Finance Comps skill: add Getting Started's Plotly Chart with Theme and Toolbar using Config File and Widget Examples's Chains chart example Plotly with raw data, then close with a Comps-governance Governed Note recording what it compares after normalizing metrics.",
+    "spec_sha256": "e1e0a2bc351c997fe2b5eb83f010e48da7c3b7d6ee08c9751f2b7fcd6d11d514"
+  },
+  "comps_governance_level5": {
+    "prompt": "Deliver Buildout Comps Governance end to end: read the Finance Comps skill, add the backend with a Comps Governance Register table per the workspace's widgets.json spec, publish and instantiate Comps Governance App on Comparables, and finish with a Comps-governance Build Note containing valuation multiples.",
+    "spec_sha256": "311dc2d225d447b9b3281e85223939776e51e304776b4cde3af4807d5103ccf5"
   },
   "crypto_display_controls_level0": {
     "prompt": "On the open Crypto Display Controls dashboard, set Binance OHLC: symbol to ethusdt, interval to 1m, exchange to binancef. Preserve the other views.",
@@ -262,6 +310,54 @@
   "execution_quality_review_level5": {
     "prompt": "Give the execution desk its own review stack: add Buildout Execution Review with an Execution Review Register table per the workspace's widgets.json spec, publish and instantiate Execution Review App on Quality, then place Live Orders from Bench Stark Enterprise's Execution Desk and Getting Started's Multi PDF Viewer - URL. Follow the Finance Comps skill and wrap up with an Execution-quality Build Note recording what it says deserve premium or discount.",
     "spec_sha256": "f77b7a4d9632f4fc47bfa47f3f546571c69368d99a343e6c8f56a62ef5890cab"
+  },
+  "governed_earnings_brief_level0": {
+    "prompt": "Earnings week setup - read the Finance Earnings Prep skill for the open Governed Earnings Brief dashboard and leave an Earnings Prep Workflow note recording the workflow title and its first and fifth actions.",
+    "spec_sha256": "c9c6a358c49d03992c403cd8f4a0286f1e668e50645ef1dce72ea2467bee65e1"
+  },
+  "governed_earnings_brief_level1": {
+    "prompt": "Prep for the earnings huddle on the open Governed Earnings Brief dashboard: consult Finance Earnings Prep governance and add an Earnings Governance Actions note naming internal estimates and transcript tone.",
+    "spec_sha256": "5a96bb0686df8d85d56bafbd494986c5db001ee74516ec5b9cbed52460a7185b"
+  },
+  "governed_earnings_brief_level2": {
+    "prompt": "Before wiring anything up, review the backend contract resource for the open Governed Earnings Brief dashboard, then post a Backend Contract Actions note recording the two contract items listed between the manifest files and authentication.",
+    "spec_sha256": "11975485c64d16de31ddb470083340dd12792971cba484fc7c5f2b4d72d306c9"
+  },
+  "governed_earnings_brief_level3": {
+    "prompt": "Session hygiene on the open Governed Earnings Brief dashboard: use Workspace session guidance, add an Actions tab, and place a Session Grounding note there naming current-dashboard and current-tab.",
+    "spec_sha256": "4593454df2be7bd1ea7013d46916218d5020d1df7a8c4c11106f2e98d1d44065"
+  },
+  "governed_earnings_brief_level4": {
+    "prompt": "Wrap the earnings desk day - on the open Governed Earnings Brief dashboard, combine Finance Earnings Prep governance with Workspace session guidance, add an Actions tab, and leave an Earnings Session Actions note there naming action items and current-dashboard.",
+    "spec_sha256": "aa9f5f54c6771b64ccbb48a2b2be5ae15012fed27b0e6d4d2766f1891bb9bdf2"
+  },
+  "governed_earnings_brief_level5": {
+    "prompt": "The desk wants its own register: following the build-an-app guide, author and add a Governed Earnings Backend with an Earnings Action Register, publish a Governed Earnings App with an Actions tab, and instantiate it.",
+    "spec_sha256": "e138dbef467dd0352c604b37e07a4bc965e3f0be63f47af404a21b061179d12b"
+  },
+  "investment_snapshot_governance_level0": {
+    "prompt": "Snapshot groundwork first: read the Finance Tearsheet skill and post an Investment-snapshot Starter Note containing price action.",
+    "spec_sha256": "1892be90f4a996a2e267af1836557fe391e52e6dad4efe03f8707895ad0146b5"
+  },
+  "investment_snapshot_governance_level1": {
+    "prompt": "New joiner on the snapshot team - start from the Finance Tearsheet skill and add an Investment-snapshot Discovery Note containing price action.",
+    "spec_sha256": "2b72556c58de6239715f6a36951d4656deae95dc11d7cd02464f3b1b02a1b1ec"
+  },
+  "investment_snapshot_governance_level2": {
+    "prompt": "Charting round: put the Finance Tearsheet skill to work and bring in Getting Started's TradingView Chart for price action.",
+    "spec_sha256": "22c422ff0b4cc3dc0d862ed22f34645242bdabb77b603f63fbf78b902c29e9f1"
+  },
+  "investment_snapshot_governance_level3": {
+    "prompt": "Fill the open Investment-snapshot Desk dashboard from the Finance Tearsheet skill: Getting Started's TradingView Chart and Getting Started's HTML Widget, both in support of price action.",
+    "spec_sha256": "142bd53b833998c946714889fbaf2fb126c4304befd544fe2abcf9f778524159"
+  },
+  "investment_snapshot_governance_level4": {
+    "prompt": "Snapshot sign-off under the Finance Tearsheet skill: add Getting Started's TradingView Chart and Getting Started's HTML Widget, then close with an Investment-snapshot Governed Note recording the first input its workflow gathers.",
+    "spec_sha256": "89cd8d8bc6950b724dc8471adadef53f35fce3044810d50e0f3e6f7ed7b85ef2"
+  },
+  "investment_snapshot_governance_level5": {
+    "prompt": "Deliver Buildout Investment Snapshot for the team: read the Finance Tearsheet skill, add the backend with an Investment Snapshot Register table per the workspace's widgets.json spec, publish and instantiate Investment Snapshot App on Snapshot, and cap it with an Investment-snapshot Build Note containing price action.",
+    "spec_sha256": "d13eefff6f1e470aafe0693faa9533fbef4b23a3e3fa46309188e6975fa65b3c"
   },
   "live_quote_lookup_level0": {
     "prompt": "Read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",

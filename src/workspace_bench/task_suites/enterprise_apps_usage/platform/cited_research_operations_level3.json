@@ -2,7 +2,7 @@
   "id": "cited_research_operations_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "For the open Cited Research Operations dashboard, use Daloopa Industry governance to place two Bench Daloopa Company Fundamentals views, one for MSFT in 2025Q4 and one for NVDA in 2025Q4.",
+  "prompt": "Two names for the industry read: under Daloopa Industry governance, set the open Cited Research Operations dashboard up with a pair of Bench Daloopa Company Fundamentals views - MSFT in 2025Q4 and NVDA in 2025Q4.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

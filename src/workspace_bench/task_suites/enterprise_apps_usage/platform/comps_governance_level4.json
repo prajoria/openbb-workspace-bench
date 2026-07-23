@@ -2,7 +2,7 @@
   "id": "comps_governance_level4",
   "category": "platform",
   "difficulty": "level4",
-  "prompt": "Using the Finance Comps skill, add Getting Started's Plotly Chart with Theme and Toolbar using Config File, Widget Examples's Chains chart example Plotly with raw data, and add a Comps-governance Governed Note containing valuation multiples.",
+  "prompt": "Comps sign-off under the Finance Comps skill: add Getting Started's Plotly Chart with Theme and Toolbar using Config File and Widget Examples's Chains chart example Plotly with raw data, then close with a Comps-governance Governed Note recording what it compares after normalizing metrics.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
