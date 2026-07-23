@@ -2,7 +2,7 @@
   "id": "earnings_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The desk needs a Wave One Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Earnings Lookup Build Note recording what it identifies right after the estimate comparison.",
+  "prompt": "The desk needs a Pilot Earnings Lookup backend with an Earnings Status Lookup table for LLY and YTD. Build and add it, instantiate its Earnings Lookup App, read the lookup, and report the exact score and status. Follow the widgets.json spec. Follow the Finance Earnings Prep skill and add a Earnings Lookup Build Note recording what it identifies right after the estimate comparison.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -75,7 +75,7 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave One Earnings Lookup",
+          "name": "Pilot Earnings Lookup",
           "url": "http://127.0.0.1:9501",
           "widgets_json": {
             "earnings_status_lookup": {
@@ -118,7 +118,7 @@
           "apps_json": [
             {
               "name": "Earnings Lookup App",
-              "description": "Wave-1 authored app for Earnings Lookup App.",
+              "description": "Authored app for Earnings Lookup App.",
               "tabs": {
                 "lookup": {
                   "id": "lookup",
@@ -171,7 +171,7 @@
       {
         "tool": "get_widget_data",
         "args": {
-          "origin": "Wave One Earnings Lookup",
+          "origin": "Pilot Earnings Lookup",
           "widget_id": "earnings_status_lookup",
           "data_args": {
             "ticker": "LLY",
@@ -198,7 +198,7 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave One Earnings Lookup",
+        "origin": "Pilot Earnings Lookup",
         "widget_id": "earnings_status_lookup",
         "data_args": {
           "ticker": "LLY",
@@ -213,7 +213,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave One Earnings Lookup",
+        "backend_name": "Pilot Earnings Lookup",
         "widget_id": "earnings_status_lookup",
         "expect": {
           "type": "table"
@@ -222,7 +222,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave One Earnings Lookup",
+        "backend_name": "Pilot Earnings Lookup",
         "name_contains": "Earnings Lookup App",
         "tabs_include": [
           "lookup"

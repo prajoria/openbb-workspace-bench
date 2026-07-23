@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Live-quote discovery request: read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
+  "prompt": "Quick ask - read Widget Examples's Live Grid with symbol AAPL, then report the exact symbol and price shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

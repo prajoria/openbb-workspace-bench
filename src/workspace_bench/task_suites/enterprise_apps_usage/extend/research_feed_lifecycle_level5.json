@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Complete the research service with Wave Two Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Capital Allocation skill (daloopa-capital-allocation) and add a Research Feed Build Note recording the payout item added to buybacks in its comparison.",
+  "prompt": "Complete the research service with Rollout Research Feed, Research Feed Pulse, Source Freshness Alert, and Archive Coverage Watch. Add the backend, publish Research Feed App with Research Feed Pulse and Source Freshness Alert on Feed and Archive Coverage Watch on Archive, and instantiate it.  Follow the Daloopa Capital Allocation skill and add a Research Feed Build Note recording the payout item added to buybacks in its comparison.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -64,10 +64,17 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Two Research Feed",
+          "name": "Rollout Research Feed",
           "url": "http://127.0.0.1:9606",
           "widgets_json": {
             "research_feed_pulse": {
@@ -82,7 +89,7 @@
             },
             "source_freshness_alert": {
               "name": "Source Freshness Alert",
-              "description": "Wave-1 view for Source Freshness Alert.",
+              "description": "Authored view for Source Freshness Alert.",
               "endpoint": "/source-freshness",
               "type": "table",
               "gridData": {
@@ -92,7 +99,7 @@
             },
             "archive_coverage_watch": {
               "name": "Archive Coverage Watch",
-              "description": "Wave-1 view for Archive Coverage Watch.",
+              "description": "Authored view for Archive Coverage Watch.",
               "endpoint": "/archive-coverage",
               "type": "table",
               "gridData": {
@@ -104,7 +111,7 @@
           "apps_json": [
             {
               "name": "Research Feed App",
-              "description": "Wave-1 authored app for Research Feed App.",
+              "description": "Authored app for Research Feed App.",
               "tabs": {
                 "feed": {
                   "id": "feed",
@@ -183,41 +190,41 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Two Research Feed",
+        "origin": "Rollout Research Feed",
         "widget_id": "research_feed_pulse",
         "tab_id": "feed"
       },
       {
-        "origin": "Wave Two Research Feed",
+        "origin": "Rollout Research Feed",
         "widget_id": "source_freshness_alert",
         "tab_id": "feed"
       },
       {
-        "origin": "Wave Two Research Feed",
+        "origin": "Rollout Research Feed",
         "widget_id": "archive_coverage_watch",
         "tab_id": "archive"
       }
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "widget_id": "research_feed_pulse",
         "expect": {}
       },
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "widget_id": "source_freshness_alert",
         "expect": {}
       },
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "widget_id": "archive_coverage_watch",
         "expect": {}
       }
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "name_contains": "Research Feed App",
         "tabs_include": [
           "feed",
@@ -227,7 +234,7 @@
         "no_overlaps": true
       }
     ],
-    "max_turns": 9,
+    "max_turns": 10,
     "required_generated_widgets": [
       {
         "widget_type": "note",

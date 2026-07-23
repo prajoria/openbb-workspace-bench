@@ -2,7 +2,7 @@
   "id": "investment_snapshot_governance_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Investment-snapshot paired workflow: read the Finance Tearsheet skill (finance-tearsheet), then add Getting Started's TradingView Chart, Getting Started's HTML Widget to support price action.",
+  "prompt": "Working from the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget to support price action.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

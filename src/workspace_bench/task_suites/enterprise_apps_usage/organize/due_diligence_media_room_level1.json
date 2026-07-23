@@ -2,7 +2,7 @@
   "id": "due_diligence_media_room_level1",
   "category": "dashboard",
   "difficulty": "level1",
-  "prompt": "Media-room tab setup: create and open Due Diligence Media Room, then add Overview and Review tabs.",
+  "prompt": "Set up Due Diligence Media Room: create and open it, then add Overview and Review tabs.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

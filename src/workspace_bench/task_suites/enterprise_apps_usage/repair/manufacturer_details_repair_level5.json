@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level5",
   "category": "repair",
   "difficulty": "level5",
-  "prompt": "Detail-queue backend rebuild: Wave Two Detail Repair was lost from the workspace; on the open Custom Detail Repair dashboard, rebuild it from scratch: add a custom backend Wave Two Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Industry skill (daloopa-industry) and add a Detail-queue Rebuild Note recording who it lists from the company directory.",
+  "prompt": "Rollout Detail Repair was lost from the workspace; on the open Custom Detail Repair dashboard, rebuild it from scratch: add a custom backend Rollout Detail Repair with a Manufacturer Detail Queue table, publish Detail Repair App, and instantiate it with one non-overlapping Manufacturer Detail Queue placement on Details, keeping all other workspace content. Follow the widgets.json spec. Follow the Daloopa Industry skill and add a Detail-queue Rebuild Note recording who it lists from the company directory.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -87,7 +87,7 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Two Detail Repair",
+          "name": "Rollout Detail Repair",
           "url": "http://127.0.0.1:9604",
           "widgets_json": {
             "manufacturer_detail_queue": {
@@ -104,7 +104,7 @@
           "apps_json": [
             {
               "name": "Detail Repair App",
-              "description": "Wave-1 authored app for Detail Repair App.",
+              "description": "Authored app for Detail Repair App.",
               "tabs": {
                 "details": {
                   "id": "details",
@@ -163,7 +163,7 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Two Detail Repair",
+        "origin": "Rollout Detail Repair",
         "widget_id": "manufacturer_detail_queue",
         "tab_id": "details"
       }
@@ -179,7 +179,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Two Detail Repair",
+        "backend_name": "Rollout Detail Repair",
         "widget_id": "manufacturer_detail_queue",
         "expect": {
           "type": "table"
@@ -188,7 +188,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Two Detail Repair",
+        "backend_name": "Rollout Detail Repair",
         "name_contains": "Detail Repair App",
         "tabs_include": [
           "details"

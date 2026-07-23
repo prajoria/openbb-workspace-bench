@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Review the connected backends on the open Risk Service Staging dashboard, then refresh Wave One Risk Service so Wave One Risk App has one non-overlapping Wave One Risk Signal placement on Monitor.",
+  "prompt": "Review the connected backends on the open Risk Service Staging dashboard, then refresh Pilot Risk Service so Pilot Risk App has one non-overlapping Pilot Risk Signal placement on Monitor.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,8 +58,8 @@
         ],
         "widgets": [
           {
-            "origin": "Wave One Risk Service",
-            "widget_id": "wave_one_risk_signal",
+            "origin": "Pilot Risk Service",
+            "widget_id": "pilot_risk_signal",
             "widget_uuid": "seeded_risk_signal",
             "tab_id": "monitor",
             "layout": {
@@ -74,11 +74,11 @@
       "custom_backends": [
         {
           "backend_id": "backend_005",
-          "name": "Wave One Risk Service",
+          "name": "Pilot Risk Service",
           "url": "http://127.0.0.1:9506",
           "widgets_json": {
-            "wave_one_risk_signal": {
-              "name": "Wave One Risk Signal",
+            "pilot_risk_signal": {
+              "name": "Pilot Risk Signal",
               "description": "Stale risk signal feed.",
               "endpoint": "/risk-signal",
               "type": "table",
@@ -90,21 +90,21 @@
           },
           "apps_json": [
             {
-              "name": "Wave One Risk App",
+              "name": "Pilot Risk App",
               "tabs": {
                 "monitor": {
                   "id": "monitor",
                   "name": "Monitor",
                   "layout": [
                     {
-                      "i": "wave_one_risk_signal",
+                      "i": "pilot_risk_signal",
                       "x": 0,
                       "y": 0,
                       "w": 30,
                       "h": 10
                     },
                     {
-                      "i": "wave_one_risk_signal",
+                      "i": "pilot_risk_signal",
                       "x": 20,
                       "y": 0,
                       "w": 20,
@@ -127,6 +127,13 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "list"
@@ -139,8 +146,8 @@
           "operation": "refresh",
           "backend_id": "backend_005",
           "widgets_json": {
-            "wave_one_risk_signal": {
-              "name": "Wave One Risk Signal",
+            "pilot_risk_signal": {
+              "name": "Pilot Risk Signal",
               "description": "Refreshed risk signal feed.",
               "endpoint": "/risk-signal",
               "type": "table",
@@ -152,15 +159,15 @@
           },
           "apps_json": [
             {
-              "name": "Wave One Risk App",
-              "description": "Wave-1 authored app for Wave One Risk App.",
+              "name": "Pilot Risk App",
+              "description": "Authored app for Pilot Risk App.",
               "tabs": {
                 "monitor": {
                   "id": "monitor",
                   "name": "Monitor",
                   "layout": [
                     {
-                      "i": "wave_one_risk_signal",
+                      "i": "pilot_risk_signal",
                       "x": 0,
                       "y": 0,
                       "w": 40,
@@ -179,8 +186,8 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave One Risk Service",
-        "name_contains": "Wave One Risk App",
+        "backend_name": "Pilot Risk Service",
+        "name_contains": "Pilot Risk App",
         "tabs_include": [
           "monitor"
         ],
@@ -188,6 +195,6 @@
         "no_overlaps": true
       }
     ],
-    "max_turns": 6
+    "max_turns": 7
   }
 }

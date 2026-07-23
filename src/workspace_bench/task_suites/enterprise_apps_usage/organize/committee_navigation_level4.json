@@ -2,7 +2,7 @@
   "id": "committee_navigation_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Following Workspace session guidance, create and activate Wave One Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order.",
+  "prompt": "Following Workspace session guidance, create and activate Pilot Committee Review with Decision Agenda, Evidence, and Sign-Off tabs in that order.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -65,7 +65,7 @@
         "tool": "manage_dashboard",
         "args": {
           "operation": "create",
-          "name": "Wave One Committee Review",
+          "name": "Pilot Committee Review",
           "activate": true
         },
         "graded_args": [

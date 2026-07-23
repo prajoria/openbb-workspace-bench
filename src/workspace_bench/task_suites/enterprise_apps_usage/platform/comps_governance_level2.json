@@ -2,7 +2,7 @@
   "id": "comps_governance_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Comps-governance governed placement: read the Finance Comps skill (finance-comps), then add Getting Started's Plotly Chart with Theme and Toolbar using Config File for valuation multiples.",
+  "prompt": "Put the Finance Comps skill to work: add Getting Started's Plotly Chart with Theme and Toolbar using Config File for valuation multiples.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

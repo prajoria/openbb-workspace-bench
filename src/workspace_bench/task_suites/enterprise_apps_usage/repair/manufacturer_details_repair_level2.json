@@ -2,7 +2,7 @@
   "id": "manufacturer_details_repair_level2",
   "category": "repair",
   "difficulty": "level2",
-  "prompt": "The open Manufacturer Detail Repair dashboard has an extra Car Manufacturer Details copy. The manufacturer-duplicate marker identifies it; remove that copy so exactly one remains, and preserve Markdown Widget.",
+  "prompt": "The open Manufacturer Detail Repair dashboard has two copies of Car Manufacturer Details. Remove the one flagged as the duplicate so exactly one remains, and preserve Markdown Widget.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

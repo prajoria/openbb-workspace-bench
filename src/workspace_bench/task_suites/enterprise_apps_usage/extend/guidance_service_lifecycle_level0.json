@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "Guidance-service level-0 service: add a custom backend Wave Three Guidance Service with the Evidence Gaps table. Widget ids are the snake_case of widget names.",
+  "prompt": "Add a Buildout Guidance Service custom backend with the Evidence Gaps table.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -65,12 +65,12 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Guidance Service",
+          "name": "Buildout Guidance Service",
           "url": "http://127.0.0.1:9712",
           "widgets_json": {
             "evidence_gaps": {
               "name": "Evidence Gaps",
-              "description": "Wave-1 view for Evidence Gaps.",
+              "description": "Authored view for Evidence Gaps.",
               "endpoint": "/evidence_gaps",
               "type": "table",
               "gridData": {
@@ -89,7 +89,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Guidance Service",
+        "backend_name": "Buildout Guidance Service",
         "widget_id": "evidence_gaps",
         "expect": {}
       }

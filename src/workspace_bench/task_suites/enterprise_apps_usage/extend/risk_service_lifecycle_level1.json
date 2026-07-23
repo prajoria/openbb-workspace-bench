@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level1",
   "category": "platform",
   "difficulty": "level1",
-  "prompt": "Add a minimal Wave One Risk Service backend that serves a Wave One Risk Signal table at /risk-signal. Widget ids are the snake_case of widget names.",
+  "prompt": "Add a minimal Pilot Risk Service backend that serves a Pilot Risk Signal table at /risk-signal.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -55,14 +55,21 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave One Risk Service",
+          "name": "Pilot Risk Service",
           "url": "http://127.0.0.1:9506",
           "widgets_json": {
-            "wave_one_risk_signal": {
-              "name": "Wave One Risk Signal",
+            "pilot_risk_signal": {
+              "name": "Pilot Risk Signal",
               "description": "Refreshed risk signal feed.",
               "endpoint": "/risk-signal",
               "type": "table",
@@ -81,13 +88,13 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave One Risk Service",
-        "widget_id": "wave_one_risk_signal",
+        "backend_name": "Pilot Risk Service",
+        "widget_id": "pilot_risk_signal",
         "expect": {
           "type": "table"
         }
       }
     ],
-    "max_turns": 5
+    "max_turns": 6
   }
 }

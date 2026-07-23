@@ -2,7 +2,7 @@
   "id": "nav_exception_station_level2",
   "category": "repair",
   "difficulty": "level2",
-  "prompt": "The open NAV Repair Staging dashboard has an extra NAV Exceptions copy. The duplicate-cleanup marker identifies it; remove that copy so exactly one remains, and preserve Trade Ideas and all other content.",
+  "prompt": "The open NAV Repair Staging dashboard has two copies of NAV Exceptions. Remove the one flagged as the duplicate so exactly one remains, and preserve Trade Ideas and all other content.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

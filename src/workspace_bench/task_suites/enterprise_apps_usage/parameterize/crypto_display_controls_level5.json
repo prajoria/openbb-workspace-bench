@@ -2,7 +2,7 @@
   "id": "crypto_display_controls_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Crypto-display build tuning: add a custom backend Wave Three Display Tuning with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Crypto-display Tuning Note recording what it flags as inflections.",
+  "prompt": "Tune Buildout Display Tuning end to end: add it as a custom backend with a Display Control Panel table carrying symbol and interval params, publish and instantiate Display Tuning App on Controls, then set the live Display Control Panel to symbol ethusdt, interval 1m. Follow the widgets.json spec.  Follow the Daloopa Inflection skill and add a Crypto-display Tuning Note recording what it flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -74,7 +74,7 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Display Tuning",
+          "name": "Buildout Display Tuning",
           "url": "http://127.0.0.1:9724",
           "widgets_json": {
             "display_control_panel": {
@@ -117,7 +117,7 @@
           "apps_json": [
             {
               "name": "Display Tuning App",
-              "description": "Wave-1 authored app for Display Tuning App.",
+              "description": "Authored app for Display Tuning App.",
               "tabs": {
                 "controls": {
                   "id": "controls",
@@ -189,7 +189,7 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Three Display Tuning",
+        "origin": "Buildout Display Tuning",
         "widget_id": "display_control_panel",
         "data_args": {
           "symbol": "ethusdt",
@@ -209,7 +209,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Display Tuning",
+        "backend_name": "Buildout Display Tuning",
         "widget_id": "display_control_panel",
         "expect": {
           "type": "table"
@@ -218,7 +218,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Three Display Tuning",
+        "backend_name": "Buildout Display Tuning",
         "name_contains": "Display Tuning App",
         "tabs_include": [
           "controls"

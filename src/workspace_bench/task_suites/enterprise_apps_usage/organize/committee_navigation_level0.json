@@ -2,7 +2,7 @@
   "id": "committee_navigation_level0",
   "category": "dashboard",
   "difficulty": "level0",
-  "prompt": "Create a dashboard named Wave One Committee Review for the committee and make it the active dashboard.",
+  "prompt": "Create a dashboard named Pilot Committee Review for the committee and make it the active dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,7 +58,7 @@
         "tool": "manage_dashboard",
         "args": {
           "operation": "create",
-          "name": "Wave One Committee Review",
+          "name": "Pilot Committee Review",
           "activate": true
         },
         "graded_args": [

@@ -2,7 +2,7 @@
   "id": "operating_driver_lookup_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Operating-driver discovery request: read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
+  "prompt": "Quick ask - read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, then report the exact calendar_period and Installed Base Active Devices value shown.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

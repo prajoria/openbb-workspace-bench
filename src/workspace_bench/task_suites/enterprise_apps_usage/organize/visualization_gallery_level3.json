@@ -2,7 +2,7 @@
   "id": "visualization_gallery_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "Visualization-gallery level-3 layout: create and open Visualization Gallery, add Overview and Review tabs, then add Getting Started's Chains TVL Highcharts, Getting Started's Vega-Lite Bar Demo.",
+  "prompt": "Lay out Visualization Gallery end to end: create and open it, add Overview and Review tabs, then add Getting Started's Chains TVL Highcharts, Getting Started's Vega-Lite Bar Demo.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

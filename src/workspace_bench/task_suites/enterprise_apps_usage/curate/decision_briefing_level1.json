@@ -2,7 +2,7 @@
   "id": "decision_briefing_level1",
   "category": "single-widget",
   "difficulty": "level1",
-  "prompt": "On the open Wave One Decision Brief dashboard, find Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, and add it for Flagship Long/Short and YTD.",
+  "prompt": "On the open Pilot Decision Brief dashboard, find Bench Stark Enterprise's Portfolio Command Center, Trade Ideas, and add it for Flagship Long/Short and YTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Wave One Decision Brief",
+    "default_selected_dashboard": "Pilot Decision Brief",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -48,7 +48,7 @@
     ],
     "initial_state": {
       "dashboard": {
-        "name": "Wave One Decision Brief",
+        "name": "Pilot Decision Brief",
         "activate": false,
         "tabs": [
           {

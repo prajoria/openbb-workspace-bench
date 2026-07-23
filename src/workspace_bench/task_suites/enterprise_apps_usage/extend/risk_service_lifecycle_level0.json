@@ -2,7 +2,7 @@
   "id": "risk_service_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "On the open Risk Service Staging dashboard, review the connected backends and refresh Wave One Risk Service so its Wave One Risk Signal description is Refreshed risk signal feed.",
+  "prompt": "On the open Risk Service Staging dashboard, review the connected backends and refresh Pilot Risk Service so its Pilot Risk Signal description is Refreshed risk signal feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,8 +58,8 @@
         ],
         "widgets": [
           {
-            "origin": "Wave One Risk Service",
-            "widget_id": "wave_one_risk_signal",
+            "origin": "Pilot Risk Service",
+            "widget_id": "pilot_risk_signal",
             "widget_uuid": "seeded_risk_signal",
             "tab_id": "monitor",
             "layout": {
@@ -74,11 +74,11 @@
       "custom_backends": [
         {
           "backend_id": "backend_005",
-          "name": "Wave One Risk Service",
+          "name": "Pilot Risk Service",
           "url": "http://127.0.0.1:9506",
           "widgets_json": {
-            "wave_one_risk_signal": {
-              "name": "Wave One Risk Signal",
+            "pilot_risk_signal": {
+              "name": "Pilot Risk Signal",
               "description": "Stale risk signal feed.",
               "endpoint": "/risk-signal",
               "type": "table",
@@ -100,6 +100,13 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "list"
@@ -112,8 +119,8 @@
           "operation": "refresh",
           "backend_id": "backend_005",
           "widgets_json": {
-            "wave_one_risk_signal": {
-              "name": "Wave One Risk Signal",
+            "pilot_risk_signal": {
+              "name": "Pilot Risk Signal",
               "description": "Refreshed risk signal feed.",
               "endpoint": "/risk-signal",
               "type": "table",
@@ -131,11 +138,11 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave One Risk Service",
-        "widget_id": "wave_one_risk_signal",
+        "backend_name": "Pilot Risk Service",
+        "widget_id": "pilot_risk_signal",
         "expect": {}
       }
     ],
-    "max_turns": 6
+    "max_turns": 7
   }
 }

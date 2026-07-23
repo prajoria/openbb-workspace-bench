@@ -2,7 +2,7 @@
   "id": "consensus_exception_handoff_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Consensus-exception governed handoff: follow the Daloopa Earnings Review skill (daloopa-earnings-review) on the open Consensus Exception Handoff dashboard, read Bench Daloopa's Consensus Estimates with ticker AAPL, add a Consensus-exception Governed Handoff note recording the exact Total Revenue actual and consensus for 2026Q1 and consensus, then delegate the follow-up.",
+  "prompt": "Close out the open Consensus Exception Handoff dashboard under the Daloopa Earnings Review skill: read Bench Daloopa's Consensus Estimates with ticker AAPL, add a Consensus-exception Governed Handoff note recording the exact Total Revenue actual and consensus for 2026Q1 and consensus, then delegate the follow-up.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

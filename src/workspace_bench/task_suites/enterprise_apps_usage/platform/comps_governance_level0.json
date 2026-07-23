@@ -2,7 +2,7 @@
   "id": "comps_governance_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "Comps-governance level-0 workflow: read the Finance Comps skill (finance-comps) and add a Comps-governance Starter Note containing valuation multiples.",
+  "prompt": "Read the Finance Comps skill and add a Comps-governance Starter Note containing valuation multiples.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

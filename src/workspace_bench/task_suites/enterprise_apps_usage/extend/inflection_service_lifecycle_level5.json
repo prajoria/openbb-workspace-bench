@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Inflection-service complete service: follow the widgets manifest specification; add a custom backend Wave Three Inflection Service with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Inflection skill (daloopa-inflection) and add a Inflection-service Governing Note recording the first growth cadence it computes.",
+  "prompt": "Build Buildout Inflection Service end to end, following the widgets.json spec: add the backend with Growth-Rate Reversals, Quarterly Series Monitor, Inflection Evidence Log tables, publish Inflection Service App with Growth-Rate Reversals and Quarterly Series Monitor on Review and Inflection Evidence Log on Archive, and instantiate it. Follow the Daloopa Inflection skill and add a Inflection-service Governing Note recording the first growth cadence it computes.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -74,12 +74,12 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Inflection Service",
+          "name": "Buildout Inflection Service",
           "url": "http://127.0.0.1:9711",
           "widgets_json": {
             "growth_rate_reversals": {
               "name": "Growth-Rate Reversals",
-              "description": "Wave-1 view for Growth-Rate Reversals.",
+              "description": "Authored view for Growth-Rate Reversals.",
               "endpoint": "/growth_rate_reversals",
               "type": "table",
               "gridData": {
@@ -89,7 +89,7 @@
             },
             "quarterly_series_monitor": {
               "name": "Quarterly Series Monitor",
-              "description": "Wave-1 view for Quarterly Series Monitor.",
+              "description": "Authored view for Quarterly Series Monitor.",
               "endpoint": "/quarterly_series_monitor",
               "type": "table",
               "gridData": {
@@ -99,7 +99,7 @@
             },
             "inflection_evidence_log": {
               "name": "Inflection Evidence Log",
-              "description": "Wave-1 view for Inflection Evidence Log.",
+              "description": "Authored view for Inflection Evidence Log.",
               "endpoint": "/inflection_evidence_log",
               "type": "table",
               "gridData": {
@@ -111,7 +111,7 @@
           "apps_json": [
             {
               "name": "Inflection Service App",
-              "description": "Wave-1 authored app for Inflection Service App.",
+              "description": "Authored app for Inflection Service App.",
               "tabs": {
                 "review": {
                   "id": "review",
@@ -190,17 +190,17 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Three Inflection Service",
+        "origin": "Buildout Inflection Service",
         "widget_id": "growth_rate_reversals",
         "tab_id": "review"
       },
       {
-        "origin": "Wave Three Inflection Service",
+        "origin": "Buildout Inflection Service",
         "widget_id": "quarterly_series_monitor",
         "tab_id": "review"
       },
       {
-        "origin": "Wave Three Inflection Service",
+        "origin": "Buildout Inflection Service",
         "widget_id": "inflection_evidence_log",
         "tab_id": "archive"
       }
@@ -216,24 +216,24 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Inflection Service",
+        "backend_name": "Buildout Inflection Service",
         "widget_id": "growth_rate_reversals",
         "expect": {}
       },
       {
-        "backend_name": "Wave Three Inflection Service",
+        "backend_name": "Buildout Inflection Service",
         "widget_id": "quarterly_series_monitor",
         "expect": {}
       },
       {
-        "backend_name": "Wave Three Inflection Service",
+        "backend_name": "Buildout Inflection Service",
         "widget_id": "inflection_evidence_log",
         "expect": {}
       }
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Three Inflection Service",
+        "backend_name": "Buildout Inflection Service",
         "name_contains": "Inflection Service App",
         "tabs_include": [
           "review",

@@ -2,7 +2,7 @@
   "id": "vendor_freshness_repair_level3",
   "category": "repair",
   "difficulty": "level3",
-  "prompt": "Vendor-freshness overlap fix: on the open Vendor Freshness Repair dashboard, move Vendor Contract Terms to x 0, y 12, width 40, height 12 on Review; preserve SLA Metrics.",
+  "prompt": "Vendor Contract Terms is overlapping on the open Vendor Freshness Repair dashboard: move it to x 0, y 12, width 40, height 12 on Review, and preserve SLA Metrics.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

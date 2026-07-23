@@ -2,7 +2,7 @@
   "id": "protocol_display_repair_level3",
   "category": "repair",
   "difficulty": "level3",
-  "prompt": "Protocol-display overlap fix: on the open Protocol Display Repair dashboard, move Demo Financial Data (SSRM) to x 0, y 12, width 40, height 12 on Review; preserve Defi Llama Protocol Details.",
+  "prompt": "Demo Financial Data (SSRM) is overlapping on the open Protocol Display Repair dashboard: move it to x 0, y 12, width 40, height 12 on Review, and preserve Defi Llama Protocol Details.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "On the open Research Feed Staging dashboard, review the connected backends and refresh Wave Two Research Feed so Research Feed Pulse has the description Refreshed research feed.",
+  "prompt": "On the open Research Feed Staging dashboard, review the connected backends and refresh Rollout Research Feed so Research Feed Pulse has the description Refreshed research feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,7 +58,7 @@
         ],
         "widgets": [
           {
-            "origin": "Wave Two Research Feed",
+            "origin": "Rollout Research Feed",
             "widget_id": "research_feed_pulse",
             "widget_uuid": "seeded_research_feed",
             "tab_id": "feed",
@@ -74,7 +74,7 @@
       "custom_backends": [
         {
           "backend_id": "backend_005",
-          "name": "Wave Two Research Feed",
+          "name": "Rollout Research Feed",
           "url": "http://127.0.0.1:9606",
           "widgets_json": {
             "research_feed_pulse": {
@@ -97,6 +97,13 @@
       {
         "tool": "get_workspace_snapshot",
         "args": {},
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
         "optional": true
       },
       {
@@ -131,11 +138,11 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "widget_id": "research_feed_pulse",
         "expect": {}
       }
     ],
-    "max_turns": 6
+    "max_turns": 7
   }
 }

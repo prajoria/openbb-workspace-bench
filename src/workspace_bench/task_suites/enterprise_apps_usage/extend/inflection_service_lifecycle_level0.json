@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "Inflection-service level-0 service: add a custom backend Wave Three Inflection Service with the Growth-Rate Reversals table. Widget ids are the snake_case of widget names.",
+  "prompt": "Add a Buildout Inflection Service custom backend with the Growth-Rate Reversals table.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -65,12 +65,12 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Inflection Service",
+          "name": "Buildout Inflection Service",
           "url": "http://127.0.0.1:9711",
           "widgets_json": {
             "growth_rate_reversals": {
               "name": "Growth-Rate Reversals",
-              "description": "Wave-1 view for Growth-Rate Reversals.",
+              "description": "Authored view for Growth-Rate Reversals.",
               "endpoint": "/growth_rate_reversals",
               "type": "table",
               "gridData": {
@@ -89,7 +89,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Inflection Service",
+        "backend_name": "Buildout Inflection Service",
         "widget_id": "growth_rate_reversals",
         "expect": {}
       }

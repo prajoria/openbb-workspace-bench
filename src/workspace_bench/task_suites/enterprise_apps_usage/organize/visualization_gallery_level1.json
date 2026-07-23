@@ -2,7 +2,7 @@
   "id": "visualization_gallery_level1",
   "category": "dashboard",
   "difficulty": "level1",
-  "prompt": "Visualization-gallery tab setup: create and open Visualization Gallery, then add Overview and Review tabs.",
+  "prompt": "Set up Visualization Gallery: create and open it, then add Overview and Review tabs.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

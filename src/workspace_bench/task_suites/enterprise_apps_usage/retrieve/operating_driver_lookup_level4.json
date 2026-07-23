@@ -2,7 +2,7 @@
   "id": "operating_driver_lookup_level4",
   "category": "read",
   "difficulty": "level4",
-  "prompt": "Operating-driver governed request: follow the Daloopa Inflection skill (daloopa-inflection), read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, report the exact calendar_period and Installed Base Active Devices value shown, and add a Operating-driver Governance Note that records growth-rate reversals.",
+  "prompt": "Following the Daloopa Inflection skill, read Bench Daloopa's Operating KPIs with ticker AAPL, period 2026Q1, report the exact calendar_period and Installed Base Active Devices value shown, and add a Operating-driver Governance Note that records growth-rate reversals.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "governed_earnings_brief_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "Read the Finance Earnings Prep skill (finance-earnings-prep) for the open Governed Earnings Brief dashboard. Add an Earnings Prep Workflow note that records the workflow title and its first and fourth actions.",
+  "prompt": "Read the Finance Earnings Prep skill for the open Governed Earnings Brief dashboard. Add an Earnings Prep Workflow note that records the workflow title and its first and fourth actions.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

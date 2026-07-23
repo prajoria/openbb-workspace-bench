@@ -2,7 +2,7 @@
   "id": "earnings_handoff_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "From the open Earnings Handoff dashboard, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and record in the note what internal estimates are compared to.",
+  "prompt": "From the open Earnings Handoff dashboard, author and add a minimal custom Earnings Handoff Backend with one Earnings Handoff Register. Publish and instantiate Earnings Handoff App with one Handoff tab, add an Earnings Build Handoff note naming Earnings Handoff App and Earnings Handoff Register, then delegate the build-review follow-up. Follow the Finance Earnings Prep skill and record in the note what internal estimates are compared to.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -77,6 +77,13 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
@@ -85,7 +92,7 @@
           "widgets_json": {
             "earnings_handoff_register": {
               "name": "Earnings Handoff Register",
-              "description": "Wave-1 view for Earnings Handoff Register.",
+              "description": "Authored view for Earnings Handoff Register.",
               "endpoint": "/earnings-handoff",
               "type": "table",
               "gridData": {
@@ -97,7 +104,7 @@
           "apps_json": [
             {
               "name": "Earnings Handoff App",
-              "description": "Wave-1 authored app for Earnings Handoff App.",
+              "description": "Authored app for Earnings Handoff App.",
               "tabs": {
                 "handoff": {
                   "id": "handoff",
@@ -209,6 +216,6 @@
         ]
       }
     ],
-    "max_turns": 10
+    "max_turns": 11
   }
 }

@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "From the open Research Feed Staging dashboard, review the connected backends, then refresh Wave Two Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.",
+  "prompt": "From the open Research Feed Staging dashboard, review the connected backends, then refresh Rollout Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,7 +58,7 @@
         ],
         "widgets": [
           {
-            "origin": "Wave Two Research Feed",
+            "origin": "Rollout Research Feed",
             "widget_id": "research_feed_pulse",
             "widget_uuid": "seeded_research_feed",
             "tab_id": "feed",
@@ -74,7 +74,7 @@
       "custom_backends": [
         {
           "backend_id": "backend_005",
-          "name": "Wave Two Research Feed",
+          "name": "Rollout Research Feed",
           "url": "http://127.0.0.1:9606",
           "widgets_json": {
             "research_feed_pulse": {
@@ -127,6 +127,13 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "list"
@@ -153,7 +160,7 @@
           "apps_json": [
             {
               "name": "Research Feed App",
-              "description": "Wave-1 authored app for Research Feed App.",
+              "description": "Authored app for Research Feed App.",
               "tabs": {
                 "feed": {
                   "id": "feed",
@@ -179,7 +186,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "name_contains": "Research Feed App",
         "tabs_include": [
           "feed"
@@ -188,6 +195,6 @@
         "no_overlaps": true
       }
     ],
-    "max_turns": 6
+    "max_turns": 7
   }
 }

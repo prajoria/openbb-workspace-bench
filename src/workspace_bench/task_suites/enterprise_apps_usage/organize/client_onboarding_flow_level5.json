@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Guidance Tracker skill (finance-guidance-tracker) and add a Client Onboarding Build Note recording what it flags after comparing claims with guidance.",
+  "prompt": "Author and add a Client Onboarding Backend with Client Intake Queue and Approval Log table views, then publish and instantiate a Client Onboarding App with Intake and Approvals tabs. Follow the apps.json spec.  Follow the Finance Guidance Tracker skill and add a Client Onboarding Build Note recording what it flags after comparing claims with guidance.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -66,6 +66,13 @@
       {
         "tool": "read_workspace_resource",
         "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
           "uri": "openbb://workspace/specs/apps-json"
         },
         "optional": true
@@ -79,7 +86,7 @@
           "widgets_json": {
             "client_intake_queue": {
               "name": "Client Intake Queue",
-              "description": "Wave-1 view for Client Intake Queue.",
+              "description": "Authored view for Client Intake Queue.",
               "endpoint": "/client-intake",
               "type": "table",
               "gridData": {
@@ -89,7 +96,7 @@
             },
             "approval_log": {
               "name": "Approval Log",
-              "description": "Wave-1 view for Approval Log.",
+              "description": "Authored view for Approval Log.",
               "endpoint": "/approval-log",
               "type": "table",
               "gridData": {
@@ -101,7 +108,7 @@
           "apps_json": [
             {
               "name": "Client Onboarding App",
-              "description": "Wave-1 authored app for Client Onboarding App.",
+              "description": "Authored app for Client Onboarding App.",
               "tabs": {
                 "intake": {
                   "id": "intake",
@@ -220,7 +227,7 @@
         ]
       }
     ],
-    "max_turns": 10,
+    "max_turns": 11,
     "required_generated_widgets": [
       {
         "widget_type": "note",

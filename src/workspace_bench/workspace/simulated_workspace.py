@@ -52,7 +52,7 @@ LIVE_WORKSPACE_RESOURCES = {
     "openbb://workspace/overview/what-is-workspace": "What Workspace Is: dashboards, apps, widgets, prompts, and the AI Agent.",
     "openbb://workspace/overview/ai-agent-contract": "AI Agent Contract: descriptions and response shapes make widgets agent-friendly.",
     "openbb://workspace/contract/backend": "Backend Contract: HTTP, widgets.json, apps.json, endpoints, CORS, and authentication.",
-    "openbb://workspace/specs/widgets-json": "widgets.json Spec: object keyed by widget id with name, type, endpoint, params, and data.",
+    "openbb://workspace/specs/widgets-json": "widgets.json Spec: object keyed by widget id with name, type, endpoint, params, and data. Naming convention: widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
     "openbb://workspace/specs/apps-json": "apps.json Spec: array of apps with tabs, layout, groups, prompts, and allowCustomization.",
     "openbb://workspace/specs/widget-types": "Widget Types: table, table_ssrm, chart, metric, markdown, newsfeed, live_grid, html.",
     "openbb://workspace/specs/widget-parameters": "Widget Parameters: text, number, boolean, date, endpoint, form, and button params.",

@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level0",
   "category": "dashboard",
   "difficulty": "level0",
-  "prompt": "For client operations, create a dashboard named Wave Two Client Onboarding and make it the active dashboard.",
+  "prompt": "For client operations, create a dashboard named Rollout Client Onboarding and make it the active dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,7 +58,7 @@
         "tool": "manage_dashboard",
         "args": {
           "operation": "create",
-          "name": "Wave Two Client Onboarding",
+          "name": "Rollout Client Onboarding",
           "activate": true
         },
         "graded_args": [

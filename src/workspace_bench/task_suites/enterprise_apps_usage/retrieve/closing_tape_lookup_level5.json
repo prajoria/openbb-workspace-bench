@@ -2,7 +2,7 @@
   "id": "closing_tape_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Build and add a Wave Two Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Daloopa Tearsheet skill (daloopa-tearsheet) and add a Closing Tape Build Note recording the anchor it uses for all period math.",
+  "prompt": "Build and add a Rollout Closing Tape backend with a Closing Tape Lookup table for NVDA, instantiate its Closing Tape App, read the result, and report the latest date and exact close. Follow the widgets.json spec. Follow the Daloopa Tearsheet skill and add a Closing Tape Build Note recording the anchor it uses for all period math.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -75,7 +75,7 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Two Closing Tape",
+          "name": "Rollout Closing Tape",
           "url": "http://127.0.0.1:9601",
           "widgets_json": {
             "closing_tape_lookup": {
@@ -106,7 +106,7 @@
           "apps_json": [
             {
               "name": "Closing Tape App",
-              "description": "Wave-1 authored app for Closing Tape App.",
+              "description": "Authored app for Closing Tape App.",
               "tabs": {
                 "tape": {
                   "id": "tape",
@@ -158,7 +158,7 @@
       {
         "tool": "get_widget_data",
         "args": {
-          "origin": "Wave Two Closing Tape",
+          "origin": "Rollout Closing Tape",
           "widget_id": "closing_tape_lookup",
           "data_args": {
             "ticker": "NVDA"
@@ -184,7 +184,7 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Two Closing Tape",
+        "origin": "Rollout Closing Tape",
         "widget_id": "closing_tape_lookup",
         "data_args": {
           "ticker": "NVDA"
@@ -198,7 +198,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Two Closing Tape",
+        "backend_name": "Rollout Closing Tape",
         "widget_id": "closing_tape_lookup",
         "expect": {
           "type": "table"
@@ -207,7 +207,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Two Closing Tape",
+        "backend_name": "Rollout Closing Tape",
         "name_contains": "Closing Tape App",
         "tabs_include": [
           "tape"

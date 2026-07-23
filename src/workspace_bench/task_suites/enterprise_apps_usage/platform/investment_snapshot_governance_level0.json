@@ -2,7 +2,7 @@
   "id": "investment_snapshot_governance_level0",
   "category": "platform",
   "difficulty": "level0",
-  "prompt": "Investment-snapshot level-0 workflow: read the Finance Tearsheet skill (finance-tearsheet) and add a Investment-snapshot Starter Note containing price action.",
+  "prompt": "Read the Finance Tearsheet skill and add a Investment-snapshot Starter Note containing price action.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

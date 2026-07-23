@@ -2,7 +2,7 @@
   "id": "due_diligence_media_room_level3",
   "category": "dashboard",
   "difficulty": "level3",
-  "prompt": "Media-room level-3 layout: create and open Due Diligence Media Room, add Overview and Review tabs, then add Getting Started's Video Library with Transcript, Getting Started's PDF Widget with URL.",
+  "prompt": "Lay out Due Diligence Media Room end to end: create and open it, add Overview and Review tabs, then add Getting Started's Video Library with Transcript, Getting Started's PDF Widget with URL.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

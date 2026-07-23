@@ -2,7 +2,7 @@
   "id": "execution_quality_review_level0",
   "category": "dashboard",
   "difficulty": "level0",
-  "prompt": "Execution-quality opening dashboard: add Bench Stark Enterprise — Execution Desk, Live Orders to the current dashboard.",
+  "prompt": "Add Live Orders from Bench Stark Enterprise's Execution Desk to the current dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

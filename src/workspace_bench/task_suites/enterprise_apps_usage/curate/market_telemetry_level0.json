@@ -2,7 +2,7 @@
   "id": "market_telemetry_level0",
   "category": "single-widget",
   "difficulty": "level0",
-  "prompt": "Add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Wave Two Market Telemetry dashboard.",
+  "prompt": "Add Getting Started's Stock Price Trends - Line Sparklines with First/Last Points to the open Rollout Market Telemetry dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Wave Two Market Telemetry",
+    "default_selected_dashboard": "Rollout Market Telemetry",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -48,7 +48,7 @@
     ],
     "initial_state": {
       "dashboard": {
-        "name": "Wave Two Market Telemetry",
+        "name": "Rollout Market Telemetry",
         "activate": false,
         "tabs": [
           {

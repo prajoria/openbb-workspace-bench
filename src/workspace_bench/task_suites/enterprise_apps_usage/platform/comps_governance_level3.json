@@ -2,7 +2,7 @@
   "id": "comps_governance_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Comps-governance paired workflow: read the Finance Comps skill (finance-comps), then add Getting Started's Plotly Chart with Theme and Toolbar using Config File, Widget Examples's Chains chart example Plotly with raw data to support valuation multiples.",
+  "prompt": "Working from the Finance Comps skill, add Getting Started's Plotly Chart with Theme and Toolbar using Config File, Widget Examples's Chains chart example Plotly with raw data to support valuation multiples.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -2,7 +2,7 @@
   "id": "client_intake_controls_level0",
   "category": "single-widget",
   "difficulty": "level0",
-  "prompt": "Client-intake level-0 change: on the open Client Intake Controls dashboard, set Financial Entry Form with client_first_name set to Maya, client_last_name set to Chen, risk_profile set to Moderate, add_record set to True and preserve the other views.",
+  "prompt": "On the open Client Intake Controls dashboard, set Financial Entry Form: client_first_name to Maya, client_last_name to Chen, risk_profile to Moderate, add_record to True. Preserve the other views.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

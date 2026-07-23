@@ -2,7 +2,7 @@
   "id": "client_intake_controls_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Client-intake build tuning: add a custom backend Wave Three Intake Tuning with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) and add a Client-intake Tuning Note recording the param kind it names between endpoint and button.",
+  "prompt": "Tune Buildout Intake Tuning end to end: add it as a custom backend with a Intake Control Panel table carrying risk_profile and client_last_name params, publish and instantiate Intake Tuning App on Controls, then set the live Intake Control Panel to risk_profile Moderate, client_last_name Chen. Follow the widgets.json spec.  Follow the Widget Parameters resource (openbb://workspace/specs/widget-parameters) and add a Client-intake Tuning Note recording the param kind it names between endpoint and button.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -74,7 +74,7 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Intake Tuning",
+          "name": "Buildout Intake Tuning",
           "url": "http://127.0.0.1:9723",
           "widgets_json": {
             "intake_control_panel": {
@@ -117,7 +117,7 @@
           "apps_json": [
             {
               "name": "Intake Tuning App",
-              "description": "Wave-1 authored app for Intake Tuning App.",
+              "description": "Authored app for Intake Tuning App.",
               "tabs": {
                 "controls": {
                   "id": "controls",
@@ -189,7 +189,7 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Three Intake Tuning",
+        "origin": "Buildout Intake Tuning",
         "widget_id": "intake_control_panel",
         "data_args": {
           "risk_profile": "Moderate",
@@ -209,7 +209,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Intake Tuning",
+        "backend_name": "Buildout Intake Tuning",
         "widget_id": "intake_control_panel",
         "expect": {
           "type": "table"
@@ -218,7 +218,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Three Intake Tuning",
+        "backend_name": "Buildout Intake Tuning",
         "name_contains": "Intake Tuning App",
         "tabs_include": [
           "controls"

@@ -2,7 +2,7 @@
   "id": "execution_quality_review_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Execution-quality paired dashboard: add Bench Stark Enterprise — Execution Desk, Live Orders; Bench Stark Enterprise — Execution Desk, Broker Scorecard to the current dashboard.",
+  "prompt": "Place both Live Orders from Bench Stark Enterprise's Execution Desk; Broker Scorecard from Bench Stark Enterprise's Execution Desk on the current dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

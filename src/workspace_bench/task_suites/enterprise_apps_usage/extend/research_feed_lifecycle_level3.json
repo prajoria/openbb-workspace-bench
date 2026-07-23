@@ -2,7 +2,7 @@
   "id": "research_feed_lifecycle_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Publish and add Wave Two Research Feed with Research Feed Pulse and a Research Feed App containing Feed. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Publish and add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -50,10 +50,17 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Two Research Feed",
+          "name": "Rollout Research Feed",
           "url": "http://127.0.0.1:9606",
           "widgets_json": {
             "research_feed_pulse": {
@@ -70,7 +77,7 @@
           "apps_json": [
             {
               "name": "Research Feed App",
-              "description": "Wave-1 authored app for Research Feed App.",
+              "description": "Authored app for Research Feed App.",
               "tabs": {
                 "feed": {
                   "id": "feed",
@@ -97,14 +104,14 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "widget_id": "research_feed_pulse",
         "expect": {}
       }
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Two Research Feed",
+        "backend_name": "Rollout Research Feed",
         "name_contains": "Research Feed App",
         "tabs_include": [
           "feed"
@@ -112,6 +119,6 @@
         "layout_refs_valid": true
       }
     ],
-    "max_turns": 4
+    "max_turns": 5
   }
 }

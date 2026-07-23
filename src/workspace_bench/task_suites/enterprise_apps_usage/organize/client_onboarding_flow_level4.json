@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level4",
   "category": "dashboard",
   "difficulty": "level4",
-  "prompt": "Client operations needs a governed setup: following Workspace session guidance, create and activate Wave Two Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order.",
+  "prompt": "Client operations needs a governed setup: following Workspace session guidance, create and activate Rollout Client Onboarding with Client Intake, Due Diligence, and Approval tabs in that order.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -65,7 +65,7 @@
         "tool": "manage_dashboard",
         "args": {
           "operation": "create",
-          "name": "Wave Two Client Onboarding",
+          "name": "Rollout Client Onboarding",
           "activate": true
         },
         "graded_args": [

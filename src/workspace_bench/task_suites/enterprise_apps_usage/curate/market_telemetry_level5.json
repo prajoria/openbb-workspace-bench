@@ -2,7 +2,7 @@
   "id": "market_telemetry_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Author and add a Telemetry Summary Backend with a Telemetry Summary Tile metric, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and add a Market Telemetry Build Note recording the first input its workflow gathers.",
+  "prompt": "Author and add a Telemetry Summary Backend with a Telemetry Summary Tile metric, then instantiate its Market Telemetry App. On Monitor, place Getting Started's Stock Price Trends - Line Sparklines with First/Last Points beside Widget Examples' [MOCK DATA] Tabs + Dropdown Combined at y 10, x 0 and x 20, each width 20 and height 12. Follow the Finance Tearsheet skill and add a Market Telemetry Build Note recording the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -64,6 +64,13 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
@@ -72,7 +79,7 @@
           "widgets_json": {
             "telemetry_summary_tile": {
               "name": "Telemetry Summary Tile",
-              "description": "Wave-1 view for Telemetry Summary Tile.",
+              "description": "Authored view for Telemetry Summary Tile.",
               "endpoint": "/telemetry-summary",
               "type": "metric",
               "gridData": {
@@ -84,7 +91,7 @@
           "apps_json": [
             {
               "name": "Market Telemetry App",
-              "description": "Wave-1 authored app for Market Telemetry App.",
+              "description": "Authored app for Market Telemetry App.",
               "tabs": {
                 "monitor": {
                   "id": "monitor",
@@ -240,7 +247,7 @@
         ]
       }
     ],
-    "max_turns": 15,
+    "max_turns": 16,
     "required_generated_widgets": [
       {
         "widget_type": "note",

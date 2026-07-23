@@ -2,7 +2,7 @@
   "id": "comps_governance_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Comps-governance governed build: read the Finance Comps skill (finance-comps), add Wave Three Comps Governance with a Comps Governance Register table, publish and instantiate Comps Governance App on Comparables, and add a Comps-governance Build Note containing valuation multiples. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names.",
+  "prompt": "Deliver Buildout Comps Governance: read the Finance Comps skill, add the backend with a Comps Governance Register table per the workspace's widgets.json spec, publish and instantiate Comps Governance App on Comparables, and add a Comps-governance Build Note containing valuation multiples.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -64,15 +64,22 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Comps Governance",
+          "name": "Buildout Comps Governance",
           "url": "http://127.0.0.1:9709",
           "widgets_json": {
             "comps_governance_register": {
               "name": "Comps Governance Register",
-              "description": "Wave-1 view for Comps Governance Register.",
+              "description": "Authored view for Comps Governance Register.",
               "endpoint": "/comps_governance_register",
               "type": "table",
               "gridData": {
@@ -84,7 +91,7 @@
           "apps_json": [
             {
               "name": "Comps Governance App",
-              "description": "Wave-1 authored app for Comps Governance App.",
+              "description": "Authored app for Comps Governance App.",
               "tabs": {
                 "comparables": {
                   "id": "comparables",
@@ -143,7 +150,7 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Three Comps Governance",
+        "origin": "Buildout Comps Governance",
         "widget_id": "comps_governance_register",
         "tab_id": "comparables"
       }
@@ -159,7 +166,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Comps Governance",
+        "backend_name": "Buildout Comps Governance",
         "widget_id": "comps_governance_register",
         "expect": {
           "type": "table"
@@ -168,7 +175,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Three Comps Governance",
+        "backend_name": "Buildout Comps Governance",
         "name_contains": "Comps Governance App",
         "tabs_include": [
           "comparables"
@@ -182,6 +189,6 @@
         ]
       }
     ],
-    "max_turns": 9
+    "max_turns": 10
   }
 }

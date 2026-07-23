@@ -2,7 +2,7 @@
   "id": "live_quote_lookup_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "Live-quote build request: add Wave Three Live Quote with a Live Quote Lookup table, carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Follow the widgets manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Tearsheet skill (finance-tearsheet) and add a Live-quote Build Note recording the first input its workflow gathers.",
+  "prompt": "Stand up Buildout Live Quote: add it with a Live Quote Lookup table carrying symbol and last_price columns; publish and instantiate Live Quote App on Quotes, read it with symbol AAPL, and report the exact symbol and last_price values shown. Build it to the workspace's widgets.json spec. Follow the Finance Tearsheet skill and add a Live-quote Build Note recording the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -75,7 +75,7 @@
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Live Quote",
+          "name": "Buildout Live Quote",
           "url": "http://127.0.0.1:9702",
           "widgets_json": {
             "live_quote_lookup": {
@@ -106,7 +106,7 @@
           "apps_json": [
             {
               "name": "Live Quote App",
-              "description": "Wave-1 authored app for Live Quote App.",
+              "description": "Authored app for Live Quote App.",
               "tabs": {
                 "quotes": {
                   "id": "quotes",
@@ -158,7 +158,7 @@
       {
         "tool": "get_widget_data",
         "args": {
-          "origin": "Wave Three Live Quote",
+          "origin": "Buildout Live Quote",
           "widget_id": "live_quote_lookup",
           "data_args": {
             "symbol": "AAPL"
@@ -181,7 +181,7 @@
     ],
     "required_widgets": [
       {
-        "origin": "Wave Three Live Quote",
+        "origin": "Buildout Live Quote",
         "widget_id": "live_quote_lookup",
         "data_args": {
           "symbol": "AAPL"
@@ -204,7 +204,7 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Live Quote",
+        "backend_name": "Buildout Live Quote",
         "widget_id": "live_quote_lookup",
         "expect": {
           "type": "table"
@@ -213,7 +213,7 @@
     ],
     "required_app_defs": [
       {
-        "backend_name": "Wave Three Live Quote",
+        "backend_name": "Buildout Live Quote",
         "name_contains": "Live Quote App",
         "tabs_include": [
           "quotes"

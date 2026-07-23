@@ -2,7 +2,7 @@
   "id": "consensus_exception_handoff_level1",
   "category": "read",
   "difficulty": "level1",
-  "prompt": "Consensus-exception discovered handoff: on the open Consensus Exception Handoff dashboard, read Bench Daloopa's Consensus Estimates with ticker AAPL, then add a Consensus-exception Discovered Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+  "prompt": "Desk log - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Discovered Note recording the exact Total Revenue actual and consensus for 2026Q1.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

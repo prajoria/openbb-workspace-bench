@@ -2,7 +2,7 @@
   "id": "client_onboarding_flow_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Operations needs you to create and activate Wave Two Client Onboarding with Intake, Review, and Approval tabs, then open Review.",
+  "prompt": "Operations needs you to create and activate Rollout Client Onboarding with Intake, Review, and Approval tabs, then open Review.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -53,7 +53,7 @@
         "tool": "manage_dashboard",
         "args": {
           "operation": "create",
-          "name": "Wave Two Client Onboarding",
+          "name": "Rollout Client Onboarding",
           "activate": true
         },
         "graded_args": [
@@ -95,7 +95,7 @@
       "review",
       "approval"
     ],
-    "required_dashboard_name_contains": "Wave Two Client Onboarding",
+    "required_dashboard_name_contains": "Rollout Client Onboarding",
     "max_turns": 6
   }
 }

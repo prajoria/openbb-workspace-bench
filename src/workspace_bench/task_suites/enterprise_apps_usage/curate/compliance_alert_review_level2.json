@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Compliance-alert paired dashboard: add Bench Stark Enterprise — Compliance Surveillance Hub, Open Alert Metrics; Bench Stark Enterprise — Compliance Surveillance Hub, Policy Breaches to the current dashboard.",
+  "prompt": "Place both Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub on the current dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

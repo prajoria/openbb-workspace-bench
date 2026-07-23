@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Guidance-service paired service: add a custom backend Wave Three Guidance Service with Evidence Gaps and Changed Assumptions tables. Widget ids are the snake_case of widget names.",
+  "prompt": "Set up Buildout Guidance Service with Evidence Gaps and Changed Assumptions tables - add it as a custom backend.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -50,15 +50,22 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
         "tool": "manage_backends",
         "args": {
           "operation": "add",
-          "name": "Wave Three Guidance Service",
+          "name": "Buildout Guidance Service",
           "url": "http://127.0.0.1:9712",
           "widgets_json": {
             "evidence_gaps": {
               "name": "Evidence Gaps",
-              "description": "Wave-1 view for Evidence Gaps.",
+              "description": "Authored view for Evidence Gaps.",
               "endpoint": "/evidence_gaps",
               "type": "table",
               "gridData": {
@@ -68,7 +75,7 @@
             },
             "changed_assumptions": {
               "name": "Changed Assumptions",
-              "description": "Wave-1 view for Changed Assumptions.",
+              "description": "Authored view for Changed Assumptions.",
               "endpoint": "/changed_assumptions",
               "type": "table",
               "gridData": {
@@ -87,16 +94,16 @@
     ],
     "required_widget_defs": [
       {
-        "backend_name": "Wave Three Guidance Service",
+        "backend_name": "Buildout Guidance Service",
         "widget_id": "evidence_gaps",
         "expect": {}
       },
       {
-        "backend_name": "Wave Three Guidance Service",
+        "backend_name": "Buildout Guidance Service",
         "widget_id": "changed_assumptions",
         "expect": {}
       }
     ],
-    "max_turns": 4
+    "max_turns": 5
   }
 }

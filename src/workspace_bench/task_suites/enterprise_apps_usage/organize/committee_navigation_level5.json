@@ -2,7 +2,7 @@
   "id": "committee_navigation_level5",
   "category": "platform",
   "difficulty": "level5",
-  "prompt": "The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register table views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps manifest specification. Widget ids are the snake_case of widget names; tab ids are the snake_case of tab names. Follow the Finance Earnings Prep skill (finance-earnings-prep) and add a Committee Navigation Build Note recording what it inspects just before producing action items.",
+  "prompt": "The committee needs a Committee Navigation Backend with Agenda Queue and Evidence Register table views. Author and add it, publish a Committee Review App with Agenda and Evidence tabs, and instantiate it. Follow the apps.json spec. Follow the Finance Earnings Prep skill and add a Committee Navigation Build Note recording what it inspects just before producing action items.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -66,6 +66,13 @@
       {
         "tool": "read_workspace_resource",
         "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
           "uri": "openbb://workspace/specs/apps-json"
         },
         "optional": true
@@ -79,7 +86,7 @@
           "widgets_json": {
             "agenda_queue": {
               "name": "Agenda Queue",
-              "description": "Wave-1 view for Agenda Queue.",
+              "description": "Authored view for Agenda Queue.",
               "endpoint": "/agenda",
               "type": "table",
               "gridData": {
@@ -89,7 +96,7 @@
             },
             "evidence_register": {
               "name": "Evidence Register",
-              "description": "Wave-1 view for Evidence Register.",
+              "description": "Authored view for Evidence Register.",
               "endpoint": "/evidence",
               "type": "table",
               "gridData": {
@@ -101,7 +108,7 @@
           "apps_json": [
             {
               "name": "Committee Review App",
-              "description": "Wave-1 authored app for Committee Review App.",
+              "description": "Authored app for Committee Review App.",
               "tabs": {
                 "agenda": {
                   "id": "agenda",
@@ -220,7 +227,7 @@
         ]
       }
     ],
-    "max_turns": 10,
+    "max_turns": 11,
     "required_generated_widgets": [
       {
         "widget_type": "note",
