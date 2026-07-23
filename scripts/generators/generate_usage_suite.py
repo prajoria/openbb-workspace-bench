@@ -222,6 +222,19 @@ DISCOVERY_TOOLS = {
 # Regression fence, not a style guide: implementation vocabulary that must
 # never appear in an analyst-facing prompt. The principled voice contract
 # lives in .claude/skills/prompt-realism; keep this list small.
+# Register regression fence shared by the R1 assertion and prompt specs.
+REALISM_FENCE = (
+    "level-",          # the bench's difficulty axis spoken aloud
+    "snake_case",      # id-derivation convention lives in the spec resource
+    " marker",         # bench-seeded disambiguation devices
+    "(finance-",       # skill slugs belong to the tool layer, not the ask
+    "(daloopa-",
+    "wave one",        # generator batch labels posing as business names
+    "wave two",
+    "wave three",
+    "manifest specification",
+)
+
 PROMPT_FORBIDDEN = {
     *WORKSPACE_TOOL_NAMES,
     "final_answer",
@@ -10155,25 +10168,277 @@ def _assert_prompt_realism(records: list[TaskRecord]) -> None:
     The positive voice contract lives in .claude/skills/prompt-realism.
     """
 
-    forbidden = (
-        "level-",          # the bench's difficulty axis spoken aloud
-        "snake_case",      # id-derivation convention lives in the spec resource
-        " marker",         # bench-seeded disambiguation devices
-        "(finance-",       # skill slugs belong to the tool layer, not the ask
-        "(daloopa-",
-        "wave one",        # generator batch labels posing as business names
-        "wave two",
-        "wave three",
-        "manifest specification",
-    )
     for record in records:
         prompt = str(record.payload["prompt"]).casefold()
-        for fragment in forbidden:
+        for fragment in REALISM_FENCE:
             if fragment in prompt:
                 raise AssertionError(
                     f"{record.payload['id']}: R1 prompt contains bench plumbing "
                     f"{fragment.strip()!r}"
                 )
+
+
+
+
+# ---------------------------------------------------------------------------
+# Prompt authoring contract (spec-authored prompts, stage A). The generator
+# owns task substance and emits, per task, the machine-readable rules an
+# authoring agent needs to write the prompt. Authored prompts arrive through
+# prompt_overlay.json and are applied before the assertion battery, so
+# authored text faces exactly the gates template text does.
+# ---------------------------------------------------------------------------
+
+LEVEL_DIRECTIVES: dict[str, str] = {
+    "level0": (
+        "execute: state everything - the target by display name, every "
+        "parameter key and value, and the deliverable"
+    ),
+    "level1": (
+        "discover: state the ask, but give at least one input only "
+        "colloquially (a name to map, not an identifier); the agent finds "
+        "the target"
+    ),
+    "level2": (
+        "translate policy: state the policy phrase and let it carry the "
+        "values it maps to; do not also state those values directly"
+    ),
+    "level3": (
+        "ambient: the work happens on the open dashboard named in the "
+        "prompt; everything already there must survive"
+    ),
+    "level4": (
+        "governed: name the knowledge source and describe - never print - "
+        "each governed token via its registered description"
+    ),
+    "level5": (
+        "governed build: one coherent build ask - author, register, "
+        "instantiate, use - with the governance woven in"
+    ),
+}
+
+
+def _spec_leaf_values(value: Any) -> list[str]:
+    if isinstance(value, dict):
+        return [leaf for item in value.values() for leaf in _spec_leaf_values(item)]
+    if isinstance(value, (list, tuple)):
+        return [leaf for item in value for leaf in _spec_leaf_values(item)]
+    if isinstance(value, bool) or value is None:
+        return [str(value)]
+    return [str(value)]
+
+
+def _compute_prompt_spec(record: TaskRecord) -> JsonDict:
+    """Everything an authoring agent needs to write this task's prompt."""
+
+    payload = record.payload
+    evaluation = payload["eval"]
+    level = str(payload["difficulty"])
+
+    described: dict[str, JsonDict] = {}
+    if record.governance is not None:
+        for token in record.governance.outcome_tokens:
+            words = GOVERNED_TOKEN_WORDS.get(token)
+            if words is not None:
+                described[token] = {
+                    "token": token,
+                    "description": words,
+                    "source": record.governance.label,
+                    "source_key": record.governance.key,
+                }
+    grounded_tokens = sorted(
+        {str(token) for item in record.grounded_generated for token in item.tokens}
+    )
+    hidden = {token.casefold() for token in described} | {
+        token.casefold() for token in grounded_tokens
+    }
+
+    must_contain: dict[str, str] = {}
+
+    def _require(text: str, why: str) -> None:
+        text = str(text).strip()
+        if not text or text.casefold() in hidden:
+            return
+        must_contain.setdefault(text, why)
+
+    for target in record.targets:
+        _require(target.display_name, "target display name (findability)")
+    for policy in record.policies:
+        _require(policy.words, "policy phrase (declared grounding)")
+    if record.governance is not None:
+        _require(record.governance.label, "knowledge source (governance)")
+    selected = str(payload["setup"]["default_selected_dashboard"])
+    if selected != "Home":
+        _require(f"open {selected} dashboard", "selected-dashboard phrase (asserted)")
+    policy_values = {
+        leaf.casefold()
+        for policy in record.policies
+        for leaf in _spec_leaf_values(policy.values)
+    }
+    governance_key = record.governance.key if record.governance else None
+    for call in evaluation.get("required_tools", []):
+        args = call.get("args", {})
+        for name in call.get("graded_args", ()) or ():
+            for leaf in _spec_leaf_values(args.get(name)):
+                if leaf.casefold() in policy_values:
+                    continue
+                if name == "slug" and leaf == governance_key:
+                    # Slugs never appear in prompts; naming the skill in
+                    # words (the governance label above) grounds the slug.
+                    continue
+                _require(leaf, f"graded value ({call['tool']}:{name})")
+        if level == "level0" and isinstance(args.get("data_args"), dict):
+            for key in args["data_args"]:
+                _require(key, "level0 parameter key")
+
+    flow: list[str] = []
+    for call in evaluation.get("required_tools", []):
+        args = call.get("args", {})
+        brief = {
+            key: args[key]
+            for key in ("operation", "name", "slug", "uri", "widget_id", "widget_type")
+            if key in args
+        }
+        if isinstance(args.get("data_args"), dict):
+            brief["data_args"] = args["data_args"]
+        step = call["tool"] + (f" {json.dumps(brief, ensure_ascii=False)}" if brief else "")
+        if call.get("optional"):
+            step += "  (optional)"
+        flow.append(step)
+
+    return {
+        "task_id": str(payload["id"]),
+        "family": record.family,
+        "spine": str(payload["id"]).rsplit("_level", 1)[0],
+        "level": level,
+        "level_directive": LEVEL_DIRECTIVES[level],
+        "audience": (
+            "an analyst or PM asking a colleague; business language; "
+            "no tool names; at most 110 words"
+        ),
+        "must_contain": [
+            {"text": text, "why": why} for text, why in sorted(must_contain.items())
+        ],
+        "must_describe_never_print": sorted(
+            described.values(), key=lambda item: item["token"]
+        ),
+        "grounded_from_read": [
+            {
+                "tokens": grounded_tokens,
+                "rule": (
+                    "the deliverable is described as recording these facts; "
+                    "the values themselves come from the read and must not "
+                    "appear in the prompt"
+                ),
+            }
+        ]
+        if grounded_tokens
+        else [],
+        "forbidden_fragments": sorted(REALISM_FENCE) + sorted(PROMPT_FORBIDDEN),
+        "uniqueness": (
+            "the opening five words (casefolded) must be unique across all "
+            "192 prompts - place a spine-distinctive token early"
+        ),
+        "word_cap": 110,
+        "flow": flow,
+        "max_turns": evaluation["max_turns"],
+    }
+
+
+def _spec_sha(spec: JsonDict) -> str:
+    import hashlib
+
+    canonical = json.dumps(spec, sort_keys=True, ensure_ascii=False)
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+PROMPT_OVERLAY_NAME = "prompt_overlay.json"
+PROMPT_SPECS_NAME = "prompt_specs.json"
+
+
+def _apply_prompt_overlay(
+    records: list[TaskRecord], specs: dict[str, JsonDict]
+) -> dict[str, int]:
+    """Replace template prompts with authored ones whose spec is still fresh."""
+
+    stats = {"applied": 0, "stale": 0, "unknown": 0}
+    overlay_path = OUTPUT_DIR / PROMPT_OVERLAY_NAME
+    if not overlay_path.exists():
+        return stats
+    overlay = json.loads(overlay_path.read_text(encoding="utf-8"))
+    by_id = {str(record.payload["id"]): record for record in records}
+    for task_id, entry in overlay.items():
+        record = by_id.get(task_id)
+        if record is None:
+            stats["unknown"] += 1
+            continue
+        if entry.get("spec_sha256") != _spec_sha(specs[task_id]):
+            stats["stale"] += 1
+            continue
+        record.payload["prompt"] = re.sub(
+            r"\s{2,}", " ", str(entry["prompt"])
+        ).strip()
+        stats["applied"] += 1
+    return stats
+
+
+def _report_level_contract(records: list[TaskRecord]) -> int:
+    """Report-only inventory of rungs whose substance is thinner than their label."""
+
+    by_spine: dict[str, dict[int, TaskRecord]] = defaultdict(dict)
+    for record in records:
+        task_id = str(record.payload["id"])
+        spine, _, level = task_id.rpartition("_level")
+        by_spine[spine][int(level)] = record
+
+    def body(record: TaskRecord) -> str:
+        return " ".join(str(record.payload["prompt"]).casefold().split()[5:])
+
+    findings: list[str] = []
+    for spine in sorted(by_spine):
+        ladder = by_spine[spine]
+        for level in sorted(ladder):
+            record = ladder[level]
+            payload = record.payload
+            below = ladder.get(level - 1)
+            if below is not None and body(record) == body(below):
+                findings.append(
+                    f"{payload['id']}: prompt body identical to level{level - 1} "
+                    "beyond the opener"
+                )
+            if level == 2 and not record.policies:
+                findings.append(f"{payload['id']}: translate-policy rung has no policy")
+            if level == 3 and str(payload["setup"]["default_selected_dashboard"]) == "Home":
+                # Ambient state may be a staged dashboard or a lived-in
+                # baseline one; either way the work must have a locus.
+                findings.append(f"{payload['id']}: ambient rung has no open dashboard")
+            if level == 4:
+                knowledge_call = any(
+                    call["tool"]
+                    in {
+                        "get_skill_content",
+                        "read_workspace_resource",
+                        "get_workspace_prompt",
+                    }
+                    and call.get("graded_args")
+                    for call in payload["eval"]["required_tools"]
+                )
+                if record.governance is None and not knowledge_call:
+                    findings.append(
+                        f"{payload['id']}: governed rung has no knowledge source"
+                    )
+            if level == 5 and not any(
+                call["tool"] == "manage_backends"
+                and call.get("args", {}).get("operation") == "add"
+                for call in payload["eval"]["required_tools"]
+            ):
+                findings.append(f"{payload['id']}: build rung authors no backend")
+    if findings:
+        print(f"LEVEL-CONTRACT REPORT: {len(findings)} finding(s)", flush=True)
+        for line in findings:
+            print(f"  {line}", flush=True)
+    else:
+        print("LEVEL-CONTRACT REPORT: clean", flush=True)
+    return len(findings)
 
 
 def validate_payloads(records: list[TaskRecord]) -> dict[str, int]:
@@ -10286,8 +10551,8 @@ def _manifest(records: list[TaskRecord]) -> JsonDict:
     }
 
 
-def write_suite(records: list[TaskRecord]) -> None:
-    """Write the suite task files and finalize the manifest."""
+def write_suite(records: list[TaskRecord], specs: dict[str, JsonDict] | None = None) -> None:
+    """Write the suite task files, prompt specs, and finalize the manifest."""
 
     # Refresh family directories in place; never touch the suite README.
     for family in FAMILY_LEVELS:
@@ -10299,6 +10564,15 @@ def write_suite(records: list[TaskRecord]) -> None:
         path = OUTPUT_DIR / record.family / f"{record.payload['id']}.json"
         path.write_text(
             json.dumps(record.payload, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+    if specs is not None:
+        spec_doc = {
+            task_id: {**spec, "spec_sha256": _spec_sha(spec)}
+            for task_id, spec in sorted(specs.items())
+        }
+        (OUTPUT_DIR / PROMPT_SPECS_NAME).write_text(
+            json.dumps(spec_doc, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
     (OUTPUT_DIR / "task_suite.json").write_text(
@@ -10421,8 +10695,17 @@ def _print_coverage_summary(records: list[TaskRecord]) -> None:
 def main() -> int:
     print("[1/4] Building thirty-two usage-v3 spine ladders", flush=True)
     records = build_tasks()
+    specs = {str(record.payload["id"]): _compute_prompt_spec(record) for record in records}
+    overlay = _apply_prompt_overlay(records, specs)
+    print(
+        f"[overlay] {overlay['applied']} authored prompts applied "
+        f"({overlay['stale']} stale, {overlay['unknown']} unknown, "
+        f"{len(records) - overlay['applied']} template)",
+        flush=True,
+    )
     print("[2/4] Asserting task shape, missions, F1-F11, and L1-L5", flush=True)
     summary = validate_payloads(records)
+    _report_level_contract(records)
     print(
         "[static] "
         f"{summary['tasks']} tasks; max {summary['max_checks']} graded checks; "
@@ -10431,7 +10714,7 @@ def main() -> int:
         flush=True,
     )
     print("[3/4] Writing and loading pilots/usage_v3", flush=True)
-    write_suite(records)
+    write_suite(records, specs)
     print("[4/4] Replaying oracle and no-op certification", flush=True)
     replay, table = certify_loaded_suite(records)
     _print_certification_table(table)
