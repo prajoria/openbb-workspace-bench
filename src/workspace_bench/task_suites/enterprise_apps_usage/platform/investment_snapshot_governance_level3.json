@@ -2,7 +2,7 @@
   "id": "investment_snapshot_governance_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Working from the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget to support price action.",
+  "prompt": "On the open Investment-snapshot Desk dashboard, working from the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget to support price action.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Home",
+    "default_selected_dashboard": "Investment-snapshot Desk",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -45,7 +45,20 @@
       "read_workspace_resource",
       "get_workspace_prompt",
       "assign_tasks_to_agents"
-    ]
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Investment-snapshot Desk",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": []
+      }
+    }
   },
   "eval": {
     "required_tools": [

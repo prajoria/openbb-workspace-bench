@@ -2,7 +2,7 @@
   "id": "execution_quality_review_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Place both Live Orders from Bench Stark Enterprise's Execution Desk; Broker Scorecard from Bench Stark Enterprise's Execution Desk on the current dashboard.",
+  "prompt": "Place both Live Orders from Bench Stark Enterprise's Execution Desk; Broker Scorecard from Bench Stark Enterprise's Execution Desk on the current dashboard, configured to the US desk review policy - that policy means the US Equity desk, quarter to date.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -60,7 +60,11 @@
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
-          "widget_id": "execution_desk_blotter_live_orders"
+          "widget_id": "execution_desk_blotter_live_orders",
+          "data_args": {
+            "desk": "US Equity",
+            "period": "QTD"
+          }
         },
         "graded_args": [
           "origin",
@@ -71,7 +75,11 @@
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
-          "widget_id": "execution_desk_fills_broker_scorecard"
+          "widget_id": "execution_desk_fills_broker_scorecard",
+          "data_args": {
+            "desk": "US Equity",
+            "period": "QTD"
+          }
         },
         "graded_args": [
           "origin",
@@ -82,11 +90,19 @@
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
-        "widget_id": "execution_desk_blotter_live_orders"
+        "widget_id": "execution_desk_blotter_live_orders",
+        "data_args": {
+          "desk": "US Equity",
+          "period": "QTD"
+        }
       },
       {
         "origin": "Bench Stark Enterprise",
-        "widget_id": "execution_desk_fills_broker_scorecard"
+        "widget_id": "execution_desk_fills_broker_scorecard",
+        "data_args": {
+          "desk": "US Equity",
+          "period": "QTD"
+        }
       }
     ],
     "max_turns": 6

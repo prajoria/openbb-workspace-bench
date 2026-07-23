@@ -2,7 +2,7 @@
   "id": "guidance_service_lifecycle_level3",
   "category": "platform",
   "difficulty": "level3",
-  "prompt": "Publish Buildout Guidance Service as an app: add the backend with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.",
+  "prompt": "From the open Guidance Service Staging dashboard, publish Buildout Guidance Service as an app: add the backend with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -23,7 +23,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "Home",
+    "default_selected_dashboard": "Guidance Service Staging",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -45,7 +45,20 @@
       "read_workspace_resource",
       "get_workspace_prompt",
       "assign_tasks_to_agents"
-    ]
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Guidance Service Staging",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": []
+      }
+    }
   },
   "eval": {
     "required_tools": [

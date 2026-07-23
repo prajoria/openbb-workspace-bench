@@ -2680,6 +2680,10 @@
       {
         "text": "Policy Breaches",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "the open-items review policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -2726,11 +2730,11 @@
     "word_cap": 110,
     "flow": [
       "list_available_widgets  (optional)",
-      "create_widget {\"widget_id\": \"compliance_surveillance_hub_alerts_open_alert_metrics\"}",
-      "create_widget {\"widget_id\": \"compliance_surveillance_hub_personal_trading_policy_breaches\"}"
+      "create_widget {\"widget_id\": \"compliance_surveillance_hub_alerts_open_alert_metrics\", \"data_args\": {\"status\": \"Open\", \"period\": \"QTD\"}}",
+      "create_widget {\"widget_id\": \"compliance_surveillance_hub_personal_trading_policy_breaches\", \"data_args\": {\"status\": \"Open\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "ff58b2f2bc49b671c4b0f56bd1e739664a470bc6a8b05162904c8c6d4362d291"
+    "spec_sha256": "44272030920a6db803352ce0280fcb92f9f5b1023dc32d62da8df97eef2c7d2a"
   },
   "compliance_alert_review_level3": {
     "task_id": "compliance_alert_review_level3",
@@ -2755,6 +2759,14 @@
       {
         "text": "Open Alert Metrics",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "Policy Breaches",
+        "why": "target display name (findability)"
+      },
+      {
+        "text": "open Compliance Alert Review dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -2800,13 +2812,14 @@
     "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
     "word_cap": 110,
     "flow": [
+      "get_workspace_snapshot  (optional)",
       "list_available_widgets  (optional)",
       "list_available_widgets  (optional)",
-      "create_widget {\"widget_id\": \"compliance_surveillance_hub_alerts_open_alert_metrics\"}",
+      "create_widget {\"widget_id\": \"compliance_surveillance_hub_personal_trading_policy_breaches\"}",
       "create_widget {\"widget_id\": \"markdown_widget_with_number_input\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "1236b2c5c261e904ce6cee48a7cb39b689dcf9758e50d915b2965a223c6199be"
+    "max_turns": 8,
+    "spec_sha256": "ae85842422376af1f7021bcc103386bdc8b3a60ad2f7a78ddb86d9ea30b502d9"
   },
   "compliance_alert_review_level4": {
     "task_id": "compliance_alert_review_level4",
@@ -3183,16 +3196,16 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Finance Comps skill",
+        "why": "policy phrase (declared grounding)"
+      },
+      {
         "text": "Getting Started",
         "why": "graded value (create_widget:origin)"
       },
       {
         "text": "Plotly Chart with Theme and Toolbar using Config File",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "finance-comps",
-        "why": "graded value (get_skill_content:slug)"
       }
     ],
     "must_describe_never_print": [],
@@ -3243,7 +3256,7 @@
       "create_widget {\"widget_id\": \"plotly_chart_with_theme_and_toolbar_using_config_file\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "3f9b04a6db1335121fd1cab1fc1903f3b0263afb4c2f7c5b4f2a4e25f1eb7b25"
+    "spec_sha256": "bff339bfb077b1e790a21ae958b138a97276c40d68f48462645f8d10285d7715"
   },
   "comps_governance_level3": {
     "task_id": "comps_governance_level3",
@@ -3272,6 +3285,10 @@
       {
         "text": "finance-comps",
         "why": "graded value (get_skill_content:slug)"
+      },
+      {
+        "text": "open Comps-governance Desk dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -3324,7 +3341,7 @@
       "create_widget {\"widget_id\": \"chains_plotly\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "68fed723ca6fd19135713222d3dafdd7c8c2cc80f5e11382567c69b45988dc9f"
+    "spec_sha256": "cc515bbce4cea2d31e942f17713e8e0aec9d514622b5015bb5ea872d3afc90e2"
   },
   "comps_governance_level4": {
     "task_id": "comps_governance_level4",
@@ -3726,6 +3743,10 @@
       {
         "text": "open Consensus Exception Handoff dashboard",
         "why": "selected-dashboard phrase (asserted)"
+      },
+      {
+        "text": "the mega-cap coverage policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -3780,11 +3801,12 @@
     "word_cap": 110,
     "flow": [
       "list_available_widgets  (optional)",
+      "get_params_options {\"widget_id\": \"daloopa_consensus_estimates\"}  (optional)",
       "get_widget_data {\"widget_id\": \"daloopa_consensus_estimates\", \"data_args\": {\"ticker\": \"AAPL\"}}",
       "add_generative_widget {\"name\": \"Consensus-exception Analyst Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 6,
-    "spec_sha256": "d2fb589a73fad249e64e9511c78a3f01418b349b16b1fe8b9d94185f91159199"
+    "max_turns": 7,
+    "spec_sha256": "5b55a4ffdc36f59f2003ca4d4920cc068d6d61a4a30956236079d1bae1100bb1"
   },
   "consensus_exception_handoff_level3": {
     "task_id": "consensus_exception_handoff_level3",
@@ -5578,7 +5600,20 @@
         "why": "selected-dashboard phrase (asserted)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "current-dashboard",
+        "description": "the first anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      },
+      {
+        "token": "current-tab",
+        "description": "the second anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -5622,7 +5657,7 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
-      "get_workspace_prompt {\"name\": \"workspace_session_context\"}  (optional)",
+      "get_workspace_prompt {\"name\": \"workspace_session_context\"}",
       "list_available_widgets  (optional)",
       "list_available_widgets  (optional)",
       "create_widget {\"widget_id\": \"portfolio_command_center_actions_trade_ideas\", \"data_args\": {\"fund\": \"Flagship Long/Short\", \"period\": \"QTD\"}}",
@@ -5631,7 +5666,7 @@
       "update_widget_layout {\"widget_id\": \"company_performance\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "1721e83e4419f54b7a242e2eeb418c753c29790c2d613e212fd66f8ccc9ea349"
+    "spec_sha256": "5d103dd310e292d2faf459802af8f810ceee1262c88fd0bb1ec09ebc397e2ad6"
   },
   "decision_briefing_level5": {
     "task_id": "decision_briefing_level5",
@@ -7474,6 +7509,10 @@
       {
         "text": "Live Orders",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "the US desk review policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -7520,11 +7559,11 @@
     "word_cap": 110,
     "flow": [
       "list_available_widgets  (optional)",
-      "create_widget {\"widget_id\": \"execution_desk_blotter_live_orders\"}",
-      "create_widget {\"widget_id\": \"execution_desk_fills_broker_scorecard\"}"
+      "create_widget {\"widget_id\": \"execution_desk_blotter_live_orders\", \"data_args\": {\"desk\": \"US Equity\", \"period\": \"QTD\"}}",
+      "create_widget {\"widget_id\": \"execution_desk_fills_broker_scorecard\", \"data_args\": {\"desk\": \"US Equity\", \"period\": \"QTD\"}}"
     ],
     "max_turns": 6,
-    "spec_sha256": "c34a60cbf0fed6bc7a8b5d345bdc2776d39f73197623ba6931dd3ea3287d3b7a"
+    "spec_sha256": "5d4de5ba901ba9d94fef23fb4f6f885631450f8dec3546bcf9553609c2401fbd"
   },
   "execution_quality_review_level3": {
     "task_id": "execution_quality_review_level3",
@@ -7539,6 +7578,10 @@
         "why": "graded value (create_widget:origin)"
       },
       {
+        "text": "Broker Scorecard",
+        "why": "target display name (findability)"
+      },
+      {
         "text": "Getting Started",
         "why": "graded value (create_widget:origin)"
       },
@@ -7549,6 +7592,10 @@
       {
         "text": "Multi PDF Viewer - URL",
         "why": "target display name (findability)"
+      },
+      {
+        "text": "open Execution Quality Review dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -7594,13 +7641,14 @@
     "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
     "word_cap": 110,
     "flow": [
+      "get_workspace_snapshot  (optional)",
       "list_available_widgets  (optional)",
       "list_available_widgets  (optional)",
-      "create_widget {\"widget_id\": \"execution_desk_blotter_live_orders\"}",
+      "create_widget {\"widget_id\": \"execution_desk_fills_broker_scorecard\"}",
       "create_widget {\"widget_id\": \"multi_pdf_url\"}"
     ],
-    "max_turns": 7,
-    "spec_sha256": "e6b6eed1b2987c7d3e76e852cf5179a88add02e08cde6040ce0beea33bef7bf7"
+    "max_turns": 8,
+    "spec_sha256": "5620fa42fb99a2e7e1646d289691a39acf5a861f11e7e1005ef9aa92f28387c8"
   },
   "execution_quality_review_level4": {
     "task_id": "execution_quality_review_level4",
@@ -8465,6 +8513,10 @@
       {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
+      },
+      {
+        "text": "the guidance service policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -8514,7 +8566,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Guidance Service\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "8405ea7f8b19f25d28334ff5132cefed35a124370f90166390437284628d4f06"
+    "spec_sha256": "83aa13cf8c0b67795a9acdd45dd81d93f34ce8f0f952e1a707f29a0d643b5a64"
   },
   "guidance_service_lifecycle_level3": {
     "task_id": "guidance_service_lifecycle_level3",
@@ -8547,6 +8599,10 @@
       {
         "text": "instantiate",
         "why": "graded value (manage_apps:operation)"
+      },
+      {
+        "text": "open Guidance Service Staging dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -8597,7 +8653,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "6e99c7b21da5d478a2208b9843868fca7e4ed162d958358d821cb7424ac1ba5c"
+    "spec_sha256": "94db81221406f11974c72e631550f3d71a275ce8fd147edaad4d8f2fbbfdab91"
   },
   "guidance_service_lifecycle_level4": {
     "task_id": "guidance_service_lifecycle_level4",
@@ -8971,6 +9027,10 @@
       {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
+      },
+      {
+        "text": "the inflection service policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -9020,7 +9080,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Buildout Inflection Service\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "eb07c9a11f2b9171b2c10150bf28b592bbd863d4710790f84ebcec885dfbe61a"
+    "spec_sha256": "b4e7e150773922775daf6647623a8f092f051350521693b0daaa568461742156"
   },
   "inflection_service_lifecycle_level3": {
     "task_id": "inflection_service_lifecycle_level3",
@@ -9053,6 +9113,10 @@
       {
         "text": "instantiate",
         "why": "graded value (manage_apps:operation)"
+      },
+      {
+        "text": "open Inflection Service Staging dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -9103,7 +9167,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "a050f1022392340eb5a4233155c51b6a9114f205e102179c1688a75efa46e2a8"
+    "spec_sha256": "e8ad3a26a77bb061fec246497907b3b01b543f5a99de129fdf975f11691b7b4e"
   },
   "inflection_service_lifecycle_level4": {
     "task_id": "inflection_service_lifecycle_level4",
@@ -9463,16 +9527,16 @@
     "audience": "an analyst or PM asking a colleague; business language; no tool names; at most 110 words",
     "must_contain": [
       {
+        "text": "Finance Tearsheet skill",
+        "why": "policy phrase (declared grounding)"
+      },
+      {
         "text": "Getting Started",
         "why": "graded value (create_widget:origin)"
       },
       {
         "text": "TradingView Chart",
         "why": "target display name (findability)"
-      },
-      {
-        "text": "finance-tearsheet",
-        "why": "graded value (get_skill_content:slug)"
       }
     ],
     "must_describe_never_print": [],
@@ -9523,7 +9587,7 @@
       "create_widget {\"widget_id\": \"udf\"}"
     ],
     "max_turns": 6,
-    "spec_sha256": "fd77b1e0d8072cef7cdb5f9563c7a0f8b6a9217aa244f78150d7140d3025f574"
+    "spec_sha256": "22c422ff0b4cc3dc0d862ed22f34645242bdabb77b603f63fbf78b902c29e9f1"
   },
   "investment_snapshot_governance_level3": {
     "task_id": "investment_snapshot_governance_level3",
@@ -9548,6 +9612,10 @@
       {
         "text": "finance-tearsheet",
         "why": "graded value (get_skill_content:slug)"
+      },
+      {
+        "text": "open Investment-snapshot Desk dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -9599,7 +9667,7 @@
       "create_widget {\"widget_id\": \"html_widget\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "3e5639741af7fbd95606a06773d28138b80830df892b595d7346e36915359779"
+    "spec_sha256": "142bd53b833998c946714889fbaf2fb126c4304befd544fe2abcf9f778524159"
   },
   "investment_snapshot_governance_level4": {
     "task_id": "investment_snapshot_governance_level4",
@@ -11212,7 +11280,20 @@
         "why": "graded value (create_widget:data_args)"
       }
     ],
-    "must_describe_never_print": [],
+    "must_describe_never_print": [
+      {
+        "token": "current-dashboard",
+        "description": "the first anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      },
+      {
+        "token": "current-tab",
+        "description": "the second anchor in its stable session-grounding phrase",
+        "source": "Workspace session guidance",
+        "source_key": "workspace_session_context"
+      }
+    ],
     "grounded_from_read": [],
     "forbidden_fragments": [
       " marker",
@@ -11256,7 +11337,7 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
-      "get_workspace_prompt {\"name\": \"workspace_session_context\"}  (optional)",
+      "get_workspace_prompt {\"name\": \"workspace_session_context\"}",
       "list_available_widgets  (optional)",
       "list_available_widgets  (optional)",
       "create_widget {\"widget_id\": \"sparkline_line\"}",
@@ -11265,7 +11346,7 @@
       "update_widget_layout {\"widget_id\": \"tabs_with_dropdown\"}"
     ],
     "max_turns": 11,
-    "spec_sha256": "e02ca410d40d8e540c0f9bd22ba151a466e1e0365ed4da886cd110736a815b25"
+    "spec_sha256": "77e945c6a468b1646dbf13753fec00f5d9eee5c07731f9e98d78df36db19f3b3"
   },
   "market_telemetry_level5": {
     "task_id": "market_telemetry_level5",
@@ -12317,13 +12398,13 @@
     "uniqueness": "the opening five words (casefolded) must be unique across all 192 prompts - place a spine-distinctive token early",
     "word_cap": 110,
     "flow": [
-      "get_workspace_prompt {\"name\": \"workspace_session_context\"}  (optional)",
+      "get_workspace_prompt {\"name\": \"workspace_session_context\"}",
       "list_available_widgets  (optional)",
       "get_widget_data {\"widget_id\": \"sample_newsfeed\", \"data_args\": {\"category\": \"business\", \"limit\": 2}}",
       "add_generative_widget {\"name\": \"Governed Expansion Handoff\", \"widget_type\": \"note\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "5594e986ff88dc8d3305868eb590bae28dc88fd49d53d1b559f80d42dddbd62b"
+    "spec_sha256": "098d8cc3cbb23e12ce42bf9dbb225c1ff1457b878a41dff974f7610478499141"
   },
   "news_desk_handoff_level4": {
     "task_id": "news_desk_handoff_level4",
@@ -12414,14 +12495,14 @@
     "word_cap": 110,
     "flow": [
       "get_workspace_snapshot  (optional)",
-      "get_workspace_prompt {\"name\": \"workspace_session_context\"}  (optional)",
+      "get_workspace_prompt {\"name\": \"workspace_session_context\"}",
       "list_available_widgets  (optional)",
       "get_widget_data {\"widget_id\": \"sample_newsfeed\", \"data_args\": {\"category\": \"science\", \"limit\": 2}}",
       "add_generative_widget {\"name\": \"Science Delegation Handoff\", \"widget_type\": \"note\"}",
       "assign_tasks_to_agents"
     ],
     "max_turns": 9,
-    "spec_sha256": "b56a65ef00e37da8e084024adb262800a7482a17bf9cdfc8d2575872535ce2de"
+    "spec_sha256": "32037a66e01167481178a199f7f7b8a949c0dd87eba5b0aaf28ca8bfe2f15c71"
   },
   "news_desk_handoff_level5": {
     "task_id": "news_desk_handoff_level5",
@@ -13687,6 +13768,10 @@
       {
         "text": "refresh",
         "why": "graded value (manage_backends:operation)"
+      },
+      {
+        "text": "the feed refresh policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -13738,7 +13823,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "614cb3524842ab54397d88ff1d7f812e82b7c77fbcd955d042d76d96e9bb1ad9"
+    "spec_sha256": "bc9764fa101e98cf99eef895fe7d42da839eb5788946ffc6ae1ca8b6a02f4b85"
   },
   "research_feed_lifecycle_level3": {
     "task_id": "research_feed_lifecycle_level3",
@@ -13763,6 +13848,10 @@
       {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
+      },
+      {
+        "text": "open Research Feed Staging dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -13812,7 +13901,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Rollout Research Feed\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "0bef58b01b437667e53699ee36678f17ee2a900a2d55018df9b552032358d017"
+    "spec_sha256": "78a0fd1b78b57850856a7c5153be63f920303caeb24b65a5fe579c374b4ae5ef"
   },
   "research_feed_lifecycle_level4": {
     "task_id": "research_feed_lifecycle_level4",
@@ -13845,6 +13934,10 @@
       {
         "text": "instantiate",
         "why": "graded value (manage_apps:operation)"
+      },
+      {
+        "text": "the widgets.json spec",
+        "why": "knowledge source (governance)"
       }
     ],
     "must_describe_never_print": [],
@@ -13897,7 +13990,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "6c0fcee92b9c0640a2488c160729fe97a7bfb1b31777dc353a28907fb68789a1"
+    "spec_sha256": "c77914d094fcb156b484c6c13f5d80699dce94f59cae6a641ea91297e6f4d98a"
   },
   "research_feed_lifecycle_level5": {
     "task_id": "research_feed_lifecycle_level5",
@@ -14179,6 +14272,10 @@
       {
         "text": "refresh",
         "why": "graded value (manage_backends:operation)"
+      },
+      {
+        "text": "the risk refresh policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -14230,7 +14327,7 @@
       "manage_backends {\"operation\": \"refresh\"}"
     ],
     "max_turns": 7,
-    "spec_sha256": "9d3576dbaa4e0a7640cc5ee2b706702e29f3b4eee6f6d0902954d761e7059953"
+    "spec_sha256": "06cc6f9b6a80409e21f33f8441c938bdc404b925456586d6ba827b2e2aba2c12"
   },
   "risk_service_lifecycle_level3": {
     "task_id": "risk_service_lifecycle_level3",
@@ -14255,6 +14352,10 @@
       {
         "text": "add",
         "why": "graded value (manage_backends:operation)"
+      },
+      {
+        "text": "open Risk Service Staging dashboard",
+        "why": "selected-dashboard phrase (asserted)"
       }
     ],
     "must_describe_never_print": [],
@@ -14304,7 +14405,7 @@
       "manage_backends {\"operation\": \"add\", \"name\": \"Pilot Risk Service\"}"
     ],
     "max_turns": 5,
-    "spec_sha256": "ca88c1dfd0271320d3c5f776903dd0b9a67bd7c8186769aa3ed2cda83ee4a332"
+    "spec_sha256": "2466a9614ee6a1dcaaed7cb935d3357fa8fe885bd27ad3e453d0defa7dfdd2a4"
   },
   "risk_service_lifecycle_level4": {
     "task_id": "risk_service_lifecycle_level4",
@@ -14337,6 +14438,10 @@
       {
         "text": "instantiate",
         "why": "graded value (manage_apps:operation)"
+      },
+      {
+        "text": "the widgets.json spec",
+        "why": "knowledge source (governance)"
       }
     ],
     "must_describe_never_print": [],
@@ -14389,7 +14494,7 @@
       "manage_apps {\"operation\": \"instantiate\"}"
     ],
     "max_turns": 8,
-    "spec_sha256": "edcac3f93bdeec651dacbd236a677d4436e6e46293252cf6232f04e639a8add6"
+    "spec_sha256": "1edfe4d662aef7197bc141bc5c37fad3902a6bb1d2e5e3d3795853b1e84d6dc5"
   },
   "risk_service_lifecycle_level5": {
     "task_id": "risk_service_lifecycle_level5",
@@ -14716,6 +14821,10 @@
       {
         "text": "open Segment Mix Handoff dashboard",
         "why": "selected-dashboard phrase (asserted)"
+      },
+      {
+        "text": "the covered-quarter handoff policy",
+        "why": "policy phrase (declared grounding)"
       }
     ],
     "must_describe_never_print": [],
@@ -14770,11 +14879,12 @@
     "word_cap": 110,
     "flow": [
       "list_available_widgets  (optional)",
+      "get_params_options {\"widget_id\": \"daloopa_segment_breakdown\"}  (optional)",
       "get_widget_data {\"widget_id\": \"daloopa_segment_breakdown\", \"data_args\": {\"ticker\": \"AAPL\", \"period\": \"2026Q1\"}}",
       "add_generative_widget {\"name\": \"Segment-mix Analyst Note\", \"widget_type\": \"note\"}"
     ],
-    "max_turns": 6,
-    "spec_sha256": "c26d6a0fb701359161cbc35fa69110514c2340be008a55278d767d3a0dcfa611"
+    "max_turns": 7,
+    "spec_sha256": "1508d0b824e00a810bbd07fd8c88a154102365441dacf3ae72964765f734f780"
   },
   "segment_mix_handoff_level3": {
     "task_id": "segment_mix_handoff_level3",

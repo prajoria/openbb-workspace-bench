@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level1",
   "category": "dashboard",
   "difficulty": "level1",
-  "prompt": "Next, add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub to the current dashboard.",
+  "prompt": "Next, add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub beside it on the current dashboard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

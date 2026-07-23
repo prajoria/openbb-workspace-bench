@@ -2,7 +2,7 @@
   "id": "compliance_alert_review_level2",
   "category": "dashboard",
   "difficulty": "level2",
-  "prompt": "Place both Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub on the current dashboard.",
+  "prompt": "Place both Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub on the current dashboard, configured to the open-items review policy - that policy means everything still open, quarter to date.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -60,7 +60,11 @@
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
-          "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics"
+          "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
+          "data_args": {
+            "status": "Open",
+            "period": "QTD"
+          }
         },
         "graded_args": [
           "origin",
@@ -71,7 +75,11 @@
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
-          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches"
+          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+          "data_args": {
+            "status": "Open",
+            "period": "QTD"
+          }
         },
         "graded_args": [
           "origin",
@@ -82,11 +90,19 @@
     "required_widgets": [
       {
         "origin": "Bench Stark Enterprise",
-        "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics"
+        "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
+        "data_args": {
+          "status": "Open",
+          "period": "QTD"
+        }
       },
       {
         "origin": "Bench Stark Enterprise",
-        "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches"
+        "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+        "data_args": {
+          "status": "Open",
+          "period": "QTD"
+        }
       }
     ],
     "max_turns": 6

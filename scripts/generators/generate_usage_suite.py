@@ -1086,12 +1086,12 @@ def _build_curate_tasks() -> list[TaskRecord]:
         )
         tools: list[JsonDict] = []
         policies: tuple[PolicyMapping, ...] = ()
+        governance_spec: GovernanceSpec | None = None
         if level == 4:
             tools.append(
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
-                    optional=True,
                     graded_args=("name",),
                 )
             )
@@ -1100,6 +1100,12 @@ def _build_curate_tasks() -> list[TaskRecord]:
                     "Workspace session guidance",
                     ("workspace_session_context",),
                 ),
+            )
+            governance_spec = GovernanceSpec(
+                "get_workspace_prompt",
+                "workspace_session_context",
+                "Workspace session guidance",
+                ("current-dashboard", "current-tab"),
             )
         tools.extend(
             [
@@ -1172,6 +1178,7 @@ def _build_curate_tasks() -> list[TaskRecord]:
                 tools,
                 targets=(_trade_target(), _manufacturer_target()),
                 policies=policies,
+                governance=governance_spec,
                 pinned_widget_args={
                     (STARK, TRADE_IDEAS_WIDGET): frozenset({"fund", "period"}),
                     (GETTING_STARTED, MANUFACTURER_WIDGET): frozenset({"company", "year"}),
@@ -2964,7 +2971,8 @@ def _build_extend_tasks() -> list[TaskRecord]:
             2,
             "platform",
             (
-                "Review the connected backends on the open Risk Service Staging dashboard, "
+                "Apply the risk refresh policy on the open Risk Service Staging "
+                "dashboard - review the connected backends, "
                 "then refresh Pilot Risk Service so Pilot Risk App has "
                 "one non-overlapping Pilot Risk Signal placement on Monitor."
             ),
@@ -2993,6 +3001,9 @@ def _build_extend_tasks() -> list[TaskRecord]:
                     signal_name,
                     staged=True,
                 ),
+            ),
+            policies=(
+                PolicyMapping("the risk refresh policy", ("Pilot Risk Signal",)),
             ),
             required_app_defs=[
                 {
@@ -3051,7 +3062,8 @@ def _build_extend_tasks() -> list[TaskRecord]:
             3,
             "platform",
             (
-                "The risk desk needs Pilot Risk Service with its Pilot Risk Signal "
+                "From the open Risk Service Staging dashboard the risk desk needs "
+                "Pilot Risk Service with its Pilot Risk Signal "
                 "and a Pilot Risk App containing Monitor. Publish and add it."
             ),
             [
@@ -3083,6 +3095,8 @@ def _build_extend_tasks() -> list[TaskRecord]:
                     "layout_refs_valid": True,
                 }
             ],
+            selected_dashboard="Risk Service Staging",
+            initial_state=_staged_dashboard("Risk Service Staging", []),
         )
     )
 
@@ -3144,6 +3158,12 @@ def _build_extend_tasks() -> list[TaskRecord]:
                 _required_widget(backend_name, signal_id, tab_id="monitor"),
                 _required_widget(backend_name, limit_id, tab_id="monitor"),
             ],
+            governance=GovernanceSpec(
+                "read_workspace_resource",
+                "openbb://workspace/specs/widgets-json",
+                "the widgets.json spec",
+                ("snake_case",),
+            ),
             required_widget_defs=[
                 {
                     "backend_name": backend_name,
@@ -4070,17 +4090,23 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
         )
         tools: list[JsonDict] = []
         policies: tuple[PolicyMapping, ...] = ()
+        governance_spec: GovernanceSpec | None = None
         if level == 4:
             tools.append(
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
-                    optional=True,
                     graded_args=("name",),
                 )
             )
             policies = (
                 PolicyMapping("Workspace session guidance", ("workspace_session_context",)),
+            )
+            governance_spec = GovernanceSpec(
+                "get_workspace_prompt",
+                "workspace_session_context",
+                "Workspace session guidance",
+                ("current-dashboard", "current-tab"),
             )
         tools.extend(
             [
@@ -4122,6 +4148,7 @@ def _build_curate_wave2_tasks() -> list[TaskRecord]:
                 tools,
                 targets=(spark_target, ratio_target),
                 policies=policies,
+                governance=governance_spec,
                 pinned_widget_args={(WIDGET_EXAMPLES, RATIO_TABS_WIDGET): frozenset(ratio_args)},
                 required_widgets=[
                     _required_widget(GETTING_STARTED, SPARKLINE_WIDGET),
@@ -5576,7 +5603,8 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
             2,
             "platform",
             (
-                "From the open Research Feed Staging dashboard, review the connected backends, "
+                "From the open Research Feed Staging dashboard, apply the feed refresh "
+                "policy - review the connected backends, "
                 "then refresh Rollout Research Feed so Research Feed App has one "
                 "non-overlapping Research Feed Pulse placement on Feed."
             ),
@@ -5595,6 +5623,9 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 ),
             ],
             targets=(_custom_target(backend_name, pulse_id, pulse_name, staged=True),),
+            policies=(
+                PolicyMapping("the feed refresh policy", ("Research Feed Pulse",)),
+            ),
             required_app_defs=[
                 {
                     "backend_name": backend_name,
@@ -5648,7 +5679,8 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
             3,
             "platform",
             (
-                "Publish and add Rollout Research Feed with Research Feed Pulse and a "
+                "Publish from the open Research Feed Staging dashboard: add "
+                "Rollout Research Feed with Research Feed Pulse and a "
                 "Research Feed App containing Feed."
             ),
             [
@@ -5680,6 +5712,8 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                     "layout_refs_valid": True,
                 }
             ],
+            selected_dashboard="Research Feed Staging",
+            initial_state=_staged_dashboard("Research Feed Staging", []),
         )
     )
 
@@ -5741,6 +5775,12 @@ def _build_extend_wave2_tasks() -> list[TaskRecord]:
                 _required_widget(backend_name, pulse_id, tab_id="feed"),
                 _required_widget(backend_name, freshness_id, tab_id="feed"),
             ],
+            governance=GovernanceSpec(
+                "read_workspace_resource",
+                "openbb://workspace/specs/widgets-json",
+                "the widgets.json spec",
+                ("snake_case",),
+            ),
             required_widget_defs=[
                 {
                     "backend_name": backend_name,
@@ -5986,7 +6026,6 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
-                    optional=True,
                     graded_args=("name",),
                 ),
                 _call("list_available_widgets", {"origin": GETTING_STARTED}, optional=True),
@@ -6050,7 +6089,6 @@ def _build_handoff_wave2_tasks() -> list[TaskRecord]:
                 _call(
                     "get_workspace_prompt",
                     {"name": "workspace_session_context"},
-                    optional=True,
                     graded_args=("name",),
                 ),
                 _call("list_available_widgets", {"origin": GETTING_STARTED}, optional=True),
@@ -6814,6 +6852,8 @@ def _build_wave3_curate_spine(
     primary: TargetSpec,
     same_app: TargetSpec,
     cross_catalog: TargetSpec,
+    l2_policy: tuple[str, str, JsonDict],
+    staged_dashboard: str,
     governance: GovernanceSpec,
     backend_name: str,
     widget_name: str,
@@ -6822,23 +6862,14 @@ def _build_wave3_curate_spine(
     url: str,
 ) -> list[TaskRecord]:
     tasks: list[TaskRecord] = []
-    level_targets = (
-        (primary,),
-        (same_app,),
-        (primary, same_app),
-        (primary, cross_catalog),
-    )
-    level_frames = (
-        "Add {names} to the current dashboard.",
-        "Next, add {names} to the current dashboard.",
-        "Place both {names} on the current dashboard.",
-        "Pull together {names} on the current dashboard.",
-    )
-    for level, targets in enumerate(level_targets):
+    for level, targets in ((0, (primary,)), (1, (same_app,))):
         names = "; ".join(_wave3_target_words(target) for target in targets)
-        tools: list[JsonDict] = []
-        if level in {0, 1}:
-            tools.append(_snapshot())
+        frame = (
+            f"Add {names} to the current dashboard."
+            if level == 0
+            else f"Next, add {names} beside it on the current dashboard."
+        )
+        tools = [_snapshot()]
         if level == 1:
             tools.append(
                 _call("list_available_widgets", {"origin": targets[0].origin}, optional=True)
@@ -6851,7 +6882,7 @@ def _build_wave3_curate_spine(
                 spine,
                 level,
                 "dashboard",
-                level_frames[level].format(names=names),
+                frame,
                 tools,
                 targets=targets,
                 required_widgets=[
@@ -6859,6 +6890,81 @@ def _build_wave3_curate_spine(
                 ],
             )
         )
+
+    # level2 - translate policy: both placements configured from one policy.
+    l2_words, l2_meaning, l2_args = l2_policy
+    l2_targets = (primary, same_app)
+    l2_names = "; ".join(_wave3_target_words(target) for target in l2_targets)
+    tasks.append(
+        _record(
+            "curate",
+            spine,
+            2,
+            "dashboard",
+            (
+                f"Place both {l2_names} on the current dashboard, configured to "
+                f"{l2_words} - that policy means {l2_meaning}."
+            ),
+            [
+                *_wave3_discover_targets(l2_targets),
+                *(_wave3_place_call(target, dict(l2_args)) for target in l2_targets),
+            ],
+            targets=l2_targets,
+            policies=(PolicyMapping(l2_words, tuple(l2_args.values())),),
+            pinned_widget_args={
+                (target.origin, target.widget_id): frozenset(l2_args)
+                for target in l2_targets
+            },
+            required_widgets=[
+                _required_widget(target.origin, target.widget_id, dict(l2_args))
+                for target in l2_targets
+            ],
+        )
+    )
+
+    # level3 - ambient: the primary is already placed; extend the dashboard.
+    l3_targets = (same_app, cross_catalog)
+    l3_names = "; ".join(_wave3_target_words(target) for target in l3_targets)
+    l3_stage = _staged_dashboard(
+        staged_dashboard,
+        [
+            {
+                "origin": primary.origin,
+                "widget_id": primary.widget_id,
+                "tab_id": "review",
+                "layout": {"x": 0, "y": 0, "w": 40, "h": 12},
+            }
+        ],
+    )
+    staged_primary = dataclasses.replace(primary, staged=True)
+    tasks.append(
+        _record(
+            "curate",
+            spine,
+            3,
+            "dashboard",
+            (
+                f"The open {staged_dashboard} dashboard already has "
+                f"{primary.display_name} on it - add {l3_names} alongside, and leave "
+                "what is there alone."
+            ),
+            [
+                _snapshot(),
+                *_wave3_discover_targets(l3_targets),
+                *(_wave3_place_call(target) for target in l3_targets),
+            ],
+            targets=(staged_primary, *l3_targets),
+            required_widgets=[
+                _required_widget(primary.origin, primary.widget_id),
+                *(
+                    _required_widget(target.origin, target.widget_id)
+                    for target in l3_targets
+                ),
+            ],
+            selected_dashboard=staged_dashboard,
+            initial_state=l3_stage,
+        )
+    )
 
     note_name = f"{title} Governance"
     governed_token = governance.outcome_tokens[0]
@@ -7017,6 +7123,12 @@ def _build_wave3_curate_tasks() -> list[TaskRecord]:
     return [
         *_build_wave3_curate_spine(
             spine="compliance_alert_review",
+            l2_policy=(
+                "the open-items review policy",
+                "everything still open, quarter to date",
+                {"status": "Open", "period": "QTD"},
+            ),
+            staged_dashboard="Compliance Alert Review",
             title="Compliance-alert",
             primary=compliance_alerts,
             same_app=policy_breaches,
@@ -7035,6 +7147,12 @@ def _build_wave3_curate_tasks() -> list[TaskRecord]:
         ),
         *_build_wave3_curate_spine(
             spine="execution_quality_review",
+            l2_policy=(
+                "the US desk review policy",
+                "the US Equity desk, quarter to date",
+                {"desk": "US Equity", "period": "QTD"},
+            ),
+            staged_dashboard="Execution Quality Review",
             title="Execution-quality",
             primary=live_orders,
             same_app=broker_scorecard,
@@ -8080,6 +8198,7 @@ def _build_wave3_platform_spine(
             ],
             targets=(primary,),
             required_widgets=[_required_widget(primary.origin, primary.widget_id)],
+            policies=(PolicyMapping(skill_label, (governance.key,)),),
         )
     )
     names = ", ".join(f"{target.origin}'s {target.display_name}" for target in targets)
@@ -8090,8 +8209,8 @@ def _build_wave3_platform_spine(
             3,
             "platform",
             (
-                f"Working from the {skill_label}, add {names} to "
-                f"support {governed_token}."
+                f"On the open {title} Desk dashboard, working from the "
+                f"{skill_label}, add {names} to support {governed_token}."
             ),
             [
                 _wave3_governance_call(governance),
@@ -8100,6 +8219,8 @@ def _build_wave3_platform_spine(
             ],
             targets=targets,
             required_widgets=[_required_widget(t.origin, t.widget_id) for t in targets],
+            selected_dashboard=f"{title} Desk",
+            initial_state=_staged_dashboard(f"{title} Desk", []),
         )
     )
     note_name = f"{title} Governed Note"
@@ -8281,6 +8402,8 @@ def _build_wave3_extend_spine(
     *,
     spine: str,
     title: str,
+    service_policy: str,
+    staging_dashboard: str,
     backend_name: str,
     app_name: str,
     widget_names: tuple[str, str, str],
@@ -8351,7 +8474,9 @@ def _build_wave3_extend_spine(
             2,
             "platform",
             (
-                f"Set up {backend_name} with {widget_names[0]} and {widget_names[1]} tables - add it as a custom backend."
+                f"Set up {backend_name} to {service_policy} - that policy means "
+                f"{widget_names[0]} and {widget_names[1]} tables - and add it as a "
+                "custom backend."
             ),
             [
                 _call(
@@ -8367,6 +8492,9 @@ def _build_wave3_extend_spine(
                 )
             ],
             targets=first_two_targets,
+            policies=(
+                PolicyMapping(service_policy, (widget_names[0], widget_names[1])),
+            ),
             required_widget_defs=[
                 {"backend_name": backend_name, "widget_id": widget_id, "expect": {}}
                 for widget_id in widget_ids[:2]
@@ -8380,7 +8508,8 @@ def _build_wave3_extend_spine(
             3,
             "platform",
             (
-                f"Publish {backend_name} as an app: add the backend with "
+                f"From the open {staging_dashboard} dashboard, publish "
+                f"{backend_name} as an app: add the backend with "
                 f"{widget_names[0]} and {widget_names[1]} tables, publish {app_name} on "
                 "Review, and instantiate it."
             ),
@@ -8425,6 +8554,8 @@ def _build_wave3_extend_spine(
                     "layout_refs_valid": True,
                 }
             ],
+            selected_dashboard=staging_dashboard,
+            initial_state=_staged_dashboard(staging_dashboard, []),
         )
     )
     tasks.append(
@@ -8579,6 +8710,8 @@ def _build_wave3_extend_tasks() -> list[TaskRecord]:
     return [
         *_build_wave3_extend_spine(
             spine="inflection_service_lifecycle",
+            service_policy="the inflection service policy",
+            staging_dashboard="Inflection Service Staging",
             title="Inflection-service",
             backend_name="Buildout Inflection Service",
             app_name="Inflection Service App",
@@ -8598,6 +8731,8 @@ def _build_wave3_extend_tasks() -> list[TaskRecord]:
         ),
         *_build_wave3_extend_spine(
             spine="guidance_service_lifecycle",
+            service_policy="the guidance service policy",
+            staging_dashboard="Guidance Service Staging",
             title="Guidance-service",
             backend_name="Buildout Guidance Service",
             app_name="Guidance Service App",
@@ -8624,6 +8759,7 @@ def _build_wave3_handoff_spine(
     data_args: JsonDict,
     tokens: tuple[str, str],
     fact_words: str,
+    l2_policy: tuple[str, str, str],
     governance: GovernanceSpec,
     build_token: str | None = None,
     backend_name: str,
@@ -8634,12 +8770,25 @@ def _build_wave3_handoff_spine(
 ) -> list[TaskRecord]:
     stage = _staged_dashboard(dashboard_name, [])
     tasks: list[TaskRecord] = []
+    policy_words, policy_meaning, policy_key = l2_policy
     for level, rung in enumerate(("direct", "discovered", "analyst", "desk")):
         note_name = f"{title} {rung.title()} Note"
         tools: list[JsonDict] = []
         if level in {0, 1}:
             tools.append(_snapshot())
         tools.extend(_wave3_discover_targets((target,)))
+        if level == 2:
+            tools.append(
+                _call(
+                    "get_params_options",
+                    {
+                        "origin": target.origin,
+                        "widget_id": target.widget_id,
+                        "param_name": policy_key,
+                    },
+                    optional=True,
+                )
+            )
         tools.extend(
             [
                 _wave3_read_call(target, data_args),
@@ -8649,26 +8798,46 @@ def _build_wave3_handoff_spine(
                 ),
             ]
         )
+        if level == 2:
+            l2_rest = ", ".join(
+                f"{key} {value}"
+                for key, value in data_args.items()
+                if key != policy_key
+            )
+            prompt = (
+                f"Handoff capture under {policy_words} - that policy means "
+                f"{policy_meaning} - read {target.display_name} from "
+                f"{target.origin} on the open {dashboard_name} dashboard"
+                + (f" with {l2_rest}" if l2_rest else "")
+                + f", then add a {_note_phrase(note_name)} recording {fact_words}."
+            )
+            policies: tuple[PolicyMapping, ...] = (
+                PolicyMapping(policy_words, (data_args[policy_key],)),
+            )
+        else:
+            prompt = (
+                (
+                    "Read ",
+                    "Desk log - read ",
+                    "Handoff capture - read ",
+                    "Day wrap - read ",
+                )[level]
+                + f"{target.display_name} from {target.origin} on the open "
+                + f"{dashboard_name} dashboard with "
+                + ", ".join(f"{key} {value}" for key, value in data_args.items())
+                + f", then add a {_note_phrase(note_name)} recording {fact_words}."
+            )
+            policies = ()
         tasks.append(
             _record(
                 "handoff",
                 spine,
                 level,
                 "read",
-                (
-                    (
-                        "Read ",
-                        "Desk log - read ",
-                        "Handoff capture - read ",
-                        "Day wrap - read ",
-                    )[level]
-                    + f"{target.display_name} from {target.origin} on the open "
-                    + f"{dashboard_name} dashboard with "
-                    + ", ".join(f"{key} {value}" for key, value in data_args.items())
-                    + f", then add a {_note_phrase(note_name)} recording {fact_words}."
-                ),
+                prompt,
                 tools,
                 targets=(target,),
+                policies=policies,
                 required_generated_widgets=[_wave3_required_generated(note_name, *tokens)],
                 grounded_generated=(GroundedGenerated(source_slug, target.widget_id, tokens),),
                 selected_dashboard=dashboard_name,
@@ -8830,6 +8999,11 @@ def _build_wave3_handoff_tasks() -> list[TaskRecord]:
             data_args={"ticker": "AAPL", "period": "2026Q1"},
             tokens=("iPhone", "52365.6"),
             fact_words="the top segment and its exact revenue_musd",
+            l2_policy=(
+                "the covered-quarter handoff policy",
+                "period 2026Q1, Apple's latest covered quarter",
+                "period",
+            ),
             governance=GovernanceSpec(
                 "get_skill_content",
                 "daloopa-tearsheet",
@@ -8852,6 +9026,11 @@ def _build_wave3_handoff_tasks() -> list[TaskRecord]:
             data_args={"ticker": "AAPL"},
             tokens=("102070.1", "99404.2"),
             fact_words="the exact Total Revenue actual and consensus for 2026Q1",
+            l2_policy=(
+                "the mega-cap coverage policy",
+                "the Apple line, ticker AAPL",
+                "ticker",
+            ),
             governance=GovernanceSpec(
                 "get_skill_content",
                 "daloopa-earnings-review",

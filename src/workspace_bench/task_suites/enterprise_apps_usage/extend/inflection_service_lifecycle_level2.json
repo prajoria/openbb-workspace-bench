@@ -2,7 +2,7 @@
   "id": "inflection_service_lifecycle_level2",
   "category": "platform",
   "difficulty": "level2",
-  "prompt": "Set up Buildout Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables - add it as a custom backend.",
+  "prompt": "Set up Buildout Inflection Service to the inflection service policy - that policy means Growth-Rate Reversals and Quarterly Series Monitor tables - and add it as a custom backend.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

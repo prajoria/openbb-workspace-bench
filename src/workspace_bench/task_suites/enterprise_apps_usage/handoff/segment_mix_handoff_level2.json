@@ -2,7 +2,7 @@
   "id": "segment_mix_handoff_level2",
   "category": "read",
   "difficulty": "level2",
-  "prompt": "Handoff capture - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Analyst Note recording the top segment and its exact revenue_musd.",
+  "prompt": "Handoff capture under the covered-quarter handoff policy - that policy means period 2026Q1, Apple's latest covered quarter - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, then add a Segment-mix Analyst Note recording the top segment and its exact revenue_musd.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -70,6 +70,15 @@
         "optional": true
       },
       {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_segment_breakdown",
+          "param_name": "period"
+        },
+        "optional": true
+      },
+      {
         "tool": "get_widget_data",
         "args": {
           "origin": "Bench Daloopa",
@@ -107,6 +116,6 @@
         ]
       }
     ],
-    "max_turns": 6
+    "max_turns": 7
   }
 }

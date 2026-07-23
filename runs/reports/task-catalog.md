@@ -3009,7 +3009,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: dashboard · specification: -
 
-> Next, add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub to the current dashboard.
+> Next, add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub beside it on the current dashboard.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3023,9 +3023,24 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> Place both Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub on the current dashboard.
+> Place both Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub on the current dashboard, configured to the open-items review policy - that policy means everything still open, quarter to date.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_alerts_open_alert_metrics` with data_args ⊇ {"status": "Open", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_personal_trading_policy_breaches` with data_args ⊇ {"status": "Open", "period": "QTD"} → `missing_widget`
+
+#### `compliance_alert_review_level3`
+
+**level3** · category: dashboard · specification: -
+
+> The open Compliance Alert Review dashboard already has Open Alert Metrics on it - add Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started alongside, and leave what is there alone.
+
+- Initial workspace: dashboard "Compliance Alert Review"; 1 tab(s): review; 1 seeded widget(s): compliance_surveillance_hub_alerts_open_alert_metrics({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -3033,20 +3048,6 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_alerts_open_alert_metrics` → `missing_widget`
 - **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_personal_trading_policy_breaches` → `missing_widget`
-
-#### `compliance_alert_review_level3`
-
-**level3** · category: dashboard · specification: -
-
-> Pull together Open Alert Metrics from Bench Stark Enterprise's Compliance Surveillance Hub; Markdown Widget with Number Input from Getting Started on the current dashboard.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/compliance_surveillance_hub_alerts_open_alert_metrics` → `missing_widget`
 - **Widget** ≥1× `Getting Started/markdown_widget_with_number_input` → `missing_widget`
 
 #### `compliance_alert_review_level4`
@@ -3189,7 +3190,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level1** · category: dashboard · specification: -
 
-> Next, add Broker Scorecard from Bench Stark Enterprise's Execution Desk to the current dashboard.
+> Next, add Broker Scorecard from Bench Stark Enterprise's Execution Desk beside it on the current dashboard.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3203,9 +3204,24 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: dashboard · specification: -
 
-> Place both Live Orders from Bench Stark Enterprise's Execution Desk; Broker Scorecard from Bench Stark Enterprise's Execution Desk on the current dashboard.
+> Place both Live Orders from Bench Stark Enterprise's Execution Desk; Broker Scorecard from Bench Stark Enterprise's Execution Desk on the current dashboard, configured to the US desk review policy - that policy means the US Equity desk, quarter to date.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
+- Turn budget: None · oracle reference trace: 0 calls
+
+**Passes only if all of these checks hold** (each failure emits the issue code shown):
+
+- **Widget** ≥1× `Bench Stark Enterprise/execution_desk_blotter_live_orders` with data_args ⊇ {"desk": "US Equity", "period": "QTD"} → `missing_widget`
+- **Widget** ≥1× `Bench Stark Enterprise/execution_desk_fills_broker_scorecard` with data_args ⊇ {"desk": "US Equity", "period": "QTD"} → `missing_widget`
+
+#### `execution_quality_review_level3`
+
+**level3** · category: dashboard · specification: -
+
+> The open Execution Quality Review dashboard already has Live Orders on it - add Broker Scorecard from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started alongside, and leave what is there alone.
+
+- Initial workspace: dashboard "Execution Quality Review"; 1 tab(s): review; 1 seeded widget(s): execution_desk_blotter_live_orders({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -3213,20 +3229,6 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 - **Widget** ≥1× `Bench Stark Enterprise/execution_desk_blotter_live_orders` → `missing_widget`
 - **Widget** ≥1× `Bench Stark Enterprise/execution_desk_fills_broker_scorecard` → `missing_widget`
-
-#### `execution_quality_review_level3`
-
-**level3** · category: dashboard · specification: -
-
-> Pull together Live Orders from Bench Stark Enterprise's Execution Desk; Multi PDF Viewer - URL from Getting Started on the current dashboard.
-
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
-- Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
-- Turn budget: None · oracle reference trace: 0 calls
-
-**Passes only if all of these checks hold** (each failure emits the issue code shown):
-
-- **Widget** ≥1× `Bench Stark Enterprise/execution_desk_blotter_live_orders` → `missing_widget`
 - **Widget** ≥1× `Getting Started/multi_pdf_url` → `missing_widget`
 
 #### `execution_quality_review_level4`
@@ -3383,7 +3385,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Set up Buildout Guidance Service with Evidence Gaps and Changed Assumptions tables - add it as a custom backend.
+> Set up Buildout Guidance Service to the guidance service policy - that policy means Evidence Gaps and Changed Assumptions tables - and add it as a custom backend.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3396,9 +3398,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Publish Buildout Guidance Service as an app: add the backend with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.
+> From the open Guidance Service Staging dashboard, publish Buildout Guidance Service as an app: add the backend with Evidence Gaps and Changed Assumptions tables, publish Guidance Service App on Review, and instantiate it.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Guidance Service Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -3469,7 +3471,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Set up Buildout Inflection Service with Growth-Rate Reversals and Quarterly Series Monitor tables - add it as a custom backend.
+> Set up Buildout Inflection Service to the inflection service policy - that policy means Growth-Rate Reversals and Quarterly Series Monitor tables - and add it as a custom backend.
 
 - Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3482,9 +3484,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Publish Buildout Inflection Service as an app: add the backend with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.
+> From the open Inflection Service Staging dashboard, publish Buildout Inflection Service as an app: add the backend with Growth-Rate Reversals and Quarterly Series Monitor tables, publish Inflection Service App on Review, and instantiate it.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Inflection Service Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -3555,7 +3557,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> From the open Research Feed Staging dashboard, review the connected backends, then refresh Rollout Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.
+> From the open Research Feed Staging dashboard, apply the feed refresh policy - review the connected backends, then refresh Rollout Research Feed so Research Feed App has one non-overlapping Research Feed Pulse placement on Feed.
 
 - Initial workspace: dashboard "Research Feed Staging"; 1 tab(s): feed; 1 seeded widget(s): research_feed_pulse({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3568,9 +3570,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Publish and add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.
+> Publish from the open Research Feed Staging dashboard: add Rollout Research Feed with Research Feed Pulse and a Research Feed App containing Feed.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Research Feed Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -3639,7 +3641,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: platform · specification: -
 
-> Review the connected backends on the open Risk Service Staging dashboard, then refresh Pilot Risk Service so Pilot Risk App has one non-overlapping Pilot Risk Signal placement on Monitor.
+> Apply the risk refresh policy on the open Risk Service Staging dashboard - review the connected backends, then refresh Pilot Risk Service so Pilot Risk App has one non-overlapping Pilot Risk Signal placement on Monitor.
 
 - Initial workspace: dashboard "Risk Service Staging"; 1 tab(s): monitor; 1 seeded widget(s): pilot_risk_signal({})
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3652,9 +3654,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> The risk desk needs Pilot Risk Service with its Pilot Risk Signal and a Pilot Risk App containing Monitor. Publish and add it.
+> From the open Risk Service Staging dashboard the risk desk needs Pilot Risk Service with its Pilot Risk Signal and a Pilot Risk App containing Monitor. Publish and add it.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Risk Service Staging"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -3727,7 +3729,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> Handoff capture - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard with ticker AAPL, then add a Consensus-exception Analyst Note recording the exact Total Revenue actual and consensus for 2026Q1.
+> Handoff capture under the mega-cap coverage policy - that policy means the Apple line, ticker AAPL - read Consensus Estimates from Bench Daloopa on the open Consensus Exception Handoff dashboard, then add a Consensus-exception Analyst Note recording the exact Total Revenue actual and consensus for 2026Q1.
 
 - Initial workspace: dashboard "Consensus Exception Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -3982,7 +3984,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level2** · category: read · specification: -
 
-> Handoff capture - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, period 2026Q1, then add a Segment-mix Analyst Note recording the top segment and its exact revenue_musd.
+> Handoff capture under the covered-quarter handoff policy - that policy means period 2026Q1, Apple's latest covered quarter - read Segment Breakdown from Bench Daloopa on the open Segment Mix Handoff dashboard with ticker AAPL, then add a Segment-mix Analyst Note recording the top segment and its exact revenue_musd.
 
 - Initial workspace: dashboard "Segment Mix Handoff"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
@@ -4894,9 +4896,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Working from the Finance Comps skill, add Getting Started's Plotly Chart with Theme and Toolbar using Config File, Widget Examples's Chains chart example Plotly with raw data to support valuation multiples.
+> On the open Comps-governance Desk dashboard, working from the Finance Comps skill, add Getting Started's Plotly Chart with Theme and Toolbar using Config File, Widget Examples's Chains chart example Plotly with raw data to support valuation multiples.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Comps-governance Desk"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
@@ -5066,9 +5068,9 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 **level3** · category: platform · specification: -
 
-> Working from the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget to support price action.
+> On the open Investment-snapshot Desk dashboard, working from the Finance Tearsheet skill, add Getting Started's TradingView Chart, Getting Started's HTML Widget to support price action.
 
-- Initial workspace: baseline `stark-workspace-a`; backends `stark-enterprise-x`, `support-daloopa-skills`, `getting-started`, `widget-examples`; active dashboard "Home"
+- Initial workspace: dashboard "Investment-snapshot Desk"; 1 tab(s): review
 - Allowed tools (20): `get_workspace_snapshot`, `manage_dashboard`, `manage_navigation_bar`, `navigate_workspace`, `list_available_widgets`, `get_widget_schema`, `get_params_options`, `get_widget_data`, `create_widget`, `update_widget`, `update_widget_layout`, `delete_widget`, `add_generative_widget`, `read_widget`, `manage_backends`, `manage_apps`, `get_skill_content`, `read_workspace_resource`, `get_workspace_prompt`, `assign_tasks_to_agents`
 - Turn budget: None · oracle reference trace: 0 calls
 
