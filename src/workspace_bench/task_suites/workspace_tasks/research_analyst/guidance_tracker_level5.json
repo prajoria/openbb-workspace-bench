@@ -1,0 +1,367 @@
+{
+  "id": "guidance_tracker_level5",
+  "difficulty": "level5",
+  "prompt": "Build the desk's guidance-tracking workflow: add a Guidance Watch Service backend serving a Guidance Register table, publish Guidance Watch App with Guidance Register on its Guidance tab, and instantiate the app. On the open Guidance Watch dashboard, add the built Guidance Register and keep everything already there exactly as it is. Read Management Guidance from Bench Daloopa with ticker NFLX, then under the Daloopa Guidance Tracker skill leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit, plus how that skill says to weight quarters when characterizing the trend.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Guidance Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Guidance Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "guidance",
+            "name": "Guidance"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_management_guidance",
+            "widget_uuid": "seeded_msft_management_guidance",
+            "tab_id": "guidance",
+            "data_args": {
+              "ticker": "MSFT"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_directory",
+            "widget_uuid": "seeded_company_directory",
+            "tab_id": "guidance",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_guidance_note",
+            "name": "Prior Guidance Note",
+            "data": "Prior review: MSFT open guide remains under review; carry no assumptions into the NFLX tracker.",
+            "tab_id": "guidance",
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Guidance Watch Service",
+          "url": "http://127.0.0.1:9717",
+          "widgets_json": {
+            "guidance_register": {
+              "name": "Guidance Register",
+              "description": "Authored register for the desk's tracked management guidance.",
+              "endpoint": "/guidance-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Guidance Watch App",
+              "description": "Authored app for the desk's guidance register.",
+              "tabs": {
+                "guidance": {
+                  "id": "guidance",
+                  "name": "Guidance",
+                  "layout": [
+                    {
+                      "i": "guidance_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Guidance Watch App",
+          "dashboard_name": "Guidance Watch App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Guidance Watch Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Guidance Watch Service",
+          "widget_id": "guidance_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_management_guidance",
+          "param_name": "ticker"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_management_guidance",
+          "data_args": {
+            "ticker": "NFLX"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Guidance Tracker Note",
+          "data": "NFLX Pending 2026Q2 guide: Total Revenue Guidance 14617.6 to 15062.8 USD mn; Diluted EPS Guidance 7.68 to 7.91 USD; Paid Memberships Guidance 329.6 to 339.7 mn. Per the Daloopa Guidance Tracker skill, weight recent quarters over old ones when characterizing the trend."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "guidance"
+    ],
+    "required_tab_names": [
+      "Guidance"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Guidance Watch Service",
+        "widget_id": "guidance_register",
+        "tab_id": "guidance"
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_management_guidance",
+        "data_args": {
+          "ticker": "MSFT"
+        },
+        "tab_id": "guidance",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_directory",
+        "tab_id": "guidance",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Guidance Note",
+        "data_contains": [
+          "Prior review: MSFT open guide remains under review; carry no assumptions into the NFLX tracker."
+        ],
+        "tab_id": "guidance"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Guidance Tracker Note",
+        "data_contains": [
+          "Total Revenue Guidance",
+          "14617.6",
+          "15062.8",
+          "USD mn",
+          "Diluted EPS Guidance",
+          "7.68",
+          "7.91",
+          "Paid Memberships Guidance",
+          "329.6",
+          "339.7",
+          "recent quarters over old ones"
+        ]
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_msft_management_guidance",
+        "tab_id": "guidance",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_company_directory",
+        "tab_id": "guidance",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_prior_guidance_note",
+        "tab_id": "guidance",
+        "x": 0,
+        "y": 12,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Guidance Watch Service",
+        "widget_id": "guidance_register",
+        "expect": {
+          "name": "Guidance Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Guidance Watch Service",
+        "name_contains": "Guidance Watch App",
+        "tabs_include": [
+          "guidance"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "guidance",
+            "widget_id": "guidance_register"
+          }
+        ]
+      }
+    ],
+    "required_dashboard_name_contains": "Guidance Watch",
+    "max_turns": 15
+  }
+}

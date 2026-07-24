@@ -1,0 +1,124 @@
+{
+  "id": "guidance_tracker_level0",
+  "difficulty": "level0",
+  "prompt": "On the open Guidance Watch dashboard, read Management Guidance from Bench Daloopa with ticker set to NFLX, then leave a Guidance Tracker Note recording these Pending 2026Q2 ranges exactly: Total Revenue Guidance at 14617.6 to 15062.8 USD mn, Diluted EPS Guidance at 7.68 to 7.91 USD, and Paid Memberships Guidance at 329.6 to 339.7 mn.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Guidance Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Guidance Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "guidance",
+            "name": "Guidance"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_management_guidance",
+          "data_args": {
+            "ticker": "NFLX"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Guidance Tracker Note",
+          "data": "NFLX Pending 2026Q2 guide: Total Revenue Guidance 14617.6 to 15062.8 USD mn; Diluted EPS Guidance 7.68 to 7.91 USD; Paid Memberships Guidance 329.6 to 339.7 mn."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Guidance Tracker Note",
+        "data_contains": [
+          "Total Revenue Guidance",
+          "14617.6",
+          "15062.8",
+          "USD mn",
+          "Diluted EPS Guidance",
+          "7.68",
+          "7.91",
+          "Paid Memberships Guidance",
+          "329.6",
+          "339.7"
+        ]
+      }
+    ],
+    "max_turns": 7
+  }
+}
