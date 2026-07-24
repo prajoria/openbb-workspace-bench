@@ -1,0 +1,393 @@
+{
+  "id": "document_room_level5",
+  "difficulty": "level5",
+  "prompt": "Build the filing room service before the audit cutoff: add a Filing Room Service backend serving a Filing Register table, publish Filing Room App with Filing Register on its Filings tab, and instantiate the app. On the open Filing Room dashboard, add the built Filing Register, Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K, and Multi PDF Viewer - URL from Getting Started, keeping everything already there exactly as it is. Read the Daloopa Tearsheet skill and leave a Filing Room Governance note recording the identifier its final step says every Daloopa-sourced figure must be cited with.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Filing Room",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Filing Room",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "filings",
+            "name": "Filings"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_document_search",
+            "widget_uuid": "seeded_msft_document_search",
+            "tab_id": "filings",
+            "data_args": {
+              "ticker": "MSFT",
+              "doc_type": "10-Q"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_directory",
+            "widget_uuid": "seeded_company_directory",
+            "tab_id": "filings",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_filing_note",
+            "name": "Prior Filing Sign-off",
+            "data": "Prior filing pull: MSFT quarterly filing checked and signed off.",
+            "tab_id": "filings",
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Filing Room Service",
+          "url": "http://127.0.0.1:9716",
+          "widgets_json": {
+            "filing_register": {
+              "name": "Filing Register",
+              "description": "Authored register for the filing room's audit pulls.",
+              "endpoint": "/filing-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Filing Room App",
+              "description": "Authored app for the filing room workflow.",
+              "tabs": {
+                "filings": {
+                  "id": "filings",
+                  "name": "Filings",
+                  "layout": [
+                    {
+                      "i": "filing_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Filing Room App",
+          "dashboard_name": "Filing Room App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Filing Room Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Filing Room Service",
+          "widget_id": "filing_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_document_search",
+          "param_name": "doc_type"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_document_search",
+          "data_args": {
+            "ticker": "AAPL",
+            "doc_type": "10-K"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "multi_pdf_url"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Filing Room Governance",
+          "data": "Per the Daloopa Tearsheet skill, every Daloopa-sourced figure must be cited with its source_url."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "filings"
+    ],
+    "required_tab_names": [
+      "Filings"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Filing Room Service",
+        "widget_id": "filing_register",
+        "tab_id": "filings"
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_document_search",
+        "data_args": {
+          "ticker": "AAPL",
+          "doc_type": "10-K"
+        },
+        "tab_id": "filings"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "multi_pdf_url",
+        "tab_id": "filings"
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_document_search",
+        "data_args": {
+          "ticker": "MSFT",
+          "doc_type": "10-Q"
+        },
+        "tab_id": "filings",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_directory",
+        "tab_id": "filings",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Filing Sign-off",
+        "data_contains": [
+          "Prior filing pull: MSFT quarterly filing checked and signed off."
+        ],
+        "tab_id": "filings"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Filing Room Governance",
+        "data_contains": [
+          "source_url"
+        ],
+        "tab_id": "filings"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_msft_document_search",
+        "tab_id": "filings",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_company_directory",
+        "tab_id": "filings",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_prior_filing_note",
+        "tab_id": "filings",
+        "x": 0,
+        "y": 12,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Filing Room Service",
+        "widget_id": "filing_register",
+        "expect": {
+          "name": "Filing Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Filing Room Service",
+        "name_contains": "Filing Room App",
+        "tabs_include": [
+          "filings"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "filings",
+            "widget_id": "filing_register"
+          }
+        ]
+      }
+    ],
+    "required_dashboard_name_contains": "Filing Room",
+    "max_turns": 17
+  }
+}

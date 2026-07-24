@@ -1,0 +1,135 @@
+{
+  "id": "document_room_level1",
+  "difficulty": "level1",
+  "prompt": "Get the filings search from Bench Daloopa onto the open Filing Room dashboard for ticker AAPL and doc_type 10-K, with Multi PDF Viewer - URL from Getting Started beside it - audit needs the room checked before cutoff.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Filing Room",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Filing Room",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "filings",
+            "name": "Filings"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_document_search"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_document_search",
+          "data_args": {
+            "ticker": "AAPL",
+            "doc_type": "10-K"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "multi_pdf_url"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_document_search",
+        "data_args": {
+          "ticker": "AAPL",
+          "doc_type": "10-K"
+        }
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "multi_pdf_url"
+      }
+    ],
+    "max_turns": 9
+  }
+}
