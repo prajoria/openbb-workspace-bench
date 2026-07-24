@@ -1,0 +1,242 @@
+{
+  "id": "pm_handoff_level5",
+  "difficulty": "level5",
+  "prompt": "Stand up the desk's own handoff log before the overnight shift: add a backend named Handoff Log Service serving a Handoff Register table, and put Handoff Register on the open PM Handoff Log dashboard. Then the close-out: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1 - the close-out runs under the Daloopa Earnings Review skill, so the note also records the granularity that skill's first step sets for the consensus compare. Delegate the follow-up to the coverage analyst. Everything already on the dashboard stays.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "PM Handoff Log",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "PM Handoff Log",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "handoff",
+            "name": "Handoff"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_consensus_estimates",
+            "widget_uuid": "seeded_nvda_consensus_estimates",
+            "tab_id": "handoff",
+            "data_args": {
+              "ticker": "NVDA"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_shift_note",
+            "name": "Prior Shift Note",
+            "data": "Prior shift: NVDA into the print - exception cleared, nothing carried over.",
+            "tab_id": "handoff",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-earnings-review"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Handoff Log Service",
+          "url": "http://127.0.0.1:9715",
+          "widgets_json": {
+            "handoff_register": {
+              "name": "Handoff Register",
+              "description": "Authored register of the desk's end-of-day handoffs.",
+              "endpoint": "/handoff-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          }
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Handoff Log Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Handoff Log Service",
+          "widget_id": "handoff_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_consensus_estimates",
+          "data_args": {
+            "ticker": "MSFT"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Overnight Handoff Note",
+          "data": "Overnight handoff: MSFT Total Revenue 2026Q1 - actual 91934.6 vs consensus 93202.6 (USD mn); per the Daloopa Earnings Review skill, the consensus compare runs metric by metric."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "pm_handoff_follow_up",
+              "description": "Run the overnight follow-up on the MSFT consensus handoff.",
+              "assigned_holder_url": "workspace://agents/pm_handoff",
+              "assigned_agent_id": "pm_handoff-agent"
+            }
+          ]
+        },
+        "graded_args": []
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Handoff Log Service",
+        "widget_id": "handoff_register"
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_consensus_estimates",
+        "data_args": {
+          "ticker": "NVDA"
+        }
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Handoff Log Service",
+        "widget_id": "handoff_register",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Shift Note",
+        "data_contains": [
+          "NVDA"
+        ]
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Overnight Handoff Note",
+        "data_contains": [
+          "91934.6",
+          "93202.6",
+          "metric by metric"
+        ]
+      }
+    ],
+    "max_turns": 12
+  }
+}
