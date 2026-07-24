@@ -1,0 +1,275 @@
+{
+  "id": "nav_close_repair_level4",
+  "difficulty": "level4",
+  "prompt": "Repair Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard that is currently showing Multi-Asset Fund, Closed, 1Y on the open Close Room dashboard: restore it to Flagship Long/Short, Open, 1D, and keep everything already on the dashboard exactly as is. The close runs under the Daloopa Capital Allocation skill - leave a Close Governance Note recording which payout line its comparison adds to Share Buybacks before testing the total against Free Cash Flow.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Close Room",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Close Room",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "close",
+            "name": "Close"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+            "widget_uuid": "close_exceptions_primary",
+            "tab_id": "close",
+            "data_args": {
+              "fund": "Multi-Asset Fund",
+              "status": "Closed",
+              "period": "1Y"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+            "widget_uuid": "close_exceptions_decoy",
+            "tab_id": "close",
+            "data_args": {
+              "fund": "Income Fund",
+              "status": "In Review",
+              "period": "MTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "nav_fees_close_dashboard_close_close_notes",
+            "widget_uuid": "seeded_close_notes",
+            "tab_id": "close",
+            "data_args": {
+              "fund": "Flagship Long/Short",
+              "status": "Open",
+              "period": "1D"
+            },
+            "layout": {
+              "x": 0,
+              "y": 14,
+              "w": 40,
+              "h": 10
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_close_note",
+            "name": "Prior Close Sign-Off",
+            "data": "Prior close: Income Fund cash break cleared under four-eyes review.",
+            "tab_id": "close",
+            "layout": {
+              "x": 0,
+              "y": 24,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-capital-allocation"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "close_exceptions_primary",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "status": "Open",
+            "period": "1D"
+          }
+        },
+        "graded_args": [
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Close Governance Note",
+          "data": "Close governance: the Daloopa Capital Allocation comparison adds Dividends Paid to Share Buybacks before comparing total shareholder return with Free Cash Flow."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "close"
+    ],
+    "required_tab_names": [
+      "Close"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "status": "Open",
+          "period": "1D"
+        },
+        "tab_id": "close",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
+        "data_args": {
+          "fund": "Income Fund",
+          "status": "In Review",
+          "period": "MTD"
+        },
+        "tab_id": "close",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "nav_fees_close_dashboard_close_close_notes",
+        "data_args": {
+          "fund": "Flagship Long/Short",
+          "status": "Open",
+          "period": "1D"
+        },
+        "tab_id": "close",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Close Sign-Off",
+        "data_contains": [
+          "Prior close: Income Fund cash break cleared under four-eyes review."
+        ],
+        "tab_id": "close"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Close Governance Note",
+        "data_contains": [
+          "Dividends Paid"
+        ],
+        "tab_id": "close"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "close_exceptions_primary",
+        "tab_id": "close",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "close_exceptions_decoy",
+        "tab_id": "close",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_close_notes",
+        "tab_id": "close",
+        "x": 0,
+        "y": 14,
+        "w": 40,
+        "h": 10
+      },
+      {
+        "widget_uuid": "seeded_prior_close_note",
+        "tab_id": "close",
+        "x": 0,
+        "y": 24,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Close Room",
+    "max_turns": 8
+  }
+}
