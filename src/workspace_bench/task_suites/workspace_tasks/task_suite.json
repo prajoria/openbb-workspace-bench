@@ -1,0 +1,8 @@
+{
+  "suite_id": "workspace-bench-workspace-tasks",
+  "visibility": "private",
+  "description": "Story-authored suite: 5 personas x 5 stories x 6 levels, authored by agents from task_templates/ and certified by oracle/no-op replay. In construction; not yet registered.",
+  "task_defaults": {
+    "category": "story"
+  }
+}

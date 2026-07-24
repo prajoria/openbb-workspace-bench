@@ -38,7 +38,9 @@ WORKSPACE_TOOL_NAMES = (
     "assign_tasks_to_agents",
 )
 # workflow-kind axis (formerly the L0-L4 "level" codes)
-TASK_CATEGORIES = ("read", "single-widget", "dashboard", "platform", "repair")
+TASK_CATEGORIES = ("read", "single-widget", "dashboard", "platform", "repair", "story")
+# "story": the workspace_tasks suite does not use the category axis; its
+# manifest defaults every task to this label so task files omit the field.
 # Measured labels (easy/medium/hard) plus the smoke execution-context ladder:
 # level0 = one tool on an empty workspace, level1 = full tool surface,
 # level2 = full surface on a lived-in baseline, level3 = level2 with an open
