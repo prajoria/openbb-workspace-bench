@@ -498,6 +498,12 @@ def _layout_value_equals(layout: JsonDict, key: str, expected: float) -> bool:
 def _leaf_equals(observed: object, expected: object) -> bool:
     if observed == expected:
         return True
+    # multiSelect params invite agents to wrap a single value in a list
+    # (["TSLA"] for a symbol param); a one-element list equals its scalar.
+    if isinstance(observed, list) and len(observed) == 1 and not isinstance(expected, list):
+        return _leaf_equals(observed[0], expected)
+    if isinstance(expected, list) and len(expected) == 1 and not isinstance(observed, list):
+        return _leaf_equals(observed, expected[0])
     # JSON agents legitimately emit numbers as strings ("2024" for a numeric
     # year param); graded values accept numeric-equal spellings. Booleans stay
     # strict, and non-numeric strings never coerce.

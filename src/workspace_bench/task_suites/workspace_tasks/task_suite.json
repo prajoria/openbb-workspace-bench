@@ -3,6 +3,20 @@
   "visibility": "private",
   "description": "Story-authored suite: 5 personas x 5 stories x 6 levels, authored by agents from task_templates/ and certified by oracle/no-op replay. In construction; not yet registered.",
   "task_defaults": {
-    "category": "story"
+    "category": "story",
+    "eval": {
+      "layout": {
+        "within_grid": true,
+        "no_overlaps": true,
+        "grid_width": 40
+      },
+      "trace_checks": {
+        "max_invalid_tool_calls": 2,
+        "forbid_invented_widget_ids": true
+      },
+      "workspace_checks": {
+        "preserve_other_dashboards": true
+      }
+    }
   }
 }
