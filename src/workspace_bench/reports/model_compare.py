@@ -73,7 +73,7 @@ from workspace_bench.core.runner import (
 )
 
 
-INTERACTIVE_PROVIDERS = {"openai", "openrouter", "ollama"}
+INTERACTIVE_PROVIDERS = {"openai", "openrouter", "ollama", "concentrate"}
 RESULT_SCHEMA_VERSION = "workspace-bench-model-result/v2"
 RUN_MANIFEST_SCHEMA_VERSION = "workspace-bench-run-manifest/v1"
 
@@ -199,6 +199,9 @@ def effective_settings(args: argparse.Namespace) -> JsonDict:
             "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"
         ),
         "ollama_base_url": os.environ.get("OLLAMA_BASE_URL", "http://127.0.0.1:11434"),
+        "concentrate_base_url": os.environ.get(
+            "CONCENTRATE_BASE_URL", "https://api.concentrate.ai/v1"
+        ),
         "openai_temperature": os.environ.get("OPENAI_TEMPERATURE", "0"),
         "ollama_temperature": os.environ.get("OLLAMA_TEMPERATURE", "0"),
         "openai_response_format": os.environ.get("OPENAI_RESPONSE_FORMAT", "json_schema"),
@@ -1470,6 +1473,8 @@ def call_model(adapter: ModelAdapter, messages: list[JsonDict], timeout: float) 
         )
     if adapter.provider == "ollama":
         return call_ollama_chat(adapter.model, messages, timeout)
+    if adapter.provider == "concentrate":
+        return call_concentrate_responses(adapter.model, messages, timeout)
     raise ValueError(f"Unsupported provider {adapter.provider!r}")
 
 
@@ -1594,6 +1599,78 @@ def call_openai_chat(
         raise ValueError(f"OpenAI returned no message content: {body!r}") from error
     if not isinstance(content, str) or not content.strip():
         raise ValueError(f"OpenAI returned empty message content: {body!r}")
+    return content
+
+
+def call_concentrate_responses(model: str, messages: list[JsonDict], timeout: float) -> str:
+    """Call Concentrate's Responses-shaped API (POST {base}/responses/).
+
+    Concentrate normalizes many upstream providers behind one OpenAI
+    Responses-shaped endpoint. Chat system messages travel in
+    ``instructions``, the remaining turns in ``input``, and the reply text
+    comes back in the ``output`` array's message items. Temperature, token
+    cap, and the structured-output escape hatch reuse the OPENAI_* env
+    knobs so a model swap never changes run semantics.
+    """
+
+    load_dotenv()
+    api_key = os.environ.get("CONCENTRATE_API_KEY")
+    if not api_key:
+        raise RuntimeError("CONCENTRATE_API_KEY is not set in the environment or .env")
+    base_url = os.environ.get("CONCENTRATE_BASE_URL", "https://api.concentrate.ai/v1").rstrip("/")
+    instructions = "\n\n".join(
+        message["content"]
+        for message in messages
+        if message.get("role") == "system" and isinstance(message.get("content"), str)
+    )
+    payload: JsonDict = {
+        "model": model,
+        "temperature": float(os.environ.get("OPENAI_TEMPERATURE", "0")),
+        "max_output_tokens": int(os.environ.get("OPENAI_MAX_TOKENS", "4096")),
+        "input": [
+            {"role": message.get("role", "user"), "content": message.get("content", "")}
+            for message in messages
+            if message.get("role") != "system"
+        ],
+    }
+    if instructions:
+        payload["instructions"] = instructions
+    reasoning_effort = os.environ.get("CONCENTRATE_REASONING_EFFORT")
+    if reasoning_effort:
+        payload["reasoning"] = {"effort": reasoning_effort}
+    if os.environ.get("OPENAI_RESPONSE_FORMAT", "json_schema") != "none":
+        payload["text"] = {
+            "format": {
+                "type": "json_schema",
+                "name": "workspace_next_action",
+                "schema": interactive_action_schema(),
+                "strict": False,
+            }
+        }
+    # The docs publish the path with a trailing slash; keep it verbatim so a
+    # framework-level redirect never downgrades the POST.
+    body = post_json(
+        f"{base_url}/responses/",
+        payload,
+        timeout,
+        headers={"Authorization": f"Bearer {api_key}"},
+    )
+    status = body.get("status")
+    if status in {"failed", "cancelled", "incomplete"}:
+        raise ValueError(f"Concentrate returned status {status!r}: {body.get('error') or body!r}")
+    _record_provider_meta(model=body.get("model"), usage=openai_usage(body))
+    parts: list[str] = []
+    for item in body.get("output") or []:
+        if not isinstance(item, dict) or item.get("type") != "message":
+            continue
+        for chunk in item.get("content") or []:
+            if isinstance(chunk, dict) and chunk.get("type") in {"output_text", "text"}:
+                text_value = chunk.get("text")
+                if isinstance(text_value, str):
+                    parts.append(text_value)
+    content = "".join(parts)
+    if not content.strip():
+        raise ValueError(f"Concentrate returned no output text: {body!r}")
     return content
 
 

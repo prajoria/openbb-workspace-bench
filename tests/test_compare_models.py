@@ -367,3 +367,83 @@ def test_validate_adapters_for_runner_requires_batch_command() -> None:
         error
         == "Batch runner requires command for every adapter; missing command for openai-compatible"
     )
+
+
+def test_call_concentrate_responses_maps_chat_to_responses_shape(monkeypatch) -> None:
+    from workspace_bench.reports import model_compare as mc
+
+    captured: dict = {}
+
+    def fake_post_json(url, payload, timeout, headers=None):
+        captured["url"] = url
+        captured["payload"] = payload
+        captured["headers"] = headers
+        return {
+            "status": "completed",
+            "model": "openai/gpt-5.2",
+            "output": [
+                {"type": "reasoning", "content": []},
+                {
+                    "type": "message",
+                    "content": [{"type": "output_text", "text": '{"done": true}'}],
+                },
+            ],
+            "usage": {"input_tokens": 10, "output_tokens": 5, "total_tokens": 15},
+        }
+
+    monkeypatch.setenv("CONCENTRATE_API_KEY", "test-key")
+    monkeypatch.delenv("CONCENTRATE_BASE_URL", raising=False)
+    monkeypatch.setattr(mc, "post_json", fake_post_json)
+
+    content = mc.call_concentrate_responses(
+        "openai/gpt-5.2",
+        [
+            {"role": "system", "content": "be terse"},
+            {"role": "user", "content": "hello"},
+        ],
+        timeout=5,
+    )
+
+    assert content == '{"done": true}'
+    assert captured["url"] == "https://api.concentrate.ai/v1/responses/"
+    assert captured["headers"] == {"Authorization": "Bearer test-key"}
+    assert captured["payload"]["model"] == "openai/gpt-5.2"
+    assert captured["payload"]["instructions"] == "be terse"
+    assert captured["payload"]["input"] == [{"role": "user", "content": "hello"}]
+    assert "max_output_tokens" in captured["payload"]
+    assert captured["payload"]["text"]["format"]["type"] == "json_schema"
+
+
+def test_call_concentrate_responses_requires_api_key(monkeypatch) -> None:
+    from workspace_bench.reports import model_compare as mc
+
+    monkeypatch.delenv("CONCENTRATE_API_KEY", raising=False)
+    try:
+        mc.call_concentrate_responses("auto", [{"role": "user", "content": "x"}], timeout=1)
+    except RuntimeError as error:
+        assert "CONCENTRATE_API_KEY" in str(error)
+    else:
+        raise AssertionError("missing key should raise")
+
+
+def test_call_concentrate_responses_rejects_failed_status(monkeypatch) -> None:
+    from workspace_bench.reports import model_compare as mc
+
+    monkeypatch.setenv("CONCENTRATE_API_KEY", "test-key")
+    monkeypatch.setattr(
+        mc,
+        "post_json",
+        lambda *a, **k: {"status": "failed", "error": {"message": "boom"}},
+    )
+    try:
+        mc.call_concentrate_responses("auto", [{"role": "user", "content": "x"}], timeout=1)
+    except ValueError as error:
+        assert "failed" in str(error)
+    else:
+        raise AssertionError("failed status should raise")
+
+
+def test_interactive_providers_include_concentrate() -> None:
+    from workspace_bench.reports.model_compare import INTERACTIVE_PROVIDERS
+
+    assert "concentrate" in INTERACTIVE_PROVIDERS
