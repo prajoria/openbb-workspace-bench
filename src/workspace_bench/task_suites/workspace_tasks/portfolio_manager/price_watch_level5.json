@@ -1,0 +1,233 @@
+{
+  "id": "price_watch_level5",
+  "difficulty": "level5",
+  "prompt": "Stand up the desk's own watch feed before the open: add a backend named Watch Feed Service serving a Watch Register table, and put Watch Register on the open Price Watch dashboard alongside Live Grid from Getting Started with symbol set to TSLA. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with. Everything already on the dashboard stays.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Price Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Price Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "watch",
+            "name": "Watch"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "sparkline_line",
+            "widget_uuid": "seeded_sparkline_trends",
+            "tab_id": "watch",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_watch_handoff_note",
+            "name": "Watch Handoff Note",
+            "data": "Prior session: the desk was watching MSFT into the print.",
+            "tab_id": "watch",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Watch Feed Service",
+          "url": "http://127.0.0.1:9714",
+          "widgets_json": {
+            "watch_register": {
+              "name": "Watch Register",
+              "description": "Authored register of the names the desk is watching.",
+              "endpoint": "/watch-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          }
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Watch Feed Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Watch Feed Service",
+          "widget_id": "watch_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "data_args": {
+            "symbol": "TSLA"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Price Watch Governance",
+          "data": "Per the Finance Tearsheet skill, close with a short investment conclusion a reader could act on."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Watch Feed Service",
+        "widget_id": "watch_register"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
+        "data_args": {
+          "symbol": "TSLA"
+        }
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "sparkline_line"
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Watch Feed Service",
+        "widget_id": "watch_register",
+        "expect": {
+          "type": "table"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Watch Handoff Note",
+        "data_contains": [
+          "MSFT"
+        ]
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Price Watch Governance",
+        "data_contains": [
+          "investment conclusion"
+        ]
+      }
+    ],
+    "max_turns": 12
+  }
+}

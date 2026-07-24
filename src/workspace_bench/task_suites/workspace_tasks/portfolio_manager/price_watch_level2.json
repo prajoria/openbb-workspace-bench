@@ -1,0 +1,106 @@
+{
+  "id": "price_watch_level2",
+  "difficulty": "level2",
+  "prompt": "Prep the open Price Watch dashboard before the open: Live Grid from Getting Started, with the symbol set per the EV watch policy - the desk keeps its electric-vehicle name streaming.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Price Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Price Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "watch",
+            "name": "Watch"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "param_name": "symbol"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "data_args": {
+            "symbol": "TSLA"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
+        "data_args": {
+          "symbol": "TSLA"
+        }
+      }
+    ],
+    "max_turns": 6
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "id": "price_watch_level3",
+  "difficulty": "level3",
+  "prompt": "Add Live Grid from Getting Started to the open Price Watch dashboard with symbol set to TSLA - the dashboard already has the desk's other views on it, and everything already there stays untouched. The open is in ten minutes.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Price Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Price Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "watch",
+            "name": "Watch"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "sparkline_line",
+            "widget_uuid": "seeded_sparkline_trends",
+            "tab_id": "watch",
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_watch_handoff_note",
+            "name": "Watch Handoff Note",
+            "data": "Prior session: the desk was watching MSFT into the print.",
+            "tab_id": "watch",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "data_args": {
+            "symbol": "TSLA"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
+        "data_args": {
+          "symbol": "TSLA"
+        }
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "sparkline_line"
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Watch Handoff Note",
+        "data_contains": [
+          "MSFT"
+        ]
+      }
+    ],
+    "max_turns": 6
+  }
+}
