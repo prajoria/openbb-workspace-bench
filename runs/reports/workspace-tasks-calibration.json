@@ -5,7 +5,7 @@
       "levels": {
         "level0": {
           "attempts": 12,
-          "passes": 10
+          "passes": 11
         },
         "level1": {
           "attempts": 12,
@@ -13,7 +13,7 @@
         },
         "level2": {
           "attempts": 12,
-          "passes": 5
+          "passes": 3
         },
         "level3": {
           "attempts": 12,
@@ -29,7 +29,7 @@
         }
       },
       "monotone": true,
-      "recorded": "2026-07-24T03:58:35+00:00",
+      "recorded": "2026-07-24T06:11:14+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-portfolio_manager"
     }
   },
