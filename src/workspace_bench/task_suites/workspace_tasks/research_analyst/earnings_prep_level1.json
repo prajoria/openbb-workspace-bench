@@ -1,0 +1,131 @@
+{
+  "id": "earnings_prep_level1",
+  "difficulty": "level1",
+  "prompt": "Pull the earnings calendar from Bench Stark Enterprise's Earnings & Estimates Monitor for the open Earnings Prep Desk dashboard - sector Technology, ticker NVDA, period QTD - and leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly. The preview goes out shortly.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Earnings Prep Desk",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Earnings Prep Desk",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "prep",
+            "name": "Prep"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "data_args": {
+            "sector": "Technology",
+            "ticker": "NVDA",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Earnings Prep Note",
+          "data": "Upcoming Earnings (Technology, NVDA, QTD) returned AAPL: change -0.0581, score 6.52, status In Review; TSLA: change 0.0579, score 73.24, status In Review."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Earnings Prep Note",
+        "data_contains": [
+          "AAPL",
+          "-0.0581",
+          "6.52",
+          "TSLA",
+          "0.0579",
+          "73.24",
+          "In Review"
+        ]
+      }
+    ],
+    "max_turns": 8
+  }
+}

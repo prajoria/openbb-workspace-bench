@@ -1,0 +1,383 @@
+{
+  "id": "earnings_prep_level5",
+  "difficulty": "level5",
+  "prompt": "Build the desk's prep-sheet workflow: add a Prep Sheet Service backend serving a Prep Register table, publish Prep Sheet App with Prep Register on its Prep tab, and instantiate the app. On the open Earnings Prep Desk dashboard, add the built Prep Register and keep everything already there exactly as it is. Read Upcoming Earnings from Bench Stark Enterprise's Earnings & Estimates Monitor with sector Technology, ticker NVDA, and period QTD, then under the Finance Earnings Prep skill leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly, plus what the skill's final step tells the analyst to produce for the PM across the three print outcomes.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Earnings Prep Desk",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Earnings Prep Desk",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "prep",
+            "name": "Prep"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+            "widget_uuid": "seeded_upcoming_earnings_decoy",
+            "tab_id": "prep",
+            "data_args": {
+              "sector": "Healthcare",
+              "ticker": "LLY",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
+            "widget_uuid": "seeded_consensus_revisions",
+            "tab_id": "prep",
+            "data_args": {
+              "sector": "Technology",
+              "ticker": "AAPL",
+              "period": "MTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_prep_note",
+            "name": "Prior Prep Note",
+            "data": "Prior prep: AAPL revisions remain under review; carry no assumptions into the NVDA preview.",
+            "tab_id": "prep",
+            "layout": {
+              "x": 0,
+              "y": 14,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-earnings-prep"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Prep Sheet Service",
+          "url": "http://127.0.0.1:9716",
+          "widgets_json": {
+            "prep_register": {
+              "name": "Prep Register",
+              "description": "Authored register for the desk's earnings-preview facts.",
+              "endpoint": "/prep-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Prep Sheet App",
+              "description": "Authored app for the desk's earnings-prep register.",
+              "tabs": {
+                "prep": {
+                  "id": "prep",
+                  "name": "Prep",
+                  "layout": [
+                    {
+                      "i": "prep_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Prep Sheet App",
+          "dashboard_name": "Prep Sheet App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Prep Sheet Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Prep Sheet Service",
+          "widget_id": "prep_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "param_name": "period"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "data_args": {
+            "sector": "Technology",
+            "ticker": "NVDA",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Earnings Prep Note",
+          "data": "Upcoming Earnings (Technology, NVDA, QTD) returned AAPL: change -0.0581, score 6.52, status In Review; TSLA: change 0.0579, score 73.24, status In Review. Per the Finance Earnings Prep skill, produce action items for the portfolio manager: what to do on a beat, a miss, and an in-line print."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "prep"
+    ],
+    "required_tab_names": [
+      "Prep"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Prep Sheet Service",
+        "widget_id": "prep_register",
+        "tab_id": "prep"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+        "data_args": {
+          "sector": "Healthcare",
+          "ticker": "LLY",
+          "period": "YTD"
+        },
+        "tab_id": "prep",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
+        "data_args": {
+          "sector": "Technology",
+          "ticker": "AAPL",
+          "period": "MTD"
+        },
+        "tab_id": "prep",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Prep Note",
+        "data_contains": [
+          "Prior prep: AAPL revisions remain under review; carry no assumptions into the NVDA preview."
+        ],
+        "tab_id": "prep"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Earnings Prep Note",
+        "data_contains": [
+          "AAPL",
+          "-0.0581",
+          "6.52",
+          "TSLA",
+          "0.0579",
+          "73.24",
+          "In Review",
+          "action items",
+          "beat",
+          "miss",
+          "in-line print"
+        ]
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_upcoming_earnings_decoy",
+        "tab_id": "prep",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_consensus_revisions",
+        "tab_id": "prep",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_prior_prep_note",
+        "tab_id": "prep",
+        "x": 0,
+        "y": 14,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Prep Sheet Service",
+        "widget_id": "prep_register",
+        "expect": {
+          "name": "Prep Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Prep Sheet Service",
+        "name_contains": "Prep Sheet App",
+        "tabs_include": [
+          "prep"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "prep",
+            "widget_id": "prep_register"
+          }
+        ]
+      }
+    ],
+    "required_dashboard_name_contains": "Earnings Prep Desk",
+    "max_turns": 15
+  }
+}
