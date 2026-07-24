@@ -82,6 +82,18 @@
               "w": 20,
               "h": 10
             }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "plotly_chart",
+            "widget_uuid": "seeded_deck_plotly_chart",
+            "tab_id": "deck",
+            "layout": {
+              "x": 0,
+              "y": 18,
+              "w": 40,
+              "h": 15
+            }
           }
         ],
         "generated_widgets": [
@@ -213,6 +225,12 @@
       {
         "origin": "Getting Started",
         "widget_id": "sparkline_line",
+        "tab_id": "deck",
+        "max_count": 1
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "plotly_chart",
         "tab_id": "deck",
         "max_count": 1
       }
