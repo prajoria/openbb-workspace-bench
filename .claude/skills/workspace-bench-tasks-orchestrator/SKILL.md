@@ -32,6 +32,16 @@ uv run python scripts/audits/calibrate_workspace_tasks.py --persona <persona>
 
 It runs gpt-4.1-mini over the persona's tasks with 3 repeats (12 attempts per level - the sample is small, hence the repeats), checks the staircase `level0 >= level1 >= ... >= level5` (ties allowed), and records the curve in `runs/reports/workspace-tasks-calibration.json`. A non-zero exit is a gate failure: diagnose before proceeding — a task failing level0 on **every** repeat is a defect fingerprint (route it back to its story's author), while a single mid-ladder wobble at this sample size may be noise (note it for the persona review, don't tune content toward the curve). Once all five personas are recorded, `--aggregate` writes the pooled per-level comparison across personas to `runs/reports/workspace-tasks-calibration.md`.
 
+## Dead levels: a 0% rung is a question, not a result
+
+A gate can PASS with levels at 0% (ties at the floor are allowed) — but a dead level must be explained before the persona is called done. The gating model's zero tells you nothing by itself: it cannot distinguish "honestly hard" from "impossible". Investigate every 0% level:
+
+1. **Transcript diagnosis first.** Pull the failing episodes' tool calls and failure codes. Failures scattering across distinct modes per story lean honest; identical near-miss failures (high checks-passed, one repeated missing check) are the over-pinning fingerprint.
+2. **Frontier probe.** Run one or two of the dead level's tasks as single live episodes with a strong model (the suite's arbiter, e.g. GPT-5.5 — single episodes, never a full run). A frontier pass proves the level is reachable and honestly hard. A frontier failure by one or two checks almost always means a task defect — read the transcript and find which valid route the eval refuses to credit.
+3. **Close the loop with validation.** Task feasibility validation exists precisely to answer "could this be solved?" — so when calibration contradicts it, re-run the task-validator on the dead tasks WITH the probe transcript attached as evidence: fresh eyes plus what actually happened. Fix the task (never the grader, never the level labels), add the lesson to the task-author skill, re-certify, and re-run the calibration so the staircase claim holds on the shipped content.
+
+Precedent from the pilot: level 5 sat at 0% for the gating model; the frontier probe passed level 4 outright and missed level 5 by exactly one check — an instantiate call pinned to `app_name` when the model used an equally valid `template_id` it had discovered. Task fixed, rule recorded, re-probe passed 74/74. The zero was half honest difficulty, half a defect only a live run could expose.
+
 ## Persona review gates
 
 The unit of delivery is the **persona**: four stories, the calibration gate, done. When a persona completes: run certification over the whole suite dir, tally coverage (origins, skills, parameter types, widget types touched), and **stop for the user's review** — sample tasks, the persona's staircase, coverage tally, anything that fought the gates. Never start the next persona without their go. The first persona (portfolio_manager) is the pilot: it proves the whole pipeline before any other persona begins.
