@@ -406,7 +406,10 @@ def test_call_concentrate_responses_maps_chat_to_responses_shape(monkeypatch) ->
 
     assert content == '{"done": true}'
     assert captured["url"] == "https://api.concentrate.ai/v1/responses/"
-    assert captured["headers"] == {"Authorization": "Bearer test-key"}
+    assert captured["headers"] == {
+        "Authorization": "Bearer test-key",
+        "User-Agent": "workspace-bench/1.0",
+    }
     assert captured["payload"]["model"] == "openai/gpt-5.2"
     assert captured["payload"]["instructions"] == "be terse"
     assert captured["payload"]["input"] == [{"role": "user", "content": "hello"}]

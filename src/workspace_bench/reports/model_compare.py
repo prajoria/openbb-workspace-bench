@@ -1653,7 +1653,12 @@ def call_concentrate_responses(model: str, messages: list[JsonDict], timeout: fl
         f"{base_url}/responses/",
         payload,
         timeout,
-        headers={"Authorization": f"Bearer {api_key}"},
+        # Concentrate sits behind Cloudflare, which rejects urllib's default
+        # user-agent (error 1010); a real product UA passes.
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "User-Agent": "workspace-bench/1.0",
+        },
     )
     status = body.get("status")
     if status in {"failed", "cancelled", "incomplete"}:
