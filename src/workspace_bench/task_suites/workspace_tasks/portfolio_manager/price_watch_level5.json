@@ -1,7 +1,7 @@
 {
   "id": "price_watch_level5",
   "difficulty": "level5",
-  "prompt": "Stand up the desk's own watch feed before the open: add a backend named Watch Feed Service serving a Watch Register table, and put Watch Register on the open Price Watch dashboard alongside Live Grid from Getting Started with symbol set to TSLA. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with. Everything already on the dashboard stays.",
+  "prompt": "Build the desk's watch feed before the open: add a Watch Feed Service backend serving a Watch Register table, publish Watch Feed App with Watch Register on its Watch tab, and instantiate the app. On the open Price Watch dashboard, add the built Watch Register and a fresh Live Grid from Getting Started with symbol set to TSLA, keeping everything already there as is. Read the Finance Tearsheet skill and leave a Price Watch Governance note recording what its final step says to close with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,11 +58,26 @@
         "widgets": [
           {
             "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "widget_uuid": "seeded_live_grid_decoy",
+            "tab_id": "watch",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 9
+            }
+          },
+          {
+            "origin": "Getting Started",
             "widget_id": "sparkline_line",
             "widget_uuid": "seeded_sparkline_trends",
             "tab_id": "watch",
             "layout": {
-              "x": 0,
+              "x": 20,
               "y": 0,
               "w": 20,
               "h": 10
@@ -77,8 +92,8 @@
             "data": "Prior session: the desk was watching MSFT into the print.",
             "tab_id": "watch",
             "layout": {
-              "x": 20,
-              "y": 0,
+              "x": 0,
+              "y": 10,
               "w": 20,
               "h": 8
             }
@@ -90,6 +105,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "finance-tearsheet"
@@ -97,11 +117,6 @@
         "graded_args": [
           "slug"
         ]
-      },
-      {
-        "tool": "get_workspace_snapshot",
-        "args": {},
-        "optional": true
       },
       {
         "tool": "read_workspace_resource",
@@ -127,7 +142,28 @@
                 "h": 10
               }
             }
-          }
+          },
+          "apps_json": [
+            {
+              "name": "Watch Feed App",
+              "description": "Authored app for the desk's watch feed.",
+              "tabs": {
+                "watch": {
+                  "id": "watch",
+                  "name": "Watch",
+                  "layout": [
+                    {
+                      "i": "watch_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         },
         "graded_args": [
           "operation",
@@ -135,9 +171,40 @@
         ]
       },
       {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Watch Feed App",
+          "dashboard_name": "Watch Feed App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Watch Feed Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "param_name": "symbol"
         },
         "optional": true
       },
@@ -189,18 +256,81 @@
     "required_widgets": [
       {
         "origin": "Watch Feed Service",
-        "widget_id": "watch_register"
+        "widget_id": "watch_register",
+        "tab_id": "watch"
       },
       {
         "origin": "Getting Started",
         "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "TSLA"
-        }
+        },
+        "tab_id": "watch"
       },
       {
         "origin": "Getting Started",
-        "widget_id": "sparkline_line"
+        "widget_id": "live_grid_data",
+        "data_args": {
+          "symbol": "MSFT"
+        },
+        "tab_id": "watch",
+        "max_count": 1
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "sparkline_line",
+        "tab_id": "watch",
+        "max_count": 1
+      }
+    ],
+    "required_tabs": [
+      "watch"
+    ],
+    "required_tab_names": [
+      "Watch"
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Watch Handoff Note",
+        "data_contains": [
+          "Prior session: the desk was watching MSFT into the print."
+        ],
+        "tab_id": "watch"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Price Watch Governance",
+        "data_contains": [
+          "investment conclusion"
+        ],
+        "tab_id": "watch"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_live_grid_decoy",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 9
+      },
+      {
+        "widget_uuid": "seeded_sparkline_trends",
+        "tab_id": "watch",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      },
+      {
+        "widget_uuid": "seeded_watch_handoff_note",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 10,
+        "w": 20,
+        "h": 8
       }
     ],
     "required_widget_defs": [
@@ -208,26 +338,23 @@
         "backend_name": "Watch Feed Service",
         "widget_id": "watch_register",
         "expect": {
+          "name": "Watch Register",
           "type": "table"
         }
       }
     ],
-    "required_generated_widgets": [
+    "required_app_defs": [
       {
-        "widget_type": "note",
-        "name_contains": "Watch Handoff Note",
-        "data_contains": [
-          "MSFT"
-        ]
-      },
-      {
-        "widget_type": "note",
-        "name_contains": "Price Watch Governance",
-        "data_contains": [
-          "investment conclusion"
-        ]
+        "backend_name": "Watch Feed Service",
+        "name_contains": "Watch Feed App",
+        "tabs_include": [
+          "watch"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true
       }
     ],
-    "max_turns": 12
+    "required_dashboard_name_contains": "Price Watch",
+    "max_turns": 15
   }
 }

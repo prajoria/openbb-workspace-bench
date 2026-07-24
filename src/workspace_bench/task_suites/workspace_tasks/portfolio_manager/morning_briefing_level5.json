@@ -1,7 +1,7 @@
 {
   "id": "morning_briefing_level5",
   "difficulty": "level5",
-  "prompt": "Stand up the desk's own briefing feed before the 9am call: add a backend named Briefing Feed Service serving an Idea Register table, and put Idea Register on the open PM Morning Briefing dashboard alongside Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, QTD. Briefings run under the Daloopa Capital Allocation skill - leave a Morning Briefing Governance note recording what its final step says every figure is cited via. Everything already on the dashboard stays.",
+  "prompt": "Build the desk's briefing feed before the 9am call: add a Briefing Feed Service backend serving an Idea Register table, publish Briefing Feed App with Idea Register on its Briefing tab, and instantiate the app. On the open PM Morning Briefing dashboard, add the built Idea Register and Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, QTD, keeping everything already there as is. Read the Daloopa Capital Allocation skill and leave a Morning Briefing Governance note recording what its final step says every figure is cited via.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,6 +58,22 @@
         "widgets": [
           {
             "origin": "Bench Stark Enterprise",
+            "widget_id": "portfolio_command_center_actions_trade_ideas",
+            "widget_uuid": "seeded_trade_ideas_decoy",
+            "tab_id": "briefing",
+            "data_args": {
+              "fund": "Global Opportunities",
+              "period": "1Y"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
             "widget_id": "portfolio_command_center_overview_top_alerts",
             "widget_uuid": "seeded_top_alerts",
             "tab_id": "briefing",
@@ -66,7 +82,7 @@
               "period": "1D"
             },
             "layout": {
-              "x": 0,
+              "x": 20,
               "y": 0,
               "w": 20,
               "h": 14
@@ -81,8 +97,8 @@
             "data": "Last week's briefing: watch Income Fund redemptions into month-end.",
             "tab_id": "briefing",
             "layout": {
-              "x": 20,
-              "y": 0,
+              "x": 0,
+              "y": 14,
               "w": 20,
               "h": 8
             }
@@ -94,6 +110,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "daloopa-capital-allocation"
@@ -101,11 +122,6 @@
         "graded_args": [
           "slug"
         ]
-      },
-      {
-        "tool": "get_workspace_snapshot",
-        "args": {},
-        "optional": true
       },
       {
         "tool": "read_workspace_resource",
@@ -131,11 +147,54 @@
                 "h": 10
               }
             }
-          }
+          },
+          "apps_json": [
+            {
+              "name": "Briefing Feed App",
+              "description": "Authored app for the desk's briefing feed.",
+              "tabs": {
+                "briefing": {
+                  "id": "briefing",
+                  "name": "Briefing",
+                  "layout": [
+                    {
+                      "i": "idea_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         },
         "graded_args": [
           "operation",
           "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Briefing Feed App",
+          "dashboard_name": "Briefing Feed App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
         ]
       },
       {
@@ -160,6 +219,15 @@
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_actions_trade_ideas",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -191,10 +259,17 @@
         ]
       }
     ],
+    "required_tabs": [
+      "briefing"
+    ],
+    "required_tab_names": [
+      "Briefing"
+    ],
     "required_widgets": [
       {
         "origin": "Briefing Feed Service",
-        "widget_id": "idea_register"
+        "widget_id": "idea_register",
+        "tab_id": "briefing"
       },
       {
         "origin": "Bench Stark Enterprise",
@@ -202,7 +277,18 @@
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "QTD"
-        }
+        },
+        "tab_id": "briefing"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_trade_ideas",
+        "data_args": {
+          "fund": "Global Opportunities",
+          "period": "1Y"
+        },
+        "tab_id": "briefing",
+        "max_count": 1
       },
       {
         "origin": "Bench Stark Enterprise",
@@ -210,16 +296,9 @@
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "1D"
-        }
-      }
-    ],
-    "required_widget_defs": [
-      {
-        "backend_name": "Briefing Feed Service",
-        "widget_id": "idea_register",
-        "expect": {
-          "type": "table"
-        }
+        },
+        "tab_id": "briefing",
+        "max_count": 1
       }
     ],
     "required_generated_widgets": [
@@ -227,17 +306,67 @@
         "widget_type": "note",
         "name_contains": "Last Week Briefing Note",
         "data_contains": [
-          "Income Fund"
-        ]
+          "Last week's briefing: watch Income Fund redemptions into month-end."
+        ],
+        "tab_id": "briefing"
       },
       {
         "widget_type": "note",
         "name_contains": "Morning Briefing Governance",
         "data_contains": [
           "source_url"
-        ]
+        ],
+        "tab_id": "briefing"
       }
     ],
-    "max_turns": 12
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_trade_ideas_decoy",
+        "tab_id": "briefing",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_top_alerts",
+        "tab_id": "briefing",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_last_week_note",
+        "tab_id": "briefing",
+        "x": 0,
+        "y": 14,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Briefing Feed Service",
+        "widget_id": "idea_register",
+        "expect": {
+          "name": "Idea Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Briefing Feed Service",
+        "name_contains": "Briefing Feed App",
+        "tabs_include": [
+          "briefing"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true
+      }
+    ],
+    "required_dashboard_name_contains": "PM Morning Briefing",
+    "max_turns": 15
   }
 }

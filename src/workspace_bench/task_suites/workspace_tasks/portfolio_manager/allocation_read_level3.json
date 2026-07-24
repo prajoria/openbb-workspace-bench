@@ -1,7 +1,7 @@
 {
   "id": "allocation_read_level3",
   "difficulty": "level3",
-  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. The dashboard still carries the desk's Microsoft review - everything already on it stays as is.",
+  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -71,6 +71,18 @@
               "w": 20,
               "h": 12
             }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_directory",
+            "widget_uuid": "seeded_company_directory",
+            "tab_id": "review",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
           }
         ],
         "generated_widgets": [
@@ -81,8 +93,8 @@
             "data": "Prior review: MSFT segment mix - Intelligent Cloud led the quarter.",
             "tab_id": "review",
             "layout": {
-              "x": 20,
-              "y": 0,
+              "x": 0,
+              "y": 12,
               "w": 20,
               "h": 8
             }
@@ -134,6 +146,12 @@
         ]
       }
     ],
+    "required_tabs": [
+      "review"
+    ],
+    "required_tab_names": [
+      "Review"
+    ],
     "required_widgets": [
       {
         "origin": "Bench Daloopa",
@@ -141,7 +159,15 @@
         "data_args": {
           "ticker": "MSFT",
           "period": "2025Q4"
-        }
+        },
+        "tab_id": "review",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_directory",
+        "tab_id": "review",
+        "max_count": 1
       }
     ],
     "required_generated_widgets": [
@@ -149,8 +175,9 @@
         "widget_type": "note",
         "name_contains": "Prior Allocation Note",
         "data_contains": [
-          "Intelligent Cloud"
-        ]
+          "Prior review: MSFT segment mix - Intelligent Cloud led the quarter."
+        ],
+        "tab_id": "review"
       },
       {
         "widget_type": "note",
@@ -161,6 +188,33 @@
         ]
       }
     ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_msft_segment_breakdown",
+        "tab_id": "review",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_company_directory",
+        "tab_id": "review",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_prior_allocation_note",
+        "tab_id": "review",
+        "x": 0,
+        "y": 12,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Allocation Review",
     "max_turns": 7
   }
 }

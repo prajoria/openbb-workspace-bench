@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level3",
   "difficulty": "level3",
-  "prompt": "On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1. The dashboard still carries the last shift's NVDA coverage - everything already on it stays as is.",
+  "prompt": "On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -132,13 +132,21 @@
         ]
       }
     ],
+    "required_tabs": [
+      "handoff"
+    ],
+    "required_tab_names": [
+      "Handoff"
+    ],
     "required_widgets": [
       {
         "origin": "Bench Daloopa",
         "widget_id": "daloopa_consensus_estimates",
         "data_args": {
           "ticker": "NVDA"
-        }
+        },
+        "tab_id": "handoff",
+        "max_count": 1
       }
     ],
     "required_generated_widgets": [
@@ -146,8 +154,9 @@
         "widget_type": "note",
         "name_contains": "Prior Shift Note",
         "data_contains": [
-          "NVDA"
-        ]
+          "Prior shift: NVDA into the print - exception cleared, nothing carried over."
+        ],
+        "tab_id": "handoff"
       },
       {
         "widget_type": "note",
@@ -158,6 +167,25 @@
         ]
       }
     ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_nvda_consensus_estimates",
+        "tab_id": "handoff",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_prior_shift_note",
+        "tab_id": "handoff",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "PM Handoff Log",
     "max_turns": 7
   }
 }

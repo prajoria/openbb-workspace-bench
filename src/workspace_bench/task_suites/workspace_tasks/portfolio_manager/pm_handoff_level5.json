@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level5",
   "difficulty": "level5",
-  "prompt": "Stand up the desk's own handoff log before the overnight shift: add a backend named Handoff Log Service serving a Handoff Register table, and put Handoff Register on the open PM Handoff Log dashboard. Then the close-out: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1 - the close-out runs under the Daloopa Earnings Review skill, so the note also records the granularity that skill's first step sets for the consensus compare. Delegate the follow-up to the coverage analyst. Everything already on the dashboard stays.",
+  "prompt": "Build the desk's handoff log before the overnight shift: add a Handoff Log Service backend serving a Handoff Register table, publish Handoff Log App with Handoff Register on its Handoff tab, and instantiate the app. On the open PM Handoff Log dashboard, add the built Handoff Register, keeping everything already there as is. Then close out under the Daloopa Earnings Review skill: read Consensus Estimates from Bench Daloopa with ticker MSFT, leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1 plus the granularity that skill's first step sets for the consensus compare, and delegate the follow-up to the coverage analyst.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -93,6 +93,11 @@
   "eval": {
     "required_tools": [
       {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
         "tool": "get_skill_content",
         "args": {
           "slug": "daloopa-earnings-review"
@@ -100,11 +105,6 @@
         "graded_args": [
           "slug"
         ]
-      },
-      {
-        "tool": "get_workspace_snapshot",
-        "args": {},
-        "optional": true
       },
       {
         "tool": "read_workspace_resource",
@@ -130,11 +130,54 @@
                 "h": 10
               }
             }
-          }
+          },
+          "apps_json": [
+            {
+              "name": "Handoff Log App",
+              "description": "Authored app for the desk's handoff log.",
+              "tabs": {
+                "handoff": {
+                  "id": "handoff",
+                  "name": "Handoff",
+                  "layout": [
+                    {
+                      "i": "handoff_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
         },
         "graded_args": [
           "operation",
           "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Handoff Log App",
+          "dashboard_name": "Handoff Log App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation",
+          "app_name"
         ]
       },
       {
@@ -154,6 +197,22 @@
           "origin",
           "widget_id"
         ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_consensus_estimates",
+          "param_name": "ticker"
+        },
+        "optional": true
       },
       {
         "tool": "get_widget_data",
@@ -197,17 +256,26 @@
         "graded_args": []
       }
     ],
+    "required_tabs": [
+      "handoff"
+    ],
+    "required_tab_names": [
+      "Handoff"
+    ],
     "required_widgets": [
       {
         "origin": "Handoff Log Service",
-        "widget_id": "handoff_register"
+        "widget_id": "handoff_register",
+        "tab_id": "handoff"
       },
       {
         "origin": "Bench Daloopa",
         "widget_id": "daloopa_consensus_estimates",
         "data_args": {
           "ticker": "NVDA"
-        }
+        },
+        "tab_id": "handoff",
+        "max_count": 1
       }
     ],
     "required_widget_defs": [
@@ -215,8 +283,26 @@
         "backend_name": "Handoff Log Service",
         "widget_id": "handoff_register",
         "expect": {
+          "name": "Handoff Register",
           "type": "table"
         }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Handoff Log Service",
+        "name_contains": "Handoff Log App",
+        "tabs_include": [
+          "handoff"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "handoff",
+            "widget_id": "handoff_register"
+          }
+        ]
       }
     ],
     "required_generated_widgets": [
@@ -224,8 +310,9 @@
         "widget_type": "note",
         "name_contains": "Prior Shift Note",
         "data_contains": [
-          "NVDA"
-        ]
+          "Prior shift: NVDA into the print - exception cleared, nothing carried over."
+        ],
+        "tab_id": "handoff"
       },
       {
         "widget_type": "note",
@@ -237,6 +324,25 @@
         ]
       }
     ],
-    "max_turns": 12
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_nvda_consensus_estimates",
+        "tab_id": "handoff",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_prior_shift_note",
+        "tab_id": "handoff",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "PM Handoff Log",
+    "max_turns": 16
   }
 }
