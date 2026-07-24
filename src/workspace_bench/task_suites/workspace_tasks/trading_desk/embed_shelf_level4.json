@@ -1,0 +1,266 @@
+{
+  "id": "embed_shelf_level4",
+  "difficulty": "level4",
+  "prompt": "On the open Desk Shelf dashboard, add Getting Started's HTML Widget and Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo, keeping everything already there exactly as it is. Read the build-an-app guide and leave a Shelf Governance note recording the final two actions it lists.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Desk Shelf",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Desk Shelf",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "shelf",
+            "name": "Shelf"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "get_video",
+            "widget_uuid": "seeded_data_platform_video_decoy",
+            "tab_id": "shelf",
+            "data_args": {
+              "video_name": "Open Data Platform Demo"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "sparkline_line",
+            "widget_uuid": "seeded_shelf_sparklines",
+            "tab_id": "shelf",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_shelf_note",
+            "name": "Prior Shelf Note",
+            "data": "Prior shelf: keep the data-platform walkthrough available through the onboarding cycle.",
+            "tab_id": "shelf",
+            "layout": {
+              "x": 20,
+              "y": 10,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/guides/build-an-app"
+        },
+        "graded_args": [
+          "uri"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "html_widget"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "html_widget"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "get_video"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "get_video",
+          "data_args": {
+            "video_name": "OpenBB Workspace Demo"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Shelf Governance",
+          "data": "The build-an-app guide's final two actions are validate, and register."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "shelf"
+    ],
+    "required_tab_names": [
+      "Shelf"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "html_widget",
+        "tab_id": "shelf"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "get_video",
+        "data_args": {
+          "video_name": "OpenBB Workspace Demo"
+        },
+        "tab_id": "shelf"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "get_video",
+        "data_args": {
+          "video_name": "Open Data Platform Demo"
+        },
+        "tab_id": "shelf",
+        "max_count": 1
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "sparkline_line",
+        "tab_id": "shelf",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Shelf Note",
+        "data_contains": [
+          "Prior shelf: keep the data-platform walkthrough available through the onboarding cycle."
+        ],
+        "tab_id": "shelf"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Shelf Governance",
+        "data_contains": [
+          "validate, and register"
+        ],
+        "tab_id": "shelf"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_data_platform_video_decoy",
+        "tab_id": "shelf",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "seeded_shelf_sparklines",
+        "tab_id": "shelf",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      },
+      {
+        "widget_uuid": "seeded_prior_shelf_note",
+        "tab_id": "shelf",
+        "x": 20,
+        "y": 10,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Desk Shelf",
+    "max_turns": 11
+  }
+}
