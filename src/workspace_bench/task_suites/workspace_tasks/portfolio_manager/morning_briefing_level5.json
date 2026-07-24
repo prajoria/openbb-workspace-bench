@@ -193,8 +193,7 @@
           "activate": false
         },
         "graded_args": [
-          "operation",
-          "app_name"
+          "operation"
         ]
       },
       {
