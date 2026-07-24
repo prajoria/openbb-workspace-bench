@@ -1,0 +1,37 @@
+{
+  "model": "openai:gpt-4.1-mini",
+  "personas": {
+    "portfolio_manager": {
+      "levels": {
+        "level0": {
+          "attempts": 12,
+          "passes": 11
+        },
+        "level1": {
+          "attempts": 12,
+          "passes": 6
+        },
+        "level2": {
+          "attempts": 12,
+          "passes": 2
+        },
+        "level3": {
+          "attempts": 12,
+          "passes": 0
+        },
+        "level4": {
+          "attempts": 12,
+          "passes": 1
+        },
+        "level5": {
+          "attempts": 12,
+          "passes": 0
+        }
+      },
+      "monotone": false,
+      "recorded": "2026-07-24T02:10:58+00:00",
+      "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-portfolio_manager"
+    }
+  },
+  "repeats": 3
+}
