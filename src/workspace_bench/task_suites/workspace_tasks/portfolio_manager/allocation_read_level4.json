@@ -1,0 +1,176 @@
+{
+  "id": "allocation_read_level4",
+  "difficulty": "level4",
+  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, on the open Allocation Review dashboard, and keep everything already on the dashboard as is. Allocation reads run under the Daloopa Tearsheet skill - leave an Allocation Read Note recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Allocation Review",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Allocation Review",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_segment_breakdown",
+            "widget_uuid": "seeded_msft_segment_breakdown",
+            "tab_id": "review",
+            "data_args": {
+              "ticker": "MSFT",
+              "period": "2025Q4"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_allocation_note",
+            "name": "Prior Allocation Note",
+            "data": "Prior review: MSFT segment mix - Intelligent Cloud led the quarter.",
+            "tab_id": "review",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_segment_breakdown",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "2026Q1"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Allocation Read Note",
+          "data": "Top segment iPhone at 52365.6 revenue_musd (AAPL, 2026Q1); per the Daloopa Tearsheet skill, all period math anchors on latest_calendar_quarter."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_segment_breakdown",
+        "data_args": {
+          "ticker": "MSFT",
+          "period": "2025Q4"
+        }
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Allocation Note",
+        "data_contains": [
+          "Intelligent Cloud"
+        ]
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Allocation Read Note",
+        "data_contains": [
+          "iPhone",
+          "52365.6",
+          "latest_calendar_quarter"
+        ]
+      }
+    ],
+    "max_turns": 8
+  }
+}
