@@ -1,0 +1,267 @@
+{
+  "id": "chart_deck_level4",
+  "difficulty": "level4",
+  "prompt": "On the open Chart Deck dashboard, add Getting Started's TradingView Chart and Getting Started's Plotly Heatmap with its color_scale parameter set to Viridis, keeping everything already there exactly as it is. Read Workspace session guidance and leave a Chart Deck Governance note recording the stable phrase it gives for anchoring work to the current dashboard and tab.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Chart Deck",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Chart Deck",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "deck",
+            "name": "Deck"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "plotly_heatmap",
+            "widget_uuid": "seeded_plasma_heatmap_decoy",
+            "tab_id": "deck",
+            "data_args": {
+              "color_scale": "Plasma"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 15
+            }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "sparkline_line",
+            "widget_uuid": "seeded_deck_sparklines",
+            "tab_id": "deck",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 10
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_deck_note",
+            "name": "Prior Deck Note",
+            "data": "Prior deck: keep the cross-section view on the alternate palette through the close.",
+            "tab_id": "deck",
+            "layout": {
+              "x": 20,
+              "y": 10,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_session_context"
+        },
+        "graded_args": [
+          "name"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "udf"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "plotly_heatmap"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "plotly_heatmap",
+          "param_name": "color_scale"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "plotly_heatmap",
+          "data_args": {
+            "color_scale": "Viridis"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Chart Deck Governance",
+          "data": "Workspace session guidance: current-dashboard current-tab session grounding."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "deck"
+    ],
+    "required_tab_names": [
+      "Deck"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "udf",
+        "tab_id": "deck"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "plotly_heatmap",
+        "data_args": {
+          "color_scale": "Viridis"
+        },
+        "tab_id": "deck"
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "plotly_heatmap",
+        "data_args": {
+          "color_scale": "Plasma"
+        },
+        "tab_id": "deck",
+        "max_count": 1
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "sparkline_line",
+        "tab_id": "deck",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Deck Note",
+        "data_contains": [
+          "Prior deck: keep the cross-section view on the alternate palette through the close."
+        ],
+        "tab_id": "deck"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Chart Deck Governance",
+        "data_contains": [
+          "current-dashboard current-tab session grounding"
+        ],
+        "tab_id": "deck"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_plasma_heatmap_decoy",
+        "tab_id": "deck",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 15
+      },
+      {
+        "widget_uuid": "seeded_deck_sparklines",
+        "tab_id": "deck",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      },
+      {
+        "widget_uuid": "seeded_prior_deck_note",
+        "tab_id": "deck",
+        "x": 20,
+        "y": 10,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Chart Deck",
+    "max_turns": 11
+  }
+}
