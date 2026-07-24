@@ -452,6 +452,9 @@ def _numeric_equivalent_contains(data_blob: str, expected: str) -> bool:
     if not re.fullmatch(r"-?\d+(?:\.\d+)?", expected.strip()):
         return False
     expected_value = float(expected)
+    # Agents write thousands-grouped figures ("$52,365.6M"); strip grouping
+    # commas (a comma followed by exactly three digits) before tokenizing.
+    data_blob = re.sub(r"(?<=\d),(?=\d{3}(?!\d))", "", data_blob)
     for match in re.finditer(r"-?\d+(?:\.\d+)?\s*%?", data_blob):
         raw = match.group(0)
         observed = float(raw.rstrip("%").strip())
