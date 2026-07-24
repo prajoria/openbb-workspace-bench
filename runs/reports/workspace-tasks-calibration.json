@@ -5,15 +5,15 @@
       "levels": {
         "level0": {
           "attempts": 12,
-          "passes": 10
+          "passes": 11
         },
         "level1": {
           "attempts": 12,
-          "passes": 6
+          "passes": 7
         },
         "level2": {
           "attempts": 12,
-          "passes": 6
+          "passes": 5
         },
         "level3": {
           "attempts": 12,
@@ -29,7 +29,7 @@
         }
       },
       "monotone": true,
-      "recorded": "2026-07-24T07:23:09+00:00",
+      "recorded": "2026-07-24T07:35:22+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-fund_operations"
     },
     "portfolio_manager": {
