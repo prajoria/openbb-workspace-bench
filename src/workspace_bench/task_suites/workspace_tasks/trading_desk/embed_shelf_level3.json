@@ -1,7 +1,7 @@
 {
   "id": "embed_shelf_level3",
   "difficulty": "level3",
-  "prompt": "On the open Desk Shelf dashboard, add Getting Started's HTML Widget and Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo. Leave everything already on the dashboard exactly as it is.",
+  "prompt": "On the open Desk Shelf dashboard, add Getting Started's HTML Widget at x 0, y 24, width 20, height 12 and Getting Started's fresh Video Library with its video_name parameter set to OpenBB Workspace Demo at x 20, y 24, width 20, height 12. Leave everything already on the dashboard exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -151,6 +151,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "html_widget",
+          "x": 0,
+          "y": 24,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "get_widget_schema",
         "args": {
           "origin": "Getting Started",
@@ -171,6 +188,23 @@
           "origin",
           "widget_id",
           "data_args"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_338",
+          "widget_id": "get_video",
+          "x": 20,
+          "y": 24,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
         ]
       }
     ],
@@ -253,9 +287,33 @@
         "y": 10,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_uuid": "seeded_shelf_transcript_video",
+        "tab_id": "shelf",
+        "x": 0,
+        "y": 12,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "html_widget",
+        "tab_id": "shelf",
+        "x": 0,
+        "y": 24,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "get_video",
+        "tab_id": "shelf",
+        "x": 20,
+        "y": 24,
+        "w": 20,
+        "h": 12
       }
     ],
     "required_dashboard_name_contains": "Desk Shelf",
-    "max_turns": 9
+    "max_turns": 11
   }
 }

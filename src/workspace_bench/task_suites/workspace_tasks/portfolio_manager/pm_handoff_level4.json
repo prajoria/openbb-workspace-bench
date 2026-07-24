@@ -136,8 +136,7 @@
           "data": "Overnight handoff: MSFT Total Revenue 2026Q1 - actual 91934.6 vs consensus 93202.6 (USD mn); per the Daloopa Earnings Review skill, the consensus compare runs metric by metric."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

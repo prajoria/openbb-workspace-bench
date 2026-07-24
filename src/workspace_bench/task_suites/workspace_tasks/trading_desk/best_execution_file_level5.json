@@ -1,7 +1,7 @@
 {
   "id": "best_execution_file_level5",
   "difficulty": "level5",
-  "prompt": "Build the committee file: add a Best-Ex File Service backend serving a Best-Ex Register table, publish Best-Ex File App with Best-Ex Register on its Review tab, and instantiate the app. On the open Best-Ex Review dashboard, add the built Best-Ex Register plus Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD, keeping everything already there exactly as it is. Read the Finance Comps skill and leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.",
+  "prompt": "Build the committee file: add a Best-Ex File Service backend serving a Best-Ex Register table, publish Best-Ex File App with Best-Ex Register on its Review tab, and instantiate the app. On the open Best-Ex Review dashboard, add the built Best-Ex Register plus Live Orders at x 0, y 46, width 20, height 12 and Broker Scorecard at x 20, y 46, width 20, height 12 from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD, keeping everything already there exactly as it is. Read the Finance Comps skill and leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -246,6 +246,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_338",
+          "widget_id": "execution_desk_blotter_live_orders",
+          "x": 0,
+          "y": 46,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
@@ -261,6 +278,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_339",
+          "widget_id": "execution_desk_fills_broker_scorecard",
+          "x": 20,
+          "y": 46,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -268,8 +302,7 @@
           "data": "Per the Finance Comps skill, outliers deserve premium or discount rather than deleting them."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],
@@ -366,6 +399,22 @@
         "y": 28,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "execution_desk_blotter_live_orders",
+        "tab_id": "review",
+        "x": 0,
+        "y": 46,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "execution_desk_fills_broker_scorecard",
+        "tab_id": "review",
+        "x": 20,
+        "y": 46,
+        "w": 20,
+        "h": 12
       }
     ],
     "required_widget_defs": [
@@ -396,6 +445,6 @@
       }
     ],
     "required_dashboard_name_contains": "Best-Ex Review",
-    "max_turns": 16
+    "max_turns": 18
   }
 }

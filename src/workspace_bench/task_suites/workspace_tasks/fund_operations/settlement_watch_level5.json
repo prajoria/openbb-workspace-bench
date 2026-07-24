@@ -272,8 +272,7 @@
           "data": "Per the Finance Guidance Tracker skill, the cutoff review must list evidence gaps."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

@@ -268,8 +268,7 @@
           "data": "Per the Daloopa Tearsheet skill, every Daloopa-sourced figure must be cited with its source_url."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

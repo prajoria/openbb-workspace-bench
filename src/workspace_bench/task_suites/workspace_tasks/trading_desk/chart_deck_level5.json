@@ -1,7 +1,7 @@
 {
   "id": "chart_deck_level5",
   "difficulty": "level5",
-  "prompt": "Build the side-screen deck before the open: add a Chart Deck Service backend serving a Deck Register table, publish Chart Deck App with Deck Register on its Deck tab, and instantiate the app. On the open Chart Deck dashboard, add the built Deck Register, Getting Started's TradingView Chart, and Getting Started's Plotly Heatmap with its color_scale parameter set to Viridis, keeping everything already there exactly as it is. Read Workspace session guidance and leave a Chart Deck Governance note recording the stable phrase it gives for anchoring work to the current dashboard and tab.",
+  "prompt": "Build the side-screen deck before the open: add a Chart Deck Service backend serving a Deck Register table, publish Chart Deck App with Deck Register on its Deck tab, and instantiate the app. On the open Chart Deck dashboard, add the built Deck Register, Getting Started's TradingView Chart at x 0, y 33, width 20, height 12, and Getting Started's Plotly Heatmap with its color_scale parameter set to Viridis at x 20, y 33, width 20, height 12, keeping everything already there exactly as it is. Read Workspace session guidance and leave a Chart Deck Governance note recording the stable phrase it gives for anchoring work to the current dashboard and tab.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -204,42 +204,6 @@
         ]
       },
       {
-        "tool": "navigate_workspace",
-        "args": {
-          "operation": "tab",
-          "tab_id": "deck"
-        },
-        "graded_args": [
-          "tab_id"
-        ]
-      },
-      {
-        "tool": "list_available_widgets",
-        "args": {
-          "origin": "Chart Deck Service"
-        },
-        "optional": true
-      },
-      {
-        "tool": "get_widget_schema",
-        "args": {
-          "origin": "Chart Deck Service",
-          "widget_id": "deck_register"
-        },
-        "optional": true
-      },
-      {
-        "tool": "create_widget",
-        "args": {
-          "origin": "Chart Deck Service",
-          "widget_id": "deck_register"
-        },
-        "graded_args": [
-          "origin",
-          "widget_id"
-        ]
-      },
-      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Getting Started"
@@ -255,6 +219,23 @@
         "graded_args": [
           "origin",
           "widget_id"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_338",
+          "widget_id": "udf",
+          "x": 0,
+          "y": 33,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
         ]
       },
       {
@@ -290,6 +271,49 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_339",
+          "widget_id": "plotly_heatmap",
+          "x": 20,
+          "y": 33,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Chart Deck Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Chart Deck Service",
+          "widget_id": "deck_register"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Chart Deck Service",
+          "widget_id": "deck_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -297,8 +321,7 @@
           "data": "Workspace session guidance: current-dashboard current-tab session grounding."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],
@@ -418,9 +441,33 @@
         "y": 10,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_uuid": "seeded_deck_plotly_chart",
+        "tab_id": "deck",
+        "x": 0,
+        "y": 18,
+        "w": 40,
+        "h": 15
+      },
+      {
+        "widget_id": "udf",
+        "tab_id": "deck",
+        "x": 0,
+        "y": 33,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "plotly_heatmap",
+        "tab_id": "deck",
+        "x": 20,
+        "y": 33,
+        "w": 20,
+        "h": 12
       }
     ],
     "required_dashboard_name_contains": "Chart Deck",
-    "max_turns": 19
+    "max_turns": 21
   }
 }

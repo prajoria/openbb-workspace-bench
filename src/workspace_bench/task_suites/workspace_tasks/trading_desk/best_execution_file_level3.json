@@ -1,7 +1,7 @@
 {
   "id": "best_execution_file_level3",
   "difficulty": "level3",
-  "prompt": "On the open Best-Ex Review dashboard, add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already on the dashboard exactly as it is.",
+  "prompt": "On the open Best-Ex Review dashboard, add Live Orders at x 0, y 46, width 20, height 12 and Broker Scorecard at x 20, y 46, width 20, height 12 from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already on the dashboard exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -145,6 +145,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_336",
+          "widget_id": "execution_desk_blotter_live_orders",
+          "x": 0,
+          "y": 46,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
@@ -157,6 +174,23 @@
         "graded_args": [
           "origin",
           "data_args"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "execution_desk_fills_broker_scorecard",
+          "x": 20,
+          "y": 46,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
         ]
       }
     ],
@@ -240,9 +274,25 @@
         "y": 28,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "execution_desk_blotter_live_orders",
+        "tab_id": "review",
+        "x": 0,
+        "y": 46,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "execution_desk_fills_broker_scorecard",
+        "tab_id": "review",
+        "x": 20,
+        "y": 46,
+        "w": 20,
+        "h": 12
       }
     ],
     "required_dashboard_name_contains": "Best-Ex Review",
-    "max_turns": 8
+    "max_turns": 10
   }
 }

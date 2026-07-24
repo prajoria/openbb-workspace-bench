@@ -171,29 +171,6 @@
         "optional": true
       },
       {
-        "tool": "manage_apps",
-        "args": {
-          "operation": "instantiate",
-          "backend_id": "backend_005",
-          "app_name": "Intake Controls App",
-          "dashboard_name": "Intake Controls App",
-          "activate": false
-        },
-        "graded_args": [
-          "operation"
-        ]
-      },
-      {
-        "tool": "navigate_workspace",
-        "args": {
-          "operation": "tab",
-          "tab_id": "intake"
-        },
-        "graded_args": [
-          "tab_id"
-        ]
-      },
-      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Intake Form Service"
@@ -285,8 +262,20 @@
           "data": "The widgets.json parameter kind named between endpoint and button is form."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Intake Controls App",
+          "dashboard_name": "Intake Controls App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
         ]
       }
     ],

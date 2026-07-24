@@ -1,7 +1,7 @@
 {
   "id": "embed_shelf_level4",
   "difficulty": "level4",
-  "prompt": "On the open Desk Shelf dashboard, add Getting Started's HTML Widget and Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo, keeping everything already there exactly as it is. Read the build-an-app guide and leave a Shelf Governance note recording the final two actions it lists.",
+  "prompt": "On the open Desk Shelf dashboard, add Getting Started's HTML Widget at x 0, y 24, width 20, height 12 and Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo at x 20, y 24, width 20, height 12, keeping everything already there exactly as it is. Read the build-an-app guide and leave a Shelf Governance note recording the final two actions it lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -160,6 +160,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "html_widget",
+          "x": 0,
+          "y": 24,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "get_widget_schema",
         "args": {
           "origin": "Getting Started",
@@ -183,6 +200,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_338",
+          "widget_id": "get_video",
+          "x": 20,
+          "y": 24,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -190,8 +224,7 @@
           "data": "The build-an-app guide's final two actions are validate, and register."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],
@@ -282,9 +315,33 @@
         "y": 10,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_uuid": "seeded_shelf_transcript_video",
+        "tab_id": "shelf",
+        "x": 0,
+        "y": 12,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "html_widget",
+        "tab_id": "shelf",
+        "x": 0,
+        "y": 24,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "get_video",
+        "tab_id": "shelf",
+        "x": 20,
+        "y": 24,
+        "w": 20,
+        "h": 12
       }
     ],
     "required_dashboard_name_contains": "Desk Shelf",
-    "max_turns": 11
+    "max_turns": 13
   }
 }

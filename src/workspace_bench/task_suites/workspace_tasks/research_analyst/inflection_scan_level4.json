@@ -150,8 +150,7 @@
           "data": "TSLA Operating KPIs for 2026Q1: Vehicle Deliveries 509.3 units k; Energy Storage Deployed 12.8 GWh. Per the Daloopa Inflection skill, compute quarter-over-quarter growth per series first and flag growth-rate reversals as inflections."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

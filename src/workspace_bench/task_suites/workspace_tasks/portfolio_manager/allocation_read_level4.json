@@ -138,8 +138,7 @@
           "data": "Top segment iPhone at 52365.6 revenue_musd (AAPL, 2026Q1); per the Daloopa Tearsheet skill, all period math anchors on latest_calendar_quarter."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

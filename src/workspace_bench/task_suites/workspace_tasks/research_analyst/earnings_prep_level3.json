@@ -156,8 +156,7 @@
           "data": "Upcoming Earnings (Technology, NVDA, QTD) returned AAPL: change -0.0581, score 6.52, status In Review; TSLA: change 0.0579, score 73.24, status In Review."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

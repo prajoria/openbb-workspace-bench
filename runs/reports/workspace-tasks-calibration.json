@@ -93,6 +93,37 @@
       "monotone": true,
       "recorded": "2026-07-24T08:37:45+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-research_analyst"
+    },
+    "trading_desk": {
+      "levels": {
+        "level0": {
+          "attempts": 12,
+          "passes": 9
+        },
+        "level1": {
+          "attempts": 12,
+          "passes": 4
+        },
+        "level2": {
+          "attempts": 12,
+          "passes": 1
+        },
+        "level3": {
+          "attempts": 12,
+          "passes": 1
+        },
+        "level4": {
+          "attempts": 12,
+          "passes": 0
+        },
+        "level5": {
+          "attempts": 12,
+          "passes": 0
+        }
+      },
+      "monotone": true,
+      "recorded": "2026-07-24T11:21:47+00:00",
+      "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-trading_desk"
     }
   },
   "repeats": 3

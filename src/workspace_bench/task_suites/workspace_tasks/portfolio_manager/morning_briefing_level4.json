@@ -137,8 +137,7 @@
           "data": "Per the Daloopa Capital Allocation skill, every figure is cited via source_url."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

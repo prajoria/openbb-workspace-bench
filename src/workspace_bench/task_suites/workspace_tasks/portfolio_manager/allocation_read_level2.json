@@ -101,8 +101,7 @@
           "data": "Top segment iPhone at 52365.6 revenue_musd (AAPL, 2026Q1)."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

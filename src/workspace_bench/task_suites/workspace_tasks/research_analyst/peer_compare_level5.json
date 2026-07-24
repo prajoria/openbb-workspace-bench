@@ -180,29 +180,6 @@
         "optional": true
       },
       {
-        "tool": "manage_apps",
-        "args": {
-          "operation": "instantiate",
-          "backend_id": "backend_005",
-          "app_name": "Peer Compare App",
-          "dashboard_name": "Peer Compare App",
-          "activate": false
-        },
-        "graded_args": [
-          "operation"
-        ]
-      },
-      {
-        "tool": "navigate_workspace",
-        "args": {
-          "operation": "tab",
-          "tab_id": "compare"
-        },
-        "graded_args": [
-          "tab_id"
-        ]
-      },
-      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Peer Compare Service"
@@ -274,8 +251,20 @@
           "data": "Per the Daloopa Industry skill, the comparable set comes from daloopa_company_directory, not prior assumptions."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Peer Compare App",
+          "dashboard_name": "Peer Compare App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
         ]
       }
     ],

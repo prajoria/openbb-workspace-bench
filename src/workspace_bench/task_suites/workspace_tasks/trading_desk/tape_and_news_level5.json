@@ -1,7 +1,7 @@
 {
   "id": "tape_and_news_level5",
   "difficulty": "level5",
-  "prompt": "Build the tape digest before the open: add a Tape Digest Service backend serving a Tape Register table, publish Tape Digest App with Tape Register on its Digest tab, and instantiate the app. On the open Desk Tape dashboard, add the built Tape Register, keeping everything already there exactly as it is. Read Getting Started's Sample News Feed for business, limited to 3, and under the Finance Tearsheet skill leave a Tape Lead Note recording the exact lead title and author, plus the first input its workflow gathers.",
+  "prompt": "Build the tape digest before the open: add a Tape Digest Service backend serving a Tape Register table, publish Tape Digest App with Tape Register on its Digest tab, and instantiate the app. On the open Desk Tape dashboard, add the built Tape Register, keeping everything already there exactly as it is. Read Getting Started's Sample News Feed for business, limited to 3, and under the Finance Tearsheet skill leave a Tape Lead Note at x 20, y 28, width 20, height 8 recording the exact lead title and author, plus the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -193,17 +193,6 @@
         ]
       },
       {
-        "tool": "navigate_workspace",
-        "args": {
-          "operation": "tab",
-          "dashboard_id": "dash_028",
-          "tab_id": "tape"
-        },
-        "graded_args": [
-          "tab_id"
-        ]
-      },
-      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Tape Digest Service"
@@ -229,6 +218,20 @@
           "origin",
           "widget_id"
         ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "tape_register",
+          "dashboard_id": "dash_028",
+          "tab_id": "tape",
+          "x": 0,
+          "y": 18,
+          "w": 40,
+          "h": 10
+        },
+        "optional": true
       },
       {
         "tool": "list_available_widgets",
@@ -267,11 +270,30 @@
           "widget_type": "note",
           "name": "Tape Lead Note",
           "data": "Lead: Global Markets Rally on Positive Economic Data; author: Robert Williams. Per the Finance Tearsheet skill, the workflow gathers price action first.",
-          "dashboard_id": "dash_028"
+          "dashboard_id": "dash_028",
+          "inner_tab": "tape"
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_338",
+          "widget_id": "generated_note",
+          "dashboard_id": "dash_028",
+          "tab_id": "tape",
+          "x": 20,
+          "y": 28,
+          "w": 20,
+          "h": 8
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
         ]
       }
     ],
@@ -375,9 +397,17 @@
         "y": 10,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "generated_note",
+        "tab_id": "tape",
+        "x": 20,
+        "y": 28,
+        "w": 20,
+        "h": 8
       }
     ],
     "required_dashboard_name_contains": "Desk Tape",
-    "max_turns": 17
+    "max_turns": 18
   }
 }

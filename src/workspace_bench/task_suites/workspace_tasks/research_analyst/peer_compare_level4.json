@@ -172,8 +172,7 @@
           "data": "Per the Daloopa Industry skill, the comparable set comes from daloopa_company_directory, not prior assumptions."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

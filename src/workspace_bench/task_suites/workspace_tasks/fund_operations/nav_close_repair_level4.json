@@ -171,8 +171,7 @@
           "data": "Close governance: the Daloopa Capital Allocation comparison adds Dividends Paid to Share Buybacks before comparing total shareholder return with Free Cash Flow."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

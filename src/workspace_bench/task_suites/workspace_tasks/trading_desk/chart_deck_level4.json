@@ -1,7 +1,7 @@
 {
   "id": "chart_deck_level4",
   "difficulty": "level4",
-  "prompt": "On the open Chart Deck dashboard, add Getting Started's TradingView Chart and Getting Started's Plotly Heatmap with its color_scale parameter set to Viridis, keeping everything already there exactly as it is. Read Workspace session guidance and leave a Chart Deck Governance note recording the stable phrase it gives for anchoring work to the current dashboard and tab.",
+  "prompt": "On the open Chart Deck dashboard, add Getting Started's TradingView Chart at x 0, y 33, width 20, height 12 and Getting Started's Plotly Heatmap with its color_scale parameter set to Viridis at x 20, y 33, width 20, height 12, keeping everything already there exactly as it is. Read Workspace session guidance and leave a Chart Deck Governance note recording the stable phrase it gives for anchoring work to the current dashboard and tab.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -149,6 +149,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "udf",
+          "x": 0,
+          "y": 33,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "get_widget_schema",
         "args": {
           "origin": "Getting Started",
@@ -181,6 +198,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_338",
+          "widget_id": "plotly_heatmap",
+          "x": 20,
+          "y": 33,
+          "w": 20,
+          "h": 12
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -188,8 +222,7 @@
           "data": "Workspace session guidance: current-dashboard current-tab session grounding."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],
@@ -277,9 +310,33 @@
         "y": 10,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_uuid": "seeded_deck_plotly_chart",
+        "tab_id": "deck",
+        "x": 0,
+        "y": 18,
+        "w": 40,
+        "h": 15
+      },
+      {
+        "widget_id": "udf",
+        "tab_id": "deck",
+        "x": 0,
+        "y": 33,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_id": "plotly_heatmap",
+        "tab_id": "deck",
+        "x": 20,
+        "y": 33,
+        "w": 20,
+        "h": 12
       }
     ],
     "required_dashboard_name_contains": "Chart Deck",
-    "max_turns": 11
+    "max_turns": 13
   }
 }

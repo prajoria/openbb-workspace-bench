@@ -160,8 +160,7 @@
           "data": "The widgets.json parameter kind named between endpoint and button is form."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

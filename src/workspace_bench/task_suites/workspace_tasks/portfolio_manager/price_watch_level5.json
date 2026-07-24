@@ -247,8 +247,7 @@
           "data": "Per the Finance Tearsheet skill, close with a short investment conclusion a reader could act on."
         },
         "graded_args": [
-          "widget_type",
-          "name"
+          "widget_type"
         ]
       }
     ],

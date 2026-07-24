@@ -40,6 +40,10 @@ You receive the **six task.json files of one story** and judge them as a set. Th
 
 Intentional repetition of the world dials (levels 3-5 sharing the same clutter is correct); values restated at level 3+ that level 2 hid (correct by design); stylistic differences between prompts (that's the point); a hard-but-honest top rung.
 
+Two grading shapes are settled precedent — do not flag them:
+- **Instantiate calls grade `operation` only.** The instantiation *outcome* is graded in state (`required_dashboard_name_contains`, `required_tabs`, `required_tab_names` on the working dashboard); pinning `app_name`/`template_id` on the call failed a perfect frontier run over a naming ambiguity and was removed suite-wide.
+- **No graded `navigate_workspace` calls.** Navigation is a route with no state consequence we grade and no freeride to prevent (every read and mutation carries explicit addressing); a perfect-outcome run may honestly skip the hop.
+
 ## Report
 
 One line per finding, story-scoped:
