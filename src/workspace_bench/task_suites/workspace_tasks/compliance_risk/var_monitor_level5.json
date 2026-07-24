@@ -1,0 +1,494 @@
+{
+  "id": "var_monitor_level5",
+  "difficulty": "level5",
+  "prompt": "Build the rates-shock file: add a Shock Watch Service backend serving a Shock Register table, publish Shock Watch App with Shock Register on its Register tab, and instantiate the app. On the open Shock Watch dashboard, add the built Shock Register at x 0, y 28, width 40, height 10 and a fresh VaR Trend at x 0, y 14, width 40, height 14 from Bench Stark Enterprise's Risk & Exposure Monitor with parameters portfolio Long/Short Equity, scenario Rates +100bp, and period YTD, keeping everything already on the dashboard exactly as it is. Read the Daloopa Inflection skill and leave a Shock Watch Governance Note recording the growth cadence it says to compute first and what it flags as inflections.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Shock Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Shock Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "watch",
+            "name": "Watch"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+            "widget_uuid": "seeded_equity_var_decoy",
+            "tab_id": "watch",
+            "data_args": {
+              "portfolio": "Global Equity",
+              "scenario": "Equity -10%",
+              "period": "QTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
+            "widget_uuid": "seeded_risk_snapshot",
+            "tab_id": "watch",
+            "data_args": {
+              "portfolio": "Global Equity",
+              "scenario": "Equity -10%",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 5
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_shock_note",
+            "name": "Prior Shock Review Note",
+            "data": "Prior review: retain the Global Equity downside sample as evidence for the limit file.",
+            "tab_id": "watch",
+            "layout": {
+              "x": 20,
+              "y": 5,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-inflection"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Shock Watch Service",
+          "widgets_json": {},
+          "apps_json": []
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Shock Watch Service",
+          "url": "http://127.0.0.1:9739",
+          "widgets_json": {
+            "shock_register": {
+              "name": "Shock Register",
+              "description": "Authored register for the rates-shock risk review.",
+              "endpoint": "/shock-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Shock Watch App",
+              "description": "Authored app for the rates-shock risk file.",
+              "tabs": {
+                "register": {
+                  "id": "register",
+                  "name": "Register",
+                  "layout": [
+                    {
+                      "i": "shock_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Shock Watch Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Shock Watch Service",
+          "widget_id": "shock_register"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Shock Watch Service",
+          "widget_id": "shock_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_336",
+          "widget_id": "shock_register",
+          "x": 0,
+          "y": 28,
+          "w": 40,
+          "h": 10
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "param_name": "scenario"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "data_args": {
+            "portfolio": "Long/Short Equity",
+            "scenario": "Rates +100bp",
+            "period": "YTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "x": 0,
+          "y": 14,
+          "w": 40,
+          "h": 14
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Shock Watch Governance Note",
+          "data": "Per the Daloopa Inflection skill, compute quarter-over-quarter growth per series first and flag growth-rate reversals as inflections."
+        },
+        "graded_args": [
+          "widget_type"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Shock Watch App",
+          "dashboard_name": "Shock Watch App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "dashboard",
+          "dashboard_id": "dash_029"
+        },
+        "optional": true
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "dashboard_id": "dash_028",
+          "tab_id": "watch"
+        },
+        "optional": true
+      }
+    ],
+    "required_tabs": [
+      "watch"
+    ],
+    "required_tab_names": [
+      "Watch"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Shock Watch Service",
+        "widget_id": "shock_register",
+        "tab_id": "watch"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+        "data_args": {
+          "portfolio": "Long/Short Equity",
+          "scenario": "Rates +100bp",
+          "period": "YTD"
+        },
+        "tab_id": "watch"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+        "data_args": {
+          "portfolio": "Global Equity",
+          "scenario": "Equity -10%",
+          "period": "QTD"
+        },
+        "tab_id": "watch",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
+        "data_args": {
+          "portfolio": "Global Equity",
+          "scenario": "Equity -10%",
+          "period": "YTD"
+        },
+        "tab_id": "watch",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Shock Review Note",
+        "data_contains": [
+          "Prior review: retain the Global Equity downside sample as evidence for the limit file."
+        ],
+        "tab_id": "watch"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Shock Watch Governance",
+        "data_contains": [
+          "quarter-over-quarter growth per series",
+          "growth-rate reversals"
+        ],
+        "tab_id": "watch"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_equity_var_decoy",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_risk_snapshot",
+        "tab_id": "watch",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 5
+      },
+      {
+        "widget_uuid": "seeded_prior_shock_note",
+        "tab_id": "watch",
+        "x": 20,
+        "y": 5,
+        "w": 20,
+        "h": 8
+      },
+      {
+        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 14,
+        "w": 40,
+        "h": 14
+      },
+      {
+        "widget_id": "shock_register",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 28,
+        "w": 40,
+        "h": 10
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Shock Watch Service",
+        "widget_id": "shock_register",
+        "expect": {
+          "name": "Shock Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Shock Watch Service",
+        "name_contains": "Shock Watch App",
+        "tabs_include": [
+          "register"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "register",
+            "widget_id": "shock_register"
+          }
+        ]
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_apps",
+        "data_contains": [
+          "Shock Watch App",
+          "Register",
+          "Shock Watch Service"
+        ]
+      }
+    ],
+    "required_dashboard_name_contains": "Shock Watch",
+    "max_turns": 23
+  }
+}

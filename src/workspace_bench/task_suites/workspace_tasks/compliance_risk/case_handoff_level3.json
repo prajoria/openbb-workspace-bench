@@ -1,0 +1,259 @@
+{
+  "id": "case_handoff_level3",
+  "difficulty": "level3",
+  "prompt": "On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD. Leave a Case Handoff Note at x 20, y 14, width 20, height 8 recording the returned In Review fund and both exact scores. Keep everything already on the dashboard exactly as it is.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Case Review",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Case Review",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "mnpi_research_review_mnpi_log_expert_calls",
+            "widget_uuid": "seeded_expert_calls_decoy",
+            "tab_id": "review",
+            "data_args": {
+              "status": "Open",
+              "severity": "Low",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "mnpi_research_review_mnpi_log_wall_crossings",
+            "widget_uuid": "seeded_wall_crossings",
+            "tab_id": "review",
+            "data_args": {
+              "status": "Closed",
+              "severity": "Medium",
+              "period": "QTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_case_note",
+            "name": "Prior Case Review Note",
+            "data": "Prior review: retain the closed Medium-severity wall-crossing sample as audit evidence.",
+            "tab_id": "review",
+            "layout": {
+              "x": 0,
+              "y": 14,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "mnpi_research_review_mnpi_log_expert_calls",
+          "data_args": {
+            "status": "In Review",
+            "severity": "High",
+            "period": "MTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Case Handoff Note",
+          "data": "Expert Calls evidence: the returned In Review fund is Global Opportunities, with exact scores 89.96 and 21.55."
+        },
+        "graded_args": [
+          "widget_type"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_336",
+          "widget_id": "generated_note",
+          "x": 20,
+          "y": 14,
+          "w": 20,
+          "h": 8
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "review"
+    ],
+    "required_tab_names": [
+      "Review"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "mnpi_research_review_mnpi_log_expert_calls",
+        "data_args": {
+          "status": "Open",
+          "severity": "Low",
+          "period": "YTD"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "mnpi_research_review_mnpi_log_wall_crossings",
+        "data_args": {
+          "status": "Closed",
+          "severity": "Medium",
+          "period": "QTD"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Case Review Note",
+        "data_contains": [
+          "Prior review: retain the closed Medium-severity wall-crossing sample as audit evidence."
+        ],
+        "tab_id": "review"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Case Handoff Note",
+        "data_contains": [
+          "Global Opportunities",
+          "89.96",
+          "21.55"
+        ],
+        "tab_id": "review"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_expert_calls_decoy",
+        "tab_id": "review",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_wall_crossings",
+        "tab_id": "review",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_prior_case_note",
+        "tab_id": "review",
+        "x": 0,
+        "y": 14,
+        "w": 20,
+        "h": 8
+      },
+      {
+        "widget_id": "generated_note",
+        "tab_id": "review",
+        "x": 20,
+        "y": 14,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Case Review",
+    "max_turns": 8
+  }
+}

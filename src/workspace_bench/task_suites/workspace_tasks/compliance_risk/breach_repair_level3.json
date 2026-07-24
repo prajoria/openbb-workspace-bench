@@ -1,0 +1,271 @@
+{
+  "id": "breach_repair_level3",
+  "difficulty": "level3",
+  "prompt": "On the open Breach Review dashboard, repair Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub that is currently configured with parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD, then place the repaired view at x 0, y 28, width 40, height 14. Keep everything else on the dashboard exactly as it is.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Breach Review",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Breach Review",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+            "widget_uuid": "policy_breaches_primary",
+            "tab_id": "review",
+            "data_args": {
+              "severity": "High",
+              "status": "Closed",
+              "period": "1Y"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+            "widget_uuid": "policy_breaches_decoy",
+            "tab_id": "review",
+            "data_args": {
+              "severity": "Low",
+              "status": "In Review",
+              "period": "MTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue",
+            "widget_uuid": "seeded_pre_clearance_queue",
+            "tab_id": "review",
+            "data_args": {
+              "severity": "Medium",
+              "status": "Approved",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 14,
+              "w": 20,
+              "h": 14
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_breach_note",
+            "name": "Prior Breach Review Note",
+            "data": "Prior review: retain the approved pre-clearance sample as evidence for the audit file.",
+            "tab_id": "review",
+            "layout": {
+              "x": 20,
+              "y": 14,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "policy_breaches_primary",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "data_args"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "policy_breaches_primary",
+          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+          "x": 0,
+          "y": 28,
+          "w": 40,
+          "h": 14
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "review"
+    ],
+    "required_tab_names": [
+      "Review"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+        "data_args": {
+          "severity": "High",
+          "status": "Open",
+          "period": "QTD"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+        "data_args": {
+          "severity": "Low",
+          "status": "In Review",
+          "period": "MTD"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue",
+        "data_args": {
+          "severity": "Medium",
+          "status": "Approved",
+          "period": "YTD"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Breach Review Note",
+        "data_contains": [
+          "Prior review: retain the approved pre-clearance sample as evidence for the audit file."
+        ],
+        "tab_id": "review"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "policy_breaches_primary",
+        "tab_id": "review",
+        "x": 0,
+        "y": 28,
+        "w": 40,
+        "h": 14
+      },
+      {
+        "widget_uuid": "policy_breaches_decoy",
+        "tab_id": "review",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_pre_clearance_queue",
+        "tab_id": "review",
+        "x": 0,
+        "y": 14,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_prior_breach_note",
+        "tab_id": "review",
+        "x": 20,
+        "y": 14,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Breach Review",
+    "max_turns": 8
+  }
+}

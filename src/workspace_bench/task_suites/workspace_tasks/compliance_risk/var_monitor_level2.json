@@ -1,0 +1,118 @@
+{
+  "id": "var_monitor_level2",
+  "difficulty": "level2",
+  "prompt": "On the open Shock Watch dashboard, add VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor with portfolio set to Long/Short Equity, period set to YTD, and scenario set by the rates-shock policy.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Shock Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Shock Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "watch",
+            "name": "Watch"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "param_name": "scenario"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+          "data_args": {
+            "portfolio": "Long/Short Equity",
+            "scenario": "Rates +100bp",
+            "period": "YTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+        "data_args": {
+          "portfolio": "Long/Short Equity",
+          "scenario": "Rates +100bp",
+          "period": "YTD"
+        },
+        "tab_id": "watch"
+      }
+    ],
+    "required_dashboard_name_contains": "Shock Watch",
+    "max_turns": 7
+  }
+}
