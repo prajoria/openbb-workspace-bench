@@ -1664,11 +1664,18 @@ def call_concentrate_responses(model: str, messages: list[JsonDict], timeout: fl
     if status in {"failed", "cancelled", "incomplete"}:
         raise ValueError(f"Concentrate returned status {status!r}: {body.get('error') or body!r}")
     _record_provider_meta(model=body.get("model"), usage=openai_usage(body))
+    # Concentrate echoes the request's assistant input items back into the
+    # output array ahead of the new generation; only the LAST message item is
+    # the model's reply. Concatenating them would resurface the previous
+    # turn's action JSON and trap the episode in a loop.
+    message_items = [
+        item
+        for item in body.get("output") or []
+        if isinstance(item, dict) and item.get("type") == "message"
+    ]
     parts: list[str] = []
-    for item in body.get("output") or []:
-        if not isinstance(item, dict) or item.get("type") != "message":
-            continue
-        for chunk in item.get("content") or []:
+    if message_items:
+        for chunk in message_items[-1].get("content") or []:
             if isinstance(chunk, dict) and chunk.get("type") in {"output_text", "text"}:
                 text_value = chunk.get("text")
                 if isinstance(text_value, str):

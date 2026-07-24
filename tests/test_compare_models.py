@@ -450,3 +450,31 @@ def test_interactive_providers_include_concentrate() -> None:
     from workspace_bench.reports.model_compare import INTERACTIVE_PROVIDERS
 
     assert "concentrate" in INTERACTIVE_PROVIDERS
+
+
+def test_call_concentrate_responses_ignores_echoed_input_messages(monkeypatch) -> None:
+    from workspace_bench.reports import model_compare as mc
+
+    monkeypatch.setenv("CONCENTRATE_API_KEY", "test-key")
+    monkeypatch.setattr(
+        mc,
+        "post_json",
+        lambda *a, **k: {
+            "status": "completed",
+            "output": [
+                {"type": "message", "content": [{"type": "output_text", "text": '{"tool": "old"}'}]},
+                {"type": "reasoning", "content": []},
+                {"type": "message", "content": [{"type": "output_text", "text": '{"done": true}'}]},
+            ],
+        },
+    )
+    content = mc.call_concentrate_responses(
+        "glm-5.2",
+        [
+            {"role": "user", "content": "a"},
+            {"role": "assistant", "content": '{"tool": "old"}'},
+            {"role": "user", "content": "b"},
+        ],
+        timeout=1,
+    )
+    assert content == '{"done": true}'
