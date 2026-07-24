@@ -7,7 +7,7 @@ facts:
   find_hint: the live-updating price grid
   policy: {phrase: the EV watch policy, carries: symbol, meaning: the desk's EV name - Tesla}
   governance: {skill: finance-tearsheet}
-  build: {backend: Watch Feed Service, table: Watch Register}
+  build: {backend: Watch Feed Service, table: Watch Register, app: Watch Feed App, tab: Watch}
 ---
 # Price watch
 

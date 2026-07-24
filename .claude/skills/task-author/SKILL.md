@@ -77,11 +77,13 @@ One story, six tasks, same canonical facts throughout. Each level adds one new d
 | 0 **Execute** | none | minimal | grade the stated action | everything stated: display names, every parameter key and value |
 | 1 **Find** | discovery | minimal | same | one thing named only colloquially (the story's find-hint); enough other words to disambiguate |
 | 2 **Derive** | inference | minimal | grades the derived value | a named policy phrase carries one graded value; do **not** also print that value |
-| 3 **Care** | preservation | populated dashboard **with distractors** (a near-miss widget, a stale note) | pre-existing content graded as preserved | names the open dashboard; asks only for the change |
+| 3 **Care** | preservation | populated dashboard whose distractors include a **decoy near-duplicate of the target itself** (same widget, different configuration) plus at least one more piece of furniture | ALL pre-existing content graded as preserved, the decoy included - byte-for-byte | names the open dashboard; asks only for the change; the decoy is never mentioned |
 | 4 **Ground** | reading | as 3 | a required knowledge read + a note whose graded content is derivable **only from the source** | names the source; **describes** the graded fact ("recording what the skill lists last") — never prints it |
-| 5 **Compose** | orchestration | as 3 or fresh | adds an authored backend/app (`required_widget_defs` / `required_app_defs`) used by the rest | one coherent build-and-use ask |
+| 5 **Compose** | orchestration | as 3 or fresh | a **real platform build**: authored backend (`required_widget_defs`) AND a published app with at least one named tab (`required_app_defs`), instantiated, its widget then used - plus level 4's read-and-note | one coherent build-publish-instantiate-use ask |
 
 The level-2 rule in full: the policy phrase must make the value humanly derivable — via its meaning, common knowledge ("quarterly" → QTD), or the parameter's declared options — and the value must be inside those options. The level-4 rule in full: if the prompt printed the fact, reading the source would be optional and the level would be a lie.
+
+**Rung weight — each level's new demand must actually cost something.** The pilot measured what happens otherwise. A Care world of polite, unrelated furniture doesn't bind: the decoy near-duplicate (same widget as the target, different parameter values, preservation-graded, never mentioned in the prompt) is what makes carelessness expensive — an agent that "fixes", reuses, or updates the decoy instead of placing the fresh one fails. A Compose rung that only registers one table is *lighter than its own ceremony* — models follow long structured asks more diligently than short ones, so a cheap build makes level 5 easier than level 4. The build must include publishing and instantiating an app with a named tab, so the manifest surface (widgets_json AND apps_json with layout refs) carries real failure modes. Never compensate the other way: do not pad prompts, budgets, or grading to force the staircase — weight lives in the world and the eval, not in wording tricks.
 
 ## The prompt
 

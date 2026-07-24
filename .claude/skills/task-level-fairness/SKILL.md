@@ -20,9 +20,9 @@ You receive the **six task.json files of one story** and judge them as a set. Th
 | 0 | none: everything stated, minimal world, the floor |
 | 1 | the target is *not named exactly* in the prompt — only described colloquially (the only level where this happens) |
 | 2 | exactly one graded value is absent from the prompt, carried by a stated policy phrase (the only level where a value is hidden this way) |
-| 3 | the starting dashboard is populated, including look-alike content, and the eval grades pre-existing content as preserved |
+| 3 | the starting dashboard is populated, including a decoy near-duplicate of the target itself (same widget, different configuration), and the eval grades ALL pre-existing content as preserved, the decoy included |
 | 4 | a knowledge read is required, and a note is graded on a fact derivable only from that source — the fact never appears in the prompt |
-| 5 | an authored backend/app is graded (`required_widget_defs` / `required_app_defs`) and then used by the rest of the ask |
+| 5 | a real platform build is graded: authored backend (`required_widget_defs`) AND a published, instantiated app with a named tab (`required_app_defs`), its widget then used - alongside level 4's read-and-note |
 
 **World demands accumulate; prompt dials do not.** A populated, preservation-graded world is present from level 3 through 5 (same demand, not necessarily the same furniture); level 5 keeps level 4's read-and-note demand alongside its build. But prompt-side signatures are one level each: level 3 may name the widget plainly again (finding was level 1's exam) and may print the value that level 2 hid (deriving was level 2's exam). This is deliberate — each level's failure should have one interpretation.
 
@@ -33,7 +33,8 @@ You receive the **six task.json files of one story** and judge them as a set. Th
 3. **Signatures absent where they should be** — the level-1 colloquialism doesn't leak into level 0; the level-2 hidden value is plainly stated at levels 0 and 1; no level below 4 requires a knowledge read.
 4. **Difficulty direction** — walking 0→5, each task should have more to do or more to figure out than the last. Flag any level that is plausibly *easier* than its predecessor (fewer demands, a more generous budget for the same work, a prompt that hands over more).
 5. **Budgets track the growth** — `max_turns` should grow (or hold) as the reference traces grow; a level whose demands grew while its budget shrank starves honest solves.
-6. **Six asks, not one ask six times** — the prompts should read like the same person raising the same matter with rising demands, not one sentence photocopied with a word swapped. Flag copy-paste ladders; they train pattern-matching, not capability.
+6. **Rung weight** — a "level 3" whose furniture contains no near-duplicate of the target, or a "level 5" that registers a bare backend without publishing and instantiating an app, is wearing the wrong label: its demand is too light to cost more than the level below. Flag underweight rungs even when everything else checks out.
+7. **Six asks, not one ask six times** — the prompts should read like the same person raising the same matter with rising demands, not one sentence photocopied with a word swapped. Flag copy-paste ladders; they train pattern-matching, not capability.
 
 ## What not to flag
 

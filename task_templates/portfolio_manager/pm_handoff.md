@@ -7,7 +7,7 @@ facts:
   find_hint: the street numbers
   policy: {phrase: the mega-cap coverage policy, carries: ticker, meaning: the Microsoft line}
   governance: {skill: daloopa-earnings-review}
-  build: {backend: Handoff Log Service, table: Handoff Register}
+  build: {backend: Handoff Log Service, table: Handoff Register, app: Handoff Log App, tab: Handoff}
 ---
 # PM handoff
 

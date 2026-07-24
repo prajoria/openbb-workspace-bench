@@ -7,7 +7,7 @@ facts:
   find_hint: the idea pipeline
   policy: {phrase: the quarterly briefing policy, carries: period, meaning: quarter-to-date}
   governance: {skill: daloopa-capital-allocation}
-  build: {backend: Briefing Feed Service, table: Idea Register}
+  build: {backend: Briefing Feed Service, table: Idea Register, app: Briefing Feed App, tab: Briefing}
 ---
 # Morning briefing
 

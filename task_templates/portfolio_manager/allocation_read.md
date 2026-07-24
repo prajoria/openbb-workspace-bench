@@ -7,7 +7,7 @@ facts:
   find_hint: the segment split
   policy: {phrase: the latest covered quarter policy, carries: period, meaning: the newest quarter the dataset covers - 2026Q1}
   governance: {skill: daloopa-tearsheet}
-  build: {backend: Allocation Digest Service, table: Segment Digest}
+  build: {backend: Allocation Digest Service, table: Segment Digest, app: Allocation Digest App, tab: Digest}
 ---
 # Allocation read
 
