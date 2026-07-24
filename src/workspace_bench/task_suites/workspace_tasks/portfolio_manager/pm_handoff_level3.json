@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level3",
   "difficulty": "level3",
-  "prompt": "On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
+  "prompt": "On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note at x 20, y 22, width 20, height 8 recording the exact Total Revenue actual and consensus for 2026Q1. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -129,6 +129,23 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_335",
+          "widget_id": "generated_note",
+          "x": 20,
+          "y": 22,
+          "w": 20,
+          "h": 8
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
       }
     ],
     "required_tabs": [
@@ -182,9 +199,17 @@
         "y": 0,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "generated_note",
+        "tab_id": "handoff",
+        "x": 20,
+        "y": 22,
+        "w": 20,
+        "h": 8
       }
     ],
     "required_dashboard_name_contains": "PM Handoff Log",
-    "max_turns": 7
+    "max_turns": 8
   }
 }

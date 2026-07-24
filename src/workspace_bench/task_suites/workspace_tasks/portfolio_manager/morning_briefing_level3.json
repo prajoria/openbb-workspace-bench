@@ -1,7 +1,7 @@
 {
   "id": "morning_briefing_level3",
   "difficulty": "level3",
-  "prompt": "Add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to the open PM Morning Briefing dashboard for Flagship Long/Short, QTD - the 9am call is in ten minutes. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
+  "prompt": "Add Trade Ideas at x 20, y 32, width 20, height 14 from Bench Stark Enterprise's Portfolio Command Center to the open PM Morning Briefing dashboard for Flagship Long/Short, QTD - the 9am call is in ten minutes. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -143,6 +143,23 @@
           "origin",
           "data_args"
         ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_336",
+          "widget_id": "portfolio_command_center_actions_trade_ideas",
+          "x": 20,
+          "y": 32,
+          "w": 20,
+          "h": 14
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
       }
     ],
     "required_tabs": [
@@ -216,9 +233,17 @@
         "y": 14,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "portfolio_command_center_actions_trade_ideas",
+        "tab_id": "briefing",
+        "x": 20,
+        "y": 32,
+        "w": 20,
+        "h": 14
       }
     ],
     "required_dashboard_name_contains": "PM Morning Briefing",
-    "max_turns": 7
+    "max_turns": 8
   }
 }

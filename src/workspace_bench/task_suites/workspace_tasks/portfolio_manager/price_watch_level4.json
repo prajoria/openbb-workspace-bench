@@ -1,7 +1,7 @@
 {
   "id": "price_watch_level4",
   "difficulty": "level4",
-  "prompt": "On the open Price Watch dashboard, add Live Grid from Getting Started with symbol set to TSLA, and keep everything already on the dashboard as is. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with.",
+  "prompt": "On the open Price Watch dashboard, add Live Grid at x 20, y 28, width 20, height 9 from Getting Started with symbol set to TSLA, and keep everything already on the dashboard as is. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,11 +58,26 @@
         "widgets": [
           {
             "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "widget_uuid": "seeded_live_grid_decoy",
+            "tab_id": "watch",
+            "data_args": {
+              "symbol": "MSFT"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 9
+            }
+          },
+          {
+            "origin": "Getting Started",
             "widget_id": "sparkline_line",
             "widget_uuid": "seeded_sparkline_trends",
             "tab_id": "watch",
             "layout": {
-              "x": 0,
+              "x": 20,
               "y": 0,
               "w": 20,
               "h": 10
@@ -77,8 +92,8 @@
             "data": "Prior session: the desk was watching MSFT into the print.",
             "tab_id": "watch",
             "layout": {
-              "x": 20,
-              "y": 0,
+              "x": 0,
+              "y": 10,
               "w": 20,
               "h": 8
             }
@@ -125,6 +140,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_336",
+          "widget_id": "live_grid_data",
+          "x": 20,
+          "y": 28,
+          "w": 20,
+          "h": 9
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -146,7 +178,18 @@
       },
       {
         "origin": "Getting Started",
-        "widget_id": "sparkline_line"
+        "widget_id": "live_grid_data",
+        "data_args": {
+          "symbol": "MSFT"
+        },
+        "tab_id": "watch",
+        "max_count": 1
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "sparkline_line",
+        "tab_id": "watch",
+        "max_count": 1
       }
     ],
     "required_generated_widgets": [
@@ -154,8 +197,9 @@
         "widget_type": "note",
         "name_contains": "Watch Handoff Note",
         "data_contains": [
-          "MSFT"
-        ]
+          "Prior session: the desk was watching MSFT into the print."
+        ],
+        "tab_id": "watch"
       },
       {
         "widget_type": "note",
@@ -165,6 +209,47 @@
         ]
       }
     ],
-    "max_turns": 8
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_live_grid_decoy",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 9
+      },
+      {
+        "widget_uuid": "seeded_sparkline_trends",
+        "tab_id": "watch",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 10
+      },
+      {
+        "widget_uuid": "seeded_watch_handoff_note",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 10,
+        "w": 20,
+        "h": 8
+      },
+      {
+        "widget_id": "live_grid_data",
+        "tab_id": "watch",
+        "x": 20,
+        "y": 28,
+        "w": 20,
+        "h": 9
+      }
+    ],
+    "required_tabs": [
+      "watch"
+    ],
+    "required_tab_names": [
+      "Watch"
+    ],
+    "required_dashboard_name_contains": "Price Watch",
+    "max_turns": 9
   }
 }

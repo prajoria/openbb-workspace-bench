@@ -1,7 +1,7 @@
 {
   "id": "allocation_read_level3",
   "difficulty": "level3",
-  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
+  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note at x 20, y 12, width 20, height 8 on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -143,6 +143,23 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_336",
+          "widget_id": "generated_note",
+          "x": 20,
+          "y": 12,
+          "w": 20,
+          "h": 8
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
       }
     ],
     "required_tabs": [
@@ -211,9 +228,17 @@
         "y": 12,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "generated_note",
+        "tab_id": "review",
+        "x": 20,
+        "y": 12,
+        "w": 20,
+        "h": 8
       }
     ],
     "required_dashboard_name_contains": "Allocation Review",
-    "max_turns": 7
+    "max_turns": 8
   }
 }

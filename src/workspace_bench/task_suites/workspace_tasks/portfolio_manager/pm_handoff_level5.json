@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level5",
   "difficulty": "level5",
-  "prompt": "Build the desk's handoff log before the overnight shift: add a Handoff Log Service backend serving a Handoff Register table, publish Handoff Log App with Handoff Register on its Handoff tab, and instantiate the app. On the open PM Handoff Log dashboard, add the built Handoff Register, keeping everything already there as is. Then close out under the Daloopa Earnings Review skill: read Consensus Estimates from Bench Daloopa with ticker MSFT, leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1 plus the granularity that skill's first step sets for the consensus compare, and delegate the follow-up to the coverage analyst.",
+  "prompt": "Build the desk's handoff log before the overnight shift: add a Handoff Log Service backend serving a Handoff Register table, publish Handoff Log App with Handoff Register on its Handoff tab, and instantiate the app. On the open PM Handoff Log dashboard, add the built Handoff Register, keeping everything already there as is. Then close out under the Daloopa Earnings Review skill: read Consensus Estimates from Bench Daloopa with ticker MSFT, leave an Overnight Handoff Note at x 20, y 22, width 20, height 8 with the exact Total Revenue actual and consensus for 2026Q1 plus the granularity that skill's first step sets for the consensus compare, and delegate the follow-up to the coverage analyst.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -240,6 +240,25 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "generated_note",
+          "dashboard_id": "dash_028",
+          "tab_id": "handoff",
+          "x": 20,
+          "y": 22,
+          "w": 20,
+          "h": 8
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "assign_tasks_to_agents",
         "args": {
           "task_requests": [
@@ -338,9 +357,17 @@
         "y": 0,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "generated_note",
+        "tab_id": "handoff",
+        "x": 20,
+        "y": 22,
+        "w": 20,
+        "h": 8
       }
     ],
     "required_dashboard_name_contains": "PM Handoff Log",
-    "max_turns": 16
+    "max_turns": 17
   }
 }

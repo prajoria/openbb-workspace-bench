@@ -1,7 +1,7 @@
 {
   "id": "morning_briefing_level4",
   "difficulty": "level4",
-  "prompt": "On the open PM Morning Briefing dashboard, add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, QTD, and keep everything already on the dashboard as is. Briefings run under the Daloopa Capital Allocation skill - leave a Morning Briefing Governance note recording what its final step says every figure is cited via.",
+  "prompt": "On the open PM Morning Briefing dashboard, add Trade Ideas at x 20, y 32, width 20, height 14 from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, QTD, and keep everything already on the dashboard as is. Briefings run under the Daloopa Capital Allocation skill - leave a Morning Briefing Governance note recording what its final step says every figure is cited via.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -58,6 +58,22 @@
         "widgets": [
           {
             "origin": "Bench Stark Enterprise",
+            "widget_id": "portfolio_command_center_actions_trade_ideas",
+            "widget_uuid": "seeded_trade_ideas_decoy",
+            "tab_id": "briefing",
+            "data_args": {
+              "fund": "Global Opportunities",
+              "period": "1Y"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
             "widget_id": "portfolio_command_center_overview_top_alerts",
             "widget_uuid": "seeded_top_alerts",
             "tab_id": "briefing",
@@ -66,7 +82,7 @@
               "period": "1D"
             },
             "layout": {
-              "x": 0,
+              "x": 20,
               "y": 0,
               "w": 20,
               "h": 14
@@ -81,8 +97,8 @@
             "data": "Last week's briefing: watch Income Fund redemptions into month-end.",
             "tab_id": "briefing",
             "layout": {
-              "x": 20,
-              "y": 0,
+              "x": 0,
+              "y": 14,
               "w": 20,
               "h": 8
             }
@@ -130,6 +146,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_336",
+          "widget_id": "portfolio_command_center_actions_trade_ideas",
+          "x": 20,
+          "y": 32,
+          "w": 20,
+          "h": 14
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -152,11 +185,23 @@
       },
       {
         "origin": "Bench Stark Enterprise",
+        "widget_id": "portfolio_command_center_actions_trade_ideas",
+        "data_args": {
+          "fund": "Global Opportunities",
+          "period": "1Y"
+        },
+        "tab_id": "briefing",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
         "widget_id": "portfolio_command_center_overview_top_alerts",
         "data_args": {
           "fund": "Flagship Long/Short",
           "period": "1D"
-        }
+        },
+        "tab_id": "briefing",
+        "max_count": 1
       }
     ],
     "required_generated_widgets": [
@@ -164,8 +209,9 @@
         "widget_type": "note",
         "name_contains": "Last Week Briefing Note",
         "data_contains": [
-          "Income Fund"
-        ]
+          "Last week's briefing: watch Income Fund redemptions into month-end."
+        ],
+        "tab_id": "briefing"
       },
       {
         "widget_type": "note",
@@ -175,6 +221,47 @@
         ]
       }
     ],
-    "max_turns": 8
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_trade_ideas_decoy",
+        "tab_id": "briefing",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_top_alerts",
+        "tab_id": "briefing",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_last_week_note",
+        "tab_id": "briefing",
+        "x": 0,
+        "y": 14,
+        "w": 20,
+        "h": 8
+      },
+      {
+        "widget_id": "portfolio_command_center_actions_trade_ideas",
+        "tab_id": "briefing",
+        "x": 20,
+        "y": 32,
+        "w": 20,
+        "h": 14
+      }
+    ],
+    "required_tabs": [
+      "briefing"
+    ],
+    "required_tab_names": [
+      "Briefing"
+    ],
+    "required_dashboard_name_contains": "PM Morning Briefing",
+    "max_turns": 9
   }
 }

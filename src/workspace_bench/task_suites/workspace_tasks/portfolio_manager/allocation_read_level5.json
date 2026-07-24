@@ -1,7 +1,7 @@
 {
   "id": "allocation_read_level5",
   "difficulty": "level5",
-  "prompt": "Build the desk's allocation digest before the rebalance: add an Allocation Digest Service backend serving a Segment Digest table, publish Allocation Digest App with Segment Digest on its Digest tab, and instantiate the app. On the open Allocation Review dashboard, add the built Segment Digest, keeping everything already there as is. Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and under the Daloopa Tearsheet skill leave an Allocation Read Note recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.",
+  "prompt": "Build the desk's allocation digest before the rebalance: add an Allocation Digest Service backend serving a Segment Digest table, publish Allocation Digest App with Segment Digest on its Digest tab, and instantiate the app. On the open Allocation Review dashboard, add the built Segment Digest, keeping everything already there as is. Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and under the Daloopa Tearsheet skill leave an Allocation Read Note at x 20, y 12, width 20, height 8 recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -241,6 +241,23 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "generated_note",
+          "x": 20,
+          "y": 12,
+          "w": 20,
+          "h": 8
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "manage_apps",
         "args": {
           "operation": "instantiate",
@@ -353,9 +370,17 @@
         "y": 12,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "generated_note",
+        "tab_id": "review",
+        "x": 20,
+        "y": 12,
+        "w": 20,
+        "h": 8
       }
     ],
     "required_dashboard_name_contains": "Allocation Review",
-    "max_turns": 16
+    "max_turns": 17
   }
 }

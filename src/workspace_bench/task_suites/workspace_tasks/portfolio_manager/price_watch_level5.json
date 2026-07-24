@@ -1,7 +1,7 @@
 {
   "id": "price_watch_level5",
   "difficulty": "level5",
-  "prompt": "Build the desk's watch feed before the open: add a Watch Feed Service backend serving a Watch Register table, publish Watch Feed App with Watch Register on its Watch tab, and instantiate the app. On the open Price Watch dashboard, add the built Watch Register and a fresh Live Grid from Getting Started with symbol set to TSLA, keeping everything already there as is. Read the Finance Tearsheet skill and leave a Price Watch Governance note recording what its final step says to close with.",
+  "prompt": "Build the desk's watch feed before the open: add a Watch Feed Service backend serving a Watch Register table, publish Watch Feed App with Watch Register on its Watch tab, and instantiate the app. On the open Price Watch dashboard, add the built Watch Register and a fresh Live Grid at x 20, y 28, width 20, height 9 from Getting Started with symbol set to TSLA, keeping everything already there as is. Read the Finance Tearsheet skill and leave a Price Watch Governance note recording what its final step says to close with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -240,6 +240,25 @@
         ]
       },
       {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_338",
+          "widget_id": "live_grid_data",
+          "dashboard_id": "dash_028",
+          "tab_id": "watch",
+          "x": 20,
+          "y": 28,
+          "w": 20,
+          "h": 9
+        },
+        "graded_args": [
+          "x",
+          "y",
+          "w",
+          "h"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -329,6 +348,14 @@
         "y": 10,
         "w": 20,
         "h": 8
+      },
+      {
+        "widget_id": "live_grid_data",
+        "tab_id": "watch",
+        "x": 20,
+        "y": 28,
+        "w": 20,
+        "h": 9
       }
     ],
     "required_widget_defs": [
@@ -359,6 +386,6 @@
       }
     ],
     "required_dashboard_name_contains": "Price Watch",
-    "max_turns": 15
+    "max_turns": 16
   }
 }
