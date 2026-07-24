@@ -87,6 +87,12 @@ The level-2 rule in full: the policy phrase must make the value humanly derivabl
 
 **Rung weight — each level's new demand must actually cost something.** The pilot measured what happens otherwise. A Care world of polite, unrelated furniture doesn't bind: the decoy near-duplicate (same widget as the target, different parameter values, preservation-graded, never mentioned in the prompt) is what makes carelessness expensive — an agent that "fixes", reuses, or updates the decoy instead of placing the fresh one fails. A Compose rung that only registers one table is *lighter than its own ceremony* — models follow long structured asks more diligently than short ones, so a cheap build makes level 5 easier than level 4. The build must include publishing and instantiating an app with a named tab, so the manifest surface (widgets_json AND apps_json with layout refs) carries real failure modes. Never compensate the other way: do not pad prompts, budgets, or grading to force the staircase — weight lives in the world and the eval, not in wording tricks.
 
+## Story shapes beyond place-and-read
+
+- **Repair stories** (the facts block carries `seeded_wrong`): the target starts on the working dashboard **misconfigured with the seeded_wrong values**, and the ask is to restore the correct configuration (graded via `update_widget` and/or the corrected end state). The six dials apply unchanged — level 0 states the correct values, level 2's policy carries one of them, level 3 adds the decoy and preservation ("repair the target, leave everything else"), level 5 still builds. Old-suite precedent: the repair-family tasks in `task_suites/enterprise_apps_usage/`.
+- **Resource- and prompt-governed rungs**: when the story's governance names a workspace resource or prompt instead of a skill, the level-4 read is `read_workspace_resource` / `get_workspace_prompt` (graded on `uri` / `name`), and the note fact must live only in that source — same describe-never-print contract. Verify the source's exact text via `src/workspace_bench/workspace/simulated_workspace.py`.
+- **Form widgets**: the form param type carries no options list; grade placement and end state, and verify the widget's actual schema in the catalog before inventing any interaction with it.
+
 ## The prompt
 
 Written last, once the eval is fixed, in the persona's voice (their README is the voice contract):
