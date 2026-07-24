@@ -62,6 +62,37 @@
       "monotone": true,
       "recorded": "2026-07-24T06:11:14+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-portfolio_manager"
+    },
+    "research_analyst": {
+      "levels": {
+        "level0": {
+          "attempts": 12,
+          "passes": 12
+        },
+        "level1": {
+          "attempts": 12,
+          "passes": 12
+        },
+        "level2": {
+          "attempts": 12,
+          "passes": 12
+        },
+        "level3": {
+          "attempts": 12,
+          "passes": 6
+        },
+        "level4": {
+          "attempts": 12,
+          "passes": 0
+        },
+        "level5": {
+          "attempts": 12,
+          "passes": 0
+        }
+      },
+      "monotone": true,
+      "recorded": "2026-07-24T08:37:45+00:00",
+      "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-research_analyst"
     }
   },
   "repeats": 3
