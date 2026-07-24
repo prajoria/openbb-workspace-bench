@@ -1,0 +1,269 @@
+{
+  "id": "best_execution_file_level4",
+  "difficulty": "level4",
+  "prompt": "On the open Best-Ex Review dashboard, add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD, keeping everything already there exactly as it is. Best-ex runs under the Finance Comps skill - leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Best-Ex Review",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Best-Ex Review",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "execution_desk_blotter_live_orders",
+            "widget_uuid": "seeded_live_orders_decoy",
+            "tab_id": "review",
+            "data_args": {
+              "desk": "EU Equity",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 40,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "execution_desk_fills_broker_scorecard",
+            "widget_uuid": "seeded_broker_scorecard_decoy",
+            "tab_id": "review",
+            "data_args": {
+              "desk": "Macro",
+              "period": "MTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 14,
+              "w": 40,
+              "h": 14
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_best_ex_note",
+            "name": "Prior Best-Ex Note",
+            "data": "Prior review: retain the EU Equity routing sample for the committee appendix.",
+            "tab_id": "review",
+            "layout": {
+              "x": 0,
+              "y": 28,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-comps"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "execution_desk_blotter_live_orders",
+          "data_args": {
+            "desk": "US Equity",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "execution_desk_fills_broker_scorecard",
+          "data_args": {
+            "desk": "US Equity",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Best-Ex Governance",
+          "data": "Per the Finance Comps skill, outliers deserve premium or discount rather than deleting them."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "review"
+    ],
+    "required_tab_names": [
+      "Review"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_blotter_live_orders",
+        "data_args": {
+          "desk": "US Equity",
+          "period": "QTD"
+        },
+        "tab_id": "review"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_fills_broker_scorecard",
+        "data_args": {
+          "desk": "US Equity",
+          "period": "QTD"
+        },
+        "tab_id": "review"
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_blotter_live_orders",
+        "data_args": {
+          "desk": "EU Equity",
+          "period": "YTD"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "execution_desk_fills_broker_scorecard",
+        "data_args": {
+          "desk": "Macro",
+          "period": "MTD"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Best-Ex Note",
+        "data_contains": [
+          "Prior review: retain the EU Equity routing sample for the committee appendix."
+        ],
+        "tab_id": "review"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Best-Ex Governance",
+        "data_contains": [
+          "outliers deserve premium or discount rather than deleting them"
+        ],
+        "tab_id": "review"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_live_orders_decoy",
+        "tab_id": "review",
+        "x": 0,
+        "y": 0,
+        "w": 40,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_broker_scorecard_decoy",
+        "tab_id": "review",
+        "x": 0,
+        "y": 14,
+        "w": 40,
+        "h": 14
+      },
+      {
+        "widget_uuid": "seeded_prior_best_ex_note",
+        "tab_id": "review",
+        "x": 0,
+        "y": 28,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Best-Ex Review",
+    "max_turns": 9
+  }
+}
