@@ -363,7 +363,13 @@
           "briefing"
         ],
         "layout_refs_valid": true,
-        "no_overlaps": true
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "briefing",
+            "widget_id": "idea_register"
+          }
+        ]
       }
     ],
     "required_dashboard_name_contains": "PM Morning Briefing",

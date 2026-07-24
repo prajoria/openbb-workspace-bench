@@ -351,7 +351,13 @@
           "watch"
         ],
         "layout_refs_valid": true,
-        "no_overlaps": true
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "watch",
+            "widget_id": "watch_register"
+          }
+        ]
       }
     ],
     "required_dashboard_name_contains": "Price Watch",

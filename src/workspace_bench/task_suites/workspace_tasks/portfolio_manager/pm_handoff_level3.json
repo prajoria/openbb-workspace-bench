@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level3",
   "difficulty": "level3",
-  "prompt": "On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1.",
+  "prompt": "On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level4",
   "difficulty": "level4",
-  "prompt": "Close out the open PM Handoff Log dashboard for the overnight desk: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1. The close-out runs under the Daloopa Earnings Review skill - the note also records the granularity that skill's first step sets for the consensus compare. Then delegate the follow-up to the coverage analyst. Everything already on the dashboard stays as is.",
+  "prompt": "Close out the open PM Handoff Log dashboard for the overnight desk: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1. The close-out runs under the Daloopa Earnings Review skill - the note also records the granularity that skill's first step sets for the consensus compare. Everything already on the dashboard stays as is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -139,20 +139,6 @@
           "widget_type",
           "name"
         ]
-      },
-      {
-        "tool": "assign_tasks_to_agents",
-        "args": {
-          "task_requests": [
-            {
-              "id": "pm_handoff_follow_up",
-              "description": "Run the overnight follow-up on the MSFT consensus handoff.",
-              "assigned_holder_url": "workspace://agents/pm_handoff",
-              "assigned_agent_id": "pm_handoff-agent"
-            }
-          ]
-        },
-        "graded_args": []
       }
     ],
     "required_widgets": [
@@ -182,6 +168,6 @@
         ]
       }
     ],
-    "max_turns": 9
+    "max_turns": 8
   }
 }

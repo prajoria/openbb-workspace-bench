@@ -1,7 +1,7 @@
 {
   "id": "allocation_read_level3",
   "difficulty": "level3",
-  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd.",
+  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

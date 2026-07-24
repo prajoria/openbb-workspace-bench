@@ -313,7 +313,13 @@
           "digest"
         ],
         "layout_refs_valid": true,
-        "no_overlaps": true
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "digest",
+            "widget_id": "segment_digest"
+          }
+        ]
       }
     ],
     "required_generated_widgets": [

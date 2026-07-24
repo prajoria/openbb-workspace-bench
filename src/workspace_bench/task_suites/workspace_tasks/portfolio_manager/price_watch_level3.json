@@ -1,7 +1,7 @@
 {
   "id": "price_watch_level3",
   "difficulty": "level3",
-  "prompt": "Add a fresh Live Grid from Getting Started to the open Price Watch dashboard with symbol set to TSLA - the open is in ten minutes.",
+  "prompt": "Add a fresh Live Grid from Getting Started to the open Price Watch dashboard with symbol set to TSLA - the open is in ten minutes. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

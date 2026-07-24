@@ -22,7 +22,7 @@ You receive the **six task.json files of one story** and judge them as a set. Th
 | 2 | exactly one graded value is absent from the prompt, carried by a stated policy phrase (the only level where a value is hidden this way) |
 | 3 | the starting dashboard is populated, including a decoy near-duplicate of the target itself (same widget, different configuration), and the eval grades ALL pre-existing content as preserved, the decoy included |
 | 4 | a knowledge read is required, and a note is graded on a fact derivable only from that source — the fact never appears in the prompt |
-| 5 | a real platform build is graded: authored backend (`required_widget_defs`) AND a published, instantiated app with a named tab (`required_app_defs`), its widget then used - alongside level 4's read-and-note |
+| 5 | a real platform build is graded: authored backend (`required_widget_defs`) AND a published, instantiated app with a named tab and the built widget required ON that tab (`required_app_defs` with `widgets_on_tab`), its widget then used - alongside level 4's read-and-note; story-shape extras like delegation ride HERE (orchestration), never at level 4 |
 
 **World demands accumulate; prompt dials do not.** A populated, preservation-graded world is present from level 3 through 5 (same demand, not necessarily the same furniture); level 5 keeps level 4's read-and-note demand alongside its build. But prompt-side signatures are one level each: level 3 may name the widget plainly again (finding was level 1's exam) and may print the value that level 2 hid (deriving was level 2's exam). This is deliberate — each level's failure should have one interpretation.
 

@@ -1,7 +1,7 @@
 {
   "id": "morning_briefing_level3",
   "difficulty": "level3",
-  "prompt": "Add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to the open PM Morning Briefing dashboard for Flagship Long/Short, QTD - the 9am call is in ten minutes.",
+  "prompt": "Add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to the open PM Morning Briefing dashboard for Flagship Long/Short, QTD - the 9am call is in ten minutes. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
