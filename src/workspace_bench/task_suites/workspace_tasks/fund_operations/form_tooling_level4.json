@@ -1,0 +1,241 @@
+{
+  "id": "form_tooling_level4",
+  "difficulty": "level4",
+  "prompt": "On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples, with daysPicker1 set to 5 and the tester's other parameters left at their defaults. Keep everything already on the dashboard exactly as it is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind its list names between endpoint and button.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Intake Tools",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Intake Tools",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "intake",
+            "name": "Intake"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Widget Examples",
+            "widget_id": "show_example_params",
+            "widget_uuid": "seeded_month_end_params",
+            "tab_id": "intake",
+            "data_args": {
+              "datePicker1": "$currentDate-1d",
+              "textBox1": "Hello!",
+              "textBox2": "var1,var2,var3",
+              "TrueFalse": true,
+              "daysPicker1": "10"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 9
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "seeded_prior_intake_note",
+            "name": "Prior Intake Check",
+            "data": "Prior intake check: the month-end exception batch stays on its existing review window.",
+            "tab_id": "intake",
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widget-parameters"
+        },
+        "graded_args": [
+          "uri"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "show_example_params",
+          "param_name": "daysPicker1"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "form_submit_widget"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "show_example_params",
+          "data_args": {
+            "daysPicker1": "5"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Intake Tooling Governance Note",
+          "data": "The widgets.json parameter kind named between endpoint and button is form."
+        },
+        "graded_args": [
+          "widget_type",
+          "name"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "intake"
+    ],
+    "required_tab_names": [
+      "Intake"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Widget Examples",
+        "widget_id": "form_submit_widget",
+        "tab_id": "intake"
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "show_example_params",
+        "data_args": {
+          "daysPicker1": "5"
+        },
+        "tab_id": "intake"
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "show_example_params",
+        "data_args": {
+          "datePicker1": "$currentDate-1d",
+          "textBox1": "Hello!",
+          "textBox2": "var1,var2,var3",
+          "TrueFalse": true,
+          "daysPicker1": "10"
+        },
+        "tab_id": "intake",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Intake Check",
+        "data_contains": [
+          "Prior intake check: the month-end exception batch stays on its existing review window."
+        ],
+        "tab_id": "intake"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Intake Tooling Governance Note",
+        "data_contains": [
+          "form"
+        ],
+        "tab_id": "intake"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "seeded_month_end_params",
+        "tab_id": "intake",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 9
+      },
+      {
+        "widget_uuid": "seeded_prior_intake_note",
+        "tab_id": "intake",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Intake Tools",
+    "max_turns": 10
+  }
+}
