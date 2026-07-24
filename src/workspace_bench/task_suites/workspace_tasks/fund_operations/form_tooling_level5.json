@@ -201,6 +201,14 @@
         "optional": true
       },
       {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Intake Form Service",
+          "widget_id": "intake_register"
+        },
+        "optional": true
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Intake Form Service",
@@ -215,6 +223,22 @@
         "tool": "list_available_widgets",
         "args": {
           "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "form_submit_widget"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "show_example_params"
         },
         "optional": true
       },
@@ -369,6 +393,6 @@
       }
     ],
     "required_dashboard_name_contains": "Intake Tools",
-    "max_turns": 17
+    "max_turns": 20
   }
 }
