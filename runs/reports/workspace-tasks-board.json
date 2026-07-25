@@ -1,0 +1,229 @@
+{
+ "suite": "workspace_tasks",
+ "protocol": "closed-world",
+ "levels": [
+  "level0",
+  "level1",
+  "level2",
+  "level3",
+  "level4"
+ ],
+ "board": [
+  {
+   "model": "gpt-4.1-mini (reference, 3 repeats pooled)",
+   "episodes": 360,
+   "pass_at_1": 0.3944,
+   "process_failures": 0,
+   "per_level": {
+    "level0": {
+     "passes": 61,
+     "attempts": 72,
+     "rate": 0.8472
+    },
+    "level1": {
+     "passes": 43,
+     "attempts": 72,
+     "rate": 0.5972
+    },
+    "level2": {
+     "passes": 26,
+     "attempts": 72,
+     "rate": 0.3611
+    },
+    "level3": {
+     "passes": 12,
+     "attempts": 72,
+     "rate": 0.1667
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 72,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 258,
+    "missing_widget": 194,
+    "missing_generated_widget": 82,
+    "widget_list_not_called_before_use": 29,
+    "too_many_invalid_calls": 26,
+    "layout_mismatch": 26,
+    "missing_tool_result": 16,
+    "missing_custom_backend": 8,
+    "dashboard_name": 7,
+    "layout_out_of_grid": 6,
+    "app_def_mismatch": 6,
+    "collateral_dashboard_change": 5,
+    "layout_overlap": 3,
+    "backend_validation_warnings": 2,
+    "missing_app_def": 2,
+    "missing_tab": 1,
+    "missing_tab_name": 1
+   }
+  },
+  {
+   "model": "concentrate-claude-opus-5",
+   "episodes": 120,
+   "pass_at_1": 0.0,
+   "process_failures": 120,
+   "per_level": {
+    "level0": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level1": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level2": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level3": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 380,
+    "missing_widget": 156,
+    "missing_generated_widget": 72,
+    "missing_custom_backend": 48,
+    "missing_tool_result": 8
+   },
+   "excluded": "process failures exceed 20% - provider outage or credit limit; resume before publishing"
+  },
+  {
+   "model": "concentrate-glm-5.2",
+   "episodes": 120,
+   "pass_at_1": 0.4167,
+   "process_failures": 51,
+   "per_level": {
+    "level0": {
+     "passes": 14,
+     "attempts": 24,
+     "rate": 0.5833
+    },
+    "level1": {
+     "passes": 12,
+     "attempts": 24,
+     "rate": 0.5
+    },
+    "level2": {
+     "passes": 11,
+     "attempts": 24,
+     "rate": 0.4583
+    },
+    "level3": {
+     "passes": 7,
+     "attempts": 24,
+     "rate": 0.2917
+    },
+    "level4": {
+     "passes": 6,
+     "attempts": 24,
+     "rate": 0.25
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 173,
+    "missing_widget": 85,
+    "missing_generated_widget": 35,
+    "missing_custom_backend": 20,
+    "layout_mismatch": 5,
+    "missing_tool_result": 4,
+    "layout_out_of_grid": 3,
+    "widget_list_not_called_before_use": 1
+   },
+   "excluded": "process failures exceed 20% - provider outage or credit limit; resume before publishing"
+  },
+  {
+   "model": "concentrate-kimi-k3",
+   "episodes": 120,
+   "pass_at_1": 0.0,
+   "process_failures": 120,
+   "per_level": {
+    "level0": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level1": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level2": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level3": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 380,
+    "missing_widget": 156,
+    "missing_generated_widget": 72,
+    "missing_custom_backend": 48,
+    "missing_tool_result": 8
+   },
+   "excluded": "process failures exceed 20% - provider outage or credit limit; resume before publishing"
+  },
+  {
+   "model": "gpt-5.5-r3",
+   "episodes": 120,
+   "pass_at_1": 0.9333,
+   "process_failures": 0,
+   "per_level": {
+    "level0": {
+     "passes": 24,
+     "attempts": 24,
+     "rate": 1.0
+    },
+    "level1": {
+     "passes": 23,
+     "attempts": 24,
+     "rate": 0.9583
+    },
+    "level2": {
+     "passes": 21,
+     "attempts": 24,
+     "rate": 0.875
+    },
+    "level3": {
+     "passes": 21,
+     "attempts": 24,
+     "rate": 0.875
+    },
+    "level4": {
+     "passes": 23,
+     "attempts": 24,
+     "rate": 0.9583
+    }
+   },
+   "issue_codes": {
+    "missing_widget": 5,
+    "missing_tool_call": 5,
+    "missing_generated_widget": 2
+   }
+  }
+ ]
+}
