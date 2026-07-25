@@ -36,31 +36,31 @@
       "levels": {
         "level0": {
           "attempts": 12,
-          "passes": 9
+          "passes": 11
         },
         "level1": {
           "attempts": 12,
-          "passes": 8
+          "passes": 6
         },
         "level2": {
           "attempts": 12,
-          "passes": 7
+          "passes": 5
         },
         "level3": {
           "attempts": 12,
-          "passes": 4
+          "passes": 3
         },
         "level4": {
           "attempts": 12,
-          "passes": 5
+          "passes": 3
         },
         "level5": {
           "attempts": 12,
           "passes": 0
         }
       },
-      "monotone": false,
-      "recorded": "2026-07-25T00:40:11+00:00",
+      "monotone": true,
+      "recorded": "2026-07-25T01:25:47+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-fund_operations"
     },
     "portfolio_manager": {
@@ -133,7 +133,7 @@
         },
         "level1": {
           "attempts": 12,
-          "passes": 4
+          "passes": 3
         },
         "level2": {
           "attempts": 12,
@@ -141,11 +141,11 @@
         },
         "level3": {
           "attempts": 12,
-          "passes": 6
+          "passes": 9
         },
         "level4": {
           "attempts": 12,
-          "passes": 3
+          "passes": 0
         },
         "level5": {
           "attempts": 12,
@@ -153,7 +153,7 @@
         }
       },
       "monotone": false,
-      "recorded": "2026-07-25T00:27:01+00:00",
+      "recorded": "2026-07-25T01:22:21+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-trading_desk"
     }
   },
