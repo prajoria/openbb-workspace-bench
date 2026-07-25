@@ -1,0 +1,142 @@
+{
+  "id": "proposal_pack_level2",
+  "difficulty": "level2",
+  "prompt": "On the open Proposal Pack dashboard, add Company Fundamentals from Bench Daloopa with ticker set to MSFT and period set to 2025Q4, and add Omni Widget with Citations from Widget Examples configured under the written-summary pack policy. Please have the figures and cited narrative ready before the client meeting.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Proposal Pack",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Proposal Pack",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "pack",
+            "name": "Pack"
+          }
+        ],
+        "widgets": []
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "omni_widget_with_citations",
+          "param_name": "type"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_company_fundamentals",
+          "data_args": {
+            "ticker": "MSFT",
+            "period": "2025Q4"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "omni_widget_with_citations",
+          "data_args": {
+            "type": "markdown"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      }
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_fundamentals",
+        "data_args": {
+          "ticker": "MSFT",
+          "period": "2025Q4"
+        }
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "omni_widget_with_citations",
+        "data_args": {
+          "type": "markdown"
+        }
+      }
+    ],
+    "required_dashboard_name_contains": "Proposal Pack",
+    "max_turns": 9
+  }
+}

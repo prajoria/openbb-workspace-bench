@@ -1,0 +1,258 @@
+{
+  "id": "holdings_watch_level3",
+  "difficulty": "level3",
+  "prompt": "On the open Client Holdings Watch dashboard, correct the stale Live Grid from the Onboarding App for Devs in Getting Started that has parameter symbol TSLA to AAPL. The separate Live Grid with parameter symbol AAPL is already correct for the client's Apple holding and must stay untouched. Keep every other view and note exactly as it is so the client material stays ready for the call. Read the Finance Tearsheet skill and leave a Holdings Watch Governance Note recording what its workflow says to gather first and the three elements that includes.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Client Holdings Watch",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Client Holdings Watch",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "watch",
+            "name": "Watch"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "widget_uuid": "w_c7a",
+            "tab_id": "watch",
+            "data_args": {
+              "symbol": "TSLA"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 9
+            }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "live_grid_data",
+            "widget_uuid": "w_91e",
+            "tab_id": "watch",
+            "data_args": {
+              "symbol": "AAPL"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 9
+            }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "sparkline_line",
+            "widget_uuid": "w_4d2",
+            "tab_id": "watch",
+            "layout": {
+              "x": 0,
+              "y": 9,
+              "w": 40,
+              "h": 10
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "w_b86",
+            "name": "Prior Client Watch Note",
+            "data": "Prior call: Tesla was discussed as a comparison; retain this note in the client file.",
+            "tab_id": "watch",
+            "layout": {
+              "x": 0,
+              "y": 19,
+              "w": 40,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Getting Started"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_c7a",
+          "data_args": {
+            "symbol": "AAPL"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Holdings Watch Governance Note",
+          "data": "Per the Finance Tearsheet skill: Gather price action first - level, trend, and how the name has traded around recent events."
+        },
+        "graded_args": [
+          "widget_type"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "watch"
+    ],
+    "required_tab_names": [
+      "Watch"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Getting Started",
+        "widget_id": "live_grid_data",
+        "data_args": {
+          "symbol": "AAPL"
+        },
+        "tab_id": "watch",
+        "min_count": 2,
+        "max_count": 2
+      },
+      {
+        "origin": "Getting Started",
+        "widget_id": "sparkline_line",
+        "tab_id": "watch",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Client Watch Note",
+        "data_contains": [
+          "Prior call: Tesla was discussed as a comparison; retain this note in the client file."
+        ],
+        "tab_id": "watch"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Holdings Watch Governance",
+        "data_contains": [
+          "Gather price action first",
+          "level",
+          "trend",
+          "recent events"
+        ],
+        "tab_id": "watch"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "w_c7a",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 9
+      },
+      {
+        "widget_uuid": "w_91e",
+        "tab_id": "watch",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 9
+      },
+      {
+        "widget_uuid": "w_4d2",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 9,
+        "w": 40,
+        "h": 10
+      },
+      {
+        "widget_uuid": "w_b86",
+        "tab_id": "watch",
+        "x": 0,
+        "y": 19,
+        "w": 40,
+        "h": 8
+      }
+    ],
+    "required_dashboard_name_contains": "Client Holdings Watch",
+    "max_turns": 9
+  }
+}

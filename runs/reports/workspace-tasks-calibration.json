@@ -1,6 +1,37 @@
 {
   "model": "openai:gpt-4.1-mini",
   "personas": {
+    "client_advisor": {
+      "levels": {
+        "level0": {
+          "attempts": 12,
+          "passes": 10
+        },
+        "level1": {
+          "attempts": 12,
+          "passes": 9
+        },
+        "level2": {
+          "attempts": 12,
+          "passes": 5
+        },
+        "level3": {
+          "attempts": 12,
+          "passes": 4
+        },
+        "level4": {
+          "attempts": 12,
+          "passes": 0
+        },
+        "level5": {
+          "attempts": 0,
+          "passes": 0
+        }
+      },
+      "monotone": true,
+      "recorded": "2026-07-25T03:36:22+00:00",
+      "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-client_advisor"
+    },
     "compliance_risk": {
       "levels": {
         "level0": {

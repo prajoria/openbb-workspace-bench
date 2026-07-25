@@ -1,0 +1,347 @@
+{
+  "id": "meeting_prep_level3",
+  "difficulty": "level3",
+  "prompt": "On the open Client Call Prep dashboard, correct the stale Client Returns instance from Bench Stark Enterprise's Client 360 that has parameters client Northstar Endowment and period YTD to client Northstar Endowment and period QTD. The separate Client Returns instance with parameters client Atlas Pension and period YTD belongs to a prior review and must stay untouched. Add a fresh Client Returns for Northstar Endowment and QTD, then read it with those parameters. Keep every other view and note exactly as it is. Before the call, read the Finance Tearsheet skill and leave a Client Call Performance Note recording the client, fund, return, change, and review status exactly as served, plus what the skill's workflow lists last.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Client Call Prep",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Client Call Prep",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "prep",
+            "name": "Prep"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "client_360_portfolio_view_client_returns",
+            "widget_uuid": "w_3b7",
+            "tab_id": "prep",
+            "data_args": {
+              "client": "Northstar Endowment",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "client_360_portfolio_view_client_returns",
+            "widget_uuid": "w_8d2",
+            "tab_id": "prep",
+            "data_args": {
+              "client": "Atlas Pension",
+              "period": "YTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "client_360_portfolio_view_exposure_summary",
+            "widget_uuid": "w_5f9",
+            "tab_id": "prep",
+            "data_args": {
+              "client": "Meridian Family Office",
+              "period": "MTD"
+            },
+            "layout": {
+              "x": 0,
+              "y": 14,
+              "w": 20,
+              "h": 14
+            }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "client_360_meeting_prep_meeting_agenda",
+            "widget_uuid": "w_c81",
+            "tab_id": "prep",
+            "data_args": {
+              "client": "Horizon Sovereign",
+              "period": "1D"
+            },
+            "layout": {
+              "x": 20,
+              "y": 14,
+              "w": 20,
+              "h": 14
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "w_a64",
+            "name": "Prior Call Note",
+            "data": "Prior call: retain the Atlas Pension year-to-date return view and the Meridian exposure follow-up for the next review.",
+            "tab_id": "prep",
+            "layout": {
+              "x": 0,
+              "y": 28,
+              "w": 40,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_portfolio_view_client_returns"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_3b7",
+          "data_args": {
+            "client": "Northstar Endowment",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_portfolio_view_client_returns",
+          "data_args": {
+            "client": "Northstar Endowment",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "get_widget_data",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "client_360_portfolio_view_client_returns",
+          "data_args": {
+            "client": "Northstar Endowment",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "widget_id",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Client Call Performance Note",
+          "data": "Northstar Endowment | fund: Global Opportunities | return: 0.0524 | change: -0.0675 | review status: In Review. Close with a short investment conclusion a reader could act on."
+        },
+        "graded_args": [
+          "widget_type"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "prep"
+    ],
+    "required_tab_names": [
+      "Prep"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_portfolio_view_client_returns",
+        "data_args": {
+          "client": "Northstar Endowment",
+          "period": "QTD"
+        },
+        "tab_id": "prep",
+        "min_count": 2,
+        "max_count": 2
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_portfolio_view_client_returns",
+        "data_args": {
+          "client": "Atlas Pension",
+          "period": "YTD"
+        },
+        "tab_id": "prep",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_portfolio_view_exposure_summary",
+        "data_args": {
+          "client": "Meridian Family Office",
+          "period": "MTD"
+        },
+        "tab_id": "prep",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "client_360_meeting_prep_meeting_agenda",
+        "data_args": {
+          "client": "Horizon Sovereign",
+          "period": "1D"
+        },
+        "tab_id": "prep",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Call Note",
+        "data_contains": [
+          "Prior call: retain the Atlas Pension year-to-date return view and the Meridian exposure follow-up for the next review."
+        ],
+        "tab_id": "prep"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Client Call Performance",
+        "data_contains": [
+          "Northstar Endowment",
+          "Global Opportunities",
+          "0.0524",
+          "-0.0675",
+          "In Review",
+          "short investment conclusion a reader could act on"
+        ],
+        "tab_id": "prep"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "w_3b7",
+        "tab_id": "prep",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "w_8d2",
+        "tab_id": "prep",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "w_5f9",
+        "tab_id": "prep",
+        "x": 0,
+        "y": 14,
+        "w": 20,
+        "h": 14
+      },
+      {
+        "widget_uuid": "w_a64",
+        "tab_id": "prep",
+        "x": 0,
+        "y": 28,
+        "w": 40,
+        "h": 8
+      },
+      {
+        "widget_uuid": "w_c81",
+        "tab_id": "prep",
+        "x": 20,
+        "y": 14,
+        "w": 20,
+        "h": 14
+      }
+    ],
+    "required_dashboard_name_contains": "Client Call Prep",
+    "max_turns": 11
+  }
+}

@@ -1,0 +1,494 @@
+{
+  "id": "proposal_pack_level4",
+  "difficulty": "level4",
+  "prompt": "Build the client's proposal register before the meeting: add a Client Pack Service backend serving a Pack Register table, publish Client Pack App with Pack Register on its Pack tab, and instantiate the app. On the open Proposal Pack dashboard, add the built Pack Register and correct the stale Company Fundamentals instance from Bench Daloopa that has parameters ticker MSFT and period 2025Q3 to ticker MSFT and period 2025Q4. The separate Company Fundamentals instance with parameters ticker TSLA and period 2025Q4 belongs to another client conversation and must stay untouched, and the existing Omni Widget with Citations from Widget Examples with parameter type chart is the approved visual appendix and must also stay untouched. Add fresh Company Fundamentals from Bench Daloopa with parameters ticker MSFT and period 2025Q4, plus a fresh Omni Widget with Citations from Widget Examples with parameter type markdown. Keep every other view and note on the dashboard exactly as it is so the pack remains ready to explain. Read the Daloopa Tearsheet skill and leave a Proposal Pack Sourcing Note recording the sourcing field its workflow requires for every Daloopa-sourced figure.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Proposal Pack",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Proposal Pack",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "pack",
+            "name": "Pack"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_fundamentals",
+            "widget_uuid": "w_31c",
+            "tab_id": "pack",
+            "data_args": {
+              "ticker": "MSFT",
+              "period": "2025Q3"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_fundamentals",
+            "widget_uuid": "w_7e2",
+            "tab_id": "pack",
+            "data_args": {
+              "ticker": "TSLA",
+              "period": "2025Q4"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Widget Examples",
+            "widget_id": "omni_widget_with_citations",
+            "widget_uuid": "w_a64",
+            "tab_id": "pack",
+            "data_args": {
+              "type": "chart"
+            },
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 40,
+              "h": 15
+            }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_directory",
+            "widget_uuid": "w_c08",
+            "tab_id": "pack",
+            "layout": {
+              "x": 0,
+              "y": 27,
+              "w": 20,
+              "h": 12
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "w_f51",
+            "name": "Prior Proposal Note",
+            "data": "Prior proposal: retain the Tesla comparison, the approved chart appendix, and the covered-company directory for the client's follow-up questions.",
+            "tab_id": "pack",
+            "layout": {
+              "x": 20,
+              "y": 27,
+              "w": 20,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Client Pack Service",
+          "url": "http://127.0.0.1:9728",
+          "widgets_json": {
+            "pack_register": {
+              "name": "Pack Register",
+              "description": "Authored register for the client's proposal pack.",
+              "endpoint": "/pack-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Client Pack App",
+              "description": "Authored app for the client's proposal pack register.",
+              "tabs": {
+                "pack": {
+                  "id": "pack",
+                  "name": "Pack",
+                  "layout": [
+                    {
+                      "i": "pack_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Client Pack Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Client Pack Service",
+          "widget_id": "pack_register"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Client Pack Service",
+          "widget_id": "pack_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_company_fundamentals"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_31c",
+          "data_args": {
+            "ticker": "MSFT",
+            "period": "2025Q4"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_company_fundamentals",
+          "data_args": {
+            "ticker": "MSFT",
+            "period": "2025Q4"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "omni_widget_with_citations"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "omni_widget_with_citations",
+          "data_args": {
+            "type": "markdown"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Proposal Pack Sourcing Note",
+          "data": "For the proposal pack, cite every Daloopa-sourced figure with its source_url."
+        },
+        "graded_args": [
+          "widget_type"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Client Pack App",
+          "dashboard_name": "Client Pack App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "pack"
+    ],
+    "required_tab_names": [
+      "Pack"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Client Pack Service",
+        "widget_id": "pack_register",
+        "tab_id": "pack"
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_fundamentals",
+        "data_args": {
+          "ticker": "MSFT",
+          "period": "2025Q4"
+        },
+        "tab_id": "pack",
+        "min_count": 2,
+        "max_count": 2
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_fundamentals",
+        "data_args": {
+          "ticker": "TSLA",
+          "period": "2025Q4"
+        },
+        "tab_id": "pack",
+        "max_count": 1
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "omni_widget_with_citations",
+        "data_args": {
+          "type": "markdown"
+        },
+        "tab_id": "pack"
+      },
+      {
+        "origin": "Widget Examples",
+        "widget_id": "omni_widget_with_citations",
+        "data_args": {
+          "type": "chart"
+        },
+        "tab_id": "pack",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_directory",
+        "tab_id": "pack",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Proposal Note",
+        "data_contains": [
+          "Prior proposal: retain the Tesla comparison, the approved chart appendix, and the covered-company directory for the client's follow-up questions."
+        ],
+        "tab_id": "pack"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Proposal Pack Sourcing",
+        "data_contains": [
+          "source_url"
+        ],
+        "tab_id": "pack"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "w_31c",
+        "tab_id": "pack",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "w_7e2",
+        "tab_id": "pack",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "w_a64",
+        "tab_id": "pack",
+        "x": 0,
+        "y": 12,
+        "w": 40,
+        "h": 15
+      },
+      {
+        "widget_uuid": "w_c08",
+        "tab_id": "pack",
+        "x": 0,
+        "y": 27,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "w_f51",
+        "tab_id": "pack",
+        "x": 20,
+        "y": 27,
+        "w": 20,
+        "h": 8
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Client Pack Service",
+        "widget_id": "pack_register",
+        "expect": {
+          "name": "Pack Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Client Pack Service",
+        "name_contains": "Client Pack App",
+        "tabs_include": [
+          "pack"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "pack",
+            "widget_id": "pack_register"
+          }
+        ]
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_apps",
+        "data_contains": [
+          "Client Pack App",
+          "Pack",
+          "Client Pack Service"
+        ]
+      }
+    ],
+    "required_dashboard_name_contains": "Proposal Pack",
+    "max_turns": 20
+  }
+}
