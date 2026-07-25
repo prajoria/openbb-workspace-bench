@@ -108,6 +108,7 @@
         }
       }
     ],
+    "required_dashboard_name_contains": "PM Morning Briefing",
     "max_turns": 7
   }
 }

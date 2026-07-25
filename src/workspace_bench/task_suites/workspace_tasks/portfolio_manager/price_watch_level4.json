@@ -1,7 +1,7 @@
 {
   "id": "price_watch_level4",
   "difficulty": "level4",
-  "prompt": "On the open Price Watch dashboard, add Live Grid at x 20, y 28, width 20, height 9 from Getting Started with symbol set to TSLA, and keep everything already on the dashboard as is. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with.",
+  "prompt": "On the open Price Watch dashboard, fix the stale Live Grid from Getting Started to TSLA and add a fresh Live Grid for the same symbol. Keep everything else as is. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "live_grid_data",
-            "widget_uuid": "seeded_live_grid_decoy",
+            "widget_uuid": "w_e89",
             "tab_id": "watch",
             "data_args": {
               "symbol": "MSFT"
@@ -74,7 +74,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "sparkline_line",
-            "widget_uuid": "seeded_sparkline_trends",
+            "widget_uuid": "w_6a3",
             "tab_id": "watch",
             "layout": {
               "x": 20,
@@ -87,7 +87,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_watch_handoff_note",
+            "widget_uuid": "w_a8a",
             "name": "Watch Handoff Note",
             "data": "Prior session: the desk was watching MSFT into the print.",
             "tab_id": "watch",
@@ -126,6 +126,19 @@
         "optional": true
       },
       {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_e89",
+          "data_args": {
+            "symbol": "TSLA"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Getting Started",
@@ -137,23 +150,6 @@
         "graded_args": [
           "origin",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "live_grid_data",
-          "x": 20,
-          "y": 28,
-          "w": 20,
-          "h": 9
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       },
       {
@@ -174,16 +170,10 @@
         "widget_id": "live_grid_data",
         "data_args": {
           "symbol": "TSLA"
-        }
-      },
-      {
-        "origin": "Getting Started",
-        "widget_id": "live_grid_data",
-        "data_args": {
-          "symbol": "MSFT"
         },
         "tab_id": "watch",
-        "max_count": 1
+        "min_count": 2,
+        "max_count": 2
       },
       {
         "origin": "Getting Started",
@@ -211,7 +201,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_live_grid_decoy",
+        "widget_uuid": "w_e89",
         "tab_id": "watch",
         "x": 0,
         "y": 0,
@@ -219,7 +209,7 @@
         "h": 9
       },
       {
-        "widget_uuid": "seeded_sparkline_trends",
+        "widget_uuid": "w_6a3",
         "tab_id": "watch",
         "x": 20,
         "y": 0,
@@ -227,20 +217,12 @@
         "h": 10
       },
       {
-        "widget_uuid": "seeded_watch_handoff_note",
+        "widget_uuid": "w_a8a",
         "tab_id": "watch",
         "x": 0,
         "y": 10,
         "w": 20,
         "h": 8
-      },
-      {
-        "widget_id": "live_grid_data",
-        "tab_id": "watch",
-        "x": 20,
-        "y": 28,
-        "w": 20,
-        "h": 9
       }
     ],
     "required_tabs": [

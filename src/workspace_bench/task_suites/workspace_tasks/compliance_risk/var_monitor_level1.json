@@ -1,7 +1,7 @@
 {
   "id": "var_monitor_level1",
   "difficulty": "level1",
-  "prompt": "On the open Shock Watch dashboard, add the risk trend from Bench Stark Enterprise's Risk & Exposure Monitor with parameters portfolio Long/Short Equity, scenario Rates +100bp, and period YTD.",
+  "prompt": "On the open Shock Watch dashboard, add the value-at-risk trend from Bench Stark Enterprise's Risk & Exposure Monitor with parameters portfolio Long/Short Equity, scenario Rates +100bp, and period YTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

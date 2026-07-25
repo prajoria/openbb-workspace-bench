@@ -1,7 +1,7 @@
 {
   "id": "case_handoff_level5",
   "difficulty": "level5",
-  "prompt": "Build the case file for handoff: add a Case File Service backend serving a Case Register table, publish Case File App with Case Register on its Cases tab, and instantiate the app. On the open Case Review dashboard, add the built Case Register, keeping everything already there exactly as it is. Read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD. Read the Finance Earnings Prep skill and leave a Case Handoff Note at x 20, y 14, width 20, height 8 recording the returned In Review fund and both exact scores, plus the transcript-tone signal the skill identifies and what it often precedes. Hand the follow-up to the reviewing team.",
+  "prompt": "Build the case file for handoff: add a Case File Service backend serving a Case Register table, publish Case File App with Case Register on its Cases tab, and instantiate the app. On the open Case Review dashboard, add the built Case Register, keeping everything already there exactly as it is. Read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD. Read the Finance Earnings Prep skill and leave a Case Handoff Note recording the returned In Review fund and both exact scores, plus the transcript-tone signal the skill identifies and what it often precedes. Hand the follow-up to the reviewing team.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "mnpi_research_review_mnpi_log_expert_calls",
-            "widget_uuid": "seeded_expert_calls_decoy",
+            "widget_uuid": "w_71a",
             "tab_id": "review",
             "data_args": {
               "status": "Open",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "mnpi_research_review_mnpi_log_wall_crossings",
-            "widget_uuid": "seeded_wall_crossings",
+            "widget_uuid": "w_168",
             "tab_id": "review",
             "data_args": {
               "status": "Closed",
@@ -94,7 +94,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_case_note",
+            "widget_uuid": "w_a2e",
             "name": "Prior Case Review Note",
             "data": "Prior review: retain the closed Medium-severity wall-crossing sample as audit evidence.",
             "tab_id": "review",
@@ -275,23 +275,6 @@
         ]
       },
       {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_337",
-          "widget_id": "generated_note",
-          "x": 20,
-          "y": 14,
-          "w": 20,
-          "h": 8
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
-      },
-      {
         "tool": "assign_tasks_to_agents",
         "args": {
           "task_requests": [
@@ -422,7 +405,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_expert_calls_decoy",
+        "widget_uuid": "w_71a",
         "tab_id": "review",
         "x": 0,
         "y": 0,
@@ -430,7 +413,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_wall_crossings",
+        "widget_uuid": "w_168",
         "tab_id": "review",
         "x": 20,
         "y": 0,
@@ -438,17 +421,9 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_prior_case_note",
+        "widget_uuid": "w_a2e",
         "tab_id": "review",
         "x": 0,
-        "y": 14,
-        "w": 20,
-        "h": 8
-      },
-      {
-        "widget_id": "generated_note",
-        "tab_id": "review",
-        "x": 20,
         "y": 14,
         "w": 20,
         "h": 8
@@ -465,6 +440,6 @@
       }
     ],
     "required_dashboard_name_contains": "Case Review",
-    "max_turns": 22
+    "max_turns": 21
   }
 }

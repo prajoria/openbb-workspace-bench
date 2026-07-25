@@ -1,7 +1,7 @@
 {
   "id": "nav_close_repair_level4",
   "difficulty": "level4",
-  "prompt": "Repair Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard that is currently showing Multi-Asset Fund, Closed, 1Y on the open Close Room dashboard: restore it to Flagship Long/Short, Open, 1D, and keep everything already on the dashboard exactly as is. The close runs under the Daloopa Capital Allocation skill - leave a Close Governance Note recording which payout line its comparison adds to Share Buybacks before testing the total against Free Cash Flow.",
+  "prompt": "Close repair on the open Close Room dashboard: Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard is showing Multi-Asset Fund, Closed, 1Y. Restore it to Flagship Long/Short, Open, 1D; keep everything already there exactly as is. Under the Daloopa Capital Allocation skill, leave a Close Governance Note recording which payout line its comparison adds to Share Buybacks before testing the total against Free Cash Flow.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
-            "widget_uuid": "close_exceptions_primary",
+            "widget_uuid": "w_455",
             "tab_id": "close",
             "data_args": {
               "fund": "Multi-Asset Fund",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
-            "widget_uuid": "close_exceptions_decoy",
+            "widget_uuid": "w_ef0",
             "tab_id": "close",
             "data_args": {
               "fund": "Income Fund",
@@ -93,7 +93,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "nav_fees_close_dashboard_close_close_notes",
-            "widget_uuid": "seeded_close_notes",
+            "widget_uuid": "w_67b",
             "tab_id": "close",
             "data_args": {
               "fund": "Flagship Long/Short",
@@ -111,7 +111,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_close_note",
+            "widget_uuid": "w_087",
             "name": "Prior Close Sign-Off",
             "data": "Prior close: Income Fund cash break cleared under four-eyes review.",
             "tab_id": "close",
@@ -152,7 +152,7 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "close_exceptions_primary",
+          "widget_uuid": "w_455",
           "data_args": {
             "fund": "Flagship Long/Short",
             "status": "Open",
@@ -236,7 +236,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "close_exceptions_primary",
+        "widget_uuid": "w_455",
         "tab_id": "close",
         "x": 0,
         "y": 0,
@@ -244,7 +244,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "close_exceptions_decoy",
+        "widget_uuid": "w_ef0",
         "tab_id": "close",
         "x": 20,
         "y": 0,
@@ -252,7 +252,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_close_notes",
+        "widget_uuid": "w_67b",
         "tab_id": "close",
         "x": 0,
         "y": 14,
@@ -260,7 +260,7 @@
         "h": 10
       },
       {
-        "widget_uuid": "seeded_prior_close_note",
+        "widget_uuid": "w_087",
         "tab_id": "close",
         "x": 0,
         "y": 24,

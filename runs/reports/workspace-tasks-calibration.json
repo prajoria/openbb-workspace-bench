@@ -9,38 +9,7 @@
         },
         "level1": {
           "attempts": 12,
-          "passes": 10
-        },
-        "level2": {
-          "attempts": 12,
-          "passes": 6
-        },
-        "level3": {
-          "attempts": 12,
-          "passes": 6
-        },
-        "level4": {
-          "attempts": 12,
-          "passes": 3
-        },
-        "level5": {
-          "attempts": 12,
-          "passes": 0
-        }
-      },
-      "monotone": true,
-      "recorded": "2026-07-24T12:43:46+00:00",
-      "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-compliance_risk"
-    },
-    "fund_operations": {
-      "levels": {
-        "level0": {
-          "attempts": 12,
-          "passes": 10
-        },
-        "level1": {
-          "attempts": 12,
-          "passes": 7
+          "passes": 11
         },
         "level2": {
           "attempts": 12,
@@ -52,7 +21,7 @@
         },
         "level4": {
           "attempts": 12,
-          "passes": 4
+          "passes": 5
         },
         "level5": {
           "attempts": 12,
@@ -60,7 +29,38 @@
         }
       },
       "monotone": true,
-      "recorded": "2026-07-24T11:50:54+00:00",
+      "recorded": "2026-07-25T00:36:45+00:00",
+      "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-compliance_risk"
+    },
+    "fund_operations": {
+      "levels": {
+        "level0": {
+          "attempts": 12,
+          "passes": 9
+        },
+        "level1": {
+          "attempts": 12,
+          "passes": 8
+        },
+        "level2": {
+          "attempts": 12,
+          "passes": 7
+        },
+        "level3": {
+          "attempts": 12,
+          "passes": 4
+        },
+        "level4": {
+          "attempts": 12,
+          "passes": 5
+        },
+        "level5": {
+          "attempts": 12,
+          "passes": 0
+        }
+      },
+      "monotone": false,
+      "recorded": "2026-07-25T00:40:11+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-fund_operations"
     },
     "portfolio_manager": {
@@ -75,11 +75,11 @@
         },
         "level2": {
           "attempts": 12,
-          "passes": 3
+          "passes": 4
         },
         "level3": {
           "attempts": 12,
-          "passes": 2
+          "passes": 3
         },
         "level4": {
           "attempts": 12,
@@ -91,7 +91,7 @@
         }
       },
       "monotone": true,
-      "recorded": "2026-07-24T12:18:27+00:00",
+      "recorded": "2026-07-25T00:30:07+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-portfolio_manager"
     },
     "research_analyst": {
@@ -106,11 +106,11 @@
         },
         "level2": {
           "attempts": 12,
-          "passes": 10
+          "passes": 11
         },
         "level3": {
           "attempts": 12,
-          "passes": 8
+          "passes": 9
         },
         "level4": {
           "attempts": 12,
@@ -122,7 +122,7 @@
         }
       },
       "monotone": true,
-      "recorded": "2026-07-24T11:41:27+00:00",
+      "recorded": "2026-07-25T00:06:14+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-research_analyst"
     },
     "trading_desk": {
@@ -137,23 +137,23 @@
         },
         "level2": {
           "attempts": 12,
-          "passes": 1
+          "passes": 3
         },
         "level3": {
           "attempts": 12,
-          "passes": 1
+          "passes": 6
         },
         "level4": {
           "attempts": 12,
-          "passes": 0
+          "passes": 3
         },
         "level5": {
           "attempts": 12,
           "passes": 0
         }
       },
-      "monotone": true,
-      "recorded": "2026-07-24T11:21:47+00:00",
+      "monotone": false,
+      "recorded": "2026-07-25T00:27:01+00:00",
       "run_dir": "runs/comparison/workspace-tasks-openai-gpt-4.1-mini-trading_desk"
     }
   },

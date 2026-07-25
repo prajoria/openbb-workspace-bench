@@ -1,7 +1,7 @@
 {
   "id": "nav_close_repair_level2",
   "difficulty": "level2",
-  "prompt": "Restore Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard on the open Close Room dashboard to Flagship Long/Short and Open, with the period configured per the close-day policy for today's close.",
+  "prompt": "Close repair on the open Close Room dashboard: restore Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard to Flagship Long/Short and Open, with period set by the close-day policy for today's close.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
-            "widget_uuid": "close_exceptions_primary",
+            "widget_uuid": "w_455",
             "tab_id": "close",
             "data_args": {
               "fund": "Multi-Asset Fund",
@@ -103,7 +103,7 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "close_exceptions_primary",
+          "widget_uuid": "w_455",
           "data_args": {
             "fund": "Flagship Long/Short",
             "status": "Open",

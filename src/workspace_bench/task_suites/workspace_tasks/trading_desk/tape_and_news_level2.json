@@ -1,7 +1,7 @@
 {
   "id": "tape_and_news_level2",
   "difficulty": "level2",
-  "prompt": "On the open Desk Tape dashboard, read Getting Started's Sample News Feed under the market-open tape policy, with limit set to 3, then leave a Tape Lead Note recording the exact lead title and author.",
+  "prompt": "Tape check on the open Desk Tape dashboard: read Getting Started's Sample News Feed under the market-open tape policy with limit 3. Leave a Tape Lead Note recording the exact lead title and author.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -120,6 +120,7 @@
         ]
       }
     ],
+    "required_dashboard_name_contains": "Desk Tape",
     "max_turns": 8
   }
 }

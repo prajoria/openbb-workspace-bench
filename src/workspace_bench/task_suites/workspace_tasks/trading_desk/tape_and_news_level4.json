@@ -1,7 +1,7 @@
 {
   "id": "tape_and_news_level4",
   "difficulty": "level4",
-  "prompt": "Read Getting Started's Sample News Feed for business, limited to 3, on the open Desk Tape dashboard, keeping everything already there exactly as it is. The tape runs under the Finance Tearsheet skill - leave a Tape Lead Note at x 20, y 28, width 20, height 8 recording the exact lead title and author, plus the first input its workflow gathers.",
+  "prompt": "Tape check on the open Desk Tape dashboard: read Getting Started's Sample News Feed for business, limited to 3, and keep everything already there exactly as is. Under the Finance Tearsheet skill, leave a Tape Lead Note recording the exact lead title and author plus the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "sample_newsfeed",
-            "widget_uuid": "seeded_tech_newsfeed_decoy",
+            "widget_uuid": "w_474",
             "tab_id": "tape",
             "data_args": {
               "category": "tech",
@@ -75,7 +75,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "sparkline_line",
-            "widget_uuid": "seeded_tape_sparklines",
+            "widget_uuid": "w_fe7",
             "tab_id": "tape",
             "layout": {
               "x": 20,
@@ -88,7 +88,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_tape_note",
+            "widget_uuid": "w_540",
             "name": "Prior Tape Note",
             "data": "Prior session: technology headlines stayed pinned through the close.",
             "tab_id": "tape",
@@ -160,23 +160,6 @@
         "graded_args": [
           "widget_type"
         ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "generated_note",
-          "x": 20,
-          "y": 28,
-          "w": 20,
-          "h": 8
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
       }
     ],
     "required_tabs": [
@@ -225,7 +208,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_tech_newsfeed_decoy",
+        "widget_uuid": "w_474",
         "tab_id": "tape",
         "x": 0,
         "y": 0,
@@ -233,7 +216,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_tape_sparklines",
+        "widget_uuid": "w_fe7",
         "tab_id": "tape",
         "x": 20,
         "y": 0,
@@ -241,23 +224,15 @@
         "h": 10
       },
       {
-        "widget_uuid": "seeded_prior_tape_note",
+        "widget_uuid": "w_540",
         "tab_id": "tape",
         "x": 20,
         "y": 10,
         "w": 20,
         "h": 8
-      },
-      {
-        "widget_id": "generated_note",
-        "tab_id": "tape",
-        "x": 20,
-        "y": 28,
-        "w": 20,
-        "h": 8
       }
     ],
     "required_dashboard_name_contains": "Desk Tape",
-    "max_turns": 10
+    "max_turns": 9
   }
 }

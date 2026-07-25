@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
-            "widget_uuid": "policy_breaches_primary",
+            "widget_uuid": "w_b2b",
             "tab_id": "review",
             "data_args": {
               "severity": "High",
@@ -87,7 +87,7 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "policy_breaches_primary",
+          "widget_uuid": "w_b2b",
           "data_args": {
             "severity": "High",
             "status": "Open",
@@ -112,6 +112,7 @@
         "max_count": 1
       }
     ],
+    "required_dashboard_name_contains": "Breach Review",
     "max_turns": 5
   }
 }

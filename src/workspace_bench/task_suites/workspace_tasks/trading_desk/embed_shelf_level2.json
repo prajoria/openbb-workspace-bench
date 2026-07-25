@@ -1,7 +1,7 @@
 {
   "id": "embed_shelf_level2",
   "difficulty": "level2",
-  "prompt": "On the open Desk Shelf dashboard, add Getting Started's HTML Widget and Getting Started's Video Library, with its video_name parameter set under the onboarding clip policy.",
+  "prompt": "Desk Shelf on the open dashboard: add the Getting Started component selected by the interactive-dashboard widget policy, plus Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

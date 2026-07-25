@@ -1,7 +1,7 @@
 {
   "id": "document_room_level3",
   "difficulty": "level3",
-  "prompt": "On the open Filing Room dashboard, add Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K, with Multi PDF Viewer - URL from Getting Started beside it. The dashboard already has the prior audit views on it - leave everything else exactly as it is.",
+  "prompt": "On the open Filing Room dashboard, add Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K; put Multi PDF Viewer - URL from Getting Started beside it. Prior audit views are already there—leave everything else exactly as is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_document_search",
-            "widget_uuid": "seeded_msft_document_search",
+            "widget_uuid": "w_290",
             "tab_id": "filings",
             "data_args": {
               "ticker": "MSFT",
@@ -75,7 +75,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_company_directory",
-            "widget_uuid": "seeded_company_directory",
+            "widget_uuid": "w_810",
             "tab_id": "filings",
             "layout": {
               "x": 20,
@@ -88,7 +88,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_filing_note",
+            "widget_uuid": "w_72a",
             "name": "Prior Filing Sign-off",
             "data": "Prior filing pull: MSFT quarterly filing checked and signed off.",
             "tab_id": "filings",
@@ -210,7 +210,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_msft_document_search",
+        "widget_uuid": "w_290",
         "tab_id": "filings",
         "x": 0,
         "y": 0,
@@ -218,7 +218,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_company_directory",
+        "widget_uuid": "w_810",
         "tab_id": "filings",
         "x": 20,
         "y": 0,
@@ -226,7 +226,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_prior_filing_note",
+        "widget_uuid": "w_72a",
         "tab_id": "filings",
         "x": 0,
         "y": 12,

@@ -1,7 +1,7 @@
 {
   "id": "case_handoff_level4",
   "difficulty": "level4",
-  "prompt": "On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD, keeping everything already on the dashboard exactly as it is. Read the Finance Earnings Prep skill and leave a Case Handoff Note at x 20, y 14, width 20, height 8 recording the returned In Review fund and both exact scores, plus the transcript-tone signal the skill identifies and what it often precedes.",
+  "prompt": "On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD, keeping everything already on the dashboard exactly as it is. Read the Finance Earnings Prep skill and leave a Case Handoff Note recording the returned In Review fund and both exact scores, plus the transcript-tone signal the skill identifies and what it often precedes.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "mnpi_research_review_mnpi_log_expert_calls",
-            "widget_uuid": "seeded_expert_calls_decoy",
+            "widget_uuid": "w_71a",
             "tab_id": "review",
             "data_args": {
               "status": "Open",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "mnpi_research_review_mnpi_log_wall_crossings",
-            "widget_uuid": "seeded_wall_crossings",
+            "widget_uuid": "w_168",
             "tab_id": "review",
             "data_args": {
               "status": "Closed",
@@ -94,7 +94,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_case_note",
+            "widget_uuid": "w_a2e",
             "name": "Prior Case Review Note",
             "data": "Prior review: retain the closed Medium-severity wall-crossing sample as audit evidence.",
             "tab_id": "review",
@@ -159,23 +159,6 @@
         "graded_args": [
           "widget_type"
         ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "generated_note",
-          "x": 20,
-          "y": 14,
-          "w": 20,
-          "h": 8
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
       }
     ],
     "required_tabs": [
@@ -232,7 +215,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_expert_calls_decoy",
+        "widget_uuid": "w_71a",
         "tab_id": "review",
         "x": 0,
         "y": 0,
@@ -240,7 +223,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_wall_crossings",
+        "widget_uuid": "w_168",
         "tab_id": "review",
         "x": 20,
         "y": 0,
@@ -248,23 +231,15 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_prior_case_note",
+        "widget_uuid": "w_a2e",
         "tab_id": "review",
         "x": 0,
-        "y": 14,
-        "w": 20,
-        "h": 8
-      },
-      {
-        "widget_id": "generated_note",
-        "tab_id": "review",
-        "x": 20,
         "y": 14,
         "w": 20,
         "h": 8
       }
     ],
     "required_dashboard_name_contains": "Case Review",
-    "max_turns": 9
+    "max_turns": 8
   }
 }

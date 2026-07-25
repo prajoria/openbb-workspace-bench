@@ -106,6 +106,7 @@
         }
       }
     ],
+    "required_dashboard_name_contains": "Price Watch",
     "max_turns": 7
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "document_room_level2",
   "difficulty": "level2",
-  "prompt": "Set up the open Filing Room dashboard before cutoff: add Document Search from Bench Daloopa for ticker AAPL, with its document type set per the annual-report pull policy - the annual report filing - and put Multi PDF Viewer - URL from Getting Started beside it.",
+  "prompt": "Filing Room before cutoff: on the open dashboard, add Document Search from Bench Daloopa for ticker AAPL, with document type set by the annual-report pull policy—the annual report filing. Put Multi PDF Viewer - URL from Getting Started beside it.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

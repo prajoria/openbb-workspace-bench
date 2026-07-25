@@ -1,7 +1,7 @@
 {
   "id": "form_tooling_level2",
   "difficulty": "level2",
-  "prompt": "Set up the open Intake Tools dashboard with Financial Entry Form and Example Backend Params from Widget Examples. Configure daysPicker1 on Example Backend Params per the weekly window policy, meaning one trading week, and leave its other parameters at their defaults.",
+  "prompt": "Intake Tools on the open dashboard: add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 on Example Backend Params by the weekly window policy, meaning one trading week; leave its other parameters at their defaults.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

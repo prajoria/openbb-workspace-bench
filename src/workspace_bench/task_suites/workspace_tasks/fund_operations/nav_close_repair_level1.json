@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "nav_fees_close_dashboard_close_close_exceptions",
-            "widget_uuid": "close_exceptions_primary",
+            "widget_uuid": "w_455",
             "tab_id": "close",
             "data_args": {
               "fund": "Multi-Asset Fund",
@@ -102,7 +102,7 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "close_exceptions_primary",
+          "widget_uuid": "w_455",
           "data_args": {
             "fund": "Flagship Long/Short",
             "status": "Open",

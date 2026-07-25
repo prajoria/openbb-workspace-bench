@@ -1,7 +1,7 @@
 {
   "id": "embed_shelf_level3",
   "difficulty": "level3",
-  "prompt": "On the open Desk Shelf dashboard, add Getting Started's HTML Widget at x 0, y 24, width 20, height 12 and Getting Started's fresh Video Library with its video_name parameter set to OpenBB Workspace Demo at x 20, y 24, width 20, height 12. Leave everything already on the dashboard exactly as it is.",
+  "prompt": "On the open Desk Shelf dashboard, switch the Getting Started Video Library still showing Open Data Platform Demo to the desk demo, OpenBB Workspace Demo, through its video_name parameter; add Getting Started's HTML Widget. Leave the rest alone: the separate Video Library already showing OpenBB Workspace Demo is correct for the other desk and must stay untouched.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "get_video",
-            "widget_uuid": "seeded_data_platform_video_decoy",
+            "widget_uuid": "w_57a",
             "tab_id": "shelf",
             "data_args": {
               "video_name": "Open Data Platform Demo"
@@ -74,7 +74,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "sparkline_line",
-            "widget_uuid": "seeded_shelf_sparklines",
+            "widget_uuid": "w_3cf",
             "tab_id": "shelf",
             "layout": {
               "x": 20,
@@ -86,7 +86,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "get_video_with_transcript",
-            "widget_uuid": "seeded_shelf_transcript_video",
+            "widget_uuid": "w_190",
             "tab_id": "shelf",
             "data_args": {
               "video_name": "Open Data Platform Demo"
@@ -97,12 +97,27 @@
               "w": 20,
               "h": 12
             }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "get_video",
+            "widget_uuid": "w_079",
+            "tab_id": "shelf",
+            "data_args": {
+              "video_name": "OpenBB Workspace Demo"
+            },
+            "layout": {
+              "x": 20,
+              "y": 18,
+              "w": 20,
+              "h": 12
+            }
           }
         ],
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_shelf_note",
+            "widget_uuid": "w_d02",
             "name": "Prior Shelf Note",
             "data": "Prior shelf: keep the data-platform walkthrough available through the onboarding cycle.",
             "tab_id": "shelf",
@@ -151,23 +166,6 @@
         ]
       },
       {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_337",
-          "widget_id": "html_widget",
-          "x": 0,
-          "y": 24,
-          "w": 20,
-          "h": 12
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
-      },
-      {
         "tool": "get_widget_schema",
         "args": {
           "origin": "Getting Started",
@@ -176,35 +174,16 @@
         "optional": true
       },
       {
-        "tool": "create_widget",
+        "tool": "update_widget",
         "args": {
-          "origin": "Getting Started",
-          "widget_id": "get_video",
+          "widget_uuid": "w_57a",
           "data_args": {
             "video_name": "OpenBB Workspace Demo"
           }
         },
         "graded_args": [
-          "origin",
-          "widget_id",
+          "widget_uuid",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_338",
-          "widget_id": "get_video",
-          "x": 20,
-          "y": 24,
-          "w": 20,
-          "h": 12
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       }
     ],
@@ -226,16 +205,9 @@
         "data_args": {
           "video_name": "OpenBB Workspace Demo"
         },
-        "tab_id": "shelf"
-      },
-      {
-        "origin": "Getting Started",
-        "widget_id": "get_video",
-        "data_args": {
-          "video_name": "Open Data Platform Demo"
-        },
         "tab_id": "shelf",
-        "max_count": 1
+        "min_count": 2,
+        "max_count": 2
       },
       {
         "origin": "Getting Started",
@@ -265,7 +237,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_data_platform_video_decoy",
+        "widget_uuid": "w_57a",
         "tab_id": "shelf",
         "x": 0,
         "y": 0,
@@ -273,7 +245,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_shelf_sparklines",
+        "widget_uuid": "w_3cf",
         "tab_id": "shelf",
         "x": 20,
         "y": 0,
@@ -281,7 +253,7 @@
         "h": 10
       },
       {
-        "widget_uuid": "seeded_prior_shelf_note",
+        "widget_uuid": "w_d02",
         "tab_id": "shelf",
         "x": 20,
         "y": 10,
@@ -289,7 +261,7 @@
         "h": 8
       },
       {
-        "widget_uuid": "seeded_shelf_transcript_video",
+        "widget_uuid": "w_190",
         "tab_id": "shelf",
         "x": 0,
         "y": 12,
@@ -297,23 +269,15 @@
         "h": 12
       },
       {
-        "widget_id": "html_widget",
-        "tab_id": "shelf",
-        "x": 0,
-        "y": 24,
-        "w": 20,
-        "h": 12
-      },
-      {
-        "widget_id": "get_video",
+        "widget_uuid": "w_079",
         "tab_id": "shelf",
         "x": 20,
-        "y": 24,
+        "y": 18,
         "w": 20,
         "h": 12
       }
     ],
     "required_dashboard_name_contains": "Desk Shelf",
-    "max_turns": 11
+    "max_turns": 9
   }
 }

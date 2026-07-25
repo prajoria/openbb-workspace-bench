@@ -1,7 +1,7 @@
 {
   "id": "var_monitor_level4",
   "difficulty": "level4",
-  "prompt": "On the open Shock Watch dashboard, add a fresh VaR Trend at x 0, y 14, width 40, height 14 from Bench Stark Enterprise's Risk & Exposure Monitor with parameters portfolio Long/Short Equity, scenario Rates +100bp, and period YTD, keeping everything already on the dashboard exactly as it is. Read the Daloopa Inflection skill and leave a Shock Watch Governance Note recording the growth cadence it says to compute first and what it flags as inflections.",
+  "prompt": "On the open Shock Watch dashboard, correct the stale VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor that has parameters portfolio Global Equity, scenario Equity -10%, and period QTD to portfolio Long/Short Equity, scenario Rates +100bp, and period YTD. The separate VaR Trend with parameters portfolio Credit Opportunities, scenario Credit +150bp, and period MTD is already correct for the credit book and must stay untouched. Add a fresh VaR Trend for the same Long/Short Equity, Rates +100bp, YTD cut, and leave every other view and record exactly as it is so the risk evidence remains intact. Read the Daloopa Inflection skill and leave a Shock Watch Governance Note recording the growth cadence it says to compute first and what it flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "risk_exposure_monitor_dashboard_var_trend",
-            "widget_uuid": "seeded_equity_var_decoy",
+            "widget_uuid": "w_42c",
             "tab_id": "watch",
             "data_args": {
               "portfolio": "Global Equity",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "risk_exposure_monitor_dashboard_risk_snapshot",
-            "widget_uuid": "seeded_risk_snapshot",
+            "widget_uuid": "w_b7c",
             "tab_id": "watch",
             "data_args": {
               "portfolio": "Global Equity",
@@ -89,12 +89,29 @@
               "w": 20,
               "h": 5
             }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+            "widget_uuid": "w_a9e",
+            "tab_id": "watch",
+            "data_args": {
+              "portfolio": "Credit Opportunities",
+              "scenario": "Credit +150bp",
+              "period": "MTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 13,
+              "w": 20,
+              "h": 14
+            }
           }
         ],
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_shock_note",
+            "widget_uuid": "w_e4b",
             "name": "Prior Shock Review Note",
             "data": "Prior review: retain the Global Equity downside sample as evidence for the limit file.",
             "tab_id": "watch",
@@ -141,6 +158,21 @@
         "optional": true
       },
       {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_42c",
+          "data_args": {
+            "portfolio": "Long/Short Equity",
+            "scenario": "Rates +100bp",
+            "period": "YTD"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
@@ -155,23 +187,6 @@
           "origin",
           "widget_id",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "risk_exposure_monitor_dashboard_var_trend",
-          "x": 0,
-          "y": 14,
-          "w": 40,
-          "h": 14
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       },
       {
@@ -201,15 +216,17 @@
           "scenario": "Rates +100bp",
           "period": "YTD"
         },
-        "tab_id": "watch"
+        "tab_id": "watch",
+        "min_count": 2,
+        "max_count": 2
       },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "risk_exposure_monitor_dashboard_var_trend",
         "data_args": {
-          "portfolio": "Global Equity",
-          "scenario": "Equity -10%",
-          "period": "QTD"
+          "portfolio": "Credit Opportunities",
+          "scenario": "Credit +150bp",
+          "period": "MTD"
         },
         "tab_id": "watch",
         "max_count": 1
@@ -247,7 +264,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_equity_var_decoy",
+        "widget_uuid": "w_42c",
         "tab_id": "watch",
         "x": 0,
         "y": 0,
@@ -255,7 +272,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_risk_snapshot",
+        "widget_uuid": "w_b7c",
         "tab_id": "watch",
         "x": 20,
         "y": 0,
@@ -263,7 +280,7 @@
         "h": 5
       },
       {
-        "widget_uuid": "seeded_prior_shock_note",
+        "widget_uuid": "w_e4b",
         "tab_id": "watch",
         "x": 20,
         "y": 5,
@@ -271,11 +288,11 @@
         "h": 8
       },
       {
-        "widget_id": "risk_exposure_monitor_dashboard_var_trend",
+        "widget_uuid": "w_a9e",
         "tab_id": "watch",
-        "x": 0,
-        "y": 14,
-        "w": 40,
+        "x": 20,
+        "y": 13,
+        "w": 20,
         "h": 14
       }
     ],

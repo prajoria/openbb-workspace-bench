@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level4",
   "difficulty": "level4",
-  "prompt": "Close out the open PM Handoff Log dashboard for the overnight desk: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note at x 20, y 22, width 20, height 8 with the exact Total Revenue actual and consensus for 2026Q1. The close-out runs under the Daloopa Earnings Review skill - the note also records the granularity that skill's first step sets for the consensus compare. Everything already on the dashboard stays as is.",
+  "prompt": "Close out the open PM Handoff Log dashboard for the overnight desk: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1. The close-out runs under the Daloopa Earnings Review skill - the note also records the granularity that skill's first step sets for the consensus compare. Everything already on the dashboard stays as is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_consensus_estimates",
-            "widget_uuid": "seeded_nvda_consensus_estimates",
+            "widget_uuid": "w_5b2",
             "tab_id": "handoff",
             "data_args": {
               "ticker": "NVDA"
@@ -75,7 +75,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_shift_note",
+            "widget_uuid": "w_5e3",
             "name": "Prior Shift Note",
             "data": "Prior shift: NVDA into the print - exception cleared, nothing carried over.",
             "tab_id": "handoff",
@@ -138,23 +138,6 @@
         "graded_args": [
           "widget_type"
         ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_335",
-          "widget_id": "generated_note",
-          "x": 20,
-          "y": 22,
-          "w": 20,
-          "h": 8
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
       }
     ],
     "required_widgets": [
@@ -189,7 +172,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_nvda_consensus_estimates",
+        "widget_uuid": "w_5b2",
         "tab_id": "handoff",
         "x": 0,
         "y": 0,
@@ -197,18 +180,10 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_prior_shift_note",
+        "widget_uuid": "w_5e3",
         "tab_id": "handoff",
         "x": 20,
         "y": 0,
-        "w": 20,
-        "h": 8
-      },
-      {
-        "widget_id": "generated_note",
-        "tab_id": "handoff",
-        "x": 20,
-        "y": 22,
         "w": 20,
         "h": 8
       }
@@ -220,6 +195,6 @@
       "Handoff"
     ],
     "required_dashboard_name_contains": "PM Handoff Log",
-    "max_turns": 9
+    "max_turns": 8
   }
 }

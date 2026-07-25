@@ -1,7 +1,7 @@
 {
   "id": "chart_deck_level2",
   "difficulty": "level2",
-  "prompt": "On the open Chart Deck dashboard, add Getting Started's TradingView Chart and Getting Started's Plotly Heatmap with its color scale set under the house palette policy, the desk's blue-green-yellow standard.",
+  "prompt": "Chart Deck on the open dashboard: add Getting Started's TradingView Chart and Getting Started's Plotly Heatmap. Set the heatmap's color scale under the house palette policy, the desk's blue-green-yellow standard.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

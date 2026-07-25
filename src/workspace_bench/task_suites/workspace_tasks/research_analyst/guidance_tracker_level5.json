@@ -59,7 +59,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_management_guidance",
-            "widget_uuid": "seeded_msft_management_guidance",
+            "widget_uuid": "w_1d4",
             "tab_id": "guidance",
             "data_args": {
               "ticker": "MSFT"
@@ -74,7 +74,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_company_directory",
-            "widget_uuid": "seeded_company_directory",
+            "widget_uuid": "w_91e",
             "tab_id": "guidance",
             "layout": {
               "x": 20,
@@ -87,7 +87,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_guidance_note",
+            "widget_uuid": "w_036",
             "name": "Prior Guidance Note",
             "data": "Prior review: MSFT open guide remains under review; carry no assumptions into the NFLX tracker.",
             "tab_id": "guidance",
@@ -309,7 +309,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_msft_management_guidance",
+        "widget_uuid": "w_1d4",
         "tab_id": "guidance",
         "x": 0,
         "y": 0,
@@ -317,7 +317,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_company_directory",
+        "widget_uuid": "w_91e",
         "tab_id": "guidance",
         "x": 20,
         "y": 0,
@@ -325,7 +325,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_prior_guidance_note",
+        "widget_uuid": "w_036",
         "tab_id": "guidance",
         "x": 0,
         "y": 12,

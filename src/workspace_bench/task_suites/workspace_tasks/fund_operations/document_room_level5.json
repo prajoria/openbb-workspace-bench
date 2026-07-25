@@ -1,7 +1,7 @@
 {
   "id": "document_room_level5",
   "difficulty": "level5",
-  "prompt": "Build the filing room service before the audit cutoff: add a Filing Room Service backend serving a Filing Register table, publish Filing Room App with Filing Register on its Filings tab, and instantiate the app. On the open Filing Room dashboard, add the built Filing Register, Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K, and Multi PDF Viewer - URL from Getting Started, keeping everything already there exactly as it is. Read the Daloopa Tearsheet skill and leave a Filing Room Governance note recording the identifier its final step says every Daloopa-sourced figure must be cited with.",
+  "prompt": "Build the filing room service before the audit cutoff: add a Filing Room Service backend serving a Filing Register table; publish Filing Room App with Filing Register on its Filings tab; instantiate the app. On the open Filing Room dashboard, add the built Filing Register, Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K, and Multi PDF Viewer - URL from Getting Started. Keep everything already there exactly as is. Read the Daloopa Tearsheet skill; leave a Filing Room Governance note recording the identifier its final step says every Daloopa-sourced figure must be cited with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_document_search",
-            "widget_uuid": "seeded_msft_document_search",
+            "widget_uuid": "w_290",
             "tab_id": "filings",
             "data_args": {
               "ticker": "MSFT",
@@ -75,7 +75,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_company_directory",
-            "widget_uuid": "seeded_company_directory",
+            "widget_uuid": "w_810",
             "tab_id": "filings",
             "layout": {
               "x": 20,
@@ -88,7 +88,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_filing_note",
+            "widget_uuid": "w_72a",
             "name": "Prior Filing Sign-off",
             "data": "Prior filing pull: MSFT quarterly filing checked and signed off.",
             "tab_id": "filings",
@@ -335,7 +335,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_msft_document_search",
+        "widget_uuid": "w_290",
         "tab_id": "filings",
         "x": 0,
         "y": 0,
@@ -343,7 +343,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_company_directory",
+        "widget_uuid": "w_810",
         "tab_id": "filings",
         "x": 20,
         "y": 0,
@@ -351,7 +351,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_prior_filing_note",
+        "widget_uuid": "w_72a",
         "tab_id": "filings",
         "x": 0,
         "y": 12,

@@ -1,7 +1,7 @@
 {
   "id": "settlement_watch_level3",
   "difficulty": "level3",
-  "prompt": "On the open Fails Watch dashboard, add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower, both with fund Income Fund, status Open, and period 1D. The cutoff is close, and everything already on the dashboard must stay exactly as it is.",
+  "prompt": "Fails watch on the open Fails Watch dashboard: add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower, both with fund Income Fund, status Open, and period 1D. The cutoff is close; everything already there must stay exactly as is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "fund_operations_control_tower_trade_lifecycle_failed_trades",
-            "widget_uuid": "seeded_failed_trades_decoy",
+            "widget_uuid": "w_704",
             "tab_id": "watch",
             "data_args": {
               "fund": "Global Opportunities",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "fund_operations_control_tower_trade_lifecycle_settlement_exceptions",
-            "widget_uuid": "seeded_settlement_exceptions_decoy",
+            "widget_uuid": "w_5f4",
             "tab_id": "watch",
             "data_args": {
               "fund": "Multi-Asset Fund",
@@ -94,7 +94,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_cutoff_note",
+            "widget_uuid": "w_c0a",
             "name": "Prior Cutoff Note",
             "data": "Prior cutoff: the Multi-Asset Fund review queue was carried to the next shift.",
             "tab_id": "watch",
@@ -226,7 +226,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_failed_trades_decoy",
+        "widget_uuid": "w_704",
         "tab_id": "watch",
         "x": 0,
         "y": 0,
@@ -234,7 +234,7 @@
         "h": 5
       },
       {
-        "widget_uuid": "seeded_settlement_exceptions_decoy",
+        "widget_uuid": "w_5f4",
         "tab_id": "watch",
         "x": 0,
         "y": 5,
@@ -242,7 +242,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_prior_cutoff_note",
+        "widget_uuid": "w_c0a",
         "tab_id": "watch",
         "x": 20,
         "y": 5,

@@ -1,7 +1,7 @@
 {
   "id": "form_tooling_level4",
   "difficulty": "level4",
-  "prompt": "On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples, with daysPicker1 set to 5 and the tester's other parameters left at their defaults. Keep everything already on the dashboard exactly as it is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind its list names between endpoint and button.",
+  "prompt": "On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 to 5 and leave the tester's other parameters at their defaults. Keep everything already there exactly as is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind listed between endpoint and button.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Widget Examples",
             "widget_id": "show_example_params",
-            "widget_uuid": "seeded_month_end_params",
+            "widget_uuid": "w_bf5",
             "tab_id": "intake",
             "data_args": {
               "datePicker1": "$currentDate-1d",
@@ -79,7 +79,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_intake_note",
+            "widget_uuid": "w_87d",
             "name": "Prior Intake Check",
             "data": "Prior intake check: the month-end exception batch stays on its existing review window.",
             "tab_id": "intake",
@@ -218,7 +218,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_month_end_params",
+        "widget_uuid": "w_bf5",
         "tab_id": "intake",
         "x": 0,
         "y": 0,
@@ -226,7 +226,7 @@
         "h": 9
       },
       {
-        "widget_uuid": "seeded_prior_intake_note",
+        "widget_uuid": "w_87d",
         "tab_id": "intake",
         "x": 20,
         "y": 0,

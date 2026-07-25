@@ -1,7 +1,7 @@
 {
   "id": "best_execution_file_level2",
   "difficulty": "level2",
-  "prompt": "Add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk to the open Best-Ex Review dashboard, both with desk set by the US desk review policy and period set to QTD.",
+  "prompt": "Best-ex file on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk. For both, set desk by the US desk review policy and period to QTD.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -131,6 +131,7 @@
         }
       }
     ],
+    "required_dashboard_name_contains": "Best-Ex Review",
     "max_turns": 8
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "alert_sweep_level5",
   "difficulty": "level5",
-  "prompt": "Build the sweep file: add a Sweep File Service backend serving a Sweep Register table, publish Sweep File App with Sweep Register on its Register tab, and instantiate the app. On the open Alert Sweep dashboard, add the built Sweep Register plus Open Alert Metrics at x 0, y 19, width 40, height 5 and Alert Trend at x 0, y 24, width 40, height 14 from Bench Stark Enterprise's Compliance Surveillance Hub, both with parameters severity High, status Open, and period MTD, keeping everything already on the dashboard exactly as it is. Read the Finance Guidance Tracker skill and leave an Alert Sweep Evidence Note recording what its workflow lists last.",
+  "prompt": "Build the sweep file: add a Sweep File Service backend serving a Sweep Register table, publish Sweep File App with Sweep Register on its Register tab, and instantiate the app. On the open Alert Sweep dashboard, add the built Sweep Register and correct the stale Open Alert Metrics instance from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity Medium, status Closed, and period YTD to severity High, status Open, and period MTD. The separate Open Alert Metrics instance with parameters severity Low, status In Review, and period QTD is already correct for the quarterly review cut and must stay untouched. Add fresh Open Alert Metrics and Alert Trend from the same app and origin, both with parameters severity High, status Open, and period MTD. Keep every other view and record on the dashboard exactly as it is so the sweep evidence remains intact. Read the Finance Guidance Tracker skill and leave an Alert Sweep Evidence Note recording what its workflow lists last.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
-            "widget_uuid": "seeded_open_alert_metrics_decoy",
+            "widget_uuid": "w_a4b",
             "tab_id": "sweep",
             "data_args": {
               "severity": "Medium",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
-            "widget_uuid": "seeded_alert_trend_decoy",
+            "widget_uuid": "w_783",
             "tab_id": "sweep",
             "data_args": {
               "severity": "Low",
@@ -89,12 +89,29 @@
               "w": 20,
               "h": 14
             }
+          },
+          {
+            "origin": "Bench Stark Enterprise",
+            "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
+            "widget_uuid": "w_a93",
+            "tab_id": "sweep",
+            "data_args": {
+              "severity": "Low",
+              "status": "In Review",
+              "period": "QTD"
+            },
+            "layout": {
+              "x": 20,
+              "y": 13,
+              "w": 20,
+              "h": 5
+            }
           }
         ],
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_sweep_note",
+            "widget_uuid": "w_ddd",
             "name": "Prior Sweep Note",
             "data": "Prior sweep: retain the Medium-severity closed-item sample for the audit file.",
             "tab_id": "sweep",
@@ -242,6 +259,21 @@
         "optional": true
       },
       {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_a4b",
+          "data_args": {
+            "severity": "High",
+            "status": "Open",
+            "period": "MTD"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
@@ -255,23 +287,6 @@
         "graded_args": [
           "origin",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
-          "x": 0,
-          "y": 19,
-          "w": 40,
-          "h": 5
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       },
       {
@@ -296,23 +311,6 @@
         "graded_args": [
           "origin",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_337",
-          "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
-          "x": 0,
-          "y": 24,
-          "w": 40,
-          "h": 14
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       },
       {
@@ -399,7 +397,20 @@
           "status": "Open",
           "period": "MTD"
         },
-        "tab_id": "sweep"
+        "tab_id": "sweep",
+        "min_count": 2,
+        "max_count": 2
+      },
+      {
+        "origin": "Bench Stark Enterprise",
+        "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
+        "data_args": {
+          "severity": "Low",
+          "status": "In Review",
+          "period": "QTD"
+        },
+        "tab_id": "sweep",
+        "max_count": 1
       },
       {
         "origin": "Bench Stark Enterprise",
@@ -410,17 +421,6 @@
           "period": "MTD"
         },
         "tab_id": "sweep"
-      },
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
-        "data_args": {
-          "severity": "Medium",
-          "status": "Closed",
-          "period": "YTD"
-        },
-        "tab_id": "sweep",
-        "max_count": 1
       },
       {
         "origin": "Bench Stark Enterprise",
@@ -454,7 +454,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_open_alert_metrics_decoy",
+        "widget_uuid": "w_a4b",
         "tab_id": "sweep",
         "x": 0,
         "y": 0,
@@ -462,7 +462,7 @@
         "h": 5
       },
       {
-        "widget_uuid": "seeded_alert_trend_decoy",
+        "widget_uuid": "w_783",
         "tab_id": "sweep",
         "x": 0,
         "y": 5,
@@ -470,7 +470,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_prior_sweep_note",
+        "widget_uuid": "w_ddd",
         "tab_id": "sweep",
         "x": 20,
         "y": 5,
@@ -478,20 +478,12 @@
         "h": 8
       },
       {
-        "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
+        "widget_uuid": "w_a93",
         "tab_id": "sweep",
-        "x": 0,
-        "y": 19,
-        "w": 40,
+        "x": 20,
+        "y": 13,
+        "w": 20,
         "h": 5
-      },
-      {
-        "widget_id": "compliance_surveillance_hub_alerts_alert_trend",
-        "tab_id": "sweep",
-        "x": 0,
-        "y": 24,
-        "w": 40,
-        "h": 14
       }
     ],
     "required_widget_defs": [
@@ -532,6 +524,6 @@
       }
     ],
     "required_dashboard_name_contains": "Alert Sweep",
-    "max_turns": 26
+    "max_turns": 25
   }
 }

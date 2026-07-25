@@ -59,7 +59,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_kpi_metrics",
-            "widget_uuid": "seeded_tsla_prior_kpis",
+            "widget_uuid": "w_acb",
             "tab_id": "scan",
             "data_args": {
               "ticker": "TSLA",
@@ -75,7 +75,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_company_directory",
-            "widget_uuid": "seeded_company_directory",
+            "widget_uuid": "w_c8e",
             "tab_id": "scan",
             "layout": {
               "x": 20,
@@ -88,7 +88,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_scan_note",
+            "widget_uuid": "w_bf8",
             "name": "Prior Scan Note",
             "data": "Prior scan: NVDA networking cadence softened into 2026Q1; keep the source trail intact.",
             "tab_id": "scan",
@@ -193,7 +193,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_tsla_prior_kpis",
+        "widget_uuid": "w_acb",
         "tab_id": "scan",
         "x": 0,
         "y": 0,
@@ -201,7 +201,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_company_directory",
+        "widget_uuid": "w_c8e",
         "tab_id": "scan",
         "x": 20,
         "y": 0,
@@ -209,7 +209,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_prior_scan_note",
+        "widget_uuid": "w_bf8",
         "tab_id": "scan",
         "x": 0,
         "y": 12,

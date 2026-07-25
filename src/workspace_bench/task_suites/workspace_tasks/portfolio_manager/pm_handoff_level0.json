@@ -110,6 +110,7 @@
         ]
       }
     ],
+    "required_dashboard_name_contains": "PM Handoff Log",
     "max_turns": 7
   }
 }

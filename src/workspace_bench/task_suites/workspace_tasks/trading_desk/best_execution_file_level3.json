@@ -1,7 +1,7 @@
 {
   "id": "best_execution_file_level3",
   "difficulty": "level3",
-  "prompt": "On the open Best-Ex Review dashboard, add Live Orders at x 0, y 46, width 20, height 12 and Broker Scorecard at x 20, y 46, width 20, height 12 from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already on the dashboard exactly as it is.",
+  "prompt": "Best-ex file on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already there exactly as is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "execution_desk_blotter_live_orders",
-            "widget_uuid": "seeded_live_orders_decoy",
+            "widget_uuid": "w_da6",
             "tab_id": "review",
             "data_args": {
               "desk": "EU Equity",
@@ -75,7 +75,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "execution_desk_fills_broker_scorecard",
-            "widget_uuid": "seeded_broker_scorecard_decoy",
+            "widget_uuid": "w_918",
             "tab_id": "review",
             "data_args": {
               "desk": "Macro",
@@ -92,7 +92,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_best_ex_note",
+            "widget_uuid": "w_19f",
             "name": "Prior Best-Ex Note",
             "data": "Prior review: retain the EU Equity routing sample for the committee appendix.",
             "tab_id": "review",
@@ -145,23 +145,6 @@
         ]
       },
       {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "execution_desk_blotter_live_orders",
-          "x": 0,
-          "y": 46,
-          "w": 20,
-          "h": 12
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
-      },
-      {
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
@@ -174,23 +157,6 @@
         "graded_args": [
           "origin",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_337",
-          "widget_id": "execution_desk_fills_broker_scorecard",
-          "x": 20,
-          "y": 46,
-          "w": 20,
-          "h": 12
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       }
     ],
@@ -252,7 +218,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_live_orders_decoy",
+        "widget_uuid": "w_da6",
         "tab_id": "review",
         "x": 0,
         "y": 0,
@@ -260,7 +226,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_broker_scorecard_decoy",
+        "widget_uuid": "w_918",
         "tab_id": "review",
         "x": 0,
         "y": 14,
@@ -268,31 +234,15 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_prior_best_ex_note",
+        "widget_uuid": "w_19f",
         "tab_id": "review",
         "x": 0,
         "y": 28,
         "w": 20,
         "h": 8
-      },
-      {
-        "widget_id": "execution_desk_blotter_live_orders",
-        "tab_id": "review",
-        "x": 0,
-        "y": 46,
-        "w": 20,
-        "h": 12
-      },
-      {
-        "widget_id": "execution_desk_fills_broker_scorecard",
-        "tab_id": "review",
-        "x": 20,
-        "y": 46,
-        "w": 20,
-        "h": 12
       }
     ],
     "required_dashboard_name_contains": "Best-Ex Review",
-    "max_turns": 10
+    "max_turns": 8
   }
 }

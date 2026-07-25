@@ -115,6 +115,7 @@
         ]
       }
     ],
+    "required_dashboard_name_contains": "Allocation Review",
     "max_turns": 7
   }
 }

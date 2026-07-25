@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
-            "widget_uuid": "seeded_upcoming_earnings_decoy",
+            "widget_uuid": "w_36b",
             "tab_id": "prep",
             "data_args": {
               "sector": "Healthcare",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "earnings_estimates_monitor_estimates_consensus_revisions",
-            "widget_uuid": "seeded_consensus_revisions",
+            "widget_uuid": "w_b8a",
             "tab_id": "prep",
             "data_args": {
               "sector": "Technology",
@@ -94,7 +94,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_prep_note",
+            "widget_uuid": "w_b01",
             "name": "Prior Prep Note",
             "data": "Prior prep: AAPL revisions remain under review; carry no assumptions into the NVDA preview.",
             "tab_id": "prep",
@@ -228,7 +228,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_upcoming_earnings_decoy",
+        "widget_uuid": "w_36b",
         "tab_id": "prep",
         "x": 0,
         "y": 0,
@@ -236,7 +236,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_consensus_revisions",
+        "widget_uuid": "w_b8a",
         "tab_id": "prep",
         "x": 20,
         "y": 0,
@@ -244,7 +244,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_prior_prep_note",
+        "widget_uuid": "w_b01",
         "tab_id": "prep",
         "x": 0,
         "y": 14,

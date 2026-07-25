@@ -1,7 +1,7 @@
 {
   "id": "allocation_read_level3",
   "difficulty": "level3",
-  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note at x 20, y 12, width 20, height 8 on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
+  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_segment_breakdown",
-            "widget_uuid": "seeded_msft_segment_breakdown",
+            "widget_uuid": "w_7e2",
             "tab_id": "review",
             "data_args": {
               "ticker": "MSFT",
@@ -75,7 +75,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_company_directory",
-            "widget_uuid": "seeded_company_directory",
+            "widget_uuid": "w_92e",
             "tab_id": "review",
             "layout": {
               "x": 20,
@@ -88,7 +88,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_allocation_note",
+            "widget_uuid": "w_f41",
             "name": "Prior Allocation Note",
             "data": "Prior review: MSFT segment mix - Intelligent Cloud led the quarter.",
             "tab_id": "review",
@@ -143,23 +143,6 @@
         "graded_args": [
           "widget_type"
         ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "generated_note",
-          "x": 20,
-          "y": 12,
-          "w": 20,
-          "h": 8
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
       }
     ],
     "required_tabs": [
@@ -206,7 +189,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_msft_segment_breakdown",
+        "widget_uuid": "w_7e2",
         "tab_id": "review",
         "x": 0,
         "y": 0,
@@ -214,7 +197,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_company_directory",
+        "widget_uuid": "w_92e",
         "tab_id": "review",
         "x": 20,
         "y": 0,
@@ -222,23 +205,15 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_prior_allocation_note",
+        "widget_uuid": "w_f41",
         "tab_id": "review",
         "x": 0,
-        "y": 12,
-        "w": 20,
-        "h": 8
-      },
-      {
-        "widget_id": "generated_note",
-        "tab_id": "review",
-        "x": 20,
         "y": 12,
         "w": 20,
         "h": 8
       }
     ],
     "required_dashboard_name_contains": "Allocation Review",
-    "max_turns": 8
+    "max_turns": 7
   }
 }

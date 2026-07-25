@@ -1,7 +1,7 @@
 {
   "id": "morning_briefing_level3",
   "difficulty": "level3",
-  "prompt": "Add Trade Ideas at x 20, y 32, width 20, height 14 from Bench Stark Enterprise's Portfolio Command Center to the open PM Morning Briefing dashboard for Flagship Long/Short, QTD - the 9am call is in ten minutes. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
+  "prompt": "Fix the stale Trade Ideas from Bench Stark Enterprise's Portfolio Command Center on the open PM Morning Briefing dashboard to Flagship Long/Short, QTD, and add a fresh Trade Ideas for the same fund and period - the 9am call is in ten minutes. Leave everything else exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "portfolio_command_center_actions_trade_ideas",
-            "widget_uuid": "seeded_trade_ideas_decoy",
+            "widget_uuid": "w_8d6",
             "tab_id": "briefing",
             "data_args": {
               "fund": "Global Opportunities",
@@ -75,7 +75,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "portfolio_command_center_overview_top_alerts",
-            "widget_uuid": "seeded_top_alerts",
+            "widget_uuid": "w_f1b",
             "tab_id": "briefing",
             "data_args": {
               "fund": "Flagship Long/Short",
@@ -92,7 +92,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_last_week_note",
+            "widget_uuid": "w_c6f",
             "name": "Last Week Briefing Note",
             "data": "Last week's briefing: watch Income Fund redemptions into month-end.",
             "tab_id": "briefing",
@@ -130,6 +130,20 @@
         "optional": true
       },
       {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_8d6",
+          "data_args": {
+            "fund": "Flagship Long/Short",
+            "period": "QTD"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
@@ -142,23 +156,6 @@
         "graded_args": [
           "origin",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_336",
-          "widget_id": "portfolio_command_center_actions_trade_ideas",
-          "x": 20,
-          "y": 32,
-          "w": 20,
-          "h": 14
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       }
     ],
@@ -176,17 +173,9 @@
           "fund": "Flagship Long/Short",
           "period": "QTD"
         },
-        "tab_id": "briefing"
-      },
-      {
-        "origin": "Bench Stark Enterprise",
-        "widget_id": "portfolio_command_center_actions_trade_ideas",
-        "data_args": {
-          "fund": "Global Opportunities",
-          "period": "1Y"
-        },
         "tab_id": "briefing",
-        "max_count": 1
+        "min_count": 2,
+        "max_count": 2
       },
       {
         "origin": "Bench Stark Enterprise",
@@ -211,7 +200,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_trade_ideas_decoy",
+        "widget_uuid": "w_8d6",
         "tab_id": "briefing",
         "x": 0,
         "y": 0,
@@ -219,7 +208,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_top_alerts",
+        "widget_uuid": "w_f1b",
         "tab_id": "briefing",
         "x": 20,
         "y": 0,
@@ -227,20 +216,12 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_last_week_note",
+        "widget_uuid": "w_c6f",
         "tab_id": "briefing",
         "x": 0,
         "y": 14,
         "w": 20,
         "h": 8
-      },
-      {
-        "widget_id": "portfolio_command_center_actions_trade_ideas",
-        "tab_id": "briefing",
-        "x": 20,
-        "y": 32,
-        "w": 20,
-        "h": 14
       }
     ],
     "required_dashboard_name_contains": "PM Morning Briefing",

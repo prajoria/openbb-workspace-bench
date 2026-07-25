@@ -59,7 +59,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_company_fundamentals",
-            "widget_uuid": "seeded_aapl_fundamentals_decoy",
+            "widget_uuid": "w_15d",
             "tab_id": "compare",
             "data_args": {
               "ticker": "AAPL",
@@ -75,7 +75,7 @@
           {
             "origin": "Bench Daloopa",
             "widget_id": "daloopa_company_directory",
-            "widget_uuid": "seeded_company_directory",
+            "widget_uuid": "w_9f5",
             "tab_id": "compare",
             "layout": {
               "x": 20,
@@ -88,7 +88,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_peer_note",
+            "widget_uuid": "w_63e",
             "name": "Prior Peer Note",
             "data": "Prior peer read: AAPL remained the reference name; do not roll that view into the cloud comparison.",
             "tab_id": "compare",
@@ -335,7 +335,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_aapl_fundamentals_decoy",
+        "widget_uuid": "w_15d",
         "tab_id": "compare",
         "x": 0,
         "y": 0,
@@ -343,7 +343,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_company_directory",
+        "widget_uuid": "w_9f5",
         "tab_id": "compare",
         "x": 20,
         "y": 0,
@@ -351,7 +351,7 @@
         "h": 12
       },
       {
-        "widget_uuid": "seeded_prior_peer_note",
+        "widget_uuid": "w_63e",
         "tab_id": "compare",
         "x": 0,
         "y": 12,

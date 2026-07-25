@@ -119,6 +119,7 @@
         ]
       }
     ],
+    "required_dashboard_name_contains": "Desk Tape",
     "max_turns": 8
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "settlement_watch_level2",
   "difficulty": "level2",
-  "prompt": "Add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower to the open Fails Watch dashboard, both for fund Income Fund and status Open, with the period set by the same-day fails policy - today only, the one-day window.",
+  "prompt": "Fails watch on the open Fails Watch dashboard: add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower. For both, use fund Income Fund, status Open, and period set by the same-day fails policy—today only, the one-day window.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

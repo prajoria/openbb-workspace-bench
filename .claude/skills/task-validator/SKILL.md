@@ -19,7 +19,7 @@ Also fair game: the simulator's tool behavior in `src/workspace_bench/workspace/
 
 ## The five questions, per task
 
-1. **Value reachability.** Every graded argument, widget placement, and note content must be obtainable from the prompt, a stated policy phrase whose meaning a person could resolve (check the options!), or a read of the world. A graded value with no path to it fails the task for everyone — flag it.
+1. **Value reachability.** Every graded argument and note content must be obtainable from the prompt, a stated policy phrase whose meaning a person could resolve (check the options!), or a read of the world. A graded value with no path to it fails the task for everyone — flag it.
 2. **Target findability.** Enough words to locate each widget, backend, dashboard, and tab. If two catalog entries share a display name, the prompt must disambiguate (app or origin). Check the catalogs, not your intuition.
 3. **Possibility.** The asked-for end state is achievable and self-consistent: the params exist on that widget, the layout fits, the seeded defect is really there to fix, the backend/app lifecycle the eval expects matches what the tools do.
 4. **Budget sanity.** Count the calls a competent-but-not-psychic agent needs, including discovery. If `max_turns` only fits the answer key, flag it.

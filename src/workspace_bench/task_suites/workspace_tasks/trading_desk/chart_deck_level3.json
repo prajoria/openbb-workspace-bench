@@ -1,7 +1,7 @@
 {
   "id": "chart_deck_level3",
   "difficulty": "level3",
-  "prompt": "On the open Chart Deck dashboard, add Getting Started's TradingView Chart at x 0, y 33, width 20, height 12 and Getting Started's fresh Plotly Heatmap with its color_scale parameter set to Viridis at x 20, y 33, width 20, height 12. Leave everything already on the dashboard exactly as it is.",
+  "prompt": "On the open Chart Deck dashboard, switch the Getting Started Plotly Heatmap still on Plasma to house-palette Viridis through its color_scale parameter, and add Getting Started's TradingView Chart. Leave the rest alone: the Inferno heatmap is correct for the other desk and must stay untouched.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "plotly_heatmap",
-            "widget_uuid": "seeded_plasma_heatmap_decoy",
+            "widget_uuid": "w_249",
             "tab_id": "deck",
             "data_args": {
               "color_scale": "Plasma"
@@ -74,7 +74,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "sparkline_line",
-            "widget_uuid": "seeded_deck_sparklines",
+            "widget_uuid": "w_e5e",
             "tab_id": "deck",
             "layout": {
               "x": 20,
@@ -86,7 +86,7 @@
           {
             "origin": "Getting Started",
             "widget_id": "plotly_chart",
-            "widget_uuid": "seeded_deck_plotly_chart",
+            "widget_uuid": "w_c57",
             "tab_id": "deck",
             "layout": {
               "x": 0,
@@ -94,12 +94,27 @@
               "w": 40,
               "h": 15
             }
+          },
+          {
+            "origin": "Getting Started",
+            "widget_id": "plotly_heatmap",
+            "widget_uuid": "w_b75",
+            "tab_id": "deck",
+            "data_args": {
+              "color_scale": "Inferno"
+            },
+            "layout": {
+              "x": 0,
+              "y": 33,
+              "w": 20,
+              "h": 15
+            }
           }
         ],
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_deck_note",
+            "widget_uuid": "w_4ef",
             "name": "Prior Deck Note",
             "data": "Prior deck: keep the cross-section view on the alternate palette through the close.",
             "tab_id": "deck",
@@ -140,23 +155,6 @@
         ]
       },
       {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_337",
-          "widget_id": "udf",
-          "x": 0,
-          "y": 33,
-          "w": 20,
-          "h": 12
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
-        ]
-      },
-      {
         "tool": "get_widget_schema",
         "args": {
           "origin": "Getting Started",
@@ -174,35 +172,16 @@
         "optional": true
       },
       {
-        "tool": "create_widget",
+        "tool": "update_widget",
         "args": {
-          "origin": "Getting Started",
-          "widget_id": "plotly_heatmap",
+          "widget_uuid": "w_249",
           "data_args": {
             "color_scale": "Viridis"
           }
         },
         "graded_args": [
-          "origin",
-          "widget_id",
+          "widget_uuid",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "widget_338",
-          "widget_id": "plotly_heatmap",
-          "x": 20,
-          "y": 33,
-          "w": 20,
-          "h": 12
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       }
     ],
@@ -224,13 +203,14 @@
         "data_args": {
           "color_scale": "Viridis"
         },
-        "tab_id": "deck"
+        "tab_id": "deck",
+        "max_count": 1
       },
       {
         "origin": "Getting Started",
         "widget_id": "plotly_heatmap",
         "data_args": {
-          "color_scale": "Plasma"
+          "color_scale": "Inferno"
         },
         "tab_id": "deck",
         "max_count": 1
@@ -260,7 +240,7 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "seeded_plasma_heatmap_decoy",
+        "widget_uuid": "w_249",
         "tab_id": "deck",
         "x": 0,
         "y": 0,
@@ -268,7 +248,7 @@
         "h": 15
       },
       {
-        "widget_uuid": "seeded_deck_sparklines",
+        "widget_uuid": "w_e5e",
         "tab_id": "deck",
         "x": 20,
         "y": 0,
@@ -276,7 +256,7 @@
         "h": 10
       },
       {
-        "widget_uuid": "seeded_prior_deck_note",
+        "widget_uuid": "w_4ef",
         "tab_id": "deck",
         "x": 20,
         "y": 10,
@@ -284,7 +264,7 @@
         "h": 8
       },
       {
-        "widget_uuid": "seeded_deck_plotly_chart",
+        "widget_uuid": "w_c57",
         "tab_id": "deck",
         "x": 0,
         "y": 18,
@@ -292,23 +272,15 @@
         "h": 15
       },
       {
-        "widget_id": "udf",
+        "widget_uuid": "w_b75",
         "tab_id": "deck",
         "x": 0,
         "y": 33,
         "w": 20,
-        "h": 12
-      },
-      {
-        "widget_id": "plotly_heatmap",
-        "tab_id": "deck",
-        "x": 20,
-        "y": 33,
-        "w": 20,
-        "h": 12
+        "h": 15
       }
     ],
     "required_dashboard_name_contains": "Chart Deck",
-    "max_turns": 11
+    "max_turns": 9
   }
 }

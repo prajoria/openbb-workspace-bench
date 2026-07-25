@@ -122,6 +122,7 @@
         }
       }
     ],
+    "required_dashboard_name_contains": "Best-Ex Review",
     "max_turns": 7
   }
 }

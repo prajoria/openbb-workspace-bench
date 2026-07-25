@@ -126,6 +126,7 @@
         }
       }
     ],
+    "required_dashboard_name_contains": "Alert Sweep",
     "max_turns": 7
   }
 }

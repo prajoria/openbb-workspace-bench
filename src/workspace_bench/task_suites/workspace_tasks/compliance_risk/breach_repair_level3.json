@@ -1,7 +1,7 @@
 {
   "id": "breach_repair_level3",
   "difficulty": "level3",
-  "prompt": "On the open Breach Review dashboard, repair Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub that is currently configured with parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD, then place the repaired view at x 0, y 28, width 40, height 14. Keep everything else on the dashboard exactly as it is.",
+  "prompt": "On the open Breach Review dashboard, repair the Policy Breaches view from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD. The separate Policy Breaches view with parameters severity Low, status In Review, and period MTD is already correct for its review cut and must not be changed. Keep every other view and record exactly as it is so the breach evidence remains intact.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -59,7 +59,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
-            "widget_uuid": "policy_breaches_primary",
+            "widget_uuid": "w_b2b",
             "tab_id": "review",
             "data_args": {
               "severity": "High",
@@ -76,7 +76,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
-            "widget_uuid": "policy_breaches_decoy",
+            "widget_uuid": "w_7b8",
             "tab_id": "review",
             "data_args": {
               "severity": "Low",
@@ -93,7 +93,7 @@
           {
             "origin": "Bench Stark Enterprise",
             "widget_id": "compliance_surveillance_hub_personal_trading_pre_clearance_queue",
-            "widget_uuid": "seeded_pre_clearance_queue",
+            "widget_uuid": "w_a00",
             "tab_id": "review",
             "data_args": {
               "severity": "Medium",
@@ -111,7 +111,7 @@
         "generated_widgets": [
           {
             "widget_type": "note",
-            "widget_uuid": "seeded_prior_breach_note",
+            "widget_uuid": "w_4aa",
             "name": "Prior Breach Review Note",
             "data": "Prior review: retain the approved pre-clearance sample as evidence for the audit file.",
             "tab_id": "review",
@@ -151,7 +151,7 @@
       {
         "tool": "update_widget",
         "args": {
-          "widget_uuid": "policy_breaches_primary",
+          "widget_uuid": "w_b2b",
           "data_args": {
             "severity": "High",
             "status": "Open",
@@ -159,24 +159,8 @@
           }
         },
         "graded_args": [
+          "widget_uuid",
           "data_args"
-        ]
-      },
-      {
-        "tool": "update_widget_layout",
-        "args": {
-          "widget_uuid": "policy_breaches_primary",
-          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
-          "x": 0,
-          "y": 28,
-          "w": 40,
-          "h": 14
-        },
-        "graded_args": [
-          "x",
-          "y",
-          "w",
-          "h"
         ]
       }
     ],
@@ -233,15 +217,15 @@
     ],
     "required_layouts": [
       {
-        "widget_uuid": "policy_breaches_primary",
+        "widget_uuid": "w_b2b",
         "tab_id": "review",
         "x": 0,
-        "y": 28,
-        "w": 40,
+        "y": 0,
+        "w": 20,
         "h": 14
       },
       {
-        "widget_uuid": "policy_breaches_decoy",
+        "widget_uuid": "w_7b8",
         "tab_id": "review",
         "x": 20,
         "y": 0,
@@ -249,7 +233,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_pre_clearance_queue",
+        "widget_uuid": "w_a00",
         "tab_id": "review",
         "x": 0,
         "y": 14,
@@ -257,7 +241,7 @@
         "h": 14
       },
       {
-        "widget_uuid": "seeded_prior_breach_note",
+        "widget_uuid": "w_4aa",
         "tab_id": "review",
         "x": 20,
         "y": 14,
@@ -266,6 +250,6 @@
       }
     ],
     "required_dashboard_name_contains": "Breach Review",
-    "max_turns": 8
+    "max_turns": 7
   }
 }
