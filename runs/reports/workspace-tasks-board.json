@@ -224,6 +224,235 @@
     "missing_tool_call": 5,
     "missing_generated_widget": 2
    }
+  },
+  {
+   "model": "gpt-oss-20b",
+   "episodes": 120,
+   "pass_at_1": 0.1917,
+   "process_failures": 4,
+   "per_level": {
+    "level0": {
+     "passes": 9,
+     "attempts": 24,
+     "rate": 0.375
+    },
+    "level1": {
+     "passes": 5,
+     "attempts": 24,
+     "rate": 0.2083
+    },
+    "level2": {
+     "passes": 7,
+     "attempts": 24,
+     "rate": 0.2917
+    },
+    "level3": {
+     "passes": 2,
+     "attempts": 24,
+     "rate": 0.0833
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 204,
+    "missing_widget": 145,
+    "missing_generated_widget": 76,
+    "layout_mismatch": 61,
+    "too_many_invalid_calls": 49,
+    "app_def_mismatch": 15,
+    "missing_widget_def": 13,
+    "dashboard_name": 10,
+    "widget_list_not_called_before_use": 8,
+    "missing_tab": 4,
+    "missing_tab_name": 4,
+    "missing_app_def": 4,
+    "missing_tool_result": 4,
+    "missing_custom_backend": 2,
+    "backend_validation_warnings": 1
+   }
+  },
+  {
+   "model": "openrouter-anthropic-claude-opus-5",
+   "episodes": 120,
+   "pass_at_1": 0.0,
+   "process_failures": 106,
+   "per_level": {
+    "level0": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level1": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level2": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level3": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 380,
+    "missing_widget": 156,
+    "missing_generated_widget": 72,
+    "missing_custom_backend": 48,
+    "too_many_invalid_calls": 16,
+    "missing_tool_result": 8
+   },
+   "excluded": "process failures exceed 20% - provider outage or credit limit; resume before publishing"
+  },
+  {
+   "model": "openrouter-moonshotai-kimi-k3",
+   "episodes": 120,
+   "pass_at_1": 0.0,
+   "process_failures": 120,
+   "per_level": {
+    "level0": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level1": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level2": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level3": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 380,
+    "missing_widget": 156,
+    "missing_generated_widget": 72,
+    "missing_custom_backend": 48,
+    "missing_tool_result": 8
+   },
+   "excluded": "process failures exceed 20% - provider outage or credit limit; resume before publishing"
+  },
+  {
+   "model": "openrouter-z-ai-glm-5.2",
+   "episodes": 120,
+   "pass_at_1": 0.1333,
+   "process_failures": 0,
+   "per_level": {
+    "level0": {
+     "passes": 6,
+     "attempts": 24,
+     "rate": 0.25
+    },
+    "level1": {
+     "passes": 6,
+     "attempts": 24,
+     "rate": 0.25
+    },
+    "level2": {
+     "passes": 3,
+     "attempts": 24,
+     "rate": 0.125
+    },
+    "level3": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level4": {
+     "passes": 1,
+     "attempts": 24,
+     "rate": 0.0417
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 302,
+    "missing_widget": 130,
+    "too_many_invalid_calls": 95,
+    "missing_generated_widget": 59,
+    "missing_custom_backend": 36,
+    "missing_tool_result": 7,
+    "missing_widget_def": 1,
+    "app_def_mismatch": 1,
+    "widget_list_not_called_before_use": 1
+   },
+   "excluded": "serving-confounded: same weights scored 3x higher via another route; rerun with a pinned provider before publishing"
+  },
+  {
+   "model": "qwen3-8b",
+   "episodes": 120,
+   "pass_at_1": 0.1667,
+   "process_failures": 7,
+   "per_level": {
+    "level0": {
+     "passes": 9,
+     "attempts": 24,
+     "rate": 0.375
+    },
+    "level1": {
+     "passes": 5,
+     "attempts": 24,
+     "rate": 0.2083
+    },
+    "level2": {
+     "passes": 4,
+     "attempts": 24,
+     "rate": 0.1667
+    },
+    "level3": {
+     "passes": 2,
+     "attempts": 24,
+     "rate": 0.0833
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 226,
+    "missing_widget": 117,
+    "missing_generated_widget": 69,
+    "layout_mismatch": 24,
+    "too_many_invalid_calls": 12,
+    "missing_custom_backend": 10,
+    "missing_app_def": 10,
+    "app_def_mismatch": 8,
+    "missing_tool_result": 7,
+    "missing_widget_def": 5,
+    "missing_tab": 4,
+    "backend_validation_warnings": 3,
+    "widget_list_not_called_before_use": 3,
+    "missing_tab_name": 2,
+    "dashboard_name": 2,
+    "app_layout_ref_invalid": 1
+   }
   }
  ]
 }

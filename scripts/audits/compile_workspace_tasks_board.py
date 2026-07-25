@@ -73,6 +73,14 @@ def main() -> int:
         # exclude runs dominated by process failures (credit/provider outages)
         if r["process_failures"] > len(complete_rows) * 0.2:
             r["excluded"] = "process failures exceed 20% - provider outage or credit limit; resume before publishing"
+        MANUAL_EXCLUSIONS = {
+            "openrouter-z-ai-glm-5.2": (
+                "serving-confounded: same weights scored 3x higher via another route; "
+                "rerun with a pinned provider before publishing"
+            ),
+        }
+        if label in MANUAL_EXCLUSIONS:
+            r["excluded"] = MANUAL_EXCLUSIONS[label]
         board.append(r)
     OUT.write_text(json.dumps({"suite": "workspace_tasks", "protocol": "closed-world",
                                "levels": LEVELS, "board": board}, indent=1))
