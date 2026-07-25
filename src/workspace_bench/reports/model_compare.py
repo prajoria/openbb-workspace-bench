@@ -1577,33 +1577,31 @@ def call_openai_chat(
                 "strict": False,
             },
         }
-    try:
-        body = post_json(
-            f"{base_url}/chat/completions",
-            payload,
-            timeout,
-            headers={"Authorization": f"Bearer {api_key}"},
-        )
-    except Exception as error:
-        # Reasoning-family OpenAI models reject max_tokens in favor of
-        # max_completion_tokens, and reject non-default temperature outright;
-        # strip the offending field once and retry.
-        message = str(error)
-        retried = False
-        if "max_completion_tokens" in message and "max_tokens" in payload:
-            payload["max_completion_tokens"] = payload.pop("max_tokens")
-            retried = True
-        if "temperature" in message and "unsupported_value" in message and "temperature" in payload:
-            payload.pop("temperature")
-            retried = True
-        if retried:
+    # Reasoning-family OpenAI models reject max_tokens (use
+    # max_completion_tokens) and non-default temperature - and the API
+    # reports one offending param per response, so adapt-and-retry loops
+    # until the payload is accepted or the error is something else.
+    for _ in range(3):
+        try:
             body = post_json(
                 f"{base_url}/chat/completions",
                 payload,
                 timeout,
                 headers={"Authorization": f"Bearer {api_key}"},
             )
-        else:
+            break
+        except Exception as error:
+            message = str(error)
+            if "max_completion_tokens" in message and "max_tokens" in payload:
+                payload["max_completion_tokens"] = payload.pop("max_tokens")
+                continue
+            if (
+                "temperature" in message
+                and "unsupported_value" in message
+                and "temperature" in payload
+            ):
+                payload.pop("temperature")
+                continue
             raise
     _record_provider_meta(
         model=body.get("model"),
