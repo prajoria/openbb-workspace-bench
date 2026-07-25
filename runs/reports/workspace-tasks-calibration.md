@@ -1,12 +1,13 @@
 # workspace_tasks calibration
 
-Model: `openai:gpt-4.1-mini` - 3 repeats per task, 5 persona(s) recorded.
+Model: `openai:gpt-4.1-mini` - 3 repeats per task, 6 persona(s) recorded.
 
 | persona | level0 | level1 | level2 | level3 | level4 | level5 | monotone |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | :-: |
-| compliance_risk | 100% | 92% | 50% | 42% | 42% | 0% | yes |
-| fund_operations | 92% | 50% | 42% | 25% | 25% | 0% | yes |
-| portfolio_manager | 92% | 50% | 33% | 25% | 17% | 0% | yes |
-| research_analyst | 100% | 100% | 92% | 75% | 8% | 8% | yes |
-| trading_desk | 75% | 25% | 25% | 75% | 0% | 0% | NO |
-| **all** | 92% | 63% | 48% | 48% | 18% | 2% | yes |
+| client_advisor | 83% | 75% | 42% | 33% | 0% | — | yes |
+| compliance_risk | 100% | 67% | 58% | 33% | 0% | — | yes |
+| fund_operations | 67% | 33% | 50% | 25% | 0% | — | NO |
+| portfolio_manager | 100% | 75% | 17% | 8% | 0% | — | yes |
+| research_analyst | 83% | 83% | 42% | 0% | 0% | — | yes |
+| trading_desk | 75% | 25% | 8% | 0% | 0% | — | yes |
+| **all** | 85% | 60% | 36% | 17% | 0% | — | yes |
