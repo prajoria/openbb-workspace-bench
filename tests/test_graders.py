@@ -239,3 +239,27 @@ def test_grader_matches_required_resource_read() -> None:
     grade = grade_task(task, snapshot, trace)
 
     assert grade.passed is True
+
+
+def test_missing_widget_split_absent_vs_misconfigured() -> None:
+    from workspace_bench.core.graders import _matching_required_widgets, _same_identity_widgets
+    from workspace_bench.core.models import RequiredWidget
+
+    required = RequiredWidget(
+        origin="Getting Started", widget_id="live_grid_data",
+        data_args={"symbol": "TSLA"}, min_count=1,
+    )
+    absent_world = [
+        {"origin": "Getting Started", "widget_id": "sparkline_line", "data_args": {}},
+    ]
+    misconfigured_world = [
+        {"origin": "Getting Started", "widget_id": "live_grid_data", "data_args": {"symbol": "AAPL"}},
+    ]
+    correct_world = [
+        {"origin": "Getting Started", "widget_id": "live_grid_data", "data_args": {"symbol": "TSLA"}},
+    ]
+    assert _matching_required_widgets(required, absent_world) == []
+    assert _same_identity_widgets(required, absent_world) == []
+    assert _matching_required_widgets(required, misconfigured_world) == []
+    assert len(_same_identity_widgets(required, misconfigured_world)) == 1
+    assert len(_matching_required_widgets(required, correct_world)) == 1

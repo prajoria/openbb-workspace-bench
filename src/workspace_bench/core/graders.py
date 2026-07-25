@@ -149,15 +149,33 @@ def grade_task(
 
     for required in task.success.required_widgets:
         matches = _matching_required_widgets(required, widgets)
-        state_builder.check(
-            len(matches) >= required.min_count,
-            "missing_widget",
-            (
-                f"Expected at least {required.min_count} widget(s) "
-                f"{required.origin}/{required.widget_id} with data_args "
-                f"{required.data_args}, found {len(matches)}."
-            ),
-        )
+        if len(matches) >= required.min_count:
+            state_builder.check(True, "missing_widget", "")
+        else:
+            # Same pass/fail semantics, split diagnostics: a widget that never
+            # landed and one that landed misconfigured are different failures.
+            candidates = _same_identity_widgets(required, widgets)
+            if candidates:
+                observed = [widget.get("data_args") or {} for widget in candidates]
+                state_builder.check(
+                    False,
+                    "misconfigured_widget",
+                    (
+                        f"Widget {required.origin}/{required.widget_id} is present "
+                        f"but no instance carries data_args {required.data_args}; "
+                        f"observed {observed}."
+                    ),
+                )
+            else:
+                state_builder.check(
+                    False,
+                    "missing_widget",
+                    (
+                        f"Expected at least {required.min_count} widget(s) "
+                        f"{required.origin}/{required.widget_id} with data_args "
+                        f"{required.data_args}, found none of that widget at all."
+                    ),
+                )
         if required.max_count is not None:
             builder.check(
                 len(matches) <= required.max_count,
@@ -382,6 +400,25 @@ def grade_task(
         polish_issues=tuple(polish_builder.issues),
         issues=issues,
     )
+
+
+def _same_identity_widgets(required: RequiredWidget, widgets: list[JsonDict]) -> list[JsonDict]:
+    """Instances matching origin/widget_id (and tab) regardless of data_args."""
+
+    matches = []
+    for widget in widgets:
+        if widget.get("generated"):
+            continue
+        if widget.get("origin") != required.origin:
+            continue
+        if widget.get("widget_id") != required.widget_id:
+            continue
+        if required.tab_id is not None:
+            layout = widget.get("layout") or {}
+            if layout.get("tab_id") != required.tab_id:
+                continue
+        matches.append(widget)
+    return matches
 
 
 def _matching_required_widgets(required: RequiredWidget, widgets: list[JsonDict]) -> list[JsonDict]:
