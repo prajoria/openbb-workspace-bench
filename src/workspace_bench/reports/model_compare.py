@@ -1586,9 +1586,17 @@ def call_openai_chat(
         )
     except Exception as error:
         # Reasoning-family OpenAI models reject max_tokens in favor of
-        # max_completion_tokens; swap the key once and retry.
-        if "max_completion_tokens" in str(error) and "max_tokens" in payload:
+        # max_completion_tokens, and reject non-default temperature outright;
+        # strip the offending field once and retry.
+        message = str(error)
+        retried = False
+        if "max_completion_tokens" in message and "max_tokens" in payload:
             payload["max_completion_tokens"] = payload.pop("max_tokens")
+            retried = True
+        if "temperature" in message and "unsupported_value" in message and "temperature" in payload:
+            payload.pop("temperature")
+            retried = True
+        if retried:
             body = post_json(
                 f"{base_url}/chat/completions",
                 payload,
