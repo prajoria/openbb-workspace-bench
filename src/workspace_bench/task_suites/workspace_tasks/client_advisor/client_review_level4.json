@@ -1,0 +1,491 @@
+{
+  "id": "client_review_level4",
+  "difficulty": "level4",
+  "prompt": "Build the client's review register before the meeting: add a Client Review Service backend serving a Review Register table, publish Client Review App with Review Register on its Review tab, and instantiate the app. On the open Quarterly Client Review dashboard, add the built Review Register and correct the stale Company Fundamentals instance from Bench Daloopa that has parameters ticker MSFT and period 2025Q4 to ticker AAPL and period 2026Q1. The separate Company Fundamentals instance with parameters ticker TSLA and period 2025Q4 belongs to another client conversation and must stay untouched. Add fresh Company Fundamentals and Segment Breakdown from Bench Daloopa, both with parameters ticker AAPL and period 2026Q1. Keep every other view and note on the dashboard exactly as it is so the review remains ready to explain. Read the Daloopa Tearsheet skill and leave a Client Review Sourcing Note recording the sourcing field its workflow requires for every Daloopa-sourced figure.",
+  "setup": {
+    "workspace_baseline": "stark-workspace-a",
+    "workspace_backends": [
+      "stark-enterprise-x",
+      "support-daloopa-skills",
+      "getting-started",
+      "widget-examples"
+    ],
+    "workspace_skills": [
+      "daloopa-capital-allocation",
+      "daloopa-earnings-review",
+      "daloopa-guidance-tracker",
+      "daloopa-industry",
+      "daloopa-inflection",
+      "daloopa-tearsheet",
+      "finance-comps",
+      "finance-earnings-prep",
+      "finance-guidance-tracker",
+      "finance-tearsheet"
+    ],
+    "default_selected_dashboard": "Quarterly Client Review",
+    "allowed_tools": [
+      "get_workspace_snapshot",
+      "manage_dashboard",
+      "manage_navigation_bar",
+      "navigate_workspace",
+      "list_available_widgets",
+      "get_widget_schema",
+      "get_params_options",
+      "get_widget_data",
+      "create_widget",
+      "update_widget",
+      "update_widget_layout",
+      "delete_widget",
+      "add_generative_widget",
+      "read_widget",
+      "manage_backends",
+      "manage_apps",
+      "get_skill_content",
+      "read_workspace_resource",
+      "get_workspace_prompt",
+      "assign_tasks_to_agents"
+    ],
+    "initial_state": {
+      "dashboard": {
+        "name": "Quarterly Client Review",
+        "activate": false,
+        "tabs": [
+          {
+            "id": "review",
+            "name": "Review"
+          }
+        ],
+        "widgets": [
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_fundamentals",
+            "widget_uuid": "w_4c1",
+            "tab_id": "review",
+            "data_args": {
+              "ticker": "MSFT",
+              "period": "2025Q4"
+            },
+            "layout": {
+              "x": 0,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_fundamentals",
+            "widget_uuid": "w_8a7",
+            "tab_id": "review",
+            "data_args": {
+              "ticker": "TSLA",
+              "period": "2025Q4"
+            },
+            "layout": {
+              "x": 20,
+              "y": 0,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_segment_breakdown",
+            "widget_uuid": "w_2f9",
+            "tab_id": "review",
+            "data_args": {
+              "ticker": "MSFT",
+              "period": "2025Q4"
+            },
+            "layout": {
+              "x": 0,
+              "y": 12,
+              "w": 20,
+              "h": 12
+            }
+          },
+          {
+            "origin": "Bench Daloopa",
+            "widget_id": "daloopa_company_directory",
+            "widget_uuid": "w_6d3",
+            "tab_id": "review",
+            "layout": {
+              "x": 20,
+              "y": 12,
+              "w": 20,
+              "h": 12
+            }
+          }
+        ],
+        "generated_widgets": [
+          {
+            "widget_type": "note",
+            "widget_uuid": "w_b45",
+            "name": "Prior Client Review Note",
+            "data": "Prior review: retain the Tesla comparison and Microsoft's 2025Q4 segment mix for the client's follow-up questions.",
+            "tab_id": "review",
+            "layout": {
+              "x": 0,
+              "y": 24,
+              "w": 40,
+              "h": 8
+            }
+          }
+        ]
+      }
+    }
+  },
+  "eval": {
+    "required_tools": [
+      {
+        "tool": "get_workspace_snapshot",
+        "args": {},
+        "optional": true
+      },
+      {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Client Review Service",
+          "url": "http://127.0.0.1:9724",
+          "widgets_json": {
+            "review_register": {
+              "name": "Review Register",
+              "description": "Authored register for the client's quarterly review.",
+              "endpoint": "/review-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Client Review App",
+              "description": "Authored app for the client's quarterly review register.",
+              "tabs": {
+                "review": {
+                  "id": "review",
+                  "name": "Review",
+                  "layout": [
+                    {
+                      "i": "review_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Client Review Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Client Review Service",
+          "widget_id": "review_register"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Client Review Service",
+          "widget_id": "review_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_company_fundamentals"
+        },
+        "optional": true
+      },
+      {
+        "tool": "update_widget",
+        "args": {
+          "widget_uuid": "w_4c1",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "2026Q1"
+          }
+        },
+        "graded_args": [
+          "widget_uuid",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_company_fundamentals",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "2026Q1"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_segment_breakdown"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_segment_breakdown",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "2026Q1"
+          }
+        },
+        "graded_args": [
+          "origin",
+          "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Client Review Sourcing Note",
+          "data": "For the client review, cite every Daloopa-sourced figure with its source_url."
+        },
+        "graded_args": [
+          "widget_type"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Client Review App",
+          "dashboard_name": "Client Review App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      }
+    ],
+    "required_tabs": [
+      "review"
+    ],
+    "required_tab_names": [
+      "Review"
+    ],
+    "required_widgets": [
+      {
+        "origin": "Client Review Service",
+        "widget_id": "review_register",
+        "tab_id": "review"
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_fundamentals",
+        "data_args": {
+          "ticker": "AAPL",
+          "period": "2026Q1"
+        },
+        "tab_id": "review",
+        "min_count": 2,
+        "max_count": 2
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_fundamentals",
+        "data_args": {
+          "ticker": "TSLA",
+          "period": "2025Q4"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_segment_breakdown",
+        "data_args": {
+          "ticker": "AAPL",
+          "period": "2026Q1"
+        },
+        "tab_id": "review"
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_segment_breakdown",
+        "data_args": {
+          "ticker": "MSFT",
+          "period": "2025Q4"
+        },
+        "tab_id": "review",
+        "max_count": 1
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_directory",
+        "tab_id": "review",
+        "max_count": 1
+      }
+    ],
+    "required_generated_widgets": [
+      {
+        "widget_type": "note",
+        "name_contains": "Prior Client Review Note",
+        "data_contains": [
+          "Prior review: retain the Tesla comparison and Microsoft's 2025Q4 segment mix for the client's follow-up questions."
+        ],
+        "tab_id": "review"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Client Review Sourcing",
+        "data_contains": [
+          "source_url"
+        ],
+        "tab_id": "review"
+      }
+    ],
+    "required_layouts": [
+      {
+        "widget_uuid": "w_4c1",
+        "tab_id": "review",
+        "x": 0,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "w_8a7",
+        "tab_id": "review",
+        "x": 20,
+        "y": 0,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "w_2f9",
+        "tab_id": "review",
+        "x": 0,
+        "y": 12,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "w_6d3",
+        "tab_id": "review",
+        "x": 20,
+        "y": 12,
+        "w": 20,
+        "h": 12
+      },
+      {
+        "widget_uuid": "w_b45",
+        "tab_id": "review",
+        "x": 0,
+        "y": 24,
+        "w": 40,
+        "h": 8
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Client Review Service",
+        "widget_id": "review_register",
+        "expect": {
+          "name": "Review Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Client Review Service",
+        "name_contains": "Client Review App",
+        "tabs_include": [
+          "review"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "review",
+            "widget_id": "review_register"
+          }
+        ]
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_apps",
+        "data_contains": [
+          "Client Review App",
+          "Review",
+          "Client Review Service"
+        ]
+      }
+    ],
+    "required_dashboard_name_contains": "Quarterly Client Review",
+    "max_turns": 19
+  }
+}

@@ -1,7 +1,7 @@
 {
   "id": "chart_deck_level3",
   "difficulty": "level3",
-  "prompt": "On the open Chart Deck dashboard, switch the Getting Started Plotly Heatmap still on Plasma to house-palette Viridis through its color_scale parameter, and add Getting Started's TradingView Chart. Leave the rest alone: the Inferno heatmap is correct for the other desk and must stay untouched.",
+  "prompt": "On the open Chart Deck dashboard, switch the Getting Started Plotly Heatmap still on Plasma to house-palette Viridis through its color_scale parameter, and add Getting Started's TradingView Chart. Leave the rest alone: the Inferno heatmap is correct for the other desk and must stay untouched. Read Workspace session guidance; leave a Chart Deck Governance note recording its stable phrase for anchoring work to the current dashboard and tab.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -137,6 +137,15 @@
         "optional": true
       },
       {
+        "tool": "get_workspace_prompt",
+        "args": {
+          "name": "workspace_session_context"
+        },
+        "graded_args": [
+          "name"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Getting Started"
@@ -182,6 +191,17 @@
         "graded_args": [
           "widget_uuid",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Chart Deck Governance",
+          "data": "Workspace session guidance: current-dashboard current-tab session grounding."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -236,6 +256,14 @@
           "Prior deck: keep the cross-section view on the alternate palette through the close."
         ],
         "tab_id": "deck"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Chart Deck Governance",
+        "data_contains": [
+          "current-dashboard current-tab session grounding"
+        ],
+        "tab_id": "deck"
       }
     ],
     "required_layouts": [
@@ -281,6 +309,6 @@
       }
     ],
     "required_dashboard_name_contains": "Chart Deck",
-    "max_turns": 9
+    "max_turns": 11
   }
 }

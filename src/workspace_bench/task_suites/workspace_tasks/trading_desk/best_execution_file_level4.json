@@ -1,7 +1,7 @@
 {
   "id": "best_execution_file_level4",
   "difficulty": "level4",
-  "prompt": "Best-ex file on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already there exactly as is. Under the Finance Comps skill, leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.",
+  "prompt": "Build the committee file: add a Best-Ex File Service backend serving a Best-Ex Register table; publish Best-Ex File App with Best-Ex Register on its Review tab; instantiate the app. On the open Best-Ex Review dashboard, add the built Best-Ex Register, Live Orders, and Broker Scorecard from Bench Stark Enterprise's Execution Desk, with parameters desk US Equity and period QTD on both desk widgets. Keep everything already there exactly as is. Read the Finance Comps skill and leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -124,9 +124,109 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Best-Ex File Service",
+          "url": "http://127.0.0.1:9731",
+          "widgets_json": {
+            "best_ex_register": {
+              "name": "Best-Ex Register",
+              "description": "Authored register for the desk's quarterly best-execution file.",
+              "endpoint": "/best-ex-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Best-Ex File App",
+              "description": "Authored app for the desk's quarterly best-execution file.",
+              "tabs": {
+                "review": {
+                  "id": "review",
+                  "name": "Review",
+                  "layout": [
+                    {
+                      "i": "best_ex_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Best-Ex File App",
+          "dashboard_name": "Best-Ex File App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Best-Ex File Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Best-Ex File Service",
+          "widget_id": "best_ex_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "execution_desk_blotter_live_orders",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -179,6 +279,11 @@
       "Review"
     ],
     "required_widgets": [
+      {
+        "origin": "Best-Ex File Service",
+        "widget_id": "best_ex_register",
+        "tab_id": "review"
+      },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "execution_desk_blotter_live_orders",
@@ -262,7 +367,34 @@
         "h": 8
       }
     ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Best-Ex File Service",
+        "widget_id": "best_ex_register",
+        "expect": {
+          "name": "Best-Ex Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Best-Ex File Service",
+        "name_contains": "Best-Ex File App",
+        "tabs_include": [
+          "review"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "review",
+            "widget_id": "best_ex_register"
+          }
+        ]
+      }
+    ],
     "required_dashboard_name_contains": "Best-Ex Review",
-    "max_turns": 9
+    "max_turns": 16
   }
 }

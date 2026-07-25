@@ -1,7 +1,7 @@
 {
   "id": "form_tooling_level4",
   "difficulty": "level4",
-  "prompt": "On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 to 5 and leave the tester's other parameters at their defaults. Keep everything already there exactly as is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind listed between endpoint and button.",
+  "prompt": "Build the intake service before cutoff: add an Intake Form Service backend serving an Intake Register table; publish Intake Controls App with Intake Register on its Register tab; instantiate the app. On the open Intake Tools dashboard, add the built Intake Register, Financial Entry Form, and Example Backend Params from Widget Examples. Set daysPicker1 to 5 and leave the tester's other parameters at their defaults. Keep everything already there exactly as is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind listed between endpoint and button.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -111,9 +111,111 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Intake Form Service",
+          "url": "http://127.0.0.1:9718",
+          "widgets_json": {
+            "intake_register": {
+              "name": "Intake Register",
+              "description": "Authored register for operational intake submissions.",
+              "endpoint": "/intake-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Intake Controls App",
+              "description": "Authored app for the operations intake register.",
+              "tabs": {
+                "register": {
+                  "id": "register",
+                  "name": "Register",
+                  "layout": [
+                    {
+                      "i": "intake_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Intake Form Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Intake Form Service",
+          "widget_id": "intake_register"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Intake Form Service",
+          "widget_id": "intake_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Widget Examples"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "form_submit_widget"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Widget Examples",
+          "widget_id": "show_example_params"
         },
         "optional": true
       },
@@ -162,6 +264,19 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Intake Controls App",
+          "dashboard_name": "Intake Controls App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
       }
     ],
     "required_tabs": [
@@ -171,6 +286,11 @@
       "Intake"
     ],
     "required_widgets": [
+      {
+        "origin": "Intake Form Service",
+        "widget_id": "intake_register",
+        "tab_id": "intake"
+      },
       {
         "origin": "Widget Examples",
         "widget_id": "form_submit_widget",
@@ -196,6 +316,33 @@
         },
         "tab_id": "intake",
         "max_count": 1
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Intake Form Service",
+        "widget_id": "intake_register",
+        "expect": {
+          "name": "Intake Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Intake Form Service",
+        "name_contains": "Intake Controls App",
+        "tabs_include": [
+          "register"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "register",
+            "widget_id": "intake_register"
+          }
+        ]
       }
     ],
     "required_generated_widgets": [
@@ -235,6 +382,6 @@
       }
     ],
     "required_dashboard_name_contains": "Intake Tools",
-    "max_turns": 10
+    "max_turns": 20
   }
 }

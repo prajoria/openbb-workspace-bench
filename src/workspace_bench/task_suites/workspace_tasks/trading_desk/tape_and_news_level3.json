@@ -1,7 +1,7 @@
 {
   "id": "tape_and_news_level3",
   "difficulty": "level3",
-  "prompt": "Tape check on the open Desk Tape dashboard: read Getting Started's Sample News Feed for business, limited to 3. Leave a Tape Lead Note recording the exact lead title and author, and keep everything already there exactly as is.",
+  "prompt": "Tape check on the open Desk Tape dashboard: read Getting Started's Sample News Feed for business, limited to 3, and keep everything already there exactly as is. Under the Finance Tearsheet skill, leave a Tape Lead Note recording the exact lead title and author plus the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -111,6 +111,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Getting Started"
@@ -146,7 +155,7 @@
         "args": {
           "widget_type": "note",
           "name": "Tape Lead Note",
-          "data": "Lead: Global Markets Rally on Positive Economic Data; author: Robert Williams."
+          "data": "Lead: Global Markets Rally on Positive Economic Data; author: Robert Williams. Per the Finance Tearsheet skill, the workflow gathers price action first."
         },
         "graded_args": [
           "widget_type"
@@ -191,7 +200,8 @@
         "name_contains": "Tape Lead Note",
         "data_contains": [
           "Global Markets Rally on Positive Economic Data",
-          "Robert Williams"
+          "Robert Williams",
+          "price action"
         ],
         "tab_id": "tape"
       }
@@ -223,6 +233,6 @@
       }
     ],
     "required_dashboard_name_contains": "Desk Tape",
-    "max_turns": 8
+    "max_turns": 9
   }
 }

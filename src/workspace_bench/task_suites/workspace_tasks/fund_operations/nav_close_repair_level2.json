@@ -1,7 +1,7 @@
 {
   "id": "nav_close_repair_level2",
   "difficulty": "level2",
-  "prompt": "Close repair on the open Close Room dashboard: restore Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard to Flagship Long/Short and Open, with period set by the close-day policy for today's close.",
+  "prompt": "Close repair on the open Close Room dashboard: restore Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard to Flagship Long/Short and Open, with period set by the close-day policy.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

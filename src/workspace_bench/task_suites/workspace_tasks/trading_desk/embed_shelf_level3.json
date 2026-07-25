@@ -1,7 +1,7 @@
 {
   "id": "embed_shelf_level3",
   "difficulty": "level3",
-  "prompt": "On the open Desk Shelf dashboard, switch the Getting Started Video Library still showing Open Data Platform Demo to the desk demo, OpenBB Workspace Demo, through its video_name parameter; add Getting Started's HTML Widget. Leave the rest alone: the separate Video Library already showing OpenBB Workspace Demo is correct for the other desk and must stay untouched.",
+  "prompt": "On the open Desk Shelf dashboard, switch the Getting Started Video Library still showing Open Data Platform Demo to the desk demo, OpenBB Workspace Demo, through its video_name parameter; add Getting Started's HTML Widget. Leave the rest alone: the separate Video Library already showing OpenBB Workspace Demo is correct for the other desk and must stay untouched. Read the build-an-app guide; leave a Shelf Governance note recording the final two actions it lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -140,6 +140,15 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/guides/build-an-app"
+        },
+        "graded_args": [
+          "uri"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Getting Started"
@@ -184,6 +193,17 @@
         "graded_args": [
           "widget_uuid",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Shelf Governance",
+          "data": "The build-an-app guide's final two actions are validate, and register."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -233,6 +253,14 @@
           "Prior shelf: keep the data-platform walkthrough available through the onboarding cycle."
         ],
         "tab_id": "shelf"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Shelf Governance",
+        "data_contains": [
+          "validate, and register"
+        ],
+        "tab_id": "shelf"
       }
     ],
     "required_layouts": [
@@ -278,6 +306,6 @@
       }
     ],
     "required_dashboard_name_contains": "Desk Shelf",
-    "max_turns": 9
+    "max_turns": 11
   }
 }

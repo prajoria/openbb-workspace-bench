@@ -1,7 +1,7 @@
 {
   "id": "settlement_watch_level3",
   "difficulty": "level3",
-  "prompt": "Fails watch on the open Fails Watch dashboard: add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower, both with fund Income Fund, status Open, and period 1D. The cutoff is close; everything already there must stay exactly as is.",
+  "prompt": "Fails watch on the open Fails Watch dashboard: add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower for fund Income Fund, status Open, and period 1D. Keep everything already there exactly as is. Under the Finance Guidance Tracker skill, leave a Fails Cutoff Governance note recording what its workflow lists in its final step.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -117,17 +117,18 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
-        },
-        "optional": true
-      },
-      {
-        "tool": "get_widget_schema",
-        "args": {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "fund_operations_control_tower_trade_lifecycle_failed_trades"
         },
         "optional": true
       },
@@ -161,6 +162,17 @@
         "graded_args": [
           "origin",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Fails Cutoff Governance",
+          "data": "Per the Finance Guidance Tracker skill, the cutoff review must list evidence gaps."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -222,6 +234,14 @@
           "Prior cutoff: the Multi-Asset Fund review queue was carried to the next shift."
         ],
         "tab_id": "watch"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Fails Cutoff Governance",
+        "data_contains": [
+          "evidence gaps"
+        ],
+        "tab_id": "watch"
       }
     ],
     "required_layouts": [
@@ -251,6 +271,6 @@
       }
     ],
     "required_dashboard_name_contains": "Fails Watch",
-    "max_turns": 8
+    "max_turns": 9
   }
 }

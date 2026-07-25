@@ -1,7 +1,7 @@
 {
   "id": "var_monitor_level3",
   "difficulty": "level3",
-  "prompt": "On the open Shock Watch dashboard, correct the stale VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor that has parameters portfolio Global Equity, scenario Equity -10%, and period QTD to portfolio Long/Short Equity, scenario Rates +100bp, and period YTD. The separate VaR Trend with parameters portfolio Credit Opportunities, scenario Credit +150bp, and period MTD is already correct for the credit book and must stay untouched. Add a fresh VaR Trend for the same Long/Short Equity, Rates +100bp, YTD cut, and leave every other view and record exactly as it is so the risk evidence remains intact.",
+  "prompt": "On the open Shock Watch dashboard, correct the stale VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor that has parameters portfolio Global Equity, scenario Equity -10%, and period QTD to portfolio Long/Short Equity, scenario Rates +100bp, and period YTD. The separate VaR Trend with parameters portfolio Credit Opportunities, scenario Credit +150bp, and period MTD is already correct for the credit book and must stay untouched. Add a fresh VaR Trend for the same Long/Short Equity, Rates +100bp, YTD cut, and leave every other view and record exactly as it is so the risk evidence remains intact. Read the Daloopa Inflection skill and leave a Shock Watch Governance Note recording the growth cadence it says to compute first and what it flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -134,6 +134,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-inflection"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
@@ -178,6 +187,17 @@
           "origin",
           "widget_id",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Shock Watch Governance Note",
+          "data": "Per the Daloopa Inflection skill, compute quarter-over-quarter growth per series first and flag growth-rate reversals as inflections."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -231,6 +251,15 @@
           "Prior review: retain the Global Equity downside sample as evidence for the limit file."
         ],
         "tab_id": "watch"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Shock Watch Governance",
+        "data_contains": [
+          "quarter-over-quarter growth per series",
+          "growth-rate reversals"
+        ],
+        "tab_id": "watch"
       }
     ],
     "required_layouts": [
@@ -268,6 +297,6 @@
       }
     ],
     "required_dashboard_name_contains": "Shock Watch",
-    "max_turns": 8
+    "max_turns": 10
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "document_room_level3",
   "difficulty": "level3",
-  "prompt": "On the open Filing Room dashboard, add Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K; put Multi PDF Viewer - URL from Getting Started beside it. Prior audit views are already there—leave everything else exactly as is.",
+  "prompt": "On the open Filing Room dashboard, add Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K; put Multi PDF Viewer - URL from Getting Started beside it. Keep everything already there exactly as is. Read the Daloopa Tearsheet skill; leave a Filing Room Governance note recording the identifier its final step says every Daloopa-sourced figure must be cited with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -111,6 +111,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
@@ -157,6 +166,17 @@
         "graded_args": [
           "origin",
           "widget_id"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Filing Room Governance",
+          "data": "Per the Daloopa Tearsheet skill, every Daloopa-sourced figure must be cited with its source_url."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -206,6 +226,14 @@
           "Prior filing pull: MSFT quarterly filing checked and signed off."
         ],
         "tab_id": "filings"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Filing Room Governance",
+        "data_contains": [
+          "source_url"
+        ],
+        "tab_id": "filings"
       }
     ],
     "required_layouts": [
@@ -235,6 +263,6 @@
       }
     ],
     "required_dashboard_name_contains": "Filing Room",
-    "max_turns": 9
+    "max_turns": 11
   }
 }

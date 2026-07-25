@@ -27,43 +27,39 @@ Also fair game: the simulator's tool behavior in `src/workspace_bench/workspace/
 
 ## What each level promises — and what to check
 
-Every story runs the same six-step ladder. Each level makes the ask harder in exactly one new way, and part of your job is confirming the task actually delivers its level — not an easier or unfairer version of it. Example prompts below all use the same story (the PM wants the Trade Ideas widget on their briefing dashboard, set to fund Flagship Long/Short and period QTD).
+Every story runs the same five-step ladder. Each level makes the ask harder in exactly one new way, and part of your job is confirming the task actually delivers its level — not an easier or unfairer version of it. Example prompts below all use the same story (the PM wants the Trade Ideas widget on their briefing dashboard, set to fund Flagship Long/Short and period QTD).
 
-**Level 0 — everything is spelled out.** The prompt names the widget, where it lives, where it goes, and every value to set. The model only has to follow instructions.
+**Level 0 — Execute: everything is spelled out.** The prompt names the widget, where it lives, where it goes, and every value to set. The model only has to follow instructions.
 
 > *"Add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to the open Pilot Decision Brief dashboard, with fund set to Flagship Long/Short and period set to QTD."*
 
 Check: the prompt really does state every name and value the grader checks. If something graded is missing here, the floor level is broken.
 
-**Level 1 — one thing is described, not named.** The prompt refers to something the way a colleague would ("the PM's idea pipeline") instead of by its exact name. The model must look around the workspace to figure out what's meant.
+**Level 1 — Find: one thing is described, not named.** The prompt refers to something the way a colleague would ("the PM's idea pipeline") instead of by its exact name. The model must look around the workspace to figure out what's meant.
 
 > *"Get the PM's idea pipeline up on the open Pilot Decision Brief dashboard — it's somewhere under Bench Stark Enterprise's Portfolio Command Center — for Flagship Long/Short and QTD."*
 
 Check: the casual description plus the other words really do point to exactly one widget. If two catalog entries fit the description equally well, the task is a guess.
 
-**Level 2 — one value must be worked out.** The prompt hides one value behind a shorthand or house policy ("per the quarterly briefing policy" instead of "QTD"). The model must translate.
+**Level 2 — Derive: one value must be worked out.** The prompt hides one value behind a shorthand or house policy ("per the quarterly briefing policy" instead of "QTD"). The model must translate.
 
 > *"Prep the open Pilot Decision Brief dashboard with Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, per the quarterly briefing policy."*
 
 Check two failure directions: if the hidden value *does* appear in the prompt, the level is fake (nothing to work out); if a person *couldn't* work it out — from the phrase's plain meaning or the widget's own option list (open the catalog and look) — the task is unfair.
 
-**Level 3 — the work happens in a lived-in place.** The dashboard already has content on it, including things that look similar to the target (a near-copy widget, an old note). The model must make only the asked-for change and leave everything else standing.
+**Level 3 — Ground: read the governing source.** A skill or document governs the outcome: the deliverable (usually a note) must contain a fact that lives only in that document. The prompt names the document and *describes* the fact without saying it.
 
-> *"The open Pilot Decision Brief dashboard already has the desk's morning views on it. Add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short and QTD alongside — and don't touch what's already there."*
+Level 3 also runs in the ambient world: the dashboard is populated with preservation-graded content, including a decoy near-copy of the target, a stale note, and a stale-twin instance whose correction rides in the ask. The model must do the grounded work, correct the stale twin, and leave every other pre-existing item standing.
 
-Check: the content the grader expects to survive really is in the task's starting state, and the look-alike clutter doesn't make the actual target ambiguous.
+> *"On the open Pilot Decision Brief dashboard, fix the stale Trade Ideas instance for Flagship Long/Short and QTD and add a fresh one alongside it. Leave the existing views and notes untouched, then close with a note recording the final item the Finance Guidance Tracker skill's workflow lists."*
 
-**Level 4 — something must be read first.** A skill or document governs the outcome: the deliverable (usually a note) must contain a fact that lives only in that document. The prompt names the document and *describes* the fact without saying it.
+Check both parts. The knowledge fact must not appear anywhere in the prompt — otherwise the model could skip the reading — and its description must locate exactly one fact in the named source. The preservation-graded content must really be in the starting state, ALL pre-existing content must be graded as preserved, the stale-twin correction must select the intended opaque uuid, and the look-alike clutter must not make the requested change ambiguous.
 
-> *"Prep the briefing dashboard as usual, then close with a note recording the final item the Finance Guidance Tracker skill's workflow lists."*
+**Level 4 — Compose: build it, then use it.** The full workflow stands up a backend, publishes and instantiates an app with a named tab, and then does the story's work with it. It keeps level 3's knowledge read and note, and it runs under the same ambient-world preservation contract. One coherent request, not a checklist.
 
-Check: the fact the note must contain does **not** appear anywhere in the prompt — if it did, the model could skip the reading entirely and the level tests nothing. Then open the skill file and confirm the description points to exactly one thing in it (not two candidates), and that the graded wording matches what the document actually says.
+> *"Stand up the Briefing Feed Service with an Idea Register table, publish and open its app on the named Briefing tab, then on the open Pilot Decision Brief dashboard fix the stale Trade Ideas instance for Flagship Long/Short and QTD and add a fresh one alongside it without disturbing the existing views or notes. Close with a note recording the final item the Finance Guidance Tracker skill's workflow lists."*
 
-**Level 5 — build it, then use it.** The full workflow: stand up a backend or app, publish it, and then do the story's work with it, usually ending in a note. One coherent request, not a checklist.
-
-> *"Stand up the Briefing Feed Service with an Idea Register table, publish its app and open it, then add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short and QTD, and close with the morning briefing note."*
-
-Check: the whole chain is achievable within the turn budget; the names the prompt states are enough for the model to derive the technical ids it must author (the naming convention lives in the workspace's own spec document, which the model can read); and the ask still reads as one job, not a list of disconnected demands.
+Check: the whole chain is achievable within the turn budget; the names the prompt states are enough for the model to derive the technical ids it must author (the naming convention lives in the workspace's own spec document, which the model can read); the level-3 read-and-note and ambient preservation checks remain present; and the ask still reads as one job, not a list of disconnected demands.
 
 ## What not to flag
 

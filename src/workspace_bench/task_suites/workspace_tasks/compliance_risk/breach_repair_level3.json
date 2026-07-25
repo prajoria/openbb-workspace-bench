@@ -1,7 +1,7 @@
 {
   "id": "breach_repair_level3",
   "difficulty": "level3",
-  "prompt": "On the open Breach Review dashboard, repair the Policy Breaches view from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD. The separate Policy Breaches view with parameters severity Low, status In Review, and period MTD is already correct for its review cut and must not be changed. Keep every other view and record exactly as it is so the breach evidence remains intact.",
+  "prompt": "On the open Breach Review dashboard, repair the Policy Breaches view from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD. The separate Policy Breaches view with parameters severity Low, status In Review, and period MTD is already correct for its review cut and must not be changed. Keep every other view and record exactly as it is so the breach evidence remains intact. Read the Finance Guidance Tracker skill and leave a Breach Review Evidence Note recording what its workflow lists last.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -134,6 +134,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
@@ -161,6 +170,17 @@
         "graded_args": [
           "widget_uuid",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Breach Review Evidence Note",
+          "data": "Per the Finance Guidance Tracker skill: list evidence gaps - the claims currently supported by nothing you can point to."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -213,6 +233,14 @@
           "Prior review: retain the approved pre-clearance sample as evidence for the audit file."
         ],
         "tab_id": "review"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Breach Review Evidence Note",
+        "data_contains": [
+          "evidence gaps"
+        ],
+        "tab_id": "review"
       }
     ],
     "required_layouts": [
@@ -250,6 +278,6 @@
       }
     ],
     "required_dashboard_name_contains": "Breach Review",
-    "max_turns": 7
+    "max_turns": 9
   }
 }

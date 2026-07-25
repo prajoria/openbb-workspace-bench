@@ -1,7 +1,7 @@
 {
   "id": "inflection_scan_level3",
   "difficulty": "level3",
-  "prompt": "On the open Inflection Scan dashboard, read Operating KPIs from Bench Daloopa with ticker TSLA and period 2026Q1, then leave an Inflection Scan Note recording each KPI and its exact value and unit for the quarter. The dashboard already has the prior coverage views on it - leave everything else exactly as it is.",
+  "prompt": "On the open Inflection Scan dashboard, read Operating KPIs from Bench Daloopa with ticker TSLA and period 2026Q1, then leave an Inflection Scan Note recording each KPI and its exact value and unit for the quarter. The scan runs under the Daloopa Inflection skill - the note must also record the growth cadence that skill says to compute first and what it flags as inflections. Keep everything already on the dashboard exactly as it is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -111,6 +111,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-inflection"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
@@ -138,7 +147,7 @@
         "args": {
           "widget_type": "note",
           "name": "Inflection Scan Note",
-          "data": "TSLA Operating KPIs for 2026Q1: Vehicle Deliveries 509.3 units k; Energy Storage Deployed 12.8 GWh."
+          "data": "TSLA Operating KPIs for 2026Q1: Vehicle Deliveries 509.3 units k; Energy Storage Deployed 12.8 GWh. Per the Daloopa Inflection skill, compute quarter-over-quarter growth per series first and flag growth-rate reversals as inflections."
         },
         "graded_args": [
           "widget_type"
@@ -187,7 +196,9 @@
           "units k",
           "Energy Storage Deployed",
           "12.8",
-          "GWh"
+          "GWh",
+          "quarter-over-quarter growth per series",
+          "growth-rate reversals"
         ]
       }
     ],
@@ -218,6 +229,6 @@
       }
     ],
     "required_dashboard_name_contains": "Inflection Scan",
-    "max_turns": 7
+    "max_turns": 8
   }
 }

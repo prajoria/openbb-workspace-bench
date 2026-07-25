@@ -1,7 +1,7 @@
 {
   "id": "morning_briefing_level4",
   "difficulty": "level4",
-  "prompt": "On the open PM Morning Briefing dashboard, fix the stale Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to Flagship Long/Short, QTD, and add a fresh Trade Ideas for the same fund and period. Keep everything else as is. Briefings run under the Daloopa Capital Allocation skill - leave a Morning Briefing Governance note recording what its final step says every figure is cited via.",
+  "prompt": "Build the desk's briefing feed before the 9am call: add a Briefing Feed Service backend serving an Idea Register table, publish Briefing Feed App with Idea Register on its Briefing tab, and instantiate the app. On the open PM Morning Briefing dashboard, add the built Idea Register, fix the stale Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to Flagship Long/Short, QTD, and add a fresh Trade Ideas for the same fund and period, keeping everything else as is. Read the Daloopa Capital Allocation skill and leave a Morning Briefing Governance note recording what its final step says every figure is cited via.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -124,9 +124,109 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Briefing Feed Service",
+          "url": "http://127.0.0.1:9713",
+          "widgets_json": {
+            "idea_register": {
+              "name": "Idea Register",
+              "description": "Authored register of the desk's briefing ideas.",
+              "endpoint": "/idea-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Briefing Feed App",
+              "description": "Authored app for the desk's briefing feed.",
+              "tabs": {
+                "briefing": {
+                  "id": "briefing",
+                  "name": "Briefing",
+                  "layout": [
+                    {
+                      "i": "idea_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Briefing Feed App",
+          "dashboard_name": "Briefing Feed App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Briefing Feed Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Briefing Feed Service",
+          "widget_id": "idea_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "portfolio_command_center_actions_trade_ideas",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -171,7 +271,18 @@
         ]
       }
     ],
+    "required_tabs": [
+      "briefing"
+    ],
+    "required_tab_names": [
+      "Briefing"
+    ],
     "required_widgets": [
+      {
+        "origin": "Briefing Feed Service",
+        "widget_id": "idea_register",
+        "tab_id": "briefing"
+      },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "portfolio_command_center_actions_trade_ideas",
@@ -208,7 +319,8 @@
         "name_contains": "Morning Briefing Governance",
         "data_contains": [
           "source_url"
-        ]
+        ],
+        "tab_id": "briefing"
       }
     ],
     "required_layouts": [
@@ -237,13 +349,34 @@
         "h": 8
       }
     ],
-    "required_tabs": [
-      "briefing"
+    "required_widget_defs": [
+      {
+        "backend_name": "Briefing Feed Service",
+        "widget_id": "idea_register",
+        "expect": {
+          "name": "Idea Register",
+          "type": "table"
+        }
+      }
     ],
-    "required_tab_names": [
-      "Briefing"
+    "required_app_defs": [
+      {
+        "backend_name": "Briefing Feed Service",
+        "name_contains": "Briefing Feed App",
+        "tabs_include": [
+          "briefing"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "briefing",
+            "widget_id": "idea_register"
+          }
+        ]
+      }
     ],
     "required_dashboard_name_contains": "PM Morning Briefing",
-    "max_turns": 9
+    "max_turns": 16
   }
 }

@@ -1,7 +1,7 @@
 {
   "id": "case_handoff_level3",
   "difficulty": "level3",
-  "prompt": "On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD. Leave a Case Handoff Note recording the returned In Review fund and both exact scores. Keep everything already on the dashboard exactly as it is.",
+  "prompt": "On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD, keeping everything already on the dashboard exactly as it is. Read the Finance Earnings Prep skill and leave a Case Handoff Note recording the returned In Review fund and both exact scores, plus the transcript-tone signal the skill identifies and what it often precedes.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -117,6 +117,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-earnings-prep"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
@@ -145,7 +154,7 @@
         "args": {
           "widget_type": "note",
           "name": "Case Handoff Note",
-          "data": "Expert Calls evidence: the returned In Review fund is Global Opportunities, with exact scores 89.96 and 21.55."
+          "data": "Expert Calls evidence: the returned In Review fund is Global Opportunities, with exact scores 89.96 and 21.55. The Finance Earnings Prep skill says hedged language often precedes the numbers."
         },
         "graded_args": [
           "widget_type"
@@ -197,7 +206,9 @@
         "data_contains": [
           "Global Opportunities",
           "89.96",
-          "21.55"
+          "21.55",
+          "hedged language",
+          "precedes the numbers"
         ],
         "tab_id": "review"
       }

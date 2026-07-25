@@ -1,7 +1,7 @@
 {
   "id": "form_tooling_level3",
   "difficulty": "level3",
-  "prompt": "On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 to 5 and leave the tester's other parameters at their defaults. Prior intake controls are already there; leave everything else exactly as is.",
+  "prompt": "On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 to 5 and leave the tester's other parameters at their defaults. Keep everything already there exactly as is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind listed between endpoint and button.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -102,6 +102,15 @@
         "optional": true
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widget-parameters"
+        },
+        "graded_args": [
+          "uri"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Widget Examples"
@@ -109,10 +118,11 @@
         "optional": true
       },
       {
-        "tool": "get_widget_schema",
+        "tool": "get_params_options",
         "args": {
           "origin": "Widget Examples",
-          "widget_id": "form_submit_widget"
+          "widget_id": "show_example_params",
+          "param_name": "daysPicker1"
         },
         "optional": true
       },
@@ -140,6 +150,17 @@
           "origin",
           "widget_id",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Intake Tooling Governance Note",
+          "data": "The widgets.json parameter kind named between endpoint and button is form."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -185,6 +206,14 @@
           "Prior intake check: the month-end exception batch stays on its existing review window."
         ],
         "tab_id": "intake"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Intake Tooling Governance Note",
+        "data_contains": [
+          "form"
+        ],
+        "tab_id": "intake"
       }
     ],
     "required_layouts": [
@@ -206,6 +235,6 @@
       }
     ],
     "required_dashboard_name_contains": "Intake Tools",
-    "max_turns": 8
+    "max_turns": 10
   }
 }

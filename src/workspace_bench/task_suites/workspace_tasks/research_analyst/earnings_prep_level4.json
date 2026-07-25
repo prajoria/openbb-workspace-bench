@@ -1,7 +1,7 @@
 {
   "id": "earnings_prep_level4",
   "difficulty": "level4",
-  "prompt": "On the open Earnings Prep Desk dashboard, read Upcoming Earnings from Bench Stark Enterprise's Earnings & Estimates Monitor with sector Technology, ticker NVDA, and period QTD, keeping everything already on the dashboard exactly as it is. Previews run under the Finance Earnings Prep skill - leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly, plus what the skill's final step tells the analyst to produce for the PM across the three print outcomes.",
+  "prompt": "Build the desk's prep-sheet workflow: add a Prep Sheet Service backend serving a Prep Register table, publish Prep Sheet App with Prep Register on its Prep tab, and instantiate the app. On the open Earnings Prep Desk dashboard, add the built Prep Register and keep everything already there exactly as it is. Read Upcoming Earnings from Bench Stark Enterprise's Earnings & Estimates Monitor with sector Technology, ticker NVDA, and period QTD, then under the Finance Earnings Prep skill leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly, plus what the skill's final step tells the analyst to produce for the PM across the three print outcomes.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -126,6 +126,97 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Prep Sheet Service",
+          "url": "http://127.0.0.1:9716",
+          "widgets_json": {
+            "prep_register": {
+              "name": "Prep Register",
+              "description": "Authored register for the desk's earnings-preview facts.",
+              "endpoint": "/prep-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Prep Sheet App",
+              "description": "Authored app for the desk's earnings-prep register.",
+              "tabs": {
+                "prep": {
+                  "id": "prep",
+                  "name": "Prep",
+                  "layout": [
+                    {
+                      "i": "prep_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Prep Sheet App",
+          "dashboard_name": "Prep Sheet App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Prep Sheet Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Prep Sheet Service",
+          "widget_id": "prep_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
@@ -133,10 +224,11 @@
         "optional": true
       },
       {
-        "tool": "get_widget_schema",
+        "tool": "get_params_options",
         "args": {
           "origin": "Bench Stark Enterprise",
-          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings"
+          "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -176,6 +268,11 @@
       "Prep"
     ],
     "required_widgets": [
+      {
+        "origin": "Prep Sheet Service",
+        "widget_id": "prep_register",
+        "tab_id": "prep"
+      },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "earnings_estimates_monitor_calendar_upcoming_earnings",
@@ -252,7 +349,34 @@
         "h": 8
       }
     ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Prep Sheet Service",
+        "widget_id": "prep_register",
+        "expect": {
+          "name": "Prep Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Prep Sheet Service",
+        "name_contains": "Prep Sheet App",
+        "tabs_include": [
+          "prep"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "prep",
+            "widget_id": "prep_register"
+          }
+        ]
+      }
+    ],
     "required_dashboard_name_contains": "Earnings Prep Desk",
-    "max_turns": 9
+    "max_turns": 15
   }
 }

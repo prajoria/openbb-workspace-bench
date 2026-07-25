@@ -1,7 +1,7 @@
 {
   "id": "inflection_scan_level4",
   "difficulty": "level4",
-  "prompt": "On the open Inflection Scan dashboard, read Operating KPIs from Bench Daloopa with ticker TSLA and period 2026Q1, then leave an Inflection Scan Note recording each KPI and its exact value and unit for the quarter. The scan runs under the Daloopa Inflection skill - the note must also record the growth cadence that skill says to compute first and what it flags as inflections. Keep everything already on the dashboard exactly as it is.",
+  "prompt": "Build the quarter's scan register: add an Inflection Scan Service backend serving a Reversal Register table, publish Inflection Scan App with Reversal Register on its Reversals tab, and instantiate the app. On the open Inflection Scan dashboard, add the built Reversal Register and keep everything already there exactly as it is. Then run the scan under the Daloopa Inflection skill: read Operating KPIs from Bench Daloopa with ticker TSLA and period 2026Q1, and leave an Inflection Scan Note recording each KPI and its exact value and unit plus the growth cadence the skill says to compute first and what it flags as inflections.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -120,9 +120,96 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Inflection Scan Service",
+          "url": "http://127.0.0.1:9717",
+          "widgets_json": {
+            "reversal_register": {
+              "name": "Reversal Register",
+              "description": "Authored register of the desk's KPI reversal scans.",
+              "endpoint": "/reversal-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Inflection Scan App",
+              "description": "Authored app for the research desk's inflection scans.",
+              "tabs": {
+                "reversals": {
+                  "id": "reversals",
+                  "name": "Reversals",
+                  "layout": [
+                    {
+                      "i": "reversal_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Inflection Scan Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Inflection Scan Service",
+          "widget_id": "reversal_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_kpi_metrics",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -152,6 +239,19 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Inflection Scan App",
+          "dashboard_name": "Inflection Scan App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
       }
     ],
     "required_tabs": [
@@ -161,6 +261,11 @@
       "Scan"
     ],
     "required_widgets": [
+      {
+        "origin": "Inflection Scan Service",
+        "widget_id": "reversal_register",
+        "tab_id": "scan"
+      },
       {
         "origin": "Bench Daloopa",
         "widget_id": "daloopa_kpi_metrics",
@@ -228,7 +333,34 @@
         "h": 8
       }
     ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Inflection Scan Service",
+        "widget_id": "reversal_register",
+        "expect": {
+          "name": "Reversal Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Inflection Scan Service",
+        "name_contains": "Inflection Scan App",
+        "tabs_include": [
+          "reversals"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "reversals",
+            "widget_id": "reversal_register"
+          }
+        ]
+      }
+    ],
     "required_dashboard_name_contains": "Inflection Scan",
-    "max_turns": 8
+    "max_turns": 16
   }
 }

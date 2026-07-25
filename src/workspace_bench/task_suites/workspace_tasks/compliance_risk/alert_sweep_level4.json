@@ -1,7 +1,7 @@
 {
   "id": "alert_sweep_level4",
   "difficulty": "level4",
-  "prompt": "On the open Alert Sweep dashboard, correct the stale Open Alert Metrics instance from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity Medium, status Closed, and period YTD to severity High, status Open, and period MTD. The separate Open Alert Metrics instance with parameters severity Low, status In Review, and period QTD is already correct for the quarterly review cut and must stay untouched. Also add fresh Open Alert Metrics and Alert Trend from the same app and origin, both with parameters severity High, status Open, and period MTD. Keep every other view and record on the dashboard exactly as it is so the sweep evidence remains intact. Read the Finance Guidance Tracker skill and leave an Alert Sweep Evidence Note recording what its workflow lists last.",
+  "prompt": "Build the sweep file: add a Sweep File Service backend serving a Sweep Register table, publish Sweep File App with Sweep Register on its Register tab, and instantiate the app. On the open Alert Sweep dashboard, add the built Sweep Register and correct the stale Open Alert Metrics instance from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity Medium, status Closed, and period YTD to severity High, status Open, and period MTD. The separate Open Alert Metrics instance with parameters severity Low, status In Review, and period QTD is already correct for the quarterly review cut and must stay untouched. Add fresh Open Alert Metrics and Alert Trend from the same app and origin, both with parameters severity High, status Open, and period MTD. Keep every other view and record on the dashboard exactly as it is so the sweep evidence remains intact. Read the Finance Guidance Tracker skill and leave an Alert Sweep Evidence Note recording what its workflow lists last.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -143,9 +143,110 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Sweep File Service",
+          "widgets_json": {},
+          "apps_json": []
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Sweep File Service",
+          "url": "http://127.0.0.1:9737",
+          "widgets_json": {
+            "sweep_register": {
+              "name": "Sweep Register",
+              "description": "Authored register for the monthly surveillance sweep file.",
+              "endpoint": "/sweep-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Sweep File App",
+              "description": "Authored app for the monthly surveillance sweep file.",
+              "tabs": {
+                "register": {
+                  "id": "register",
+                  "name": "Register",
+                  "layout": [
+                    {
+                      "i": "sweep_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Sweep File Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Sweep File Service",
+          "widget_id": "sweep_register"
+        },
+        "optional": true
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -189,6 +290,14 @@
         ]
       },
       {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Bench Stark Enterprise",
+          "widget_id": "compliance_surveillance_hub_alerts_alert_trend"
+        },
+        "optional": true
+      },
+      {
         "tool": "create_widget",
         "args": {
           "origin": "Bench Stark Enterprise",
@@ -205,6 +314,28 @@
         ]
       },
       {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Sweep File Service",
+          "widget_id": "sweep_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "sweep_register",
+          "x": 0,
+          "y": 38,
+          "w": 40,
+          "h": 10
+        },
+        "optional": true
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -214,6 +345,36 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Sweep File App",
+          "dashboard_name": "Sweep File App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "dashboard",
+          "dashboard_id": "dash_029"
+        },
+        "optional": true
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "dashboard_id": "dash_028",
+          "tab_id": "sweep"
+        },
+        "optional": true
       }
     ],
     "required_tabs": [
@@ -223,6 +384,11 @@
       "Sweep"
     ],
     "required_widgets": [
+      {
+        "origin": "Sweep File Service",
+        "widget_id": "sweep_register",
+        "tab_id": "sweep"
+      },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "compliance_surveillance_hub_alerts_open_alert_metrics",
@@ -320,7 +486,44 @@
         "h": 5
       }
     ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Sweep File Service",
+        "widget_id": "sweep_register",
+        "expect": {
+          "name": "Sweep Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Sweep File Service",
+        "name_contains": "Sweep File App",
+        "tabs_include": [
+          "register"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "register",
+            "widget_id": "sweep_register"
+          }
+        ]
+      }
+    ],
+    "required_tool_results": [
+      {
+        "tool": "manage_apps",
+        "data_contains": [
+          "Sweep File App",
+          "Register",
+          "Sweep File Service"
+        ]
+      }
+    ],
     "required_dashboard_name_contains": "Alert Sweep",
-    "max_turns": 11
+    "max_turns": 25
   }
 }

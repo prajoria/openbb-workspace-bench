@@ -1,7 +1,7 @@
 {
   "id": "alert_sweep_level3",
   "difficulty": "level3",
-  "prompt": "On the open Alert Sweep dashboard, correct the stale Open Alert Metrics instance from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity Medium, status Closed, and period YTD to severity High, status Open, and period MTD. The separate Open Alert Metrics instance with parameters severity Low, status In Review, and period QTD is already correct for the quarterly review cut and must stay untouched. Also add fresh Open Alert Metrics and Alert Trend from the same app and origin, both with parameters severity High, status Open, and period MTD. Keep every other view and record on the dashboard exactly as it is so the sweep evidence remains intact.",
+  "prompt": "On the open Alert Sweep dashboard, correct the stale Open Alert Metrics instance from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity Medium, status Closed, and period YTD to severity High, status Open, and period MTD. The separate Open Alert Metrics instance with parameters severity Low, status In Review, and period QTD is already correct for the quarterly review cut and must stay untouched. Also add fresh Open Alert Metrics and Alert Trend from the same app and origin, both with parameters severity High, status Open, and period MTD. Keep every other view and record on the dashboard exactly as it is so the sweep evidence remains intact. Read the Finance Guidance Tracker skill and leave an Alert Sweep Evidence Note recording what its workflow lists last.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -134,6 +134,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
@@ -193,6 +202,17 @@
         "graded_args": [
           "origin",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Alert Sweep Evidence Note",
+          "data": "Per the Finance Guidance Tracker skill: list evidence gaps - the claims currently supported by nothing you can point to."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -256,6 +276,14 @@
           "Prior sweep: retain the Medium-severity closed-item sample for the audit file."
         ],
         "tab_id": "sweep"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Alert Sweep Evidence",
+        "data_contains": [
+          "evidence gaps - the claims currently supported by nothing you can point to"
+        ],
+        "tab_id": "sweep"
       }
     ],
     "required_layouts": [
@@ -293,6 +321,6 @@
       }
     ],
     "required_dashboard_name_contains": "Alert Sweep",
-    "max_turns": 9
+    "max_turns": 11
   }
 }

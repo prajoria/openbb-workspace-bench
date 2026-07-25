@@ -1,7 +1,7 @@
 {
   "id": "guidance_tracker_level3",
   "difficulty": "level3",
-  "prompt": "On the open Guidance Watch dashboard, read Management Guidance from Bench Daloopa with ticker NFLX, then leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit. The dashboard already has the desk's coverage work on it - leave everything else exactly as it is.",
+  "prompt": "On the open Guidance Watch dashboard, read Management Guidance from Bench Daloopa with ticker NFLX and keep everything already on the dashboard exactly as it is. Guidance reviews run under the Daloopa Guidance Tracker skill - leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit, plus how that skill says to weight quarters when characterizing the trend.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -110,6 +110,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-guidance-tracker"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
@@ -144,7 +153,7 @@
         "args": {
           "widget_type": "note",
           "name": "Guidance Tracker Note",
-          "data": "NFLX Pending 2026Q2 guide: Total Revenue Guidance 14617.6 to 15062.8 USD mn; Diluted EPS Guidance 7.68 to 7.91 USD; Paid Memberships Guidance 329.6 to 339.7 mn."
+          "data": "NFLX Pending 2026Q2 guide: Total Revenue Guidance 14617.6 to 15062.8 USD mn; Diluted EPS Guidance 7.68 to 7.91 USD; Paid Memberships Guidance 329.6 to 339.7 mn. Per the Daloopa Guidance Tracker skill, weight recent quarters over old ones when characterizing the trend."
         },
         "graded_args": [
           "widget_type"
@@ -196,7 +205,8 @@
           "7.91",
           "Paid Memberships Guidance",
           "329.6",
-          "339.7"
+          "339.7",
+          "recent quarters over old ones"
         ]
       }
     ],
@@ -227,6 +237,6 @@
       }
     ],
     "required_dashboard_name_contains": "Guidance Watch",
-    "max_turns": 8
+    "max_turns": 9
   }
 }

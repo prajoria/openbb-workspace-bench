@@ -1,7 +1,7 @@
 {
   "id": "morning_briefing_level3",
   "difficulty": "level3",
-  "prompt": "Fix the stale Trade Ideas from Bench Stark Enterprise's Portfolio Command Center on the open PM Morning Briefing dashboard to Flagship Long/Short, QTD, and add a fresh Trade Ideas for the same fund and period - the 9am call is in ten minutes. Leave everything else exactly as it is.",
+  "prompt": "On the open PM Morning Briefing dashboard, fix the stale Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to Flagship Long/Short, QTD, and add a fresh Trade Ideas for the same fund and period. Keep everything else as is. Briefings run under the Daloopa Capital Allocation skill - leave a Morning Briefing Governance note recording what its final step says every figure is cited via.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -115,17 +115,18 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-capital-allocation"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
-        },
-        "optional": true
-      },
-      {
-        "tool": "get_widget_schema",
-        "args": {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "portfolio_command_center_actions_trade_ideas"
         },
         "optional": true
       },
@@ -157,13 +158,18 @@
           "origin",
           "data_args"
         ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Morning Briefing Governance",
+          "data": "Per the Daloopa Capital Allocation skill, every figure is cited via source_url."
+        },
+        "graded_args": [
+          "widget_type"
+        ]
       }
-    ],
-    "required_tabs": [
-      "briefing"
-    ],
-    "required_tab_names": [
-      "Briefing"
     ],
     "required_widgets": [
       {
@@ -196,6 +202,13 @@
           "Last week's briefing: watch Income Fund redemptions into month-end."
         ],
         "tab_id": "briefing"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Morning Briefing Governance",
+        "data_contains": [
+          "source_url"
+        ]
       }
     ],
     "required_layouts": [
@@ -224,7 +237,13 @@
         "h": 8
       }
     ],
+    "required_tabs": [
+      "briefing"
+    ],
+    "required_tab_names": [
+      "Briefing"
+    ],
     "required_dashboard_name_contains": "PM Morning Briefing",
-    "max_turns": 8
+    "max_turns": 9
   }
 }

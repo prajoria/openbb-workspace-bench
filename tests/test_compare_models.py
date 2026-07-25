@@ -478,3 +478,24 @@ def test_call_concentrate_responses_ignores_echoed_input_messages(monkeypatch) -
         timeout=1,
     )
     assert content == '{"done": true}'
+
+
+def test_initial_state_hidden_by_default(monkeypatch) -> None:
+    from workspace_bench.reports import model_compare as mc
+
+    envelope = {
+        "benchmark": {},
+        "task": {
+            "id": "t", "qualified_id": "q", "difficulty": "level0", "prompt": "p",
+            "fixtures": [], "allowed_tools": ["get_workspace_snapshot"],
+            "initial_state": {"dashboard": {"name": "secret-dashboard-name"}},
+        },
+    }
+    monkeypatch.delenv("WORKSPACE_BENCH_SHOW_INITIAL_STATE", raising=False)
+    joined = "".join(m["content"] for m in mc.build_interactive_messages(envelope))
+    assert "secret-dashboard-name" not in joined
+    assert "get_workspace_snapshot" in joined
+
+    monkeypatch.setenv("WORKSPACE_BENCH_SHOW_INITIAL_STATE", "1")
+    joined = "".join(m["content"] for m in mc.build_interactive_messages(envelope))
+    assert "secret-dashboard-name" in joined

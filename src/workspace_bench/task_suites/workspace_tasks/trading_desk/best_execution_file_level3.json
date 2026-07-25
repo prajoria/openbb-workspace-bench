@@ -1,7 +1,7 @@
 {
   "id": "best_execution_file_level3",
   "difficulty": "level3",
-  "prompt": "Best-ex file on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already there exactly as is.",
+  "prompt": "Best-ex file on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already there exactly as is. Under the Finance Comps skill, leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -115,17 +115,18 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "finance-comps"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
-        },
-        "optional": true
-      },
-      {
-        "tool": "get_widget_schema",
-        "args": {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "execution_desk_blotter_live_orders"
         },
         "optional": true
       },
@@ -157,6 +158,17 @@
         "graded_args": [
           "origin",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Best-Ex Governance",
+          "data": "Per the Finance Comps skill, outliers deserve premium or discount rather than deleting them."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -214,6 +226,14 @@
           "Prior review: retain the EU Equity routing sample for the committee appendix."
         ],
         "tab_id": "review"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Best-Ex Governance",
+        "data_contains": [
+          "outliers deserve premium or discount rather than deleting them"
+        ],
+        "tab_id": "review"
       }
     ],
     "required_layouts": [
@@ -243,6 +263,6 @@
       }
     ],
     "required_dashboard_name_contains": "Best-Ex Review",
-    "max_turns": 8
+    "max_turns": 9
   }
 }

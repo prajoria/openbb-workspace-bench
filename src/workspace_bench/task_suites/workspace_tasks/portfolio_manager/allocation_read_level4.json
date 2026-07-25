@@ -1,7 +1,7 @@
 {
   "id": "allocation_read_level4",
   "difficulty": "level4",
-  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, on the open Allocation Review dashboard, and keep everything already on the dashboard as is. Allocation reads run under the Daloopa Tearsheet skill - leave an Allocation Read Note recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.",
+  "prompt": "Build the desk's allocation digest before the rebalance: add an Allocation Digest Service backend serving a Segment Digest table, publish Allocation Digest App with Segment Digest on its Digest tab, and instantiate the app. On the open Allocation Review dashboard, add the built Segment Digest, keeping everything already there as is. Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and under the Daloopa Tearsheet skill leave an Allocation Read Note recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -120,9 +120,96 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Allocation Digest Service",
+          "url": "http://127.0.0.1:9713",
+          "widgets_json": {
+            "segment_digest": {
+              "name": "Segment Digest",
+              "description": "Authored digest of the desk's segment reads.",
+              "endpoint": "/segment-digest",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Allocation Digest App",
+              "description": "Authored app for the desk's allocation digest.",
+              "tabs": {
+                "digest": {
+                  "id": "digest",
+                  "name": "Digest",
+                  "layout": [
+                    {
+                      "i": "segment_digest",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Allocation Digest Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Allocation Digest Service",
+          "widget_id": "segment_digest"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_segment_breakdown",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -152,9 +239,33 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Allocation Digest App",
+          "dashboard_name": "Allocation Digest App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
       }
     ],
+    "required_tabs": [
+      "review"
+    ],
+    "required_tab_names": [
+      "Review"
+    ],
     "required_widgets": [
+      {
+        "origin": "Allocation Digest Service",
+        "widget_id": "segment_digest",
+        "tab_id": "review"
+      },
       {
         "origin": "Bench Daloopa",
         "widget_id": "daloopa_segment_breakdown",
@@ -170,6 +281,33 @@
         "widget_id": "daloopa_company_directory",
         "tab_id": "review",
         "max_count": 1
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Allocation Digest Service",
+        "widget_id": "segment_digest",
+        "expect": {
+          "name": "Segment Digest",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Allocation Digest Service",
+        "name_contains": "Allocation Digest App",
+        "tabs_include": [
+          "digest"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "digest",
+            "widget_id": "segment_digest"
+          }
+        ]
       }
     ],
     "required_generated_widgets": [
@@ -217,13 +355,7 @@
         "h": 8
       }
     ],
-    "required_tabs": [
-      "review"
-    ],
-    "required_tab_names": [
-      "Review"
-    ],
     "required_dashboard_name_contains": "Allocation Review",
-    "max_turns": 8
+    "max_turns": 15
   }
 }

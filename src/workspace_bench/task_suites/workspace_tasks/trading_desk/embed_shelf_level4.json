@@ -1,7 +1,7 @@
 {
   "id": "embed_shelf_level4",
   "difficulty": "level4",
-  "prompt": "On the open Desk Shelf dashboard, switch the Getting Started Video Library still showing Open Data Platform Demo to the desk demo, OpenBB Workspace Demo, through its video_name parameter; add Getting Started's HTML Widget. Leave the rest alone: the separate Video Library already showing OpenBB Workspace Demo is correct for the other desk and must stay untouched. Read the build-an-app guide; leave a Shelf Governance note recording the final two actions it lists.",
+  "prompt": "Build the desk shelf before the open: add a Shelf Service backend serving a Shelf Register table; publish Shelf App with Shelf Register on its Shelf tab; instantiate the app. On the open Desk Shelf dashboard, switch the Getting Started Video Library still showing Open Data Platform Demo to the desk demo, OpenBB Workspace Demo, through its video_name parameter; add the built Shelf Register and Getting Started's HTML Widget. Leave the rest alone: the separate Video Library already showing OpenBB Workspace Demo is correct for the other desk and must stay untouched. Read the build-an-app guide; leave a Shelf Governance note recording the final two actions it lists.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -149,6 +149,79 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Shelf Service",
+          "url": "http://127.0.0.1:9753",
+          "widgets_json": {
+            "shelf_register": {
+              "name": "Shelf Register",
+              "description": "Authored register for the desk's onboarding shelf.",
+              "endpoint": "/shelf-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Shelf App",
+              "description": "Authored app for the desk's onboarding shelf.",
+              "tabs": {
+                "shelf": {
+                  "id": "shelf",
+                  "name": "Shelf",
+                  "layout": [
+                    {
+                      "i": "shelf_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Shelf App",
+          "dashboard_name": "Shelf App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Getting Started"
@@ -196,6 +269,32 @@
         ]
       },
       {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Shelf Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Shelf Service",
+          "widget_id": "shelf_register"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Shelf Service",
+          "widget_id": "shelf_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -214,6 +313,11 @@
       "Shelf"
     ],
     "required_widgets": [
+      {
+        "origin": "Shelf Service",
+        "widget_id": "shelf_register",
+        "tab_id": "shelf"
+      },
       {
         "origin": "Getting Started",
         "widget_id": "html_widget",
@@ -305,7 +409,34 @@
         "h": 12
       }
     ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Shelf Service",
+        "widget_id": "shelf_register",
+        "expect": {
+          "name": "Shelf Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Shelf Service",
+        "name_contains": "Shelf App",
+        "tabs_include": [
+          "shelf"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "shelf",
+            "widget_id": "shelf_register"
+          }
+        ]
+      }
+    ],
     "required_dashboard_name_contains": "Desk Shelf",
-    "max_turns": 11
+    "max_turns": 18
   }
 }

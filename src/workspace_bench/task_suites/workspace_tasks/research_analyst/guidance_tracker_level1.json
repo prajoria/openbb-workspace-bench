@@ -1,7 +1,7 @@
 {
   "id": "guidance_tracker_level1",
   "difficulty": "level1",
-  "prompt": "Pull management's promises from Bench Daloopa for ticker NFLX onto the open Guidance Watch dashboard, then leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit. The desk needs the guide before the review.",
+  "prompt": "Pull management's promises from Bench Daloopa for ticker NFLX onto the open Guidance Watch dashboard, then leave a Guidance Tracker Note recording these Pending 2026Q2 ranges exactly: Total Revenue Guidance at 14617.6 to 15062.8 USD mn, Diluted EPS Guidance at 7.68 to 7.91 USD, and Paid Memberships Guidance at 329.6 to 339.7 mn. The desk needs the guide before the review.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [

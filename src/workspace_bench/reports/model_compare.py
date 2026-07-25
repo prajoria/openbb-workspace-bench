@@ -205,6 +205,7 @@ def effective_settings(args: argparse.Namespace) -> JsonDict:
         "openai_temperature": os.environ.get("OPENAI_TEMPERATURE", "0"),
         "ollama_temperature": os.environ.get("OLLAMA_TEMPERATURE", "0"),
         "openai_response_format": os.environ.get("OPENAI_RESPONSE_FORMAT", "json_schema"),
+        "initial_state_visible": os.environ.get("WORKSPACE_BENCH_SHOW_INITIAL_STATE") == "1",
         "ollama_format": os.environ.get("OLLAMA_FORMAT", "schema"),
         "judge_model": getattr(args, "judge_model", None)
         or os.environ.get("WORKSPACE_BENCH_JUDGE_MODEL"),
@@ -1370,7 +1371,15 @@ def build_interactive_messages(
         "business_terms": task.get("business_terms", []),
         "fixtures": task["fixtures"],
         "origin_hints": origin_hints,
-        "initial_state": task["initial_state"],
+        # Closed-world by default: a real MCP agent discovers workspace state
+        # through get_workspace_snapshot rather than receiving the dashboard
+        # JSON for free, so discovery is part of every exam. The legacy flag
+        # restores the old open-world behavior for historical comparisons.
+        "initial_state": (
+            task["initial_state"]
+            if os.environ.get("WORKSPACE_BENCH_SHOW_INITIAL_STATE") == "1"
+            else {"hidden": "call get_workspace_snapshot to inspect the workspace"}
+        ),
         "allowed_tools": allowed_tools,
     }
     base_instructions = [

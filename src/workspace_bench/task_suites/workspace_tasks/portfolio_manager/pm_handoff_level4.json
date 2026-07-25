@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level4",
   "difficulty": "level4",
-  "prompt": "Close out the open PM Handoff Log dashboard for the overnight desk: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1. The close-out runs under the Daloopa Earnings Review skill - the note also records the granularity that skill's first step sets for the consensus compare. Everything already on the dashboard stays as is.",
+  "prompt": "Build the desk's handoff log before the overnight shift: add a Handoff Log Service backend serving a Handoff Register table, publish Handoff Log App with Handoff Register on its Handoff tab, and instantiate the app. On the open PM Handoff Log dashboard, add the built Handoff Register, keeping everything already there as is. Then close out under the Daloopa Earnings Review skill: read Consensus Estimates from Bench Daloopa with ticker MSFT, leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1 plus the granularity that skill's first step sets for the consensus compare, and delegate the follow-up to the coverage analyst.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -107,9 +107,109 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Handoff Log Service",
+          "url": "http://127.0.0.1:9715",
+          "widgets_json": {
+            "handoff_register": {
+              "name": "Handoff Register",
+              "description": "Authored register of the desk's end-of-day handoffs.",
+              "endpoint": "/handoff-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Handoff Log App",
+              "description": "Authored app for the desk's handoff log.",
+              "tabs": {
+                "handoff": {
+                  "id": "handoff",
+                  "name": "Handoff",
+                  "layout": [
+                    {
+                      "i": "handoff_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Handoff Log App",
+          "dashboard_name": "Handoff Log App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Handoff Log Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Handoff Log Service",
+          "widget_id": "handoff_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_consensus_estimates",
+          "param_name": "ticker"
         },
         "optional": true
       },
@@ -138,9 +238,34 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "assign_tasks_to_agents",
+        "args": {
+          "task_requests": [
+            {
+              "id": "pm_handoff_follow_up",
+              "description": "Run the overnight follow-up on the MSFT consensus handoff.",
+              "assigned_holder_url": "workspace://agents/pm_handoff",
+              "assigned_agent_id": "pm_handoff-agent"
+            }
+          ]
+        },
+        "graded_args": []
       }
     ],
+    "required_tabs": [
+      "handoff"
+    ],
+    "required_tab_names": [
+      "Handoff"
+    ],
     "required_widgets": [
+      {
+        "origin": "Handoff Log Service",
+        "widget_id": "handoff_register",
+        "tab_id": "handoff"
+      },
       {
         "origin": "Bench Daloopa",
         "widget_id": "daloopa_consensus_estimates",
@@ -149,6 +274,33 @@
         },
         "tab_id": "handoff",
         "max_count": 1
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Handoff Log Service",
+        "widget_id": "handoff_register",
+        "expect": {
+          "name": "Handoff Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Handoff Log Service",
+        "name_contains": "Handoff Log App",
+        "tabs_include": [
+          "handoff"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "handoff",
+            "widget_id": "handoff_register"
+          }
+        ]
       }
     ],
     "required_generated_widgets": [
@@ -188,13 +340,7 @@
         "h": 8
       }
     ],
-    "required_tabs": [
-      "handoff"
-    ],
-    "required_tab_names": [
-      "Handoff"
-    ],
     "required_dashboard_name_contains": "PM Handoff Log",
-    "max_turns": 8
+    "max_turns": 16
   }
 }

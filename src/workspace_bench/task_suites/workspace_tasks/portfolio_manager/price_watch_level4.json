@@ -1,7 +1,7 @@
 {
   "id": "price_watch_level4",
   "difficulty": "level4",
-  "prompt": "On the open Price Watch dashboard, fix the stale Live Grid from Getting Started to TSLA and add a fresh Live Grid for the same symbol. Keep everything else as is. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with.",
+  "prompt": "Build the desk's watch feed before the open: add a Watch Feed Service backend serving a Watch Register table, publish Watch Feed App with Watch Register on its Watch tab, and instantiate the app. On the open Price Watch dashboard, add the built Watch Register, fix the stale Live Grid from Getting Started to TSLA, and add a fresh Live Grid for the same symbol, keeping everything else as is. Read the Finance Tearsheet skill and leave a Price Watch Governance note recording what its final step says to close with.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -119,6 +119,106 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Watch Feed Service",
+          "url": "http://127.0.0.1:9714",
+          "widgets_json": {
+            "watch_register": {
+              "name": "Watch Register",
+              "description": "Authored register of the names the desk is watching.",
+              "endpoint": "/watch-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Watch Feed App",
+              "description": "Authored app for the desk's watch feed.",
+              "tabs": {
+                "watch": {
+                  "id": "watch",
+                  "name": "Watch",
+                  "layout": [
+                    {
+                      "i": "watch_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Watch Feed App",
+          "dashboard_name": "Watch Feed App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Watch Feed Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_params_options",
+        "args": {
+          "origin": "Getting Started",
+          "widget_id": "live_grid_data",
+          "param_name": "symbol"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Watch Feed Service",
+          "widget_id": "watch_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Getting Started"
@@ -166,6 +266,11 @@
     ],
     "required_widgets": [
       {
+        "origin": "Watch Feed Service",
+        "widget_id": "watch_register",
+        "tab_id": "watch"
+      },
+      {
         "origin": "Getting Started",
         "widget_id": "live_grid_data",
         "data_args": {
@@ -182,6 +287,12 @@
         "max_count": 1
       }
     ],
+    "required_tabs": [
+      "watch"
+    ],
+    "required_tab_names": [
+      "Watch"
+    ],
     "required_generated_widgets": [
       {
         "widget_type": "note",
@@ -196,7 +307,8 @@
         "name_contains": "Price Watch Governance",
         "data_contains": [
           "investment conclusion"
-        ]
+        ],
+        "tab_id": "watch"
       }
     ],
     "required_layouts": [
@@ -225,13 +337,34 @@
         "h": 8
       }
     ],
-    "required_tabs": [
-      "watch"
+    "required_widget_defs": [
+      {
+        "backend_name": "Watch Feed Service",
+        "widget_id": "watch_register",
+        "expect": {
+          "name": "Watch Register",
+          "type": "table"
+        }
+      }
     ],
-    "required_tab_names": [
-      "Watch"
+    "required_app_defs": [
+      {
+        "backend_name": "Watch Feed Service",
+        "name_contains": "Watch Feed App",
+        "tabs_include": [
+          "watch"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "watch",
+            "widget_id": "watch_register"
+          }
+        ]
+      }
     ],
     "required_dashboard_name_contains": "Price Watch",
-    "max_turns": 9
+    "max_turns": 16
   }
 }

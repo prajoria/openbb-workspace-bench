@@ -1,7 +1,7 @@
 {
   "id": "allocation_read_level3",
   "difficulty": "level3",
-  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
+  "prompt": "Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, on the open Allocation Review dashboard, and keep everything already on the dashboard as is. Allocation reads run under the Daloopa Tearsheet skill - leave an Allocation Read Note recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -111,6 +111,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-tearsheet"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
@@ -138,18 +147,12 @@
         "args": {
           "widget_type": "note",
           "name": "Allocation Read Note",
-          "data": "Top segment iPhone at 52365.6 revenue_musd (AAPL, 2026Q1)."
+          "data": "Top segment iPhone at 52365.6 revenue_musd (AAPL, 2026Q1); per the Daloopa Tearsheet skill, all period math anchors on latest_calendar_quarter."
         },
         "graded_args": [
           "widget_type"
         ]
       }
-    ],
-    "required_tabs": [
-      "review"
-    ],
-    "required_tab_names": [
-      "Review"
     ],
     "required_widgets": [
       {
@@ -183,7 +186,8 @@
         "name_contains": "Allocation Read Note",
         "data_contains": [
           "iPhone",
-          "52365.6"
+          "52365.6",
+          "latest_calendar_quarter"
         ]
       }
     ],
@@ -213,7 +217,13 @@
         "h": 8
       }
     ],
+    "required_tabs": [
+      "review"
+    ],
+    "required_tab_names": [
+      "Review"
+    ],
     "required_dashboard_name_contains": "Allocation Review",
-    "max_turns": 7
+    "max_turns": 8
   }
 }

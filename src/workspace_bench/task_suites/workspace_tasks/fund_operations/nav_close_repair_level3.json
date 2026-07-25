@@ -1,7 +1,7 @@
 {
   "id": "nav_close_repair_level3",
   "difficulty": "level3",
-  "prompt": "Close repair on the open Close Room dashboard: Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard is showing Multi-Asset Fund, Closed, 1Y. Restore it to Flagship Long/Short, Open, 1D before the cutoff; leave every other close view, note, and layout exactly as is.",
+  "prompt": "Close repair on the open Close Room dashboard: Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard is showing Multi-Asset Fund, Closed, 1Y. Restore it to Flagship Long/Short, Open, 1D; keep everything already there exactly as is. Under the Daloopa Capital Allocation skill, leave a Close Governance Note recording which payout line its comparison adds to Share Buybacks before testing the total against Free Cash Flow.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -134,17 +134,18 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-capital-allocation"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
-        },
-        "optional": true
-      },
-      {
-        "tool": "get_widget_schema",
-        "args": {
-          "origin": "Bench Stark Enterprise",
-          "widget_id": "nav_fees_close_dashboard_close_close_exceptions"
         },
         "optional": true
       },
@@ -160,6 +161,17 @@
         },
         "graded_args": [
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Close Governance Note",
+          "data": "Close governance: the Daloopa Capital Allocation comparison adds Dividends Paid to Share Buybacks before comparing total shareholder return with Free Cash Flow."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -212,6 +224,14 @@
           "Prior close: Income Fund cash break cleared under four-eyes review."
         ],
         "tab_id": "close"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Close Governance Note",
+        "data_contains": [
+          "Dividends Paid"
+        ],
+        "tab_id": "close"
       }
     ],
     "required_layouts": [
@@ -249,6 +269,6 @@
       }
     ],
     "required_dashboard_name_contains": "Close Room",
-    "max_turns": 7
+    "max_turns": 8
   }
 }

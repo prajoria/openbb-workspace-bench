@@ -1,7 +1,7 @@
 {
   "id": "tape_and_news_level4",
   "difficulty": "level4",
-  "prompt": "Tape check on the open Desk Tape dashboard: read Getting Started's Sample News Feed for business, limited to 3, and keep everything already there exactly as is. Under the Finance Tearsheet skill, leave a Tape Lead Note recording the exact lead title and author plus the first input its workflow gathers.",
+  "prompt": "Build the tape digest before the open: add a Tape Digest Service backend serving a Tape Register table; publish Tape Digest App with Tape Register on its Digest tab; instantiate the app. On the open Desk Tape dashboard, add the built Tape Register and keep everything already there exactly as is. Read Getting Started's Sample News Feed for business, limited to 3; under the Finance Tearsheet skill, leave a Tape Lead Note recording the exact lead title and author plus the first input its workflow gathers.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -120,6 +120,120 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Tape Digest Service",
+          "url": "http://127.0.0.1:9732",
+          "widgets_json": {
+            "tape_register": {
+              "name": "Tape Register",
+              "description": "Authored register for the desk's market-open tape digest.",
+              "endpoint": "/tape-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Tape Digest App",
+              "description": "Authored app for the desk's market-open tape digest.",
+              "tabs": {
+                "digest": {
+                  "id": "digest",
+                  "name": "Digest",
+                  "layout": [
+                    {
+                      "i": "tape_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Tape Digest App",
+          "dashboard_name": "Tape Digest App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Tape Digest Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Tape Digest Service",
+          "widget_id": "tape_register"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Tape Digest Service",
+          "widget_id": "tape_register",
+          "dashboard_id": "dash_028"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_uuid": "widget_337",
+          "widget_id": "tape_register",
+          "dashboard_id": "dash_028",
+          "tab_id": "tape",
+          "x": 0,
+          "y": 18,
+          "w": 40,
+          "h": 10
+        },
+        "optional": true
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Getting Started"
@@ -155,7 +269,9 @@
         "args": {
           "widget_type": "note",
           "name": "Tape Lead Note",
-          "data": "Lead: Global Markets Rally on Positive Economic Data; author: Robert Williams. Per the Finance Tearsheet skill, the workflow gathers price action first."
+          "data": "Lead: Global Markets Rally on Positive Economic Data; author: Robert Williams. Per the Finance Tearsheet skill, the workflow gathers price action first.",
+          "dashboard_id": "dash_028",
+          "inner_tab": "tape"
         },
         "graded_args": [
           "widget_type"
@@ -169,6 +285,11 @@
       "Tape"
     ],
     "required_widgets": [
+      {
+        "origin": "Tape Digest Service",
+        "widget_id": "tape_register",
+        "tab_id": "tape"
+      },
       {
         "origin": "Getting Started",
         "widget_id": "sample_newsfeed",
@@ -184,6 +305,33 @@
         "widget_id": "sparkline_line",
         "tab_id": "tape",
         "max_count": 1
+      }
+    ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Tape Digest Service",
+        "widget_id": "tape_register",
+        "expect": {
+          "name": "Tape Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Tape Digest Service",
+        "name_contains": "Tape Digest App",
+        "tabs_include": [
+          "digest"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "digest",
+            "widget_id": "tape_register"
+          }
+        ]
       }
     ],
     "required_generated_widgets": [
@@ -233,6 +381,6 @@
       }
     ],
     "required_dashboard_name_contains": "Desk Tape",
-    "max_turns": 9
+    "max_turns": 17
   }
 }

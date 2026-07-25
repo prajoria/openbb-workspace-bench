@@ -1,7 +1,7 @@
 {
-  "id": "pm_handoff_level2",
-  "difficulty": "level2",
-  "prompt": "Read Consensus Estimates from Bench Daloopa on the open PM Handoff Log dashboard for the line the mega-cap coverage policy covers - the policy names it by company, the Microsoft line, never by ticker - and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1. The overnight desk trades off this note.",
+  "id": "client_review_level0",
+  "difficulty": "level0",
+  "prompt": "On the open Quarterly Client Review dashboard, add Company Fundamentals and Segment Breakdown from Bench Daloopa, both with parameters ticker set to AAPL and period set to 2026Q1. Please have the financial picture and revenue mix ready on the same basis before the client meeting.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -22,7 +22,7 @@
       "finance-guidance-tracker",
       "finance-tearsheet"
     ],
-    "default_selected_dashboard": "PM Handoff Log",
+    "default_selected_dashboard": "Quarterly Client Review",
     "allowed_tools": [
       "get_workspace_snapshot",
       "manage_dashboard",
@@ -47,12 +47,12 @@
     ],
     "initial_state": {
       "dashboard": {
-        "name": "PM Handoff Log",
+        "name": "Quarterly Client Review",
         "activate": false,
         "tabs": [
           {
-            "id": "handoff",
-            "name": "Handoff"
+            "id": "review",
+            "name": "Review"
           }
         ],
         "widgets": []
@@ -74,52 +74,55 @@
         "optional": true
       },
       {
-        "tool": "get_params_options",
+        "tool": "create_widget",
         "args": {
           "origin": "Bench Daloopa",
-          "widget_id": "daloopa_consensus_estimates",
-          "param_name": "ticker"
-        },
-        "optional": true
-      },
-      {
-        "tool": "get_widget_data",
-        "args": {
-          "origin": "Bench Daloopa",
-          "widget_id": "daloopa_consensus_estimates",
+          "widget_id": "daloopa_company_fundamentals",
           "data_args": {
-            "ticker": "MSFT"
+            "ticker": "AAPL",
+            "period": "2026Q1"
           }
         },
         "graded_args": [
           "origin",
-          "widget_id",
           "data_args"
         ]
       },
       {
-        "tool": "add_generative_widget",
+        "tool": "create_widget",
         "args": {
-          "widget_type": "note",
-          "name": "Overnight Handoff Note",
-          "data": "Overnight handoff: MSFT Total Revenue 2026Q1 - actual 91934.6 vs consensus 93202.6 (USD mn)."
+          "origin": "Bench Daloopa",
+          "widget_id": "daloopa_segment_breakdown",
+          "data_args": {
+            "ticker": "AAPL",
+            "period": "2026Q1"
+          }
         },
         "graded_args": [
-          "widget_type"
+          "origin",
+          "data_args"
         ]
       }
     ],
-    "required_generated_widgets": [
+    "required_widgets": [
       {
-        "widget_type": "note",
-        "name_contains": "Overnight Handoff Note",
-        "data_contains": [
-          "91934.6",
-          "93202.6"
-        ]
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_company_fundamentals",
+        "data_args": {
+          "ticker": "AAPL",
+          "period": "2026Q1"
+        }
+      },
+      {
+        "origin": "Bench Daloopa",
+        "widget_id": "daloopa_segment_breakdown",
+        "data_args": {
+          "ticker": "AAPL",
+          "period": "2026Q1"
+        }
       }
     ],
-    "required_dashboard_name_contains": "PM Handoff Log",
-    "max_turns": 8
+    "required_dashboard_name_contains": "Quarterly Client Review",
+    "max_turns": 7
   }
 }

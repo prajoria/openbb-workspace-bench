@@ -1,7 +1,7 @@
 {
   "id": "pm_handoff_level3",
   "difficulty": "level3",
-  "prompt": "On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1. The dashboard already has the desk's views on it - leave everything else exactly as it is.",
+  "prompt": "Close out the open PM Handoff Log dashboard for the overnight desk: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1. The close-out runs under the Daloopa Earnings Review skill - the note also records the granularity that skill's first step sets for the consensus compare. Everything already on the dashboard stays as is.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -98,6 +98,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-earnings-review"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
@@ -124,18 +133,12 @@
         "args": {
           "widget_type": "note",
           "name": "Overnight Handoff Note",
-          "data": "Overnight handoff: MSFT Total Revenue 2026Q1 - actual 91934.6 vs consensus 93202.6 (USD mn)."
+          "data": "Overnight handoff: MSFT Total Revenue 2026Q1 - actual 91934.6 vs consensus 93202.6 (USD mn); per the Daloopa Earnings Review skill, the consensus compare runs metric by metric."
         },
         "graded_args": [
           "widget_type"
         ]
       }
-    ],
-    "required_tabs": [
-      "handoff"
-    ],
-    "required_tab_names": [
-      "Handoff"
     ],
     "required_widgets": [
       {
@@ -162,7 +165,8 @@
         "name_contains": "Overnight Handoff Note",
         "data_contains": [
           "91934.6",
-          "93202.6"
+          "93202.6",
+          "metric by metric"
         ]
       }
     ],
@@ -184,7 +188,13 @@
         "h": 8
       }
     ],
+    "required_tabs": [
+      "handoff"
+    ],
+    "required_tab_names": [
+      "Handoff"
+    ],
     "required_dashboard_name_contains": "PM Handoff Log",
-    "max_turns": 7
+    "max_turns": 8
   }
 }

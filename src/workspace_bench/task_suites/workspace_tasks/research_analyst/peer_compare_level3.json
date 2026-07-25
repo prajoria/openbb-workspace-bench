@@ -1,7 +1,7 @@
 {
   "id": "peer_compare_level3",
   "difficulty": "level3",
-  "prompt": "Add Company Fundamentals from Bench Daloopa twice on the open Peer Compare dashboard, one for MSFT at 2025Q2 and one for AMZN at 2025Q2. The dashboard already has the desk's coverage on it, so leave everything else exactly as it is.",
+  "prompt": "On the open Peer Compare dashboard, add Company Fundamentals from Bench Daloopa twice, one for MSFT at 2025Q2 and one for AMZN at 2025Q2, and keep everything already on the dashboard as is. Peer comparisons run under the Daloopa Industry skill - leave a Peer Compare Governance note recording where its first step says the comparable set comes from.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -111,6 +111,15 @@
         "optional": true
       },
       {
+        "tool": "get_skill_content",
+        "args": {
+          "slug": "daloopa-industry"
+        },
+        "graded_args": [
+          "slug"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
@@ -153,6 +162,17 @@
         "graded_args": [
           "origin",
           "data_args"
+        ]
+      },
+      {
+        "tool": "add_generative_widget",
+        "args": {
+          "widget_type": "note",
+          "name": "Peer Compare Governance",
+          "data": "Per the Daloopa Industry skill, the comparable set comes from daloopa_company_directory, not prior assumptions."
+        },
+        "graded_args": [
+          "widget_type"
         ]
       }
     ],
@@ -206,6 +226,14 @@
           "Prior peer read: AAPL remained the reference name; do not roll that view into the cloud comparison."
         ],
         "tab_id": "compare"
+      },
+      {
+        "widget_type": "note",
+        "name_contains": "Peer Compare Governance",
+        "data_contains": [
+          "daloopa_company_directory"
+        ],
+        "tab_id": "compare"
       }
     ],
     "required_layouts": [
@@ -235,6 +263,6 @@
       }
     ],
     "required_dashboard_name_contains": "Peer Compare",
-    "max_turns": 8
+    "max_turns": 10
   }
 }

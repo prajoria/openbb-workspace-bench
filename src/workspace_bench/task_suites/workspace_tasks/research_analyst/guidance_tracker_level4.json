@@ -1,7 +1,7 @@
 {
   "id": "guidance_tracker_level4",
   "difficulty": "level4",
-  "prompt": "On the open Guidance Watch dashboard, read Management Guidance from Bench Daloopa with ticker NFLX and keep everything already on the dashboard exactly as it is. Guidance reviews run under the Daloopa Guidance Tracker skill - leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit, plus how that skill says to weight quarters when characterizing the trend.",
+  "prompt": "Build the desk's guidance-tracking workflow: add a Guidance Watch Service backend serving a Guidance Register table, publish Guidance Watch App with Guidance Register on its Guidance tab, and instantiate the app. On the open Guidance Watch dashboard, add the built Guidance Register and keep everything already there exactly as it is. Read Management Guidance from Bench Daloopa with ticker NFLX, then under the Daloopa Guidance Tracker skill leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit, plus how that skill says to weight quarters when characterizing the trend.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -119,6 +119,97 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Guidance Watch Service",
+          "url": "http://127.0.0.1:9717",
+          "widgets_json": {
+            "guidance_register": {
+              "name": "Guidance Register",
+              "description": "Authored register for the desk's tracked management guidance.",
+              "endpoint": "/guidance-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Guidance Watch App",
+              "description": "Authored app for the desk's guidance register.",
+              "tabs": {
+                "guidance": {
+                  "id": "guidance",
+                  "name": "Guidance",
+                  "layout": [
+                    {
+                      "i": "guidance_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Guidance Watch App",
+          "dashboard_name": "Guidance Watch App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Guidance Watch Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Guidance Watch Service",
+          "widget_id": "guidance_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Daloopa"
@@ -126,10 +217,11 @@
         "optional": true
       },
       {
-        "tool": "get_widget_schema",
+        "tool": "get_params_options",
         "args": {
           "origin": "Bench Daloopa",
-          "widget_id": "daloopa_management_guidance"
+          "widget_id": "daloopa_management_guidance",
+          "param_name": "ticker"
         },
         "optional": true
       },
@@ -167,6 +259,11 @@
       "Guidance"
     ],
     "required_widgets": [
+      {
+        "origin": "Guidance Watch Service",
+        "widget_id": "guidance_register",
+        "tab_id": "guidance"
+      },
       {
         "origin": "Bench Daloopa",
         "widget_id": "daloopa_management_guidance",
@@ -236,7 +333,34 @@
         "h": 8
       }
     ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Guidance Watch Service",
+        "widget_id": "guidance_register",
+        "expect": {
+          "name": "Guidance Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Guidance Watch Service",
+        "name_contains": "Guidance Watch App",
+        "tabs_include": [
+          "guidance"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "guidance",
+            "widget_id": "guidance_register"
+          }
+        ]
+      }
+    ],
     "required_dashboard_name_contains": "Guidance Watch",
-    "max_turns": 9
+    "max_turns": 15
   }
 }

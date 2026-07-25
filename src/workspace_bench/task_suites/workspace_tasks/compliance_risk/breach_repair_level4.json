@@ -1,7 +1,7 @@
 {
   "id": "breach_repair_level4",
   "difficulty": "level4",
-  "prompt": "On the open Breach Review dashboard, repair the Policy Breaches view from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD. The separate Policy Breaches view with parameters severity Low, status In Review, and period MTD is already correct for its review cut and must not be changed. Keep every other view and record exactly as it is so the breach evidence remains intact. Read the Finance Guidance Tracker skill and leave a Breach Review Evidence Note recording what its workflow lists last.",
+  "prompt": "Build the breach file: add a Breach Watch Service backend serving a Breach Register table, publish Breach Watch App with Breach Register on its Register tab, and instantiate the app. On the open Breach Review dashboard, add the built Breach Register and repair the Policy Breaches view from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD. The separate Policy Breaches view with parameters severity Low, status In Review, and period MTD is already correct for its review cut and must not be changed. Keep every other view and record exactly as it is so the breach evidence remains intact. Read the Finance Guidance Tracker skill and leave a Breach Review Evidence Note recording what its workflow lists last.",
   "setup": {
     "workspace_baseline": "stark-workspace-a",
     "workspace_backends": [
@@ -143,6 +143,98 @@
         ]
       },
       {
+        "tool": "read_workspace_resource",
+        "args": {
+          "uri": "openbb://workspace/specs/widgets-json"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Breach Watch Service",
+          "widgets_json": {},
+          "apps_json": []
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "add",
+          "name": "Breach Watch Service",
+          "url": "http://127.0.0.1:9738",
+          "widgets_json": {
+            "breach_register": {
+              "name": "Breach Register",
+              "description": "Authored register for the personal-trading breach review.",
+              "endpoint": "/breach-register",
+              "type": "table",
+              "gridData": {
+                "w": 40,
+                "h": 10
+              }
+            }
+          },
+          "apps_json": [
+            {
+              "name": "Breach Watch App",
+              "description": "Authored app for the personal-trading breach review.",
+              "tabs": {
+                "register": {
+                  "id": "register",
+                  "name": "Register",
+                  "layout": [
+                    {
+                      "i": "breach_register",
+                      "x": 0,
+                      "y": 0,
+                      "w": 40,
+                      "h": 10
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "graded_args": [
+          "operation",
+          "name"
+        ]
+      },
+      {
+        "tool": "manage_backends",
+        "args": {
+          "operation": "list"
+        },
+        "optional": true
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "list",
+          "backend_id": "backend_005"
+        },
+        "optional": true
+      },
+      {
+        "tool": "list_available_widgets",
+        "args": {
+          "origin": "Breach Watch Service"
+        },
+        "optional": true
+      },
+      {
+        "tool": "get_widget_schema",
+        "args": {
+          "origin": "Breach Watch Service",
+          "widget_id": "breach_register"
+        },
+        "optional": true
+      },
+      {
         "tool": "list_available_widgets",
         "args": {
           "origin": "Bench Stark Enterprise"
@@ -150,10 +242,11 @@
         "optional": true
       },
       {
-        "tool": "get_widget_schema",
+        "tool": "get_params_options",
         "args": {
           "origin": "Bench Stark Enterprise",
-          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches"
+          "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
+          "param_name": "period"
         },
         "optional": true
       },
@@ -173,6 +266,28 @@
         ]
       },
       {
+        "tool": "create_widget",
+        "args": {
+          "origin": "Breach Watch Service",
+          "widget_id": "breach_register"
+        },
+        "graded_args": [
+          "origin",
+          "widget_id"
+        ]
+      },
+      {
+        "tool": "update_widget_layout",
+        "args": {
+          "widget_id": "breach_register",
+          "x": 0,
+          "y": 42,
+          "w": 40,
+          "h": 10
+        },
+        "optional": true
+      },
+      {
         "tool": "add_generative_widget",
         "args": {
           "widget_type": "note",
@@ -182,6 +297,36 @@
         "graded_args": [
           "widget_type"
         ]
+      },
+      {
+        "tool": "manage_apps",
+        "args": {
+          "operation": "instantiate",
+          "backend_id": "backend_005",
+          "app_name": "Breach Watch App",
+          "dashboard_name": "Breach Watch App",
+          "activate": false
+        },
+        "graded_args": [
+          "operation"
+        ]
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "dashboard",
+          "dashboard_id": "dash_029"
+        },
+        "optional": true
+      },
+      {
+        "tool": "navigate_workspace",
+        "args": {
+          "operation": "tab",
+          "dashboard_id": "dash_028",
+          "tab_id": "review"
+        },
+        "optional": true
       }
     ],
     "required_tabs": [
@@ -191,6 +336,11 @@
       "Review"
     ],
     "required_widgets": [
+      {
+        "origin": "Breach Watch Service",
+        "widget_id": "breach_register",
+        "tab_id": "review"
+      },
       {
         "origin": "Bench Stark Enterprise",
         "widget_id": "compliance_surveillance_hub_personal_trading_policy_breaches",
@@ -277,7 +427,34 @@
         "h": 8
       }
     ],
+    "required_widget_defs": [
+      {
+        "backend_name": "Breach Watch Service",
+        "widget_id": "breach_register",
+        "expect": {
+          "name": "Breach Register",
+          "type": "table"
+        }
+      }
+    ],
+    "required_app_defs": [
+      {
+        "backend_name": "Breach Watch Service",
+        "name_contains": "Breach Watch App",
+        "tabs_include": [
+          "register"
+        ],
+        "layout_refs_valid": true,
+        "no_overlaps": true,
+        "widgets_on_tab": [
+          {
+            "tab_id": "register",
+            "widget_id": "breach_register"
+          }
+        ]
+      }
+    ],
     "required_dashboard_name_contains": "Breach Review",
-    "max_turns": 9
+    "max_turns": 21
   }
 }
