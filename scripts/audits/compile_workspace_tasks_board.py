@@ -82,6 +82,12 @@ def main() -> int:
                 "serving-confounded: same weights scored 3x higher via another route; "
                 "rerun with a pinned provider before publishing"
             ),
+            "openrouter-laguna-s-2.1": (
+                "action-format non-compliance, not an outage: 110/120 episodes "
+                "exhausted the malformed-action recoveries drifting back to the "
+                "model's native tool_call-tag syntax; 7 of the 10 fully-JSON "
+                "episodes passed"
+            ),
         }
         if label in MANUAL_EXCLUSIONS:
             r["excluded"] = MANUAL_EXCLUSIONS[label]

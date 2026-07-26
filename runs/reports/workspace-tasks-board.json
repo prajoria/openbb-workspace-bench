@@ -361,6 +361,50 @@
    }
   },
   {
+   "model": "openrouter-laguna-s-2.1",
+   "episodes": 120,
+   "pass_at_1": 0.0583,
+   "process_failures": 110,
+   "per_level": {
+    "level0": {
+     "passes": 4,
+     "attempts": 24,
+     "rate": 0.1667
+    },
+    "level1": {
+     "passes": 2,
+     "attempts": 24,
+     "rate": 0.0833
+    },
+    "level2": {
+     "passes": 1,
+     "attempts": 24,
+     "rate": 0.0417
+    },
+    "level3": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    },
+    "level4": {
+     "passes": 0,
+     "attempts": 24,
+     "rate": 0.0
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 350,
+    "missing_widget": 96,
+    "missing_generated_widget": 71,
+    "misconfigured_widget": 51,
+    "missing_custom_backend": 48,
+    "missing_tool_result": 8,
+    "widget_list_not_called_before_use": 7,
+    "layout_out_of_grid": 1
+   },
+   "excluded": "action-format non-compliance, not an outage: 110/120 episodes exhausted the malformed-action recoveries drifting back to the model's native tool_call-tag syntax; 7 of the 10 fully-JSON episodes passed"
+  },
+  {
    "model": "openrouter-moonshotai-kimi-k3",
    "episodes": 120,
    "pass_at_1": 0.0,

@@ -402,7 +402,11 @@ exclusion reasons in
 | gpt-oss:20b | 19.2% | 38 | 21 | 29 | 8 | 0 |
 | qwen3:8b | 16.7% | 38 | 21 | 17 | 8 | 0 |
 
-GLM-5.2 runs pinned to a single upstream provider with fallbacks disabled:
+Laguna S 2.1 (Poolside) ran the full 120 and is excluded with its reason
+recorded: 110/120 episodes exhausted the malformed-action recoveries by
+drifting into the model's native tool_call-tag syntax instead of the
+harness's JSON action contract (7 of its 10 fully-compliant episodes
+passed). GLM-5.2 runs pinned to a single upstream provider with fallbacks disabled:
 an earlier unpinned run of the same weights scored 13.3% with 95/120
 episodes dying on invalid-call storms, and stays in the board JSON as an
 excluded cautionary row. Rows for claude-opus-5 and kimi-k3 are
