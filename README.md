@@ -398,10 +398,15 @@ exclusion reasons in
 | --- | --- | --- | --- | --- | --- | --- |
 | GPT-5.5 | 93.3% | 100 | 96 | 88 | 88 | 96 |
 | GLM-5.2 (Fireworks-pinned) | 81.7% | 100 | 92 | 79 | 71 | 67 |
+| Gemini 2.5 Flash | 47.5% | 63 | 79 | 46 | 50 | 0 |
 | gpt-4.1-mini (reference) | 39.4% | 85 | 60 | 36 | 17 | 0 |
 | gpt-oss:20b | 19.2% | 38 | 21 | 29 | 8 | 0 |
 | qwen3:8b | 16.7% | 38 | 21 | 17 | 8 | 0 |
 
+Gemini 2.5 Flash runs free-form: under schema-grammar decoding it
+degenerate-loops on invented tool names (0/4 probe tasks; 3/4 free-form,
+same prompts). Its Find-above-Execute inversion is a reported model
+property driven by skipped evidence notes, not a content defect.
 Laguna S 2.1 (Poolside) ran the full 120 and is excluded with its reason
 recorded: 110/120 episodes exhausted the malformed-action recoveries by
 drifting into the model's native tool_call-tag syntax instead of the
