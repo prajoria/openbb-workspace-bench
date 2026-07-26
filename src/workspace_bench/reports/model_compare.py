@@ -270,9 +270,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     parser.add_argument(
         "--difficulty",
-        choices=["all", "easy", "medium", "hard"],
+        choices=["all", "easy", "medium", "hard"]
+        + [f"level{level}" for level in range(6)],
         default="all",
-        help="Task difficulty slice to run.",
+        help="Task difficulty slice to run (classic tier or ladder level).",
     )
     parser.add_argument("--family", help="Optional task-family filter, e.g. create.")
     parser.add_argument("--category", help="Optional task-category filter, e.g. dashboard.")

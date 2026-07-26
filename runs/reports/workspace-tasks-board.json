@@ -318,6 +318,49 @@
    "excluded": "process failures exceed 20% - provider outage or credit limit; resume before publishing"
   },
   {
+   "model": "openrouter-glm-5.2-fireworks",
+   "episodes": 120,
+   "pass_at_1": 0.8167,
+   "process_failures": 0,
+   "per_level": {
+    "level0": {
+     "passes": 24,
+     "attempts": 24,
+     "rate": 1.0
+    },
+    "level1": {
+     "passes": 22,
+     "attempts": 24,
+     "rate": 0.9167
+    },
+    "level2": {
+     "passes": 19,
+     "attempts": 24,
+     "rate": 0.7917
+    },
+    "level3": {
+     "passes": 17,
+     "attempts": 24,
+     "rate": 0.7083
+    },
+    "level4": {
+     "passes": 16,
+     "attempts": 24,
+     "rate": 0.6667
+    }
+   },
+   "issue_codes": {
+    "missing_tool_call": 14,
+    "misconfigured_widget": 13,
+    "missing_widget": 7,
+    "missing_generated_widget": 4,
+    "widget_list_not_called_before_use": 3,
+    "too_many_invalid_calls": 2,
+    "layout_out_of_grid": 1,
+    "missing_tool_result": 1
+   }
+  },
+  {
    "model": "openrouter-moonshotai-kimi-k3",
    "episodes": 120,
    "pass_at_1": 0.0,

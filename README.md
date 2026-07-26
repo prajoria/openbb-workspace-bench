@@ -397,14 +397,17 @@ exclusion reasons in
 | model | overall | L0 execute | L1 find | L2 derive | L3 ground | L4 compose |
 | --- | --- | --- | --- | --- | --- | --- |
 | GPT-5.5 | 93.3% | 100 | 96 | 88 | 88 | 96 |
+| GLM-5.2 (Fireworks-pinned) | 81.7% | 100 | 92 | 79 | 71 | 67 |
 | gpt-4.1-mini (reference) | 39.4% | 85 | 60 | 36 | 17 | 0 |
 | gpt-oss:20b | 19.2% | 38 | 21 | 29 | 8 | 0 |
 | qwen3:8b | 16.7% | 38 | 21 | 17 | 8 | 0 |
 
-Rows for claude-opus-5 and kimi-k3 are credit-blocked (checkpoints resume
-when provider credits allow) and GLM-5.2's completed run is excluded as
-serving-confounded; each exclusion is recorded with its reason in the board
-JSON.
+GLM-5.2 runs pinned to a single upstream provider with fallbacks disabled:
+an earlier unpinned run of the same weights scored 13.3% with 95/120
+episodes dying on invalid-call storms, and stays in the board JSON as an
+excluded cautionary row. Rows for claude-opus-5 and kimi-k3 are
+credit-blocked (checkpoints resume when provider credits allow); each
+exclusion is recorded with its reason in the board JSON.
 
 Every suite requires the reference solution to pass every task and a
 do-nothing agent to fail every task. Additional generation and validation gates
