@@ -46,10 +46,10 @@ def _row(
 
 def test_calibration_metrics_include_variance_recovery_and_cost() -> None:
     rows = [
-        _row("enterprise-apps-usage/repair/a", 1, True, failed_calls=1),
-        _row("enterprise-apps-usage/repair/a", 2, False),
-        _row("enterprise-apps-usage/platform/b", 1, True),
-        _row("enterprise-apps-usage/platform/b", 2, True),
+        _row("workspace-tasks/compliance_risk/a", 1, True, failed_calls=1),
+        _row("workspace-tasks/compliance_risk/a", 2, False),
+        _row("workspace-tasks/research_analyst/b", 1, True),
+        _row("workspace-tasks/research_analyst/b", 2, True),
     ]
 
     summary = summarize_result_rows(rows)
@@ -63,24 +63,42 @@ def test_calibration_metrics_include_variance_recovery_and_cost() -> None:
     assert summary["pass_at_k"] == 1.0
     assert summary["pass_power_k"] == 0.5
     assert summary["cost_usd"] == 0.04
-    repair = next(item for item in matrix if item["family"] == "repair")
-    assert repair["outcomes"] == [True, False]
-    assert repair["flip_rate"] == 1.0
+    compliance_risk = next(
+        item for item in matrix if item["family"] == "compliance_risk"
+    )
+    assert compliance_risk["outcomes"] == [True, False]
+    assert compliance_risk["flip_rate"] == 1.0
 
 
 def test_run_summary_builds_family_difficulty_matrix_from_result_rows() -> None:
     rows = [
-        {**_row("enterprise-apps-usage/repair/easy", 1, True), "difficulty": "easy"},
-        {**_row("enterprise-apps-usage/repair/hard", 1, False), "difficulty": "hard"},
-        {**_row("enterprise-apps-usage/platform/hard", 1, True), "difficulty": "hard"},
+        {**_row("workspace-tasks/compliance_risk/easy", 1, True), "difficulty": "easy"},
+        {**_row("workspace-tasks/compliance_risk/hard", 1, False), "difficulty": "hard"},
+        {**_row("workspace-tasks/research_analyst/hard", 1, True), "difficulty": "hard"},
     ]
 
     summary = summarize_runs([], result_rows=rows)
 
-    assert list(summary["family_difficulty_matrix"]) == ["platform", "repair"]
-    assert list(summary["family_difficulty_matrix"]["repair"]) == ["easy", "hard"]
-    assert summary["family_difficulty_matrix"]["repair"]["easy"]["strict_pass_rate"] == 1.0
-    assert summary["family_difficulty_matrix"]["repair"]["hard"]["strict_pass_rate"] == 0.0
+    assert list(summary["family_difficulty_matrix"]) == [
+        "compliance_risk",
+        "research_analyst",
+    ]
+    assert list(summary["family_difficulty_matrix"]["compliance_risk"]) == [
+        "easy",
+        "hard",
+    ]
+    assert (
+        summary["family_difficulty_matrix"]["compliance_risk"]["easy"][
+            "strict_pass_rate"
+        ]
+        == 1.0
+    )
+    assert (
+        summary["family_difficulty_matrix"]["compliance_risk"]["hard"][
+            "strict_pass_rate"
+        ]
+        == 0.0
+    )
 
 
 def test_openai_usage_prefers_provider_cost_and_can_estimate() -> None:
@@ -154,9 +172,9 @@ def test_resume_manifest_rejects_incompatible_cells(tmp_path) -> None:
 
 def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None:
     tasks = [
-        ("enterprise-apps-usage/retrieve/easy", "easy"),
-        ("enterprise-apps-usage/repair/medium", "hard"),
-        ("enterprise-apps-usage/platform/hard", "medium"),
+        ("workspace-tasks/portfolio_manager/easy", "easy"),
+        ("workspace-tasks/compliance_risk/medium", "hard"),
+        ("workspace-tasks/research_analyst/hard", "medium"),
     ]
     model_a = {
         "model": {"slug": "frontier"},
@@ -192,25 +210,25 @@ def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None
             "competent_models": ["frontier", "small"],
             "frontier_models": ["frontier"],
             "small_models": ["small"],
-            "overrides": {"enterprise-apps-usage/curate/existing": "hard"},
+            "overrides": {"workspace-tasks/client_advisor/existing": "hard"},
         },
     )
 
     raw = {row["task_ref"]: row["raw_proposed"] for row in proposal["rows"]}
     proposed = {row["task_ref"]: row["proposed"] for row in proposal["rows"]}
     assert raw == {
-        "enterprise-apps-usage/platform/hard": "hard",
-        "enterprise-apps-usage/repair/medium": "medium",
-        "enterprise-apps-usage/retrieve/easy": "easy",
+        "workspace-tasks/research_analyst/hard": "hard",
+        "workspace-tasks/compliance_risk/medium": "medium",
+        "workspace-tasks/portfolio_manager/easy": "easy",
     }
     assert proposed == {
-        "enterprise-apps-usage/platform/hard": "hard",
-        "enterprise-apps-usage/repair/medium": "medium",
-        "enterprise-apps-usage/retrieve/easy": "easy",
+        "workspace-tasks/research_analyst/hard": "hard",
+        "workspace-tasks/compliance_risk/medium": "medium",
+        "workspace-tasks/portfolio_manager/easy": "easy",
     }
     assert proposal["override_table"]["bands"] == {"easy": 1, "medium": 1, "hard": 1}
     assert proposal["override_table"]["overrides"] == {
-        "enterprise-apps-usage/curate/existing": "hard",
-        "enterprise-apps-usage/platform/hard": "hard",
-        "enterprise-apps-usage/repair/medium": "medium",
+        "workspace-tasks/client_advisor/existing": "hard",
+        "workspace-tasks/research_analyst/hard": "hard",
+        "workspace-tasks/compliance_risk/medium": "medium",
     }

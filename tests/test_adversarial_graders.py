@@ -15,8 +15,8 @@ from workspace_bench.core.runner import TaskRunner, find_task, load_builtin_task
 
 
 CASES = (
-    ("enterprise-apps-usage/platform/cited_research_operations_level5", NEVER_INSTANTIATED),
-    ("enterprise-apps-usage/organize/client_onboarding_flow_level5", ONE_WIDGET_MISSING),
+    ("workspace-tasks/research_analyst/earnings_prep_level4", NEVER_INSTANTIATED),
+    ("workspace-tasks/trading_desk/chart_deck_level4", ONE_WIDGET_MISSING),
 )
 
 
@@ -43,11 +43,11 @@ def test_invalid_candidate_fails_for_its_isolated_intended_reason(
     assert result.passed
 
 
-def test_adversarial_matrix_rejects_every_applicable_organize_mutant() -> None:
+def test_adversarial_matrix_rejects_every_applicable_trading_desk_mutant() -> None:
     tasks = [
         task
-        for task in load_builtin_tasks("enterprise-apps-usage")
-        if task.family == "organize"
+        for task in load_builtin_tasks("workspace-tasks")
+        if task.family == "trading_desk"
     ]
 
     matrix = run_adversarial_matrix(tasks, runtime_sample_per_family=1)
@@ -60,6 +60,7 @@ def test_adversarial_matrix_rejects_every_applicable_organize_mutant() -> None:
     assert {archetype for _family, archetype in matrix.applicable} == {
         "never_instantiated",
         "one_widget_missing",
+        "invalid_setting",
     }
     assert {result.candidate.archetype for result in matrix.results} == {
         archetype for _family, archetype in matrix.applicable

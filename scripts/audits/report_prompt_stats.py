@@ -24,12 +24,12 @@ SUITES = {
     "enterprise-apps-default": (
         REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
     ),
-    "enterprise-apps-usage": REPO / "src/workspace_bench/task_suites/enterprise_apps_usage",
+    "workspace-tasks": REPO / "src/workspace_bench/task_suites/workspace_tasks",
 }
 EXPECTED_TASKS = {
     "smoke": 80,
     "enterprise-apps-default": 138,
-    "enterprise-apps-usage": 192,
+    "workspace-tasks": 120,
 }
 # The smoke ladder repeats each family's declarative prompt across levels
 # 0-2 on purpose (same instruction, different execution context) and adds
@@ -41,7 +41,7 @@ EXPECTED_DISTINCT_PROMPTS = {
 PROMPT_WORD_CAPS = {
     "smoke": 100,
     "enterprise-apps-default": 1_000,
-    "enterprise-apps-usage": 350,
+    "workspace-tasks": 200,
 }
 
 

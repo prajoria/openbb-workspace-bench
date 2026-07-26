@@ -302,8 +302,18 @@ def generate_adversarial_candidates(
     if _has_instantiate_call(context.trace) and _instantiated_custom_widgets(
         context.final_snapshot
     ):
+        instantiate_is_graded = any(
+            call.name == "manage_apps"
+            and call.args_contains.get("operation") == "instantiate"
+            for call in task.success.required_tool_calls
+        )
         if task.success.required_capabilities:
             expected_codes: tuple[str, ...] = ("missing_capability",)
+        elif instantiate_is_graded:
+            # The instantiate call is itself a graded trajectory step (the
+            # workspace-tasks Compose shape): omitting it from the trace is
+            # flagged as the missing graded call, not as a state defect.
+            expected_codes = ("missing_tool_call",)
         elif task.success.required_widgets:
             expected_codes = ("missing_widget",)
         else:

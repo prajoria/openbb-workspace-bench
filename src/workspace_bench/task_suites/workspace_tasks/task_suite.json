@@ -1,7 +1,9 @@
 {
-  "suite_id": "workspace-bench-workspace-tasks",
-  "visibility": "private",
-  "description": "Story-authored suite: 5 personas x 5 stories x 6 levels, authored by agents from task_templates/ and certified by oracle/no-op replay. In construction; not yet registered.",
+  "suite_id": "workspace-tasks",
+  "visibility": "public",
+  "content_sha256": "1e03213e448735c6d1cdf60ab8a637cb25b118ffc0d56be11c4258182da0a618",
+  "workspace_baseline": "stark-workspace-a",
+  "description": "Agent-authored suite of 120 tasks: 6 personas x 4 stories x 5 levels (Execute, Find, Derive, Ground, Compose), run closed-world - the agent discovers the workspace through get_workspace_snapshot. Authored from task_templates/ under the task-author skill, reviewed by fresh-context validators and a per-story fairness judge, certified by oracle/no-op replay, and gated on a gpt-4.1-mini calibration staircase (pooled 85/60/36/17/0 over three repeats).",
   "task_defaults": {
     "category": "story",
     "eval": {

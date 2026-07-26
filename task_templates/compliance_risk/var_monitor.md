@@ -4,7 +4,7 @@ facts:
   targets:
     - {widget: VaR Trend, app: Risk & Exposure Monitor, origin: Bench Stark Enterprise}
   params: {portfolio: Long/Short Equity, scenario: Rates +100bp, period: YTD}
-  find_hint: the risk trend
+  find_hint: the value-at-risk trend
   policy: {phrase: the rates-shock policy, carries: scenario, meaning: the plus-100-basis-points rates scenario}
   governance: {skill: daloopa-inflection}
   build: {backend: Shock Watch Service, table: Shock Register}

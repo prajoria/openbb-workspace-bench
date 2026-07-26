@@ -12,7 +12,7 @@ from workspace_bench.reports.suites import summarize
 
 
 def test_cli_and_model_comparison_share_grade_serialization(tmp_path: Path) -> None:
-    result = TaskRunner().run(find_task("decision_briefing_level0"), "oracle")
+    result = TaskRunner().run(find_task("morning_briefing_level0"), "oracle")
     comparison = ComparisonRun(
         run_result=result,
         command="test-agent",

@@ -7,18 +7,18 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] `uv run --extra dev ruff check src tests scripts` passes.
 - [ ] `uv run --extra dev mypy src scripts` passes.
 - [ ] `uv run --extra dev pytest` passes.
-- [ ] `uv run python scripts/audits/audit_task_identity.py` reports 0 findings across 410 tasks.
+- [ ] `uv run python scripts/audits/audit_task_identity.py` reports 0 findings across 338 tasks.
 - [ ] `uv run python scripts/audits/report_prompt_stats.py` reports unique prompts within the documented per-suite word caps.
 - [ ] `uv run python scripts/audits/audit_release_consistency.py` reports zero stale active counts or cross-phase claims across release-facing docs, metadata, CLI text, CI, and tests.
-- [ ] Usage validation passes on the default Workspace with release checks green: `uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 192`.
-- [ ] `uv run workspace-bench adversarial --suite enterprise-apps-usage` reports zero survivors, wrong-reason failures, and dirty oracles.
+- [ ] Workspace-tasks validation passes on the default Workspace with release checks green: `uv run workspace-bench validate --suite workspace-tasks --min-tasks 120`.
+- [ ] `uv run workspace-bench adversarial --suite workspace-tasks` reports zero survivors, wrong-reason failures, and dirty oracles.
 - [ ] `uv run workspace-bench run --agent oracle` passes all core tasks; the other suites prove oracle pass through their `validate` commands above.
 - [ ] `uv run workspace-bench run --agent noop` fails every core task; the suite validations prove their own no-op baselines.
-- [ ] `uv run --extra dev workspace-bench export-task --task enterprise-apps-usage/retrieve/earnings_lookup_level0 --output /tmp/workspace-task.json` succeeds.
-- [ ] `uv run --extra dev workspace-bench run-agent-command --task enterprise-apps-usage/retrieve/earnings_lookup_level0 --agent-command "python -m workspace_bench.agents.rule_agent"` passes.
-- [ ] `uv run workspace-bench report --suite enterprise-apps-usage --output runs/reports/benchmark-report.md` succeeds.
+- [ ] `uv run --extra dev workspace-bench export-task --task workspace-tasks/research_analyst/earnings_prep_level0 --output /tmp/workspace-task.json` succeeds.
+- [ ] `uv run --extra dev workspace-bench run-agent-command --task workspace-tasks/portfolio_manager/morning_briefing_level0 --agent-command "python -m workspace_bench.agents.rule_agent"` passes.
+- [ ] `uv run workspace-bench report --suite workspace-tasks --output runs/reports/benchmark-report.md` succeeds.
 - [ ] `uv run --extra live python scripts/audits/audit_hosted_surface.py` reports no missing tools, prompts, or resources against the hosted Workspace MCP (needs `WORKSPACE_MCP_TOKEN` in `.env`).
-- [ ] Stable task counts: 80 in `smoke`, 138 in `enterprise-apps-default`, exactly 192 in `enterprise-apps-usage` (410 tasks total).
+- [ ] Stable task counts: 80 in `smoke`, 138 in `enterprise-apps-default`, exactly 120 in `workspace-tasks` (338 tasks total).
 - [ ] Novelty fingerprints and task ids are unique in the quota-checked suite.
 - [ ] Coverage quotas pass via `validate` (core: backend, difficulty, widget-pair, dashboard-category, grader-check quotas).
 - [ ] `runs/reports/calibration.json`, `suites.json`, and `significance.json` match the README board notes. These are the retained compiled boards from the July 2026 runs (raw run directories are not committed); any recomputation requires re-running the models against the current suites, and pre-reset boards must not be pooled with new runs.

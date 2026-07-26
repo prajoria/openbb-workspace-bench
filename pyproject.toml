@@ -50,7 +50,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "workspace_bench.core" = ["*.json"]
-"workspace_bench.task_suites.enterprise_apps_usage" = ["*.json", "**/*.json", "*.md"]
+"workspace_bench.task_suites.workspace_tasks" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.task_suites.enterprise_apps_default" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.task_suites.smoke" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.data" = ["*.json", "**/*.json"]

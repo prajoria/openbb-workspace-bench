@@ -16,7 +16,7 @@ from workspace_bench.core.models import task_payload_conditions
 REPO = Path(__file__).resolve().parents[2]
 SMOKE_DIR = REPO / "src/workspace_bench/task_suites/smoke"
 APPS_DEFAULT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
-PACK_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_usage"
+PACK_DIR = REPO / "src/workspace_bench/task_suites/workspace_tasks"
 REPORT = REPO / "runs/reports/benchmark-report.md"
 OUT = REPO / "runs/reports/task-catalog.md"
 
@@ -245,7 +245,7 @@ def main() -> None:
             ),
         ),
         (
-            "enterprise-apps-usage",
+            "workspace-tasks",
             sorted(
                 (p for p in PACK_DIR.rglob("*.json") if p.parent != PACK_DIR),
                 key=lambda path: path.name,

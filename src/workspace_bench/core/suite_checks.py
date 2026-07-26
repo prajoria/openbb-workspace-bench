@@ -22,7 +22,7 @@ from workspace_bench.core.models import FINAL_ANSWER_TOOL, JsonDict, RunResult, 
 from workspace_bench.core.mutation_checks import grader_mutation_failures
 from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
 
-USAGE_SUITE = "enterprise-apps-usage"
+WORKSPACE_TASKS_SUITE = "workspace-tasks"
 SMOKE_SUITE = "smoke"
 APPS_DEFAULT_SUITE = "enterprise-apps-default"
 
@@ -47,18 +47,17 @@ SMOKE_LEVELS = ("level0", "level1", "level2", "level3")
 SMOKE_BASELINE = "stark-onboard-a"
 SMOKE_LEVEL_TURNS = {"level0": 1, "level1": 2, "level2": 2, "level3": 4}
 
-# Job-shaped usage families: a full grid so every level carries the same
-# number of attempts (8 families x 6 levels x 2 spines).
-USAGE_FAMILIES = {
-    "retrieve": (24, (0, 1, 2, 3, 4, 5)),
-    "curate": (24, (0, 1, 2, 3, 4, 5)),
-    "parameterize": (24, (0, 1, 2, 3, 4, 5)),
-    "organize": (24, (0, 1, 2, 3, 4, 5)),
-    "repair": (24, (0, 1, 2, 3, 4, 5)),
-    "platform": (24, (0, 1, 2, 3, 4, 5)),
-    "extend": (24, (0, 1, 2, 3, 4, 5)),
-    "handoff": (24, (0, 1, 2, 3, 4, 5)),
+# Workspace Tasks personas: a full grid so every level carries the same
+# number of attempts (6 personas x 4 stories x 5 levels).
+WORKSPACE_TASKS_FAMILIES = {
+    "portfolio_manager": (20, (0, 1, 2, 3, 4)),
+    "fund_operations": (20, (0, 1, 2, 3, 4)),
+    "research_analyst": (20, (0, 1, 2, 3, 4)),
+    "trading_desk": (20, (0, 1, 2, 3, 4)),
+    "compliance_risk": (20, (0, 1, 2, 3, 4)),
+    "client_advisor": (20, (0, 1, 2, 3, 4)),
 }
+WORKSPACE_TASKS_BASELINE = "stark-workspace-a"
 
 
 def release_checks_for_suite(
@@ -68,8 +67,8 @@ def release_checks_for_suite(
 ) -> dict[str, bool]:
     """Return the release checks for a bundled suite; {} for private suites."""
 
-    if suite == USAGE_SUITE:
-        return usage_release_checks(tasks, oracle_results)
+    if suite == WORKSPACE_TASKS_SUITE:
+        return workspace_tasks_release_checks(tasks, oracle_results)
     if suite == SMOKE_SUITE:
         return smoke_release_checks(tasks)
     if suite == APPS_DEFAULT_SUITE:
@@ -193,7 +192,9 @@ def _authored_task_payload(task: Task) -> JsonDict | None:
     return payload if isinstance(payload, dict) else None
 
 
-def usage_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> dict[str, bool]:
+def workspace_tasks_release_checks(
+    tasks: list[Task], oracle_results: list[RunResult]
+) -> dict[str, bool]:
     total = len(tasks)
     fingerprints = [_task_fingerprint(task) for task in tasks]
     origins: set[str] = set()
@@ -211,41 +212,49 @@ def usage_release_checks(tasks: list[Task], oracle_results: list[RunResult]) -> 
             if task.family == family and task.difficulty == f"level{level}"
         )
         == 4
-        for family, (_, levels) in USAGE_FAMILIES.items()
+        for family, (_, levels) in WORKSPACE_TASKS_FAMILIES.items()
         for level in levels
     )
+    # Budgets model the honest reference arc plus discovery slack; a few
+    # Compose tasks carry extra probe-earned slack, so the bound is a floor.
     budget_ok = all(
-        task.limits.get("max_turns") == len(task.oracle_tool_calls) + 3
+        task.limits.get("max_turns", 0) >= len(task.oracle_tool_calls) + 3
         for task in tasks
     )
     universal = _universal_release_checks(
-        tasks, max_duplicate_prompts=1, max_prompt_words=200
+        tasks, max_duplicate_prompts=0, max_prompt_words=200
     )
-    # The reply channel replaced note-mailbox deliverables: with only a
-    # handful of artifact tasks, the generated-widget-type share quotas
-    # would force artificial variety.
+    # The suite's generated deliverable is deliberately the note - the
+    # persona's evidence artifact - so type-share quotas would force
+    # artificial variety.
     universal.pop("generated_widget_type_diversity", None)
     universal.pop("generated_widget_type_max_share_80pct", None)
     return {
         **universal,
         **_family_count_checks(
             tasks,
-            expected={family: count for family, (count, _) in USAGE_FAMILIES.items()},
+            expected={
+                family: count
+                for family, (count, _) in WORKSPACE_TASKS_FAMILIES.items()
+            },
         ),
         "grader_mutation_sensitive": _mutation_suite_passes(tasks, oracle_results),
-        "task_count_192": total == 192,
+        "task_count_120": total == 120,
         "level_counts_equal": len(
             {
                 sum(1 for task in tasks if task.difficulty == f"level{level}")
-                for level in range(6)
+                for level in range(5)
             }
         )
         == 1,
-        "ladder_cells_four_spines": ladder_ok,
-        "turn_budget_reference_plus_three": budget_ok,
+        "ladder_cells_four_stories": ladder_ok,
+        "turn_budget_at_least_reference_plus_three": budget_ok,
         "fingerprint_unique": len(set(fingerprints)) == total,
         "all_level_difficulties": all(
             task.difficulty.startswith("level") for task in tasks
+        ),
+        "shared_baseline": all(
+            task.workspace_baseline == WORKSPACE_TASKS_BASELINE for task in tasks
         ),
         "catalog_coverage": {
             "Bench Stark Enterprise",

@@ -236,465 +236,152 @@ Column key: `snap`=get_workspace_snapshot, `dash`=manage_dashboard, `nav_bar`=ma
 | 137 | `workspace_data_control_center_p3_x` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
 | 138 | `workspace_data_control_center_p3_y` | x |   |   |   |   |   |   | x |   |   |   |   |   |   |   |   |   |   |   |   | 2 | medium |
 
-## enterprise-apps-usage (192 tasks)
+## workspace-tasks (120 tasks)
 
 | # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
 |--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
-| 1 | `cited_research_operations_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 2 | `cited_research_operations_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 3 | `cited_research_operations_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 4 | `cited_research_operations_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 5 | `cited_research_operations_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 6 | `cited_research_operations_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 7 | `client_intake_controls_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 8 | `client_intake_controls_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 9 | `client_intake_controls_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 10 | `client_intake_controls_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 11 | `client_intake_controls_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 12 | `client_intake_controls_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 13 | `client_onboarding_flow_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 14 | `client_onboarding_flow_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 15 | `client_onboarding_flow_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 16 | `client_onboarding_flow_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 17 | `client_onboarding_flow_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 18 | `client_onboarding_flow_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 19 | `closing_tape_lookup_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 20 | `closing_tape_lookup_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 21 | `closing_tape_lookup_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 22 | `closing_tape_lookup_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 23 | `closing_tape_lookup_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 24 | `closing_tape_lookup_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 25 | `committee_navigation_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 26 | `committee_navigation_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 27 | `committee_navigation_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 28 | `committee_navigation_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 29 | `committee_navigation_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 30 | `committee_navigation_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 31 | `compliance_alert_review_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 32 | `compliance_alert_review_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 33 | `compliance_alert_review_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 34 | `compliance_alert_review_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 35 | `compliance_alert_review_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 36 | `compliance_alert_review_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 37 | `comps_governance_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 38 | `comps_governance_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 39 | `comps_governance_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 40 | `comps_governance_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 41 | `comps_governance_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 42 | `comps_governance_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 43 | `consensus_exception_handoff_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 44 | `consensus_exception_handoff_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 45 | `consensus_exception_handoff_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 46 | `consensus_exception_handoff_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 47 | `consensus_exception_handoff_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 48 | `consensus_exception_handoff_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 49 | `crypto_display_controls_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 50 | `crypto_display_controls_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 51 | `crypto_display_controls_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 52 | `crypto_display_controls_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 53 | `crypto_display_controls_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 54 | `crypto_display_controls_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 55 | `crypto_document_controls_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 56 | `crypto_document_controls_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 57 | `crypto_document_controls_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 58 | `crypto_document_controls_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 59 | `crypto_document_controls_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 60 | `crypto_document_controls_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 61 | `decision_briefing_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 62 | `decision_briefing_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 63 | `decision_briefing_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 64 | `decision_briefing_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 65 | `decision_briefing_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 66 | `decision_briefing_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 67 | `due_diligence_media_room_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 68 | `due_diligence_media_room_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 69 | `due_diligence_media_room_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 70 | `due_diligence_media_room_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 71 | `due_diligence_media_room_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 72 | `due_diligence_media_room_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 73 | `earnings_handoff_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 74 | `earnings_handoff_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 75 | `earnings_handoff_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 76 | `earnings_handoff_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 77 | `earnings_handoff_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 78 | `earnings_handoff_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 79 | `earnings_lookup_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 80 | `earnings_lookup_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 81 | `earnings_lookup_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 82 | `earnings_lookup_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 83 | `earnings_lookup_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 84 | `earnings_lookup_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 85 | `execution_quality_review_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 86 | `execution_quality_review_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 87 | `execution_quality_review_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 88 | `execution_quality_review_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 89 | `execution_quality_review_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 90 | `execution_quality_review_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 91 | `governed_earnings_brief_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 92 | `governed_earnings_brief_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 93 | `governed_earnings_brief_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 94 | `governed_earnings_brief_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 95 | `governed_earnings_brief_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 96 | `governed_earnings_brief_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 97 | `guidance_service_lifecycle_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 98 | `guidance_service_lifecycle_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 99 | `guidance_service_lifecycle_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 100 | `guidance_service_lifecycle_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 101 | `guidance_service_lifecycle_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 102 | `guidance_service_lifecycle_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 103 | `inflection_service_lifecycle_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 104 | `inflection_service_lifecycle_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 105 | `inflection_service_lifecycle_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 106 | `inflection_service_lifecycle_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 107 | `inflection_service_lifecycle_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 108 | `inflection_service_lifecycle_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 109 | `investment_snapshot_governance_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 110 | `investment_snapshot_governance_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 111 | `investment_snapshot_governance_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 112 | `investment_snapshot_governance_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 113 | `investment_snapshot_governance_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 114 | `investment_snapshot_governance_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 115 | `live_quote_lookup_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 116 | `live_quote_lookup_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 117 | `live_quote_lookup_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 118 | `live_quote_lookup_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 119 | `live_quote_lookup_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 120 | `live_quote_lookup_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 121 | `manufacturer_details_repair_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 122 | `manufacturer_details_repair_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 123 | `manufacturer_details_repair_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 124 | `manufacturer_details_repair_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 125 | `manufacturer_details_repair_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 126 | `manufacturer_details_repair_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 127 | `market_telemetry_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 128 | `market_telemetry_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 129 | `market_telemetry_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 130 | `market_telemetry_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 131 | `market_telemetry_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 132 | `market_telemetry_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 133 | `nav_exception_station_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 134 | `nav_exception_station_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 135 | `nav_exception_station_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 136 | `nav_exception_station_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 137 | `nav_exception_station_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 138 | `nav_exception_station_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 139 | `news_desk_handoff_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 140 | `news_desk_handoff_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 141 | `news_desk_handoff_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 142 | `news_desk_handoff_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 143 | `news_desk_handoff_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 144 | `news_desk_handoff_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 145 | `operating_driver_lookup_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 146 | `operating_driver_lookup_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 147 | `operating_driver_lookup_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 148 | `operating_driver_lookup_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 149 | `operating_driver_lookup_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 150 | `operating_driver_lookup_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 151 | `protocol_display_repair_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 152 | `protocol_display_repair_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 153 | `protocol_display_repair_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 154 | `protocol_display_repair_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 155 | `protocol_display_repair_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 156 | `protocol_display_repair_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 157 | `research_feed_lifecycle_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 158 | `research_feed_lifecycle_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 159 | `research_feed_lifecycle_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 160 | `research_feed_lifecycle_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 161 | `research_feed_lifecycle_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 162 | `research_feed_lifecycle_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 163 | `risk_service_lifecycle_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 164 | `risk_service_lifecycle_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 165 | `risk_service_lifecycle_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 166 | `risk_service_lifecycle_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 167 | `risk_service_lifecycle_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 168 | `risk_service_lifecycle_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 169 | `segment_mix_handoff_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 170 | `segment_mix_handoff_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 171 | `segment_mix_handoff_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 172 | `segment_mix_handoff_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 173 | `segment_mix_handoff_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 174 | `segment_mix_handoff_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 175 | `technology_decision_inputs_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 176 | `technology_decision_inputs_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 177 | `technology_decision_inputs_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 178 | `technology_decision_inputs_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 179 | `technology_decision_inputs_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 180 | `technology_decision_inputs_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 181 | `vendor_freshness_repair_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 182 | `vendor_freshness_repair_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 183 | `vendor_freshness_repair_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 184 | `vendor_freshness_repair_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 185 | `vendor_freshness_repair_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 186 | `vendor_freshness_repair_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-| 187 | `visualization_gallery_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
-| 188 | `visualization_gallery_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
-| 189 | `visualization_gallery_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
-| 190 | `visualization_gallery_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
-| 191 | `visualization_gallery_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
-| 192 | `visualization_gallery_level5` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level5 |
-
-## build-openbb-apps (236 tasks)
-
-| # | task | snap | dash | nav_bar | nav | list_w | schema | params | data | create | update | layout | delete | note | read_w | backends | apps | skill | resource | prompt | agents | tools | difficulty |
-|--:|:---------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|--:|:-----------|
-| 1 | `access_review_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 2 | `add_catalyst_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
-| 3 | `add_curve_spread_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | easy |
-| 4 | `add_exception_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | easy |
-| 5 | `add_vol_regime_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 6 | `alert_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
-| 7 | `alert_metric_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 8 | `alert_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
-| 9 | `alert_queue_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 10 | `auction_cache_grid` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 11 | `auction_calendar` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 12 | `auction_watch` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 13 | `call_replay_video` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 14 | `case_aging` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 15 | `case_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 16 | `case_escalation_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 17 | `case_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 18 | `case_notes` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 19 | `case_notes_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 20 | `case_notes_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 21 | `case_prompt_omni` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 22 | `case_qa_omni` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 23 | `case_qa_omni_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 24 | `case_qa_omni_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 25 | `case_room_omni_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 26 | `case_triage` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 27 | `catalyst_calendar` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 28 | `catalyst_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 29 | `catalyst_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 30 | `chain_deck` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 31 | `chain_flow_highchart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 32 | `chain_flows` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 33 | `chain_flows` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 34 | `chains_heatmap_html` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 35 | `chains_highchart` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 36 | `chains_highchart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 37 | `chains_highchart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 38 | `chains_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 39 | `chart_note_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 40 | `chart_preview_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 41 | `chart_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 42 | `click_preview_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 43 | `click_revision_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 44 | `click_season_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 45 | `click_summary_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 46 | `click_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 47 | `compliance_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 48 | `compliance_surveillance` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 49 | `curve_comment_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 50 | `curve_monitor_iframe_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 51 | `diagnose_earnings` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 52 | `diagnose_healthcare` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 53 | `diagnose_rates` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 54 | `diagnose_sla` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 55 | `earnings_calls_video_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 56 | `earnings_calls_video_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 57 | `earnings_chart` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
-| 58 | `earnings_chart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 59 | `earnings_chart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 60 | `earnings_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 61 | `earnings_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 62 | `earnings_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 63 | `earnings_note_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 64 | `earnings_param_review` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 65 | `earnings_review_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 66 | `earnings_season` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 67 | `earnings_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 68 | `earnings_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 69 | `earnings_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 70 | `earnings_symbol_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 71 | `earnings_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 72 | `estimate_revisions_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 73 | `estimates_ssrm` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
-| 74 | `evidence_files_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 75 | `evidence_files_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 76 | `evidence_files_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 77 | `exception_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 78 | `exception_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 79 | `exception_refresh_grid` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 80 | `execution_broken_group` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
-| 81 | `execution_dangling_app` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 82 | `execution_data_mismatch` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 83 | `execution_duplicate_backend` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 84 | `execution_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 85 | `execution_monitor` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 86 | `execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 87 | `execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 88 | `execution_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 89 | `execution_silent_second_tab` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 90 | `execution_wrong_form_endpoint` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 91 | `execution_wrong_live_row_id` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 92 | `fda_newsfeed_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 93 | `fill_quality` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 94 | `full_earnings_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 95 | `gas_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 96 | `gas_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 97 | `gas_metric_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 98 | `gas_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 99 | `gas_priority_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 100 | `gas_refresh_metric` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 101 | `healthcare_pipeline` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 102 | `healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 103 | `healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 104 | `healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 105 | `healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 106 | `healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 107 | `healthcare_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 108 | `incident_triage_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
-| 109 | `kpi_param_tabs` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 110 | `kpi_tabs_table` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 111 | `latency_history` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 112 | `live_orders_grid` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 113 | `live_orders_grid_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 114 | `live_orders_grid_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 115 | `macro_advanced_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 116 | `macro_morning` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 117 | `modify_case_notes` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 118 | `modify_rates_commentary` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 119 | `modify_trial_catalysts` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 120 | `modify_vol_screener` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 121 | `nvda_review_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 122 | `open_orders` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 123 | `order_watch` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 124 | `orders_ops_stream_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 125 | `orders_stream` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 126 | `phase_mix_vegalite` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 127 | `pipeline_vegalite` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 128 | `pipeline_vegalite_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 129 | `pipeline_vegalite_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 130 | `place_alert_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 131 | `place_breach_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 132 | `place_curve_spread_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 133 | `place_vol_regime_metric` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 134 | `policy_digest_pdf` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 135 | `policy_digest_pdf_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 136 | `policy_exception_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 137 | `preview_sync_live` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 138 | `rates_advanced_chart` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 139 | `rates_advanced_chart_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 140 | `rates_auctions` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 141 | `rates_commentary` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 142 | `rates_commentary_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 143 | `rates_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 144 | `rates_live_chart_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 145 | `rates_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 146 | `rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 147 | `rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 148 | `rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 149 | `rates_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 150 | `rates_symbol_chart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 151 | `realized_screen` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
-| 152 | `realized_vol_grid` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 153 | `repair_compliance` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | hard |
-| 154 | `repair_execution` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | hard |
-| 155 | `repair_rates` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | hard |
-| 156 | `repair_vol` | x |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 5 | hard |
-| 157 | `research_room` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 158 | `revision_grid` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | medium |
-| 159 | `revision_note_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 160 | `revision_preview_sync` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 161 | `runbook_markdown` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 162 | `series_markdown` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 163 | `sla_newsfeed_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
-| 164 | `sla_newsfeed_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 165 | `sla_runbook_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 166 | `sla_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 167 | `sla_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 168 | `surprise_metric_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 169 | `surprise_metric_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 170 | `surprise_metric_wrap` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 171 | `surveillance_broken_group` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 172 | `surveillance_dangling_app` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 173 | `surveillance_data_mismatch` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
-| 174 | `surveillance_duplicate_backend` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 175 | `surveillance_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 176 | `surveillance_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 177 | `surveillance_silent_second_tab` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 178 | `surveillance_wrong_form_endpoint` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
-| 179 | `surveillance_wrong_live_row_id` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 180 | `symbol_click_summary_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 181 | `symbol_momentum_chart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 182 | `symbol_param_desk` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 183 | `threshold_update_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
-| 184 | `trade_break_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 185 | `trial_catalysts` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 186 | `trial_catalysts_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 187 | `trial_catalysts_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 188 | `trial_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 189 | `trial_param_review` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 190 | `trial_readout_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 191 | `tvl_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 192 | `tvl_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 193 | `vendor_board` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 194 | `vendor_broken_group` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 195 | `vendor_command` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 196 | `vendor_dangling_app` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 197 | `vendor_data_mismatch` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
-| 198 | `vendor_duplicate_backend` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 199 | `vendor_intake_form` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
-| 200 | `vendor_intake_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 201 | `vendor_intake_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 202 | `vendor_invalid_widget` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 203 | `vendor_ops` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 204 | `vendor_review_form` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 205 | `vendor_silent_second_tab` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | easy |
-| 206 | `vendor_sla_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 207 | `vendor_sla_table_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 208 | `vendor_wrong_form_endpoint` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | medium |
-| 209 | `vendor_wrong_live_row_id` | x |   |   |   | x | x |   | x |   |   |   |   | x | x | x | x |   | x |   |   | 9 | hard |
-| 210 | `venue_exception_form_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 211 | `venue_packet_pdf_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 212 | `venue_pdf` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 213 | `venue_slippage_chart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 214 | `vix_advanced` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 215 | `vix_advanced_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | easy |
-| 216 | `vix_advanced_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 217 | `vix_history` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 218 | `vix_history` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | medium |
-| 219 | `vix_room_chart_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 220 | `vol_cockpit` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 221 | `vol_commentary` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 222 | `vol_commentary_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 223 | `vol_morning` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | medium |
-| 224 | `vol_overview` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 225 | `vol_param_cockpit` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 226 | `vol_playbook_note` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 227 | `vol_regime_metric` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | easy |
-| 228 | `vol_screener` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 229 | `vol_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 230 | `vol_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 231 | `vol_ship` |   |   |   |   |   |   |   |   |   | x |   |   | x |   | x | x |   |   |   |   | 4 | hard |
-| 232 | `vol_symbol_chart` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 233 | `windowed_vix_slice` | x |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 5 | hard |
-| 234 | `yield_curve` |   |   |   |   | x | x |   |   | x |   |   |   |   |   | x |   |   |   |   |   | 4 | hard |
-| 235 | `yield_curve_app` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
-| 236 | `yield_curve_room` | x |   |   |   |   |   |   |   |   |   |   |   |   |   | x | x |   |   |   |   | 3 | hard |
+| 1 | `alert_sweep_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 2 | `alert_sweep_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 3 | `alert_sweep_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 4 | `alert_sweep_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 5 | `alert_sweep_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 6 | `allocation_read_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 7 | `allocation_read_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 8 | `allocation_read_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 9 | `allocation_read_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 10 | `allocation_read_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 11 | `best_execution_file_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 12 | `best_execution_file_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 13 | `best_execution_file_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 14 | `best_execution_file_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 15 | `best_execution_file_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 16 | `breach_repair_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 17 | `breach_repair_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 18 | `breach_repair_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 19 | `breach_repair_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 20 | `breach_repair_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 21 | `case_handoff_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 22 | `case_handoff_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 23 | `case_handoff_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 24 | `case_handoff_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 25 | `case_handoff_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 26 | `chart_deck_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 27 | `chart_deck_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 28 | `chart_deck_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 29 | `chart_deck_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 30 | `chart_deck_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 31 | `client_review_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 32 | `client_review_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 33 | `client_review_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 34 | `client_review_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 35 | `client_review_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 36 | `document_room_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 37 | `document_room_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 38 | `document_room_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 39 | `document_room_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 40 | `document_room_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 41 | `earnings_prep_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 42 | `earnings_prep_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 43 | `earnings_prep_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 44 | `earnings_prep_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 45 | `earnings_prep_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 46 | `embed_shelf_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 47 | `embed_shelf_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 48 | `embed_shelf_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 49 | `embed_shelf_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 50 | `embed_shelf_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 51 | `form_tooling_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 52 | `form_tooling_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 53 | `form_tooling_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 54 | `form_tooling_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 55 | `form_tooling_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 56 | `guidance_tracker_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 57 | `guidance_tracker_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 58 | `guidance_tracker_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 59 | `guidance_tracker_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 60 | `guidance_tracker_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 61 | `holdings_watch_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 62 | `holdings_watch_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 63 | `holdings_watch_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 64 | `holdings_watch_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 65 | `holdings_watch_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 66 | `inflection_scan_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 67 | `inflection_scan_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 68 | `inflection_scan_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 69 | `inflection_scan_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 70 | `inflection_scan_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 71 | `meeting_prep_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 72 | `meeting_prep_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 73 | `meeting_prep_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 74 | `meeting_prep_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 75 | `meeting_prep_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 76 | `morning_briefing_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 77 | `morning_briefing_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 78 | `morning_briefing_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 79 | `morning_briefing_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 80 | `morning_briefing_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 81 | `nav_close_repair_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 82 | `nav_close_repair_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 83 | `nav_close_repair_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 84 | `nav_close_repair_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 85 | `nav_close_repair_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 86 | `peer_compare_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 87 | `peer_compare_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 88 | `peer_compare_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 89 | `peer_compare_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 90 | `peer_compare_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 91 | `pm_handoff_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 92 | `pm_handoff_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 93 | `pm_handoff_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 94 | `pm_handoff_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 95 | `pm_handoff_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 96 | `price_watch_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 97 | `price_watch_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 98 | `price_watch_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 99 | `price_watch_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 100 | `price_watch_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 101 | `proposal_pack_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 102 | `proposal_pack_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 103 | `proposal_pack_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 104 | `proposal_pack_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 105 | `proposal_pack_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 106 | `settlement_watch_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 107 | `settlement_watch_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 108 | `settlement_watch_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 109 | `settlement_watch_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 110 | `settlement_watch_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 111 | `tape_and_news_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 112 | `tape_and_news_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 113 | `tape_and_news_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 114 | `tape_and_news_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 115 | `tape_and_news_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
+| 116 | `var_monitor_level0` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level0 |
+| 117 | `var_monitor_level1` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level1 |
+| 118 | `var_monitor_level2` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level2 |
+| 119 | `var_monitor_level3` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level3 |
+| 120 | `var_monitor_level4` |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   |   | 0 | level4 |
 
 ## Per-tool task counts
 
 | tool | tasks |
 |:-----|----------:|
-| `get_workspace_snapshot` | 308 |
-| `manage_backends` | 240 |
-| `manage_apps` | 172 |
-| `get_widget_data` | 166 |
-| `list_available_widgets` | 104 |
-| `get_widget_schema` | 96 |
-| `add_generative_widget` | 80 |
-| `create_widget` | 72 |
-| `update_widget` | 56 |
-| `read_widget` | 28 |
-| `read_workspace_resource` | 28 |
+| `get_workspace_snapshot` | 148 |
+| `get_widget_data` | 142 |
+| `list_available_widgets` | 12 |
 | `manage_dashboard` | 4 |
 | `manage_navigation_bar` | 4 |
 | `navigate_workspace` | 4 |
+| `get_widget_schema` | 4 |
 | `get_params_options` | 4 |
+| `create_widget` | 4 |
+| `update_widget` | 4 |
 | `update_widget_layout` | 4 |
 | `delete_widget` | 4 |
+| `add_generative_widget` | 4 |
+| `read_widget` | 4 |
+| `manage_backends` | 4 |
+| `manage_apps` | 4 |
 | `get_skill_content` | 4 |
+| `read_workspace_resource` | 4 |
 | `get_workspace_prompt` | 4 |
 | `assign_tasks_to_agents` | 4 |

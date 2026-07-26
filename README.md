@@ -12,7 +12,8 @@ Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed ag
 Three suites ship bundled in a capability ladder: `smoke` checks one round trip
 per Workspace MCP surface (80 tasks), `enterprise-apps-default` answers the
 default apps' product prompts in two data worlds (138), and
-`enterprise-apps-usage` operates Workspace state (192).
+`workspace-tasks` operates Workspace state through agent-authored persona
+storylines (120).
 
 ## Contents
 
@@ -36,17 +37,18 @@ default apps' product prompts in two data worlds (138), and
 
 ## What Is Included
 
-- 410 deterministic simulator tasks across three certified suites:
+- 338 deterministic simulator tasks across three certified suites:
   - `smoke` — 80 tasks: a four-level execution ladder over every Workspace MCP surface
   - `enterprise-apps-default` — 138 tasks pairing 69 byte-verbatim product prompts across two data worlds
-  - `enterprise-apps-usage` — 192 operating tasks: 8 job-shaped families
-    (retrieve, curate, parameterize, organize, repair, platform, extend,
-    handoff) climbing a level0-level5 operation ladder on the
-    everything-mounted workspace, topped by authoring custom backends
+  - `workspace-tasks` — 120 agent-authored operating tasks: 6 personas
+    (portfolio manager, fund operations, research analyst, trading desk,
+    compliance, client advisor) x 4 stories x 5 levels (Execute, Find,
+    Derive, Ground, Compose), run closed-world on the everything-mounted
+    workspace and topped by authoring custom backends
 
   Each suite directory under `src/workspace_bench/task_suites/` has a README
   explaining how it is generated and how its tasks are categorized.
-- generated families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, and layout
+- generated and agent-authored task families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, and layout
 - transcription-grade Getting Started, Widget Examples, Stark enterprise, and Daloopa fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
@@ -97,7 +99,7 @@ uv run workspace-bench list
 uv run workspace-bench manifest --json
 uv run workspace-bench validate --suite smoke --min-tasks 80
 uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 138
-uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
+uv run workspace-bench validate --suite workspace-tasks --min-tasks 120
 ```
 
 Run built-in baselines:
@@ -119,6 +121,12 @@ uv run --extra dev pytest
 
 ## Archived Baselines
 
+The current operating-suite board lives in the [Suites](#suites) section;
+everything below predates the current task contract and is preserved as
+history. The `enterprise-apps-usage` suite itself was retired in July 2026
+when the agent-authored `workspace-tasks` suite replaced it as the operating
+suite.
+
 The committed model runs below predate the current task contract. Their task
 ids include the retired generation labels and their prompts/graders differ from
 the active corpus. Historical numbers remain for reproducibility and must not
@@ -129,7 +137,7 @@ Six models have been run against both suites (pass@1, single fresh
 end-to-end attempt per suite, temperature 0, same grader and turn budget
 for every model — no patched or spliced results).
 
-Usage suite (operating the workspace, 192 tasks):
+Retired usage suite (operating the workspace, 192 tasks):
 
 | Model | Strict pass | t0 → t4 pass rate (%) |
 |---|---|---|
@@ -175,7 +183,7 @@ Run the included demo agent:
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
+  --task workspace-tasks/portfolio_manager/morning_briefing_level0 \
   --agent-command "python -m workspace_bench.agents.rule_agent" \
   --json
 ```
@@ -188,7 +196,7 @@ Run any external agent command (it receives the task envelope via
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
+  --task workspace-tasks/portfolio_manager/morning_briefing_level0 \
   --agent-command "python -m workspace_bench.agents.rule_agent" \
   --run-dir runs/rule-agent \
   --json
@@ -202,19 +210,19 @@ Run several models side by side — `--model` is repeatable:
 uv run workspace-bench \
   --model openai:gpt-4.1-mini \
   --model ollama:qwen3:8b \
-  --suite enterprise-apps-usage
+  --suite workspace-tasks
 ```
 
 Omit `--task` and the runner covers the whole suite (e.g. `--suite
-enterprise-apps-usage`); add `--family`, `--difficulty`, or
-`--tag` to run a slice.
+workspace-tasks`); add `--family` (a persona, e.g.
+`compliance_risk`), `--difficulty` (a level), or `--tag` to run a slice.
 
 Compare only one difficulty slice:
 
 ```bash
 uv run workspace-bench \
-  --suite enterprise-apps-usage \
-  --difficulty easy \
+  --suite workspace-tasks \
+  --difficulty level2 \
   --timeout 240
 ```
 
@@ -222,7 +230,7 @@ Run repeated attempts for a more stable comparison:
 
 ```bash
 uv run workspace-bench \
-  --suite enterprise-apps-usage \
+  --suite workspace-tasks \
   --release-run \
   --repeats 3 \
   --metric pass-at-k \
@@ -235,7 +243,7 @@ Run one specific task with one specific model — the fastest way to study
 what a model actually does on a single task:
 
 ```bash
-uv run workspace-bench --model openai:gpt-4.1-mini --task enterprise-apps-usage/retrieve/earnings_lookup_level0
+uv run workspace-bench --model openai:gpt-4.1-mini --task workspace-tasks/research_analyst/earnings_prep_level0
 ```
 
 That's the whole command - no subcommand needed, evaluating is what the tool does: `--model provider:model` needs no adapter config
@@ -262,7 +270,7 @@ Run models from a JSON adapter config:
 ```bash
 uv run workspace-bench \
   --models-file my-models.json \
-  --suite enterprise-apps-usage \
+  --suite workspace-tasks \
   --timeout 240
 ```
 
@@ -292,7 +300,21 @@ OpenRouter is a first-class OpenAI-compatible provider. It reads
 ```bash
 uv run workspace-bench \
   --model openrouter:anthropic/claude-sonnet-4.5 \
-  --task enterprise-apps-usage/curate/decision_briefing_level0
+  --task workspace-tasks/compliance_risk/alert_sweep_level0
+```
+
+[Concentrate](https://concentrate.ai) is also supported, speaking its
+Responses-shaped API (`POST /v1/responses/`). It reads `CONCENTRATE_API_KEY`,
+defaults to `https://api.concentrate.ai/v1` (override with
+`CONCENTRATE_BASE_URL`), and accepts Concentrate model ids, provider-prefixed
+names, or `auto`; `CONCENTRATE_REASONING_EFFORT` optionally sets the reasoning
+effort. The `OPENAI_TEMPERATURE` / `OPENAI_MAX_TOKENS` /
+`OPENAI_RESPONSE_FORMAT` knobs apply unchanged:
+
+```bash
+uv run workspace-bench \
+  --model concentrate:openai/gpt-5.2 \
+  --task workspace-tasks/compliance_risk/alert_sweep_level0
 ```
 
 Per-episode rows record wall time, input/output/total tokens, API-call count,
@@ -313,7 +335,7 @@ After at least two model result sets exist,
 conservatively approved override payload; `--apply-overrides PATH` writes the
 approved table to a measured-difficulty JSON file for downstream review.
 
-Use `--suite enterprise-apps-usage` for the stable interactive suite, and `--task-dir`
+Use `--suite workspace-tasks` for the stable interactive suite, and `--task-dir`
 for a private task suite. You can slice with `--family`, `--category`, and
 `--difficulty`.
 
@@ -321,7 +343,7 @@ Export a task envelope without running an agent:
 
 ```bash
 uv run workspace-bench export-task \
-  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
+  --task workspace-tasks/research_analyst/earnings_prep_level0 \
   --output task.json
 ```
 
@@ -358,13 +380,31 @@ be added independently and reported separately or in aggregate. Bundled today:
 | --- | --- | --- |
 | `smoke` | 80 | four-level execution ladder across every Workspace MCP tool and knowledge surface |
 | `enterprise-apps-default` | 138 | answering 69 byte-verbatim product prompts across two seeded data worlds |
-| `enterprise-apps-usage` | 192 | operating the workspace across widgets, dashboards, apps, skills, and repair |
+| `workspace-tasks` | 120 | operating the workspace through agent-authored persona storylines: 6 personas x 4 stories x 5 levels (Execute, Find, Derive, Ground, Compose), closed-world |
 
 ```bash
 # run or validate one suite
-uv run workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
-uv run workspace-bench --models-file my-models.json --suite enterprise-apps-usage
+uv run workspace-bench validate --suite workspace-tasks --min-tasks 120
+uv run workspace-bench --models-file my-models.json --suite workspace-tasks
 ```
+
+The current `workspace-tasks` board (strict pass@1, closed-world; the
+reference model pools its three calibration repeats, every other row is a
+single pass over the sealed 120; canonical record with per-level rates and
+exclusion reasons in
+[`runs/reports/workspace-tasks-board.json`](runs/reports/workspace-tasks-board.json)):
+
+| model | overall | L0 execute | L1 find | L2 derive | L3 ground | L4 compose |
+| --- | --- | --- | --- | --- | --- | --- |
+| GPT-5.5 | 93.3% | 100 | 96 | 88 | 88 | 96 |
+| gpt-4.1-mini (reference) | 39.4% | 85 | 60 | 36 | 17 | 0 |
+| gpt-oss:20b | 19.2% | 38 | 21 | 29 | 8 | 0 |
+| qwen3:8b | 16.7% | 38 | 21 | 17 | 8 | 0 |
+
+Rows for claude-opus-5 and kimi-k3 are credit-blocked (checkpoints resume
+when provider credits allow) and GLM-5.2's completed run is excluded as
+serving-confounded; each exclusion is recorded with its reason in the board
+JSON.
 
 Every suite requires the reference solution to pass every task and a
 do-nothing agent to fail every task. Additional generation and validation gates
@@ -380,7 +420,7 @@ run directory per model per suite:
 ```bash
 # each evaluator invocation writes one run directory per model
 uv run workspace-bench compile suites \
-  --run enterprise-apps-usage=runs/comparison/<run-id>/<model>.json \
+  --run workspace-tasks=runs/comparison/<run-id>/<model>.json \
   --historical-run core=runs/comparison/<historical-run-id> \
   --output /tmp/workspace-bench-suites-example.json
 ```
@@ -427,7 +467,7 @@ Then smoke-test the real MCP endpoint and browser bridge protocol:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --task enterprise-apps-usage/retrieve/earnings_lookup_level0 \
+  --task workspace-tasks/research_analyst/earnings_prep_level0 \
   --json
 ```
 
@@ -436,8 +476,8 @@ Check the broader live MCP surface against a workflow task:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --suite enterprise-apps-usage \
-  --task enterprise-apps-usage/platform/governed_earnings_brief_level1 \
+  --suite workspace-tasks \
+  --task workspace-tasks/compliance_risk/alert_sweep_level4 \
   --check-surface \
   --json
 ```
@@ -473,9 +513,10 @@ faithfully are refused with a reason. Live runs execute in a real user
 workspace: results are validation evidence for grader fidelity, never board
 numbers.
 
-The usage suite was rebuilt on job-shaped families in July 2026; its live-parity eligibility set is pending re-derivation
-replay. The 68 refused tasks use backend/app mutation or delegation tools that
-the conservative replay does not execute.
+The operating suite was replaced by the agent-authored `workspace-tasks`
+suite in July 2026; its live-parity eligibility set is pending derivation.
+Compose-rung tasks use backend/app mutation tools that the conservative
+replay does not execute, so they will be refused with a reason.
 
 ## Browser Certification
 
@@ -630,7 +671,7 @@ See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates and
 ## Task Organization
 
 Every active task has the canonical identity `suite/family/task`, for example
-`enterprise-apps-usage/retrieve/earnings_lookup_level0`. The local task id contains only the
+`workspace-tasks/research_analyst/earnings_prep_level0`. The local task id contains only the
 descriptive slug; generator mechanics are not part of the public identity.
 
 **Category** — what kind of workflow the task is:
@@ -640,9 +681,10 @@ descriptive slug; generator mechanics are not part of the public identity.
 - `dashboard`: build a multi-widget dashboard from analyst requirements
 - `platform`: use app templates, tabs, parameter groups, prompts, skills, or delegation
 - `repair`: fix incorrect Workspace state or bad metadata assumptions
+- `story`: one persona storyline climbing the workspace-tasks ladder
 
 **Difficulty** — `easy`, `medium`, or `hard` for classic tasks; the bundled
-suites instead grade a `level0`–`level5` (usage) or `level0`–`level3` (smoke)
+suites instead grade a `level0`–`level4` (workspace-tasks) or `level0`–`level3` (smoke)
 operation ladder. It does not render prompts or select graders.
 **Specification level** is the structural axis that does; see
 [TASK-SCHEMA.md](TASK-SCHEMA.md).
@@ -656,7 +698,7 @@ For readers arriving from other benchmarks:
 | task | Terminal-Bench / Inspect / GAIA / TMax "task" (HELM says "scenario") |
 | suite | lm-eval-harness "group"/"suite", Terminal-Bench registry "dataset" |
 | difficulty | GAIA "Level 1–3", TMax "complexity buckets" |
-| family | METR-style "task family" (generated variations of one capability) |
+| family | METR-style "task family" — the suite's grouping axis (personas in workspace-tasks, tool families in smoke) |
 | category | task type — τ-bench's "domain" plays a similar role |
 | rubric / graders | Terminal-Bench "verification test suite", TMax "graded verifiers" |
 | oracle | Terminal-Bench "oracle solution" (same word) |
@@ -670,8 +712,8 @@ src/workspace_bench/
   task_suites/           Bundled suites, organized as suite/family/task:
     smoke/                              MCP-surface round trips
     enterprise_apps_default/            Default-app product prompts
-    enterprise_apps_usage/              Workspace operating families
-      create/ update/ ...                Family directories
+    workspace_tasks/                    Agent-authored persona storylines
+      portfolio_manager/ ...              One directory per persona
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
     data/                Packaged fixture metadata such as Stark and Daloopa widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
@@ -681,7 +723,6 @@ src/workspace_bench/
   __init__.py            Small public convenience surface
 scripts/
   generators/             Deterministic suite, catalog, matrix, and fixture generators
-    _assembly/             Shared deterministic suite-assembly harness
   audits/                 Local, release, hosted-surface, and prompt audits
 runs/
   reports/                 Compiled reports and generated catalogs/matrices
@@ -692,6 +733,10 @@ references/
   openbb-backend-examples/  Vendored OpenBB backend reference implementations (MIT,
                             pinned upstream commit) — ground truth for building
                             widget-creation and backend-building tasks
+task_templates/             Persona READMEs and story files — the source of truth
+                            the workspace-tasks authoring pipeline works from
+.claude/skills/             The authoring contracts (task-author, task-validator,
+                            task-level-fairness, orchestrator) that govern it
 tests/
 ```
 
@@ -705,4 +750,4 @@ Benchmark data should not appear in model training corpora unless explicitly rel
 
 ## Release Notes
 
-This is an alpha benchmark package. It is ready for local evals, private task suites, CI regression testing, `workspace-mcp` sidecar smoke tests, and local browser-harness self-testing, and it ships with six real model baselines. Before a broader public leaderboard: hidden task suites and a completed browser-certification run against a real authenticated Workspace.
+This is an alpha benchmark package. It is ready for local evals, private task suites, CI regression testing, `workspace-mcp` sidecar smoke tests, and local browser-harness self-testing, and it ships with committed model boards and baselines. Before a broader public leaderboard: hidden task suites and a completed browser-certification run against a real authenticated Workspace.

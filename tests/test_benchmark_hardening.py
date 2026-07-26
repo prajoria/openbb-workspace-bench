@@ -14,10 +14,11 @@ from workspace_bench.workspace.live_mcp import compare_tool_schemas
 
 
 def test_current_task_schema_is_strict() -> None:
-    source = find_task("decision_briefing_level0", suite="enterprise-apps-usage")
+    source = find_task("morning_briefing_level0", suite="workspace-tasks")
     assert source.source_path is not None
     payload = json.loads(source.source_path.read_text(encoding="utf-8"))
     payload.setdefault("family", source.family)
+    payload.setdefault("category", source.category)
 
     obsolete_level = dict(payload)
     obsolete_level["level"] = "t2"
@@ -52,13 +53,16 @@ def test_current_task_schema_is_strict() -> None:
 
 
 def test_active_identity_is_suite_family_task_without_generation_labels() -> None:
-    tasks = load_builtin_tasks("enterprise-apps-usage")
+    tasks = load_builtin_tasks("workspace-tasks")
 
-    assert len(tasks) == 192
+    assert len(tasks) == 120
     assert all(not task.id.startswith(("auth_", "gen_")) for task in tasks)
     assert all(task.qualified_id == f"{task.suite.suite_id}/{task.family}/{task.id}" for task in tasks if task.suite)
 
-    assert find_task("enterprise-apps-usage/curate/decision_briefing_level0").family == "curate"
+    assert (
+        find_task("workspace-tasks/portfolio_manager/morning_briefing_level0").family
+        == "portfolio_manager"
+    )
 
 
 def test_suite_manifests_reject_manual_release_versioning() -> None:
@@ -73,21 +77,21 @@ def test_suite_manifests_reject_manual_release_versioning() -> None:
 
 
 def test_task_envelope_uses_suite_provenance() -> None:
-    task = find_task("decision_briefing_level0", suite="enterprise-apps-usage")
+    task = find_task("morning_briefing_level0", suite="workspace-tasks")
     envelope = build_task_envelope(task)
 
     assert envelope["schema_version"] == "workspace-bench-envelope"
-    assert envelope["benchmark"]["suite_id"] == "enterprise-apps-usage"
+    assert envelope["benchmark"]["suite_id"] == "workspace-tasks"
     assert len(envelope["benchmark"]["content_sha256"]) == 64
     assert "release_id" not in envelope["benchmark"]
     assert (
         envelope["task"]["qualified_id"]
-        == "enterprise-apps-usage/curate/decision_briefing_level0"
+        == "workspace-tasks/portfolio_manager/morning_briefing_level0"
     )
 
 
 def test_state_and_trace_requirements_are_reported_independently() -> None:
-    task = find_task("earnings_handoff_level0", suite="enterprise-apps-usage")
+    task = find_task("allocation_read_level0", suite="workspace-tasks")
     episode = WorkspaceEpisode(task)
     for call in task.oracle_tool_calls:
         if call.name != "get_widget_data":
@@ -102,7 +106,7 @@ def test_state_and_trace_requirements_are_reported_independently() -> None:
 
 
 def test_oracle_is_sensitive_to_independent_mutations() -> None:
-    task = find_task("decision_briefing_level0", suite="enterprise-apps-usage")
+    task = find_task("morning_briefing_level0", suite="workspace-tasks")
     oracle = TaskRunner().run(task, "oracle")
 
     assert oracle.grade.passed

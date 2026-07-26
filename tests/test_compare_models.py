@@ -68,7 +68,7 @@ def test_normalize_interactive_args_maps_fixture_origin_slug() -> None:
 
 
 def test_stark_interactive_prompt_uses_display_origin_hints() -> None:
-    task = find_task("earnings_lookup_level1")
+    task = find_task("allocation_read_level0")
 
     messages = build_interactive_messages(build_task_envelope(task))
     prompt = messages[1]["content"]
@@ -80,7 +80,7 @@ def test_stark_interactive_prompt_uses_display_origin_hints() -> None:
 
 
 def test_origin_hints_can_be_ablated() -> None:
-    task = find_task("earnings_lookup_level1")
+    task = find_task("allocation_read_level0")
 
     messages = build_interactive_messages(
         build_task_envelope(task), include_widget_hints=False
@@ -102,7 +102,7 @@ def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
         provider="custom",
         model="rule-agent",
     )
-    task = find_task("decision_briefing_level0")
+    task = find_task("morning_briefing_level0")
 
     runs, metadata = run_adapter(
         adapter,
@@ -157,9 +157,9 @@ def test_release_run_requires_repeated_attempts(capsys) -> None:
 
 
 def test_comparison_metadata_uses_core_suite_content_provenance() -> None:
-    metadata = benchmark_metadata(SimpleNamespace(task_dir=None, suite="enterprise-apps-usage"))
+    metadata = benchmark_metadata(SimpleNamespace(task_dir=None, suite="workspace-tasks"))
 
-    assert metadata["suite_id"] == "enterprise-apps-usage"
+    assert metadata["suite_id"] == "workspace-tasks"
     assert len(metadata["content_sha256"]) == 64
     assert "git_commit" in metadata
 
@@ -168,7 +168,7 @@ def test_comparison_metadata_records_workspace_baseline_override() -> None:
     metadata = benchmark_metadata(
         SimpleNamespace(
             task_dir=None,
-            suite="enterprise-apps-usage",
+            suite="workspace-tasks",
             workspace_baseline="stark-workspace-a",
         )
     )

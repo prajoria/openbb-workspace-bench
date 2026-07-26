@@ -14,17 +14,17 @@ from workspace_bench.core.models import RunResult, Task, TaskSuiteManifest
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
-USAGE_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_usage"
+WORKSPACE_TASKS_PACKAGE = "workspace_bench.task_suites.workspace_tasks"
 APPS_DEFAULT_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_default"
 SMOKE_TASKS_PACKAGE = "workspace_bench.task_suites.smoke"
 TASK_SUITE_MANIFEST = "task_suite.json"
 BUILTIN_TASK_SUITES = {
-    "enterprise-apps-usage": USAGE_TASKS_PACKAGE,
+    "workspace-tasks": WORKSPACE_TASKS_PACKAGE,
     "enterprise-apps-default": APPS_DEFAULT_TASKS_PACKAGE,
     "smoke": SMOKE_TASKS_PACKAGE,
 }
 BUILTIN_TASK_SUITE_ORDER = (
-    "enterprise-apps-usage",
+    "workspace-tasks",
     "enterprise-apps-default",
     "smoke",
 )
@@ -75,7 +75,7 @@ class TaskRunner:
         )
 
 
-def load_builtin_tasks(suite: str = "enterprise-apps-usage") -> list[Task]:
+def load_builtin_tasks(suite: str = "workspace-tasks") -> list[Task]:
     """Load bundled JSON tasks for a named suite."""
 
     try:
@@ -91,7 +91,7 @@ def load_builtin_tasks(suite: str = "enterprise-apps-usage") -> list[Task]:
     ]
 
 
-def load_builtin_task_suite_manifest(suite: str = "enterprise-apps-usage") -> TaskSuiteManifest | None:
+def load_builtin_task_suite_manifest(suite: str = "workspace-tasks") -> TaskSuiteManifest | None:
     """Load a bundled task-suite manifest when one exists."""
 
     package = BUILTIN_TASK_SUITES[suite]

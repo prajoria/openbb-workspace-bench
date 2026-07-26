@@ -34,7 +34,7 @@ SUITE_DIRS = {
     "enterprise-apps-default": (
         REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
     ),
-    "enterprise-apps-usage": REPO / "src/workspace_bench/task_suites/enterprise_apps_usage",
+    "workspace-tasks": REPO / "src/workspace_bench/task_suites/workspace_tasks",
 }
 REFERENCE_FILES = (
     REPO / "README.md",
@@ -57,7 +57,7 @@ REPEATED_WORD_RE = re.compile(r"(?i)\b([a-z][a-z0-9-]*)\s+\1\b")
 REPEATED_BIGRAM_RE = re.compile(r"(?i)\b([a-z][a-z0-9-]*\s+[a-z][a-z0-9-]*)\s+\1\b")
 TASK_ARG_RE = re.compile(r"--task\s+([^\s`\"']+)")
 QUALIFIED_ID_RE = re.compile(
-    r"\b(?:smoke|enterprise-apps-default|enterprise-apps-usage)/"
+    r"\b(?:smoke|enterprise-apps-default|workspace-tasks)/"
     r"[a-z0-9]+(?:[-_][a-z0-9]+)*/"
     r"[a-z0-9]+(?:_[a-z0-9]+)*\b"
 )

@@ -57,11 +57,11 @@ def test_task_suite_manifest_validates_workspace_baseline() -> None:
         )
 
 
-def test_usage_and_default_suites_declare_the_default_workspace() -> None:
-    usage_task = load_builtin_tasks("enterprise-apps-usage")[0]
+def test_workspace_tasks_and_default_suites_declare_the_default_workspace() -> None:
+    workspace_task = load_builtin_tasks("workspace-tasks")[0]
     default_task = load_builtin_tasks("enterprise-apps-default")[0]
 
-    assert task_workspace_baseline(usage_task) == WORKSPACE_A_VERSION
+    assert task_workspace_baseline(workspace_task) == WORKSPACE_A_VERSION
     assert task_workspace_baseline(default_task) == DEFAULT_WORKSPACE_VERSION
 
 

@@ -15,8 +15,8 @@ from workspace_bench.workspace.live_mcp import run_workspace_mcp_smoke
 
 
 DEFAULT_GOLDENS = (
-    ("enterprise-apps-usage", "enterprise-apps-usage/create/price_performance_aapl"),
-    ("enterprise-apps-usage", "enterprise-apps-usage/layout/arrange_split_macro"),
+    ("workspace-tasks", "workspace-tasks/portfolio_manager/morning_briefing_level0"),
+    ("workspace-tasks", "workspace-tasks/compliance_risk/alert_sweep_level4"),
 )
 
 

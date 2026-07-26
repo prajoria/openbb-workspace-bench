@@ -90,7 +90,7 @@ cleanly immediately before the mutation, then the invalid candidate must fail
 with its expected code. Add a representative test and run:
 
 ```bash
-uv run workspace-bench adversarial --suite enterprise-apps-usage
+uv run workspace-bench adversarial --suite workspace-tasks
 ```
 
 In-memory archetypes run on every applicable task. HTTP/data-side archetypes
@@ -103,7 +103,7 @@ Prefer the external JSONL command protocol first:
 
 ```bash
 uv run workspace-bench run-agent-command \
-  --task enterprise-apps-usage/create/price_performance_aapl \
+  --task workspace-tasks/compliance_risk/alert_sweep_level0 \
   --agent-command "python my_agent.py" \
   --json
 ```
@@ -136,7 +136,7 @@ uv run mypy src
 uv run python scripts/audits/audit_task_identity.py
 uv run python scripts/audits/report_prompt_stats.py
 uv run python scripts/audits/audit_release_consistency.py
-uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
+uv run --extra dev workspace-bench validate --suite workspace-tasks --min-tasks 120
 ```
 
 For evaluator changes, also run the relevant adversarial gates and:
@@ -145,6 +145,6 @@ For evaluator changes, also run the relevant adversarial gates and:
 printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
 uv run workspace-bench \
   --models-file /tmp/models.json \
-  --difficulty easy \
+  --difficulty level0 \
   --dry-run
 ```

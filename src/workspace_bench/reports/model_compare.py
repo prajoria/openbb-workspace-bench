@@ -279,7 +279,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--suite",
         dest="suite",
-        default="enterprise-apps-usage",
+        default="workspace-tasks",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help="Bundled task suite. core = operating the workspace.",
     )
@@ -785,11 +785,11 @@ def load_task_source(args: argparse.Namespace) -> list[Task]:
     task_dir = getattr(args, "task_dir", None)
     if task_dir:
         return load_task_directory(Path(task_dir))
-    suite = getattr(args, "suite", "enterprise-apps-usage")
+    suite = getattr(args, "suite", "workspace-tasks")
     # `--task <id>` should just work without naming the suite: when ids are
     # given and the suite was left at its default, search every bundled
     # suite for them.
-    if getattr(args, "task", None) and suite == "enterprise-apps-usage":
+    if getattr(args, "task", None) and suite == "workspace-tasks":
         tasks = []
         seen: set[str] = set()
         for name in BUILTIN_TASK_SUITE_ORDER:
@@ -2728,7 +2728,7 @@ def selected_filters(args: argparse.Namespace) -> dict:
         "difficulty": args.difficulty,
         "family": args.family,
         "category": getattr(args, "category", None),
-        "suite": getattr(args, "suite", "enterprise-apps-usage"),
+        "suite": getattr(args, "suite", "workspace-tasks"),
         "task_dir": getattr(args, "task_dir", None),
     }
 
@@ -2739,7 +2739,7 @@ def benchmark_metadata(args: argparse.Namespace) -> dict:
         task_suite = load_task_suite_manifest(Path(args.task_dir))
     else:
         task_suite = load_builtin_task_suite_manifest(
-            getattr(args, "suite", "enterprise-apps-usage")
+            getattr(args, "suite", "workspace-tasks")
         )
     return {
         "name": BENCHMARK_NAME,

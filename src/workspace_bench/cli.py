@@ -83,7 +83,7 @@ def main(argv: list[str] | None = None) -> int:
     show_parser = subparsers.add_parser("show", help="Show a task JSON summary.")
     show_parser.add_argument("task_id")
     show_parser.add_argument("--task-file", help="Show a task JSON file.")
-    show_parser.add_argument("--suite", default="enterprise-apps-usage", choices=list(BUILTIN_TASK_SUITE_ORDER))
+    show_parser.add_argument("--suite", default="workspace-tasks", choices=list(BUILTIN_TASK_SUITE_ORDER))
 
     validate_parser = subparsers.add_parser(
         "validate", help="Validate task metadata, oracle traces, and noop baseline."
@@ -245,11 +245,11 @@ def main(argv: list[str] | None = None) -> int:
     smoke_parser.add_argument("--url", default="http://127.0.0.1:8787")
     smoke_parser.add_argument(
         "--suite",
-        default="enterprise-apps-usage",
+        default="workspace-tasks",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help="Bundled task suite used to resolve --task.",
     )
-    smoke_parser.add_argument("--task", default="enterprise-apps-usage/create/price_performance_aapl")
+    smoke_parser.add_argument("--task", default="workspace-tasks/compliance_risk/alert_sweep_level0")
     smoke_parser.add_argument("--agent", default="oracle", choices=["oracle", "noop"])
     smoke_parser.add_argument("--json", action="store_true", help="Emit JSON.")
     smoke_parser.add_argument(
@@ -268,7 +268,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     export_parser.add_argument("--task")
     export_parser.add_argument("--task-file", help="Export a task JSON file.")
-    export_parser.add_argument("--suite", default="enterprise-apps-usage", choices=list(BUILTIN_TASK_SUITE_ORDER))
+    export_parser.add_argument("--suite", default="workspace-tasks", choices=list(BUILTIN_TASK_SUITE_ORDER))
     export_parser.add_argument("--output", required=True)
 
     harbor_parser = subparsers.add_parser(
@@ -376,10 +376,10 @@ def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--suite",
         dest="suite",
-        default="enterprise-apps-usage",
+        default="workspace-tasks",
         choices=list(BUILTIN_TASK_SUITE_ORDER),
         help=(
-            "Bundled task suite. core = operating the workspace (192)."
+            "Bundled task suite. workspace-tasks = operating the workspace (120)."
         ),
     )
     parser.add_argument(
@@ -668,7 +668,7 @@ def _cmd_export_task(args: argparse.Namespace) -> int:
         write_task_envelope(Path(args.output), task)
         print(f"Wrote task envelope for {task.id} to {args.output}")
         return 0
-    task_id = args.task or "enterprise-apps-usage/create/price_performance_aapl"
+    task_id = args.task or "workspace-tasks/compliance_risk/alert_sweep_level0"
     task = _task_from_file_or_builtin(task_id, args.task_file, args.suite)
     write_task_envelope(Path(args.output), task)
     print(f"Wrote task envelope for {task.id} to {args.output}")
@@ -904,7 +904,7 @@ def _release_profile(args: argparse.Namespace) -> str | None:
         return None
     if _filters_active(args):
         return None
-    return getattr(args, "suite", "enterprise-apps-usage")
+    return getattr(args, "suite", "workspace-tasks")
 
 
 def _filters_active(args: argparse.Namespace) -> bool:
@@ -938,7 +938,7 @@ def _selected_tasks(args: argparse.Namespace) -> list[Task]:
         if (
             not tasks
             and not getattr(args, "task_dir", None)
-            and getattr(args, "suite", "enterprise-apps-usage") == "enterprise-apps-usage"
+            and getattr(args, "suite", "workspace-tasks") == "workspace-tasks"
         ):
             # A task id should just work without naming the suite (mirrors
             # the evaluator): fall back to searching every bundled suite.
@@ -951,7 +951,7 @@ def _selected_tasks(args: argparse.Namespace) -> list[Task]:
 def _task_collection(args: argparse.Namespace) -> list[Task]:
     task_dir = getattr(args, "task_dir", None)
     if not task_dir:
-        tasks = load_builtin_tasks(getattr(args, "suite", "enterprise-apps-usage"))
+        tasks = load_builtin_tasks(getattr(args, "suite", "workspace-tasks"))
     else:
         tasks = load_task_directory(Path(task_dir))
     return tasks
@@ -961,7 +961,7 @@ def _task_suite_manifest(args: argparse.Namespace) -> TaskSuiteManifest | None:
     task_dir = getattr(args, "task_dir", None)
     if not task_dir:
         manifest = load_builtin_task_suite_manifest(
-            getattr(args, "suite", "enterprise-apps-usage")
+            getattr(args, "suite", "workspace-tasks")
         )
     else:
         manifest = load_task_suite_manifest(Path(task_dir))
@@ -976,7 +976,7 @@ def _task_suite_is_hidden(task_suite: TaskSuiteManifest | None) -> bool:
     return task_suite is not None and task_suite.visibility == "hidden"
 
 
-def _task_from_file_or_builtin(task_id: str, task_file: str | None, suite: str = "enterprise-apps-usage") -> Task:
+def _task_from_file_or_builtin(task_id: str, task_file: str | None, suite: str = "workspace-tasks") -> Task:
     if task_file:
         task = _load_task_file_with_suite(Path(task_file))
         if task_id and task.id != task_id:

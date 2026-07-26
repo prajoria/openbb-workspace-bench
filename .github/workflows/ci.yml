@@ -28,9 +28,8 @@ jobs:
         run: uv run --extra dev mypy src scripts
 
       - name: Run tests with coverage
-        # Threshold recalibrated after the build-openbb-apps removal: the suite's
-        # deletion took well-covered test paths with it, shifting the total from
-        # 65.9% to 63.6% without any code losing its own tests.
+        # Rechecked after the enterprise-apps-usage retirement: the committed
+        # tree measures 64%, so the floor holds.
         run: uv run --extra dev pytest --cov=workspace_bench --cov-report=term --cov-fail-under=63
 
       - name: Audit task identities and prompt openness
@@ -39,8 +38,8 @@ jobs:
           uv run python scripts/audits/report_prompt_stats.py
           uv run python scripts/audits/audit_release_consistency.py
 
-      - name: Validate the usage suite
-        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-usage --min-tasks 192
+      - name: Validate the workspace-tasks suite
+        run: uv run --extra dev workspace-bench validate --suite workspace-tasks --min-tasks 120
 
       - name: Validate enterprise-apps-default suite
         run: uv run --extra dev workspace-bench validate --suite enterprise-apps-default --min-tasks 138
@@ -48,31 +47,31 @@ jobs:
       - name: Validate the smoke suite
         run: uv run --extra dev workspace-bench validate --suite smoke --min-tasks 80
 
-      - name: Run oracle baseline (usage)
-        run: uv run --extra dev workspace-bench run --suite enterprise-apps-usage --agent oracle
+      - name: Run oracle baseline (workspace-tasks)
+        run: uv run --extra dev workspace-bench run --suite workspace-tasks --agent oracle
 
       - name: Reject adversarial candidates
         run: |
-          uv run workspace-bench adversarial --suite enterprise-apps-usage
+          uv run workspace-bench adversarial --suite workspace-tasks
 
       - name: Export agent task envelope
-        run: uv run --extra dev workspace-bench export-task --task enterprise-apps-usage/curate/decision_briefing_level0 --output /tmp/workspace-task.json
+        run: uv run --extra dev workspace-bench export-task --task workspace-tasks/compliance_risk/alert_sweep_level0 --output /tmp/workspace-task.json
 
       - name: Run demo external agent
-        run: uv run --extra dev workspace-bench run-agent-command --task enterprise-apps-usage/curate/decision_briefing_level0 --agent-command "python -m workspace_bench.agents.rule_agent"
+        run: uv run --extra dev workspace-bench run-agent-command --task workspace-tasks/portfolio_manager/morning_briefing_level0 --agent-command "python -m workspace_bench.agents.rule_agent"
 
       - name: Build manifests
         run: |
-          uv run --extra dev workspace-bench manifest --suite enterprise-apps-usage --json > /dev/null
+          uv run --extra dev workspace-bench manifest --suite workspace-tasks --json > /dev/null
 
       - name: Build release reports
         run: |
-          uv run --extra dev workspace-bench report --suite enterprise-apps-usage --json > /dev/null
+          uv run --extra dev workspace-bench report --suite workspace-tasks --json > /dev/null
 
       - name: Smoke the evaluator dispatch
         run: |
           printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "model": "rule-agent", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
-          uv run --extra dev workspace-bench --models-file /tmp/models.json --task decision_briefing_level0 --runner batch --dry-run
+          uv run --extra dev workspace-bench --models-file /tmp/models.json --task morning_briefing_level0 --runner batch --dry-run
 
       - name: Build package
         run: uv build

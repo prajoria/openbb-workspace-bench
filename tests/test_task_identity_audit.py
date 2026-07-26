@@ -17,12 +17,12 @@ def test_repeated_token_phrase_finds_join_scars() -> None:
         "post_earnings"
     )
     assert repeated_token_phrase("drift_drift_by_sleeve".split("_")) == "drift"
-    assert repeated_token_phrase("decision_briefing_level0".split("_")) is None
+    assert repeated_token_phrase("morning_briefing_level0".split("_")) is None
 
 
 def test_audit_task_flags_generator_identity_and_prompt_scars() -> None:
     findings = audit_task(
-        "enterprise-apps-usage",
+        "workspace-tasks",
         "inspect",
         {
             "id": "inspect_drift_drift_3",
@@ -40,7 +40,7 @@ def test_audit_task_flags_generator_identity_and_prompt_scars() -> None:
 
 def test_audit_task_allows_business_numeric_suffix() -> None:
     assert not audit_task(
-        "enterprise-apps-usage",
+        "workspace-tasks",
         "apps",
         {
             "id": "client_360",

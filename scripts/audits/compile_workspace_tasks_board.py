@@ -5,7 +5,9 @@ and joins single-pass board runs into one canonical record:
 per-model overall pass@1, per-level rates, and issue-code fingerprints.
 """
 from __future__ import annotations
-import json, glob, sys
+import json
+import glob
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -29,13 +31,15 @@ def result_files(run_dir: str):
         yield p
 
 def row(model_label: str, results: list[dict]) -> dict:
-    lv = defaultdict(lambda: [0, 0])
-    codes = defaultdict(int)
+    lv: defaultdict[str, list[int]] = defaultdict(lambda: [0, 0])
+    codes: defaultdict[str, int] = defaultdict(int)
     passes = 0
     proc = 0
     for r in results:
-        lv[r["difficulty"]][0] += bool(r["passed"]); lv[r["difficulty"]][1] += 1
-        passes += bool(r["passed"]); proc += bool(r.get("process_failed"))
+        lv[r["difficulty"]][0] += bool(r["passed"])
+        lv[r["difficulty"]][1] += 1
+        passes += bool(r["passed"])
+        proc += bool(r.get("process_failed"))
         if not r["passed"]:
             for i in r.get("issues", []):
                 codes[i.get("code", "unknown")] += 1
@@ -86,7 +90,9 @@ def main() -> int:
                                "levels": LEVELS, "board": board}, indent=1))
     for r in board:
         flag = " [EXCLUDED]" if r.get("excluded") else ""
-        rates = "/".join(f"{(r['per_level'][l]['rate'] or 0)*100:.0f}" for l in LEVELS)
+        rates = "/".join(
+            f"{(r['per_level'][level]['rate'] or 0) * 100:.0f}" for level in LEVELS
+        )
         print(f"{r['model']}: pass@1={r['pass_at_1']:.1%} levels {rates}{flag}")
     print("written:", OUT)
     return 0

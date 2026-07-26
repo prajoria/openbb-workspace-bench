@@ -35,7 +35,7 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
         [
             "run",
             "--task",
-            "decision_briefing_level0",
+            "morning_briefing_level0",
             "--agent",
             "oracle",
             "--trace-dir",
@@ -44,11 +44,11 @@ def test_cli_can_write_trace_artifacts(tmp_path) -> None:
         ]
     )
 
-    artifact = tmp_path / "decision_briefing_level0.json"
+    artifact = tmp_path / "morning_briefing_level0.json"
     payload = json.loads(artifact.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert payload["grade"]["passed"] is True
-    assert payload["task"]["family"] == "curate"
+    assert payload["task"]["family"] == "portfolio_manager"
     assert payload["task"]["difficulty"] == "level0"
     assert payload["trace"][0]["tool"] == "get_workspace_snapshot"
 
@@ -72,9 +72,13 @@ def test_builtin_tasks_have_terminal_bench_style_metadata() -> None:
 
 def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> None:
     source = next(
-        task for task in load_builtin_tasks() if task.id == "decision_briefing_level0"
+        task for task in load_builtin_tasks() if task.id == "morning_briefing_level0"
     )
     assert source.source_path is not None
+    (tmp_path / "task_suite.json").write_text(
+        json.dumps({"task_defaults": {"category": "story"}}),
+        encoding="utf-8",
+    )
     family_dir = tmp_path / source.family
     family_dir.mkdir()
     payload = json.loads(source.source_path.read_text(encoding="utf-8"))
@@ -93,7 +97,7 @@ def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> N
 
 
 def test_cli_validate_passes_for_builtin_tasks() -> None:
-    assert main(["validate", "--min-tasks", "192"]) == 0
+    assert main(["validate", "--min-tasks", "120"]) == 0
 
 
 def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
@@ -105,19 +109,19 @@ def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
 
 
 def test_cli_filters_by_first_class_family(capsys) -> None:
-    exit_code = main(["list", "--family", "curate", "--json"])
+    exit_code = main(["list", "--family", "portfolio_manager", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert len(payload) == 24
-    assert {task["family"] for task in payload} == {"curate"}
+    assert len(payload) == 20
+    assert {task["family"] for task in payload} == {"portfolio_manager"}
 
 
 def test_find_task_searches_all_bundled_suites() -> None:
     from workspace_bench.core.runner import find_task
 
-    assert find_task("decision_briefing_level0").id == (
-        "decision_briefing_level0"
+    assert find_task("morning_briefing_level0").id == (
+        "morning_briefing_level0"
     )
     assert find_task("smoke_get_widget_data_level0").id == (
         "smoke_get_widget_data_level0"
@@ -127,7 +131,7 @@ def test_find_task_searches_all_bundled_suites() -> None:
         == "smoke_get_widget_data_level0"
     )
     try:
-        find_task("smoke_get_widget_data_level0", suite="enterprise-apps-usage")
+        find_task("smoke_get_widget_data_level0", suite="workspace-tasks")
     except KeyError:
         pass
     else:
@@ -146,9 +150,9 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
         [
             "smoke-workspace-mcp",
             "--task",
-            "decision_briefing_level0",
+            "morning_briefing_level0",
             "--suite",
-            "enterprise-apps-usage",
+            "workspace-tasks",
         ]
     )
 
@@ -156,19 +160,19 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
 
 
 def test_cli_manifest_resolves_core_suite(capsys) -> None:
-    exit_code = main(["manifest", "--suite", "enterprise-apps-usage", "--json"])
+    exit_code = main(["manifest", "--suite", "workspace-tasks", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
-    assert payload["task_count"] == 192
-    assert "curate" in payload["families"]
-    assert payload["task_suite"]["suite_id"] == "enterprise-apps-usage"
+    assert payload["task_count"] == 120
+    assert "portfolio_manager" in payload["families"]
+    assert payload["task_suite"]["suite_id"] == "workspace-tasks"
     assert len(payload["task_suite"]["content_sha256"]) == 64
-    assert "read" in payload["categories"]
+    assert "story" in payload["categories"]
 
 
 def test_cli_validate_fails_when_min_task_gate_is_not_met(capsys) -> None:
-    exit_code = main(["validate", "--category", "repair", "--min-tasks", "300"])
+    exit_code = main(["validate", "--category", "story", "--min-tasks", "300"])
 
     output = capsys.readouterr().out
     assert exit_code == 1
@@ -180,7 +184,7 @@ def test_cli_filters_by_difficulty(capsys) -> None:
 
     output = capsys.readouterr().out
     assert exit_code == 0
-    assert "decision_briefing_level0" not in output
+    assert "morning_briefing_level0" not in output
 
 
 def test_cli_canary_command(capsys) -> None:
@@ -197,11 +201,11 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["name"] == "openbb-workspace-bench"
-    assert payload["task_suite"]["suite_id"] == "enterprise-apps-usage"
+    assert payload["task_suite"]["suite_id"] == "workspace-tasks"
     assert "release_id" not in payload
     assert payload["task_count"] == len(load_builtin_tasks())
     assert payload["canary_guid"] == CANARY_GUID
-    assert "dashboard" in payload["categories"]
+    assert "story" in payload["categories"]
 
 
 def test_cli_report_json_includes_release_checks(capsys) -> None:
@@ -222,7 +226,7 @@ def test_cli_report_can_write_markdown(tmp_path) -> None:
     text = output.read_text(encoding="utf-8")
     assert exit_code == 0
     assert "# OpenBB Workspace Bench Report" in text
-    assert "task_count_192" in text
+    assert "task_count_120" in text
 
 
 def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
@@ -230,7 +234,7 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
         [
             "run",
             "--task",
-            "decision_briefing_level0",
+            "morning_briefing_level0",
             "--agent",
             "oracle",
             "--json",
@@ -240,7 +244,7 @@ def test_cli_run_json_includes_aggregate_summary(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["summary"]["passed"] == 1
-    assert payload["results"][0]["category"] == "single-widget"
+    assert payload["results"][0]["category"] == "story"
     assert payload["results"][0]["difficulty"] == "level0"
 
 
@@ -264,10 +268,14 @@ def test_cli_run_resolves_smoke_suite_task_without_suite_flag(capsys) -> None:
 
 def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
+        item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
+    )
+    (tmp_path / "task_suite.json").write_text(
+        json.dumps({"task_defaults": {"category": "story"}}),
+        encoding="utf-8",
     )
     (tmp_path / "create").mkdir()
-    task_path = tmp_path / "create" / "decision_briefing_level0.json"
+    task_path = tmp_path / "create" / "morning_briefing_level0.json"
     task_path.write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
@@ -357,7 +365,7 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
 
 def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
+        item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     (tmp_path / "task_suite.json").write_text(
         json.dumps(
@@ -368,7 +376,7 @@ def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
         ),
         encoding="utf-8",
     )
-    (tmp_path / "decision_briefing_level0.json").write_text(
+    (tmp_path / "morning_briefing_level0.json").write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
@@ -383,17 +391,19 @@ def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
 
 def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
+        item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     task_dir = tmp_path / "hidden_pack"
     trace_dir = tmp_path / "traces"
     task_dir.mkdir()
     (task_dir / "task_suite.json").write_text(
-        json.dumps({"visibility": "hidden"}),
+        json.dumps(
+            {"visibility": "hidden", "task_defaults": {"category": "story"}}
+        ),
         encoding="utf-8",
     )
     (task_dir / "create").mkdir()
-    (task_dir / "create" / "decision_briefing_level0.json").write_text(
+    (task_dir / "create" / "morning_briefing_level0.json").write_text(
         task.source_path.read_text(encoding="utf-8"),
         encoding="utf-8",
     )
@@ -413,7 +423,7 @@ def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
         ]
     )
 
-    payload = json.loads((trace_dir / "decision_briefing_level0.json").read_text())
+    payload = json.loads((trace_dir / "morning_briefing_level0.json").read_text())
     assert manifest_exit == 0
     assert run_exit == 0
     assert manifest["redacted"] is True
@@ -428,7 +438,7 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
         [
             "export-task",
             "--task",
-            "decision_briefing_level0",
+            "morning_briefing_level0",
             "--output",
             str(output),
         ]
@@ -437,10 +447,13 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert payload["schema_version"] == "workspace-bench-envelope"
-    assert payload["benchmark"]["suite_id"] == "enterprise-apps-usage"
-    assert payload["task"]["qualified_id"] == "enterprise-apps-usage/curate/decision_briefing_level0"
-    assert payload["task"]["id"] == "decision_briefing_level0"
-    assert payload["task"]["family"] == "curate"
+    assert payload["benchmark"]["suite_id"] == "workspace-tasks"
+    assert (
+        payload["task"]["qualified_id"]
+        == "workspace-tasks/portfolio_manager/morning_briefing_level0"
+    )
+    assert payload["task"]["id"] == "morning_briefing_level0"
+    assert payload["task"]["family"] == "portfolio_manager"
     assert payload["task"]["business_terms"] == []
     assert "oracle_tool_calls" not in payload["task"]
     assert "success" not in payload["task"]
@@ -451,7 +464,7 @@ def test_cli_run_agent_command_uses_jsonl_contract(tmp_path, capsys) -> None:
         [
             "run-agent-command",
             "--task",
-            "decision_briefing_level0",
+            "morning_briefing_level0",
             "--agent-command",
             "python -m workspace_bench.agents.rule_agent",
             "--run-dir",
@@ -474,7 +487,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
         [
             "run-agent-command",
             "--task",
-            "decision_briefing_level0",
+            "morning_briefing_level0",
             "--agent-command",
             "python -m workspace_bench.agents.rule_agent",
             "--run-dir",
@@ -488,7 +501,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
         [
             "run-agent-command",
             "--task",
-            "decision_briefing_level0",
+            "morning_briefing_level0",
             "--agent-command",
             'python -c "raise SystemExit(2)"',
             "--run-dir",
@@ -506,7 +519,7 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
 
 def test_task_loader_rejects_legacy_split_field(tmp_path) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
+        item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["split"] = "train"
@@ -523,7 +536,7 @@ def test_task_loader_rejects_legacy_split_field(tmp_path) -> None:
 
 def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
+        item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["setup"]["allowed_tools"] = "create_widget"
@@ -540,9 +553,13 @@ def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:
 
 def test_validate_reports_duplicate_task_ids(tmp_path, capsys) -> None:
     task = next(
-        item for item in load_builtin_tasks() if item.id == "decision_briefing_level0"
+        item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     source = task.source_path.read_text(encoding="utf-8")
+    (tmp_path / "task_suite.json").write_text(
+        json.dumps({"task_defaults": {"category": "story"}}),
+        encoding="utf-8",
+    )
     (tmp_path / "create").mkdir()
     (tmp_path / "create" / "one.json").write_text(source, encoding="utf-8")
     (tmp_path / "create" / "two.json").write_text(source, encoding="utf-8")

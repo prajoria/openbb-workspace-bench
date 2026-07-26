@@ -86,17 +86,17 @@ SUITE_TERMINOLOGY_RE = re.compile(
 
 REQUIRED_FACTS = {
     REPO / "README.md": (
-        "410 deterministic simulator tasks",
+        "338 deterministic simulator tasks",
         f"{ARCHETYPE_COUNT_WORD} archetypes",
     ),
     REPO / "RELEASE_CHECKLIST.md": (
-        "410 tasks",
+        "338 tasks",
     ),
     REPO / "runs/README.md": (
         "GPT-5.1, GPT-5.4 mini, and GPT-5.5",
     ),
     REPO / "src/workspace_bench/cli.py": (
-        "operating the workspace (192).",
+        "operating the workspace (120).",
     ),
 }
 

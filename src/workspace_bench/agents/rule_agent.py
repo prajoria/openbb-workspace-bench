@@ -14,7 +14,7 @@ def main() -> int:
     task_id = task["task"]["id"]
 
     calls = []
-    if task_id == "decision_briefing_level0":
+    if task_id == "morning_briefing_level0":
         calls = [
             {"tool": "get_workspace_snapshot", "args": {}},
             {
@@ -26,7 +26,7 @@ def main() -> int:
                 "args": {
                     "origin": "Bench Stark Enterprise",
                     "widget_id": "portfolio_command_center_actions_trade_ideas",
-                    "data_args": {"fund": "Flagship Long/Short", "period": "YTD"},
+                    "data_args": {"fund": "Flagship Long/Short", "period": "QTD"},
                 },
             },
         ]
