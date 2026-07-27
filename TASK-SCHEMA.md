@@ -35,9 +35,9 @@ README). The task schema itself is one shared contract.
 | field | contract |
 | --- | --- |
 | `id` | Stable local slug. The public identity is `suite/family/task`. |
-| `category`, `family` | Workflow kind (`read`, `single-widget`, `dashboard`, `platform`, or `repair`) and generator/verifier family. `family` may be omitted — the loader derives it from the task's directory. `category` (and `difficulty`) may be omitted when derivable: from the canonical tool-family map, or from the suite manifest's `task_defaults` (e.g. `{"category": "read", "difficulty": "medium"}` for a uniform suite). A manifest may also carry `task_defaults.eval` — suite policy criteria (layout hygiene, trace discipline, preservation) merged into every task's eval block wherever the task file omits the key. |
+| `category`, `family` | Workflow kind (`read`, `single-widget`, `dashboard`, `platform`, `repair`, or `story` — one persona storyline in the workspace-tasks ladder) and the suite's grouping family (tool families in smoke, personas in workspace-tasks). `family` may be omitted — the loader derives it from the task's directory. `category` (and `difficulty`) may be omitted when derivable: from the canonical tool-family map, or from the suite manifest's `task_defaults` (e.g. `{"category": "read", "difficulty": "medium"}` for a uniform suite). A manifest may also carry `task_defaults.eval` — suite policy criteria (layout hygiene, trace discipline, preservation) merged into every task's eval block wherever the task file omits the key. |
 | `specification_level` | Structural prompt level: `explicit`, `partially-specified`, or `open-brief`. Written only when it deviates from the difficulty default (easy→explicit, medium→partially-specified, hard→open-brief). |
-| `difficulty` | Measured `easy`, `medium`, or `hard` reporting label — or, in the smoke ladder, the execution-context level `level0`–`level3` (levels 0–2 default to explicit prompts, level3 to partially specified). |
+| `difficulty` | Measured `easy`, `medium`, or `hard` reporting label — or a ladder level: `level0`–`level3` in smoke, `level0`–`level4` in workspace-tasks (Execute/Find/Derive/Ground/Compose). Ladder levels 0–2 default to explicit prompts, levels 3–4 to partially specified, level5 (retired) to open-brief. |
 | `business_terms` | Optional declared allowlist of genuine verbatim business identifiers in less-specified prompts; omitted when empty. |
 | `prompt` | Analyst-facing instruction. |
 | `setup` | The world the agent acts in, grouped in one block: `workspace_baseline`, `workspace_backends`, `workspace_skills` (per-task selections/overrides of the suite manifest's workspace axes, for state-variant tasks), `default_selected_dashboard` (the dashboard already open when the episode starts, by name), `fixtures` (deterministic backend references), `initial_state` (optional seeded dashboards, tabs, widgets, apps, generated widgets, or repair state), and `allowed_tools` (the agent-visible Workspace MCP tool surface, plus optionally the harness-level `final_answer` answer action — a tool-shaped reply that is recorded in the trace, never dispatched to the workspace, and completes the episode). The same fields remain accepted flat at the top level as the legacy spelling. |
@@ -45,7 +45,12 @@ README). The task schema itself is one shared contract.
 | `code_task` | Experimental code-track contract: confined starter/oracle paths, argv install/start/test commands, health path, timeouts, manifest requirements, and typed HTTP probes. |
 
 `workspace-bench export-task` publishes prompt, business terms, metadata,
-fixtures, initial state, tools, protocol, suite hash, and Git provenance. It
+fixtures, initial state, tools, protocol, suite hash, and Git provenance.
+The interactive harness additionally runs **closed-world** by default: the
+rendered prompt withholds `initial_state`, so the agent discovers the seeded
+workspace through `get_workspace_snapshot`
+(`WORKSPACE_BENCH_SHOW_INITIAL_STATE=1` restores the legacy open-world
+prompt). It
 deliberately excludes the entire `eval` block: agents never see grading
 criteria, the reference trajectory, or their turn budget — the harness
 enforces the budget and refuses calls past `max_turns` — so agents always
