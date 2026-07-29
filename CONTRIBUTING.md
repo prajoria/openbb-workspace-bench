@@ -12,8 +12,9 @@ generators, never by editing generated artifacts.
 2. Give it a stable `id`, category, family, difficulty, and a
    specification level where it deviates from the difficulty default.
 3. Keep fixture data deterministic and versioned.
-4. Add clear `success` criteria that grade durable Workspace state.
-5. Add a known-good `oracle_tool_calls` trace.
+4. Add clear `eval` criteria that grade durable Workspace state.
+5. Add a known-good `eval.reference_trace` (the legacy `success` /
+   `oracle_tool_calls` spellings still load, but new tasks use `eval`).
 6. Regenerate the taskset twice, confirm deterministic output, and run its
    validation gate.
 
@@ -43,6 +44,13 @@ optional business names—not exact oracle widget/app definitions or layouts.
 uv run python scripts/audits/audit_task_identity.py
 uv run python scripts/audits/report_prompt_stats.py
 ```
+
+The `workspace-tasks` taskset is not generated: its tasks are agent-authored
+under the versioned contracts in `.claude/skills/` (task-author,
+task-validator, task-level-fairness, orchestrator) and certified by the same
+validate/adversarial/calibration gates. Read those skill files plus
+`src/workspace_bench/tasksets/workspace_tasks/README.md` before proposing new
+stories.
 
 The generated tasksets each have one deterministic generator in
 `scripts/generators/` (`generate_smoke_suite.py`,

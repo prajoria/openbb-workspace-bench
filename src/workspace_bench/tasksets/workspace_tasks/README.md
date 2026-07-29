@@ -38,6 +38,6 @@ by `scripts/audits/compile_workspace_tasks_board.py` into
 uv run workspace-bench validate --taskset workspace-tasks
 
 # run a model
-uv run python -m workspace_bench.reports.model_compare \
+uv run workspace-bench \
   --model openai:gpt-4.1-mini --taskset workspace-tasks
 ```

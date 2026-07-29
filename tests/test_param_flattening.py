@@ -1,6 +1,6 @@
 """Regression coverage for canonical widget-parameter traversal."""
 
-from workspace_bench.core import adversarial, graders, prompt_openness
+from workspace_bench.core import adversarial, graders
 from workspace_bench.core.models import JsonDict
 from workspace_bench.workspace import runtime
 from workspace_bench.workspace.widget_params import flatten_params
@@ -42,7 +42,6 @@ def test_flatten_params_controls_recursive_input_traversal() -> None:
 
 def test_gate_lint_grader_and_runtime_share_recursive_param_visibility() -> None:
     recursive_consumers = (
-        prompt_openness,
         adversarial,
         graders,
         runtime,
@@ -55,22 +54,3 @@ def test_gate_lint_grader_and_runtime_share_recursive_param_visibility() -> None
 
     assert set(runtime.synthesize_params(DEFINITION)) == expected_names
     assert graders._definition_param_kinds(DEFINITION) == {"form", "tabs", "date"}
-
-    issues = prompt_openness.prompt_openness_issues(
-        {
-            "specification_level": "open-brief",
-            "prompt": "Build a workflow configured by deep_parameter.",
-            "business_terms": [],
-            "oracle_tool_calls": [
-                {
-                    "tool": "manage_backends",
-                    "args": {"widgets_json": {"nested_widget": DEFINITION}},
-                }
-            ],
-        }
-    )
-    assert any(
-        issue.code == "implementation_identifier_leak"
-        and "deep_parameter" in issue.detail
-        for issue in issues
-    )

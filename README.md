@@ -15,6 +15,9 @@ default apps' product prompts in two data worlds (138), and
 `workspace-tasks` operates Workspace state through agent-authored persona
 storylines (120).
 
+Benchmark vocabulary (task, taskset, family, oracle, closed-world) is mapped
+to other benchmarks' terms in [Terminology](#terminology).
+
 ## Contents
 
 - [What Is Included](#what-is-included)
@@ -26,6 +29,7 @@ storylines (120).
 - [Live Workspace MCP Smoke](#live-workspace-mcp-smoke)
 - [Browser Certification](#browser-certification)
 - [Serve Fixture Backends](#serve-fixture-backends)
+- [Harbor Adapter](#harbor-adapter)
 - [Reference](#reference) — [TASK-SCHEMA.md](TASK-SCHEMA.md) · [RESULT-SCHEMA.md](RESULT-SCHEMA.md)
 - [Grading Model](#grading-model)
 - [Task Organization](#task-organization)
@@ -90,7 +94,8 @@ same benchmark core. Other important boundaries:
 
 ## Quick Start
 
-Install dependencies and inspect the benchmark:
+Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/) (`uv run` creates
+the environment on first use). Clone the repo, then inspect the benchmark:
 
 ```bash
 uv run workspace-bench list
@@ -103,9 +108,9 @@ uv run workspace-bench validate --taskset workspace-tasks --min-tasks 120
 Run built-in baselines:
 
 ```bash
-uv run workspace-bench run --agent oracle
-uv run workspace-bench run --agent noop
-uv run workspace-bench report --output runs/reports/benchmark-report.md
+uv run workspace-bench run --taskset workspace-tasks --agent oracle
+uv run workspace-bench run --taskset workspace-tasks --agent noop
+uv run workspace-bench report --taskset workspace-tasks --output runs/reports/benchmark-report.md
 ```
 
 The committed deterministic certification report is
@@ -412,7 +417,7 @@ and durable state, include an oracle, and fail the no-op baseline.
 Start a local `workspace-mcp` sidecar:
 
 ```bash
-workspace-mcp --cors-allow https://pro.openbb.dev
+workspace-mcp --cors-allow https://pro.openbb.co
 ```
 
 Then smoke-test the real MCP endpoint and browser bridge protocol:
@@ -519,8 +524,9 @@ provider. Harbor `0.20.0`'s local Docker provider does not accept a
 but uses the provider's public-network baseline; later provider certification
 should restore an explicit no-network verifier policy where supported.
 
-Implementation status, exact validation commands, and remaining generalization
-work are maintained in [`PLANNING.md`](PLANNING.md).
+The reference task above is fully validated end to end (converter, trusted
+runtime, verifier, Harbor oracle/NOP parity, and a real coding-agent trial);
+suite-wide export and result ingestion are the remaining generalization work.
 
 ## Browser Certification
 
@@ -642,7 +648,10 @@ Two focused reference documents sit at the repository root:
   and the complete issue-code catalog.
 
 The generated per-task oracle-tool matrix and task catalog live under
-`runs/reports/`.
+`runs/reports/`. Two maintainer-oriented subcommands round out the CLI:
+`workspace-bench runtime-probe` (oracle fixture-backed HTTP endpoint probes
+for a taskset) and `workspace-bench judge --run-dir ...` (re-judge pending or
+errored answer rows in a stored evaluator run).
 
 ## Grading Model
 
@@ -706,6 +715,8 @@ For readers arriving from other benchmarks:
 | category | task type — τ-bench's "domain" plays a similar role |
 | rubric / graders | Terminal-Bench "verification test suite", TMax "graded verifiers" |
 | oracle | Terminal-Bench "oracle solution" (same word) |
+| closed-world | the agent starts with no state in the prompt and discovers every dashboard through the snapshot tool |
+| guided / cold tracks | two assistance levels for the same tasks — reported separately, never pooled |
 
 ## Repository Layout
 
@@ -732,10 +743,8 @@ runs/
     task-catalog.md         Generated catalog of the deterministic simulator tasks
     tool-coverage-matrix.md Per-task x Workspace MCP oracle-tool matrix
     tool-matrix-data.json   Machine-readable data behind the tool matrix
-references/
-  openbb-backend-examples/  Vendored OpenBB backend reference implementations (MIT,
-                            pinned upstream commit) — ground truth for building
-                            widget-creation and backend-building tasks
+references/                 Local-only (gitignored) clones used during catalog
+                            transcription; not distributed with the repo
 task_templates/             Persona READMEs and story files — the source of truth
                             the workspace-tasks authoring pipeline works from
 .claude/skills/             The authoring contracts (task-author, task-validator,

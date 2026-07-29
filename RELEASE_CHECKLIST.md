@@ -30,7 +30,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] Repository URL in `pyproject.toml` is correct.
 - [ ] The smoke taskset sweeps green through live-parity against the hosted Workspace MCP bridge (`uv run --extra live workspace-bench live-parity --task smoke/get_widget_data/smoke_get_widget_data_level0` per eligible task) — the strongest harness-fidelity evidence the repo produces.
 - [ ] The answer judge is calibrated against the pinned local judge model: `uv run python scripts/audits/audit_judge_calibration.py --repeats 3` passes (all exemplars PASS; shallow, off-topic, and injection mutants FAIL; verdicts stable). Local gate — CI stays deterministic-only.
-- [ ] License decision is made before open-source publication.
+- [ ] `LICENSE` (MIT) is present and the README badge matches.
 - [ ] `uv lock --check` passes and `uv build` produces both sdist and wheel.
 - [ ] CI is green.
 
