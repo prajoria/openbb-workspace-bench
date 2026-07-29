@@ -50,11 +50,11 @@ def test_audit_task_allows_business_numeric_suffix() -> None:
     )
 
 
-def test_release_consistency_allows_only_explicitly_archived_counts() -> None:
+def test_release_consistency_flags_all_retired_counts() -> None:
     path = Path("README.md")
-    content = """# Current\n212 tasks\n## Archived Baselines\nformer 212 and 512 tasks\n## Evaluate Your Agent\n512 tasks\n"""
+    content = """# Current\n212 tasks\nmore text\n512 tasks\n"""
     findings = audit_text(path, content)
-    assert [finding.line for finding in findings] == [2, 6]
+    assert [finding.line for finding in findings] == [2, 4]
 
 
 def test_release_consistency_flags_cross_phase_claims() -> None:

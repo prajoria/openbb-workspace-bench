@@ -21,7 +21,7 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] Stable task counts: 80 in `smoke`, 138 in `enterprise-apps-default`, exactly 120 in `workspace-tasks` (338 tasks total).
 - [ ] Novelty fingerprints and task ids are unique in the quota-checked taskset.
 - [ ] Coverage quotas pass via `validate` (workspace-tasks: backend, difficulty, widget-pair, dashboard-category, grader-check quotas).
-- [ ] `runs/reports/calibration.json`, `suites.json`, and `significance.json` match the README board notes. These are the retained compiled boards from the July 2026 runs (raw run directories are not committed); any recomputation requires re-running the models against the current tasksets, and pre-reset boards must not be pooled with new runs.
+- [ ] `runs/reports/workspace-tasks-board.json` and `workspace-tasks-calibration.json`/`.md` match the README board notes (raw run directories are not committed); any recomputation requires re-running the models against the current tasksets.
 - [ ] Difficulty relabel review requires both repeats and approves the intermediate band from complete repeated evidence; relabels do not alter task prompts or success criteria.
 - [ ] README quick start, tasksets table, and aggregate command are accurate.
 - [ ] Per-taskset READMEs are present, use the shared structure, and state task counts verified by `audit_release_consistency.py`.

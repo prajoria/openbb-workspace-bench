@@ -92,9 +92,6 @@ REQUIRED_FACTS = {
     REPO / "RELEASE_CHECKLIST.md": (
         "338 tasks",
     ),
-    REPO / "runs/README.md": (
-        "GPT-5.1, GPT-5.4 mini, and GPT-5.5",
-    ),
     REPO / "src/workspace_bench/cli.py": (
         "operating the workspace (120).",
     ),
@@ -112,18 +109,12 @@ def audit_text(path: Path, content: str) -> list[Finding]:
     """Return stale-count and stale-claim findings for one file."""
 
     findings: list[Finding] = []
-    in_archived_readme = False
     for line_number, line in enumerate(content.splitlines(), start=1):
-        if path.name == "README.md" and line == "## Archived Baselines":
-            in_archived_readme = True
-        elif path.name == "README.md" and line == "## Evaluate Your Agent":
-            in_archived_readme = False
         scan_line = "tests" not in path.parts or "assert" in line
         if (
             scan_line
             and path not in COUNT_SCAN_EXCLUSIONS
             and STALE_COUNT_RE.search(line)
-            and not in_archived_readme
         ):
             findings.append(Finding(path, line_number, f"stale active count: {line.strip()}"))
         for label, pattern in STALE_CLAIMS.items():

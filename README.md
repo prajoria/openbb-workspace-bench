@@ -20,7 +20,6 @@ storylines (120).
 - [What Is Included](#what-is-included)
 - [Scope & Limitations](#scope--limitations)
 - [Quick Start](#quick-start)
-- [Archived Baselines](#archived-baselines)
 - [Evaluate Your Agent](#evaluate-your-agent)
 - [Tasksets](#tasksets)
 - [Private Tasksets](#private-tasksets)
@@ -87,8 +86,7 @@ same benchmark core. Other important boundaries:
   downstream multi-agent work. Completion-note semantics and cosmetic polish
   are narrower than human review.
 - Guided and cold evaluation tracks provide different assistance and must be
-  reported separately. Archived boards predate the current contracts and must
-  not be pooled with current runs.
+  reported separately.
 
 ## Quick Start
 
@@ -118,62 +116,6 @@ Run tests:
 ```bash
 uv run --extra dev pytest
 ```
-
-## Archived Baselines
-
-The current operating-suite board lives in the [Tasksets](#tasksets) section;
-everything below predates the current task contract and is preserved as
-history. The `enterprise-apps-usage` suite itself was retired in July 2026
-when the agent-authored `workspace-tasks` suite replaced it as the operating
-suite.
-
-The committed model runs below predate the current task contract. Their task
-ids include the retired generation labels and their prompts/graders differ from
-the active corpus. Historical numbers remain for reproducibility and must not
-be compared directly with fresh runs. New reports record the Git commit, dirty
-state, and suite content hash instead of a hand-maintained release number.
-
-Six models have been run against both suites (pass@1, single fresh
-end-to-end attempt per suite, temperature 0, same grader and turn budget
-for every model — no patched or spliced results).
-
-Retired usage-era board (operating the workspace, 300 tasks):
-
-| Model | Strict pass | t0 → t4 pass rate (%) |
-|---|---|---|
-| GPT-5.5 | 282/300 (94.0%) | 98 · 100 · 90 · 87 · 95 |
-| Claude Sonnet 5 | 267/300 (89.0%) | 100 · 98 · 85 · 82 · 80 |
-| GLM-5.2 | 229/300 (76.3%) | 85 · 100 · 73 · 60 · 63 |
-| gpt-4.1-mini ‡ | 211/300 (70.3%) | 98 · 92 · 77 · 52 · 33 |
-| gpt-oss:20b | 178/300 (59.3%) | 93 · 68 · 57 · 45 · 33 |
-| Qwen3 8B | 149/300 (49.7%) | 80 · 78 · 47 · 27 · 17 |
-
-Historical task-IID 95% Wilson intervals at n=300 span roughly ±3–6 points (GPT-5.5 90.7–96.2%,
-Qwen3 8B 44.0–55.3%). Paired McNemar tests separate every adjacent rank
-except GLM-5.2 vs gpt-4.1-mini (p=0.06). Strict pass counts provider/process
-failures as failures — core process failures: Sonnet 5 15, gpt-oss:20b 22,
-Qwen3 8B 20, GLM-5.2 4, GPT-5.5 1, gpt-4.1-mini 0; excluding them, the
-valid-attempt pass rates are 94.3 / 93.7 / 77.4 / 70.3 / 64.0 / 53.2%.
-
-The raw per-task traces from those runs predate the 2026-07 schema resets and
-were removed from the repository as non-comparable; the compiled evidence
-remains at `runs/reports/calibration.json` (built by
-`workspace-bench compile calibration`), and confidence intervals, difficulty
-slices, and all pairwise tests at `runs/reports/significance.json`. Task-IID
-Wilson and McNemar statistics are retained only as descriptive historical
-measures.
-
-‡ gpt-4.1-mini is the calibration model; the other five models never
-influenced task selection.
-
-The retired 512-task pooled snapshot was GPT-5.5 96.5%, Sonnet 5 93.0%,
-GLM-5.2 85.7%, gpt-4.1-mini 71.1%, gpt-oss:20b 62.9%, and Qwen3 8B 35.0%.
-It is preserved here as history but deliberately absent from the current
-aggregate in `runs/reports/suites.json`; cross-era pooling is invalid.
-
-Repeatability: the calibration model repeated 3x over the 300 core tasks lands
-at 71.7 / 70.0 / 70.7% strict per attempt (pass@3 73.7%, pass^3 67.3%), with
-only 19/300 tasks showing within-model variance.
 
 ## Evaluate Your Agent
 
@@ -433,7 +375,6 @@ run directory per model per taskset:
 # each evaluator invocation writes one run directory per model
 uv run workspace-bench compile suites \
   --run workspace-tasks=runs/comparison/<run-id>/<model>.json \
-  --historical-run core=runs/comparison/<historical-run-id> \
   --output /tmp/workspace-bench-suites-example.json
 ```
 
