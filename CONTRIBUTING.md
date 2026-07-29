@@ -151,7 +151,7 @@ uv run --extra dev workspace-bench validate --taskset workspace-tasks --min-task
 For evaluator changes, also run the relevant adversarial gates and:
 
 ```bash
-printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
+printf '{"models": [{"slug": "rule", "label": "Rule agent", "provider": "command", "model": "rule-agent", "command": "python -m workspace_bench.agents.rule_agent"}]}' > /tmp/models.json
 uv run workspace-bench \
   --models-file /tmp/models.json \
   --difficulty level0 \

@@ -161,6 +161,74 @@ def main(argv: list[str] | None = None) -> int:
         help="Allowed Workspace origin. Defaults to all origins for local certification.",
     )
 
+    runtime_parser = subparsers.add_parser(
+        "runtime-probe",
+        help="Run oracle fixture-backed HTTP endpoint probes for a taskset.",
+    )
+    _add_task_collection_args(runtime_parser)
+    _add_task_filters(runtime_parser)
+    runtime_parser.add_argument("--json", action="store_true", help="Emit JSON.")
+
+    judge_parser = subparsers.add_parser(
+        "judge", help="Judge pending or errored answer rows in a stored evaluator run."
+    )
+    judge_parser.add_argument("--run-dir", type=Path, required=True)
+    judge_parser.add_argument("--judge-model", required=True)
+    judge_parser.add_argument("--judge-base-url")
+    judge_parser.add_argument("--judge-api-key")
+    judge_parser.add_argument("--judge-timeout", type=float, default=60.0)
+
+    adversarial_parser = subparsers.add_parser(
+        "adversarial",
+        help="Run systematic invalid-candidate grader checks for a taskset.",
+    )
+    _add_task_collection_args(adversarial_parser)
+    _add_task_filters(adversarial_parser)
+    adversarial_parser.add_argument("--json", action="store_true", help="Emit JSON.")
+    adversarial_parser.add_argument(
+        "--runtime-sample-per-family",
+        type=int,
+        default=3,
+        help="Runtime-mutant sample per applicable family and archetype (default: 3).",
+    )
+
+    parity_parser = subparsers.add_parser(
+        "live-parity",
+        help="Run one task mocked and live (hosted Workspace MCP bridge) and compare grades.",
+    )
+    parity_parser.add_argument("--task", required=True, help="Task id or qualified ref.")
+    parity_parser.add_argument(
+        "--taskset",
+        "--suite",
+        dest="suite",
+        default=None,
+        choices=list(BUILTIN_TASKSET_ORDER),
+    )
+    parity_parser.add_argument(
+        "--url",
+        default=None,
+        help="Hosted Workspace MCP endpoint (default: the production bridge).",
+    )
+    parity_parser.add_argument(
+        "--origin-map",
+        action="append",
+        default=[],
+        metavar="SIM=LIVE",
+        help='Origin translation, repeatable (default: "Bench Stark Enterprise=Stark Fund").',
+    )
+    parity_parser.add_argument(
+        "--keep",
+        action="store_true",
+        help="Skip teardown and leave the parity dashboard in the live workspace.",
+    )
+    parity_parser.add_argument("--json", action="store_true", help="Emit the full report JSON.")
+    parity_parser.add_argument(
+        "--output-root",
+        type=Path,
+        default=Path("runs/live-parity"),
+        help="Directory where per-task parity reports are written.",
+    )
+
     smoke_parser = subparsers.add_parser(
         "smoke-workspace-mcp",
         help="Run one task through a live workspace-mcp sidecar.",
