@@ -27,7 +27,6 @@ to other benchmarks' terms in [Terminology](#terminology).
 - [Tasksets](#tasksets)
 - [Private Tasksets](#private-tasksets)
 - [Live Workspace MCP Smoke](#live-workspace-mcp-smoke)
-- [Serve Fixture Backends](#serve-fixture-backends)
 - [Harbor Adapter](#harbor-adapter)
 - [Reference](#reference) — [TASK-SCHEMA.md](TASK-SCHEMA.md) · [RESULT-SCHEMA.md](RESULT-SCHEMA.md)
 - [Grading Model](#grading-model)
@@ -263,19 +262,6 @@ and provider-reported cost. A `pricing` block in `--models-file` can supply
 published per-million-token input, cached-input, and output prices when the
 provider omits cost.
 
-Compile a smoke or full result directory into family×difficulty and per-task
-calibration matrices:
-
-```bash
-uv run workspace-bench compile calibration runs/comparison/<run-id> \
-  --output runs/comparison/<run-id>/calibration.json
-```
-
-After at least two model result sets exist,
-`workspace-bench compile difficulty` produces a raw band proposal and a
-conservatively approved override payload; `--apply-overrides PATH` writes the
-approved table to a measured-difficulty JSON file for downstream review.
-
 Use `--taskset workspace-tasks` for the stable interactive taskset, and `--task-dir`
 for a private taskset. You can slice with `--family`, `--category`, and
 `--difficulty`.
@@ -306,11 +292,6 @@ unparseable output, or failed grade makes the run fail; malformed output is
 retained as an invalid trace event. This command is trace-producing rather than
 interactive. Use `workspace-bench --model ...` when the agent must observe each
 tool result before selecting its next action.
-
-Training exports are explicit downstream artifacts. Preserve their Git commit,
-dirty-worktree flag, taskset content hash, schema version, task identity, and
-model/runner metadata. Prefer passing attempts for SFT, keep failed attempts
-only with grade metadata, and do not mix in hidden answer data.
 
 ## Tasksets
 
@@ -365,17 +346,6 @@ are taskset-specific: they include prompt provenance, outcome-only rubric review
 coverage and difficulty quotas, mutation sensitivity, check caps, live-process
 tests, and clean teardown where applicable. Each taskset README records its exact
 generation method, axes, gates, and limitations.
-
-Per-taskset results roll up into one pooled aggregate — task counts are
-added across tasksets, never averaged percentages. Point the report at one
-run directory per model per taskset:
-
-```bash
-# each evaluator invocation writes one run directory per model
-uv run workspace-bench compile suites \
-  --run workspace-tasks=runs/comparison/<run-id>/<model>.json \
-  --output /tmp/workspace-bench-suites-example.json
-```
 
 This is the extension path: a firm can add a private taskset built from the
 data and workflows that matter to it — its workspace skills, macro workflows,
@@ -522,62 +492,6 @@ The reference task above is fully validated end to end (converter, trusted
 runtime, verifier, Harbor oracle/NOP parity, and a real coding-agent trial);
 suite-wide export and result ingestion are the remaining generalization work.
 
-## Serve Fixture Backends
-
-Serve a deterministic fixture as a Workspace backend:
-
-```bash
-uv run workspace-bench serve-fixture --backend getting-started --port 9106
-```
-
-The server exposes:
-
-- `GET /widgets.json`
-- `GET /apps.json`
-- widget data endpoints such as `/company_performance?company=TM&year=2024`
-
-`Getting Started` and `Widget Examples` are transcribed from the real
-[OpenBB backend examples repository](https://github.com/OpenBB-finance/backend-examples-for-openbb-workspace),
-including widget ids, names, parameters, data shapes, literal samples, and the
-Getting Started app. The historical `equities`, `macro`, and `portfolio` slugs
-remain CLI lookup aliases for compatibility; they no longer expose separate
-invented data.
-
-The bundled `Bench Stark Enterprise` fixture packages widget and app metadata
-from the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo) into a stable local backend, with seeded
-deterministic data per widget. It is used for enterprise workflow coverage
-without depending on a live demo app. Serving it exposes the exact catalog and
-baked payloads the simulated workspace grades against (349 widgets, 23 apps):
-
-```bash
-uv run workspace-bench serve-fixture --backend stark-enterprise --port 9104
-```
-
-The bundled `Bench Daloopa` fixture mirrors the data surface consumed by the
-[Daloopa Claude plugin skills](https://github.com/daloopa/daloopa-plugin-claude):
-company discovery, series discovery, fundamentals with per-datapoint citation
-ids, operating KPIs, segment breakdowns, management guidance, consensus
-estimates, SEC document search, and daily stock prices across six covered
-companies. Unlike the Stark catalog (imported from a demo repo, then baked),
-the Daloopa catalog is fully authored and baked by
-`scripts/generators/generate_daloopa_data.py`. It is deliberately a
-standalone vendor feed — 10 widgets and no app templates — because the
-matching `daloopa-*` workspace skills (tearsheet, earnings review, guidance
-tracker, inflection, capital allocation, industry comparison; served through
-`get_skill_content`) are what drive dashboard composition against it. Pair it
-with `stark-enterprise` in a task's fixture backends to test Daloopa skill
-workflows inside the enterprise workspace:
-
-```bash
-uv run workspace-bench serve-fixture --backend daloopa --port 9105
-```
-
-A runtime-enabled task's oracle-declared backend and task-owned runtime
-datasets can be served with `workspace-bench serve-task-backend` (pass the
-qualified task ref and a port), which exposes that task's `widgets.json`,
-`apps.json`, widget data, parameter options, and form-submit endpoints with
-CORS enabled.
-
 ## Reference
 
 Two focused reference documents sit at the repository root:
@@ -586,14 +500,13 @@ Two focused reference documents sit at the repository root:
   contract: task fields, `SuccessCriteria`, runtime datasets, capabilities, and
   the `specification_level` vs measured `difficulty` split.
 - **[RESULT-SCHEMA.md](RESULT-SCHEMA.md)** — evaluator output: result rows and
-  `GradeResult` dimensions, deployment receipts, rollout/SFT/preference exports,
-  and the complete issue-code catalog.
+  `GradeResult` dimensions, deployment receipts, and the complete issue-code
+  catalog.
 
 The generated per-task oracle-tool matrix and task catalog live under
-`runs/reports/`. Two maintainer-oriented subcommands round out the CLI:
-`workspace-bench runtime-probe` (oracle fixture-backed HTTP endpoint probes
-for a taskset) and `workspace-bench judge --run-dir ...` (re-judge pending or
-errored answer rows in a stored evaluator run).
+`runs/reports/`. One maintainer-oriented subcommand rounds out the CLI:
+`workspace-bench judge --run-dir ...` re-judges pending or errored answer
+rows in a stored evaluator run.
 
 ## Grading Model
 

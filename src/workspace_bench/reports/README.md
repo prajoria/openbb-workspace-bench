@@ -21,8 +21,6 @@ Module responsibilities:
 
 - `model_compare.py`: interactive/batch comparison runner, model adapter config, charts, and reports.
 - `metrics.py`: shared calibration, slicing, and reliability metrics.
-- `calibration.py`, `suites.py`, and `difficulty.py`: typed analysis
-  compilers behind the `workspace-bench compile` subcommand.
 - `oracle_report.py`: manifests, baseline reports, run summaries, and trace artifacts.
 - `validation.py`: task metadata and baseline validation.
 - `serialization.py`: canonical grade-dimension serialization shared by CLI and

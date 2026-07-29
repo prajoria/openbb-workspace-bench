@@ -22,7 +22,6 @@ Use this checklist before announcing a public Workspace Bench release.
 - [ ] Novelty fingerprints and task ids are unique in the quota-checked taskset.
 - [ ] Coverage quotas pass via `validate` (workspace-tasks: backend, difficulty, widget-pair, dashboard-category, grader-check quotas).
 - [ ] `runs/reports/workspace-tasks-board.json` and `workspace-tasks-calibration.json`/`.md` match the README board notes (raw run directories are not committed); any recomputation requires re-running the models against the current tasksets.
-- [ ] Difficulty relabel review requires both repeats and approves the intermediate band from complete repeated evidence; relabels do not alter task prompts or success criteria.
 - [ ] README quick start, tasksets table, and aggregate command are accurate.
 - [ ] Per-taskset READMEs are present, use the shared structure, and state task counts verified by `audit_release_consistency.py`.
 - [ ] `runs/reports/task-catalog.md` is regenerated and covers all three deterministic simulator tasksets; `tool-coverage-matrix.md` and `tool-matrix-data.json` are regenerated beside it.

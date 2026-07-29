@@ -9,7 +9,6 @@ import sys
 from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
-from threading import Event
 from typing import Any, Callable
 
 from workspace_bench.agents.agent_command import (
@@ -18,7 +17,6 @@ from workspace_bench.agents.agent_command import (
     write_task_envelope,
 )
 from workspace_bench.agents import build_agent
-from workspace_bench.workspace.fixtures import get_fixture_backend, make_fixture_server
 from workspace_bench.core.models import (
     BENCHMARK_NAME,
     CANARY_GUID,
@@ -115,21 +113,6 @@ def main(argv: list[str] | None = None) -> int:
     report_parser.add_argument("--json", action="store_true", help="Emit JSON.")
     report_parser.add_argument("--output", help="Write report to a file.")
 
-    compile_parser = subparsers.add_parser(
-        "compile",
-        help="Compile analysis reports from stored run results.",
-    )
-    compile_parser.add_argument(
-        "kind",
-        choices=["calibration", "suites", "difficulty"],
-        help="Which report to compile.",
-    )
-    compile_parser.add_argument(
-        "compile_args",
-        nargs=argparse.REMAINDER,
-        help="Arguments forwarded to the report compiler (see its --help).",
-    )
-
     run_parser = subparsers.add_parser("run", help="Run tasks.")
     run_parser.add_argument("--task", help="Task id. Runs all when omitted.")
     run_parser.add_argument("--task-file", help="Run one task JSON file.")
@@ -141,33 +124,6 @@ def main(argv: list[str] | None = None) -> int:
         "--trace-dir",
         help="Directory where per-task trace JSON artifacts will be written.",
     )
-
-    serve_parser = subparsers.add_parser("serve-fixture", help="Serve a fixture backend over HTTP.")
-    serve_parser.add_argument("--backend", default="equities")
-    serve_parser.add_argument("--host", default="127.0.0.1")
-    serve_parser.add_argument("--port", type=int, default=9101)
-
-    task_backend_parser = subparsers.add_parser(
-        "serve-task-backend",
-        help="Serve one task's oracle backend and runtime datasets over HTTP.",
-    )
-    task_backend_parser.add_argument("--task", required=True)
-    task_backend_parser.add_argument("--backend-name")
-    task_backend_parser.add_argument("--host", default="127.0.0.1")
-    task_backend_parser.add_argument("--port", type=int, default=9102)
-    task_backend_parser.add_argument(
-        "--cors-origin",
-        default="*",
-        help="Allowed Workspace origin. Defaults to all origins for local certification.",
-    )
-
-    runtime_parser = subparsers.add_parser(
-        "runtime-probe",
-        help="Run oracle fixture-backed HTTP endpoint probes for a taskset.",
-    )
-    _add_task_collection_args(runtime_parser)
-    _add_task_filters(runtime_parser)
-    runtime_parser.add_argument("--json", action="store_true", help="Emit JSON.")
 
     judge_parser = subparsers.add_parser(
         "judge", help="Judge pending or errored answer rows in a stored evaluator run."
@@ -323,16 +279,8 @@ def main(argv: list[str] | None = None) -> int:
         return _cmd_manifest(args)
     if args.command == "report":
         return _cmd_report(args)
-    if args.command == "compile":
-        return _cmd_compile(args)
     if args.command == "run":
         return _cmd_run(args)
-    if args.command == "serve-fixture":
-        return _cmd_serve_fixture(args.backend, args.host, args.port)
-    if args.command == "serve-task-backend":
-        return _cmd_serve_task_backend(args)
-    if args.command == "runtime-probe":
-        return _cmd_runtime_probe(args)
     if args.command == "judge":
         return _cmd_judge(args)
     if args.command == "adversarial":
@@ -486,16 +434,6 @@ def _cmd_report(args: argparse.Namespace) -> int:
     return 0
 
 
-def _cmd_compile(args: argparse.Namespace) -> int:
-    if args.kind == "calibration":
-        from workspace_bench.reports.calibration import main as compile_main
-    elif args.kind == "suites":
-        from workspace_bench.reports.suites import main as compile_main
-    else:
-        from workspace_bench.reports.difficulty import main as compile_main
-    return compile_main(list(args.compile_args))
-
-
 def _cmd_run(args: argparse.Namespace) -> int:
     tasks = _selected_tasks(args)
     agent = build_agent(args.agent)
@@ -536,57 +474,6 @@ def _cmd_run(args: argparse.Namespace) -> int:
         )
 
     return 0 if all(result.grade.passed for result in results) else 1
-
-
-def _cmd_runtime_probe(args: argparse.Namespace) -> int:
-    tasks = [task for task in _filtered_tasks(args) if task.success.runtime is not None]
-    runner = TaskRunner()
-    results = [runner.run(task, "oracle") for task in tasks]
-    families: dict[str, dict[str, int]] = {}
-    for result in results:
-        row = families.setdefault(
-            result.task.family,
-            {"tasks": 0, "passed": 0, "probes": 0, "checks_passed": 0},
-        )
-        row["tasks"] += 1
-        row["passed"] += int(result.grade.runtime_passed)
-        row["probes"] += result.grade.runtime_checks_total
-        row["checks_passed"] += result.grade.runtime_checks_passed
-    passed_total = sum(result.grade.runtime_passed for result in results)
-    runtime_issues = [
-        {
-            "task_id": result.task.id,
-            "code": issue.code,
-            "message": issue.message,
-        }
-        for result in results
-        for issue in result.grade.issues
-        if issue.code.startswith("endpoint_")
-        or issue.code == "form_submission_incompatible"
-    ]
-    payload = {
-        "suite": getattr(args, "suite", "custom"),
-        "task_count": len(results),
-        "passed": passed_total,
-        "families": families,
-        "issues": runtime_issues,
-    }
-    if args.json:
-        print(json.dumps(payload, indent=2, sort_keys=True))
-    else:
-        print(f"{'family':14s} {'tasks':>7s} {'passed':>8s} {'probes':>8s}")
-        for family, row in sorted(families.items()):
-            print(
-                f"{family:14s} {row['tasks']:7d} "
-                f"{row['passed']:8d} {row['probes']:8d}"
-            )
-        print(
-            f"TOTAL          {len(results):7d} "
-            f"{passed_total:8d} {sum(row['probes'] for row in families.values()):8d}"
-        )
-        for issue in runtime_issues[:20]:
-            print(f"  - {issue['task_id']}: {issue['code']}: {issue['message']}")
-    return 0 if passed_total == len(results) else 1
 
 
 def _cmd_adversarial(args: argparse.Namespace) -> int:
@@ -1334,44 +1221,6 @@ def _refresh_comparison_summary(run_dir: Path, updated: dict[str, dict]) -> None
             }
         )
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-
-
-def _cmd_serve_fixture(backend_name: str, host: str, port: int) -> int:
-    backend = get_fixture_backend(backend_name)
-    server = make_fixture_server(backend, host=host, port=port)
-    print(f"Serving {backend.name} at http://{host}:{port}")
-    print(f"  widgets: http://{host}:{port}/widgets.json")
-    print(f"  apps:    http://{host}:{port}/apps.json")
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        print("\nStopping fixture backend.")
-    finally:
-        server.server_close()
-    return 0
-
-
-def _cmd_serve_task_backend(args: argparse.Namespace) -> int:
-    from workspace_bench.workspace.task_backend import TaskBackendServer
-
-    task = find_task(args.task)
-    server = TaskBackendServer(
-        task,
-        backend_name=args.backend_name,
-        host=args.host,
-        port=args.port,
-        cors_origin=args.cors_origin,
-    ).start()
-    print(f"Serving {server.model.backend_name} for {task.qualified_id} at {server.base_url}")
-    print(f"  widgets: {server.base_url}/widgets.json")
-    print(f"  apps:    {server.base_url}/apps.json")
-    try:
-        Event().wait()
-    except KeyboardInterrupt:
-        print("\nStopping task backend.")
-    finally:
-        server.close()
-    return 0
 
 
 if __name__ == "__main__":

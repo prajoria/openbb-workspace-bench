@@ -5,10 +5,8 @@ from __future__ import annotations
 import copy
 import json
 from dataclasses import dataclass
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib import resources
 from typing import Any
-from urllib.parse import parse_qs, urlparse
 
 from workspace_bench.core.models import JsonDict
 from workspace_bench.workspace.widget_params import flatten_params
@@ -377,57 +375,3 @@ def get_fixture_backend(name: str) -> FixtureBackend:
     except KeyError as error:
         available = sorted({backend.slug for backend in backends.values()})
         raise KeyError(f"Unknown fixture backend {name!r}. Available: {available}") from error
-
-
-class FixtureRequestHandler(BaseHTTPRequestHandler):
-    """HTTP handler serving one fixture backend."""
-
-    backend: FixtureBackend
-
-    def do_OPTIONS(self) -> None:  # noqa: N802
-        self.send_response(204)
-        self._send_cors()
-        self.end_headers()
-
-    def do_GET(self) -> None:  # noqa: N802
-        parsed = urlparse(self.path)
-        query = {
-            key: values[-1] if len(values) == 1 else values
-            for key, values in parse_qs(parsed.query).items()
-        }
-        try:
-            payload = self.backend.fetch_http_path(parsed.path, query)
-        except KeyError as error:
-            self._send_json({"error": str(error)}, status=404)
-            return
-        self._send_json(payload)
-
-    def _send_json(self, payload: Any, status: int = 200) -> None:
-        body = json.dumps(payload, indent=2, sort_keys=True).encode("utf-8")
-        self.send_response(status)
-        self._send_cors()
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
-
-    def _send_cors(self) -> None:
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "*")
-
-    def log_message(self, format: str, *args: Any) -> None:
-        return
-
-
-def make_fixture_server(
-    backend: FixtureBackend, host: str = "127.0.0.1", port: int = 9101
-) -> ThreadingHTTPServer:
-    """Create a blocking stdlib HTTP server for a fixture backend."""
-
-    handler = type(
-        f"{backend.slug.title()}FixtureRequestHandler",
-        (FixtureRequestHandler,),
-        {"backend": backend},
-    )
-    return ThreadingHTTPServer((host, port), handler)

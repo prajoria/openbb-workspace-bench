@@ -7,7 +7,6 @@ import json
 import pytest
 
 from workspace_bench.reports.metrics import summarize_result_rows, task_reliability_matrix
-from workspace_bench.reports.difficulty import propose
 from workspace_bench.reports.model_compare import (
     ModelAdapter,
     ensure_run_manifest,
@@ -167,67 +166,3 @@ def test_resume_manifest_rejects_incompatible_cells(tmp_path) -> None:
     )
     ensure_run_manifest(repriced, manifest, resume=True)
     assert json.loads(repriced.read_text(encoding="utf-8")) == manifest
-
-
-def test_empirical_difficulty_proposal_emits_reviewable_override_table() -> None:
-    tasks = [
-        ("workspace-tasks/portfolio_manager/easy", "easy"),
-        ("workspace-tasks/compliance_risk/medium", "hard"),
-        ("workspace-tasks/research_analyst/hard", "medium"),
-    ]
-    model_a = {
-        "model": {"slug": "frontier"},
-        "results": [
-            {
-                "qualified_id": ref,
-                "family": ref.split("/")[-2],
-                "difficulty": old,
-                "repeat": repeat,
-                "passed": ref.endswith(("easy", "medium")),
-            }
-            for ref, old in tasks
-            for repeat in (1, 2)
-        ],
-    }
-    model_b = {
-        "model": {"slug": "small"},
-        "results": [
-            {
-                "qualified_id": ref,
-                "family": ref.split("/")[-2],
-                "difficulty": old,
-                "repeat": repeat,
-                "passed": ref.endswith("easy"),
-            }
-            for ref, old in tasks
-            for repeat in (1, 2)
-        ],
-    }
-    proposal = propose(
-        [model_a, model_b],
-        {
-            "competent_models": ["frontier", "small"],
-            "frontier_models": ["frontier"],
-            "small_models": ["small"],
-            "overrides": {"workspace-tasks/client_advisor/existing": "hard"},
-        },
-    )
-
-    raw = {row["task_ref"]: row["raw_proposed"] for row in proposal["rows"]}
-    proposed = {row["task_ref"]: row["proposed"] for row in proposal["rows"]}
-    assert raw == {
-        "workspace-tasks/research_analyst/hard": "hard",
-        "workspace-tasks/compliance_risk/medium": "medium",
-        "workspace-tasks/portfolio_manager/easy": "easy",
-    }
-    assert proposed == {
-        "workspace-tasks/research_analyst/hard": "hard",
-        "workspace-tasks/compliance_risk/medium": "medium",
-        "workspace-tasks/portfolio_manager/easy": "easy",
-    }
-    assert proposal["override_table"]["bands"] == {"easy": 1, "medium": 1, "hard": 1}
-    assert proposal["override_table"]["overrides"] == {
-        "workspace-tasks/client_advisor/existing": "hard",
-        "workspace-tasks/research_analyst/hard": "hard",
-        "workspace-tasks/compliance_risk/medium": "medium",
-    }

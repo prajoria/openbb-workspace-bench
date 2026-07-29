@@ -3,15 +3,12 @@ from __future__ import annotations
 import importlib.util
 import json
 import re
-import threading
 from pathlib import Path
-from urllib.request import urlopen
 
 from workspace_bench.workspace.fixtures import (
     build_daloopa_backend,
     build_equities_backend,
     build_stark_enterprise_backend,
-    make_fixture_server,
 )
 
 
@@ -50,32 +47,6 @@ def test_legacy_equities_alias_uses_transcribed_getting_started_data() -> None:
         "symbol": "AAPL",
         "volume": 45_000_000,
     }
-
-
-def test_fixture_backend_http_server_serves_workspace_contract() -> None:
-    backend = build_equities_backend()
-    server = make_fixture_server(backend, port=0)
-    host, port = server.server_address
-    thread = threading.Thread(target=server.serve_forever, daemon=True)
-    thread.start()
-    try:
-        with urlopen(f"http://{host}:{port}/widgets.json", timeout=5) as response:
-            widgets = json.loads(response.read().decode("utf-8"))
-        with urlopen(
-            f"http://{host}:{port}/table_widget_with_grouping_by_cell_click?symbol=AAPL",
-            timeout=5,
-        ) as response:
-            rows = json.loads(response.read().decode("utf-8"))
-        with urlopen(f"http://{host}:{port}/get_tickers_list", timeout=5) as response:
-            symbols = json.loads(response.read().decode("utf-8"))
-    finally:
-        server.shutdown()
-        server.server_close()
-        thread.join(timeout=5)
-
-    assert "company_performance" in widgets
-    assert rows[0]["price"] == 150.25
-    assert symbols[0] == {"label": "Apple Inc.", "value": "AAPL"}
 
 
 def test_stark_enterprise_backend_exposes_demo_catalog() -> None:

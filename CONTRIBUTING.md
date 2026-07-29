@@ -127,13 +127,6 @@ reviewable source when the provider omits cost. Large runs should use bounded
 `--concurrency`, an `--episode-timeout`, a stable `--output-dir`, and
 `--resume`; never combine checkpoints whose manifests differ.
 
-Measured difficulty changes are source-reviewed. Run the proposal script on at
-least two complete model result sets, review its raw and conservatively
-approved evidence, then use `--apply-overrides PATH` to generate a
-measured-difficulty table. Never edit generated task
-labels directly. Relabeling difficulty must not alter specification level,
-prompt text, or success criteria.
-
 ## Required checks
 
 Run before submitting:
