@@ -20,7 +20,7 @@ lived-in financial workspace - 6 personas x 4 stories x 5 levels.
 
 Episodes run **closed-world** by default: the agent is not shown the initial
 workspace state and must discover it through `get_workspace_snapshot`
-(`WORKSPACE_BENCH_SHOW_INITIAL_STATE=1` restores the legacy open-world
+(`WORKSPACE_BENCH_SHOW_INITIAL_STATE=1` restores the open-world
 prompt).
 
 No script generated these tasks. They were authored by agents working under

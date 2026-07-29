@@ -67,7 +67,7 @@ def build_task_envelope(task: Task) -> JsonDict:
         "schema_version": "workspace-bench-envelope",
         "benchmark": {
             "name": BENCHMARK_NAME,
-            "suite_id": suite.suite_id if suite else "local",
+            "taskset_id": suite.taskset_id if suite else "local",
             "content_sha256": suite.content_sha256 if suite else None,
             "workspace_baseline": task_workspace_baseline(task),
             **(

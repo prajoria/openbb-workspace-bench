@@ -106,9 +106,6 @@ def test_reference_fixture_registry_uses_slug_and_display_name() -> None:
 
     assert registry["getting-started"] is registry["Getting Started"]
     assert registry["widget-examples"] is registry["Widget Examples"]
-    assert registry["equities"] is registry["getting-started"]
-    assert registry["macro"] is registry["getting-started"]
-    assert registry["portfolio"] is registry["widget-examples"]
 
 
 @pytest.mark.skipif(

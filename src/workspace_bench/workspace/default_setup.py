@@ -21,7 +21,6 @@ import copy
 import hashlib
 import json
 from collections.abc import Callable
-from dataclasses import replace
 from importlib import resources
 
 from workspace_bench.core.models import (
@@ -31,7 +30,6 @@ from workspace_bench.core.models import (
     TaskSuiteManifest,
 )
 from workspace_bench.workspace.fixtures import (
-    LEGACY_BACKEND_SLUGS,
     STARK_DATA_WORLDS,
     FixtureBackend,
     build_stark_enterprise_backend,
@@ -215,10 +213,7 @@ def apply_workspace_baseline(
         assert version is not None
         backend_names = baseline_fixture_backends(version)
     else:
-        # Pre-rename manifests and tasks reference legacy slugs.
-        backend_names = tuple(
-            LEGACY_BACKEND_SLUGS.get(name, name) for name in backend_names
-        )
+        backend_names = tuple(backend_names)
         if version is not None:
             available = set(backend_names)
             missing = sorted(
@@ -262,14 +257,10 @@ def apply_workspace_baseline(
     seen_names = {fixture.name for fixture in fixtures}
     merged_fixtures = list(fixtures)
     for fixture in task_fixtures:
-        # Pre-rename task files reference legacy slugs; dedupe canonically.
-        canonical = LEGACY_BACKEND_SLUGS.get(fixture.name, fixture.name)
-        if canonical in seen_names:
+        if fixture.name in seen_names:
             continue
-        merged_fixtures.append(
-            fixture if fixture.name == canonical else replace(fixture, name=canonical)
-        )
-        seen_names.add(canonical)
+        merged_fixtures.append(fixture)
+        seen_names.add(fixture.name)
     worlds = [fixture.name for fixture in merged_fixtures if fixture.name in STARK_DATA_WORLDS]
     if len(worlds) > 1:
         raise ValueError(

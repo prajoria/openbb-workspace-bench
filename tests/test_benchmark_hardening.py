@@ -25,11 +25,11 @@ def test_current_task_schema_is_strict() -> None:
     with pytest.raises(ValueError, match="unknown fields: level"):
         Task.from_dict(obsolete_level)
 
-    retired_metadata = dict(payload)
-    retired_metadata["title"] = "Retired Title"
-    retired_metadata["novelty"] = "retired rationale"
+    unknown_metadata = dict(payload)
+    unknown_metadata["title"] = "Unknown Title"
+    unknown_metadata["novelty"] = "unknown rationale"
     with pytest.raises(ValueError, match="unknown fields: novelty, title"):
-        Task.from_dict(retired_metadata)
+        Task.from_dict(unknown_metadata)
 
     unknown_field = dict(payload)
     unknown_field["famliy"] = "typo"
@@ -57,7 +57,7 @@ def test_active_identity_is_suite_family_task_without_generation_labels() -> Non
 
     assert len(tasks) == 120
     assert all(not task.id.startswith(("auth_", "gen_")) for task in tasks)
-    assert all(task.qualified_id == f"{task.suite.suite_id}/{task.family}/{task.id}" for task in tasks if task.suite)
+    assert all(task.qualified_id == f"{task.suite.taskset_id}/{task.family}/{task.id}" for task in tasks if task.suite)
 
     assert (
         find_task("workspace-tasks/portfolio_manager/morning_briefing_level0").family
@@ -81,7 +81,7 @@ def test_task_envelope_uses_suite_provenance() -> None:
     envelope = build_task_envelope(task)
 
     assert envelope["schema_version"] == "workspace-bench-envelope"
-    assert envelope["benchmark"]["suite_id"] == "workspace-tasks"
+    assert envelope["benchmark"]["taskset_id"] == "workspace-tasks"
     assert len(envelope["benchmark"]["content_sha256"]) == 64
     assert "release_id" not in envelope["benchmark"]
     assert (

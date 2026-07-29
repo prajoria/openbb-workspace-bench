@@ -7,7 +7,7 @@ from pathlib import Path
 
 from workspace_bench.workspace.fixtures import (
     build_daloopa_backend,
-    build_equities_backend,
+    build_getting_started_backend,
     build_stark_enterprise_backend,
 )
 
@@ -30,8 +30,8 @@ def _load_stark_data_generator():
     return _load_generator("generate_stark_data")
 
 
-def test_legacy_equities_alias_uses_transcribed_getting_started_data() -> None:
-    backend = build_equities_backend()
+def test_getting_started_backend_serves_transcribed_data() -> None:
+    backend = build_getting_started_backend()
 
     widgets = backend.widgets_json()
     assert backend.slug == "getting-started"

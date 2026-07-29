@@ -24,7 +24,7 @@ def _machinery_task(
     origin: str = "Bench Stark Enterprise",
     oracle_extra: list[dict] | None = None,
 ) -> Task:
-    """A legacy-shaped seeded read task exercising the parity machinery."""
+    """A flat-spelling seeded read task exercising the parity machinery."""
 
     payload = {
         "id": "parity_machinery_read",
@@ -36,7 +36,7 @@ def _machinery_task(
             "add a short note that says you reviewed the data."
         ),
         "setup": {
-            "fixtures": {"backends": [{"name": "stark-enterprise"}]},
+            "fixtures": {"backends": [{"name": "stark-enterprise-x"}]},
             "initial_state": {
                 "dashboard": {
                     "name": "Data Review",

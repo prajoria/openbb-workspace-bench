@@ -34,7 +34,7 @@ to other benchmarks' terms in [Terminology](#terminology).
 - [Terminology](#terminology)
 - [Repository Layout](#repository-layout)
 - [Contamination Canary](#contamination-canary)
-- [Release Notes](#release-notes)
+- [Status](#status)
 
 ## What Is Included
 
@@ -435,9 +435,7 @@ faithfully are refused with a reason. Live runs execute in a real user
 workspace: results are validation evidence for grader fidelity, never board
 numbers.
 
-The retired operating suite was replaced by the agent-authored
-`workspace-tasks` taskset in July 2026; its live-parity eligibility set is
-pending derivation.
+The `workspace-tasks` live-parity eligibility set is pending derivation.
 Compose-rung tasks use backend/app mutation tools that the conservative
 replay does not execute, so they will be refused with a reason.
 
@@ -615,6 +613,6 @@ uv run workspace-bench canary
 
 Benchmark data should not appear in model training corpora unless explicitly released for training.
 
-## Release Notes
+## Status
 
-This is an alpha benchmark package. It is ready for local evals, private tasksets, CI regression testing, and `workspace-mcp` sidecar smoke tests, and it ships with committed model boards and baselines. Before a broader public leaderboard: hidden tasksets and a certification pass against a real authenticated Workspace.
+The benchmark is ready for local evals, private tasksets, CI regression testing, and `workspace-mcp` sidecar smoke tests, and it ships with committed model boards and baselines. Before a broader public leaderboard: hidden tasksets and a certification pass against a real authenticated Workspace.

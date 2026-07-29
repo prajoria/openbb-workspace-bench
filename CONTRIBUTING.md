@@ -13,8 +13,7 @@ generators, never by editing generated artifacts.
    specification level where it deviates from the difficulty default.
 3. Keep fixture data deterministic and versioned.
 4. Add clear `eval` criteria that grade durable Workspace state.
-5. Add a known-good `eval.reference_trace` (the legacy `success` /
-   `oracle_tool_calls` spellings still load, but new tasks use `eval`).
+5. Add a known-good `eval.reference_trace`.
 6. Regenerate the taskset twice, confirm deterministic output, and run its
    validation gate.
 

@@ -144,7 +144,7 @@ def build_manifest(
     }
     if taskset:
         payload["taskset"] = {
-            "suite_id": taskset.suite_id,
+            "taskset_id": taskset.taskset_id,
             "content_sha256": taskset.content_sha256,
             "visibility": taskset.visibility,
             "description": taskset.description,

@@ -6,7 +6,7 @@ from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 def test_simulator_runs_schema_first_widget_creation_flow() -> None:
     workspace = SimulatedWorkspace()
-    workspace.reset(backends=(FixtureBackendRef(name="equities"),), initial_state={})
+    workspace.reset(backends=(FixtureBackendRef(name="getting-started"),), initial_state={})
 
     listed = workspace.call_tool(
         ToolCall("list_available_widgets", {"origin": "Getting Started"})
@@ -44,7 +44,7 @@ def test_simulator_runs_schema_first_widget_creation_flow() -> None:
 
 def test_simulator_rejects_layout_changes_via_update_widget() -> None:
     workspace = SimulatedWorkspace()
-    workspace.reset(backends=(FixtureBackendRef(name="equities"),), initial_state={})
+    workspace.reset(backends=(FixtureBackendRef(name="getting-started"),), initial_state={})
     workspace.call_tool(
         ToolCall(
             "create_widget",
@@ -72,7 +72,7 @@ def test_simulator_rejects_layout_changes_via_update_widget() -> None:
 
 def test_simulator_reads_workspace_resources_and_prompts() -> None:
     workspace = SimulatedWorkspace()
-    workspace.reset(backends=(FixtureBackendRef(name="equities"),), initial_state={})
+    workspace.reset(backends=(FixtureBackendRef(name="getting-started"),), initial_state={})
 
     index = workspace.call_tool(
         ToolCall(

@@ -277,7 +277,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--family", help="Optional task-family filter, e.g. create.")
     parser.add_argument("--category", help="Optional task-category filter, e.g. dashboard.")
     parser.add_argument(
-        "--taskset", "--suite",
+        "--taskset",
         dest="suite",
         default="workspace-tasks",
         choices=list(BUILTIN_TASKSET_ORDER),
@@ -834,7 +834,7 @@ def build_run_manifest(
         "temperature": float(os.environ.get(temperature_key, "0")),
         "harness_git_commit": harness_metadata().get("git_commit"),
         "harness_git_dirty": harness_metadata().get("git_dirty"),
-        "suite_id": benchmark.get("suite_id"),
+        "taskset_id": benchmark.get("taskset_id"),
         "suite_content_sha256": benchmark.get("content_sha256"),
         "workspace_baseline": benchmark.get("workspace_baseline"),
         "runner": args.runner,
@@ -1373,8 +1373,8 @@ def build_interactive_messages(
         "origin_hints": origin_hints,
         # Closed-world by default: a real MCP agent discovers workspace state
         # through get_workspace_snapshot rather than receiving the dashboard
-        # JSON for free, so discovery is part of every exam. The legacy flag
-        # restores the old open-world behavior for historical comparisons.
+        # JSON for free, so discovery is part of every exam. The flag restores
+        # the open-world variant for diagnostics.
         "initial_state": (
             task["initial_state"]
             if os.environ.get("WORKSPACE_BENCH_SHOW_INITIAL_STATE") == "1"
@@ -2723,7 +2723,7 @@ def benchmark_metadata(args: argparse.Namespace) -> dict:
         )
     return {
         "name": BENCHMARK_NAME,
-        "suite_id": taskset.suite_id if taskset else "local",
+        "taskset_id": taskset.taskset_id if taskset else "local",
         "content_sha256": taskset.content_sha256 if taskset else None,
         "workspace_baseline": (
             taskset.workspace_baseline

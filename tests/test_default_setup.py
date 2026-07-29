@@ -30,7 +30,7 @@ from workspace_bench.workspace.widget_params import flatten_params, sanitize_dat
 
 def _baseline_manifest() -> TaskSuiteManifest:
     return TaskSuiteManifest(
-        suite_id="baseline-test",
+        taskset_id="baseline-test",
         workspace_baseline=DEFAULT_WORKSPACE_VERSION,
     )
 
@@ -57,12 +57,10 @@ def test_taskset_manifest_validates_workspace_baseline() -> None:
         )
 
 
-def test_taskset_id_wins_over_legacy_suite_id() -> None:
-    manifest = TaskSuiteManifest.from_dict(
-        {"taskset_id": "canonical", "suite_id": "legacy"}
-    )
+def test_manifest_reads_taskset_id() -> None:
+    manifest = TaskSuiteManifest.from_dict({"taskset_id": "canonical"})
 
-    assert manifest.suite_id == "canonical"
+    assert manifest.taskset_id == "canonical"
 
 
 def test_workspace_tasks_and_default_suites_declare_the_default_workspace() -> None:
@@ -119,9 +117,9 @@ def test_workspace_baseline_merge_appends_dashboard_and_dedupes_fixtures() -> No
     fixtures, state = apply_workspace_baseline(
         _baseline_manifest(),
         (
-            FixtureBackendRef("daloopa"),
-            FixtureBackendRef("equities"),
-            FixtureBackendRef("equities"),
+            FixtureBackendRef("support-daloopa-skills"),
+            FixtureBackendRef("getting-started"),
+            FixtureBackendRef("getting-started"),
         ),
         {
             "dashboard": task_dashboard,
@@ -134,7 +132,6 @@ def test_workspace_baseline_merge_appends_dashboard_and_dedupes_fixtures() -> No
         "support-daloopa-skills",
         "getting-started",
         "widget-examples",
-        "equities",
     ]
     assert state["dashboards"][-1] == task_dashboard
     assert state["custom_backends"] == [{"name": "Task Backend"}]
@@ -239,7 +236,7 @@ def test_onboard_a_and_b_are_distinct_worlds() -> None:
 
 def test_onboard_baseline_resolves_in_simulated_workspace() -> None:
     manifest = TaskSuiteManifest(
-        suite_id="onboard-test",
+        taskset_id="onboard-test",
         workspace_baseline=ONBOARD_A_WORKSPACE_VERSION,
     )
     fixtures, state = apply_workspace_baseline(manifest, (), {})

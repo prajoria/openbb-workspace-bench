@@ -109,12 +109,6 @@ class FixtureBackend:
         raise KeyError(f"Unknown fixture path {path}")
 
 
-def build_equities_backend(url: str = "http://127.0.0.1:9101") -> FixtureBackend:
-    """Compatibility alias for the transcribed getting-started backend."""
-
-    return build_getting_started_backend(url)
-
-
 def build_stark_enterprise_backend(
     url: str = "http://127.0.0.1:9104",
 ) -> FixtureBackend:
@@ -138,14 +132,6 @@ build_stark_enterprise_x_backend = build_stark_enterprise_backend
 # Interchangeable Stark data worlds: one catalog, one display name, different
 # baked numbers. A workspace may connect at most one at a time.
 STARK_DATA_WORLDS = ("stark-enterprise-x", "stark-enterprise-y")
-
-# Task files authored before the slug renames keep resolving; the loader and
-# baseline merge normalize these to the canonical slugs.
-LEGACY_BACKEND_SLUGS = {
-    "stark-enterprise": "stark-enterprise-x",
-    "daloopa": "support-daloopa-skills",
-}
-
 
 def build_stark_enterprise_y_backend(url: str = "http://127.0.0.1:9109") -> FixtureBackend:
     """Stark data world Y: the same catalog over materially different data.
@@ -358,13 +344,6 @@ def default_fixture_backends() -> dict[str, FixtureBackend]:
         # Data-world variants share a display name; the canonical backend
         # (registered first) keeps the display-name key.
         result.setdefault(backend.name, backend)
-    for legacy, canonical in LEGACY_BACKEND_SLUGS.items():
-        result[legacy] = result[canonical]
-    # Keep the historical CLI slugs as lookup aliases without exposing the
-    # retired invented catalogs.
-    result["equities"] = result["getting-started"]
-    result["macro"] = result["getting-started"]
-    result["portfolio"] = result["widget-examples"]
     return result
 
 

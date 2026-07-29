@@ -96,15 +96,15 @@ def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> N
         Task.from_dict(payload)
 
 
-def test_task_directory_loads_legacy_manifest_filename(tmp_path) -> None:
+def test_task_directory_loads_manifest_with_task_defaults(tmp_path) -> None:
     source = next(
         task for task in load_builtin_tasks() if task.id == "morning_briefing_level0"
     )
     assert source.source_path is not None
-    (tmp_path / "task_suite.json").write_text(
+    (tmp_path / "taskset.json").write_text(
         json.dumps(
             {
-                "suite_id": "legacy-private-pack",
+                "taskset_id": "private-defaults-pack",
                 "task_defaults": {"category": "story"},
             }
         ),
@@ -120,11 +120,7 @@ def test_task_directory_loads_legacy_manifest_filename(tmp_path) -> None:
     loaded = load_task_directory(tmp_path)
 
     assert loaded[0].suite is not None
-    assert loaded[0].suite.suite_id == "legacy-private-pack"
-
-
-def test_cli_legacy_suite_alias_still_works() -> None:
-    assert main(["validate", "--suite", "smoke", "--min-tasks", "80"]) == 0
+    assert loaded[0].suite.taskset_id == "private-defaults-pack"
 
 
 def test_cli_validate_passes_for_builtin_tasks() -> None:
@@ -197,7 +193,7 @@ def test_cli_manifest_resolves_core_suite(capsys) -> None:
     assert exit_code == 0
     assert payload["task_count"] == 120
     assert "portfolio_manager" in payload["families"]
-    assert payload["taskset"]["suite_id"] == "workspace-tasks"
+    assert payload["taskset"]["taskset_id"] == "workspace-tasks"
     assert len(payload["taskset"]["content_sha256"]) == 64
     assert "story" in payload["categories"]
 
@@ -232,7 +228,7 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["name"] == "openbb-workspace-bench"
-    assert payload["taskset"]["suite_id"] == "workspace-tasks"
+    assert payload["taskset"]["taskset_id"] == "workspace-tasks"
     assert "release_id" not in payload
     assert payload["task_count"] == len(load_builtin_tasks())
     assert payload["canary_guid"] == CANARY_GUID
@@ -416,7 +412,7 @@ def test_cli_private_taskset_manifest_applies(tmp_path, capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert manifest_exit == 0
-    assert payload["taskset"]["suite_id"] == "private-pack"
+    assert payload["taskset"]["taskset_id"] == "private-pack"
     assert payload["taskset"]["visibility"] == "private"
 
 
@@ -478,7 +474,7 @@ def test_cli_export_task_writes_public_agent_envelope(tmp_path) -> None:
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert exit_code == 0
     assert payload["schema_version"] == "workspace-bench-envelope"
-    assert payload["benchmark"]["suite_id"] == "workspace-tasks"
+    assert payload["benchmark"]["taskset_id"] == "workspace-tasks"
     assert (
         payload["task"]["qualified_id"]
         == "workspace-tasks/portfolio_manager/morning_briefing_level0"
@@ -548,13 +544,13 @@ def test_cli_run_agent_command_does_not_reuse_stale_output(tmp_path, capsys) -> 
     assert payload["summary"]["process_failures"] == 1
 
 
-def test_task_loader_rejects_legacy_split_field(tmp_path) -> None:
+def test_task_loader_rejects_unknown_split_field(tmp_path) -> None:
     task = next(
         item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     payload = json.loads(task.source_path.read_text(encoding="utf-8"))
     payload["split"] = "train"
-    task_path = tmp_path / "legacy_split.json"
+    task_path = tmp_path / "unknown_split.json"
     task_path.write_text(json.dumps(payload), encoding="utf-8")
 
     try:
@@ -562,7 +558,7 @@ def test_task_loader_rejects_legacy_split_field(tmp_path) -> None:
     except ValueError as error:
         assert "unknown fields" in str(error)
     else:
-        raise AssertionError("legacy split field should be rejected")
+        raise AssertionError("unknown split field should be rejected")
 
 
 def test_task_loader_rejects_malformed_allowed_tools(tmp_path) -> None:

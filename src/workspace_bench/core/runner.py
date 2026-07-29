@@ -18,7 +18,6 @@ WORKSPACE_TASKS_PACKAGE = "workspace_bench.tasksets.workspace_tasks"
 APPS_DEFAULT_TASKS_PACKAGE = "workspace_bench.tasksets.enterprise_apps_default"
 SMOKE_TASKS_PACKAGE = "workspace_bench.tasksets.smoke"
 TASKSET_MANIFEST = "taskset.json"
-LEGACY_TASKSET_MANIFEST = "task_suite.json"
 BUILTIN_TASKSETS = {
     "workspace-tasks": WORKSPACE_TASKS_PACKAGE,
     "enterprise-apps-default": APPS_DEFAULT_TASKS_PACKAGE,
@@ -98,9 +97,7 @@ def load_builtin_taskset_manifest(suite: str = "workspace-tasks") -> TaskSuiteMa
     package = BUILTIN_TASKSETS[suite]
     manifest = resources.files(package) / TASKSET_MANIFEST
     if not manifest.is_file():
-        manifest = resources.files(package) / LEGACY_TASKSET_MANIFEST
-        if not manifest.is_file():
-            return None
+        return None
     with manifest.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     if not isinstance(payload, dict):
@@ -133,9 +130,7 @@ def load_task_file(
 def load_taskset_manifest(path: Path) -> TaskSuiteManifest | None:
     manifest_path = path / TASKSET_MANIFEST
     if not manifest_path.exists():
-        manifest_path = path / LEGACY_TASKSET_MANIFEST
-        if not manifest_path.exists():
-            return None
+        return None
     with manifest_path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     if not isinstance(payload, dict):

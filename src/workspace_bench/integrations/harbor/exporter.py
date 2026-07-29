@@ -155,7 +155,7 @@ def _bundle(task: Task, bench_repo: Path, workspace_mcp_repo: Path) -> dict[str,
 
 def _task_toml(task: Task) -> str:
     assert task.suite is not None
-    safe_name = "--".join((task.suite.suite_id, task.family, task.id)).replace("_", "-")
+    safe_name = "--".join((task.suite.taskset_id, task.family, task.id)).replace("_", "-")
     return f'''schema_version = "1.3"
 
 artifacts = [
@@ -166,11 +166,11 @@ artifacts = [
 name = "openbb/{safe_name}"
 description = "Generated OpenBB Workspace Bench task for Harbor."
 authors = [{{ name = "OpenBB Workspace Bench contributors" }}]
-keywords = ["openbb", "workspace", "mcp", "benchmark", "{task.suite.suite_id}"]
+keywords = ["openbb", "workspace", "mcp", "benchmark", "{task.suite.taskset_id}"]
 
 [metadata]
 benchmark = "openbb-workspace-bench"
-suite = "{task.suite.suite_id}"
+suite = "{task.suite.taskset_id}"
 family = "{task.family}"
 task_id = "{task.id}"
 qualified_id = "{task.qualified_id}"
@@ -409,7 +409,7 @@ def export_harbor_task(
     if not (workspace_mcp_repo / "workspace_mcp").is_dir():
         raise FileNotFoundError(f"workspace-mcp repository not found: {workspace_mcp_repo}")
     bench_repo = Path(__file__).resolve().parents[4]
-    destination = output_root / task.suite.suite_id / task.family / task.id
+    destination = output_root / task.suite.taskset_id / task.family / task.id
     if destination.exists():
         if not overwrite:
             raise FileExistsError(

@@ -73,16 +73,16 @@ def test_widget_type_catalog_matches_live_snapshot() -> None:
     assert WIDGET_VIZ_TYPE_ALIASES == {"ssrm_table": "table_ssrm"}
 
 
-def test_widgets_json_accepts_legacy_ssrm_alias() -> None:
+def test_widgets_json_accepts_ssrm_alias_spelling() -> None:
     widget = {
-        "name": "Legacy SSRM",
+        "name": "Aliased SSRM",
         "description": "Compatibility fixture.",
-        "endpoint": "/legacy",
+        "endpoint": "/aliased",
         "type": "ssrm_table",
     }
-    errors, _, normalized = validate_widgets_json({"legacy": widget})
+    errors, _, normalized = validate_widgets_json({"aliased": widget})
     assert errors == []
-    assert normalized["legacy"]["type"] == "ssrm_table"
+    assert normalized["aliased"]["type"] == "ssrm_table"
 
 
 def test_missing_app_prompts_has_distinct_issue_code() -> None:
@@ -320,7 +320,7 @@ def test_refresh_repairs_custom_backend():
 
 def test_refresh_payload_rejected_for_fixture_backends():
     workspace = SimulatedWorkspace()
-    workspace.call_tool("manage_backends", {"operation": "add", "name": "equities"})
+    workspace.call_tool("manage_backends", {"operation": "add", "name": "getting-started"})
     result = workspace.call_tool("manage_backends", {
         "operation": "refresh", "backend_id": "backend_001",
         "widgets_json": {},

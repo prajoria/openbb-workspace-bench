@@ -50,7 +50,7 @@ def test_audit_task_allows_business_numeric_suffix() -> None:
     )
 
 
-def test_release_consistency_flags_all_retired_counts() -> None:
+def test_release_consistency_flags_stale_counts_everywhere() -> None:
     path = Path("README.md")
     content = """# Current\n212 tasks\nmore text\n512 tasks\n"""
     findings = audit_text(path, content)

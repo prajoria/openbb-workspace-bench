@@ -24,7 +24,7 @@ from workspace_bench.workspace.widget_params import slugify
 from workspace_bench.workspace.widget_params import flatten_params
 
 # Canonical live catalog from openbb://workspace/specs/widget-types (2026-07-12).
-# ``ssrm_table`` remains accepted as a legacy manifest alias because older
+# ``ssrm_table`` is accepted as a manifest alias because some
 # production backend examples still publish it; generators and oracles must
 # always emit the canonical ``table_ssrm`` spelling.
 CANONICAL_WIDGET_VIZ_TYPES = frozenset({

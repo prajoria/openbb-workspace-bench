@@ -83,7 +83,6 @@ def main(argv: list[str] | None = None) -> int:
     show_parser.add_argument("--task-file", help="Show a task JSON file.")
     show_parser.add_argument(
         "--taskset",
-        "--suite",
         dest="suite",
         default="workspace-tasks",
         choices=list(BUILTIN_TASKSET_ORDER),
@@ -155,7 +154,6 @@ def main(argv: list[str] | None = None) -> int:
     parity_parser.add_argument("--task", required=True, help="Task id or qualified ref.")
     parity_parser.add_argument(
         "--taskset",
-        "--suite",
         dest="suite",
         default=None,
         choices=list(BUILTIN_TASKSET_ORDER),
@@ -192,7 +190,6 @@ def main(argv: list[str] | None = None) -> int:
     smoke_parser.add_argument("--url", default="http://127.0.0.1:8787")
     smoke_parser.add_argument(
         "--taskset",
-        "--suite",
         dest="suite",
         default="workspace-tasks",
         choices=list(BUILTIN_TASKSET_ORDER),
@@ -219,7 +216,6 @@ def main(argv: list[str] | None = None) -> int:
     export_parser.add_argument("--task-file", help="Export a task JSON file.")
     export_parser.add_argument(
         "--taskset",
-        "--suite",
         dest="suite",
         default="workspace-tasks",
         choices=list(BUILTIN_TASKSET_ORDER),
@@ -319,7 +315,7 @@ def _add_task_filters(parser: argparse.ArgumentParser) -> None:
 
 def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
-        "--taskset", "--suite",
+        "--taskset",
         dest="suite",
         default="workspace-tasks",
         choices=list(BUILTIN_TASKSET_ORDER),

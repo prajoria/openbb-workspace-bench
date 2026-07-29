@@ -74,7 +74,7 @@ def test_stark_interactive_prompt_uses_display_origin_hints() -> None:
     prompt = messages[1]["content"]
 
     assert '"stark-enterprise-x": "Bench Stark Enterprise"' in prompt
-    # The retired widget-id cheat sheet must never reappear: discovery is
+    # A widget-id cheat sheet must never appear in the prompt: discovery is
     # the skill under test.
     assert "widget_hints" not in prompt
 
@@ -159,7 +159,7 @@ def test_release_run_requires_repeated_attempts(capsys) -> None:
 def test_comparison_metadata_uses_core_suite_content_provenance() -> None:
     metadata = benchmark_metadata(SimpleNamespace(task_dir=None, suite="workspace-tasks"))
 
-    assert metadata["suite_id"] == "workspace-tasks"
+    assert metadata["taskset_id"] == "workspace-tasks"
     assert len(metadata["content_sha256"]) == 64
     assert "git_commit" in metadata
 

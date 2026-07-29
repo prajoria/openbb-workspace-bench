@@ -32,7 +32,7 @@ AUDITED_FILES = (
 )
 
 # These generated tables contain ordinal row numbers and task payload examples,
-# so historical count tokens are not release-count claims there.
+# so raw count tokens are not release-count claims there.
 COUNT_SCAN_EXCLUSIONS = {
     REPO / "runs/reports/task-catalog.md",
     REPO / "runs/reports/tool-coverage-matrix.md",

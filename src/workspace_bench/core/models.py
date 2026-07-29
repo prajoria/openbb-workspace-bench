@@ -44,8 +44,7 @@ TASK_CATEGORIES = ("read", "single-widget", "dashboard", "platform", "repair", "
 # Measured labels (easy/medium/hard) plus the levelN ladders. Smoke uses
 # level0-3 as execution-context tracks (one tool on an empty workspace, full
 # tool surface, lived-in baseline, open prompt); workspace-tasks uses level0-4
-# as its difficulty ladder. level5 is retained only as a legacy-compatible
-# label - no bundled task carries it.
+# as its difficulty ladder.
 TASK_DIFFICULTIES = (
     "easy",
     "medium",
@@ -55,7 +54,6 @@ TASK_DIFFICULTIES = (
     "level2",
     "level3",
     "level4",
-    "level5",
 )
 _DEFAULT_SPECIFICATION_LEVELS = {
     "easy": "explicit",
@@ -66,7 +64,6 @@ _DEFAULT_SPECIFICATION_LEVELS = {
     "level2": "explicit",
     "level3": "partially-specified",
     "level4": "partially-specified",
-    "level5": "open-brief",
 }
 # Category fallback for the canonical Workspace MCP tool families, so smoke
 # task files carry family without repeating a derivable category.
@@ -100,10 +97,8 @@ KNOWN_WORKSPACE_BASELINES = (
     "stark-onboard-b",
     "stark-workspace-a",
 )
-# Pre-rename spelling, normalized at validation.
-LEGACY_WORKSPACE_BASELINES = {"default-v1": "all-stark-enterprise-apps"}
 # Fields that may live inside the setup block (the world the agent acts in);
-# legacy task files keep them at the top level.
+# they are also accepted flat at the top level.
 TASK_CONDITION_FIELDS = frozenset(
     {
         "workspace_baseline",
@@ -128,8 +123,8 @@ TASK_SPEC_FIELDS = {
     "allowed_tools",
     "setup",
     "eval",
-    # Legacy aliases for the pre-rename schema: "success" maps to "eval" and
-    # "oracle_tool_calls" to "eval.reference".
+    # Alternate spellings: "success" maps to "eval" and "oracle_tool_calls"
+    # to "eval.reference".
     "success",
     "oracle_tool_calls",
     "limits",
@@ -142,7 +137,6 @@ TASK_SPEC_FIELDS = {
 def _validated_workspace_baseline(value: Any, owner: str) -> str | None:
     if value is None:
         return None
-    value = LEGACY_WORKSPACE_BASELINES.get(value, value)
     if value == "":
         # Explicitly no baseline: the episode starts on a bare workspace.
         # Unlike omitting the field, a task-level "" clears a suite baseline.
@@ -290,7 +284,7 @@ def _validated_task_defaults(value: Any) -> JsonDict | None:
 class TaskSuiteManifest:
     """Metadata for a bundled or private taskset directory."""
 
-    suite_id: str
+    taskset_id: str
     visibility: Literal["public", "private", "hidden"] = "private"
     description: str | None = None
     content_sha256: str | None = None
@@ -307,7 +301,6 @@ class TaskSuiteManifest:
             raise ValueError("taskset manifest must be a JSON object")
         allowed_fields = {
             "taskset_id",
-            "suite_id",
             "visibility",
             "description",
             "content_sha256",
@@ -319,11 +312,11 @@ class TaskSuiteManifest:
         unknown = sorted(set(payload) - allowed_fields)
         if unknown:
             raise ValueError(f"taskset manifest contains unknown fields: {', '.join(unknown)}")
-        suite_id = str(
-            payload.get("taskset_id", payload.get("suite_id", "workspace-taskset"))
+        taskset_id = str(
+            payload.get("taskset_id", "workspace-taskset")
         )
         visibility = str(payload.get("visibility", "private"))
-        if not suite_id:
+        if not taskset_id:
             raise ValueError("taskset manifest requires non-empty taskset_id")
         if visibility not in VALID_TASKSET_VISIBILITIES:
             raise ValueError(
@@ -337,7 +330,7 @@ class TaskSuiteManifest:
         ):
             raise ValueError("taskset content_sha256 must be 64 lowercase hex chars")
         return cls(
-            suite_id=suite_id,
+            taskset_id=taskset_id,
             visibility=visibility,  # type: ignore[arg-type]
             description=payload.get("description"),
             content_sha256=content_sha256,
@@ -1308,7 +1301,7 @@ class Task:
                     f"{', '.join(unknown_setup)}"
                 )
         else:
-            # Legacy schema: condition fields at the top level.
+            # Flat spelling: condition fields at the top level.
             conditions = payload
         fixtures = _optional_object(conditions.get("fixtures", {}), "fixtures")
         fixtures_payload = _object_list(fixtures.get("backends", []), "fixtures.backends")
@@ -1343,13 +1336,13 @@ class Task:
             key in payload for key in ("success", "oracle_tool_calls", "limits")
         ):
             raise ValueError(
-                f"task {task_id} mixes the eval block with the legacy "
+                f"task {task_id} mixes the eval block with the "
                 "success/oracle_tool_calls/limits fields"
             )
         if eval_payload:
             if "reference_trace" in eval_payload and "reference" in eval_payload:
                 raise ValueError(
-                    f"task {task_id} mixes reference_trace with the legacy "
+                    f"task {task_id} mixes reference_trace with the "
                     "reference key"
                 )
             required_tools_source = eval_payload.pop("required_tools", None)
@@ -1382,7 +1375,7 @@ class Task:
             if max_turns is not None:
                 if limits:
                     raise ValueError(
-                        f"task {task_id} mixes eval.max_turns with the legacy "
+                        f"task {task_id} mixes eval.max_turns with the "
                         "limits block"
                     )
                 if not isinstance(max_turns, int) or max_turns <= 0:
@@ -1393,7 +1386,7 @@ class Task:
             success = eval_payload
             oracle_tool_calls = _object_list(oracle_source, "eval.reference")
         else:
-            # Legacy schema: top-level success, oracle_tool_calls, and limits.
+            # Flat spelling: top-level success, oracle_tool_calls, and limits.
             success = _optional_object(payload.get("success", {}), "success")
             oracle_tool_calls = _object_list(
                 payload.get("oracle_tool_calls", []), "oracle_tool_calls"
@@ -1464,7 +1457,7 @@ class Task:
     def qualified_id(self) -> str:
         """Return the stable ``suite/family/task`` reference."""
 
-        suite = self.suite.suite_id if self.suite else "local"
+        suite = self.suite.taskset_id if self.suite else "local"
         return f"{suite}/{self.family}/{self.id}"
 
 
