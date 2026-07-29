@@ -1,6 +1,6 @@
 """Generate runs/reports/task-catalog.md from the simulator task JSON files.
 
-Reads every task in the four bundled simulator suites and renders each one's prompt,
+Reads every task in the three bundled simulator tasksets and renders each one's prompt,
 setup, and exact pass/fail criteria as the grader applies them.
 Regenerate after editing tasks so the catalog never drifts.
 """
@@ -14,9 +14,9 @@ from pathlib import Path
 from workspace_bench.core.models import task_payload_conditions
 
 REPO = Path(__file__).resolve().parents[2]
-SMOKE_DIR = REPO / "src/workspace_bench/task_suites/smoke"
-APPS_DEFAULT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
-PACK_DIR = REPO / "src/workspace_bench/task_suites/workspace_tasks"
+SMOKE_DIR = REPO / "src/workspace_bench/tasksets/smoke"
+APPS_DEFAULT_DIR = REPO / "src/workspace_bench/tasksets/enterprise_apps_default"
+PACK_DIR = REPO / "src/workspace_bench/tasksets/workspace_tasks"
 REPORT = REPO / "runs/reports/benchmark-report.md"
 OUT = REPO / "runs/reports/task-catalog.md"
 
@@ -258,7 +258,7 @@ def main() -> None:
         "",
         "Auto-generated from the bundled task JSON files — regenerate with",
         "`python scripts/generators/generate_task_catalog.py` after editing tasks.",
-        "All three deterministic simulator suites are included.",
+        "All three deterministic simulator tasksets are included.",
         "",
         "## How grading works",
         "",
@@ -291,14 +291,14 @@ def main() -> None:
             # Slim payloads omit family (the directory) and labels the suite
             # manifest defaults supply; hydrate them the way the loader does.
             task.setdefault("family", f.parent.name)
-            manifest_path = f.parent.parent / "task_suite.json"
+            manifest_path = f.parent.parent / "taskset.json"
             if manifest_path.is_file():
                 defaults = json.loads(manifest_path.read_text()).get("task_defaults") or {}
                 for key, value in defaults.items():
                     task.setdefault(key, value)
             tasks.append(task)
         total += len(tasks)
-        out.append(f"## Suite: {suite_name} ({len(tasks)} tasks)")
+        out.append(f"## Taskset: {suite_name} ({len(tasks)} tasks)")
         out.append("")
         by_family: dict[str, list[dict]] = {}
         for task in tasks:

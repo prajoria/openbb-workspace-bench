@@ -1,8 +1,7 @@
 # Workspace data
 
-Every referable Workspace ingredient lives here in its own folder, and task
-suites select them by identifier through the manifest axes (or per-task
-overrides) documented in [TASK-SCHEMA.md](../../../../TASK-SCHEMA.md).
+Every referable Workspace ingredient lives here in its own folder, and tasksets select them by identifier through the manifest axes (or per-task
+overrides) documented in [TASK-SCHEMA.md](../../../TASK-SCHEMA.md).
 
 ## `backends/`
 
@@ -17,7 +16,7 @@ apps) plus baked data, loaded by `workspace/fixtures.py`.
 | `getting_started.json` | `getting-started` | Transcribed OpenBB backend-examples. |
 | `widget_examples.json` | `widget-examples` | Transcribed OpenBB backend-examples. |
 
-The three Stark files share one display name ("Bench Stark Enterprise"); at
+The two Stark files share one display name ("Bench Stark Enterprise"); at
 most one may be connected per episode.
 
 ## `initial_states/`

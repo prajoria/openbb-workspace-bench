@@ -41,10 +41,11 @@ WORKSPACE_TOOL_NAMES = (
 TASK_CATEGORIES = ("read", "single-widget", "dashboard", "platform", "repair", "story")
 # "story": the workspace_tasks suite does not use the category axis; its
 # manifest defaults every task to this label so task files omit the field.
-# Measured labels (easy/medium/hard) plus the smoke execution-context ladder:
-# level0 = one tool on an empty workspace, level1 = full tool surface,
-# level2 = full surface on a lived-in baseline, level3 = level2 with an open
-# prompt that does not pinpoint ids.
+# Measured labels (easy/medium/hard) plus the levelN ladders. Smoke uses
+# level0-3 as execution-context tracks (one tool on an empty workspace, full
+# tool surface, lived-in baseline, open prompt); workspace-tasks uses level0-4
+# as its difficulty ladder. level5 is retained only as a legacy-compatible
+# label - no bundled task carries it.
 TASK_DIFFICULTIES = (
     "easy",
     "medium",
@@ -91,7 +92,7 @@ TOOL_FAMILY_CATEGORIES = {
     "manage_backends": "platform",
     "assign_tasks_to_agents": "platform",
 }
-VALID_TASK_SUITE_VISIBILITIES = {"public", "private", "hidden"}
+VALID_TASKSET_VISIBILITIES = {"public", "private", "hidden"}
 # Initial-state versions registered in workspace/default_setup.py.
 KNOWN_WORKSPACE_BASELINES = (
     "all-stark-enterprise-apps",
@@ -263,12 +264,12 @@ def _validated_task_defaults(value: Any) -> JsonDict | None:
     if value is None:
         return None
     if not isinstance(value, dict) or not value:
-        raise ValueError("task suite task_defaults must be a non-empty object")
+        raise ValueError("taskset task_defaults must be a non-empty object")
     allowed = {"category", "difficulty", "eval"}
     unknown = sorted(set(value) - allowed)
     if unknown:
         raise ValueError(
-            f"task suite task_defaults contains unknown fields: {', '.join(unknown)}"
+            f"taskset task_defaults contains unknown fields: {', '.join(unknown)}"
         )
     for key, item in value.items():
         if key == "eval":
@@ -276,18 +277,18 @@ def _validated_task_defaults(value: Any) -> JsonDict | None:
             # eval block wherever the task file omits the key.
             if not isinstance(item, dict) or not item:
                 raise ValueError(
-                    "task suite task_defaults.eval must be a non-empty object"
+                    "taskset task_defaults.eval must be a non-empty object"
                 )
         elif not isinstance(item, str) or not item:
             raise ValueError(
-                "task suite task_defaults values must be non-empty strings"
+                "taskset task_defaults values must be non-empty strings"
             )
     return dict(value)
 
 
 @dataclass(frozen=True)
 class TaskSuiteManifest:
-    """Metadata for a bundled or private task-suite directory."""
+    """Metadata for a bundled or private taskset directory."""
 
     suite_id: str
     visibility: Literal["public", "private", "hidden"] = "private"
@@ -303,8 +304,9 @@ class TaskSuiteManifest:
     @classmethod
     def from_dict(cls, payload: JsonDict) -> "TaskSuiteManifest":
         if not isinstance(payload, dict):
-            raise ValueError("task suite manifest must be a JSON object")
+            raise ValueError("taskset manifest must be a JSON object")
         allowed_fields = {
+            "taskset_id",
             "suite_id",
             "visibility",
             "description",
@@ -316,14 +318,16 @@ class TaskSuiteManifest:
         }
         unknown = sorted(set(payload) - allowed_fields)
         if unknown:
-            raise ValueError(f"task suite manifest contains unknown fields: {', '.join(unknown)}")
-        suite_id = str(payload.get("suite_id", "workspace-task-suite"))
+            raise ValueError(f"taskset manifest contains unknown fields: {', '.join(unknown)}")
+        suite_id = str(
+            payload.get("taskset_id", payload.get("suite_id", "workspace-taskset"))
+        )
         visibility = str(payload.get("visibility", "private"))
         if not suite_id:
-            raise ValueError("task suite manifest requires non-empty suite_id")
-        if visibility not in VALID_TASK_SUITE_VISIBILITIES:
+            raise ValueError("taskset manifest requires non-empty taskset_id")
+        if visibility not in VALID_TASKSET_VISIBILITIES:
             raise ValueError(
-                f"task suite visibility must be one of {sorted(VALID_TASK_SUITE_VISIBILITIES)}"
+                f"taskset visibility must be one of {sorted(VALID_TASKSET_VISIBILITIES)}"
             )
         content_sha256 = payload.get("content_sha256")
         if content_sha256 is not None and (
@@ -331,20 +335,20 @@ class TaskSuiteManifest:
             or len(content_sha256) != 64
             or any(character not in "0123456789abcdef" for character in content_sha256)
         ):
-            raise ValueError("task suite content_sha256 must be 64 lowercase hex chars")
+            raise ValueError("taskset content_sha256 must be 64 lowercase hex chars")
         return cls(
             suite_id=suite_id,
             visibility=visibility,  # type: ignore[arg-type]
             description=payload.get("description"),
             content_sha256=content_sha256,
             workspace_baseline=_validated_workspace_baseline(
-                payload.get("workspace_baseline"), "task suite"
+                payload.get("workspace_baseline"), "taskset"
             ),
             workspace_backends=_validated_workspace_backends(
-                payload.get("workspace_backends"), "task suite"
+                payload.get("workspace_backends"), "taskset"
             ),
             workspace_skills=_validated_workspace_skills(
-                payload.get("workspace_skills"), "task suite"
+                payload.get("workspace_skills"), "taskset"
             ),
             task_defaults=_validated_task_defaults(payload.get("task_defaults")),
         )
@@ -1328,7 +1332,7 @@ class Task:
         business_terms = _string_list(payload.get("business_terms", []), "business_terms")
         raw_family = payload.get("family")
         if raw_family is None and source_path is not None:
-            # The family is the task's directory in every bundled suite.
+            # The family is the task's directory in every bundled taskset.
             raw_family = source_path.parent.name
         if not isinstance(raw_family, str) or not raw_family:
             raise ValueError(

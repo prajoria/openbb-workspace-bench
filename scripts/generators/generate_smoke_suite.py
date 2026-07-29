@@ -30,7 +30,7 @@ REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "src"))
 
 from workspace_bench.core.episode import WorkspaceEpisode  # noqa: E402
-from workspace_bench.core.suite_checks import task_payload_digest  # noqa: E402
+from workspace_bench.core.taskset_checks import task_payload_digest  # noqa: E402
 from workspace_bench.core.models import (  # noqa: E402
     TASK_SPEC_FIELDS,
     JsonDict,
@@ -39,10 +39,10 @@ from workspace_bench.core.models import (  # noqa: E402
 )
 from workspace_bench.core.models import WORKSPACE_TOOL_NAMES  # noqa: E402
 
-OUTPUT_DIR = REPO / "src" / "workspace_bench" / "task_suites" / "smoke"
+OUTPUT_DIR = REPO / "src" / "workspace_bench" / "tasksets" / "smoke"
 
 MANIFEST_PAYLOAD: JsonDict = {
-    "suite_id": "workspace-bench-smoke",
+    "taskset_id": "workspace-bench-smoke",
     "visibility": "public",
     "description": (
         "A four-level execution ladder with one task per Workspace MCP tool "
@@ -837,9 +837,9 @@ def write_suite(tasks: list[JsonDict]) -> None:
         if child.is_dir():
             shutil.rmtree(child)
     (OUTPUT_DIR / "__init__.py").write_text(
-        '"""Generated Workspace MCP smoke task suite."""\n', encoding="utf-8"
+        '"""Generated Workspace MCP smoke taskset."""\n', encoding="utf-8"
     )
-    (OUTPUT_DIR / "task_suite.json").write_text(
+    (OUTPUT_DIR / "taskset.json").write_text(
         json.dumps(
             {**MANIFEST_PAYLOAD, "content_sha256": task_payload_digest(tasks)},
             indent=2,

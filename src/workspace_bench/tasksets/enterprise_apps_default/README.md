@@ -1,4 +1,4 @@
-# `enterprise-apps-default` task suite
+# `enterprise-apps-default` taskset
 
 Tasks: 138
 
@@ -43,8 +43,10 @@ Each of the 138 reference answers was written by gpt-5.6sol via codex from that
 task's prompt and the exact rows returned by its reference reads in its data
 world. Generation machine-certifies numeric groundedness: every cited figure
 must appear literally in those served rows. Category `read` and difficulty
-`medium` are declared once in the suite manifest; family is derived from each
-task directory.
+`medium` are declared once in the taskset manifest; family is derived from each
+task directory. The bundled JSON is emitted deterministically by
+`scripts/generators/generate_apps_default_suite.py`; regenerate through the
+generator rather than editing task files by hand.
 
 ## Grading
 

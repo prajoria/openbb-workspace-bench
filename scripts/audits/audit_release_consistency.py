@@ -8,13 +8,13 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from workspace_bench.core.adversarial import ADVERSARIAL_ARCHETYPES
-from workspace_bench.core.runner import BUILTIN_TASK_SUITES
+from workspace_bench.core.runner import BUILTIN_TASKSETS
 
 REPO = Path(__file__).resolve().parents[2]
-TASK_SUITE_ROOT = REPO / "src/workspace_bench/task_suites"
+TASKSET_ROOT = REPO / "src/workspace_bench/tasksets"
 BUILTIN_SUITE_READMES = {
-    suite: TASK_SUITE_ROOT / package.rsplit(".", 1)[-1] / "README.md"
-    for suite, package in BUILTIN_TASK_SUITES.items()
+    suite: TASKSET_ROOT / package.rsplit(".", 1)[-1] / "README.md"
+    for suite, package in BUILTIN_TASKSETS.items()
 }
 
 AUDITED_FILES = (

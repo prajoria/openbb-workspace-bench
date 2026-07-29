@@ -32,6 +32,10 @@ def grade_summary(grade: GradeResult, *, include_passed: bool = True) -> dict[st
             "runtime_passed": grade.runtime_passed,
             "runtime_checks_passed": grade.runtime_checks_passed,
             "runtime_checks_total": grade.runtime_checks_total,
+            "judge_passed": grade.judge_passed,
+            "judge_pending": grade.judge_pending,
+            "judge_checks_passed": grade.judge_checks_passed,
+            "judge_checks_total": grade.judge_checks_total,
             "deployment_receipt": (
                 asdict(grade.deployment_receipt)
                 if grade.deployment_receipt is not None

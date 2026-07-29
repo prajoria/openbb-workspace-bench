@@ -30,7 +30,7 @@ When a persona's **last** story goes green (all 4 stories × 5 levels = 20 tasks
 uv run python scripts/audits/calibrate_workspace_tasks.py --persona <persona>
 ```
 
-It runs gpt-4.1-mini over the persona's tasks with 3 repeats (12 attempts per level - the sample is small, hence the repeats), checks the staircase `level0 >= level1 >= ... >= level4` (ties allowed), and records the curve in `runs/reports/workspace-tasks-calibration.json`. A non-zero exit is a gate failure: diagnose before proceeding — a task failing level0 on **every** repeat is a defect fingerprint (route it back to its story's author), while a single mid-ladder wobble at this sample size may be noise (note it for the persona review, don't tune content toward the curve). Once all five personas are recorded, `--aggregate` writes the pooled per-level comparison across personas to `runs/reports/workspace-tasks-calibration.md`.
+It runs gpt-4.1-mini over the persona's tasks with 3 repeats (12 attempts per level - the sample is small, hence the repeats), checks the staircase `level0 >= level1 >= ... >= level4` (ties allowed), and records the curve in `runs/reports/workspace-tasks-calibration.json`. A non-zero exit is a gate failure: diagnose before proceeding — a task failing level0 on **every** repeat is a defect fingerprint (route it back to its story's author), while a single mid-ladder wobble at this sample size may be noise (note it for the persona review, don't tune content toward the curve). Once all six personas are recorded, `--aggregate` writes the pooled per-level comparison across personas to `runs/reports/workspace-tasks-calibration.md`.
 
 ## Dead levels: a 0% rung is a question, not a result
 
@@ -50,6 +50,6 @@ The unit of delivery is the **persona**: four stories, the calibration gate, don
 
 - An author burning multiple fix rounds on the same task — read the failures yourself; it may be a story problem (facts wrong) rather than an authoring problem, which means fixing the story file, not the tasks.
 - Validator flags that indict the *guidelines* (a rule two authors both got wrong) — fix the skill, not just the task, and note it for the persona review.
-- Scope creep: authors edit only their own story's files; nothing outside `task_suites/workspace_tasks/` and never the live suites.
+- Scope creep: authors edit only their own story's files; nothing outside `tasksets/workspace_tasks/` and never the live suites.
 - Name collisions: task ids are `<story>_level<N>` with no persona in them, so **story names must be unique across all personas**, not just within one. Check before spawning an author; at each persona review also scan for duplicate ids and duplicate prompts across the whole suite.
 - Commits: a story is committed only after it is fully green (certification + validator + fairness), one commit per story or per persona — never mid-loop.

@@ -21,7 +21,7 @@ from workspace_bench.core.runner import (
     task_workspace_baseline,
     tasks_workspace_baseline,
 )
-from workspace_bench.core.suite_checks import release_checks_for_suite
+from workspace_bench.core.taskset_checks import release_checks_for_taskset
 from workspace_bench.reports.serialization import grade_summary
 
 
@@ -125,11 +125,11 @@ def results_summary(results: list[RunResult]) -> dict[str, Any]:
 
 
 def build_manifest(
-    tasks: list[Task], task_suite: TaskSuiteManifest | None = None
+    tasks: list[Task], taskset: TaskSuiteManifest | None = None
 ) -> dict[str, Any]:
     """Build a machine-readable dataset manifest."""
 
-    redacted = task_suite is not None and task_suite.visibility == "hidden"
+    redacted = taskset is not None and taskset.visibility == "hidden"
     payload: dict[str, Any] = {
         "name": BENCHMARK_NAME,
         **git_provenance(source_paths=[task.source_path for task in tasks if task.source_path]),
@@ -142,20 +142,20 @@ def build_manifest(
         "difficulties": sorted({task.difficulty for task in tasks}),
         "tasks": [task_summary(task) for task in tasks],
     }
-    if task_suite:
-        payload["task_suite"] = {
-            "suite_id": task_suite.suite_id,
-            "content_sha256": task_suite.content_sha256,
-            "visibility": task_suite.visibility,
-            "description": task_suite.description,
-            "workspace_baseline": task_suite.workspace_baseline or "minimal",
+    if taskset:
+        payload["taskset"] = {
+            "suite_id": taskset.suite_id,
+            "content_sha256": taskset.content_sha256,
+            "visibility": taskset.visibility,
+            "description": taskset.description,
+            "workspace_baseline": taskset.workspace_baseline or "minimal",
         }
     return payload
 
 
 def build_report(
     tasks: list[Task],
-    task_suite: TaskSuiteManifest | None = None,
+    taskset: TaskSuiteManifest | None = None,
     release_profile: str | None = None,
 ) -> dict[str, Any]:
     """Run built-in baselines and return a release-style report payload."""
@@ -167,9 +167,9 @@ def build_report(
         "oracle_all_pass": all(result.grade.passed for result in oracle_results),
         "noop_all_fail": all(not result.grade.passed for result in noop_results),
     }
-    release_checks.update(release_checks_for_suite(release_profile, tasks, oracle_results))
+    release_checks.update(release_checks_for_taskset(release_profile, tasks, oracle_results))
     return {
-        "manifest": build_manifest(tasks, task_suite),
+        "manifest": build_manifest(tasks, taskset),
         "baselines": {
             "oracle": results_summary(oracle_results),
             "noop": results_summary(noop_results),
@@ -191,7 +191,7 @@ def render_markdown_report(report: dict[str, Any]) -> str:
         f"Git commit: `{manifest['git_commit']}`",
         f"Git dirty: `{manifest['git_dirty']}`",
         f"Tasks: `{manifest['task_count']}`",
-        f"Workspace baseline: `{(manifest.get('task_suite') or {}).get('workspace_baseline', 'minimal')}`",
+        f"Workspace baseline: `{(manifest.get('taskset') or {}).get('workspace_baseline', 'minimal')}`",
         f"Canary: `{manifest['canary_guid']}`",
         f"Redacted: `{manifest.get('redacted', False)}`",
         "",

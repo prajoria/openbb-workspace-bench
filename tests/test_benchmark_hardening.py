@@ -69,7 +69,7 @@ def test_suite_manifests_reject_manual_release_versioning() -> None:
     with pytest.raises(ValueError, match="unknown fields: release_id, version"):
         TaskSuiteManifest.from_dict(
             {
-                "suite_id": "private",
+                "taskset_id": "private",
                 "release_id": "private-v1",
                 "version": "1.0.0",
             }

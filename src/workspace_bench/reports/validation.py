@@ -6,7 +6,7 @@ from typing import Any
 
 from workspace_bench.core.models import TASK_DIFFICULTIES, Task
 from workspace_bench.core.runner import TaskRunner, tasks_workspace_baseline
-from workspace_bench.core.suite_checks import release_checks_for_suite
+from workspace_bench.core.taskset_checks import release_checks_for_taskset
 
 
 def validate_tasks(
@@ -36,7 +36,7 @@ def validate_tasks(
                 "message": f"expected at least {min_tasks} task(s), found {len(tasks)}",
             }
         )
-    release_checks = release_checks_for_suite(release_profile, tasks, oracle_results)
+    release_checks = release_checks_for_taskset(release_profile, tasks, oracle_results)
     for check_name, passed in release_checks.items():
         if not passed:
             issues.append(

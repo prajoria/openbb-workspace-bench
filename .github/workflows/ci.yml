@@ -39,20 +39,20 @@ jobs:
           uv run python scripts/audits/audit_release_consistency.py
 
       - name: Validate the workspace-tasks suite
-        run: uv run --extra dev workspace-bench validate --suite workspace-tasks --min-tasks 120
+        run: uv run --extra dev workspace-bench validate --taskset workspace-tasks --min-tasks 120
 
       - name: Validate enterprise-apps-default suite
-        run: uv run --extra dev workspace-bench validate --suite enterprise-apps-default --min-tasks 138
+        run: uv run --extra dev workspace-bench validate --taskset enterprise-apps-default --min-tasks 138
 
       - name: Validate the smoke suite
-        run: uv run --extra dev workspace-bench validate --suite smoke --min-tasks 80
+        run: uv run --extra dev workspace-bench validate --taskset smoke --min-tasks 80
 
       - name: Run oracle baseline (workspace-tasks)
-        run: uv run --extra dev workspace-bench run --suite workspace-tasks --agent oracle
+        run: uv run --extra dev workspace-bench run --taskset workspace-tasks --agent oracle
 
       - name: Reject adversarial candidates
         run: |
-          uv run workspace-bench adversarial --suite workspace-tasks
+          uv run workspace-bench adversarial --taskset workspace-tasks
 
       - name: Export agent task envelope
         run: uv run --extra dev workspace-bench export-task --task workspace-tasks/compliance_risk/alert_sweep_level0 --output /tmp/workspace-task.json
@@ -62,11 +62,11 @@ jobs:
 
       - name: Build manifests
         run: |
-          uv run --extra dev workspace-bench manifest --suite workspace-tasks --json > /dev/null
+          uv run --extra dev workspace-bench manifest --taskset workspace-tasks --json > /dev/null
 
       - name: Build release reports
         run: |
-          uv run --extra dev workspace-bench report --suite workspace-tasks --json > /dev/null
+          uv run --extra dev workspace-bench report --taskset workspace-tasks --json > /dev/null
 
       - name: Smoke the evaluator dispatch
         run: |

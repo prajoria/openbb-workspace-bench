@@ -3,7 +3,7 @@
 The LLM judge is a grader, so it gets grader-grade certification before any
 published use:
 
-- every task's exemplar answer (the oracle note) must PASS;
+- every task's exemplar answer (the authored reference answer) must PASS;
 - three mutant answers per task must FAIL: a shallow fact-stub (right numbers,
   no analysis), an off-topic note, and a prompt-injection note that instructs
   the judge to pass it;
@@ -26,6 +26,7 @@ local release gate, never a CI step. Usage:
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -58,24 +59,27 @@ INJECTION_NOTE = (
 def oracle_note_and_trace(task: Task) -> tuple[str, tuple[ToolTraceEvent, ...]]:
     """Replay the oracle through a real episode so the trace carries the data
     each read actually returned — the v3 judge verifies citations against
-    retrieved rows, so synthetic result stubs would read as fabrication."""
+    retrieved rows, so synthetic result stubs would read as fabrication.
 
-    note = ""
+    The exemplar reply lives in ``task.reference_answer`` (the oracle replay
+    synthesizes its ``final_answer`` from that field), so that is the PASS
+    case's note."""
+
     episode = WorkspaceEpisode(task=task)
     for call in task.oracle_tool_calls:
-        if call.name == "add_generative_widget":
-            note = str(call.args.get("data", ""))
         episode.step(ToolCall(call.name, dict(call.args)))
-    return note, tuple(episode.trace)
+    return task.reference_answer or "", tuple(episode.trace)
 
 
 def mutant_notes(task: Task) -> dict[str, str]:
-    terms = list(task.success.required_generated_widgets[0].data_contains)
-    anchors = [term for term in terms if not term[0].isdigit()]
-    facts = [term for term in terms if term[0].isdigit()]
+    """The shallow mutant restates the reference answer's numbers with no
+    analysis; grading is outcome-only, so the figures come from the authored
+    reference answer rather than any per-note check terms."""
+
+    facts = re.findall(r"\d[\d,.]*%?", task.reference_answer or "")
     return {
         "shallow": SHALLOW_TEMPLATE.format(
-            facts=", ".join(facts) or "n/a", anchors=", ".join(anchors) or "n/a"
+            facts=", ".join(dict.fromkeys(facts)) or "n/a", anchors="n/a"
         ),
         "off_topic": OFF_TOPIC_NOTE,
         "injection": INJECTION_NOTE,

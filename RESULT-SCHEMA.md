@@ -6,7 +6,7 @@ and issue codes. See [README](README.md) for the project overview and
 
 All result issues are `{code, message}` objects. A built-in `run --json` emits
 `{summary, results}`; external commands and model comparisons also include a
-`benchmark` provenance block with benchmark/suite identity, content SHA-256,
+`benchmark` provenance block with benchmark/taskset identity, content SHA-256,
 Git commit, and dirty-worktree flag.
 
 ## Result rows and GradeResult
@@ -37,7 +37,7 @@ add model/filter/runner/repeat settings, run timestamps and harness/provider
 identity, strict/state/runtime/browser summaries, invalid-call and recovery
 metrics, turns, tokens, cost, per-task repeats/pass@k/pass^k, durable manifests,
 and checkpoints. Resume is accepted only when model, provider, temperature,
-harness revision, suite hash, track, repeats, and ordered task manifest match.
+harness revision, taskset hash, track, repeats, and ordered task manifest match.
 Rows also carry `judge_status`, `judge_model`, `judge_template_sha`, and
 `judge_raw_reason`. A required row is `pending` when no judge was configured;
 completed judgments pin the model and prompt-template hash. Stored re-judgment

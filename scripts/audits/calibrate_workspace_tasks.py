@@ -1,10 +1,10 @@
 """Per-persona calibration gate for the workspace_tasks suite.
 
-When a persona's stories are complete (4 stories x 6 levels = 24 tasks), this
+When a persona's stories are complete (4 stories x 5 levels = 20 tasks), this
 gate runs a mid-capability model (gpt-4.1-mini by default) over those tasks
 with 3 repeats and checks the level staircase:
 
-    pass(level0) >= pass(level1) >= ... >= pass(level5)
+    pass(level0) >= pass(level1) >= ... >= pass(level4)
 
 Each persona's result is merged into a ledger so that, once every persona has
 been gated, ``--aggregate`` pools all attempts and reports the suite-wide
@@ -32,10 +32,10 @@ from pathlib import Path
 from typing import Any
 
 REPO = Path(__file__).resolve().parents[2]
-SUITE_DIR = REPO / "src" / "workspace_bench" / "task_suites" / "workspace_tasks"
+SUITE_DIR = REPO / "src" / "workspace_bench" / "tasksets" / "workspace_tasks"
 DEFAULT_LEDGER = REPO / "runs" / "reports" / "workspace-tasks-calibration.json"
 DEFAULT_REPORT = REPO / "runs" / "reports" / "workspace-tasks-calibration.md"
-LEVELS = tuple(f"level{i}" for i in range(6))
+LEVELS = tuple(f"level{i}" for i in range(5))
 DEFAULT_MODEL = "openai:gpt-4.1-mini"
 DEFAULT_REPEATS = 3
 
@@ -120,7 +120,7 @@ def rates(tally: dict[str, dict[str, int]]) -> list[float | None]:
 
 
 def staircase_ok(tally: dict[str, dict[str, int]]) -> tuple[bool, list[str]]:
-    """level0 >= level1 >= ... >= level5, ties allowed; gaps in data flagged."""
+    """level0 >= level1 >= ... >= level4, ties allowed; gaps in data flagged."""
 
     violations: list[str] = []
     series = [(level, rate) for level, rate in zip(LEVELS, rates(tally)) if rate is not None]

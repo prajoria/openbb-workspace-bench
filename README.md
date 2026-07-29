@@ -9,7 +9,7 @@ The benchmark asks a simple question: can an agent inspect, build, update, and r
 
 Motivation: a [NY Tech Week talk](https://youtu.be/7fDTDYh2NJ4?t=1210) showed agents driving real financial work in OpenBB Workspace over MCP, on the [Stark Industries demo](https://github.com/DidierRLopes/stark-industries-demo). A demo shows work can happen once; this benchmark measures how reliably agents actually drive it. The Stark demo is also where the enterprise tasks come from.
 
-Three suites ship bundled in a capability ladder: `smoke` checks one round trip
+Three tasksets ship bundled in a capability ladder: `smoke` checks one round trip
 per Workspace MCP surface (80 tasks), `enterprise-apps-default` answers the
 default apps' product prompts in two data worlds (138), and
 `workspace-tasks` operates Workspace state through agent-authored persona
@@ -22,8 +22,8 @@ storylines (120).
 - [Quick Start](#quick-start)
 - [Archived Baselines](#archived-baselines)
 - [Evaluate Your Agent](#evaluate-your-agent)
-- [Suites](#suites)
-- [Private Task Suites](#private-task-suites)
+- [Tasksets](#tasksets)
+- [Private Tasksets](#private-tasksets)
 - [Live Workspace MCP Smoke](#live-workspace-mcp-smoke)
 - [Browser Certification](#browser-certification)
 - [Serve Fixture Backends](#serve-fixture-backends)
@@ -37,7 +37,7 @@ storylines (120).
 
 ## What Is Included
 
-- 338 deterministic simulator tasks across three certified suites:
+- 338 deterministic simulator tasks across three certified tasksets:
   - `smoke` — 80 tasks: a four-level execution ladder over every Workspace MCP surface
   - `enterprise-apps-default` — 138 tasks pairing 69 byte-verbatim product prompts across two data worlds
   - `workspace-tasks` — 120 agent-authored operating tasks: 6 personas
@@ -46,13 +46,13 @@ storylines (120).
     Derive, Ground, Compose), run closed-world on the everything-mounted
     workspace and topped by authoring custom backends
 
-  Each suite directory under `src/workspace_bench/task_suites/` has a README
+  Each taskset directory under `src/workspace_bench/tasksets/` has a README
   explaining how it is generated and how its tasks are categorized.
 - generated and agent-authored task families covering widgets, apps, prompts, resources, skills, delegation, inspection, repair, and layout
 - transcription-grade Getting Started, Widget Examples, Stark enterprise, and Daloopa fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
-- optional Playwright browser-certification harness for runtime-enabled suites
+- optional Playwright browser-certification harness for runtime-enabled tasksets
 - public task envelope export
 - external agent command contract
 - private task directory support
@@ -79,7 +79,7 @@ Training, RL, and live Workspace execution are downstream paths that reuse the
 same benchmark core. Other important boundaries:
 
 - Public task files contain success criteria and oracle traces; use hidden
-  private suites for held-out evaluation and never train on their answers.
+  private tasksets for held-out evaluation and never train on their answers.
 - Runtime-enabled simulator tasks make real localhost HTTP probes against
   evaluator-owned deterministic data, but do not execute agent-authored backend
   code.
@@ -97,9 +97,9 @@ Install dependencies and inspect the benchmark:
 ```bash
 uv run workspace-bench list
 uv run workspace-bench manifest --json
-uv run workspace-bench validate --suite smoke --min-tasks 80
-uv run workspace-bench validate --suite enterprise-apps-default --min-tasks 138
-uv run workspace-bench validate --suite workspace-tasks --min-tasks 120
+uv run workspace-bench validate --taskset smoke --min-tasks 80
+uv run workspace-bench validate --taskset enterprise-apps-default --min-tasks 138
+uv run workspace-bench validate --taskset workspace-tasks --min-tasks 120
 ```
 
 Run built-in baselines:
@@ -111,7 +111,7 @@ uv run workspace-bench report --output runs/reports/benchmark-report.md
 ```
 
 The committed deterministic certification report is
-`runs/reports/benchmark-report.md` (core).
+`runs/reports/benchmark-report.md` (workspace-tasks).
 
 Run tests:
 
@@ -121,7 +121,7 @@ uv run --extra dev pytest
 
 ## Archived Baselines
 
-The current operating-suite board lives in the [Suites](#suites) section;
+The current operating-suite board lives in the [Tasksets](#tasksets) section;
 everything below predates the current task contract and is preserved as
 history. The `enterprise-apps-usage` suite itself was retired in July 2026
 when the agent-authored `workspace-tasks` suite replaced it as the operating
@@ -137,7 +137,7 @@ Six models have been run against both suites (pass@1, single fresh
 end-to-end attempt per suite, temperature 0, same grader and turn budget
 for every model — no patched or spliced results).
 
-Retired usage suite (operating the workspace, 192 tasks):
+Retired usage-era board (operating the workspace, 300 tasks):
 
 | Model | Strict pass | t0 → t4 pass rate (%) |
 |---|---|---|
@@ -210,18 +210,18 @@ Run several models side by side — `--model` is repeatable:
 uv run workspace-bench \
   --model openai:gpt-4.1-mini \
   --model ollama:qwen3:8b \
-  --suite workspace-tasks
+  --taskset workspace-tasks
 ```
 
-Omit `--task` and the runner covers the whole suite (e.g. `--suite
+Omit `--task` and the runner covers the whole taskset (e.g. `--taskset
 workspace-tasks`); add `--family` (a persona, e.g.
-`compliance_risk`), `--difficulty` (a level), or `--tag` to run a slice.
+`compliance_risk`), `--difficulty` (a level), or `--category` to run a slice.
 
 Compare only one difficulty slice:
 
 ```bash
 uv run workspace-bench \
-  --suite workspace-tasks \
+  --taskset workspace-tasks \
   --difficulty level2 \
   --timeout 240
 ```
@@ -230,7 +230,7 @@ Run repeated attempts for a more stable comparison:
 
 ```bash
 uv run workspace-bench \
-  --suite workspace-tasks \
+  --taskset workspace-tasks \
   --release-run \
   --repeats 3 \
   --metric pass-at-k \
@@ -249,7 +249,7 @@ uv run workspace-bench --model openai:gpt-4.1-mini --task workspace-tasks/resear
 That's the whole command - no subcommand needed, evaluating is what the tool does: `--model provider:model` needs no adapter config
 (API keys are read from the environment or `.env`; `ollama:<model>` works the
 same for local models), the task id is found across the bundled
-suites automatically, and the output directory defaults to a timestamped
+tasksets automatically, and the output directory defaults to a timestamped
 folder under `runs/comparison/`. The run directory keeps the full
 `conversation.json` (every turn: prompt, model actions, tool results),
 raw `model_responses.jsonl`, and executed `tool_calls.jsonl` for inspection.
@@ -261,7 +261,7 @@ Use `--track cold` to remove both; the track is recorded in run metadata and
 guided/cold scores must be reported separately.
 
 The task's rubric lives next to its prompt in the task JSON
-(`src/workspace_bench/task_suites/<suite>/<family>/<id>.json`) — the
+(`src/workspace_bench/tasksets/<taskset>/<family>/<id>.json`) — the
 `success` block is exactly what the grader checks, and `oracle_tool_calls` is
 a known-good solution to diff against.
 
@@ -270,7 +270,7 @@ Run models from a JSON adapter config:
 ```bash
 uv run workspace-bench \
   --models-file my-models.json \
-  --suite workspace-tasks \
+  --taskset workspace-tasks \
   --timeout 240
 ```
 
@@ -290,7 +290,7 @@ single-shot JSONL adapter behavior. Transient model API failures such as HTTP
 and `--retry-backoff`. Use `--concurrency N` for bounded parallel episodes and
 `--episode-timeout` for a wall-clock cap over all turns in one attempt. Every
 completed task×repeat cell updates `<model>.checkpoint.json`; `--resume`
-validates the deterministic model, temperature, harness-revision, suite-hash,
+validates the deterministic model, temperature, harness-revision, taskset-hash,
 and task manifest before replaying completed cells and running only missing
 ones.
 
@@ -335,8 +335,8 @@ After at least two model result sets exist,
 conservatively approved override payload; `--apply-overrides PATH` writes the
 approved table to a measured-difficulty JSON file for downstream review.
 
-Use `--suite workspace-tasks` for the stable interactive suite, and `--task-dir`
-for a private task suite. You can slice with `--family`, `--category`, and
+Use `--taskset workspace-tasks` for the stable interactive taskset, and `--task-dir`
+for a private taskset. You can slice with `--family`, `--category`, and
 `--difficulty`.
 
 Export a task envelope without running an agent:
@@ -367,25 +367,25 @@ interactive. Use `workspace-bench --model ...` when the agent must observe each
 tool result before selecting its next action.
 
 Training exports are explicit downstream artifacts. Preserve their Git commit,
-dirty-worktree flag, suite content hash, schema version, task identity, and
+dirty-worktree flag, taskset content hash, schema version, task identity, and
 model/runner metadata. Prefer passing attempts for SFT, keep failed attempts
 only with grade metadata, and do not mix in hidden answer data.
 
-## Suites
+## Tasksets
 
-The benchmark is organized as **suites**: certified sets of tasks that can
+The benchmark is organized as **tasksets**: certified sets of tasks that can
 be added independently and reported separately or in aggregate. Bundled today:
 
-| suite | tasks | what it measures |
+| taskset | tasks | what it measures |
 | --- | --- | --- |
 | `smoke` | 80 | four-level execution ladder across every Workspace MCP tool and knowledge surface |
 | `enterprise-apps-default` | 138 | answering 69 byte-verbatim product prompts across two seeded data worlds |
 | `workspace-tasks` | 120 | operating the workspace through agent-authored persona storylines: 6 personas x 4 stories x 5 levels (Execute, Find, Derive, Ground, Compose), closed-world |
 
 ```bash
-# run or validate one suite
-uv run workspace-bench validate --suite workspace-tasks --min-tasks 120
-uv run workspace-bench --models-file my-models.json --suite workspace-tasks
+# run or validate one taskset
+uv run workspace-bench validate --taskset workspace-tasks --min-tasks 120
+uv run workspace-bench --models-file my-models.json --taskset workspace-tasks
 ```
 
 The current `workspace-tasks` board (strict pass@1, closed-world; the
@@ -418,16 +418,16 @@ excluded cautionary row. Rows for claude-opus-5 and kimi-k3 are
 credit-blocked (checkpoints resume when provider credits allow); each
 exclusion is recorded with its reason in the board JSON.
 
-Every suite requires the reference solution to pass every task and a
+Every taskset requires the reference solution to pass every task and a
 do-nothing agent to fail every task. Additional generation and validation gates
-are suite-specific: they include prompt provenance, outcome-only rubric review,
+are taskset-specific: they include prompt provenance, outcome-only rubric review,
 coverage and difficulty quotas, mutation sensitivity, check caps, live-process
-tests, and clean teardown where applicable. Each suite README records its exact
+tests, and clean teardown where applicable. Each taskset README records its exact
 generation method, axes, gates, and limitations.
 
-Per-suite results roll up into one pooled aggregate — task counts are
-added across suites, never averaged percentages. Point the report at one
-run directory per model per suite:
+Per-taskset results roll up into one pooled aggregate — task counts are
+added across tasksets, never averaged percentages. Point the report at one
+run directory per model per taskset:
 
 ```bash
 # each evaluator invocation writes one run directory per model
@@ -437,13 +437,13 @@ uv run workspace-bench compile suites \
   --output /tmp/workspace-bench-suites-example.json
 ```
 
-This is the extension path: a firm can add a private suite built from the
+This is the extension path: a firm can add a private taskset built from the
 data and workflows that matter to it — its workspace skills, macro workflows,
 client advisory, research, or trading flows — using the same task schema,
-certification gates, and reporting. The suite name in `--run name=dir` is
-free-form, so a private suite joins the aggregate just by naming itself.
+certification gates, and reporting. The taskset name in `--run name=dir` is
+free-form, so a private taskset joins the aggregate just by naming itself.
 
-## Private Task Suites
+## Private Tasksets
 
 Evaluate private tasks from a directory:
 
@@ -455,12 +455,12 @@ uv run workspace-bench run-agent-command \
   --json
 ```
 
-Private task suites use the same task schema as the bundled benchmark. This is
+Private tasksets use the same task schema as the bundled benchmark. This is
 the main BYO-data path: teams can point tasks at deterministic internal
 Workspace backends and keep graders local. Discovery is recursive, so
 `<family>/<task>.json` is the recommended layout. An optional
-`task_suite.json` can declare `suite_id` and `visibility` (`private` or
-`hidden`). Hidden suites redact prompts from trace artifacts while
+`taskset.json` can declare `taskset_id` and `visibility` (`private` or
+`hidden`). Hidden tasksets redact prompts from trace artifacts while
 retaining ids, scores, calls, results, and final snapshots. The public agent
 envelope always excludes `success`, `oracle_tool_calls`, and hidden grader
 logic. Good private tasks use deterministic versioned data, require tool use
@@ -488,7 +488,7 @@ Check the broader live MCP surface against a workflow task:
 ```bash
 uv run --extra live workspace-bench smoke-workspace-mcp \
   --url http://127.0.0.1:8787 \
-  --suite workspace-tasks \
+  --taskset workspace-tasks \
   --task workspace-tasks/compliance_risk/alert_sweep_level4 \
   --check-surface \
   --json
@@ -525,10 +525,61 @@ faithfully are refused with a reason. Live runs execute in a real user
 workspace: results are validation evidence for grader fidelity, never board
 numbers.
 
-The operating suite was replaced by the agent-authored `workspace-tasks`
-suite in July 2026; its live-parity eligibility set is pending derivation.
+The retired operating suite was replaced by the agent-authored
+`workspace-tasks` taskset in July 2026; its live-parity eligibility set is
+pending derivation.
 Compose-rung tasks use backend/app mutation tools that the conservative
 replay does not execute, so they will be refused with a reason.
+
+## Harbor Adapter
+
+Workspace Bench can generate a self-contained [Harbor](https://harborframework.com/)
+task while keeping the native task JSON, simulator, and grader authoritative.
+The reference export uses Harbor `0.20.0` and the real committed
+`workspace-mcp` sidecar:
+
+```bash
+uv run workspace-bench export-harbor \
+  --workspace-mcp-repo ~/Documents/git/workspace-mcp
+```
+
+The generated task is written below `build/harbor/` (which is intentionally
+ignored). To export another bundled task, pass its qualified
+`taskset/family/task` reference with `--task`. The converter:
+
+- archives the sidecar's committed `HEAD`, excluding dirty working-tree files;
+- puts the sealed evaluator and reference trace only in trusted runtime,
+  Oracle, and verifier contexts;
+- exposes one task-aware MCP gateway to the agent;
+- keeps the real sidecar's browser bootstrap on an isolated Docker network;
+- records and finalizes a trusted episode artifact after the agent stops; and
+- invokes the existing `grade_task` implementation in a separate verifier.
+
+Run the deterministic reference gates with Harbor's local Docker provider:
+
+```bash
+HARBOR_TASK=build/harbor/workspace-bench-enterprise-apps-default/\
+compliance_surveillance_hub/compliance_surveillance_hub_p3_x
+
+uvx --python /usr/local/bin/python3.13 --from 'harbor==0.20.0' \
+  harbor run -p "$HARBOR_TASK" -e docker -a oracle -y
+
+uvx --python /usr/local/bin/python3.13 --from 'harbor==0.20.0' \
+  harbor run -p "$HARBOR_TASK" -e docker -a nop -y
+```
+
+The primary Harbor reward is deterministic strict pass/fail. Enterprise
+default tasks retain `judge_pending` and a separate `judged_strict` reward, so
+an unevaluated answer judge is never presented as a completed judged result.
+Harbor-native model runs are a separate harness track from the existing native
+model loop. Multi-container certification currently targets the local Docker
+provider. Harbor `0.20.0`'s local Docker provider does not accept a
+`no-network` mode on a separate verifier, so the verifier image remains sealed
+but uses the provider's public-network baseline; later provider certification
+should restore an explicit no-network verifier policy where supported.
+
+Implementation status, exact validation commands, and remaining generalization
+work are maintained in [`PLANNING.md`](PLANNING.md).
 
 ## Browser Certification
 
@@ -682,7 +733,7 @@ See [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md) for release gates and
 
 ## Task Organization
 
-Every active task has the canonical identity `suite/family/task`, for example
+Every active task has the canonical identity `taskset/family/task`, for example
 `workspace-tasks/research_analyst/earnings_prep_level0`. The local task id contains only the
 descriptive slug; generator mechanics are not part of the public identity.
 
@@ -696,7 +747,7 @@ descriptive slug; generator mechanics are not part of the public identity.
 - `story`: one persona storyline climbing the workspace-tasks ladder
 
 **Difficulty** — `easy`, `medium`, or `hard` for classic tasks; the bundled
-suites instead grade a `level0`–`level4` (workspace-tasks) or `level0`–`level3` (smoke)
+tasksets instead grade a `level0`–`level4` (workspace-tasks) or `level0`–`level3` (smoke)
 operation ladder. It does not render prompts or select graders.
 **Specification level** is the structural axis that does; see
 [TASK-SCHEMA.md](TASK-SCHEMA.md).
@@ -708,9 +759,9 @@ For readers arriving from other benchmarks:
 | here | elsewhere |
 | --- | --- |
 | task | Terminal-Bench / Inspect / GAIA / TMax "task" (HELM says "scenario") |
-| suite | lm-eval-harness "group"/"suite", Terminal-Bench registry "dataset" |
+| taskset | lm-eval-harness "group"/"suite", Terminal-Bench registry "dataset" |
 | difficulty | GAIA "Level 1–3", TMax "complexity buckets" |
-| family | METR-style "task family" — the suite's grouping axis (personas in workspace-tasks, tool families in smoke) |
+| family | METR-style "task family" — the taskset's grouping axis (personas in workspace-tasks, tool families in smoke) |
 | category | task type — τ-bench's "domain" plays a similar role |
 | rubric / graders | Terminal-Bench "verification test suite", TMax "graded verifiers" |
 | oracle | Terminal-Bench "oracle solution" (same word) |
@@ -721,20 +772,19 @@ For readers arriving from other benchmarks:
 src/workspace_bench/
   cli.py                 Command line interface
   core/                  Task dataclasses, episodes, runner, graders
-  task_suites/           Bundled suites, organized as suite/family/task:
+  tasksets/           Bundled tasksets, organized as taskset/family/task:
     smoke/                              MCP-surface round trips
     enterprise_apps_default/            Default-app product prompts
     workspace_tasks/                    Agent-authored persona storylines
       portfolio_manager/ ...              One directory per persona
   workspace/             Fixture backends, simulator, live workspace-mcp smoke bridge
-    data/                Packaged fixture metadata such as Stark and Daloopa widgets/apps
+  data/                  Packaged fixture metadata such as Stark and Daloopa widgets/apps
   agents/                Oracle/noop agents, JSONL command protocol, model adapter helpers
   reports/               Model comparison, reliability metrics, charts, analysis reports
-  exports/               Rollout, SFT, preference, and metadata export helpers
-  rl/                    Gym-style env, action/observation/reward helpers
+  integrations/          Harbor task exporter, trusted runtime, and verifier
   __init__.py            Small public convenience surface
 scripts/
-  generators/             Deterministic suite, catalog, matrix, and fixture generators
+  generators/             Deterministic taskset, catalog, matrix, and fixture generators
   audits/                 Local, release, hosted-surface, and prompt audits
 runs/
   reports/                 Compiled reports and generated catalogs/matrices
@@ -762,4 +812,4 @@ Benchmark data should not appear in model training corpora unless explicitly rel
 
 ## Release Notes
 
-This is an alpha benchmark package. It is ready for local evals, private task suites, CI regression testing, `workspace-mcp` sidecar smoke tests, and local browser-harness self-testing, and it ships with committed model boards and baselines. Before a broader public leaderboard: hidden task suites and a completed browser-certification run against a real authenticated Workspace.
+This is an alpha benchmark package. It is ready for local evals, private tasksets, CI regression testing, `workspace-mcp` sidecar smoke tests, and local browser-harness self-testing, and it ships with committed model boards and baselines. Before a broader public leaderboard: hidden tasksets and a completed browser-certification run against a real authenticated Workspace.

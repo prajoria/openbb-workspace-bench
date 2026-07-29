@@ -332,7 +332,7 @@ def test_resolve_repo_root_finds_checkout_from_nested_path() -> None:
     root = resolve_repo_root()
 
     assert (root / "pyproject.toml").exists()
-    assert (root / "src" / "workspace_bench" / "task_suites").exists()
+    assert (root / "src" / "workspace_bench" / "tasksets").exists()
 
 
 def test_validate_adapters_for_runner_rejects_unsupported_interactive_provider() -> None:

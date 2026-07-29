@@ -2,7 +2,7 @@
 
 Tasks: 120
 
-The benchmark's flagship suite: 120 agent-authored tasks of operating a
+The benchmark's flagship taskset: 120 agent-authored tasks of operating a
 lived-in financial workspace - 6 personas x 4 stories x 5 levels.
 
 - **Personas** (one directory each): `portfolio_manager`, `fund_operations`,
@@ -27,7 +27,7 @@ No script generated these tasks. They were authored by agents working under
 the contracts in `.claude/skills/` (task-author, task-validator,
 task-level-fairness, workspace-bench-tasks-orchestrator), certified by
 oracle/no-op replay, and gated per persona on a gpt-4.1-mini calibration
-staircase (three repeats; pooled 85/60/36/17/0 across the suite - see
+staircase (three repeats; pooled 85/60/36/17/0 across the taskset - see
 `scripts/audits/calibrate_workspace_tasks.py` and
 `runs/reports/workspace-tasks-calibration.json`). The model board is compiled
 by `scripts/audits/compile_workspace_tasks_board.py` into
@@ -35,9 +35,9 @@ by `scripts/audits/compile_workspace_tasks_board.py` into
 
 ```bash
 # certify: oracle passes, no-op fails, quotas hold
-uv run workspace-bench validate --suite workspace-tasks
+uv run workspace-bench validate --taskset workspace-tasks
 
 # run a model
 uv run python -m workspace_bench.reports.model_compare \
-  --model openai:gpt-4.1-mini --suite workspace-tasks
+  --model openai:gpt-4.1-mini --taskset workspace-tasks
 ```

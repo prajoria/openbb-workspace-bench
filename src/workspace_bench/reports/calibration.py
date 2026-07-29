@@ -276,8 +276,9 @@ def main(argv: list[str] | None = None) -> int:
         help="Result JSON files or directories. Defaults to runs/comparison/core-*.",
     )
     parser.add_argument(
-        "--suite",
-        help="Join family/difficulty from the current bundled suite by qualified task id.",
+        "--taskset", "--suite",
+        dest="suite",
+        help="Join family/difficulty from the current bundled taskset by qualified task id.",
     )
     parser.add_argument(
         "--limitation-input",

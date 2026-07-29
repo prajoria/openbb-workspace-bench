@@ -13,9 +13,9 @@ import json
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[2]
-SMOKE = REPO / "src/workspace_bench/task_suites/smoke"
-APPS_DEFAULT = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
-PACK = REPO / "src/workspace_bench/task_suites/workspace_tasks"
+SMOKE = REPO / "src/workspace_bench/tasksets/smoke"
+APPS_DEFAULT = REPO / "src/workspace_bench/tasksets/enterprise_apps_default"
+PACK = REPO / "src/workspace_bench/tasksets/workspace_tasks"
 OUT_MD = REPO / "runs/reports/tool-coverage-matrix.md"
 OUT_JSON = REPO / "runs/reports/tool-matrix-data.json"
 
@@ -66,7 +66,7 @@ SHORT = [
 
 
 def load(directory: Path) -> list[dict]:
-    manifest_path = directory / "task_suite.json"
+    manifest_path = directory / "taskset.json"
     defaults: dict = {}
     if manifest_path.is_file():
         defaults = json.loads(manifest_path.read_text()).get("task_defaults") or {}

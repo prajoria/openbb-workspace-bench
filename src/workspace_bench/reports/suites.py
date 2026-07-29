@@ -1,4 +1,4 @@
-"""Compile per-suite and aggregate results across task suites.
+"""Compile per-taskset and aggregate results across tasksets.
 
 Suites stay separable — a new suite extends the report without touching
 existing ones — and the aggregate pools current-era attempt counts per model
@@ -21,7 +21,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-from workspace_bench.core.runner import BUILTIN_TASK_SUITES, load_builtin_tasks
+from workspace_bench.core.runner import BUILTIN_TASKSETS, load_builtin_tasks
 from workspace_bench.reports.metrics import (
     result_row_metric_slices,
     summarize_result_rows,
@@ -165,7 +165,7 @@ def main(argv: list[str] | None = None) -> int:
                 for task in load_builtin_tasks(name)
                 for key in (task.id, task.qualified_id)
             }
-            if name in BUILTIN_TASK_SUITES and not historical
+            if name in BUILTIN_TASKSETS and not historical
             else {}
         )
         bucket = suites_map.setdefault(

@@ -45,16 +45,24 @@ def test_default_workspace_build_and_hash_are_deterministic() -> None:
     )
 
 
-def test_task_suite_manifest_validates_workspace_baseline() -> None:
+def test_taskset_manifest_validates_workspace_baseline() -> None:
     manifest = TaskSuiteManifest.from_dict(
-        {"suite_id": "baseline-test", "workspace_baseline": DEFAULT_WORKSPACE_VERSION}
+        {"taskset_id": "baseline-test", "workspace_baseline": DEFAULT_WORKSPACE_VERSION}
     )
 
     assert manifest.workspace_baseline == DEFAULT_WORKSPACE_VERSION
     with pytest.raises(ValueError, match="workspace_baseline"):
         TaskSuiteManifest.from_dict(
-            {"suite_id": "baseline-test", "workspace_baseline": "default-v2"}
+            {"taskset_id": "baseline-test", "workspace_baseline": "default-v2"}
         )
+
+
+def test_taskset_id_wins_over_legacy_suite_id() -> None:
+    manifest = TaskSuiteManifest.from_dict(
+        {"taskset_id": "canonical", "suite_id": "legacy"}
+    )
+
+    assert manifest.suite_id == "canonical"
 
 
 def test_workspace_tasks_and_default_suites_declare_the_default_workspace() -> None:
@@ -248,7 +256,7 @@ def test_workspace_backends_axis_mixes_and_matches() -> None:
 
     override = TaskSuiteManifest.from_dict(
         {
-            "suite_id": "mix-test",
+            "taskset_id": "mix-test",
             "workspace_baseline": ONBOARD_A_WORKSPACE_VERSION,
             "workspace_backends": ["stark-enterprise-x", "getting-started"],
         }
@@ -257,7 +265,7 @@ def test_workspace_backends_axis_mixes_and_matches() -> None:
     assert [fixture.name for fixture in fixtures] == ["stark-enterprise-x", "getting-started"]
 
     backends_only = TaskSuiteManifest.from_dict(
-        {"suite_id": "mix-test", "workspace_backends": ["stark-enterprise-x"]}
+        {"taskset_id": "mix-test", "workspace_backends": ["stark-enterprise-x"]}
     )
     task_state = {"dashboard": {"name": "Task Dashboard"}}
     fixtures, state = apply_workspace_baseline(backends_only, (), task_state)
@@ -266,7 +274,7 @@ def test_workspace_backends_axis_mixes_and_matches() -> None:
 
     missing_required = TaskSuiteManifest.from_dict(
         {
-            "suite_id": "mix-test",
+            "taskset_id": "mix-test",
             "workspace_baseline": ONBOARD_A_WORKSPACE_VERSION,
             "workspace_backends": ["support-daloopa-skills"],
         }
@@ -275,12 +283,12 @@ def test_workspace_backends_axis_mixes_and_matches() -> None:
         apply_workspace_baseline(missing_required, (), {})
 
 
-def test_task_suite_manifest_validates_workspace_backends() -> None:
+def test_taskset_manifest_validates_workspace_backends() -> None:
     with pytest.raises(ValueError, match="workspace_backends"):
-        TaskSuiteManifest.from_dict({"suite_id": "x", "workspace_backends": []})
+        TaskSuiteManifest.from_dict({"taskset_id": "x", "workspace_backends": []})
     with pytest.raises(ValueError, match="unique"):
         TaskSuiteManifest.from_dict(
-            {"suite_id": "x", "workspace_backends": ["stark-enterprise-x", "stark-enterprise-x"]}
+            {"taskset_id": "x", "workspace_backends": ["stark-enterprise-x", "stark-enterprise-x"]}
         )
 
 
@@ -384,7 +392,7 @@ def test_world_y_varies_rows_and_entities_within_widget_contracts() -> None:
 def test_any_stark_world_satisfies_the_baseline_requirement() -> None:
     manifest = TaskSuiteManifest.from_dict(
         {
-            "suite_id": "world-test",
+            "taskset_id": "world-test",
             "workspace_baseline": ONBOARD_A_WORKSPACE_VERSION,
             "workspace_backends": ["stark-enterprise-y"],
         }
@@ -400,7 +408,7 @@ def test_any_stark_world_satisfies_the_baseline_requirement() -> None:
 def test_at_most_one_stark_world_per_episode() -> None:
     manifest = TaskSuiteManifest.from_dict(
         {
-            "suite_id": "world-test",
+            "taskset_id": "world-test",
             "workspace_baseline": ONBOARD_A_WORKSPACE_VERSION,
             "workspace_backends": ["stark-enterprise-x", "stark-enterprise-y"],
         }
@@ -417,7 +425,7 @@ def test_workspace_skills_axis_filters_the_skill_surface() -> None:
 
     manifest = TaskSuiteManifest.from_dict(
         {
-            "suite_id": "skills-test",
+            "taskset_id": "skills-test",
             "workspace_baseline": ONBOARD_A_WORKSPACE_VERSION,
             "workspace_skills": ["finance-earnings-prep", "finance-comps"],
         }
@@ -452,12 +460,12 @@ def test_workspace_skills_axis_filters_the_skill_surface() -> None:
             replace(task, suite=manifest, workspace_skills=("no-such-skill",))
         )
     with pytest.raises(ValueError, match="workspace_skills"):
-        TaskSuiteManifest.from_dict({"suite_id": "x", "workspace_skills": []})
+        TaskSuiteManifest.from_dict({"taskset_id": "x", "workspace_skills": []})
 
 
 def test_empty_string_baseline_means_explicitly_none() -> None:
     manifest = TaskSuiteManifest.from_dict(
-        {"suite_id": "clear-test", "workspace_baseline": DEFAULT_WORKSPACE_VERSION}
+        {"taskset_id": "clear-test", "workspace_baseline": DEFAULT_WORKSPACE_VERSION}
     )
     task_state = {"dashboard": {"name": "Task Dashboard"}}
     fixtures, state = apply_workspace_baseline(
@@ -474,14 +482,14 @@ def test_empty_string_baseline_means_explicitly_none() -> None:
     assert [fixture.name for fixture in fixtures] == ["stark-enterprise-x"]
 
     manifest_none = TaskSuiteManifest.from_dict(
-        {"suite_id": "clear-test", "workspace_baseline": ""}
+        {"taskset_id": "clear-test", "workspace_baseline": ""}
     )
     assert manifest_none.workspace_baseline == ""
 
 
 def test_task_level_axis_overrides_win_over_the_manifest() -> None:
     manifest = TaskSuiteManifest.from_dict(
-        {"suite_id": "override-test", "workspace_baseline": DEFAULT_WORKSPACE_VERSION}
+        {"taskset_id": "override-test", "workspace_baseline": DEFAULT_WORKSPACE_VERSION}
     )
     fixtures, state = apply_workspace_baseline(
         manifest,

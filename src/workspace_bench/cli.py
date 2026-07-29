@@ -39,14 +39,14 @@ from workspace_bench.core.judge import (
 )
 from workspace_bench.core.provenance import git_provenance
 from workspace_bench.core.runner import (
-    BUILTIN_TASK_SUITE_ORDER,
+    BUILTIN_TASKSET_ORDER,
     TaskRunner,
     find_task,
-    load_builtin_task_suite_manifest,
+    load_builtin_taskset_manifest,
     load_builtin_tasks,
     load_task_directory,
     load_task_file,
-    load_task_suite_manifest,
+    load_taskset_manifest,
     tasks_workspace_baseline,
 )
 from workspace_bench.reports.oracle_report import (
@@ -65,7 +65,7 @@ def main(argv: list[str] | None = None) -> int:
     raw_argv = list(sys.argv[1:] if argv is None else argv)
     # Evaluating IS the tool's function, so it takes no subcommand:
     # `workspace-bench --model openai:gpt-4.1-mini --task <id>` (or
-    # --models-file / --suite / any runner flag) routes straight to the
+    # --models-file / --taskset / any runner flag) routes straight to the
     # interactive runner. Bare `workspace-bench` prints the help below.
     if raw_argv and raw_argv[0].startswith("-") and raw_argv[0] not in ("-h", "--help"):
         from workspace_bench.reports.model_compare import main as compare_models_main
@@ -83,7 +83,13 @@ def main(argv: list[str] | None = None) -> int:
     show_parser = subparsers.add_parser("show", help="Show a task JSON summary.")
     show_parser.add_argument("task_id")
     show_parser.add_argument("--task-file", help="Show a task JSON file.")
-    show_parser.add_argument("--suite", default="workspace-tasks", choices=list(BUILTIN_TASK_SUITE_ORDER))
+    show_parser.add_argument(
+        "--taskset",
+        "--suite",
+        dest="suite",
+        default="workspace-tasks",
+        choices=list(BUILTIN_TASKSET_ORDER),
+    )
 
     validate_parser = subparsers.add_parser(
         "validate", help="Validate task metadata, oracle traces, and noop baseline."
@@ -176,7 +182,7 @@ def main(argv: list[str] | None = None) -> int:
 
     runtime_parser = subparsers.add_parser(
         "runtime-probe",
-        help="Run oracle fixture-backed HTTP endpoint probes for a task suite.",
+        help="Run oracle fixture-backed HTTP endpoint probes for a taskset.",
     )
     _add_task_collection_args(runtime_parser)
     _add_task_filters(runtime_parser)
@@ -193,7 +199,7 @@ def main(argv: list[str] | None = None) -> int:
 
     adversarial_parser = subparsers.add_parser(
         "adversarial",
-        help="Run systematic invalid-candidate grader checks for a task suite.",
+        help="Run systematic invalid-candidate grader checks for a taskset.",
     )
     _add_task_collection_args(adversarial_parser)
     _add_task_filters(adversarial_parser)
@@ -211,7 +217,11 @@ def main(argv: list[str] | None = None) -> int:
     )
     parity_parser.add_argument("--task", required=True, help="Task id or qualified ref.")
     parity_parser.add_argument(
-        "--suite", default=None, choices=list(BUILTIN_TASK_SUITE_ORDER)
+        "--taskset",
+        "--suite",
+        dest="suite",
+        default=None,
+        choices=list(BUILTIN_TASKSET_ORDER),
     )
     parity_parser.add_argument(
         "--url",
@@ -244,10 +254,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     smoke_parser.add_argument("--url", default="http://127.0.0.1:8787")
     smoke_parser.add_argument(
+        "--taskset",
         "--suite",
+        dest="suite",
         default="workspace-tasks",
-        choices=list(BUILTIN_TASK_SUITE_ORDER),
-        help="Bundled task suite used to resolve --task.",
+        choices=list(BUILTIN_TASKSET_ORDER),
+        help="Bundled taskset used to resolve --task.",
     )
     smoke_parser.add_argument("--task", default="workspace-tasks/compliance_risk/alert_sweep_level0")
     smoke_parser.add_argument("--agent", default="oracle", choices=["oracle", "noop"])
@@ -268,7 +280,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     export_parser.add_argument("--task")
     export_parser.add_argument("--task-file", help="Export a task JSON file.")
-    export_parser.add_argument("--suite", default="workspace-tasks", choices=list(BUILTIN_TASK_SUITE_ORDER))
+    export_parser.add_argument(
+        "--taskset",
+        "--suite",
+        dest="suite",
+        default="workspace-tasks",
+        choices=list(BUILTIN_TASKSET_ORDER),
+    )
     export_parser.add_argument("--output", required=True)
 
     harbor_parser = subparsers.add_parser(
@@ -281,7 +299,7 @@ def main(argv: list[str] | None = None) -> int:
             "enterprise-apps-default/compliance_surveillance_hub/"
             "compliance_surveillance_hub_p3_x"
         ),
-        help="Qualified suite/family/task reference.",
+        help="Qualified taskset/family/task reference.",
     )
     harbor_parser.add_argument(
         "--output-root",
@@ -374,17 +392,17 @@ def _add_task_filters(parser: argparse.ArgumentParser) -> None:
 
 def _add_task_collection_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
-        "--suite",
+        "--taskset", "--suite",
         dest="suite",
         default="workspace-tasks",
-        choices=list(BUILTIN_TASK_SUITE_ORDER),
+        choices=list(BUILTIN_TASKSET_ORDER),
         help=(
-            "Bundled task suite. workspace-tasks = operating the workspace (120)."
+            "Bundled taskset. workspace-tasks = operating the workspace (120)."
         ),
     )
     parser.add_argument(
         "--task-dir",
-        help="Directory of task JSON files. Overrides --suite.",
+        help="Directory of task JSON files. Overrides --taskset.",
     )
 
 
@@ -454,7 +472,7 @@ def _cmd_validate(args: argparse.Namespace) -> int:
 
 
 def _cmd_manifest(args: argparse.Namespace) -> int:
-    manifest = build_manifest(_task_collection(args), _task_suite_manifest(args))
+    manifest = build_manifest(_task_collection(args), _taskset_manifest(args))
     if args.json:
         print(json.dumps(manifest, indent=2, sort_keys=True))
         return 0
@@ -472,7 +490,7 @@ def _cmd_report(args: argparse.Namespace) -> int:
     tasks = _task_collection(args)
     report = build_report(
         tasks,
-        _task_suite_manifest(args),
+        _taskset_manifest(args),
         release_profile=_release_profile(args),
     )
     rendered = (
@@ -508,7 +526,7 @@ def _cmd_run(args: argparse.Namespace) -> int:
         _write_trace_artifacts(
             Path(args.trace_dir),
             results,
-            redact_prompts=_should_redact_task_suite(args),
+            redact_prompts=_should_redact_taskset(args),
         )
 
     if args.json:
@@ -694,7 +712,7 @@ def _cmd_run_agent_command(args: argparse.Namespace) -> int:
         _write_trace_artifacts(
             Path(args.trace_dir),
             results,
-            redact_prompts=_should_redact_task_suite(args),
+            redact_prompts=_should_redact_taskset(args),
         )
 
     if args.json:
@@ -894,9 +912,9 @@ def _cmd_smoke_workspace_mcp(args: argparse.Namespace) -> int:
 
 
 def _release_profile(args: argparse.Namespace) -> str | None:
-    """Resolve which bundled suite's release quotas apply, if any.
+    """Resolve which bundled taskset's release quotas apply, if any.
 
-    Quotas hold for a full bundled suite only: a private ``--task-dir`` suite
+    Quotas hold for a full bundled taskset only: a private ``--task-dir`` taskset
     or a filtered slice is validated for the universal gates alone.
     """
 
@@ -941,7 +959,7 @@ def _selected_tasks(args: argparse.Namespace) -> list[Task]:
             and getattr(args, "suite", "workspace-tasks") == "workspace-tasks"
         ):
             # A task id should just work without naming the suite (mirrors
-            # the evaluator): fall back to searching every bundled suite.
+            # the evaluator): fall back to searching every bundled taskset.
             return [find_task(task_id)]
         if not tasks:
             raise KeyError(f"Unknown task {task_id!r}")
@@ -957,23 +975,23 @@ def _task_collection(args: argparse.Namespace) -> list[Task]:
     return tasks
 
 
-def _task_suite_manifest(args: argparse.Namespace) -> TaskSuiteManifest | None:
+def _taskset_manifest(args: argparse.Namespace) -> TaskSuiteManifest | None:
     task_dir = getattr(args, "task_dir", None)
     if not task_dir:
-        manifest = load_builtin_task_suite_manifest(
+        manifest = load_builtin_taskset_manifest(
             getattr(args, "suite", "workspace-tasks")
         )
     else:
-        manifest = load_task_suite_manifest(Path(task_dir))
+        manifest = load_taskset_manifest(Path(task_dir))
     return manifest
 
 
-def _should_redact_task_suite(args: argparse.Namespace) -> bool:
-    return _task_suite_is_hidden(_task_suite_manifest(args))
+def _should_redact_taskset(args: argparse.Namespace) -> bool:
+    return _taskset_is_hidden(_taskset_manifest(args))
 
 
-def _task_suite_is_hidden(task_suite: TaskSuiteManifest | None) -> bool:
-    return task_suite is not None and task_suite.visibility == "hidden"
+def _taskset_is_hidden(taskset: TaskSuiteManifest | None) -> bool:
+    return taskset is not None and taskset.visibility == "hidden"
 
 
 def _task_from_file_or_builtin(task_id: str, task_file: str | None, suite: str = "workspace-tasks") -> Task:
@@ -990,10 +1008,10 @@ def _load_task_file_with_suite(path: Path) -> Task:
 
     manifest = None
     for directory in (path.parent, *path.parents):
-        manifest = load_task_suite_manifest(directory)
+        manifest = load_taskset_manifest(directory)
         if manifest:
             break
-    return load_task_file(path, task_suite=manifest)
+    return load_task_file(path, taskset=manifest)
 
 
 def _agent_run_passed(run: AgentCommandRun) -> bool:
@@ -1134,7 +1152,7 @@ def _resolve_judged_task(row: dict) -> Task | None:
 
     qualified = str(row.get("qualified_id") or "")
     suite, _, _ = qualified.partition("/")
-    if suite not in BUILTIN_TASK_SUITE_ORDER:
+    if suite not in BUILTIN_TASKSET_ORDER:
         return None
     try:
         for task in load_builtin_tasks(suite):

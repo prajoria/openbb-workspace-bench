@@ -26,7 +26,7 @@ from workspace_bench.core.models import (  # noqa: E402
     TaskSuiteManifest,
     ToolCall,
 )
-from workspace_bench.core.suite_checks import task_payload_digest  # noqa: E402
+from workspace_bench.core.taskset_checks import task_payload_digest  # noqa: E402
 from workspace_bench.workspace.fixtures import (  # noqa: E402
     FixtureBackend,
     build_stark_enterprise_backend,
@@ -35,7 +35,7 @@ from workspace_bench.workspace.fixtures import (  # noqa: E402
 from workspace_bench.core.models import WORKSPACE_TOOL_NAMES  # noqa: E402
 from workspace_bench.workspace.simulated_workspace import WORKSPACE_SKILLS  # noqa: E402
 
-OUT_DIR = REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
+OUT_DIR = REPO / "src/workspace_bench/tasksets/enterprise_apps_default"
 REFERENCE_ANSWERS_PATH = OUT_DIR / "reference_answers.json"
 ORIGIN = "Bench Stark Enterprise"
 SUITE_ID = "workspace-bench-enterprise-apps-default"
@@ -611,13 +611,13 @@ def build_tasks(
 
 def _manifest_payload(content_sha256: str | None = None) -> JsonDict:
     payload: JsonDict = {
-        "suite_id": SUITE_ID,
+        "taskset_id": SUITE_ID,
         "visibility": "public",
         "task_defaults": dict(TASK_DEFAULTS),
         "description": (
             "69 byte-verbatim enterprise-app product prompts, each run twice "
             "as an _x/_y pair on the stark-enterprise-x and stark-enterprise-y "
-            "data worlds, graded by the suite judge against a reference "
+            "data worlds, graded by the taskset judge against a reference "
             "trajectory with a deterministic final-answer gate."
         ),
     }
@@ -772,7 +772,7 @@ def main() -> int:
     certify(tasks, canonical, world_y)
     if OUT_DIR.exists():
         for stale in OUT_DIR.rglob("*.json"):
-            if stale.name not in {"task_suite.json", REFERENCE_ANSWERS_PATH.name}:
+            if stale.name not in {"taskset.json", REFERENCE_ANSWERS_PATH.name}:
                 stale.unlink()
     for family, payload in tasks:
         family_dir = OUT_DIR / family
@@ -782,7 +782,7 @@ def main() -> int:
             encoding="utf-8",
         )
     (OUT_DIR / "__init__.py").write_text("", encoding="utf-8")
-    (OUT_DIR / "task_suite.json").write_text(
+    (OUT_DIR / "taskset.json").write_text(
         json.dumps(
             _manifest_payload(task_payload_digest([payload for _, payload in tasks])),
             indent=1,

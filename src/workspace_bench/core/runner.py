@@ -14,16 +14,17 @@ from workspace_bench.core.models import RunResult, Task, TaskSuiteManifest
 from workspace_bench.workspace.simulated_workspace import SimulatedWorkspace
 
 
-WORKSPACE_TASKS_PACKAGE = "workspace_bench.task_suites.workspace_tasks"
-APPS_DEFAULT_TASKS_PACKAGE = "workspace_bench.task_suites.enterprise_apps_default"
-SMOKE_TASKS_PACKAGE = "workspace_bench.task_suites.smoke"
-TASK_SUITE_MANIFEST = "task_suite.json"
-BUILTIN_TASK_SUITES = {
+WORKSPACE_TASKS_PACKAGE = "workspace_bench.tasksets.workspace_tasks"
+APPS_DEFAULT_TASKS_PACKAGE = "workspace_bench.tasksets.enterprise_apps_default"
+SMOKE_TASKS_PACKAGE = "workspace_bench.tasksets.smoke"
+TASKSET_MANIFEST = "taskset.json"
+LEGACY_TASKSET_MANIFEST = "task_suite.json"
+BUILTIN_TASKSETS = {
     "workspace-tasks": WORKSPACE_TASKS_PACKAGE,
     "enterprise-apps-default": APPS_DEFAULT_TASKS_PACKAGE,
     "smoke": SMOKE_TASKS_PACKAGE,
 }
-BUILTIN_TASK_SUITE_ORDER = (
+BUILTIN_TASKSET_ORDER = (
     "workspace-tasks",
     "enterprise-apps-default",
     "smoke",
@@ -79,25 +80,27 @@ def load_builtin_tasks(suite: str = "workspace-tasks") -> list[Task]:
     """Load bundled JSON tasks for a named suite."""
 
     try:
-        package = BUILTIN_TASK_SUITES[suite]
+        package = BUILTIN_TASKSETS[suite]
     except KeyError as error:
-        available = ", ".join(BUILTIN_TASK_SUITE_ORDER)
-        raise KeyError(f"Unknown built-in task suite {suite!r}. Available: {available}") from error
+        available = ", ".join(BUILTIN_TASKSET_ORDER)
+        raise KeyError(f"Unknown built-in taskset {suite!r}. Available: {available}") from error
     task_files = _resource_task_files(resources.files(package))
-    manifest = load_builtin_task_suite_manifest(suite)
+    manifest = load_builtin_taskset_manifest(suite)
     return [
-        load_task_file(Path(str(path)), task_suite=manifest)
+        load_task_file(Path(str(path)), taskset=manifest)
         for path in task_files
     ]
 
 
-def load_builtin_task_suite_manifest(suite: str = "workspace-tasks") -> TaskSuiteManifest | None:
-    """Load a bundled task-suite manifest when one exists."""
+def load_builtin_taskset_manifest(suite: str = "workspace-tasks") -> TaskSuiteManifest | None:
+    """Load a bundled taskset manifest when one exists."""
 
-    package = BUILTIN_TASK_SUITES[suite]
-    manifest = resources.files(package) / TASK_SUITE_MANIFEST
+    package = BUILTIN_TASKSETS[suite]
+    manifest = resources.files(package) / TASKSET_MANIFEST
     if not manifest.is_file():
-        return None
+        manifest = resources.files(package) / LEGACY_TASKSET_MANIFEST
+        if not manifest.is_file():
+            return None
     with manifest.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     if not isinstance(payload, dict):
@@ -107,13 +110,13 @@ def load_builtin_task_suite_manifest(suite: str = "workspace-tasks") -> TaskSuit
 
 def load_task_file(
     path: Path,
-    task_suite: TaskSuiteManifest | None = None,
+    taskset: TaskSuiteManifest | None = None,
 ) -> Task:
     with path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
-    if task_suite and task_suite.task_defaults:
+    if taskset and taskset.task_defaults:
         # Suite-wide labels apply only where the task file omits the field.
-        defaults = dict(task_suite.task_defaults)
+        defaults = dict(taskset.task_defaults)
         eval_defaults = defaults.pop("eval", None)
         payload = {**defaults, **payload}
         if eval_defaults and isinstance(payload.get("eval"), dict):
@@ -124,13 +127,15 @@ def load_task_file(
                 "eval": {**eval_defaults, **payload["eval"]},
             }
     task = Task.from_dict(payload, source_path=path)
-    return replace(task, suite=task_suite) if task_suite else task
+    return replace(task, suite=taskset) if taskset else task
 
 
-def load_task_suite_manifest(path: Path) -> TaskSuiteManifest | None:
-    manifest_path = path / TASK_SUITE_MANIFEST
+def load_taskset_manifest(path: Path) -> TaskSuiteManifest | None:
+    manifest_path = path / TASKSET_MANIFEST
     if not manifest_path.exists():
-        return None
+        manifest_path = path / LEGACY_TASKSET_MANIFEST
+        if not manifest_path.exists():
+            return None
     with manifest_path.open("r", encoding="utf-8") as handle:
         payload = json.load(handle)
     if not isinstance(payload, dict):
@@ -143,7 +148,7 @@ def load_task_directory(path: Path) -> list[Task]:
         raise FileNotFoundError(f"task directory does not exist: {path}")
     if not path.is_dir():
         raise NotADirectoryError(f"task directory is not a directory: {path}")
-    manifest = load_task_suite_manifest(path)
+    manifest = load_taskset_manifest(path)
     # Tasks live only in family subdirectories; suite-root JSON files (the
     # manifest, reference answer corpora, and other metadata) are never tasks.
     task_paths = sorted(
@@ -155,7 +160,7 @@ def load_task_directory(path: Path) -> list[Task]:
         key=lambda candidate: candidate.name,
     )
     return [
-        load_task_file(task_path, task_suite=manifest)
+        load_task_file(task_path, taskset=manifest)
         for task_path in task_paths
     ]
 
@@ -213,7 +218,7 @@ def find_task(task_id: str, suite: str | None = None, family: str | None = None)
     elif len(parts) != 1:
         raise KeyError(f"Invalid task reference {task_id!r}; expected suite/family/task")
 
-    suites = (suite,) if suite else BUILTIN_TASK_SUITE_ORDER
+    suites = (suite,) if suite else BUILTIN_TASKSET_ORDER
     matches: list[Task] = []
     for name in suites:
         for task in load_builtin_tasks(name):

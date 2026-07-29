@@ -8,7 +8,7 @@ import pytest
 
 from workspace_bench.core.models import Task
 from workspace_bench.core.runner import TaskRunner, load_builtin_tasks
-from workspace_bench.core.suite_checks import (
+from workspace_bench.core.taskset_checks import (
     SMOKE_LEVELS,
     SMOKE_TASK_FIELDS,
     smoke_release_checks,

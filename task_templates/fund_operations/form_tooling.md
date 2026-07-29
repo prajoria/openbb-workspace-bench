@@ -19,5 +19,5 @@ Entry Form carries a form-type parameter, the rarest kind on the surface.
 The weekly window policy carries the day picker: one trading week, five days.
 The widget-parameters spec governs the deeper rungs - it is the document that
 defines the parameter kinds themselves (form sits between endpoint and button
-in its list), making it the right source for the tooling note. The level-5
+in its list), making it the right source for the tooling note. The level-4
 build is the payoff: ops publishing its own intake service.

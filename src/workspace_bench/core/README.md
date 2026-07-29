@@ -8,7 +8,7 @@ know about a specific model provider, export format, or training loop.
 
 Use this package when you need to:
 
-- load bundled or private task suites
+- load bundled or private tasksets
 - run oracle or noop baselines
 - step through one Workspace episode
 - grade a final snapshot and trace

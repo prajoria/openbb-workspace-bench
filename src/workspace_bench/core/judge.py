@@ -178,7 +178,7 @@ def resolve_judge_template(task: Task | None) -> tuple[str, str]:
     """Return the judge template and its sha for a task.
 
     A suite may define its own judge in a ``JUDGE.md`` beside its task
-    families (e.g. ``task_suites/enterprise_apps_default/JUDGE.md``); tasks
+    families (e.g. ``tasksets/enterprise_apps_default/JUDGE.md``); tasks
     without one use the fixed default template.
     """
 

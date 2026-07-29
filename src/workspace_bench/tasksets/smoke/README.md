@@ -1,4 +1,4 @@
-# `smoke` task suite
+# `smoke` taskset
 
 Tasks: 80
 
@@ -50,7 +50,7 @@ expected to pursue the fastest outcome, not pace themselves.
 
 `ai-authored-direct`. Tasks are written directly in
 `scripts/generators/generate_smoke_suite.py`, with no scaling step; the
-generator deterministically certifies and rewrites the suite.
+generator deterministically certifies and rewrites the taskset.
 
 ## Axes
 
@@ -69,14 +69,14 @@ defaults: `level0`–`level2` are explicit, `level3` is partially specified.
 Generation requires the reference trace to pass, the no-op trace to fail,
 exactly one call to the target family tool, no more than six graded checks,
 the per-level tool-surface and baseline contract, and no mutation of a seeded
-baseline dashboard. `workspace-bench validate --suite smoke` rechecks schema
+baseline dashboard. `workspace-bench validate --taskset smoke` rechecks schema
 validity, reference success, no-op failure, and the smoke field profile
 (field allowlist, no redundant defaults, level contract, one task per family
 per level, explicit workspace axes).
 
 ## Limitations
 
-This is a harness-fidelity suite, not broad workflow coverage. Pure reads
+This is a harness-fidelity taskset, not broad workflow coverage. Pure reads
 have no durable state outcome, so smoke alone permits argument-matched trace
 checks for those reads. `assign_tasks_to_agents` only verifies that the
 request envelope round-trips; it does not prove downstream work. The live

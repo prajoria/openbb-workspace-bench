@@ -1,13 +1,13 @@
-"""Release-gate checks for the bundled task suites.
+"""Release-gate checks for the bundled tasksets.
 
-The generators certify a suite at generation time; the functions here re-verify
+The generators certify a taskset at generation time; the functions here re-verify
 the release-report subset from the shipped task JSON so that
 ``workspace-bench validate`` and ``workspace-bench report`` hold the same gates
 without rerunning generation.
 
-Profiles apply only to the bundled suites. Private ``--task-dir`` suites are
+Profiles apply only to the bundled tasksets. Private ``--task-dir`` tasksets are
 validated for loadability, metadata, oracle pass, and no-op failure, but are
-never held to the bundled suites' coverage quotas.
+never held to the bundled tasksets' coverage quotas.
 """
 
 from __future__ import annotations
@@ -22,9 +22,9 @@ from workspace_bench.core.models import FINAL_ANSWER_TOOL, JsonDict, RunResult, 
 from workspace_bench.core.mutation_checks import grader_mutation_failures
 from workspace_bench.core.models import WORKSPACE_TOOL_NAMES
 
-WORKSPACE_TASKS_SUITE = "workspace-tasks"
-SMOKE_SUITE = "smoke"
-APPS_DEFAULT_SUITE = "enterprise-apps-default"
+WORKSPACE_TASKS_TASKSET = "workspace-tasks"
+SMOKE_TASKSET = "smoke"
+APPS_DEFAULT_TASKSET = "enterprise-apps-default"
 
 # Field profile for apps-default: identity, instruction, world, sealed eval.
 APPS_DEFAULT_TASK_FIELDS = frozenset({"id", "prompt", "setup", "eval"})
@@ -60,18 +60,18 @@ WORKSPACE_TASKS_FAMILIES = {
 WORKSPACE_TASKS_BASELINE = "stark-workspace-a"
 
 
-def release_checks_for_suite(
-    suite: str | None,
+def release_checks_for_taskset(
+    taskset: str | None,
     tasks: list[Task],
     oracle_results: list[RunResult],
 ) -> dict[str, bool]:
-    """Return the release checks for a bundled suite; {} for private suites."""
+    """Return the release checks for a bundled taskset; {} for private tasksets."""
 
-    if suite == WORKSPACE_TASKS_SUITE:
+    if taskset == WORKSPACE_TASKS_TASKSET:
         return workspace_tasks_release_checks(tasks, oracle_results)
-    if suite == SMOKE_SUITE:
+    if taskset == SMOKE_TASKSET:
         return smoke_release_checks(tasks)
-    if suite == APPS_DEFAULT_SUITE:
+    if taskset == APPS_DEFAULT_TASKSET:
         return apps_default_release_checks(tasks)
     return {}
 
@@ -126,7 +126,7 @@ def apps_default_release_checks(tasks: list[Task]) -> dict[str, bool]:
             payload is not None and set(payload) <= APPS_DEFAULT_TASK_FIELDS
             for payload in payloads
         ),
-        "suite_content_hash_matches": _suite_content_hash_matches(tasks),
+        "suite_content_hash_matches": _taskset_content_hash_matches(tasks),
     }
 
 
@@ -176,7 +176,7 @@ def smoke_release_checks(tasks: list[Task]) -> dict[str, bool]:
             and all(value not in ({}, []) for value in payload.values())
             for payload in payloads
         ),
-        "suite_content_hash_matches": _suite_content_hash_matches(tasks),
+        "suite_content_hash_matches": _taskset_content_hash_matches(tasks),
     }
 
 
@@ -224,7 +224,7 @@ def workspace_tasks_release_checks(
     universal = _universal_release_checks(
         tasks, max_duplicate_prompts=0, max_prompt_words=200
     )
-    # The suite's generated deliverable is deliberately the note - the
+    # The taskset's generated deliverable is deliberately the note - the
     # persona's evidence artifact - so type-share quotas would force
     # artificial variety.
     universal.pop("generated_widget_type_diversity", None)
@@ -283,7 +283,7 @@ def _mutation_suite_passes(tasks: list[Task], oracle_results: list[RunResult]) -
 
 
 def task_payload_digest(payloads: Iterable[JsonDict]) -> str:
-    """Stable digest of a suite's authored task payloads."""
+    """Stable digest of a taskset's authored task payloads."""
 
     canonical = [
         json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
@@ -320,11 +320,11 @@ def _universal_release_checks(
             task.source_path is None or task.source_path.parent.name == task.family
             for task in tasks
         ),
-        "suite_content_hash_matches": _suite_content_hash_matches(tasks),
+        "suite_content_hash_matches": _taskset_content_hash_matches(tasks),
     }
 
 
-def _suite_content_hash_matches(tasks: list[Task]) -> bool:
+def _taskset_content_hash_matches(tasks: list[Task]) -> bool:
     """Recompute the shipped payload digest and compare to the manifest's."""
 
     expected_hashes = {

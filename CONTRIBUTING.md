@@ -2,27 +2,27 @@
 
 WorkspaceBench should stay benchmark-first. Contributions must preserve the
 same task, simulator, trace, and grader contracts used by the CLI and
-RL adapter. Generated task suites and reports are changed through their
+RL adapter. Generated tasksets and reports are changed through their
 generators, never by editing generated artifacts.
 
 ## Add a task
 
-1. Edit the relevant family generator for a bundled suite, or copy an existing
+1. Edit the relevant family generator for a bundled taskset, or copy an existing
    task into a private task directory.
 2. Give it a stable `id`, category, family, difficulty, and a
    specification level where it deviates from the difficulty default.
 3. Keep fixture data deterministic and versioned.
 4. Add clear `success` criteria that grade durable Workspace state.
 5. Add a known-good `oracle_tool_calls` trace.
-6. Regenerate the suite twice, confirm deterministic output, and run its
+6. Regenerate the taskset twice, confirm deterministic output, and run its
    validation gate.
 
 Private task discovery is recursive through `--task-dir`. The complete task and
-success-criteria contract is in [README.md](README.md#task--success-schema).
+success-criteria contract is in [TASK-SCHEMA.md](TASK-SCHEMA.md).
 
 ## Author a prompt
 
-Generate suite prompts from the family generators and shared renderer; do
+Generate taskset prompts from the family generators and shared renderer; do
 not edit bundled task JSON. Follow the structural specification contract:
 
 - Keep `explicit` tasks explicit.
@@ -44,12 +44,13 @@ uv run python scripts/audits/audit_task_identity.py
 uv run python scripts/audits/report_prompt_stats.py
 ```
 
-The suite generators share their deterministic assembly mechanics
-in `scripts/generators/_assembly/`. Keep suite policy in small callbacks/configuration
-(identity cleanup, artifact prefixes, exceptional cell sizes) rather than adding
-a second implementation of phrasing, difficulty, novelty, or matrix logic.
-After changing a generator, run it twice and verify that the bundled JSON is
-unchanged on the second run.
+The generated tasksets each have one deterministic generator in
+`scripts/generators/` (`generate_smoke_suite.py`,
+`generate_apps_default_suite.py`). Keep taskset policy in small
+callbacks/configuration (identity cleanup, artifact prefixes, exceptional cell
+sizes) rather than adding a second implementation of phrasing, difficulty,
+novelty, or matrix logic. After changing a generator, run it twice and verify
+that the bundled JSON is unchanged on the second run.
 
 ## Add a grader check
 
@@ -90,7 +91,7 @@ cleanly immediately before the mutation, then the invalid candidate must fail
 with its expected code. Add a representative test and run:
 
 ```bash
-uv run workspace-bench adversarial --suite workspace-tasks
+uv run workspace-bench adversarial --taskset workspace-tasks
 ```
 
 In-memory archetypes run on every applicable task. HTTP/data-side archetypes
@@ -136,7 +137,7 @@ uv run mypy src
 uv run python scripts/audits/audit_task_identity.py
 uv run python scripts/audits/report_prompt_stats.py
 uv run python scripts/audits/audit_release_consistency.py
-uv run --extra dev workspace-bench validate --suite workspace-tasks --min-tasks 120
+uv run --extra dev workspace-bench validate --taskset workspace-tasks --min-tasks 120
 ```
 
 For evaluator changes, also run the relevant adversarial gates and:

@@ -75,7 +75,7 @@ def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> N
         task for task in load_builtin_tasks() if task.id == "morning_briefing_level0"
     )
     assert source.source_path is not None
-    (tmp_path / "task_suite.json").write_text(
+    (tmp_path / "taskset.json").write_text(
         json.dumps({"task_defaults": {"category": "story"}}),
         encoding="utf-8",
     )
@@ -96,12 +96,43 @@ def test_task_directory_derives_missing_family_from_its_directory(tmp_path) -> N
         Task.from_dict(payload)
 
 
+def test_task_directory_loads_legacy_manifest_filename(tmp_path) -> None:
+    source = next(
+        task for task in load_builtin_tasks() if task.id == "morning_briefing_level0"
+    )
+    assert source.source_path is not None
+    (tmp_path / "task_suite.json").write_text(
+        json.dumps(
+            {
+                "suite_id": "legacy-private-pack",
+                "task_defaults": {"category": "story"},
+            }
+        ),
+        encoding="utf-8",
+    )
+    family_dir = tmp_path / source.family
+    family_dir.mkdir()
+    (family_dir / source.source_path.name).write_text(
+        source.source_path.read_text(encoding="utf-8"),
+        encoding="utf-8",
+    )
+
+    loaded = load_task_directory(tmp_path)
+
+    assert loaded[0].suite is not None
+    assert loaded[0].suite.suite_id == "legacy-private-pack"
+
+
+def test_cli_legacy_suite_alias_still_works() -> None:
+    assert main(["validate", "--suite", "smoke", "--min-tasks", "80"]) == 0
+
+
 def test_cli_validate_passes_for_builtin_tasks() -> None:
     assert main(["validate", "--min-tasks", "120"]) == 0
 
 
 def test_cli_validate_skips_bundled_quotas_for_filtered_slices(capsys) -> None:
-    exit_code = main(["validate", "--suite", "smoke", "--difficulty", "level0", "--json"])
+    exit_code = main(["validate", "--taskset", "smoke", "--difficulty", "level0", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
@@ -151,7 +182,7 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
             "smoke-workspace-mcp",
             "--task",
             "morning_briefing_level0",
-            "--suite",
+            "--taskset",
             "workspace-tasks",
         ]
     )
@@ -160,14 +191,14 @@ def test_cli_smoke_workspace_mcp_wires_task_and_suite(monkeypatch) -> None:
 
 
 def test_cli_manifest_resolves_core_suite(capsys) -> None:
-    exit_code = main(["manifest", "--suite", "workspace-tasks", "--json"])
+    exit_code = main(["manifest", "--taskset", "workspace-tasks", "--json"])
 
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["task_count"] == 120
     assert "portfolio_manager" in payload["families"]
-    assert payload["task_suite"]["suite_id"] == "workspace-tasks"
-    assert len(payload["task_suite"]["content_sha256"]) == 64
+    assert payload["taskset"]["suite_id"] == "workspace-tasks"
+    assert len(payload["taskset"]["content_sha256"]) == 64
     assert "story" in payload["categories"]
 
 
@@ -180,7 +211,7 @@ def test_cli_validate_fails_when_min_task_gate_is_not_met(capsys) -> None:
 
 
 def test_cli_filters_by_difficulty(capsys) -> None:
-    exit_code = main(["list", "--suite", "smoke", "--difficulty", "medium"])
+    exit_code = main(["list", "--taskset", "smoke", "--difficulty", "medium"])
 
     output = capsys.readouterr().out
     assert exit_code == 0
@@ -201,7 +232,7 @@ def test_cli_manifest_json_includes_dataset_summary(capsys) -> None:
     payload = json.loads(capsys.readouterr().out)
     assert exit_code == 0
     assert payload["name"] == "openbb-workspace-bench"
-    assert payload["task_suite"]["suite_id"] == "workspace-tasks"
+    assert payload["taskset"]["suite_id"] == "workspace-tasks"
     assert "release_id" not in payload
     assert payload["task_count"] == len(load_builtin_tasks())
     assert payload["canary_guid"] == CANARY_GUID
@@ -270,7 +301,7 @@ def test_cli_can_run_private_task_directory(tmp_path, capsys) -> None:
     task = next(
         item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
-    (tmp_path / "task_suite.json").write_text(
+    (tmp_path / "taskset.json").write_text(
         json.dumps({"task_defaults": {"category": "story"}}),
         encoding="utf-8",
     )
@@ -363,14 +394,14 @@ def test_runner_round_trips_workspace_resource_and_prompt_task(tmp_path) -> None
     ]
 
 
-def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
+def test_cli_private_taskset_manifest_applies(tmp_path, capsys) -> None:
     task = next(
         item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
-    (tmp_path / "task_suite.json").write_text(
+    (tmp_path / "taskset.json").write_text(
         json.dumps(
             {
-                "suite_id": "private-pack",
+                "taskset_id": "private-pack",
                 "visibility": "private",
             }
         ),
@@ -385,18 +416,18 @@ def test_cli_private_task_suite_manifest_applies(tmp_path, capsys) -> None:
 
     payload = json.loads(capsys.readouterr().out)
     assert manifest_exit == 0
-    assert payload["task_suite"]["suite_id"] == "private-pack"
-    assert payload["task_suite"]["visibility"] == "private"
+    assert payload["taskset"]["suite_id"] == "private-pack"
+    assert payload["taskset"]["visibility"] == "private"
 
 
-def test_cli_hidden_task_suite_redacts_trace_prompts(tmp_path, capsys) -> None:
+def test_cli_hidden_taskset_redacts_trace_prompts(tmp_path, capsys) -> None:
     task = next(
         item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     task_dir = tmp_path / "hidden_pack"
     trace_dir = tmp_path / "traces"
     task_dir.mkdir()
-    (task_dir / "task_suite.json").write_text(
+    (task_dir / "taskset.json").write_text(
         json.dumps(
             {"visibility": "hidden", "task_defaults": {"category": "story"}}
         ),
@@ -556,7 +587,7 @@ def test_validate_reports_duplicate_task_ids(tmp_path, capsys) -> None:
         item for item in load_builtin_tasks() if item.id == "morning_briefing_level0"
     )
     source = task.source_path.read_text(encoding="utf-8")
-    (tmp_path / "task_suite.json").write_text(
+    (tmp_path / "taskset.json").write_text(
         json.dumps({"task_defaults": {"category": "story"}}),
         encoding="utf-8",
     )

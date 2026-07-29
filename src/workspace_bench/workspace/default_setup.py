@@ -1,4 +1,4 @@
-"""Versioned default Workspace initial states for task suites.
+"""Versioned default Workspace initial states for tasksets.
 
 Suites select two independent axes in their manifest, tasks may override
 either axis, and both mix and match:

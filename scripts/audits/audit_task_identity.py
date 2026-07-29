@@ -30,11 +30,11 @@ CATALOG_WIDGET_IDS = frozenset(
 
 REPO = Path(__file__).resolve().parents[2]
 SUITE_DIRS = {
-    "smoke": REPO / "src/workspace_bench/task_suites/smoke",
+    "smoke": REPO / "src/workspace_bench/tasksets/smoke",
     "enterprise-apps-default": (
-        REPO / "src/workspace_bench/task_suites/enterprise_apps_default"
+        REPO / "src/workspace_bench/tasksets/enterprise_apps_default"
     ),
-    "workspace-tasks": REPO / "src/workspace_bench/task_suites/workspace_tasks",
+    "workspace-tasks": REPO / "src/workspace_bench/tasksets/workspace_tasks",
 }
 REFERENCE_FILES = (
     REPO / "README.md",

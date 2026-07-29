@@ -2,7 +2,7 @@
 
 Auto-generated from the bundled task JSON files — regenerate with
 `python scripts/generators/generate_task_catalog.py` after editing tasks.
-All three deterministic simulator suites are included.
+All three deterministic simulator tasksets are included.
 
 ## How grading works
 
@@ -25,7 +25,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
   doing nothing — the gap to 1.0 is what the task actually demands. Release gates
   require the no-op to *fail* every task and the oracle trace to *pass* every one.
 
-## Suite: smoke (80 tasks)
+## Taskset: smoke (80 tasks)
 
 ### add_generative_widget (4)
 
@@ -1144,7 +1144,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 - **Layout** `vendor_dataset_monitor_incidents_incident_log` must sit at exactly x=0, y=0, w=20, h=10 on tab `overview` → `layout_mismatch`
 
 
-## Suite: enterprise-apps-default (138 tasks)
+## Taskset: enterprise-apps-default (138 tasks)
 
 ### cio_investment_committee_pack (6)
 
@@ -2987,13 +2987,13 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 
 
-## Suite: workspace-tasks (120 tasks)
+## Taskset: workspace-tasks (120 tasks)
 
 ### client_advisor (20)
 
 #### `client_review_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Quarterly Client Review dashboard, add Company Fundamentals and Segment Breakdown from Bench Daloopa, both with parameters ticker set to AAPL and period set to 2026Q1. Please have the financial picture and revenue mix ready on the same basis before the client meeting.
 
@@ -3009,7 +3009,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `client_review_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Quarterly Client Review dashboard, add the company financials and Segment Breakdown from Bench Daloopa, both with parameters ticker set to AAPL and period set to 2026Q1. Please have the financial picture and revenue mix ready on the same basis before the client meeting.
 
@@ -3025,7 +3025,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `client_review_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Quarterly Client Review dashboard, add Company Fundamentals and Segment Breakdown from Bench Daloopa, both with ticker set to AAPL and period set by the 2026 first-quarter review policy. Please keep the financial picture and revenue mix on the same basis for the client meeting.
 
@@ -3041,7 +3041,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `client_review_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Quarterly Client Review dashboard, correct the stale Company Fundamentals instance from Bench Daloopa that has parameters ticker MSFT and period 2025Q4 to ticker AAPL and period 2026Q1. The separate Company Fundamentals instance with parameters ticker TSLA and period 2025Q4 belongs to another client conversation and must stay untouched. Also add fresh Company Fundamentals and Segment Breakdown from Bench Daloopa, both with parameters ticker AAPL and period 2026Q1. Keep every other view and note on the dashboard exactly as it is so the review remains ready to explain. Read the Daloopa Tearsheet skill and leave a Client Review Sourcing Note recording the sourcing field its workflow requires for every Daloopa-sourced figure.
 
@@ -3068,7 +3068,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `client_review_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the client's review register before the meeting: add a Client Review Service backend serving a Review Register table, publish Client Review App with Review Register on its Review tab, and instantiate the app. On the open Quarterly Client Review dashboard, add the built Review Register and correct the stale Company Fundamentals instance from Bench Daloopa that has parameters ticker MSFT and period 2025Q4 to ticker AAPL and period 2026Q1. The separate Company Fundamentals instance with parameters ticker TSLA and period 2025Q4 belongs to another client conversation and must stay untouched. Add fresh Company Fundamentals and Segment Breakdown from Bench Daloopa, both with parameters ticker AAPL and period 2026Q1. Keep every other view and note on the dashboard exactly as it is so the review remains ready to explain. Read the Daloopa Tearsheet skill and leave a Client Review Sourcing Note recording the sourcing field its workflow requires for every Daloopa-sourced figure.
 
@@ -3097,7 +3097,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `holdings_watch_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Holdings Watch dashboard, correct Live Grid from the Onboarding App for Devs in Getting Started from parameter symbol TSLA to AAPL before the call.
 
@@ -3112,7 +3112,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `holdings_watch_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Holdings Watch dashboard, correct the live price watch from the Onboarding App for Devs in Getting Started from parameter symbol TSLA to AAPL before the call.
 
@@ -3127,7 +3127,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `holdings_watch_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Holdings Watch dashboard, restore Live Grid from the Onboarding App for Devs in Getting Started from parameter symbol TSLA under the Apple holding policy for the client's Apple holding before the call.
 
@@ -3142,7 +3142,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `holdings_watch_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Holdings Watch dashboard, correct the stale Live Grid from the Onboarding App for Devs in Getting Started that has parameter symbol TSLA to AAPL. The separate Live Grid with parameter symbol AAPL is already correct for the client's Apple holding and must stay untouched. Keep every other view and note exactly as it is so the client material stays ready for the call. Read the Finance Tearsheet skill and leave a Holdings Watch Governance Note recording what its workflow says to gather first and the three elements that includes.
 
@@ -3165,7 +3165,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `holdings_watch_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the client's holdings register before the call: add a Holdings Watch Service backend serving a Holdings Register table, publish Holdings Watch App with Holdings Register on its Watch tab, and instantiate the app. On the open Client Holdings Watch dashboard, add the built Holdings Register and correct the stale Live Grid from the Onboarding App for Devs in Getting Started that has parameter symbol TSLA to AAPL. The separate Live Grid with parameter symbol AAPL is already correct for the client's Apple holding and must stay untouched. Keep every other view and note exactly as it is so the client material stays ready for the call. Read the Finance Tearsheet skill and leave a Holdings Watch Governance Note recording what its workflow says to gather first and the three elements that includes.
 
@@ -3190,7 +3190,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `meeting_prep_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Call Prep dashboard, read Client Returns from Bench Stark Enterprise's Client 360 with parameters client set to Northstar Endowment and period set to QTD. Before the call, leave a Client Call Performance Note recording the client, fund, return, change, and review status exactly as served.
 
@@ -3205,7 +3205,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `meeting_prep_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Call Prep dashboard, read the client's performance view from Bench Stark Enterprise's Client 360 with parameters client set to Northstar Endowment and period set to QTD. Before the call, leave a Client Call Performance Note recording the client, fund, return, change, and review status exactly as served.
 
@@ -3220,7 +3220,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `meeting_prep_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Call Prep dashboard, read Client Returns from Bench Stark Enterprise's Client 360 for Northstar Endowment with the period set by the quarterly call policy. Before the call, leave a Client Call Performance Note recording the client, fund, return, change, and review status exactly as served.
 
@@ -3235,7 +3235,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `meeting_prep_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Client Call Prep dashboard, correct the stale Client Returns instance from Bench Stark Enterprise's Client 360 that has parameters client Northstar Endowment and period YTD to client Northstar Endowment and period QTD. The separate Client Returns instance with parameters client Atlas Pension and period YTD belongs to a prior review and must stay untouched. Add a fresh Client Returns for Northstar Endowment and QTD, then read it with those parameters. Keep every other view and note exactly as it is. Before the call, read the Finance Tearsheet skill and leave a Client Call Performance Note recording the client, fund, return, change, and review status exactly as served, plus what the skill's workflow lists last.
 
@@ -3261,7 +3261,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `meeting_prep_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the client's call file before the meeting: add a Call Prep Service backend serving a Call Notes Register table, publish Client Call Prep App with Call Notes Register on its Call Prep tab, and instantiate the app. On the open Client Call Prep dashboard, add the built Call Notes Register and correct the stale Client Returns instance from Bench Stark Enterprise's Client 360 that has parameters client Northstar Endowment and period YTD to client Northstar Endowment and period QTD. The separate Client Returns instance with parameters client Atlas Pension and period YTD belongs to a prior review and must stay untouched. Add a fresh Client Returns for Northstar Endowment and QTD, then read it with those parameters. Keep every other view and note exactly as it is. Before the call, read the Finance Tearsheet skill and leave a Client Call Performance Note recording the client, fund, return, change, and review status exactly as served, plus what the skill's workflow lists last.
 
@@ -3289,7 +3289,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `proposal_pack_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Proposal Pack dashboard, add Company Fundamentals from Bench Daloopa with parameters ticker set to MSFT and period set to 2025Q4, and add Omni Widget with Citations from Widget Examples with parameter type set to markdown. Please have the figures and cited written summary ready before the client meeting.
 
@@ -3305,7 +3305,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `proposal_pack_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Proposal Pack dashboard, add Company Fundamentals from Bench Daloopa with parameters ticker set to MSFT and period set to 2025Q4, along with the cited written summary from Widget Examples with parameter type set to markdown. Please have both ready to explain before the client meeting.
 
@@ -3321,7 +3321,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `proposal_pack_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Proposal Pack dashboard, add Company Fundamentals from Bench Daloopa with ticker set to MSFT and period set to 2025Q4, and add Omni Widget with Citations from Widget Examples configured under the written-summary pack policy. Please have the figures and cited narrative ready before the client meeting.
 
@@ -3337,7 +3337,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `proposal_pack_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Proposal Pack dashboard, correct the stale Company Fundamentals instance from Bench Daloopa that has parameters ticker MSFT and period 2025Q3 to ticker MSFT and period 2025Q4. The separate Company Fundamentals instance with parameters ticker TSLA and period 2025Q4 belongs to another client conversation and must stay untouched, and the existing Omni Widget with Citations from Widget Examples with parameter type chart is the approved visual appendix and must also stay untouched. Add fresh Company Fundamentals from Bench Daloopa with parameters ticker MSFT and period 2025Q4, plus a fresh Omni Widget with Citations from Widget Examples with parameter type markdown. Keep every other view and note on the dashboard exactly as it is so the pack remains ready to explain. Read the Daloopa Tearsheet skill and leave a Proposal Pack Sourcing Note recording the sourcing field its workflow requires for every Daloopa-sourced figure.
 
@@ -3364,7 +3364,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `proposal_pack_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the client's proposal register before the meeting: add a Client Pack Service backend serving a Pack Register table, publish Client Pack App with Pack Register on its Pack tab, and instantiate the app. On the open Proposal Pack dashboard, add the built Pack Register and correct the stale Company Fundamentals instance from Bench Daloopa that has parameters ticker MSFT and period 2025Q3 to ticker MSFT and period 2025Q4. The separate Company Fundamentals instance with parameters ticker TSLA and period 2025Q4 belongs to another client conversation and must stay untouched, and the existing Omni Widget with Citations from Widget Examples with parameter type chart is the approved visual appendix and must also stay untouched. Add fresh Company Fundamentals from Bench Daloopa with parameters ticker MSFT and period 2025Q4, plus a fresh Omni Widget with Citations from Widget Examples with parameter type markdown. Keep every other view and note on the dashboard exactly as it is so the pack remains ready to explain. Read the Daloopa Tearsheet skill and leave a Proposal Pack Sourcing Note recording the sourcing field its workflow requires for every Daloopa-sourced figure.
 
@@ -3395,7 +3395,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `alert_sweep_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Alert Sweep dashboard, add Open Alert Metrics and Alert Trend from Bench Stark Enterprise's Compliance Surveillance Hub, both with parameters severity set to High, status set to Open, and period set to MTD.
 
@@ -3411,7 +3411,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `alert_sweep_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Alert Sweep dashboard, add the headline number for the alert queue and Alert Trend from Bench Stark Enterprise's Compliance Surveillance Hub. Use parameters severity High, status Open, and period MTD for both.
 
@@ -3427,7 +3427,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `alert_sweep_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Alert Sweep dashboard, add Open Alert Metrics and Alert Trend from Bench Stark Enterprise's Compliance Surveillance Hub, both with severity set to High, period set to MTD, and status set by the open-items sweep policy.
 
@@ -3443,7 +3443,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `alert_sweep_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Alert Sweep dashboard, correct the stale Open Alert Metrics instance from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity Medium, status Closed, and period YTD to severity High, status Open, and period MTD. The separate Open Alert Metrics instance with parameters severity Low, status In Review, and period QTD is already correct for the quarterly review cut and must stay untouched. Also add fresh Open Alert Metrics and Alert Trend from the same app and origin, both with parameters severity High, status Open, and period MTD. Keep every other view and record on the dashboard exactly as it is so the sweep evidence remains intact. Read the Finance Guidance Tracker skill and leave an Alert Sweep Evidence Note recording what its workflow lists last.
 
@@ -3468,7 +3468,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `alert_sweep_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the sweep file: add a Sweep File Service backend serving a Sweep Register table, publish Sweep File App with Sweep Register on its Register tab, and instantiate the app. On the open Alert Sweep dashboard, add the built Sweep Register and correct the stale Open Alert Metrics instance from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity Medium, status Closed, and period YTD to severity High, status Open, and period MTD. The separate Open Alert Metrics instance with parameters severity Low, status In Review, and period QTD is already correct for the quarterly review cut and must stay untouched. Add fresh Open Alert Metrics and Alert Trend from the same app and origin, both with parameters severity High, status Open, and period MTD. Keep every other view and record on the dashboard exactly as it is so the sweep evidence remains intact. Read the Finance Guidance Tracker skill and leave an Alert Sweep Evidence Note recording what its workflow lists last.
 
@@ -3495,7 +3495,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `breach_repair_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Breach Review dashboard, repair Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub by setting the parameters severity to High, status to Open, and period to QTD.
 
@@ -3510,7 +3510,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `breach_repair_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Breach Review dashboard, repair the personal-trading breaches from Bench Stark Enterprise's Compliance Surveillance Hub by setting the parameters severity to High, status to Open, and period to QTD.
 
@@ -3525,7 +3525,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `breach_repair_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Breach Review dashboard, restore Policy Breaches from Bench Stark Enterprise's Compliance Surveillance Hub to severity High and status Open, with the period configured under the quarter-under-review policy.
 
@@ -3540,7 +3540,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `breach_repair_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Breach Review dashboard, repair the Policy Breaches view from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD. The separate Policy Breaches view with parameters severity Low, status In Review, and period MTD is already correct for its review cut and must not be changed. Keep every other view and record exactly as it is so the breach evidence remains intact. Read the Finance Guidance Tracker skill and leave a Breach Review Evidence Note recording what its workflow lists last.
 
@@ -3564,7 +3564,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `breach_repair_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the breach file: add a Breach Watch Service backend serving a Breach Register table, publish Breach Watch App with Breach Register on its Register tab, and instantiate the app. On the open Breach Review dashboard, add the built Breach Register and repair the Policy Breaches view from Bench Stark Enterprise's Compliance Surveillance Hub that has parameters severity High, status Closed, and period 1Y: restore it to severity High, status Open, and period QTD. The separate Policy Breaches view with parameters severity Low, status In Review, and period MTD is already correct for its review cut and must not be changed. Keep every other view and record exactly as it is so the breach evidence remains intact. Read the Finance Guidance Tracker skill and leave a Breach Review Evidence Note recording what its workflow lists last.
 
@@ -3589,7 +3589,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `case_handoff_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status set to In Review, severity set to High, and period set to MTD. Leave a Case Handoff Note recording the returned In Review fund and both exact scores as evidence for the reviewing team.
 
@@ -3604,7 +3604,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `case_handoff_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Case Review dashboard, read the expert-network log from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD. Leave a Case Handoff Note recording the returned In Review fund and both exact scores as evidence for the reviewing team.
 
@@ -3619,7 +3619,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `case_handoff_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with status In Review, period MTD, and severity set by the escalation policy. Leave a Case Handoff Note recording the returned In Review fund and both exact scores as evidence for the reviewing team.
 
@@ -3634,7 +3634,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `case_handoff_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Case Review dashboard, read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD, keeping everything already on the dashboard exactly as it is. Read the Finance Earnings Prep skill and leave a Case Handoff Note recording the returned In Review fund and both exact scores, plus the transcript-tone signal the skill identifies and what it often precedes.
 
@@ -3656,7 +3656,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `case_handoff_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the case file for handoff: add a Case File Service backend serving a Case Register table, publish Case File App with Case Register on its Cases tab, and instantiate the app. On the open Case Review dashboard, add the built Case Register, keeping everything already there exactly as it is. Read Expert Calls from Bench Stark Enterprise's MNPI & Research Review with parameters status In Review, severity High, and period MTD. Read the Finance Earnings Prep skill and leave a Case Handoff Note recording the returned In Review fund and both exact scores, plus the transcript-tone signal the skill identifies and what it often precedes. Hand the follow-up to the reviewing team.
 
@@ -3680,7 +3680,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `var_monitor_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Shock Watch dashboard, add VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor with parameters portfolio set to Long/Short Equity, scenario set to Rates +100bp, and period set to YTD.
 
@@ -3695,7 +3695,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `var_monitor_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Shock Watch dashboard, add the value-at-risk trend from Bench Stark Enterprise's Risk & Exposure Monitor with parameters portfolio Long/Short Equity, scenario Rates +100bp, and period YTD.
 
@@ -3710,7 +3710,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `var_monitor_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Shock Watch dashboard, add VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor with portfolio set to Long/Short Equity, period set to YTD, and scenario set by the rates-shock policy.
 
@@ -3725,7 +3725,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `var_monitor_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Shock Watch dashboard, correct the stale VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor that has parameters portfolio Global Equity, scenario Equity -10%, and period QTD to portfolio Long/Short Equity, scenario Rates +100bp, and period YTD. The separate VaR Trend with parameters portfolio Credit Opportunities, scenario Credit +150bp, and period MTD is already correct for the credit book and must stay untouched. Add a fresh VaR Trend for the same Long/Short Equity, Rates +100bp, YTD cut, and leave every other view and record exactly as it is so the risk evidence remains intact. Read the Daloopa Inflection skill and leave a Shock Watch Governance Note recording the growth cadence it says to compute first and what it flags as inflections.
 
@@ -3749,7 +3749,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `var_monitor_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the rates-shock file: add a Shock Watch Service backend serving a Shock Register table, publish Shock Watch App with Shock Register on its Register tab, and instantiate the app. On the open Shock Watch dashboard, add the built Shock Register and correct the stale VaR Trend from Bench Stark Enterprise's Risk & Exposure Monitor that has parameters portfolio Global Equity, scenario Equity -10%, and period QTD to portfolio Long/Short Equity, scenario Rates +100bp, and period YTD. The separate VaR Trend with parameters portfolio Credit Opportunities, scenario Credit +150bp, and period MTD is already correct for the credit book and must stay untouched. Add a fresh VaR Trend for the same Long/Short Equity, Rates +100bp, YTD cut. Keep every other view and record exactly as it is so the risk evidence remains intact. Read the Daloopa Inflection skill and leave a Shock Watch Governance Note recording the growth cadence it says to compute first and what it flags as inflections.
 
@@ -3777,7 +3777,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `document_room_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Filing Room dashboard, add Document Search from Bench Daloopa with parameters ticker set to AAPL and doc_type set to 10-K, then add Multi PDF Viewer - URL from Getting Started beside it - the audit pull is due before cutoff.
 
@@ -3792,7 +3792,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `document_room_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Get the filings search from Bench Daloopa onto the open Filing Room dashboard for ticker AAPL and doc_type 10-K, with Multi PDF Viewer - URL from Getting Started beside it - audit needs the room checked before cutoff.
 
@@ -3807,7 +3807,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `document_room_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Filing Room before cutoff: on the open dashboard, add Document Search from Bench Daloopa for ticker AAPL, with document type set by the annual-report pull policy. Put Multi PDF Viewer - URL from Getting Started beside it.
 
@@ -3822,7 +3822,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `document_room_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Filing Room dashboard, add Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K; put Multi PDF Viewer - URL from Getting Started beside it. Keep everything already there exactly as is. Read the Daloopa Tearsheet skill; leave a Filing Room Governance note recording the identifier its final step says every Daloopa-sourced figure must be cited with.
 
@@ -3846,7 +3846,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `document_room_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the filing room service before the audit cutoff: add a Filing Room Service backend serving a Filing Register table; publish Filing Room App with Filing Register on its Filings tab; instantiate the app. On the open Filing Room dashboard, add the built Filing Register, Document Search from Bench Daloopa for ticker AAPL and doc_type 10-K, and Multi PDF Viewer - URL from Getting Started. Keep everything already there exactly as is. Read the Daloopa Tearsheet skill; leave a Filing Room Governance note recording the identifier its final step says every Daloopa-sourced figure must be cited with.
 
@@ -3871,7 +3871,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `form_tooling_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 on Example Backend Params to 5 and leave its other parameters at their defaults.
 
@@ -3886,7 +3886,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `form_tooling_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Add the intake form from Widget Examples to the open Intake Tools dashboard, with Example Backend Params beside it and daysPicker1 set to 5. Keep the tester's other parameters at their defaults.
 
@@ -3901,7 +3901,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `form_tooling_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Intake Tools on the open dashboard: add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 on Example Backend Params by the weekly window policy; leave its other parameters at their defaults.
 
@@ -3916,7 +3916,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `form_tooling_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Intake Tools dashboard, add Financial Entry Form and Example Backend Params from Widget Examples. Set daysPicker1 to 5 and leave the tester's other parameters at their defaults. Keep everything already there exactly as is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind listed between endpoint and button.
 
@@ -3938,7 +3938,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `form_tooling_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the intake service before cutoff: add an Intake Form Service backend serving an Intake Register table; publish Intake Controls App with Intake Register on its Register tab; instantiate the app. On the open Intake Tools dashboard, add the built Intake Register, Financial Entry Form, and Example Backend Params from Widget Examples. Set daysPicker1 to 5 and leave the tester's other parameters at their defaults. Keep everything already there exactly as is. Under the widgets.json spec's Widget Parameters resource, leave an Intake Tooling Governance Note recording the parameter kind listed between endpoint and button.
 
@@ -3961,7 +3961,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `nav_close_repair_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > Repair Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard on the open Close Room dashboard: set fund to Flagship Long/Short, status to Open, and period to 1D so today's close is back on the right queue.
 
@@ -3975,7 +3975,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `nav_close_repair_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Repair the close blotter from Bench Stark Enterprise's NAV, Fees & Close Dashboard on the open Close Room dashboard: Flagship Long/Short, Open, 1D. The close cutoff is coming up.
 
@@ -3989,7 +3989,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `nav_close_repair_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Close repair on the open Close Room dashboard: restore Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard to Flagship Long/Short and Open, with period set by the close-day policy.
 
@@ -4003,7 +4003,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `nav_close_repair_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > Close repair on the open Close Room dashboard: Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard is showing Multi-Asset Fund, Closed, 1Y. Restore it to Flagship Long/Short, Open, 1D; keep everything already there exactly as is. Under the Daloopa Capital Allocation skill, leave a Close Governance Note recording which payout line its comparison adds to Share Buybacks before testing the total against Free Cash Flow.
 
@@ -4027,7 +4027,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `nav_close_repair_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the close watch before cutoff: add a Close Watch Service backend serving a Close Register table; publish Close Watch App with Close Register on its Close tab; instantiate the app. On the open Close Room dashboard, add the built Close Register. Close Exceptions from Bench Stark Enterprise's NAV, Fees & Close Dashboard is showing Multi-Asset Fund, Closed, 1Y; restore it to Flagship Long/Short, Open, 1D. Keep everything already there exactly as is. Read the Daloopa Capital Allocation skill; leave a Close Governance Note recording which payout line its comparison adds to Share Buybacks before testing the total against Free Cash Flow.
 
@@ -4052,7 +4052,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `settlement_watch_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Fails Watch dashboard, add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower, both with parameters fund set to Income Fund, status set to Open, and period set to 1D. I need today's open fails in front of the desk before the cutoff.
 
@@ -4067,7 +4067,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `settlement_watch_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Get the fails queue and Settlement Exceptions onto the open Fails Watch dashboard from Bench Stark Enterprise's Fund Operations Control Tower. Use parameters fund Income Fund, status Open, and period 1D for both - cutoff review is next.
 
@@ -4082,7 +4082,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `settlement_watch_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Fails watch on the open Fails Watch dashboard: add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower. For both, use fund Income Fund, status Open, and period set by the same-day fails policy.
 
@@ -4097,7 +4097,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `settlement_watch_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > Fails watch on the open Fails Watch dashboard: add Failed Trades and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower for fund Income Fund, status Open, and period 1D. Keep everything already there exactly as is. Under the Finance Guidance Tracker skill, leave a Fails Cutoff Governance note recording what its workflow lists in its final step.
 
@@ -4121,7 +4121,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `settlement_watch_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the cutoff file before the afternoon review: add a Fails Watch Service backend serving a Fails Register table; publish Fails Watch App with Fails Register on its Watch tab; instantiate the app. On the open Fails Watch dashboard, add the built Fails Register, Failed Trades, and Settlement Exceptions from Bench Stark Enterprise's Fund Operations Control Tower for fund Income Fund, status Open, and period 1D. Keep everything already there exactly as is. Read the Finance Guidance Tracker skill; leave a Fails Cutoff Governance note recording what its workflow lists in its final step.
 
@@ -4148,7 +4148,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `allocation_read_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Allocation Review dashboard, read Segment Breakdown from Bench Daloopa with ticker set to AAPL and period set to 2026Q1, then leave an Allocation Read Note recording the top segment and its exact revenue_musd - quoted to the decimal, the desk reuses this note.
 
@@ -4163,7 +4163,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `allocation_read_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Read the segment split off Bench Daloopa - ticker AAPL, period 2026Q1 - and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd. Sizing the Apple position after the close.
 
@@ -4178,7 +4178,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `allocation_read_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Read Segment Breakdown from Bench Daloopa for ticker AAPL, period per the latest covered quarter policy - the newest quarter the dataset covers - and leave an Allocation Read Note on the open Allocation Review dashboard recording the top segment and its exact revenue_musd.
 
@@ -4193,7 +4193,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `allocation_read_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, on the open Allocation Review dashboard, and keep everything already on the dashboard as is. Allocation reads run under the Daloopa Tearsheet skill - leave an Allocation Read Note recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.
 
@@ -4215,7 +4215,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `allocation_read_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk's allocation digest before the rebalance: add an Allocation Digest Service backend serving a Segment Digest table, publish Allocation Digest App with Segment Digest on its Digest tab, and instantiate the app. On the open Allocation Review dashboard, add the built Segment Digest, keeping everything already there as is. Read Segment Breakdown from Bench Daloopa with ticker AAPL, period 2026Q1, and under the Daloopa Tearsheet skill leave an Allocation Read Note recording the top segment, its exact revenue_musd, and what that skill says all period math anchors on.
 
@@ -4238,7 +4238,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `morning_briefing_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open PM Morning Briefing dashboard, add Trade Ideas from Bench Stark Enterprise's Portfolio Command Center with fund set to Flagship Long/Short and period set to QTD - the 9am call is about to start.
 
@@ -4253,7 +4253,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `morning_briefing_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Get the idea pipeline up on the open PM Morning Briefing dashboard before the 9am call - it lives in Bench Stark Enterprise's Portfolio Command Center. Flagship Long/Short, QTD.
 
@@ -4268,7 +4268,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `morning_briefing_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Prep the open PM Morning Briefing dashboard for the 9am call: Trade Ideas from Bench Stark Enterprise's Portfolio Command Center for Flagship Long/Short, configured per the quarterly briefing policy.
 
@@ -4283,7 +4283,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `morning_briefing_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open PM Morning Briefing dashboard, fix the stale Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to Flagship Long/Short, QTD, and add a fresh Trade Ideas for the same fund and period. Keep everything else as is. Briefings run under the Daloopa Capital Allocation skill - leave a Morning Briefing Governance note recording what its final step says every figure is cited via.
 
@@ -4305,7 +4305,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `morning_briefing_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk's briefing feed before the 9am call: add a Briefing Feed Service backend serving an Idea Register table, publish Briefing Feed App with Idea Register on its Briefing tab, and instantiate the app. On the open PM Morning Briefing dashboard, add the built Idea Register, fix the stale Trade Ideas from Bench Stark Enterprise's Portfolio Command Center to Flagship Long/Short, QTD, and add a fresh Trade Ideas for the same fund and period, keeping everything else as is. Read the Daloopa Capital Allocation skill and leave a Morning Briefing Governance note recording what its final step says every figure is cited via.
 
@@ -4328,7 +4328,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `pm_handoff_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open PM Handoff Log dashboard, read Consensus Estimates from Bench Daloopa with ticker set to MSFT, then leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1 - quoted to the decimal, the overnight desk trades off this note.
 
@@ -4343,7 +4343,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `pm_handoff_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > End of day - pull the street numbers for MSFT off Bench Daloopa, actual against consensus, and leave an Overnight Handoff Note on the open PM Handoff Log dashboard recording the exact Total Revenue actual and consensus for 2026Q1. The overnight desk trades off this note.
 
@@ -4358,7 +4358,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `pm_handoff_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Read Consensus Estimates from Bench Daloopa on the open PM Handoff Log dashboard for the line the mega-cap coverage policy covers - the policy names it by company, the Microsoft line, never by ticker - and leave an Overnight Handoff Note recording the exact Total Revenue actual and consensus for 2026Q1. The overnight desk trades off this note.
 
@@ -4373,7 +4373,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `pm_handoff_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > Close out the open PM Handoff Log dashboard for the overnight desk: read Consensus Estimates from Bench Daloopa with ticker MSFT and leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1. The close-out runs under the Daloopa Earnings Review skill - the note also records the granularity that skill's first step sets for the consensus compare. Everything already on the dashboard stays as is.
 
@@ -4393,7 +4393,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `pm_handoff_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk's handoff log before the overnight shift: add a Handoff Log Service backend serving a Handoff Register table, publish Handoff Log App with Handoff Register on its Handoff tab, and instantiate the app. On the open PM Handoff Log dashboard, add the built Handoff Register, keeping everything already there as is. Then close out under the Daloopa Earnings Review skill: read Consensus Estimates from Bench Daloopa with ticker MSFT, leave an Overnight Handoff Note with the exact Total Revenue actual and consensus for 2026Q1 plus the granularity that skill's first step sets for the consensus compare, and delegate the follow-up to the coverage analyst.
 
@@ -4414,7 +4414,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `price_watch_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Price Watch dashboard, add Live Grid from Getting Started with symbol set to TSLA - I want it streaming before the open.
 
@@ -4429,7 +4429,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `price_watch_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Get the live-updating price grid up on the open Price Watch dashboard - it's in Getting Started. TSLA, before the open.
 
@@ -4444,7 +4444,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `price_watch_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Prep the open Price Watch dashboard before the open: Live Grid from Getting Started, with the symbol set per the EV watch policy - the desk keeps its electric-vehicle name streaming.
 
@@ -4459,7 +4459,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `price_watch_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Price Watch dashboard, fix the stale Live Grid from Getting Started to TSLA and add a fresh Live Grid for the same symbol. Keep everything else as is. Price views on the desk run under the Finance Tearsheet skill - leave a Price Watch Governance note recording what its final step says to close with.
 
@@ -4481,7 +4481,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `price_watch_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk's watch feed before the open: add a Watch Feed Service backend serving a Watch Register table, publish Watch Feed App with Watch Register on its Watch tab, and instantiate the app. On the open Price Watch dashboard, add the built Watch Register, fix the stale Live Grid from Getting Started to TSLA, and add a fresh Live Grid for the same symbol, keeping everything else as is. Read the Finance Tearsheet skill and leave a Price Watch Governance note recording what its final step says to close with.
 
@@ -4506,7 +4506,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `earnings_prep_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Earnings Prep Desk dashboard, read Upcoming Earnings from Bench Stark Enterprise's Earnings & Estimates Monitor with sector set to Technology, ticker set to NVDA, and period set to QTD, then leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly - the desk is building the preview from this note.
 
@@ -4520,7 +4520,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `earnings_prep_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Pull the earnings calendar from Bench Stark Enterprise's Earnings & Estimates Monitor for the open Earnings Prep Desk dashboard - sector Technology, ticker NVDA, period QTD - and leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly. The preview goes out shortly.
 
@@ -4534,7 +4534,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `earnings_prep_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Earnings Prep Desk dashboard, read Upcoming Earnings from Bench Stark Enterprise's Earnings & Estimates Monitor for sector Technology and ticker NVDA, with the period set by the current-quarter prep policy, then leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly.
 
@@ -4548,7 +4548,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `earnings_prep_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Earnings Prep Desk dashboard, read Upcoming Earnings from Bench Stark Enterprise's Earnings & Estimates Monitor with sector Technology, ticker NVDA, and period QTD, keeping everything already on the dashboard exactly as it is. Previews run under the Finance Earnings Prep skill - leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly, plus what the skill's final step tells the analyst to produce for the PM across the three print outcomes.
 
@@ -4570,7 +4570,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `earnings_prep_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk's prep-sheet workflow: add a Prep Sheet Service backend serving a Prep Register table, publish Prep Sheet App with Prep Register on its Prep tab, and instantiate the app. On the open Earnings Prep Desk dashboard, add the built Prep Register and keep everything already there exactly as it is. Read Upcoming Earnings from Bench Stark Enterprise's Earnings & Estimates Monitor with sector Technology, ticker NVDA, and period QTD, then under the Finance Earnings Prep skill leave an Earnings Prep Note recording every returned row's ticker, change, score, and status exactly, plus what the skill's final step tells the analyst to produce for the PM across the three print outcomes.
 
@@ -4593,7 +4593,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `guidance_tracker_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Guidance Watch dashboard, read Management Guidance from Bench Daloopa with ticker set to NFLX, then leave a Guidance Tracker Note recording these Pending 2026Q2 ranges exactly: Total Revenue Guidance at 14617.6 to 15062.8 USD mn, Diluted EPS Guidance at 7.68 to 7.91 USD, and Paid Memberships Guidance at 329.6 to 339.7 mn.
 
@@ -4607,7 +4607,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `guidance_tracker_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Pull management's promises from Bench Daloopa for ticker NFLX onto the open Guidance Watch dashboard, then leave a Guidance Tracker Note recording these Pending 2026Q2 ranges exactly: Total Revenue Guidance at 14617.6 to 15062.8 USD mn, Diluted EPS Guidance at 7.68 to 7.91 USD, and Paid Memberships Guidance at 329.6 to 339.7 mn. The desk needs the guide before the review.
 
@@ -4621,7 +4621,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `guidance_tracker_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Guidance Watch dashboard, read Management Guidance from Bench Daloopa with the ticker set by the streaming coverage policy - the pure-play streaming name on coverage - then leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit.
 
@@ -4635,7 +4635,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `guidance_tracker_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Guidance Watch dashboard, read Management Guidance from Bench Daloopa with ticker NFLX and keep everything already on the dashboard exactly as it is. Guidance reviews run under the Daloopa Guidance Tracker skill - leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit, plus how that skill says to weight quarters when characterizing the trend.
 
@@ -4657,7 +4657,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `guidance_tracker_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk's guidance-tracking workflow: add a Guidance Watch Service backend serving a Guidance Register table, publish Guidance Watch App with Guidance Register on its Guidance tab, and instantiate the app. On the open Guidance Watch dashboard, add the built Guidance Register and keep everything already there exactly as it is. Read Management Guidance from Bench Daloopa with ticker NFLX, then under the Daloopa Guidance Tracker skill leave a Guidance Tracker Note recording every Pending 2026Q2 series and its exact guidance_low, guidance_high, and unit, plus how that skill says to weight quarters when characterizing the trend.
 
@@ -4680,7 +4680,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `inflection_scan_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Inflection Scan dashboard, read Operating KPIs from Bench Daloopa with ticker set to TSLA and period set to 2026Q1, then leave an Inflection Scan Note recording each KPI and its exact value and unit for the quarter.
 
@@ -4694,7 +4694,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `inflection_scan_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Pull the KPI trends from Bench Daloopa for TSLA, period 2026Q1, and leave an Inflection Scan Note on the open Inflection Scan dashboard recording each KPI and its exact value and unit for the quarter.
 
@@ -4708,7 +4708,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `inflection_scan_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Read Operating KPIs from Bench Daloopa for ticker TSLA, with period set by the fresh-quarter scan policy - the newest covered quarter in the dataset - and leave an Inflection Scan Note on the open Inflection Scan dashboard recording each KPI and its exact value and unit for that quarter.
 
@@ -4722,7 +4722,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `inflection_scan_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Inflection Scan dashboard, read Operating KPIs from Bench Daloopa with ticker TSLA and period 2026Q1, then leave an Inflection Scan Note recording each KPI and its exact value and unit for the quarter. The scan runs under the Daloopa Inflection skill - the note must also record the growth cadence that skill says to compute first and what it flags as inflections. Keep everything already on the dashboard exactly as it is.
 
@@ -4744,7 +4744,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `inflection_scan_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the quarter's scan register: add an Inflection Scan Service backend serving a Reversal Register table, publish Inflection Scan App with Reversal Register on its Reversals tab, and instantiate the app. On the open Inflection Scan dashboard, add the built Reversal Register and keep everything already there exactly as it is. Then run the scan under the Daloopa Inflection skill: read Operating KPIs from Bench Daloopa with ticker TSLA and period 2026Q1, and leave an Inflection Scan Note recording each KPI and its exact value and unit plus the growth cadence the skill says to compute first and what it flags as inflections.
 
@@ -4767,7 +4767,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `peer_compare_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Peer Compare dashboard, add Company Fundamentals from Bench Daloopa twice: one with ticker set to MSFT and period set to 2025Q2, and one with ticker set to AMZN and period set to 2025Q2. I want both names in the same peer read for the quarter.
 
@@ -4782,7 +4782,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `peer_compare_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Put the fundamentals table from Bench Daloopa on the open Peer Compare dashboard twice, one for MSFT and one for AMZN, both at 2025Q2. I need the cloud names on the same quarter.
 
@@ -4797,7 +4797,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `peer_compare_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Peer Compare dashboard, add Company Fundamentals from Bench Daloopa twice for period 2025Q2, choosing MSFT for Microsoft's line and the other ticker per the cloud pair policy - Microsoft plus the other covered cloud name. Keep the quarter identical so the peer read is comparable.
 
@@ -4812,7 +4812,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `peer_compare_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Peer Compare dashboard, add Company Fundamentals from Bench Daloopa twice, one for MSFT at 2025Q2 and one for AMZN at 2025Q2, and keep everything already on the dashboard as is. Peer comparisons run under the Daloopa Industry skill - leave a Peer Compare Governance note recording where its first step says the comparable set comes from.
 
@@ -4836,7 +4836,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `peer_compare_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk's peer comparison service for the quarter: add a Peer Compare Service backend serving a Peer Register table, publish Peer Compare App with Peer Register on its Peers tab, and instantiate the app. On the open Peer Compare dashboard, add the built Peer Register and Company Fundamentals from Bench Daloopa twice, one for MSFT at 2025Q2 and one for AMZN at 2025Q2, keeping everything already there as is. Read the Daloopa Industry skill and leave a Peer Compare Governance note recording where its first step says the comparable set comes from.
 
@@ -4864,7 +4864,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `best_execution_file_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > Blotter up on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk set to US Equity and period set to QTD.
 
@@ -4880,7 +4880,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `best_execution_file_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > Get the live-order blotter and Broker Scorecard onto the open Best-Ex Review dashboard from Bench Stark Enterprise's Execution Desk. Parameters US Equity and QTD for both.
 
@@ -4896,7 +4896,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `best_execution_file_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Best-ex file on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk. For both, set desk by the US desk review policy and period to QTD.
 
@@ -4912,7 +4912,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `best_execution_file_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > Best-ex file on the open Best-Ex Review dashboard: add Live Orders and Broker Scorecard from Bench Stark Enterprise's Execution Desk, both with parameters desk US Equity and period QTD. Keep everything already there exactly as is. Under the Finance Comps skill, leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.
 
@@ -4936,7 +4936,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `best_execution_file_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the committee file: add a Best-Ex File Service backend serving a Best-Ex Register table; publish Best-Ex File App with Best-Ex Register on its Review tab; instantiate the app. On the open Best-Ex Review dashboard, add the built Best-Ex Register, Live Orders, and Broker Scorecard from Bench Stark Enterprise's Execution Desk, with parameters desk US Equity and period QTD on both desk widgets. Keep everything already there exactly as is. Read the Finance Comps skill and leave a Best-Ex Governance note recording what it says deserves premium or discount and what not to do with them.
 
@@ -4961,7 +4961,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `chart_deck_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Chart Deck dashboard, add Getting Started's TradingView Chart and Getting Started's Plotly Heatmap with its color_scale parameter set to Viridis.
 
@@ -4977,7 +4977,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `chart_deck_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Chart Deck dashboard, add the candles chart from Getting Started and Getting Started's Plotly Heatmap with its color_scale parameter set to Viridis.
 
@@ -4993,7 +4993,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `chart_deck_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Chart Deck on the open dashboard: add Getting Started's TradingView Chart and Getting Started's Plotly Heatmap. Set the heatmap's color scale under the house palette policy, the desk's blue-green-yellow standard.
 
@@ -5009,7 +5009,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `chart_deck_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Chart Deck dashboard, switch the Getting Started Plotly Heatmap still on Plasma to house-palette Viridis through its color_scale parameter, and add Getting Started's TradingView Chart. Leave the rest alone: the Inferno heatmap is correct for the other desk and must stay untouched. Read Workspace session guidance; leave a Chart Deck Governance note recording its stable phrase for anchoring work to the current dashboard and tab.
 
@@ -5036,7 +5036,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `chart_deck_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the side-screen deck before the open: add a Chart Deck Service backend serving a Deck Register table; publish Chart Deck App with Deck Register on its Deck tab; instantiate the app. On the open Chart Deck dashboard, switch the Getting Started Plotly Heatmap still on Plasma to house-palette Viridis through its color_scale parameter; add the built Deck Register and Getting Started's TradingView Chart. Leave the rest alone: the Inferno heatmap is correct for the other desk and must stay untouched. Read Workspace session guidance; leave a Chart Deck Governance note recording its stable phrase for anchoring work to the current dashboard and tab.
 
@@ -5064,7 +5064,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `embed_shelf_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Desk Shelf dashboard, add Getting Started's HTML Widget and Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo.
 
@@ -5080,7 +5080,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `embed_shelf_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Desk Shelf dashboard, add the internal tools page from Getting Started and Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo.
 
@@ -5096,7 +5096,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `embed_shelf_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Desk Shelf on the open dashboard: add the Getting Started component selected by the interactive-dashboard widget policy, plus Getting Started's Video Library with its video_name parameter set to OpenBB Workspace Demo.
 
@@ -5112,7 +5112,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `embed_shelf_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Desk Shelf dashboard, switch the Getting Started Video Library still showing Open Data Platform Demo to the desk demo, OpenBB Workspace Demo, through its video_name parameter; add Getting Started's HTML Widget. Leave the rest alone: the separate Video Library already showing OpenBB Workspace Demo is correct for the other desk and must stay untouched. Read the build-an-app guide; leave a Shelf Governance note recording the final two actions it lists.
 
@@ -5138,7 +5138,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `embed_shelf_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the desk shelf before the open: add a Shelf Service backend serving a Shelf Register table; publish Shelf App with Shelf Register on its Shelf tab; instantiate the app. On the open Desk Shelf dashboard, switch the Getting Started Video Library still showing Open Data Platform Demo to the desk demo, OpenBB Workspace Demo, through its video_name parameter; add the built Shelf Register and Getting Started's HTML Widget. Leave the rest alone: the separate Video Library already showing OpenBB Workspace Demo is correct for the other desk and must stay untouched. Read the build-an-app guide; leave a Shelf Governance note recording the final two actions it lists.
 
@@ -5165,7 +5165,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `tape_and_news_level0`
 
-**level0** · category: story · specification: -
+**level0** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Desk Tape dashboard, read Getting Started's Sample News Feed with category set to business and limit set to 3, then leave a Tape Lead Note recording the exact lead title and author.
 
@@ -5180,7 +5180,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `tape_and_news_level1`
 
-**level1** · category: story · specification: -
+**level1** · category: story · specification: - · no-op baseline score: 0.000
 
 > On the open Desk Tape dashboard, read the newswire from Getting Started for business, limited to 3, then leave a Tape Lead Note recording the exact lead title and author.
 
@@ -5195,7 +5195,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `tape_and_news_level2`
 
-**level2** · category: story · specification: -
+**level2** · category: story · specification: - · no-op baseline score: 0.000
 
 > Tape check on the open Desk Tape dashboard: read Getting Started's Sample News Feed under the market-open tape policy with limit 3. Leave a Tape Lead Note recording the exact lead title and author.
 
@@ -5210,7 +5210,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `tape_and_news_level3`
 
-**level3** · category: story · specification: -
+**level3** · category: story · specification: - · no-op baseline score: 0.000
 
 > Tape check on the open Desk Tape dashboard: read Getting Started's Sample News Feed for business, limited to 3, and keep everything already there exactly as is. Under the Finance Tearsheet skill, leave a Tape Lead Note recording the exact lead title and author plus the first input its workflow gathers.
 
@@ -5232,7 +5232,7 @@ Every criterion below becomes one or more boolean checks in `grade_task`
 
 #### `tape_and_news_level4`
 
-**level4** · category: story · specification: -
+**level4** · category: story · specification: - · no-op baseline score: 0.000
 
 > Build the tape digest before the open: add a Tape Digest Service backend serving a Tape Register table; publish Tape Digest App with Tape Register on its Digest tab; instantiate the app. On the open Desk Tape dashboard, add the built Tape Register and keep everything already there exactly as is. Read Getting Started's Sample News Feed for business, limited to 3; under the Finance Tearsheet skill, leave a Tape Lead Note recording the exact lead title and author plus the first input its workflow gathers.
 

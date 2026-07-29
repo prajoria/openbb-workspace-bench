@@ -63,11 +63,11 @@ from workspace_bench.reports.metrics import (
 )
 from workspace_bench.reports.serialization import grade_summary
 from workspace_bench.core.runner import (
-    BUILTIN_TASK_SUITE_ORDER,
-    load_builtin_task_suite_manifest,
+    BUILTIN_TASKSET_ORDER,
+    load_builtin_taskset_manifest,
     load_builtin_tasks,
     load_task_directory,
-    load_task_suite_manifest,
+    load_taskset_manifest,
     task_workspace_baseline,
     tasks_workspace_baseline,
 )
@@ -86,7 +86,7 @@ def resolve_repo_root(start: Path | None = None) -> Path:
     for candidate in candidates:
         if (
             (candidate / "pyproject.toml").exists()
-            and (candidate / "src" / "workspace_bench" / "task_suites").exists()
+            and (candidate / "src" / "workspace_bench" / "tasksets").exists()
         ):
             return candidate
     return Path.cwd()
@@ -278,11 +278,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--family", help="Optional task-family filter, e.g. create.")
     parser.add_argument("--category", help="Optional task-category filter, e.g. dashboard.")
     parser.add_argument(
-        "--suite",
+        "--taskset", "--suite",
         dest="suite",
         default="workspace-tasks",
-        choices=list(BUILTIN_TASK_SUITE_ORDER),
-        help="Bundled task suite. core = operating the workspace.",
+        choices=list(BUILTIN_TASKSET_ORDER),
+        help="Bundled taskset. core = operating the workspace.",
     )
     parser.add_argument(
         "--task-dir",
@@ -793,7 +793,7 @@ def load_task_source(args: argparse.Namespace) -> list[Task]:
     if getattr(args, "task", None) and suite == "workspace-tasks":
         tasks = []
         seen: set[str] = set()
-        for name in BUILTIN_TASK_SUITE_ORDER:
+        for name in BUILTIN_TASKSET_ORDER:
             for task in load_builtin_tasks(name):
                 if task.qualified_id not in seen:
                     seen.add(task.qualified_id)
@@ -1858,6 +1858,11 @@ def post_json(
         message = f"model API request failed: HTTP {error.code}: {detail}"
         if is_transient_http_status(error.code):
             raise TransientModelError(message, status_code=error.code) from error
+        # OpenRouter reports an empty routing pool as 404 "No endpoints
+        # found" - with a pinned provider that is a capacity flap, not a
+        # missing model, so it deserves the transient retry path.
+        if error.code == 404 and "No endpoints found" in detail:
+            raise TransientModelError(message, status_code=error.code) from error
         raise RuntimeError(message) from error
     except urllib.error.URLError as error:
         raise TransientModelError(f"could not reach model API at {url}: {error.reason}") from error
@@ -2735,20 +2740,20 @@ def selected_filters(args: argparse.Namespace) -> dict:
 
 
 def benchmark_metadata(args: argparse.Namespace) -> dict:
-    task_suite = None
+    taskset = None
     if getattr(args, "task_dir", None):
-        task_suite = load_task_suite_manifest(Path(args.task_dir))
+        taskset = load_taskset_manifest(Path(args.task_dir))
     else:
-        task_suite = load_builtin_task_suite_manifest(
+        taskset = load_builtin_taskset_manifest(
             getattr(args, "suite", "workspace-tasks")
         )
     return {
         "name": BENCHMARK_NAME,
-        "suite_id": task_suite.suite_id if task_suite else "local",
-        "content_sha256": task_suite.content_sha256 if task_suite else None,
+        "suite_id": taskset.suite_id if taskset else "local",
+        "content_sha256": taskset.content_sha256 if taskset else None,
         "workspace_baseline": (
-            task_suite.workspace_baseline
-            if task_suite and task_suite.workspace_baseline is not None
+            taskset.workspace_baseline
+            if taskset and taskset.workspace_baseline is not None
             else "minimal"
         ),
         **git_provenance(Path(__file__).resolve()),

@@ -1,7 +1,7 @@
 """Materialize the stark-workspace-a baseline as a reviewable data file.
 
-stark-workspace-a is the everything-mounted lived-in workspace for the
-usage suite: Home plus every Stark app dashboard (as built from the
+stark-workspace-a is the everything-mounted lived-in workspace used as the
+workspace-tasks baseline: Home plus every Stark app dashboard (as built from the
 canonical catalog) plus the three personal desk dashboards from
 stark-onboard-a, with all four catalog backends connected. Re-run this
 script to regenerate ``data/initial_states/stark_workspace_a.json``.

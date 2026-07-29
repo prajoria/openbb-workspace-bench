@@ -1,11 +1,11 @@
 ---
 name: task-author
-description: Author complete workspace_tasks task.json files (setup, eval, reference trace, prompt) from a persona README and a story markdown. Use when creating or revising tasks for the workspace_tasks suite.
+description: Author complete workspace_tasks task.json files (setup, eval, reference trace, prompt) from a persona README and a story markdown. Use when creating or revising tasks for the workspace_tasks taskset.
 ---
 
 # Task authoring from stories
 
-You write **complete tasks** — setup, eval, reference trace, and prompt in one sitting — for the `workspace_tasks` suite. There is no generator: you are the generator. Two gates stand behind you (certification replay and a fresh-eyes validator), so your job is to compose tasks that are *right*, not merely plausible.
+You write **complete tasks** — setup, eval, reference trace, and prompt in one sitting — for the `workspace_tasks` taskset. There is no generator: you are the generator. Two gates stand behind you (certification replay and a fresh-eyes validator), so your job is to compose tasks that are *right*, not merely plausible.
 
 ## Your place in the pipeline
 
@@ -28,7 +28,7 @@ Before writing any task: locate the story's widgets in the catalogs, confirm the
 ## Inputs and output
 
 - **In:** `task_templates/<persona>/README.md` (who is asking: voice, priorities, vocabulary) and `task_templates/<persona>/<story>.md` — short prose context plus a `facts:` block carrying the canonical ingredients: the working dashboard name, the target widget(s) with app and origin, the parameter values, a find-hint (how the persona says it colloquially, for level 1), the level-2 policy phrase and which value it carries, the governing knowledge source for level 3, and the level-4 build names (backend, table, app/tab if used). Furniture for levels 3-4 is yours to invent; the facts block is the graded canon. The story's name must be unique across **all** personas — task ids carry no persona prefix.
-- **Out:** five files in `src/workspace_bench/task_suites/workspace_tasks/<persona>/` named `<story>_level0.json` … `<story>_level4.json`. The persona directory doubles as the task family. Tasks are committed source — self-contained, no external references beyond the standard baselines and catalogs.
+- **Out:** five files in `src/workspace_bench/tasksets/workspace_tasks/<persona>/` named `<story>_level0.json` … `<story>_level4.json`. The persona directory doubles as the task family. Tasks are committed source — self-contained, no external references beyond the standard baselines and catalogs.
 
 ## The task.json schema
 
@@ -56,9 +56,9 @@ Exactly five top-level keys — the existing bench schema, so every tool (valida
 }
 ```
 
-Do not write a `category` field — the suite's `task_suite.json` manifest supplies it for every task.
+Do not write a `category` field — the taskset's `taskset.json` manifest supplies it for every task.
 
-Other eval keys available when the story needs them: `required_tabs`, `required_dashboard_name_contains`, `required_values_in_answer`, `required_widget_defs` / `required_app_defs` (for built backends). Copy field shapes from certified tasks in `task_suites/enterprise_apps_usage/` when unsure — they are the precedent library.
+Other eval keys available when the story needs them: `required_tabs`, `required_dashboard_name_contains`, `required_values_in_answer`, `required_widget_defs` / `required_app_defs` (for built backends). Copy field shapes from certified tasks in `tasksets/workspace_tasks/` when unsure — they are the precedent library.
 
 ## The reference trace and the budget
 
@@ -104,7 +104,7 @@ The realistic preservation exam for ADD-shaped stories in the ambient world of l
 
 ## Story shapes beyond place-and-read
 
-- **Repair stories** (the facts block carries `seeded_wrong`): the target starts on the working dashboard **misconfigured with the seeded_wrong values**, and the ask is to restore the correct configuration (graded via `update_widget` and/or the corrected end state). The five dials apply unchanged — level 0 states the correct values, level 2's policy carries one of them, level 3 (Ground) reads and notes while its world still carries the decoy and preservation ambiently ("repair the target, leave everything else"), and level 4 still builds. Old-suite precedent: the repair-family tasks in `task_suites/enterprise_apps_usage/`.
+- **Repair stories** (the facts block carries `seeded_wrong`): the target starts on the working dashboard **misconfigured with the seeded_wrong values**, and the ask is to restore the correct configuration (graded via `update_widget` and/or the corrected end state). The five dials apply unchanged — level 0 states the correct values, level 2's policy carries one of them, level 3 (Ground) reads and notes while its world still carries the decoy and preservation ambiently ("repair the target, leave everything else"), and level 4 still builds. Precedent: the repair-shaped stories already certified in `tasksets/workspace_tasks/` (e.g. compliance's breach_repair, fund operations' nav_close_repair).
 - **Resource- and prompt-governed rungs**: when the story's governance names a workspace resource or prompt instead of a skill, the level-3 read is `read_workspace_resource` / `get_workspace_prompt` (graded on `uri` / `name`), and the note fact must live only in that source — same describe-never-print contract. Verify the source's exact text via `src/workspace_bench/workspace/simulated_workspace.py`.
 - **Form widgets**: the form param type carries no options list; grade placement and end state, and verify the widget's actual schema in the catalog before inventing any interaction with it.
 
@@ -121,7 +121,7 @@ Written last, once the eval is fixed, in the persona's voice (their README is th
 1. Read the persona README and the story. List the canonical facts.
 2. Verify every fact against the data folder. Flag conflicts; never paper over them.
 3. Write level 0 first, replay it mentally call by call, then climb from the shared story core — apply only that level's prompt signature while carrying forward the specified upper-world demands.
-4. After each level: certify it alone (`uv run workspace-bench validate --task-dir src/workspace_bench/task_suites/workspace_tasks --family <persona> --difficulty level<N>` — oracle passes, no-op fails), then dispatch a background task-validator subagent on that task and move to the next level.
+4. After each level: certify it alone (`uv run workspace-bench validate --task-dir src/workspace_bench/tasksets/workspace_tasks --family <persona> --difficulty level<N>` — oracle passes, no-op fails), then dispatch a background task-validator subagent on that task and move to the next level.
 5. Fix validator FLAG lines as they land (an unreachable value, an ambiguous target, an impossible ask, a too-tight budget) — before writing later levels if the flag reveals a pattern. Re-certify and have the validator re-check anything you change.
 6. When all five are authored and validator-quiet: run the full-family certification (`--family <persona>`, no difficulty filter). Report. The orchestrator then runs the task-level-fairness check across your ladder; repair its per-level flags the same way.
 
@@ -185,4 +185,4 @@ Why each piece is the way it is:
 - **Both certifications are satisfiable by construction**: replaying the trace produces the required widget (oracle passes); an agent that does nothing leaves the dashboard empty (`required_widgets` unmet — no-op fails).
 - **Every fact is data-folder-verified**: the widget id and display name from the Stark catalog, and `Flagship Long/Short` / `QTD` from that widget's declared parameter options — which is also what makes "quarterly" derivable (QTD is the only quarter option).
 
-Once the pilot's *Morning briefing* story is certified and validated, its five committed files in `task_suites/workspace_tasks/portfolio_manager/` are the canonical reference ladder — read them before your first story.
+Once the pilot's *Morning briefing* story is certified and validated, its five committed files in `tasksets/workspace_tasks/portfolio_manager/` are the canonical reference ladder — read them before your first story.
