@@ -58,17 +58,12 @@ def test_release_consistency_flags_all_retired_counts() -> None:
 
 
 def test_release_consistency_flags_cross_phase_claims() -> None:
-    stale = (
-        "The open product briefs have no "
-        + "browser harness and no "
-        + "runtime verification.\n"
-    )
+    stale = "The open product briefs have no runtime verification.\n"
     findings = audit_text(
         Path("example.md"),
         stale,
     )
     reasons = {finding.reason for finding in findings}
-    assert "stale claim (browser_harness_outdated)" in reasons
     assert "stale claim (runtime_verification_denial)" in reasons
 
 

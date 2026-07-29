@@ -63,8 +63,6 @@ def summarize_result_rows(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         row for row in rows if int(row.get("failed_tool_call_count") or 0) > 0
     ]
     recovered = sum(bool(row.get("passed")) for row in recovery_candidates)
-    browser_rows = [row for row in rows if row.get("browser_verdict") in {"pass", "fail"}]
-    browser_passed = sum(row.get("browser_verdict") == "pass" for row in browser_rows)
     outcomes_by_task: dict[str, list[bool]] = defaultdict(list)
     for row in rows:
         task_ref = str(row.get("qualified_id") or row.get("id"))
@@ -85,10 +83,6 @@ def summarize_result_rows(rows: Sequence[Mapping[str, Any]]) -> dict[str, Any]:
         "runtime_task_count": len(runtime_rows),
         "runtime_passed": runtime_passed,
         "runtime_pass_rate": runtime_passed / len(runtime_rows) if runtime_rows else None,
-        "browser_status": "observed" if browser_rows else "pending",
-        "browser_task_count": len(browser_rows),
-        "browser_passed": browser_passed,
-        "browser_pass_rate": browser_passed / len(browser_rows) if browser_rows else None,
         "tool_call_count": tool_calls,
         "failed_tool_call_count": failed_calls,
         "invalid_tool_call_rate": failed_calls / tool_calls if tool_calls else 0.0,
@@ -179,8 +173,6 @@ def task_reliability_matrix(rows: Sequence[Mapping[str, Any]]) -> list[dict[str,
                 "strict_pass_rate": metrics["strict_pass_rate"],
                 "state_pass_rate": metrics["state_pass_rate"],
                 "runtime_pass_rate": metrics["runtime_pass_rate"],
-                "browser_status": metrics["browser_status"],
-                "browser_pass_rate": metrics["browser_pass_rate"],
                 "invalid_tool_call_rate": metrics["invalid_tool_call_rate"],
                 "median_turns": metrics["median_turns"],
                 "recovery_after_failure_rate": metrics["recovery_after_failure_rate"],

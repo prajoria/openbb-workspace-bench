@@ -21,7 +21,6 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from pathlib import Path
-from functools import lru_cache
 from typing import Any, Callable, Iterator, Literal, cast
 
 from workspace_bench.agents.model_adapter_helpers import (
@@ -2653,7 +2652,6 @@ def agent_run_summary(run: ComparisonRun) -> dict:
     result = run.run_result
     tool_call_count = len(result.trace)
     failed_tool_call_count = sum(not event.ok for event in result.trace)
-    browser = browser_verdict_for_task(result.task.qualified_id)
     verdict = run.judge_verdict
     judge_status: str
     if result.task.success.required_answer_judgment:
@@ -2684,7 +2682,6 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "judge_raw_reason": judge_reason_line(verdict) if verdict is not None else "",
         "tool_call_count": tool_call_count,
         "failed_tool_call_count": failed_tool_call_count,
-        "browser_verdict": browser,
         "wall_time_seconds": round(run.wall_time_seconds, 6),
         "input_tokens": int(run.usage.get("input_tokens") or 0),
         "output_tokens": int(run.usage.get("output_tokens") or 0),
@@ -2703,29 +2700,6 @@ def agent_run_summary(run: ComparisonRun) -> dict:
         "task_path": str(run.task_path),
         "output_path": str(run.output_path),
     }
-
-
-@lru_cache(maxsize=1)
-def browser_verdict_index() -> dict[str, str]:
-    """Index completed browser verdicts; missing task entries remain pending."""
-
-    verdicts: dict[str, str] = {}
-    root = resolve_repo_root() / "runs" / "browser-cert"
-    if not root.exists():
-        return verdicts
-    for path in sorted(root.rglob("verdict.json")):
-        try:
-            payload = json.loads(path.read_text(encoding="utf-8"))
-        except (OSError, ValueError):
-            continue
-        task_ref = payload.get("task_ref")
-        if isinstance(task_ref, str) and isinstance(payload.get("passed"), bool):
-            verdicts[task_ref] = "pass" if payload["passed"] else "fail"
-    return verdicts
-
-
-def browser_verdict_for_task(task_ref: str) -> str:
-    return browser_verdict_index().get(task_ref, "pending")
 
 
 def selected_filters(args: argparse.Namespace) -> dict:

@@ -27,7 +27,6 @@ to other benchmarks' terms in [Terminology](#terminology).
 - [Tasksets](#tasksets)
 - [Private Tasksets](#private-tasksets)
 - [Live Workspace MCP Smoke](#live-workspace-mcp-smoke)
-- [Browser Certification](#browser-certification)
 - [Serve Fixture Backends](#serve-fixture-backends)
 - [Harbor Adapter](#harbor-adapter)
 - [Reference](#reference) — [TASK-SCHEMA.md](TASK-SCHEMA.md) · [RESULT-SCHEMA.md](RESULT-SCHEMA.md)
@@ -55,7 +54,6 @@ to other benchmarks' terms in [Terminology](#terminology).
 - transcription-grade Getting Started, Widget Examples, Stark enterprise, and Daloopa fixture backends
 - simulator-backed Workspace MCP runtime for fast local evals
 - live `workspace-mcp` sidecar smoke runner
-- optional Playwright browser-certification harness for runtime-enabled tasksets
 - public task envelope export
 - external agent command contract
 - private task directory support
@@ -64,19 +62,15 @@ to other benchmarks' terms in [Terminology](#terminology).
 - provenance-aware report generation
 
 The simulator is intentional. It makes evals fast, deterministic, and suitable for CI and high-volume regression runs. The live smoke runner exercises the real `workspace-mcp` HTTP and websocket bridge path against the same task contract.
-The browser subset is a separate, slower realism gate; its bundled self-test
-uses real Chromium against a mock Workspace page, while a real-product run
-requires one saved human login.
 
 ## Scope & Limitations
 
 WorkspaceBench is an agent evaluation harness, not a full training framework
 or public leaderboard. Its default runner uses a deterministic simulator and
 fixture data, not live market data or a real Workspace browser. The optional
-sidecar smoke test verifies the MCP transport and tool surface; browser dry-run
-and self-test verify the local harness, not live-product parity. A real
-authenticated `browser-cert --all` run is required before claiming live
-Workspace execution.
+sidecar smoke test verifies the MCP transport and tool surface, not
+live-product parity - do not claim live Workspace execution from simulator
+results.
 
 Training, RL, and live Workspace execution are downstream paths that reuse the
 same benchmark core. Other important boundaries:
@@ -528,58 +522,6 @@ The reference task above is fully validated end to end (converter, trusted
 runtime, verifier, Harbor oracle/NOP parity, and a real coding-agent trial);
 suite-wide export and result ingestion are the remaining generalization work.
 
-## Browser Certification
-
-Install the optional browser dependency and Chromium once:
-
-```bash
-uv sync --extra dev --extra browser
-uv run playwright install chromium
-```
-
-The local gates need no Workspace account. Dry-run validates every manifest
-entry, its oracle backend, runtime-derived evidence, parameters,
-columns, tabs, CORS, and live HTTP routes. Self-test drives real Chromium
-through the same connection, app/widget placement, interaction, assertion,
-screenshot, and trace code used for the product run:
-
-```bash
-uv run --extra browser workspace-bench browser-cert --dry-run
-uv run --extra browser workspace-bench browser-cert --self-test
-```
-
-The bundled certification manifest currently ships no entries (the previous
-subset certified the retired app-building suite), so certification fails
-closed until a new subset of runtime-enabled tasks is authored.
-
-Artifacts are written under `runs/browser-cert/selftest-*/` as
-`screenshot.png`, `trace.zip`, and `verdict.json`.
-
-A real OpenBB Workspace run has one human step: save an authenticated browser
-storage state outside the repository. No credentials are accepted or stored by
-the harness.
-
-```bash
-mkdir -p ~/.config/workspace-bench
-uv run --extra browser workspace-bench browser-cert \
-  --setup-auth \
-  --workspace-url https://pro.openbb.co \
-  --auth-state ~/.config/workspace-bench/openbb.workspace-auth.json
-
-uv run --extra browser workspace-bench browser-cert \
-  --all \
-  --workspace-url https://pro.openbb.co \
-  --auth-state ~/.config/workspace-bench/openbb.workspace-auth.json
-```
-
-Workspace UI selectors are externalized in
-`src/workspace_bench/workspace/browser/selectors.json`. If the live product differs,
-copy that file outside the repository, edit only the selectors, and pass it
-with `--selectors PATH`. The local self-test proves the browser, backend, and
-artifact layers; it does **not** prove live-product selector or rendering
-parity. Keep the no-live-execution claim in place until the real `--all` run
-passes and its verdicts are reviewed.
-
 ## Serve Fixture Backends
 
 Serve a deterministic fixture as a Workspace backend:
@@ -762,4 +704,4 @@ Benchmark data should not appear in model training corpora unless explicitly rel
 
 ## Release Notes
 
-This is an alpha benchmark package. It is ready for local evals, private tasksets, CI regression testing, `workspace-mcp` sidecar smoke tests, and local browser-harness self-testing, and it ships with committed model boards and baselines. Before a broader public leaderboard: hidden tasksets and a completed browser-certification run against a real authenticated Workspace.
+This is an alpha benchmark package. It is ready for local evals, private tasksets, CI regression testing, and `workspace-mcp` sidecar smoke tests, and it ships with committed model boards and baselines. Before a broader public leaderboard: hidden tasksets and a certification pass against a real authenticated Workspace.

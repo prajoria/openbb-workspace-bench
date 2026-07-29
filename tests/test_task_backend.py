@@ -1,24 +1,11 @@
 from __future__ import annotations
 
 import json
-from contextlib import contextmanager
-from pathlib import Path
-from types import SimpleNamespace
 from urllib.request import Request, urlopen
 
 
 from workspace_bench.core.models import Task
-from workspace_bench.workspace.browser.certification import (
-    browser_certify,
-    load_certification_subset,
-)
-from workspace_bench.workspace.browser.task_backend import TaskBackendServer
-
-
-def test_certification_manifest_is_empty_pending_reauthoring() -> None:
-    # The previous 30-entry subset certified the retired app-building suite.
-    # An empty manifest must load cleanly; certification then fails closed.
-    assert load_certification_subset() == ()
+from workspace_bench.workspace.task_backend import TaskBackendServer
 
 
 def _form_backend_task() -> Task:
@@ -120,36 +107,3 @@ def test_task_backend_serves_oracle_metadata_datasets_forms_and_cors() -> None:
             "/access-review",
             "/access-review-submit",
         }
-
-
-def test_browser_certification_fails_closed_when_no_tasks_are_selected(
-    monkeypatch,
-    tmp_path: Path,
-) -> None:
-    from workspace_bench.workspace.browser import certification
-
-    monkeypatch.setattr(certification, "load_certification_subset", lambda: ())
-
-    dry_result = browser_certify(dry_run=True, output_root=tmp_path)
-
-    class FakeBrowser:
-        def close(self) -> None:
-            return None
-
-    @contextmanager
-    def fake_sync_playwright():
-        yield SimpleNamespace(
-            chromium=SimpleNamespace(launch=lambda **_kwargs: FakeBrowser())
-        )
-
-    monkeypatch.setattr(certification, "_sync_playwright", lambda: fake_sync_playwright)
-    browser_result = browser_certify(
-        all_entries=True,
-        auth_state=tmp_path / "unused-auth.json",
-        output_root=tmp_path,
-    )
-
-    for result in (dry_result, browser_result):
-        assert result["passed"] is False
-        assert result["task_count"] == 0
-        assert result["results"] == []

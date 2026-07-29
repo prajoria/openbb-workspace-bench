@@ -45,9 +45,6 @@ STALE_CLAIMS = {
     "hand-assigned difficulty": re.compile(
         r"difficulty\s+(?:is|remains)\s+hand[- ]assigned", re.IGNORECASE
     ),
-    "browser_harness_outdated": re.compile(
-        r"(?:future browser(?: runner)?|no browser harness)", re.IGNORECASE
-    ),
 }
 
 NUMBER_WORDS = (

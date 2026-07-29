@@ -34,7 +34,7 @@ External-agent rows additionally record `grade_passed`, command, exit code,
 timeout, stdout/stderr, run directory, task path, and output path. Their
 `passed` requires both process and grade success. Interactive evaluator files
 add model/filter/runner/repeat settings, run timestamps and harness/provider
-identity, strict/state/runtime/browser summaries, invalid-call and recovery
+identity, strict/state/runtime summaries, invalid-call and recovery
 metrics, turns, tokens, cost, per-task repeats/pass@k/pass^k, durable manifests,
 and checkpoints. Resume is accepted only when model, provider, temperature,
 harness revision, taskset hash, track, repeats, and ordered task manifest match.

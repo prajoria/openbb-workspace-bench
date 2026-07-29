@@ -38,9 +38,6 @@ live = [
   "mcp>=1.27.0",
   "websockets>=16.0"
 ]
-browser = [
-  "playwright>=1.48"
-]
 
 [project.scripts]
 workspace-bench = "workspace_bench.cli:main"
@@ -54,14 +51,10 @@ where = ["src"]
 "workspace_bench.tasksets.enterprise_apps_default" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.tasksets.smoke" = ["*.json", "**/*.json", "*.md"]
 "workspace_bench.data" = ["*.json", "**/*.json"]
-"workspace_bench.workspace.browser" = ["*.json", "*.html"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
-markers = [
-  "browser: runs a real Playwright browser against the local certification harness"
-]
 
 [tool.ruff]
 line-length = 100

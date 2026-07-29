@@ -33,7 +33,6 @@ def _row(
         "state_passed": passed,
         "runtime_passed": passed,
         "runtime_checks_total": 1,
-        "browser_verdict": "pending",
         "tool_call_count": 4,
         "failed_tool_call_count": failed_calls,
         "input_tokens": 10,

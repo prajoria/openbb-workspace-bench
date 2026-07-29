@@ -11,7 +11,7 @@ Use this package when you need to:
 
 - compare multiple model adapters across task slices
 - run repeated attempts for reliability metrics
-- compute strict/state/runtime/browser pass rates, invalid-call and recovery
+- compute strict/state/runtime pass rates, invalid-call and recovery
   rates, median turns, pairwise repeat flip rate, pass@k, and pass^k
 - checkpoint task×repeat cells and account for episode time, tokens, and cost
 - generate comparison JSON, Markdown, SVG, and PNG artifacts

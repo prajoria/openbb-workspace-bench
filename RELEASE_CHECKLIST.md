@@ -37,27 +37,11 @@ Use this checklist before announcing a public Workspace Bench release.
 ## Strongly Recommended Before Wider Launch
 
 - [ ] Add at least one real Workspace MCP sidecar parity run.
-- [ ] Run the full browser subset against a real authenticated Workspace (one-time human login, then certification):
-
-  ```bash
-  mkdir -p ~/.config/workspace-bench
-  uv run --extra browser workspace-bench browser-cert \
-    --setup-auth \
-    --workspace-url https://pro.openbb.co \
-    --auth-state ~/.config/workspace-bench/openbb.workspace-auth.json
-  uv run --extra browser workspace-bench browser-cert \
-    --all \
-    --workspace-url https://pro.openbb.co \
-    --auth-state ~/.config/workspace-bench/openbb.workspace-auth.json
-  ```
-
-  If selectors have drifted, copy `src/workspace_bench/workspace/browser/selectors.json`
-  outside the repository and add `--selectors PATH` to the second command.
 - [ ] Add a hidden taskset.
 - [ ] Add an optional Docker or compose workflow for fixture backend serving.
 - [ ] Publish a short benchmark report with coverage, baselines, and limitations.
 
 ## Claims to Avoid Until Verified
 
-- Do not claim live OpenBB Workspace execution from dry-run or mock self-test results. Lift the claim only after the real `browser-cert --all` run passes and its screenshots, traces, network checks, and verdicts are reviewed.
+- Do not claim live OpenBB Workspace execution: the harness runs the deterministic simulator plus the MCP sidecar smoke and live-parity paths, never the real product UI.
 - Do not claim financial reasoning coverage beyond the included deterministic fixture domains.

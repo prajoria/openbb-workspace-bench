@@ -28,8 +28,6 @@ Committed evidence and local artifact output for the benchmark.
   retained evidence.
 - `live-parity/` — per-task `parity.json` from `workspace-bench live-parity`
   against the hosted Workspace MCP bridge.
-- `browser-cert/` — screenshots, traces, and verdicts from
-  `workspace-bench browser-cert`.
 
 ## Provenance of the compiled boards
 
