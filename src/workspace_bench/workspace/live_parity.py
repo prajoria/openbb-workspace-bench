@@ -12,7 +12,8 @@ by construction:
 
 - Everything it creates lands on one dedicated dashboard whose name carries a
   ``workspace-bench parity`` marker; created widget uuids are tracked and torn
-  down in reverse order, and the previously active dashboard is restored.
+  down in reverse order, and the previously active dashboard is restored when
+  navigation changed. Read-only tasks without dashboard state mutate nothing.
 - Only tasks whose initial state and oracle trace the live surface can
   faithfully reproduce are eligible (see ``check_eligibility``); everything
   else is refused with a reason rather than approximated.
@@ -73,6 +74,20 @@ REPLAYABLE_TOOLS = frozenset(
         # Read-only knowledge surfaces are safe to replay against the live
         # bridge; registry-mutating tools (manage_backends/manage_apps) and
         # envelope echoes stay excluded.
+        "get_skill_content",
+        "read_workspace_resource",
+        "get_workspace_prompt",
+    }
+)
+
+NO_DASHBOARD_READ_ONLY_TOOLS = frozenset(
+    {
+        "get_workspace_snapshot",
+        "list_available_widgets",
+        "get_widget_schema",
+        "get_params_options",
+        "get_widget_data",
+        "read_widget",
         "get_skill_content",
         "read_workspace_resource",
         "get_workspace_prompt",
@@ -294,6 +309,12 @@ def check_eligibility(task: Task, origin_map: dict[str, str]) -> None:
         )
 
 
+def _is_read_only_call(call: ToolCall) -> bool:
+    return call.name in NO_DASHBOARD_READ_ONLY_TOOLS or (
+        call.name == "manage_backends" and call.args.get("operation") == "list"
+    )
+
+
 def derive_seed_plan(task: Task) -> SeedPlan:
     """Translate ``initial_state.dashboard`` into ordinary live tool calls.
 
@@ -304,6 +325,9 @@ def derive_seed_plan(task: Task) -> SeedPlan:
     """
 
     dashboard = (task.initial_state or {}).get("dashboard") or {}
+    trace_is_read_only = all(_is_read_only_call(call) for call in task.oracle_tool_calls)
+    if not dashboard and trace_is_read_only:
+        return SeedPlan(steps=(), dashboard_name="", tab_ids=(), seeded_widget_count=0)
     name = str(dashboard.get("name", "Workspace Bench"))
     steps: list[SeedStep] = [
         SeedStep(
@@ -562,6 +586,8 @@ class LiveLegRecord:
     generated_meta: dict[str, JsonDict] = field(default_factory=dict)
     dashboard_live_id: str = ""
     prior_dashboard_id: str = ""
+    navigation_changed: bool = False
+    state_mutated: bool = False
     teardown_log: list[str] = field(default_factory=list)
     seed_log: list[str] = field(default_factory=list)
 
@@ -747,6 +773,10 @@ async def _seed(
                 "navigate_workspace",
                 {"operation": "dashboard", "dashboard_id": reuse_id},
             )
+            record.state_mutated = record.state_mutated or bool(rename.get("ok"))
+            record.navigation_changed = record.navigation_changed or bool(
+                navigate.get("ok")
+            )
             if rename.get("ok") and navigate.get("ok"):
                 record.dashboard_live_id = reuse_id
                 mapper.record_dashboard(reuse_id)
@@ -777,6 +807,10 @@ async def _seed(
                 f"live seed failed at {step.call.name} ({step.kind}): "
                 f"{json.dumps(payload)[:500]}"
             )
+        if step.call.name not in NO_DASHBOARD_READ_ONLY_TOOLS:
+            record.state_mutated = True
+        if step.call.name == "navigate_workspace" or step.kind == "dashboard":
+            record.navigation_changed = True
         if step.kind == "dashboard":
             live_id = extract_dashboard_id(payload) or ""
             if not live_id:
@@ -815,6 +849,10 @@ async def _replay(
     for call in task.oracle_tool_calls:
         live_args = map_origin_values(mapper.to_live(dict(call.args)), origins)
         payload = await _call(session, call.name, live_args)
+        if payload.get("ok") and not _is_read_only_call(call):
+            record.state_mutated = True
+        if payload.get("ok") and call.name == "navigate_workspace":
+            record.navigation_changed = True
         if call.name in {"create_widget", "add_generative_widget"} and payload.get("ok"):
             live_uuid = extract_widget_uuid(payload) or ""
             if live_uuid:
@@ -849,6 +887,10 @@ async def _collect_and_grade(
     # (verified: an update_widget reads stale immediately and correct ~3s
     # later), so poll until two consecutive collections are identical.
     import asyncio
+
+    if not record.dashboard_live_id:
+        snapshot: JsonDict = {}
+        return grade_task(task, snapshot, tuple(record.trace)), snapshot
 
     info, widget_details = await _collect_once(session, record)
     for _ in range(10):
@@ -966,6 +1008,11 @@ async def _collect_once(
 
 
 async def _teardown(session: Any, record: LiveLegRecord) -> None:
+    if not record.state_mutated and not record.navigation_changed:
+        record.teardown_log.append(
+            "no state or navigation changes; teardown skipped"
+        )
+        return
     for live_uuid in reversed(record.created_widget_uuids):
         payload = await _call(session, "delete_widget", {"widget_uuid": live_uuid})
         if payload.get("ok"):
@@ -996,7 +1043,7 @@ async def _teardown(session: Any, record: LiveLegRecord) -> None:
                 else f"rename FAILED for {record.dashboard_live_id}"
             )
         )
-    if record.prior_dashboard_id:
+    if record.navigation_changed and record.prior_dashboard_id:
         payload = await _call(
             session,
             "navigate_workspace",

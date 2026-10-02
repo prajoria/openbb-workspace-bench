@@ -2,12 +2,23 @@
 
 from __future__ import annotations
 
+import asyncio
+from contextlib import asynccontextmanager
+from dataclasses import replace
+
 import pytest
 
-from workspace_bench.core.models import Task
+import workspace_bench.workspace.live_parity as live_parity
+from workspace_bench.core.models import Task, ToolCall
+from workspace_bench.core.runner import (
+    BUILTIN_TASKSET_ORDER,
+    find_task,
+    load_builtin_tasks,
+)
 from workspace_bench.workspace.live_parity import (
     DEFAULT_ORIGIN_MAP,
     LiveParityIneligible,
+    NO_DASHBOARD_READ_ONLY_TOOLS,
     PlaceholderMapper,
     check_eligibility,
     derive_seed_plan,
@@ -186,6 +197,106 @@ def test_seed_plan_reproduces_initial_dashboard(stark_read_task: Task) -> None:
     widget = plan.steps[3].call
     assert widget.args["origin"] == "Bench Stark Enterprise"
     assert widget.args["data_args"] == {"fund": "Flagship Long/Short", "period": "YTD"}
+
+
+def test_seed_plan_skips_dashboard_for_read_only_task_without_initial_state() -> None:
+    task = find_task("smoke_list_available_widgets_level0")
+
+    plan = derive_seed_plan(task)
+
+    assert plan.steps == ()
+    assert plan.dashboard_name == ""
+
+
+def test_every_no_dashboard_shortcut_trace_uses_explicit_read_only_allowlist() -> None:
+    shortcut_tasks: list[str] = []
+
+    for suite in BUILTIN_TASKSET_ORDER:
+        for task in load_builtin_tasks(suite):
+            plan = derive_seed_plan(task)
+            if plan.steps:
+                continue
+            shortcut_tasks.append(f"{suite}/{task.family}/{task.id}")
+            assert not (task.initial_state or {}).get("dashboard")
+            for call in task.oracle_tool_calls:
+                assert (
+                    call.name in NO_DASHBOARD_READ_ONLY_TOOLS
+                    or (
+                        call.name == "manage_backends"
+                        and call.args.get("operation") == "list"
+                    )
+                ), f"{task.id}: {call.name} is not explicitly read-only"
+
+    assert shortcut_tasks
+
+
+def test_seed_plan_keeps_isolated_dashboard_for_navigation_trace() -> None:
+    task = find_task("smoke_list_available_widgets_level0")
+    navigation_task = replace(
+        task,
+        oracle_tool_calls=(
+            ToolCall(
+                "navigate_workspace",
+                {"operation": "dashboard", "dashboard_id": "target-dashboard"},
+            ),
+        ),
+    )
+
+    plan = derive_seed_plan(navigation_task)
+
+    assert [step.kind for step in plan.steps] == ["dashboard"]
+    assert plan.dashboard_name == "Workspace Bench"
+
+
+def test_no_dashboard_read_only_lifecycle_never_calls_mutating_tools(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    task = find_task("smoke_list_available_widgets_level0")
+    calls: list[tuple[str, dict]] = []
+
+    @asynccontextmanager
+    async def fake_session(*_args: object, **_kwargs: object):
+        yield object()
+
+    async def fake_call(
+        _session: object,
+        name: str,
+        args: dict,
+        *,
+        timeout: float = 90,
+    ) -> dict:
+        del timeout
+        calls.append((name, args))
+        if name == "get_workspace_snapshot":
+            return {
+                "ok": True,
+                "data": {
+                    "workspace_state": {
+                        "current_dashboard_uuid": "operator-dashboard",
+                        "current_dashboard_info": {"id": "operator-dashboard"},
+                    },
+                    "dashboards": [],
+                },
+            }
+        if name == "list_available_widgets":
+            return {"ok": True, "data": {"widgets": []}}
+        raise AssertionError(f"unexpected lifecycle call: {name}")
+
+    monkeypatch.setattr(live_parity, "_open_session", fake_session)
+    monkeypatch.setattr(live_parity, "_call", fake_call)
+
+    report = asyncio.run(live_parity.run_live_parity(task, token="test-token"))
+
+    assert [name for name, _args in calls] == [
+        "get_workspace_snapshot",
+        "list_available_widgets",
+    ]
+    assert all(
+        name in NO_DASHBOARD_READ_ONLY_TOOLS for name, _args in calls
+    )
+    assert report["live_teardown"] == [
+        "no state or navigation changes; teardown skipped"
+    ]
 
 
 def test_normalize_live_snapshot_rebuilds_sim_shape(stark_read_task: Task) -> None:
