@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-import shlex
+import subprocess
 import sys
 from types import SimpleNamespace
 import urllib.error
@@ -94,9 +94,8 @@ def test_batch_runner_executes_one_real_jsonl_agent_attempt(tmp_path) -> None:
     adapter = ModelAdapter(
         slug="jsonl-rule-agent",
         label="JSONL rule agent",
-        command=(
-            f"{shlex.quote(sys.executable)} "
-            "-m workspace_bench.agents.rule_agent"
+        command=subprocess.list2cmdline(
+            [sys.executable, "-m", "workspace_bench.agents.rule_agent"]
         ),
         env={},
         provider="custom",
