@@ -5,6 +5,7 @@ from __future__ import annotations
 import pytest
 
 from workspace_bench.core.models import Task
+from workspace_bench.core.runner import find_task
 from workspace_bench.workspace.live_parity import (
     DEFAULT_ORIGIN_MAP,
     LiveParityIneligible,
@@ -186,6 +187,15 @@ def test_seed_plan_reproduces_initial_dashboard(stark_read_task: Task) -> None:
     widget = plan.steps[3].call
     assert widget.args["origin"] == "Bench Stark Enterprise"
     assert widget.args["data_args"] == {"fund": "Flagship Long/Short", "period": "YTD"}
+
+
+def test_seed_plan_skips_dashboard_for_read_only_task_without_initial_state() -> None:
+    task = find_task("smoke_list_available_widgets_level0")
+
+    plan = derive_seed_plan(task)
+
+    assert plan.steps == ()
+    assert plan.dashboard_name == ""
 
 
 def test_normalize_live_snapshot_rebuilds_sim_shape(stark_read_task: Task) -> None:

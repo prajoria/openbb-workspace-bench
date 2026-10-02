@@ -304,6 +304,8 @@ def derive_seed_plan(task: Task) -> SeedPlan:
     """
 
     dashboard = (task.initial_state or {}).get("dashboard") or {}
+    if not dashboard:
+        return SeedPlan(steps=(), dashboard_name="", tab_ids=(), seeded_widget_count=0)
     name = str(dashboard.get("name", "Workspace Bench"))
     steps: list[SeedStep] = [
         SeedStep(
@@ -849,6 +851,10 @@ async def _collect_and_grade(
     # (verified: an update_widget reads stale immediately and correct ~3s
     # later), so poll until two consecutive collections are identical.
     import asyncio
+
+    if not record.dashboard_live_id:
+        snapshot: JsonDict = {}
+        return grade_task(task, snapshot, tuple(record.trace)), snapshot
 
     info, widget_details = await _collect_once(session, record)
     for _ in range(10):
