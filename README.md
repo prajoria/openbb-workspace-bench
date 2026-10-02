@@ -424,18 +424,19 @@ export WORKSPACE_MCP_TOKEN=...   # or put it in .env
 uv run --extra live workspace-bench live-parity --task smoke/get_widget_data/smoke_get_widget_data_level0
 ```
 
-The live leg reproduces the task's initial state through public tool calls on
-a dedicated marker-named dashboard, replays the oracle trace with origin
+The live leg reproduces mutable task state through public tool calls on a
+dedicated marker-named dashboard, replays the oracle trace with origin
 translation (`"Bench Stark Enterprise" → "Stark Fund"`, with identity mappings
 for `Getting Started` and `Widget Examples`, by default;
 `--origin-map` overrides), waits out the bridge's asynchronous write
 application, grades the normalized final state, then deletes everything it
-created and restores the previously active dashboard. Reports land in
-`runs/live-parity/<task>/parity.json` with per-leg grades, an agreement
-summary, and the live trace. Tasks the live surface cannot reproduce
-faithfully are refused with a reason. Live runs execute in a real user
-workspace: results are validation evidence for grader fidelity, never board
-numbers.
+created and restores the previously active dashboard only when navigation
+changed. Explicitly allowlisted read-only tasks without initial dashboard
+state skip dashboard creation and all mutating teardown calls. Reports land in
+`runs/live-parity/<task>/parity.json` with per-leg grades, an agreement summary,
+and the live trace. Tasks the live surface cannot reproduce faithfully are
+refused with a reason. Live runs execute in a real user workspace: results are
+validation evidence for grader fidelity, never board numbers.
 
 The `workspace-tasks` live-parity eligibility set is pending derivation.
 Compose-rung tasks use backend/app mutation tools that the conservative

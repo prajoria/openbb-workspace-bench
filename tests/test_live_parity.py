@@ -2,10 +2,13 @@
 
 from __future__ import annotations
 
+import asyncio
+from contextlib import asynccontextmanager
 from dataclasses import replace
 
 import pytest
 
+import workspace_bench.workspace.live_parity as live_parity
 from workspace_bench.core.models import Task, ToolCall
 from workspace_bench.core.runner import (
     BUILTIN_TASKSET_ORDER,
@@ -243,6 +246,57 @@ def test_seed_plan_keeps_isolated_dashboard_for_navigation_trace() -> None:
 
     assert [step.kind for step in plan.steps] == ["dashboard"]
     assert plan.dashboard_name == "Workspace Bench"
+
+
+def test_no_dashboard_read_only_lifecycle_never_calls_mutating_tools(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    task = find_task("smoke_list_available_widgets_level0")
+    calls: list[tuple[str, dict]] = []
+
+    @asynccontextmanager
+    async def fake_session(*_args: object, **_kwargs: object):
+        yield object()
+
+    async def fake_call(
+        _session: object,
+        name: str,
+        args: dict,
+        *,
+        timeout: float = 90,
+    ) -> dict:
+        del timeout
+        calls.append((name, args))
+        if name == "get_workspace_snapshot":
+            return {
+                "ok": True,
+                "data": {
+                    "workspace_state": {
+                        "current_dashboard_uuid": "operator-dashboard",
+                        "current_dashboard_info": {"id": "operator-dashboard"},
+                    },
+                    "dashboards": [],
+                },
+            }
+        if name == "list_available_widgets":
+            return {"ok": True, "data": {"widgets": []}}
+        raise AssertionError(f"unexpected lifecycle call: {name}")
+
+    monkeypatch.setattr(live_parity, "_open_session", fake_session)
+    monkeypatch.setattr(live_parity, "_call", fake_call)
+
+    report = asyncio.run(live_parity.run_live_parity(task, token="test-token"))
+
+    assert [name for name, _args in calls] == [
+        "get_workspace_snapshot",
+        "list_available_widgets",
+    ]
+    assert all(
+        name in NO_DASHBOARD_READ_ONLY_TOOLS for name, _args in calls
+    )
+    assert report["live_teardown"] == [
+        "no state or navigation changes; teardown skipped"
+    ]
 
 
 def test_normalize_live_snapshot_rebuilds_sim_shape(stark_read_task: Task) -> None:
