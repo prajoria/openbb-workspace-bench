@@ -79,6 +79,20 @@ REPLAYABLE_TOOLS = frozenset(
     }
 )
 
+NO_DASHBOARD_READ_ONLY_TOOLS = frozenset(
+    {
+        "get_workspace_snapshot",
+        "list_available_widgets",
+        "get_widget_schema",
+        "get_params_options",
+        "get_widget_data",
+        "read_widget",
+        "get_skill_content",
+        "read_workspace_resource",
+        "get_workspace_prompt",
+    }
+)
+
 ORIGIN_KEYS = ("origin", "backend_name")
 PLACEHOLDER_KEYS = ("widget_uuid", "dashboard_id")
 
@@ -304,7 +318,15 @@ def derive_seed_plan(task: Task) -> SeedPlan:
     """
 
     dashboard = (task.initial_state or {}).get("dashboard") or {}
-    if not dashboard:
+    trace_is_read_only = all(
+        call.name in NO_DASHBOARD_READ_ONLY_TOOLS
+        or (
+            call.name == "manage_backends"
+            and call.args.get("operation") == "list"
+        )
+        for call in task.oracle_tool_calls
+    )
+    if not dashboard and trace_is_read_only:
         return SeedPlan(steps=(), dashboard_name="", tab_ids=(), seeded_widget_count=0)
     name = str(dashboard.get("name", "Workspace Bench"))
     steps: list[SeedStep] = [

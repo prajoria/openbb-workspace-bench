@@ -2,13 +2,20 @@
 
 from __future__ import annotations
 
+from dataclasses import replace
+
 import pytest
 
-from workspace_bench.core.models import Task
-from workspace_bench.core.runner import find_task
+from workspace_bench.core.models import Task, ToolCall
+from workspace_bench.core.runner import (
+    BUILTIN_TASKSET_ORDER,
+    find_task,
+    load_builtin_tasks,
+)
 from workspace_bench.workspace.live_parity import (
     DEFAULT_ORIGIN_MAP,
     LiveParityIneligible,
+    NO_DASHBOARD_READ_ONLY_TOOLS,
     PlaceholderMapper,
     check_eligibility,
     derive_seed_plan,
@@ -196,6 +203,46 @@ def test_seed_plan_skips_dashboard_for_read_only_task_without_initial_state() ->
 
     assert plan.steps == ()
     assert plan.dashboard_name == ""
+
+
+def test_every_no_dashboard_shortcut_trace_uses_explicit_read_only_allowlist() -> None:
+    shortcut_tasks: list[str] = []
+
+    for suite in BUILTIN_TASKSET_ORDER:
+        for task in load_builtin_tasks(suite):
+            plan = derive_seed_plan(task)
+            if plan.steps:
+                continue
+            shortcut_tasks.append(f"{suite}/{task.family}/{task.id}")
+            assert not (task.initial_state or {}).get("dashboard")
+            for call in task.oracle_tool_calls:
+                assert (
+                    call.name in NO_DASHBOARD_READ_ONLY_TOOLS
+                    or (
+                        call.name == "manage_backends"
+                        and call.args.get("operation") == "list"
+                    )
+                ), f"{task.id}: {call.name} is not explicitly read-only"
+
+    assert shortcut_tasks
+
+
+def test_seed_plan_keeps_isolated_dashboard_for_navigation_trace() -> None:
+    task = find_task("smoke_list_available_widgets_level0")
+    navigation_task = replace(
+        task,
+        oracle_tool_calls=(
+            ToolCall(
+                "navigate_workspace",
+                {"operation": "dashboard", "dashboard_id": "target-dashboard"},
+            ),
+        ),
+    )
+
+    plan = derive_seed_plan(navigation_task)
+
+    assert [step.kind for step in plan.steps] == ["dashboard"]
+    assert plan.dashboard_name == "Workspace Bench"
 
 
 def test_normalize_live_snapshot_rebuilds_sim_shape(stark_read_task: Task) -> None:

@@ -12,8 +12,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Required for chart widgets: object with camelCase keys chartType, xKey, yKey (non-empty array of strings), and optional angleKey/calloutLabelKey. snake_case aliases (chart_type, x_key, y_key, angle_key, callout_label_key) are accepted and translated."
+        "default": null
       },
       "dashboard_id": {
         "anyOf": [
@@ -24,8 +23,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "data": {
         "anyOf": [
@@ -43,8 +41,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Content payload. For note and html: the raw text or HTML content string. For table and chart: an array of objects."
+        "default": null
       },
       "description": {
         "anyOf": [
@@ -55,8 +52,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Short description for the new widget."
+        "default": null
       },
       "inner_tab": {
         "anyOf": [
@@ -67,8 +63,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Places the new widget on an existing navigation tab only; it does not create a tab."
+        "default": null
       },
       "name": {
         "anyOf": [
@@ -79,17 +74,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Display name for the new widget."
+        "default": null
       },
       "widget_type": {
-        "description": "Use widget_type='note' for rich text notes such as rich_note.",
-        "enum": [
-          "note",
-          "table",
-          "chart",
-          "html"
-        ],
         "type": "string"
       }
     },
@@ -102,7 +89,6 @@
     "additionalProperties": false,
     "properties": {
       "task_requests": {
-        "description": "Array of objects shaped like {id, description, assigned_holder_url, assigned_agent_id}.",
         "items": {
           "additionalProperties": false,
           "description": "One task delegated to an external Workspace agent.\n\nField names match the frontend Zod schema in\n``terminalpro/src/components/AI/.../ai.ts`` (``taskRequestsSchema``).",
@@ -148,8 +134,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "data_args": {
         "anyOf": [
@@ -161,24 +146,18 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object of data parameter values from the widget schema."
+        "default": null
       },
-      "dry_run": {
+      "origin": {
         "anyOf": [
           {
-            "type": "boolean"
+            "type": "string"
           },
           {
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Validate and preview without changing the workspace: returns valid, effective_params, and warnings for this exact payload. A dry run that finds problems still returns ok=true; the verdict is in the data."
-      },
-      "origin": {
-        "description": "Widget origin. Pass origin exactly as returned by list_available_widgets.",
-        "type": "string"
+        "default": null
       },
       "ui_args": {
         "anyOf": [
@@ -190,18 +169,20 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object of UI config values from the widget schema."
+        "default": null
       },
       "widget_id": {
-        "description": "Widget type identifier from list_available_widgets or the workspace snapshot.",
-        "type": "string"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
       }
     },
-    "required": [
-      "origin",
-      "widget_id"
-    ],
     "type": "object"
   },
   "delete_widget": {
@@ -216,8 +197,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "widget_id": {
         "anyOf": [
@@ -228,8 +208,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Widget type identifier; fallback only when exactly one matching widget instance exists on the target dashboard. Never use a widget title or a generic widget type such as rich_note as an identifier."
+        "default": null
       },
       "widget_uuid": {
         "anyOf": [
@@ -240,8 +219,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Canonical widget instance UUID (preferred identifier). Get it from manage_dashboard operation='read' or get_workspace_snapshot.dashboard_composition."
+        "default": null
       }
     },
     "type": "object"
@@ -259,19 +237,15 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object with the values required by the schema's options_lookup_params when present."
+        "default": null
       },
       "origin": {
-        "description": "Widget origin. Pass origin exactly as returned by list_available_widgets.",
         "type": "string"
       },
       "param_name": {
-        "description": "Exact paramName from the widget schema.",
         "type": "string"
       },
       "widget_id": {
-        "description": "Widget type identifier from list_available_widgets or the workspace snapshot.",
         "type": "string"
       }
     },
@@ -297,7 +271,6 @@
         "default": null
       },
       "slug": {
-        "description": "Exact skill slug from the latest workspace snapshot (snapshot.skills).",
         "type": "string"
       }
     },
@@ -319,11 +292,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object of explicit parameter values for this data source. For chart widgets, include raw=true to fetch the underlying rows instead of the Plotly figure JSON; the figure is for the renderer, reasoning needs rows."
+        "default": null
       },
       "origin": {
-        "description": "Widget origin. Pass origin exactly as returned by list_available_widgets.",
         "type": "string"
       },
       "ssm_request": {
@@ -336,11 +307,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object payload for SSM-backed widgets."
+        "default": null
       },
       "widget_id": {
-        "description": "Widget type identifier from list_available_widgets or the workspace snapshot.",
         "type": "string"
       },
       "widget_uuid": {
@@ -352,8 +321,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Canonical widget instance UUID (preferred identifier). Get it from manage_dashboard operation='read' or get_workspace_snapshot.dashboard_composition."
+        "default": null
       }
     },
     "required": [
@@ -366,18 +334,28 @@
     "additionalProperties": false,
     "properties": {
       "origin": {
-        "description": "Widget origin. Pass origin exactly as returned by list_available_widgets.",
-        "type": "string"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
       },
       "widget_id": {
-        "description": "Widget type identifier from list_available_widgets or the workspace snapshot.",
-        "type": "string"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
       }
     },
-    "required": [
-      "origin",
-      "widget_id"
-    ],
     "type": "object"
   },
   "get_workspace_snapshot": {
@@ -397,8 +375,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Filter: backend UUID returned by manage_backends. Use backend_id when you have a UUID from manage_backends. Both filters can be passed together for a stricter match."
+        "default": null
       },
       "origin": {
         "anyOf": [
@@ -409,8 +386,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Filter: friendly catalog label matched exactly (e.g. 'Options Activity Monitor'). Use origin when working from a snapshot."
+        "default": null
       }
     },
     "type": "object"
@@ -427,8 +403,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "For instantiate: defaults to true and routes the browser to the new dashboard."
+        "default": null
       },
       "app_name": {
         "anyOf": [
@@ -439,8 +414,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "App name for read and instantiate; either app_name or template_id is required."
+        "default": null
       },
       "backend_id": {
         "anyOf": [
@@ -451,8 +425,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "For list: omit to return every app the user can see; pass backend_id only to filter to one backend (own or shared). Use manage_backends operation='list' to discover backend_id values."
+        "default": null
       },
       "dashboard_name": {
         "anyOf": [
@@ -463,15 +436,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "For instantiate: optional name for the created dashboard."
+        "default": null
       },
       "operation": {
-        "enum": [
-          "list",
-          "read",
-          "instantiate"
-        ],
         "type": "string"
       },
       "template_id": {
@@ -483,8 +450,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "App template id; alternative to app_name."
+        "default": null
       }
     },
     "required": [
@@ -504,8 +470,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Backend UUID from manage_backends operation='list'. Required for update, refresh, and remove."
+        "default": null
       },
       "endpoint_headers": {
         "anyOf": [
@@ -541,8 +506,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Array of {\"key\", \"value\", \"location\"} objects where location is \"headers\" (default) or \"query\"."
+        "default": null
       },
       "is_openbb_platform": {
         "anyOf": [
@@ -564,17 +528,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Backend display name."
+        "default": null
       },
       "operation": {
-        "enum": [
-          "list",
-          "add",
-          "update",
-          "refresh",
-          "remove"
-        ],
         "type": "string"
       },
       "url": {
@@ -586,8 +542,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Backend base URL."
+        "default": null
       },
       "validate_widgets": {
         "anyOf": [
@@ -598,8 +553,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "For add: defaults to true and surfaces a warning if widgets fail to load."
+        "default": null
       }
     },
     "required": [
@@ -619,8 +573,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "For create: route the browser to the new dashboard (default true)."
+        "default": null
       },
       "dashboard_id": {
         "anyOf": [
@@ -631,8 +584,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "name": {
         "anyOf": [
@@ -643,15 +595,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard display name. Required for create and update."
+        "default": null
       },
       "operation": {
-        "enum": [
-          "create",
-          "read",
-          "update"
-        ],
         "type": "string"
       }
     },
@@ -672,16 +618,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "operation": {
-        "enum": [
-          "create",
-          "add_tabs",
-          "remove_tabs",
-          "rename_tabs"
-        ],
         "type": "string"
       },
       "rename_map": {
@@ -696,8 +635,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object mapping existing tab_id to new display name, for example {\"old-tab-id\":\"New Name\"}. Required for rename_tabs. Renaming changes the display label only; the tab_id keeps its original slug."
+        "default": null
       },
       "tabs": {
         "anyOf": [
@@ -721,8 +659,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Array of {\"name\": ...} objects, for example [{\"name\":\"AAPL Analysis\"}]; name is the only key (tab_id and tab_name are rejected) and tab_id is generated as the slug of name. Not a string array such as [\"AAPL Analysis\"]. Required for create, add_tabs, and remove_tabs."
+        "default": null
       }
     },
     "required": [
@@ -742,14 +679,9 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "operation": {
-        "enum": [
-          "dashboard",
-          "tab"
-        ],
         "type": "string"
       },
       "tab_id": {
@@ -761,8 +693,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Inner tab slug id, e.g. aapl-analysis. Required for operation='tab'."
+        "default": null
       }
     },
     "required": [
@@ -782,8 +713,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "widget_id": {
         "anyOf": [
@@ -794,8 +724,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Widget type identifier; fallback only when exactly one matching widget instance exists on the target dashboard. Never use a widget title or a generic widget type such as rich_note as an identifier."
+        "default": null
       },
       "widget_uuid": {
         "anyOf": [
@@ -806,8 +735,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Canonical widget instance UUID (preferred identifier). Get it from manage_dashboard operation='read' or get_workspace_snapshot.dashboard_composition."
+        "default": null
       }
     },
     "type": "object"
@@ -824,8 +752,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "data_args": {
         "anyOf": [
@@ -837,20 +764,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object of data parameter values from the widget schema."
-      },
-      "dry_run": {
-        "anyOf": [
-          {
-            "type": "boolean"
-          },
-          {
-            "type": "null"
-          }
-        ],
-        "default": null,
-        "description": "Validate and preview without changing the workspace: returns valid, effective_params, and warnings for this exact payload. A dry run that finds problems still returns ok=true; the verdict is in the data."
+        "default": null
       },
       "ui_args": {
         "anyOf": [
@@ -862,8 +776,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Object of UI config values from the widget schema."
+        "default": null
       },
       "widget_id": {
         "anyOf": [
@@ -874,8 +787,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Widget type identifier; fallback only when exactly one matching widget instance exists on the target dashboard. Never use a widget title or a generic widget type such as rich_note as an identifier."
+        "default": null
       },
       "widget_uuid": {
         "anyOf": [
@@ -886,8 +798,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Canonical widget instance UUID (preferred identifier). Get it from manage_dashboard operation='read' or get_workspace_snapshot.dashboard_composition."
+        "default": null
       }
     },
     "type": "object"
@@ -904,8 +815,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Dashboard UUID. Omit to target the current dashboard route. Never send placeholder strings such as active_dashboard, current_dashboard, null, or undefined; reuse session_context.current_dashboard_uuid from your previous tool result."
+        "default": null
       },
       "h": {
         "type": "number"
@@ -963,8 +873,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Inner tab id from manage_dashboard operation='read' or get_workspace_snapshot.dashboard_composition; pass it when moving a widget across tabs."
+        "default": null
       },
       "w": {
         "type": "number"
@@ -978,8 +887,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Widget type identifier; fallback only when exactly one matching widget instance exists on the target dashboard. Never use a widget title or a generic widget type such as rich_note as an identifier."
+        "default": null
       },
       "widget_uuid": {
         "anyOf": [
@@ -990,8 +898,7 @@
             "type": "null"
           }
         ],
-        "default": null,
-        "description": "Canonical widget instance UUID (preferred identifier). Get it from manage_dashboard operation='read' or get_workspace_snapshot.dashboard_composition."
+        "default": null
       },
       "x": {
         "type": "number"
